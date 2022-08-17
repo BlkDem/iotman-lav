@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserDevice extends Model
+class DeviceUser extends Model
 {
     use HasFactory;
 
@@ -17,6 +17,7 @@ class UserDevice extends Model
         'user_device_pass',
         'device_id',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'user_id'
     ];
 }

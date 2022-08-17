@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http;
 use App\Http\Controllers\RootController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,13 +16,16 @@ use App\Http\Controllers\RootController;
 |
 */
 
-/*Route::get('/', function () {
+Route::get('/', function () {
     return view('login');
 })->name('login');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-*/
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 Route::get('/{any}', [RootController::class, 'index'])->where('any', '.*');

@@ -10,7 +10,7 @@ use Exception;
 
 class DeviceController extends Controller
 {
-    public function devices()
+    public function index()
     {
         $devicesDataSet = Device::get();
         if ($devicesDataSet->count() ==0)
@@ -20,17 +20,15 @@ class DeviceController extends Controller
         return response()->json($devicesDataSet, 200);
     }
 
-    public function devices_byId($id)
+    public function show($id)
     {
-        $deviceRecord = Device::find($id);
-        if (is_null($deviceRecord))
-        {
-            return response()->json(['Error' => 'true', 'Message' => 'Record ' . $id . ' Not Found'], 404);    
-        }
-        return response()->json($deviceRecord, 200);
+        return (is_null(Device::find($id)))? 
+            response()->json(['Error' => 'true', 'Message' => 'Record ' . $id . ' Not Found'], 404)
+            : 
+            response()->json(Device::find($id), 200);
     }
 
-    public function devices_create(Request $request)
+    public function store(Request $request)
     {
         $validator = ValidatorRules::MakeValidate($request, 'devices');  
         if ($validator->fails()) {
@@ -45,7 +43,7 @@ class DeviceController extends Controller
         }
     }
 
-    public function devices_update(Request $request, Device $updateDevice)
+    public function update(Request $request, Device $updateDevice)
     {
         $validator = ValidatorRules::MakeValidate($request, 'devices'); 
         if ($validator->fails()) {
@@ -60,11 +58,13 @@ class DeviceController extends Controller
         }
     }
 
-    public function devices_delete(Request $request, Device $deleteDevice)
+    public function destroy(Request $request, Device $deleteDevice)
     {
         try {
-            $deleteDevice->delete($request->all());
-            return response()->json('Device ' . $deleteDevice . ' Deleted', 204);
+            return ($deleteDevice->delete($request->all()) !== null)? 
+                response()->json(null, 204)
+                : 
+                response()->json('Error deleting', 200);
         }
         catch (Exception $e) {
             return response()->json('Deleting Record Error: ' . $e, 400);
