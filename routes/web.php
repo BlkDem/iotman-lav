@@ -16,11 +16,17 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('login');
-})->name('login');
+})->name('login');*/
 
-Auth::routes();
+/*Route::get('/{any?}', [
+    function () {
+        return view('welcome');
+    }
+])->where('any', '.*');*/
+
+/*Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -28,4 +34,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/{any}', [RootController::class, 'index'])->where('any', '.*');
+//Route::get('/{any}', [RootController::class, 'index'])->where('any', '.*');
+Route::get('{any}', function () {
+    return view('app');
+})->where('any', '.*');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+*/
+Route::get('/', [App\Http\Controllers\RootController::class, 'index'])->name('home');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

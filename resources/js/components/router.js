@@ -1,3 +1,6 @@
+const home = () =>import ( '../components/app.vue')
+
+
 export default new VueRouter({
     mode: 'history',
 
@@ -13,7 +16,12 @@ export default new VueRouter({
         {
             path: 'users/registration', component: () => import('./Components/User/Registration'),
             name: 'users.registration'
-        }
+        },
+        {
+            path: '/home',
+            component: home,
+            name: 'home',
+        },
     ]
 }
 

@@ -4,8 +4,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-//import './bootstrap';
-//import { createApp } from 'vue';
+import './bootstrap';
+import { createApp } from 'vue';
+import { defineAsyncComponent } from 'vue';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -13,10 +14,17 @@
  * to use in your application's views. An example is included for you.
  */
 
-//const app = createApp({});
+const app = createApp({});
 
-//import ExampleComponent from './components/ExampleComponent.vue';
-//app.component('example-component', ExampleComponent);
+import Navbar from './components/Navbar.vue';
+//import DeviceList from './components/DeviceList.vue';
+app.component('navbar', Navbar);
+//app.component('device-list', DeviceList);
+
+app.component('device-list', defineAsyncComponent(() =>
+  import('./components/DeviceList.vue')
+))
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -36,9 +44,4 @@
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
-//app.mount('#app');
-
-require('./bootstrap');
-import Vue from 'vue'({
-    el: '#app',
-})
+app.mount('#app');

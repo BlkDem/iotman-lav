@@ -17,12 +17,12 @@ class DeviceController extends Controller
         {
             return response()->json(['Error' => 'true', 'Message' => 'No Records Found'], 404);    
         }
-        return response()->json($devicesDataSet, 200);
+        return response()->json(['data' => $devicesDataSet], 200);
     }
 
     public function show($id)
     {
-        return (is_null(Device::find($id)))? 
+        return (is_null(Device::findOrFail($id)))? 
             response()->json(['Error' => 'true', 'Message' => 'Record ' . $id . ' Not Found'], 404)
             : 
             response()->json(Device::find($id), 200);
