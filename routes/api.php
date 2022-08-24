@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\DeviceTypeController;
 use App\Http\Controllers\DeviceController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\DeviceUserController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,30 +17,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Auth routes
+
+Route::post('/login', [LoginController::class, 'login']);
+
 
 //CRUD routes for table 'device_types'
 
-Route::post('/device_types/create', [DeviceTypeController::class, 'device_types_create']);
-Route::get('/device_types/read', [DeviceTypeController::class, 'device_types']);
-Route::get('/device_types/read/{id}', [DeviceTypeController::class, 'device_types_byId']);
-Route::put('/device_types/update/{updateDeviceType}', [DeviceTypeController::class, 'device_types_update']);
-Route::delete('/device_types/delete/{deleteDeviceType}', [DeviceTypeController::class, 'device_types_delete']);
+Route::post('/device_types/create', [DeviceTypeController::class, 'store']);
+Route::get('/device_types/read', [DeviceTypeController::class, 'index']);
+Route::get('/device_types/read/{id}', [DeviceTypeController::class, 'show']);
+Route::put('/device_types/update/{updateDeviceType}', [DeviceTypeController::class, 'update']);
+Route::delete('/device_types/delete/{deleteDeviceType}', [DeviceTypeController::class, 'destroy']);
 
 //CRUD routes for table 'devices'
 
-Route::post('/devices/create', [DeviceController::class, 'devices_create']);
-Route::get('/devices/read', [DeviceController::class, 'devices']);
-Route::get('/devices/read/{id}', [DeviceController::class, 'devices_byId']);
-Route::put('/devices/update/{updateDevice}', [DeviceController::class, 'devices_update']);
-Route::delete('/devices/delete/{deleteDevice}', [DeviceController::class, 'devices_delete']);
+Route::post('/devices/create', [DeviceController::class, 'store']);
+Route::get('/devices/read', [DeviceController::class, 'index']);
+Route::get('/devices/read/{id}', [DeviceController::class, 'show']);
+Route::put('/devices/update/{updateDevice}', [DeviceController::class, 'update']);
+Route::delete('/devices/delete/{deleteDevice}', [DeviceController::class, 'destroy']);
 
 //CRUD routes for table 'user_devices'
 
-Route::post('/user_devices/create', [UserDevice::class, 'user_devices_create']);
-Route::get('/user_devices/read', [UserDevice::class, 'user_devices']);
-Route::get('/user_devices/read/{id}', [UserDevice::class, 'user_devices_byId']);
-Route::put('/user_devices/update/{updateUserDevice}', [UserDevice::class, 'user_devices_update']);
-Route::delete('/user_devices/delete/{deleteUserDevice}', [UserDevice::class, 'user_devices_delete']);
+Route::post('/user_devices/create', [DeviceUserController::class, 'store']);
+Route::get('/user_devices/read', [DeviceUserController::class, 'index']);
+Route::get('/user_devices/read/{id}', [DeviceUserController::class, 'show']);
+Route::put('/user_devices/update/{updateUserDevice}', [DeviceUserController::class, 'update']);
+Route::delete('/user_devices/delete/{deleteUserDevice}', [DeviceUserController::class, 'destroy']);
