@@ -23142,7 +23142,53 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {}
+  data: function data() {
+    return {
+      isDeviceTypesVisible: false,
+      isDevicesVisible: true,
+      isUserDevicesVisible: false,
+      isDeviceTypesActive: false,
+      isDevicesActive: true,
+      isUserDevicesActive: false
+    };
+  },
+  created: function created() {//this.isDeviceTypesVisible = this.$root.$refs.DeviceTypeRef.getVisible();
+    //console.log(this.$root.$refs.DeviceTypeRef);
+  },
+  methods: {
+    onDeviceTypesClick: function onDeviceTypesClick() {
+      //this.isDeviceTypesVisible = !this.isDeviceTypesVisible;
+      //this.isDeviceTypesActive = this.isDeviceTypesVisible;
+      this.isDevicesActive = false;
+      this.isUserDevicesActive = false;
+      this.isDeviceTypesActive = true;
+      this.$root.$refs.DeviceRef.ShowHide(false);
+      this.$root.$refs.DeviceUserRef.ShowHide(false);
+      this.$root.$refs.DeviceTypeRef.ShowHide(true); //this.$root.$refs.DeviceTypeRef.ShowHide(this.isDeviceTypesVisible);
+    },
+    onDevicesClick: function onDevicesClick() {
+      this.isDevicesActive = true;
+      this.isUserDevicesActive = false;
+      this.isDeviceTypesActive = false;
+      this.$root.$refs.DeviceRef.ShowHide(true);
+      this.$root.$refs.DeviceUserRef.ShowHide(false);
+      this.$root.$refs.DeviceTypeRef.ShowHide(false);
+      /*this.isDevicesVisible = !this.isDevicesVisible;
+      this.isDevicesActive = this.isDevicesVisible;
+      this.$root.$refs.DeviceRef.ShowHide(this.isDevicesVisible);*/
+    },
+    onUserDevicesClick: function onUserDevicesClick() {
+      this.isDevicesActive = false;
+      this.isUserDevicesActive = true;
+      this.isDeviceTypesActive = false;
+      this.$root.$refs.DeviceRef.ShowHide(false);
+      this.$root.$refs.DeviceUserRef.ShowHide(true);
+      this.$root.$refs.DeviceTypeRef.ShowHide(false);
+      /*this.isUserDevicesVisible = !this.isUserDevicesVisible;
+      this.isUserDevicesActive = this.isUserDevicesVisible;
+      this.$root.$refs.DeviceUserRef.ShowHide(this.isUserDevicesVisible);*/
+    }
+  }
 });
 
 /***/ }),
@@ -23161,19 +23207,95 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "navbar navbar-expand-lg navbar-dark bg-primary"
+  "class": "navbar navbar-expand-lg navbar-dark bg-primary my-4"
+};
+var _hoisted_2 = {
+  "class": "container-fluid"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   "class": "navbar-brand",
   href: "#"
-}, "Minty Fresh", -1
+}, "Umolab", -1
 /* HOISTED */
 );
 
-var _hoisted_3 = [_hoisted_2];
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "navbar-toggler",
+  type: "button",
+  "data-bs-toggle": "collapse",
+  "data-bs-target": "#navbarColor01",
+  "aria-controls": "navbarColor01",
+  "aria-expanded": "false",
+  "aria-label": "Toggle navigation"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "navbar-toggler-icon"
+})], -1
+/* HOISTED */
+);
+
+var _hoisted_5 = {
+  "class": "collapse navbar-collapse",
+  id: "navbarColor01"
+};
+var _hoisted_6 = {
+  "class": "navbar-nav me-auto"
+};
+var _hoisted_7 = {
+  "class": "nav-item"
+};
+var _hoisted_8 = {
+  "class": "nav-item"
+};
+var _hoisted_9 = {
+  "class": "nav-item"
+};
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  "class": "d-flex"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "form-control me-sm-2",
+  type: "text",
+  placeholder: "Search"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "btn btn-secondary my-2 my-sm-0",
+  type: "submit"
+}, "Search")], -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, _hoisted_3);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["nav-link", {
+      active: $data.isDeviceTypesActive
+    }]),
+    onClick: _cache[0] || (_cache[0] = function () {
+      return $options.onDeviceTypesClick && $options.onDeviceTypesClick.apply($options, arguments);
+    }),
+    href: "#"
+  }, "Device Types", 2
+  /* CLASS */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["nav-link", {
+      active: $data.isDevicesActive
+    }]),
+    onClick: _cache[1] || (_cache[1] = function () {
+      return $options.onDevicesClick && $options.onDevicesClick.apply($options, arguments);
+    }),
+    href: "#"
+  }, "Devices", 2
+  /* CLASS */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["nav-link", {
+      active: $data.isUserDevicesActive
+    }]),
+    href: "#",
+    onClick: _cache[2] || (_cache[2] = function () {
+      return $options.onUserDevicesClick && $options.onUserDevicesClick.apply($options, arguments);
+    })
+  }, "User's Devices", 2
+  /* CLASS */
+  )])]), _hoisted_10])])]);
 }
 
 /***/ }),
@@ -23204,12 +23326,18 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)({});
- //import DeviceList from './components/DeviceList.vue';
+ //import DeviceTypes from './components/DeviceTypes.vue';
+//import DeviceList from './components/DeviceList.vue';
 
-app.component('navbar', _components_Navbar_vue__WEBPACK_IMPORTED_MODULE_2__["default"]); //app.component('device-list', DeviceList);
-
+app.component('navbar', _components_Navbar_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
 app.component('device-list', (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineAsyncComponent)(function () {
-  return __webpack_require__.e(/*! import() */ "resources_js_components_DeviceList_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/DeviceList.vue */ "./resources/js/components/DeviceList.vue"));
+  return __webpack_require__.e(/*! import() */ "resources_js_components_Devices_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Devices.vue */ "./resources/js/components/Devices.vue"));
+}));
+app.component('device-type-list', (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineAsyncComponent)(function () {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_DeviceTypes_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/DeviceTypes.vue */ "./resources/js/components/DeviceTypes.vue"));
+}));
+app.component('device-user-list', (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineAsyncComponent)(function () {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_UserDevices_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/UserDevices.vue */ "./resources/js/components/UserDevices.vue"));
 }));
 /**
  * The following block of code may be used to automatically register your
@@ -48418,7 +48546,7 @@ function compileToFunction(template, options) {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if (chunkId === "resources_js_components_DeviceList_vue") return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Devices_vue":1,"resources_js_components_DeviceTypes_vue":1,"resources_js_components_UserDevices_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

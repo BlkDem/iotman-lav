@@ -9,7 +9,7 @@ class Device extends Model
 {
     use HasFactory;
 
-    protected $table = 'devices';
+    protected $table = 'Devices_DeviceTypes';
 
     protected $fillable = [
         'id',
@@ -18,7 +18,20 @@ class Device extends Model
         'device_pass',
         'device_hwid',
         'device_type_id',
+        'device_type_name',
+        'device_type_desc',
+        'device_type_image',
         'created_at',
         'updated_at'
     ];
+
+    public function DeviceTypes()
+    {
+        return $this->hasMany(DeviceType::class);
+    }
+
+    public function DeviceType()
+    {
+      return $this->belongsTo(DeviceType::class);
+    }
 }

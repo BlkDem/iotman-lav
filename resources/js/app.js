@@ -17,15 +17,21 @@ import { defineAsyncComponent } from 'vue';
 const app = createApp({});
 
 import Navbar from './components/Navbar.vue';
+//import DeviceTypes from './components/DeviceTypes.vue';
 //import DeviceList from './components/DeviceList.vue';
 app.component('navbar', Navbar);
-//app.component('device-list', DeviceList);
 
 app.component('device-list', defineAsyncComponent(() =>
-  import('./components/DeviceList.vue')
+  import('./components/Devices.vue')
 ))
 
+app.component('device-type-list', defineAsyncComponent(() =>
+  import('./components/DeviceTypes.vue')
+))
 
+app.component('device-user-list', defineAsyncComponent(() =>
+  import('./components/UserDevices.vue')
+))
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

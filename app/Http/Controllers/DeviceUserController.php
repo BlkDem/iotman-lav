@@ -19,7 +19,8 @@ class DeviceUserController extends Controller
         {
             return response()->json(['Error' => 'true', 'Message' => 'No Records Found'], 404);    
         }
-        return response()->json($devicesUserDataSet, 200);
+        return response()->json(['data' => DeviceUser::get()], 200);
+        //return response()->json($devicesUserDataSet, 200);
     }
 
     /**

@@ -10,7 +10,8 @@ use Exception;
 class DeviceTypeController extends Controller
 {
     public function index(){        
-        return response()->json(DeviceType::get(), 200);
+        return response()->json(['data' => DeviceType::get()], 200);
+        //return response()->json(DeviceType::get(), 200);
     }
 
     public function show($id){        
