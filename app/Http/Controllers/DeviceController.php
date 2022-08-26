@@ -5,29 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Device;
 use App\Http\Middleware\ValidatorRules;
-//use Illuminate\Support\Facades\Validator;
 use Exception;
 
 class DeviceController extends Controller
 {
-    public function index()
-    {
-        $devicesDataSet = Device::get();
-        if ($devicesDataSet->count() ==0)
-        {
-            return response()->json(['Error' => 'true', 'Message' => 'No Records Found'], 404);    
-        }
-        return response()->json(['data' => $devicesDataSet], 200);
-    }
-
-    public function show($id)
-    {
-        return (is_null(Device::findOrFail($id)))? 
-            response()->json(['Error' => 'true', 'Message' => 'Record ' . $id . ' Not Found'], 404)
-            : 
-            response()->json(Device::find($id), 200);
-    }
-
     public function store(Request $request)
     {
         $validator = ValidatorRules::MakeValidate($request, 'devices');  
@@ -60,7 +41,7 @@ class DeviceController extends Controller
 
     public function destroy(Request $request, Device $deleteDevice)
     {
-        try {
+        try {            
             return ($deleteDevice->delete($request->all()) !== null)? 
                 response()->json(null, 204)
                 : 

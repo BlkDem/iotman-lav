@@ -38,11 +38,11 @@ export default {
     data() {
         return {
             isDeviceTypesVisible: false,
-            isDevicesVisible: true,
-            isUserDevicesVisible: false,
+            isDevicesVisible: false,
+            isUserDevicesVisible: true,
             isDeviceTypesActive: false,
-            isDevicesActive: true,
-            isUserDevicesActive: false
+            isDevicesActive: false,
+            isUserDevicesActive: true
         }
     },
 

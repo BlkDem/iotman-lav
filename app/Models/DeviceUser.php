@@ -9,7 +9,7 @@ class DeviceUser extends Model
 {
     use HasFactory;
 
-    protected $table = 'Device_DeviceTypes_UserDevices';
+    protected $table = 'user_devices';
 
     protected $fillable = [
         'id',
@@ -18,8 +18,7 @@ class DeviceUser extends Model
         'device_id',
         'device_type_name',
         'device_type_image',
-        'created_at',
-        'updated_at',
+        'device_HWID',
         'user_id'
     ];
 }

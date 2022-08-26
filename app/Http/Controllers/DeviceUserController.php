@@ -7,22 +7,7 @@ use Illuminate\Http\Request;
 
 class DeviceUserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $devicesUserDataSet = DeviceUser::get();
-        if ($devicesUserDataSet->count() ==0)
-        {
-            return response()->json(['Error' => 'true', 'Message' => 'No Records Found'], 404);    
-        }
-        return response()->json(['data' => DeviceUser::get()], 200);
-        //return response()->json($devicesUserDataSet, 200);
-    }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -50,11 +35,11 @@ class DeviceUserController extends Controller
      * @param  \App\Models\DeviceUser  $deviceUser
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($device_user_id)
     {
-        $isPresent = DeviceUser::find($id);
+        $isPresent = DeviceUser::find($device_user_id);
         return (is_null($isPresent))? 
-            response()->json(['Error' => 'true', 'Message' => 'Record ' . $id . ' Not Found'], 404)
+            response()->json(['Error' => 'true', 'Message' => 'Record ' . $device_user_id . ' Not Found'], 404)
             : 
             response()->json($isPresent, 200);
     }

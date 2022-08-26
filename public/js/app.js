@@ -23145,11 +23145,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       isDeviceTypesVisible: false,
-      isDevicesVisible: true,
-      isUserDevicesVisible: false,
+      isDevicesVisible: false,
+      isUserDevicesVisible: true,
       isDeviceTypesActive: false,
-      isDevicesActive: true,
-      isUserDevicesActive: false
+      isDevicesActive: false,
+      isUserDevicesActive: true
     };
   },
   created: function created() {//this.isDeviceTypesVisible = this.$root.$refs.DeviceTypeRef.getVisible();
@@ -23326,19 +23326,22 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)({});
- //import DeviceTypes from './components/DeviceTypes.vue';
-//import DeviceList from './components/DeviceList.vue';
+ //import DeviceList from './components/DeviceList.vue';
 
 app.component('navbar', _components_Navbar_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
+app.component('device-user-list', (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineAsyncComponent)(function () {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_UserDevices_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/UserDevices.vue */ "./resources/js/components/UserDevices.vue"));
+}));
 app.component('device-list', (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineAsyncComponent)(function () {
   return __webpack_require__.e(/*! import() */ "resources_js_components_Devices_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Devices.vue */ "./resources/js/components/Devices.vue"));
 }));
 app.component('device-type-list', (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineAsyncComponent)(function () {
   return __webpack_require__.e(/*! import() */ "resources_js_components_DeviceTypes_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/DeviceTypes.vue */ "./resources/js/components/DeviceTypes.vue"));
 }));
-app.component('device-user-list', (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineAsyncComponent)(function () {
-  return __webpack_require__.e(/*! import() */ "resources_js_components_UserDevices_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/UserDevices.vue */ "./resources/js/components/UserDevices.vue"));
-}));
+/*app.component('delete-confirm', defineAsyncComponent(() =>
+  import('./components/dialogues/DeleteConfirm.vue')
+))*/
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -48546,7 +48549,7 @@ function compileToFunction(template, options) {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Devices_vue":1,"resources_js_components_DeviceTypes_vue":1,"resources_js_components_UserDevices_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_UserDevices_vue":1,"resources_js_components_Devices_vue":1,"resources_js_components_DeviceTypes_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

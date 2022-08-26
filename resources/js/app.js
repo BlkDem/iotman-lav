@@ -8,6 +8,7 @@ import './bootstrap';
 import { createApp } from 'vue';
 import { defineAsyncComponent } from 'vue';
 
+
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
@@ -17,9 +18,13 @@ import { defineAsyncComponent } from 'vue';
 const app = createApp({});
 
 import Navbar from './components/Navbar.vue';
-//import DeviceTypes from './components/DeviceTypes.vue';
 //import DeviceList from './components/DeviceList.vue';
 app.component('navbar', Navbar);
+
+
+app.component('device-user-list', defineAsyncComponent(() =>
+  import('./components/UserDevices.vue')
+))
 
 app.component('device-list', defineAsyncComponent(() =>
   import('./components/Devices.vue')
@@ -29,9 +34,10 @@ app.component('device-type-list', defineAsyncComponent(() =>
   import('./components/DeviceTypes.vue')
 ))
 
-app.component('device-user-list', defineAsyncComponent(() =>
-  import('./components/UserDevices.vue')
-))
+/*app.component('delete-confirm', defineAsyncComponent(() =>
+  import('./components/dialogues/DeleteConfirm.vue')
+))*/
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

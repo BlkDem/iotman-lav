@@ -9,7 +9,7 @@ class Device extends Model
 {
     use HasFactory;
 
-    protected $table = 'Devices_DeviceTypes';
+    protected $table = 'devices';
 
     protected $fillable = [
         'id',
@@ -20,9 +20,7 @@ class Device extends Model
         'device_type_id',
         'device_type_name',
         'device_type_desc',
-        'device_type_image',
-        'created_at',
-        'updated_at'
+        'device_type_image'
     ];
 
     public function DeviceTypes()

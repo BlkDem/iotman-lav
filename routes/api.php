@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\DeviceTypeController;
 use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\DevicesViewController;
 use App\Http\Controllers\DeviceUserController;
+use App\Http\Controllers\DeviceUsersViewController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,15 +35,15 @@ Route::delete('/device_types/delete/{deleteDeviceType}', [DeviceTypeController::
 //CRUD routes for table 'devices'
 
 Route::post('/devices/create', [DeviceController::class, 'store']);
-Route::get('/devices/read', [DeviceController::class, 'index']);
-Route::get('/devices/read/{id}', [DeviceController::class, 'show']);
+Route::get('/devices/read', [DevicesViewController::class, 'index']);
+Route::get('/devices/read/{id}', [DevicesViewController::class, 'show']);
 Route::put('/devices/update/{updateDevice}', [DeviceController::class, 'update']);
 Route::delete('/devices/delete/{deleteDevice}', [DeviceController::class, 'destroy']);
 
 //CRUD routes for table 'user_devices'
 
 Route::post('/user_devices/create', [DeviceUserController::class, 'store']);
-Route::get('/user_devices/read', [DeviceUserController::class, 'index']);
-Route::get('/user_devices/read/{id}', [DeviceUserController::class, 'show']);
+Route::get('/user_devices/read', [DeviceUsersViewController::class, 'index']);
+Route::get('/user_devices/read/{device_user_id}', [DeviceUsersViewController::class, 'show']);
 Route::put('/user_devices/update/{updateUserDevice}', [DeviceUserController::class, 'update']);
 Route::delete('/user_devices/delete/{deleteUserDevice}', [DeviceUserController::class, 'destroy']);

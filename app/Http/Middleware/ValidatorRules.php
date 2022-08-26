@@ -2,13 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class ValidatorRules extends Validator
 {
-    public static function GetRulesByTable(String $table)
+    protected static function GetRulesByTable(String $table)
     {
         $_rulesArray = Array();
         switch ($table) {
@@ -28,7 +27,8 @@ class ValidatorRules extends Validator
             case 'user_devices':
                 $_rulesArray = [
                     'user_device_name' => 'required|min:3',
-                    'device_id' => 'required'
+                    'device_id' => 'required',
+                    'user_id' => 'required'
                 ];
                 break;
                         
