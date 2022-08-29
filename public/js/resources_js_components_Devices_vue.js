@@ -43,14 +43,10 @@ __webpack_require__.r(__webpack_exports__);
     getVisible: function getVisible() {
       return this.visible;
     },
-    confirmDelete: function confirmDelete() {
-      this.show = true;
-      this.deleteMsg = 'Are you sure you want to delete this person?';
-    },
     deleteDevice: function deleteDevice(key, id) {
       var _this2 = this;
 
-      console.log(key, id); //this.$refs['my-modal'].show();
+      console.log(key, id);
 
       if (confirm("Do you really want to delete?")) {
         axios["delete"]('/api/devices/delete/' + id).then(function (resp) {
@@ -125,22 +121,8 @@ var _hoisted_15 = {
 var _hoisted_16 = {
   "class": "card-body"
 };
-var _hoisted_17 = {
-  "class": "page"
-};
-
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "glyphicon glyphicon-trash"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_19 = [_hoisted_18];
-var _hoisted_20 = ["onClick"];
-var _hoisted_21 = ["onClick"];
+var _hoisted_17 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_confirm_delete = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("confirm-delete");
-
   return $data.visible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.devices, function (device, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "col-sm-4 col-xs-4 col-lg-4 p-2",
@@ -162,16 +144,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_15, "Hardware Address HWID: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_hwid), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [$data.show ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_confirm_delete, {
-      key: 0,
-      msg: $data.deleteMsg
-    }, null, 8
-    /* PROPS */
-    , ["msg"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" person details "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-      onClick: _cache[0] || (_cache[0] = function () {
-        return $options.confirmDelete && $options.confirmDelete.apply($options, arguments);
-      })
-    }, _hoisted_19)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       href: "#",
       "class": "card-link",
       onClick: function onClick($event) {
@@ -179,15 +152,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }
     }, "Delete", 8
     /* PROPS */
-    , _hoisted_20), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-      href: "#",
-      "class": "card-link",
-      onClick: function onClick($event) {
-        return $options.confirmDelete(key, device.id);
-      }
-    }, "Delete", 8
-    /* PROPS */
-    , _hoisted_21)])])], 8
+    , _hoisted_17)])])], 8
     /* PROPS */
     , _hoisted_4);
   }), 128
