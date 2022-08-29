@@ -1,10 +1,10 @@
 <template>
-    <PopupModal ref="popup" class="popup-modal">
+    <PopupModal ref="popup" class="modal-content">
         <h2 style="margin-top: 0">{{ title }}</h2>
         <p>{{ message }}</p>
         <div class="btns">
-            <button class="cancel-btn" @click="_cancel">{{ cancelButton }}</button>
-            <span class="ok-btn" @click="_confirm">{{ okButton }}</span>
+            <span class="btn btn-secondary" @click="_confirm">{{ okButton }}</span>
+            <button class="btn btn-primary" @click="_cancel">{{ cancelButton }}</button>
         </div>
     </PopupModal>
 </template>
@@ -24,7 +24,7 @@ export default {
         title: undefined,
         message: undefined, // Main text content
         okButton: undefined, // Text for confirm button; leave it empty because we don't know what we're using it for
-        cancelButton: 'Go Back', // text for cancel button
+        cancelButton: 'Cancel', // text for cancel button
         
         // Private variables
         resolvePromise: undefined,
@@ -37,7 +37,6 @@ export default {
     },
     methods: {
         showDialogue(opts = {}) {
-            console.log('we in');
             this.title = opts.title
             this.message = opts.message
             this.okButton = opts.okButton
@@ -67,35 +66,3 @@ export default {
     },
 }
 </script>
-
-<style scoped>
-.popup-modal
-{
-    background-color: black;
-}
-
-.btns {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.ok-btn {
-    color: red;
-    text-decoration: underline;
-    line-height: 2.5rem;
-    cursor: pointer;
-}
-
-.cancel-btn {
-    padding: 0.5em 1em;
-    background-color: #d5eae7;
-    color: #35907f;
-    border: 2px solid #0ec5a4;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 16px;
-    text-transform: uppercase;
-    cursor: pointer;
-}
-</style>

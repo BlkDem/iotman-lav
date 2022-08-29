@@ -19,8 +19,10 @@
                         <li class="list-group-item">Hardware Address HWID: {{ device.device_hwid }}</li>
                     </ul>
                     <div class="card-body">
-                        <a href="#" class="card-link" @click="deleteDevice(key, device.id)">Delete</a>
-                        <button class="delete-btn" @click="doDelete">Delete Page</button>
+                        <button class="btn btn-secondary" @click="doDelete(key, device.id)">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            Delete
+                        </button>
                         <ConfirmDialogue ref="confirmDialogue" />
                         
                     </div>
@@ -33,21 +35,13 @@
 
 <script>
 import ConfirmDialogue from '../components/ConfirmDialogue.vue';
-import {ref} from 'vue';
-    
 
     export default {
         components: { ConfirmDialogue },
 
-        setup() {
-        const confirmDialogue = ref(null); 
-        return { confirmDialogue };
-        },
-
         data() {
             return {
                 devices: [],
-                //show: false,
                 deleteMsg: '',
                 deleteModalResult: false,
                 visible: false
@@ -61,20 +55,29 @@ import {ref} from 'vue';
 
         methods: {
             
-            async doDelete() {
+            async doDelete(key, id) {
                 
                 //this.confirmDialogue.show();
-                console.log(this.$refs.confirmDialogue[0]);
-                const ok = await this.$refs.confirmDialogue[0].showDialogue({
-                    title: 'Delete Page',
-                    message: 'Are you sure you want to delete this page? It cannot be undone.',
-                    okButton: 'Delete Forever',
+                console.log(this.devices);
+                const ok = await this.$refs.confirmDialogue[key].showDialogue({
+                    title: 'Delete Device',
+                    message: 'Are you sure you want to delete this device - ' + this.devices[key].device_name + '?',
+                    okButton: 'Delete',
                 })
-                // If you throw an error, the method will terminate here unless you surround it wil try/catch
+                
                 if (ok) {
-                    alert('You have successfully delete this page.')
+                    console.log('deleting ...- ', this.devices[key].device_name, this.devices[key].id);
+                    axios.delete('/api/devices/delete/' + id)
+                        .then(resp => {
+                            this.devices.splice(key, 1);
+                            console.log(key, id, " - deleted");
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
                 } else {
-                    alert('You chose not to delete this page. Doing nothing now.')
+                    //alert('You chose not to delete this page. Doing nothing now.')
+                    console.log('cancel');
                 }
             },
 

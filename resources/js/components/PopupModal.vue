@@ -30,9 +30,9 @@ export default {
 }
 </script>
 
-<style scoped>
-/* css class for the transition */
-.fade-enter-active,
+<style lang="scss" scoped>
+    
+    .fade-enter-active,
 .fade-leave-active {
     transition: opacity 0.3s;
 }
@@ -42,7 +42,7 @@ export default {
 }
 
 .popup-modal {
-    color: black;
+    color: white;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -55,7 +55,7 @@ export default {
 }
 
 .window {
-    background: #fff;
+    background: #6f42c1;
     border-radius: 5px;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
     max-width: 480px;
@@ -63,4 +63,5 @@ export default {
     margin-right: auto;
     padding: 1rem;
 }
+
 </style>
