@@ -1,9 +1,9 @@
 <template>
-    <PopupModal ref="popup" class="modal-content">
+    <PopupModal ref="popup">
         <h2 style="margin-top: 0">{{ title }}</h2>
         <p>{{ message }}</p>
         <div class="btns">
-            <span class="btn btn-secondary" @click="_confirm">{{ okButton }}</span>
+            <span class="btn btn-danger" @click="_confirm">{{ okButton }}</span>
             <button class="btn btn-primary" @click="_cancel">{{ cancelButton }}</button>
         </div>
     </PopupModal>

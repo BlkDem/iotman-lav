@@ -2,7 +2,7 @@
     <div v-if="visible">
         <h1>User Devices</h1>
         <div class="row">
-            <div class="p-2 col-sm-4 col-xs-4 col-lg-4" v-for="user_device in user_devices" v-bind:key="user_device.id" v-bind:id="user_device.id">
+            <div class="p-2 col-sm-4 col-xs-4 col-lg-4" v-for="(user_device, key) in user_devices" v-bind:key="key" v-bind:id="user_device.id">
                 <div class="card border-light">
                     <h3 class="card-header">{{ user_device.device_name }}</h3>
                     <div class="card-body">
