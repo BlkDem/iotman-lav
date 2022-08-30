@@ -18,7 +18,7 @@ class DeviceTypeController extends Controller
         return (is_null(DeviceType::find($id)))? 
             response()->json(['Error' => 'true', 'Message' => 'Record ' . $id . ' Not Found'], 404)
             : 
-            response()->json(DeviceType::find($id), 200);
+            response()->json(['data' => DeviceType::find($id)], 200);
     }
     
     public function store(Request $request){

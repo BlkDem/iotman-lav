@@ -115,17 +115,31 @@ import ConfirmDeleteDeviceConstants from '../components/strings_constants/index'
                 })
 
                 if (_add) {
-                    console.log(this.$refs.addDevice)
-                    let newDevicePost = 'devices/create/?device_name=' + this.$refs.addDevice.device_name
-                         + '&device_type_id=' + this.$refs.addDevice.device_type_id + '&device_desc=' + this.$refs.addDevice.device_desc;
-                    console.log(newDevicePost);
-                    
+                    let newDevicePost = '/api/devices/create/?device_name=' + this.$refs.addDevice.device_name
+                        + '&device_type_id=' + this.$refs.addDevice.device_type_id + '&device_desc=' + this.$refs.addDevice.device_desc;
+
                     axios.post(newDevicePost)
                         .then(resp => {
-                            //this.devices.splice(key, 1);                            
-                            
-                            console.log(resp);
-                            //this.$refs.toaster.setMessage("Device Deleted", "Successfully");
+                            console.log(resp['data']);
+                            let newDevice = {
+                                device_name: resp['data'].device_name,
+                                device_desc: resp['data'].device_desc,
+                                device_type_id: resp['data'].device_type_id,
+                                device_type_name: '',
+                                device_type_image: '',
+                                id: resp['data'].id
+                            }   
+                            this.devices.push(newDevice);
+                            this.$refs.toaster.setMessage("Device Added", "Successfully");                         
+                        })
+                        .then(resp => {
+                            axios.get('/api/device_types/read/' + this.devices[this.devices.length-1].device_type_id)
+                            .then(resp_image => {
+                                console.log('Resp image: ', resp_image['data'].data.device_type_image);
+                                console.log('Last: ', this.devices[this.devices.length-1]);
+                                this.devices[this.devices.length-1].device_type_image = resp_image['data'].data.device_type_image;
+                                this.devices[this.devices.length-1].device_type_name = resp_image['data'].data.device_type_name;
+                            })
                         })
                         .catch(error => {
                             console.log(error);
@@ -134,16 +148,6 @@ import ConfirmDeleteDeviceConstants from '../components/strings_constants/index'
                     console.log('inserting canceled');
                 }
 
-                /*this.$refs.toaster.setMessage("Adding Device", "Successfully");
-                let newDevice = {device_name: 'New Device 1', device_desc: 'new desc' , device_type_id: '2'};
-                this.devices.push(newDevice); // what to push unto the rows array?*/
-                //api_url = api_url || '/api/devices/read';
-                /*fetch(api_url)
-                    .then(response => response.json())
-                    .then(response => {
-                        this.devices = response.data;
-                    })
-                    .catch(err => console.log(err));*/
             },
 
             ShowHide(isVisible) {

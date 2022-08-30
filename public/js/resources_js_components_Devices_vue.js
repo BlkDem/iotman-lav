@@ -284,30 +284,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _add = _context2.sent;
 
                 if (_add) {
-                  console.log(_this3.$refs.addDevice);
-                  newDevicePost = 'devices/create/?device_name=' + _this3.$refs.addDevice.device_name + '&device_type_id=' + _this3.$refs.addDevice.device_type_id + '&device_desc=' + _this3.$refs.addDevice.device_desc;
-                  console.log(newDevicePost);
+                  newDevicePost = '/api/devices/create/?device_name=' + _this3.$refs.addDevice.device_name + '&device_type_id=' + _this3.$refs.addDevice.device_type_id + '&device_desc=' + _this3.$refs.addDevice.device_desc;
                   axios.post(newDevicePost).then(function (resp) {
-                    //this.devices.splice(key, 1);                            
-                    console.log(resp); //this.$refs.toaster.setMessage("Device Deleted", "Successfully");
+                    console.log(resp['data']);
+                    var newDevice = {
+                      device_name: resp['data'].device_name,
+                      device_desc: resp['data'].device_desc,
+                      device_type_id: resp['data'].device_type_id,
+                      device_type_name: '',
+                      device_type_image: '',
+                      id: resp['data'].id
+                    };
+
+                    _this3.devices.push(newDevice);
+
+                    _this3.$refs.toaster.setMessage("Device Added", "Successfully");
+                  }).then(function (resp) {
+                    axios.get('/api/device_types/read/' + _this3.devices[_this3.devices.length - 1].device_type_id).then(function (resp_image) {
+                      console.log('Resp image: ', resp_image['data'].data.device_type_image);
+                      console.log('Last: ', _this3.devices[_this3.devices.length - 1]);
+                      _this3.devices[_this3.devices.length - 1].device_type_image = resp_image['data'].data.device_type_image;
+                      _this3.devices[_this3.devices.length - 1].device_type_name = resp_image['data'].data.device_type_name;
+                    });
                   })["catch"](function (error) {
                     console.log(error);
                   });
                 } else {
                   console.log('inserting canceled');
                 }
-                /*this.$refs.toaster.setMessage("Adding Device", "Successfully");
-                let newDevice = {device_name: 'New Device 1', device_desc: 'new desc' , device_type_id: '2'};
-                this.devices.push(newDevice); // what to push unto the rows array?*/
-                //api_url = api_url || '/api/devices/read';
-
-                /*fetch(api_url)
-                    .then(response => response.json())
-                    .then(response => {
-                        this.devices = response.data;
-                    })
-                    .catch(err => console.log(err));*/
-
 
               case 4:
               case "end":
