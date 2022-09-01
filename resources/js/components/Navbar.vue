@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary my-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary my-4" style="position: sticky; top: 20px; z-index: 1;">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Umolab</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
@@ -27,22 +27,27 @@
             </div>
         </div>
     </nav>
+    <Toaster ref="toaster" :title="toaster_title" :message="toaster_message"></Toaster>
 
 </template>
 
 <script>
 
-export default {
+import Toaster from './Toaster.vue';
 
+export default {
+    components: {
+        Toaster
+    },
     
     data() {
         return {
             isDeviceTypesVisible: false,
-            isDevicesVisible: false,
-            isUserDevicesVisible: true,
+            isDevicesVisible: true,
+            isUserDevicesVisible: false,
             isDeviceTypesActive: false,
-            isDevicesActive: false,
-            isUserDevicesActive: true
+            isDevicesActive: true,
+            isUserDevicesActive: false
         }
     },
 

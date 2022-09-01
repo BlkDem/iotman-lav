@@ -15,7 +15,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       user_devices: [],
-      visible: true
+      visible: false
     };
   },
   created: function created() {

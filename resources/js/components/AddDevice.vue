@@ -1,38 +1,45 @@
 <template>
     <PopupModal ref="popup">
-        <h2 style="margin-top: 0">{{ title }}</h2>
-        <p>{{ message }}</p>
-        <div class="">
-            <input type="text" class="form-control p-2 mb-4" placeholder="Input Device Name" name="device_name" 
-                id="device_name" v-bind:value="device_name" >
-            <input type="text" class="form-control p-2 mb-4" placeholder="Input Device Desc" name="device_desc" 
-                id="device_desc" v-bind:value="device_desc" >
-            <input type="text" class="form-control p-2 mb-4" placeholder="Input Device Type ID" name="device_type_id" 
-                id="device_type_id" v-bind:value="device_type_id" >
+        <div class="modal-header">
+            <h2 style="margin-top: 0">{{ title }}</h2>
         </div>
-        <div class="btns">
-            <span class="btn btn-danger p-2" @click="_confirm">{{ okButton }}</span>
-            <button class="btn btn-secondary mx-2" @click="_cancel">{{ cancelButton }}</button>
+        
+        <div class="modal-body">
+            <label>Device Name</label>
+            <input v-model="device_name" class="form-control p-2 mb-4" placeholder="Input Device Name"/>
+            <label class="ml-n4">Device Desc</label>
+            <input v-model="device_desc" class="form-control p-2 mb-4" placeholder="Input Device Desc"/>
+            <label class="ml-n4">Device Hardware Address</label>
+            <input v-model="device_hwid" class="form-control p-2 mb-4" placeholder="Input Device HWID"/>
+            <label class="ml-n4">Select Device Type {{device_type_id}}</label>
+            <DeviceTypesCombo ref="types" v-bind:id="device_type_id"></DeviceTypesCombo>
+        </div>
+        <div class="btns my-2 d-grid gap-2 px-4">
+            <button class="btn btn-danger" @click="_confirm">{{ okButton }}</button>
+            <button class="btn btn-secondary" @click="_cancel">{{ cancelButton }}</button>
         </div>
     </PopupModal>
 </template>
 
 <script>
-import PopupModal from './PopupModal.vue'
+import PopupModal from './PopupModal.vue';
+import DeviceTypesCombo from './DeviceTypesCombo.vue' 
 import {ref} from 'vue'
 
 export default {
     name: 'AddDevice',
 
-    components: { PopupModal },
+    components: { PopupModal, DeviceTypesCombo },
 
     data (){
         return {
         // Parameters that change depending on the type of dialogue
+        edit_mode: false,
         title: undefined,
         message: undefined, // Main text content
         device_name: undefined,
         device_desc: undefined,
+        device_hwid: undefined,
         device_type_id: undefined,
         okButton: undefined, // Text for confirm button; leave it empty because we don't know what we're using it for
         cancelButton: 'Cancel', // text for cancel button
@@ -42,24 +49,34 @@ export default {
         rejectPromise: undefined,
         }
     },
-    setup() {
-        const popup = ref(null); 
-        return { popup };
-    },
+    
+
     methods: {
+
         showDialogue(optsAdd = {}) {
-            console.log(optsAdd)
+            
+            this.edit_mode = optsAdd.edit_mode;
             this.title = optsAdd.title
             this.message = optsAdd.message
-            this.device_name = optsAdd.new_device_name
-            this.device_desc = optsAdd.new_device_desc
-            this.device_type_id = optsAdd.new_device_type_id
+            this.device_name = optsAdd.device_name
+            this.device_desc = optsAdd.device_desc
+            this.device_hwid = optsAdd.device_hwid
+            this.device_type_id = optsAdd.device_type_id
             this.okButton = optsAdd.okButton
             if (optsAdd.cancelButton) {
                 this.cancelButton = optsAdd.cancelButton
             }
+            console.log(this);
             // Once we set our config, we tell the popup modal to open 
+
             this.$refs.popup.open()
+            //console.log('gdti: ', this.$refs.types.getDeviceTypeID());
+
+
+            // if (this.edit_mode) {
+            //     console.log(this.$refs.popup);
+            // }
+            
             // Return promise so the caller can get results
             return new Promise((resolve, reject) => {
                 this.resolvePromise = resolve
@@ -68,9 +85,11 @@ export default {
         },
 
         _confirm() {
-            this.device_name = $('#device_name').val();
-            this.device_desc = $('#device_desc').val();
-            this.device_type_id = $('#device_type_id').val();
+            //this.device_name = $('#device_name').val();
+            //this.device_desc = $('#device_desc').val();
+            //console.log(this.$refs.types);
+            this.device_type_id = this.$refs.types.getDeviceTypeID();
+            console.log(this.device_type_id);
             this.$refs.popup.close()
             this.resolvePromise(true, this)
         },

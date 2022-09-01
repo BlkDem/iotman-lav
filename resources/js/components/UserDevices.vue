@@ -38,7 +38,7 @@
         data() {
             return {
                 user_devices: [],
-                visible: true,
+                visible: false,
             };
         },
 

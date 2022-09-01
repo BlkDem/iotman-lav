@@ -1,14 +1,17 @@
 <template>
     <transition name="fade">
-        <div class="popup-modal" v-if="isVisible">
-            <div class="window">
+
+        <div class="popup-modal " v-if="isVisible">
+            <div class="window modal-dialog modal-content">
                 <slot></slot>
             </div>
         </div>
+
     </transition>
 </template>
 
 <script>
+
 export default {
     name: 'PopupModal',
 
@@ -50,7 +53,7 @@ export default {
     right: 0;
     padding: 0.5rem;
     display: flex;
-    align-items: center;
+    height: 100vh;
     z-index: 1;
 }
 

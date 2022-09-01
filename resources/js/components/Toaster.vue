@@ -1,5 +1,5 @@
 <template>
-  <div class="toast fade hide toastBasic" style="z-index: 99; top: 100px; right: 5%; width: 300px; position: absolute;" 
+  <div class="toast fade hide toastBasic" style="z-index: 99; top: auto !important; right: 5%; width: 300px; position: absolute;" 
     id="toastBasic1" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
     <div id="toast-header" class="toast-header row">
         <div class="col-sm-10 col-xs-10 col-lg-10"> 

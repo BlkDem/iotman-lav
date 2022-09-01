@@ -19,16 +19,18 @@
                     </h3>
                     <div class="card-body">
                         <h5 class="card-title text-info">{{ device.device_type_name }}</h5>
-                        <h6 class="card-subtitle text-muted">{{ device.device_desc }}</h6>
+                        <h6 class="card-subtitle text-muted">{{ (device.device_desc === "undefined")? "no description" : device.device_desc}}</h6>
                     </div>
                     <img v-bind:src="device.device_type_image" />
-                    <div class="card-body">
-                        <p class="card-text">{{ device.device_desc }}</p>
-                    </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">HWID: {{ device.device_hwid }}</li>
+                        <li class="list-group-item">HWID: {{ device.device_hwid || "no hardware address" }}</li>
                     </ul>
                     <div class="card-body">
+                        <button class="btn btn-info" @click="doEdit(key, device.id)">
+                            <i class="fas fa-edit" aria-hidden="true"></i>
+                            Edit
+                        </button>
+
                         <button class="btn btn-secondary" @click="doDelete(key, device.id)">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                             Delete
@@ -49,17 +51,18 @@
 import ConfirmDialogue from '../components/ConfirmDialogue.vue';
 import Toaster from '../components/Toaster.vue';
 import AddDevice from '../components/AddDevice.vue';
+import DeviceTypesCombo from '../components/DeviceTypesCombo.vue';
 import ConfirmDeleteDeviceConstants from '../components/strings_constants/index';
 
     export default {
-        components: { ConfirmDialogue, Toaster , AddDevice},
+        components: { ConfirmDialogue, Toaster , AddDevice, DeviceTypesCombo},
 
         data() {
             return {
                 devices: [],
                 deleteMsg: '',
                 deleteModalResult: false,
-                visible: false
+                visible: true
             };
         },
 
@@ -79,7 +82,6 @@ import ConfirmDeleteDeviceConstants from '../components/strings_constants/index'
                 })
                 
                 if (ok) {
-                    console.log('deleting ...- ', this.devices[key].device_name, this.devices[key].id);
                     axios.delete('/api/devices/delete/' + id)
                         .then(resp => {
                             this.devices.splice(key, 1);                            
@@ -104,19 +106,30 @@ import ConfirmDeleteDeviceConstants from '../components/strings_constants/index'
                     .catch(err => console.log(err));
             },
 
+            async setDeviceType($device_type_id, $item) {
+                axios.get('/api/device_types/read/' + $device_type_id)
+                    .then(resp_type => {
+                        $item.device_type_image = resp_type['data'].data.device_type_image;
+                        $item.device_type_name = resp_type['data'].data.device_type_name;
+                    })
+            },
+
             async setDevice() {
                 const _add = await this.$refs.addDevice.showDialogue({
+                    edit_mode: false,
                     title: 'Adding Device',
                     message: 'Adding Device',
-                    new_device_name: 'dname',
-                    new_device_desc: 'dtype',
-                    mew_device_type_id: 'type_id',
-                    okButton: 'Add',
+                    device_name: 'New Device',
+                    device_desc: 'Device Desc',
+                    device_hwid: 'Device HWID',
+                    device_type_id: 'Device Type ID',
+                    okButton: 'Add Device',
                 })
 
                 if (_add) {
                     let newDevicePost = '/api/devices/create/?device_name=' + this.$refs.addDevice.device_name
                         + '&device_type_id=' + this.$refs.addDevice.device_type_id + '&device_desc=' + this.$refs.addDevice.device_desc;
+                    console.log(newDevicePost);
 
                     axios.post(newDevicePost)
                         .then(resp => {
@@ -130,16 +143,10 @@ import ConfirmDeleteDeviceConstants from '../components/strings_constants/index'
                                 id: resp['data'].id
                             }   
                             this.devices.push(newDevice);
-                            this.$refs.toaster.setMessage("Device Added", "Successfully");                         
+                            this.$refs.toaster.setMessage("Device Added", "Successfully");
                         })
                         .then(resp => {
-                            axios.get('/api/device_types/read/' + this.devices[this.devices.length-1].device_type_id)
-                            .then(resp_image => {
-                                console.log('Resp image: ', resp_image['data'].data.device_type_image);
-                                console.log('Last: ', this.devices[this.devices.length-1]);
-                                this.devices[this.devices.length-1].device_type_image = resp_image['data'].data.device_type_image;
-                                this.devices[this.devices.length-1].device_type_name = resp_image['data'].data.device_type_name;
-                            })
+                            this.setDeviceType(this.devices[this.devices.length-1].device_type_id, this.devices[this.devices.length-1]);
                         })
                         .catch(error => {
                             console.log(error);
@@ -149,34 +156,49 @@ import ConfirmDeleteDeviceConstants from '../components/strings_constants/index'
                 }
 
             },
+            async doEdit(key, id) {
+                const _edit = await this.$refs.addDevice.showDialogue({
+                    edit_mode: true,
+                    title: 'Editing Device',
+                    message: 'Editing Device',
+                    device_name: this.devices[key].device_name,
+                    device_desc: this.devices[key].device_desc,
+                    device_hwid: this.devices[key].device_hwid,
+                    device_type_id: this.devices[key].device_type_id,
+                    okButton: 'Edit Device',
+                })
 
+                if (_edit) {
+                    let editDevicePost = '/api/devices/update/'+id+'/?device_name=' + this.$refs.addDevice.device_name
+                        + '&device_type_id=' + this.$refs.addDevice.device_type_id + '&device_desc=' + this.$refs.addDevice.device_desc;
+                    console.log(editDevicePost);
+
+                    axios.put(editDevicePost)
+                        .then(resp => {
+                            console.log(resp['data']);
+                            this.devices[key].device_name = resp['data'].device_name;
+                            this.devices[key].device_desc = resp['data'].device_desc;
+                            this.devices[key].device_type_id = resp['data'].device_type_id;
+                            //this.devices.push(newDevice);
+                            this.$refs.toaster.setMessage("Device Edited", "Successfully");
+                        })
+                        .then(resp => {
+                            this.setDeviceType(this.devices[key].device_type_id, this.devices[key]);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
+                } else {
+                    console.log('inserting canceled');
+                }
+
+            },
             ShowHide(isVisible) {
                 this.visible = isVisible;
             },
 
             getVisible() {
                 return this.visible;
-            },
-
-            deleteDevice(key, id) {
-                console.log(key, id);
-
-                console.log(deleteModalResult);
-
-                /*$('#deleteConfirmationModal').on('hidden.bs.modal', function (e) {
-                    console.log(e);
-                }).one(console.log('one'));
-
-                if (confirm("Do you really want to delete?")) {
-                    axios.delete('/api/devices/delete/' + id)
-                        .then(resp => {
-                            this.devices.splice(key, 1);
-                            console.log(key, " - deleted");
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        })
-                }*/
             },
         },
         
