@@ -29,8 +29,7 @@ __webpack_require__.r(__webpack_exports__);
       fetch(api_url).then(function (response) {
         return response.json();
       }).then(function (response) {
-        _this.user_devices = response.data;
-        console.log(_this.user_devices);
+        _this.user_devices = response.data; //console.log(this.user_devices);
       })["catch"](function (err) {
         return console.log(err);
       });

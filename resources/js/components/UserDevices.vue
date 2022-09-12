@@ -53,7 +53,7 @@
                     .then(response => response.json())
                     .then(response => {
                         this.user_devices = response.data;
-                        console.log(this.user_devices);
+                        //console.log(this.user_devices);
                     })
                     .catch(err => console.log(err));
             },

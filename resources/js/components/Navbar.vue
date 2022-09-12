@@ -27,18 +27,14 @@
             </div>
         </div>
     </nav>
-    <Toaster ref="toaster" :title="toaster_title" :message="toaster_message"></Toaster>
+
 
 </template>
 
 <script>
 
-import Toaster from './Toaster.vue';
 
 export default {
-    components: {
-        Toaster
-    },
     
     data() {
         return {
@@ -96,6 +92,10 @@ export default {
             /*this.isUserDevicesVisible = !this.isUserDevicesVisible;
             this.isUserDevicesActive = this.isUserDevicesVisible;
             this.$root.$refs.DeviceUserRef.ShowHide(this.isUserDevicesVisible);*/
+        },
+
+        setMessage(message, header) {
+            this.$refs.toaster.setMessage(message, header)
         }
 
 

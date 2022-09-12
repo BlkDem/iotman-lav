@@ -12,6 +12,7 @@
 <body class="container-fluid">
 <div id="app" class="container text-center m-20">
     <navbar></navbar>
+    <Toaster ref="toaster"></Toaster>
     <device-list ref="DeviceRef"></device-list>
     <device-type-list ref="DeviceTypeRef"></device-type-list>
     <device-user-list ref="DeviceUserRef"></device-user-list>

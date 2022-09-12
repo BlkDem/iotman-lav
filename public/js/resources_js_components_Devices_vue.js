@@ -217,7 +217,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   return response.json();
                 }).then(function (response) {
                   _this.items = response.data;
-                  console.log(_this.items);
                 }) //.then(response => console.log(response))
                 ["catch"](function (err) {
                   return console.log(err);
@@ -254,10 +253,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _components_ConfirmDialogue_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/ConfirmDialogue.vue */ "./resources/js/components/ConfirmDialogue.vue");
-/* harmony import */ var _components_Toaster_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Toaster.vue */ "./resources/js/components/Toaster.vue");
-/* harmony import */ var _components_AddDevice_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/AddDevice.vue */ "./resources/js/components/AddDevice.vue");
-/* harmony import */ var _components_DeviceTypesCombo_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/DeviceTypesCombo.vue */ "./resources/js/components/DeviceTypesCombo.vue");
-/* harmony import */ var _components_strings_constants_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/strings_constants/index */ "./resources/js/components/strings_constants/index.js");
+/* harmony import */ var _components_AddDevice_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/AddDevice.vue */ "./resources/js/components/AddDevice.vue");
+/* harmony import */ var _components_DeviceTypesCombo_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/DeviceTypesCombo.vue */ "./resources/js/components/DeviceTypesCombo.vue");
+/* harmony import */ var _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/strings_constants/devices/index */ "./resources/js/components/strings_constants/devices/index.js");
+/* harmony import */ var _components_strings_constants_messages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/strings_constants/messages */ "./resources/js/components/strings_constants/messages.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
@@ -274,16 +273,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     ConfirmDialogue: _components_ConfirmDialogue_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Toaster: _components_Toaster_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    AddDevice: _components_AddDevice_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    DeviceTypesCombo: _components_DeviceTypesCombo_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    AddDevice: _components_AddDevice_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    DeviceTypesCombo: _components_DeviceTypesCombo_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
       devices: [],
       deleteMsg: '',
       deleteModalResult: false,
-      visible: true
+      visible: true,
+      compactView: true
     };
   },
   created: function created() {
@@ -301,10 +300,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this.$refs.confirmDialogue[key].showDialogue({
-                  title: _components_strings_constants_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_DELETING_CAPTION,
-                  message: _components_strings_constants_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_DELETING_MESSAGE + _this.devices[key].device_name + '?',
-                  okButton: _components_strings_constants_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_DELETING_CAPTION
+                return _this.$refs.confirmDialogue.showDialogue({
+                  title: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_3__["default"].DEVICE_DELETING_CAPTION,
+                  message: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_3__["default"].DEVICE_DELETING_MESSAGE + _this.devices[key].device_name + '?',
+                  okButton: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_3__["default"].DEVICE_DELETING_CAPTION
                 });
 
               case 2:
@@ -316,12 +315,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                     console.log(key, id, " - deleted");
 
-                    _this.$refs.toaster.setMessage("Device Deleted", "Successfully");
+                    _this.$root.$refs.toaster.setMessage(_components_strings_constants_messages__WEBPACK_IMPORTED_MODULE_4__["default"].DELETED_MESSAGE, _components_strings_constants_messages__WEBPACK_IMPORTED_MODULE_4__["default"].PROCESS_SUCCESSFULLY);
                   })["catch"](function (error) {
                     console.log(error);
                   });
                 } else {
-                  console.log('delete canceled');
+                  console.log(_components_strings_constants_messages__WEBPACK_IMPORTED_MODULE_4__["default"].DELETING_CANCELLED);
                 }
 
               case 4:
@@ -367,7 +366,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-        var _add, newDevicePost;
+        var _add;
 
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
@@ -376,22 +375,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context3.next = 2;
                 return _this3.$refs.addDevice.showDialogue({
                   edit_mode: false,
-                  title: 'Adding Device',
-                  message: 'Adding Device',
-                  device_name: 'New Device',
-                  device_desc: 'Device Desc',
-                  device_hwid: 'Device HWID',
-                  device_type_id: 'Device Type ID',
-                  okButton: 'Add Device'
+                  title: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_3__["default"].DEVICE_ADDING_TITLE,
+                  message: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_3__["default"].DEVICE_ADDING_MESSAGE,
+                  device_name: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_3__["default"].DEVICE_NAME_PLACEHOLDER,
+                  device_desc: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_3__["default"].DEVICE_DESC_PLACEHOLDER,
+                  device_hwid: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_3__["default"].DEVICE_HWID_PLACEHOLDER,
+                  device_type_id: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_3__["default"].DEVICE_DEVICETYPEID_PLACEHOLDER,
+                  okButton: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_3__["default"].DEVICE_ADDBUTTON_CAPTION
                 });
 
               case 2:
                 _add = _context3.sent;
 
                 if (_add) {
-                  newDevicePost = '/api/devices/create/?device_name=' + _this3.$refs.addDevice.device_name + '&device_type_id=' + _this3.$refs.addDevice.device_type_id + '&device_desc=' + _this3.$refs.addDevice.device_desc;
-                  console.log(newDevicePost);
-                  axios.post(newDevicePost).then(function (resp) {
+                  axios.post('/api/devices/create/?device_name=' + _this3.$refs.addDevice.device_name + '&device_type_id=' + _this3.$refs.addDevice.device_type_id + '&device_desc=' + _this3.$refs.addDevice.device_desc).then(function (resp) {
                     console.log(resp['data']);
                     var newDevice = {
                       device_name: resp['data'].device_name,
@@ -404,14 +401,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                     _this3.devices.push(newDevice);
 
-                    _this3.$refs.toaster.setMessage("Device Added", "Successfully");
+                    _this3.$root.$refs.toaster.setMessage(_components_strings_constants_messages__WEBPACK_IMPORTED_MODULE_4__["default"].ADDED_MESSAGE, _components_strings_constants_messages__WEBPACK_IMPORTED_MODULE_4__["default"].PROCESS_SUCCESSFULLY);
                   }).then(function (resp) {
                     _this3.setDeviceType(_this3.devices[_this3.devices.length - 1].device_type_id, _this3.devices[_this3.devices.length - 1]);
                   })["catch"](function (error) {
                     console.log(error);
                   });
                 } else {
-                  console.log('inserting canceled');
+                  console.log(DeviceMessagesConstants.DEVICE_INSERTING_CANCELLED);
                 }
 
               case 4:
@@ -435,35 +432,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context4.next = 2;
                 return _this4.$refs.addDevice.showDialogue({
                   edit_mode: true,
-                  title: 'Editing Device',
-                  message: 'Editing Device',
+                  title: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_3__["default"].DEVICE_EDITING_TITLE,
+                  message: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_3__["default"].DEVICE_EDITING_MESSAGE,
                   device_name: _this4.devices[key].device_name,
                   device_desc: _this4.devices[key].device_desc,
                   device_hwid: _this4.devices[key].device_hwid,
                   device_type_id: _this4.devices[key].device_type_id,
-                  okButton: 'Edit Device'
+                  okButton: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_3__["default"].DEVICE_EDITBUTTON_CAPTION
                 });
 
               case 2:
                 _edit = _context4.sent;
 
                 if (_edit) {
-                  editDevicePost = '/api/devices/update/' + id + '/?device_name=' + _this4.$refs.addDevice.device_name + '&device_type_id=' + _this4.$refs.addDevice.device_type_id + '&device_desc=' + _this4.$refs.addDevice.device_desc;
+                  editDevicePost = '/api/devices/update/' + id + '/?device_name=' + _this4.$refs.addDevice.device_name + '&device_type_id=' + _this4.$refs.addDevice.device_type_id + '&device_desc=' + _this4.$refs.addDevice.device_desc + '&device_hwid=' + _this4.$refs.addDevice.device_hwid;
                   console.log(editDevicePost);
                   axios.put(editDevicePost).then(function (resp) {
                     console.log(resp['data']);
                     _this4.devices[key].device_name = resp['data'].device_name;
                     _this4.devices[key].device_desc = resp['data'].device_desc;
-                    _this4.devices[key].device_type_id = resp['data'].device_type_id; //this.devices.push(newDevice);
+                    _this4.devices[key].device_type_id = resp['data'].device_type_id;
+                    _this4.devices[key].device_hwid = resp['data'].device_hwid;
 
-                    _this4.$refs.toaster.setMessage("Device Edited", "Successfully");
+                    _this4.$root.$refs.toaster.setMessage(_components_strings_constants_messages__WEBPACK_IMPORTED_MODULE_4__["default"].EDITED_MESSAGE, _components_strings_constants_messages__WEBPACK_IMPORTED_MODULE_4__["default"].PROCESS_SUCCESSFULLY);
                   }).then(function (resp) {
                     _this4.setDeviceType(_this4.devices[key].device_type_id, _this4.devices[key]);
                   })["catch"](function (error) {
                     console.log(error);
                   });
                 } else {
-                  console.log('inserting canceled');
+                  console.log(_components_strings_constants_messages__WEBPACK_IMPORTED_MODULE_4__["default"].EDITING_CANCELLED);
                 }
 
               case 4:
@@ -761,43 +759,76 @@ var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
 });
 
 var _hoisted_5 = {
-  "class": "col-sm-4 col-xs-4 col-lg-4 p-2"
+  "class": "col-sm-4 col-xs-4 col-lg-4 p-2",
+  style: {
+    "text-align": "right !important"
+  }
 };
-var _hoisted_6 = {
+
+var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": "fas fa-list"
+  }, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_7 = [_hoisted_6];
+
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": "fas fa-th-large"
+  }, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_9 = [_hoisted_8];
+
+var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
+    "class": "text-primary"
+  }, "All registered devices ready for use")], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_11 = {
+  key: 0,
   "class": "row"
 };
-var _hoisted_7 = ["id"];
-var _hoisted_8 = {
+var _hoisted_12 = ["id"];
+var _hoisted_13 = {
   "class": "card border-light"
 };
-var _hoisted_9 = {
+var _hoisted_14 = {
   "class": "card-header"
 };
-var _hoisted_10 = {
+var _hoisted_15 = {
   "class": "text-info"
 };
-var _hoisted_11 = {
-  "class": "card-body"
-};
-var _hoisted_12 = {
-  "class": "card-title text-info"
-};
-var _hoisted_13 = {
-  "class": "card-subtitle text-muted"
-};
-var _hoisted_14 = ["src"];
-var _hoisted_15 = {
-  "class": "list-group list-group-flush"
-};
 var _hoisted_16 = {
-  "class": "list-group-item"
+  "class": "card-body"
 };
 var _hoisted_17 = {
+  "class": "card-title text-info"
+};
+var _hoisted_18 = {
+  "class": "card-subtitle text-muted"
+};
+var _hoisted_19 = ["src"];
+var _hoisted_20 = {
+  "class": "list-group list-group-flush"
+};
+var _hoisted_21 = {
+  "class": "list-group-item"
+};
+var _hoisted_22 = {
   "class": "card-body"
 };
-var _hoisted_18 = ["onClick"];
+var _hoisted_23 = ["onClick"];
 
-var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_24 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fas fa-edit",
     "aria-hidden": "true"
@@ -806,12 +837,12 @@ var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Edit ");
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Edit ");
 
-var _hoisted_21 = [_hoisted_19, _hoisted_20];
-var _hoisted_22 = ["onClick"];
+var _hoisted_26 = [_hoisted_24, _hoisted_25];
+var _hoisted_27 = ["onClick"];
 
-var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_28 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fa fa-trash",
     "aria-hidden": "true"
@@ -820,74 +851,162 @@ var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete ");
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete ");
 
-var _hoisted_25 = [_hoisted_23, _hoisted_24];
+var _hoisted_30 = [_hoisted_28, _hoisted_29];
+var _hoisted_31 = {
+  key: 1
+};
+var _hoisted_32 = ["id"];
+var _hoisted_33 = {
+  "class": "card-header"
+};
+var _hoisted_34 = {
+  "class": "row"
+};
+var _hoisted_35 = {
+  "class": "col-sm-1 col-xs-1 col-lg-1"
+};
+var _hoisted_36 = ["src"];
+var _hoisted_37 = {
+  "class": "col-sm-3 col-xs-3 col-lg-3 align-left"
+};
+var _hoisted_38 = {
+  "class": "text-info"
+};
+var _hoisted_39 = {
+  "class": "col-sm-6 col-xs-4 col-lg-6 align-left"
+};
+var _hoisted_40 = {
+  "class": "col-sm-2 col-xs-2 col-lg-2 align-right"
+};
+var _hoisted_41 = ["onClick"];
+
+var _hoisted_42 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": "fas fa-edit",
+    "aria-hidden": "true"
+  }, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_43 = [_hoisted_42];
+var _hoisted_44 = ["onClick"];
+
+var _hoisted_45 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": "fa fa-trash",
+    "aria-hidden": "true"
+  }, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_46 = [_hoisted_45];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_Toaster = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Toaster");
-
   var _component_AddDevice = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AddDevice");
 
   var _component_ConfirmDialogue = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ConfirmDialogue");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Toaster, {
-    ref: "toaster"
-  }, null, 512
-  /* NEED_PATCH */
-  ), $data.visible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddDevice, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [$data.visible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddDevice, {
     ref: "addDevice"
   }, null, 512
   /* NEED_PATCH */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ConfirmDialogue, {
+    ref: "confirmDialogue"
+  }, null, 512
+  /* NEED_PATCH */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn btn-primary btn-block",
-    onClick: _cache[0] || (_cache[0] = function () {
+    "class": "btn btn-primary",
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $data.compactView = true;
+    })
+  }, _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "btn btn-primary m-2",
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $data.compactView = false;
+    })
+  }, _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "btn btn-primary",
+    onClick: _cache[2] || (_cache[2] = function () {
       return $options.setDevice && $options.setDevice.apply($options, arguments);
     })
-  }, "Add Device")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.devices, function (device, key) {
+  }, " Add Device ")])]), _hoisted_10, !$data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.devices, function (device, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "col-sm-4 col-xs-4 col-lg-4 p-2",
       key: key,
       id: device.id
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_name) + " ", 1
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_name) + " ", 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, "(" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.id) + ")", 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_15, "(" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.id) + ")", 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_type_name), 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_type_name), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_desc === "undefined" ? "no description" : device.device_desc), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_desc === "undefined" ? "no description" : device.device_desc), 1
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: device.device_type_image
     }, null, 8
     /* PROPS */
-    , _hoisted_14), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_16, "HWID: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_hwid || "no hardware address"), 1
+    , _hoisted_19), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_21, "HWID: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_hwid || "no hardware address"), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-info",
       onClick: function onClick($event) {
         return $options.doEdit(key, device.id);
       }
-    }, _hoisted_21, 8
+    }, _hoisted_26, 8
     /* PROPS */
-    , _hoisted_18), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    , _hoisted_23), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-secondary",
       onClick: function onClick($event) {
         return $options.doDelete(key, device.id);
       }
-    }, _hoisted_25, 8
+    }, _hoisted_30, 8
     /* PROPS */
-    , _hoisted_22), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ConfirmDialogue, {
-      ref_for: true,
-      ref: "confirmDialogue"
-    }, null, 512
-    /* NEED_PATCH */
-    )])])], 8
+    , _hoisted_27), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <ConfirmDialogue ref=\"confirmDialogue\" /> ")])])], 8
     /* PROPS */
-    , _hoisted_7);
+    , _hoisted_12);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
-  /* STABLE_FRAGMENT */
+  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" compact view "), $data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_31, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.devices, function (device, key) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      "class": "card border-primary mb-4 w-100",
+      key: key,
+      id: device.id
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+      src: device.device_type_image,
+      "class": "device-image"
+    }, null, 8
+    /* PROPS */
+    , _hoisted_36)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_type_name), 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_38, " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.id) + ") ", 1
+    /* TEXT */
+    )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_name) + ": HWID (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_hwid) + ")", 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      "class": "btn btn-info mx-2",
+      onClick: function onClick($event) {
+        return $options.doEdit(key, device.id);
+      }
+    }, _hoisted_43, 8
+    /* PROPS */
+    , _hoisted_41), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      "class": "btn btn-secondary",
+      onClick: function onClick($event) {
+        return $options.doDelete(key, device.id);
+      }
+    }, _hoisted_46, 8
+    /* PROPS */
+    , _hoisted_44), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <ConfirmDialogue ref=\"confirmDialogue\" /> ")])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"card-body\">\n                    <div class=\"row\">\n                        <div class=\"col-sm-2 col-xs-2 col-lg-2 \"><img v-bind:src=\"device.device_type_image\" style=\"width: 90px; border-radius: 10px; box-shadow:0 0 10px blueviolet; \" /></div>\n                        <div class=\"col-sm-8 col-xs-8 col-lg-8\">\n                            <h6 class=\"card-title text-info\">{{device.device_type_name}}</h6>\n                            <p class=\"card-text\">{{device.device_type_desc}}</p>\n                            <p class=\"card-text\">{{device.device_hwid}}</p>\n                        </div>\n                        <div class=\"col-sm-2 col-xs-2 col-lg-2 \"></div>\n                    </div>\n                </div> ")], 8
+    /* PROPS */
+    , _hoisted_32);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-if=\"compactView\">\n            <div class=\"row\" v-for=\"(device, key) in devices\" v-bind:key=\"key\" v-bind:id=\"device.id\">\n\n                <div class=\"col-10\">\n\n                    <div class=\"card border-light\">\n                        <div>\n                            <img v-bind:src=\"device.device_type_image\" style=\"width: 100px; padding: 10px;\" />\n                        </div>\n                        <div>\n                            <h3 class=\"card-body\">{{ device.device_name }} <span class=\"text-info\">({{ device.id\n                                    }})</span>\n                                - {{ device.device_type_name }}\n                            </h3>\n                            <h6 class=\"card-subtitle text-muted\">{{ (device.device_desc === \"undefined\")? \"no\n                                description\" : device.device_desc}}</h6>\n                            <p>{{ device.device_hwid || \"no hardware address\" }}</p>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-2\">\n                    <button class=\"btn btn-info w-100\" @click=\"doEdit(key, device.id)\">\n                        <i class=\"fas fa-edit\" aria-hidden=\"true\"></i>\n                        Edit\n                    </button>\n\n                    <button class=\"btn btn-secondary  w-100\" @click=\"doDelete(key, device.id)\">\n                        <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\n                        Delete\n                    </button>\n                    <ConfirmDialogue ref=\"confirmDialogue\" />\n\n                </div>\n            </div>\n        </div>\n\n    </div> ")], 2112
+  /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
   );
 }
 
@@ -932,10 +1051,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
-/***/ "./resources/js/components/strings_constants/index.js":
-/*!************************************************************!*\
-  !*** ./resources/js/components/strings_constants/index.js ***!
-  \************************************************************/
+/***/ "./resources/js/components/strings_constants/devices/index.js":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/strings_constants/devices/index.js ***!
+  \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -946,7 +1065,39 @@ var DEVICE_DELETING_CAPTION = "Delete";
 var DEVICE_DELETING_MESSAGE = "Are you sure you want to delete this device";
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   DEVICE_DELETING_CAPTION: DEVICE_DELETING_CAPTION,
-  DEVICE_DELETING_MESSAGE: DEVICE_DELETING_MESSAGE
+  DEVICE_DELETING_MESSAGE: DEVICE_DELETING_MESSAGE,
+  DEVICE_ADDING_TITLE: 'Adding Device',
+  DEVICE_ADDING_MESSAGE: 'Adding Device',
+  DEVICE_EDITING_TITLE: 'Editing Device',
+  DEVICE_EDITING_MESSAGE: 'Editing Device',
+  DEVICE_NAME_PLACEHOLDER: 'New Device',
+  DEVICE_DESC_PLACEHOLDER: 'Device Desc',
+  DEVICE_HWID_PLACEHOLDER: 'Device HWID',
+  DEVICE_DEVICETYPEID_PLACEHOLDER: 'Device Type ID',
+  DEVICE_ADDBUTTON_CAPTION: 'Add Device',
+  DEVICE_EDITBUTTON_CAPTION: 'Edit Device'
+});
+
+/***/ }),
+
+/***/ "./resources/js/components/strings_constants/messages.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/strings_constants/messages.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  EDITED_MESSAGE: "Edited",
+  ADDED_MESSAGE: "Added",
+  DELETED_MESSAGE: "Deleted",
+  PROCESS_SUCCESSFULLY: "Successfully",
+  INSERTING_CANCELLED: "Inserting Cancelled",
+  EDITING_CANCELLED: "Editing Cancelled",
+  DELETING_CANCELLED: "Deleting Cancelled"
 });
 
 /***/ }),
@@ -967,7 +1118,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".fade-enter-active[data-v-7c921fc2],\n.fade-leave-active[data-v-7c921fc2] {\n  transition: opacity 0.3s;\n}\n.fade-enter[data-v-7c921fc2],\n.fade-leave-to[data-v-7c921fc2] {\n  opacity: 0;\n}\n.popup-modal[data-v-7c921fc2] {\n  color: white;\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  padding: 0.5rem;\n  display: flex;\n  align-items: center;\n  z-index: 1;\n}\n.window[data-v-7c921fc2] {\n  background: #6f42c1;\n  border-radius: 5px;\n  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);\n  max-width: 480px;\n  margin-left: auto;\n  margin-right: auto;\n  padding: 1rem;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".fade-enter-active[data-v-7c921fc2],\n.fade-leave-active[data-v-7c921fc2] {\n  transition: opacity 0.3s;\n}\n.fade-enter[data-v-7c921fc2],\n.fade-leave-to[data-v-7c921fc2] {\n  opacity: 0;\n}\n.popup-modal[data-v-7c921fc2] {\n  color: white;\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  padding: 0.5rem;\n  display: flex;\n  align-items: center;\n  z-index: 1;\n}\n.window[data-v-7c921fc2] {\n  background: #6f42c1;\n  border-radius: 5px;\n  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);\n  max-width: 480px;\n  margin-left: auto;\n  margin-right: auto;\n  padding: 2.4rem;\n}\n.align-left[data-v-7c921fc2] {\n  text-align: left !important;\n}\n.align-right[data-v-7c921fc2] {\n  text-align: right !important;\n}\n.align-center[data-v-7c921fc2] {\n  text-align: center !important;\n}\n.device-image[data-v-7c921fc2] {\n  width: 70px;\n  margin-top: -50px;\n  margin-bottom: -60px;\n  margin-left: -10px;\n  border-radius: 10px;\n  box-shadow: blueviolet 0px 0px 10px;\n}\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n.device-image[data-v-7c921fc2] {\n    width: 50px;\n    margin-top: -55px;\n    margin-bottom: -29px;\n    margin-left: -249px;\n    border-radius: 10px;\n    box-shadow: blueviolet 0px 0px 10px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

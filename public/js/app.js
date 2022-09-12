@@ -23141,12 +23141,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Toaster_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Toaster.vue */ "./resources/js/components/Toaster.vue");
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {
-    Toaster: _Toaster_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
   data: function data() {
     return {
       isDeviceTypesVisible: false,
@@ -23192,6 +23187,9 @@ __webpack_require__.r(__webpack_exports__);
       /*this.isUserDevicesVisible = !this.isUserDevicesVisible;
       this.isUserDevicesActive = this.isUserDevicesVisible;
       this.$root.$refs.DeviceUserRef.ShowHide(this.isUserDevicesVisible);*/
+    },
+    setMessage: function setMessage(message, header) {
+      this.$refs.toaster.setMessage(message, header);
     }
   }
 });
@@ -23216,6 +23214,7 @@ __webpack_require__.r(__webpack_exports__);
       header: ''
     };
   },
+  // props: ["message", "header"],
   methods: {
     setMessage: function setMessage(_header, _message) {
       this.header = _header;
@@ -23307,9 +23306,7 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_Toaster = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Toaster");
-
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["nav-link", {
       active: $data.isDeviceTypesActive
     }]),
@@ -23339,15 +23336,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, "User's Devices", 2
   /* CLASS */
-  )])]), _hoisted_10])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Toaster, {
-    ref: "toaster",
-    title: _ctx.toaster_title,
-    message: _ctx.toaster_message
-  }, null, 8
-  /* PROPS */
-  , ["title", "message"])], 64
-  /* STABLE_FRAGMENT */
-  );
+  )])]), _hoisted_10])])]);
 }
 
 /***/ }),
@@ -23366,66 +23355,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "toast fade hide toastBasic",
-  style: {
-    "z-index": "99",
-    "top": "auto !important",
-    "right": "5%",
-    "width": "300px",
-    "position": "absolute"
-  },
-  id: "toastBasic1",
+  "class": "toast-container position-fixed bottom-0 end-0 p-3"
+};
+var _hoisted_2 = {
+  "class": "toast hide toastBasic",
   role: "alert",
   "aria-live": "assertive",
   "aria-atomic": "true",
   "data-delay": "3000"
 };
-var _hoisted_2 = {
-  id: "toast-header",
-  "class": "toast-header row"
-};
 var _hoisted_3 = {
-  "class": "col-sm-10 col-xs-10 col-lg-10"
+  "class": "toast-header"
+};
+var _hoisted_4 = {
+  "class": "me-auto"
 };
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fa fa-info-circle",
-  style: {
-    "margin-right": "10px"
-  }
-}, null, -1
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, "11 mins ago", -1
 /* HOISTED */
 );
 
-var _hoisted_5 = {
-  "class": "mr-auto"
-};
-var _hoisted_6 = {
-  "class": "col-sm-2 col-xs-2 col-lg-2"
-};
-
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "button",
+  "class": "btn-close ms-2 mb-1",
+  "data-bs-dismiss": "toast",
+  "aria-label": "Close"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "aria-hidden": "true"
-}, "×", -1
+})], -1
 /* HOISTED */
 );
 
-var _hoisted_8 = [_hoisted_7];
-var _hoisted_9 = {
+var _hoisted_7 = {
   "class": "toast-body"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.header), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.header), 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn btn-danger ml-2 mb-1 close",
-    type: "button",
-    "data-dismiss": "toast",
-    "aria-label": "Close",
-    onClick: _cache[0] || (_cache[0] = function () {
-      return $options.hideToast && $options.hideToast.apply($options, arguments);
-    })
-  }, _hoisted_8)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.message), 1
+  ), _hoisted_5, _hoisted_6]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.message), 1
   /* TEXT */
   )])]);
 }
@@ -23443,6 +23410,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _components_Navbar_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Navbar.vue */ "./resources/js/components/Navbar.vue");
+/* harmony import */ var _components_Toaster_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Toaster.vue */ "./resources/js/components/Toaster.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -23461,6 +23429,8 @@ var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)({});
  //import DeviceList from './components/DeviceList.vue';
 
 app.component('navbar', _components_Navbar_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+app.component('toaster', _components_Toaster_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
 app.component('device-user-list', (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineAsyncComponent)(function () {
   return __webpack_require__.e(/*! import() */ "resources_js_components_UserDevices_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/UserDevices.vue */ "./resources/js/components/UserDevices.vue"));
 }));

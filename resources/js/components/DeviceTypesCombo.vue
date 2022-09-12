@@ -39,7 +39,6 @@ export default {
                     .then(response => response.json())
                     .then(response => {                        
                         this.items = response.data;
-                        console.log(this.items)
                     })
                     //.then(response => console.log(response))
                     .catch(err => console.log(err));

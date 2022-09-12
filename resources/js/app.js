@@ -21,6 +21,9 @@ import Navbar from './components/Navbar.vue';
 //import DeviceList from './components/DeviceList.vue';
 app.component('navbar', Navbar);
 
+import Toaster from './components/Toaster.vue';
+app.component('toaster', Toaster);
+
 
 app.component('device-user-list', defineAsyncComponent(() =>
   import('./components/UserDevices.vue')
