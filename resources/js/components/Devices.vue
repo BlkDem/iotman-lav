@@ -246,7 +246,7 @@ import MessagesConstants from '../components/strings_constants/messages';
                             console.log(error);
                         })
                 } else {
-                    console.log(DeviceMessagesConstants.DEVICE_INSERTING_CANCELLED);
+                    console.log(MessagesConstants.DEVICE_INSERTING_CANCELLED);
                 }
 
             },

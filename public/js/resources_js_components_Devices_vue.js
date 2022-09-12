@@ -408,7 +408,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     console.log(error);
                   });
                 } else {
-                  console.log(DeviceMessagesConstants.DEVICE_INSERTING_CANCELLED);
+                  console.log(_components_strings_constants_messages__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_INSERTING_CANCELLED);
                 }
 
               case 4:
