@@ -23,9 +23,9 @@ export default {
 
     props: ["id"], 
 
-    setup(props) {
+    // setup(props) {
         
-    },
+    // },
 
     created(props) {        
         this.getDeviceTypes();
@@ -48,10 +48,10 @@ export default {
             return this.id;
         },
 
-        setId(){
-            //this.id=3;
-            console.log(this.props, this)
-        }
+        // setId(){
+        //     //this.id=3;
+        //     console.log(this.props, this)
+        // }
 
     },
 }

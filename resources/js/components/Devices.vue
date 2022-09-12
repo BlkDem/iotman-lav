@@ -25,7 +25,7 @@
         <div>
             <h4 class="text-primary">All registered devices ready for use</h4>
         </div>
-        
+
         <div class="row" v-if="!compactView">
             <div class="col-sm-4 col-xs-4 col-lg-4 p-2" v-for="(device, key) in devices" v-bind:key="key"
                 v-bind:id="device.id">
@@ -98,6 +98,7 @@
                 </div> -->
             </div>
         </div>
+        <Paginator ref="paginatorDevices"></Paginator>
     </div>
 
     <!-- <div v-if="compactView">
@@ -138,7 +139,6 @@
 
     </div> -->
 
-
 </template>
 
 <script>
@@ -146,16 +146,17 @@ import ConfirmDialogue from '../components/ConfirmDialogue.vue';
 
 import AddDevice from '../components/AddDevice.vue';
 import DeviceTypesCombo from '../components/DeviceTypesCombo.vue';
+import Paginator from '../components/Paginator.vue';
 import DeviceStringConstants from '../components/strings_constants/devices/index';
 import MessagesConstants from '../components/strings_constants/messages';
 
     export default {
-        components: { ConfirmDialogue, AddDevice, DeviceTypesCombo},
+        components: { ConfirmDialogue, AddDevice, DeviceTypesCombo, Paginator},
 
         data() {
             return {
                 devices: [],
-                deleteMsg: '',
+                // deleteMsg: '',
                 deleteModalResult: false,
                 visible: true,
                 compactView: true
@@ -246,7 +247,7 @@ import MessagesConstants from '../components/strings_constants/messages';
                             console.log(error);
                         })
                 } else {
-                    console.log(MessagesConstants.DEVICE_INSERTING_CANCELLED);
+                    console.log(MessagesConstants.INSERTING_CANCELLED);
                 }
 
             },
