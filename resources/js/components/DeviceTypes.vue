@@ -1,8 +1,14 @@
 <template>
     <div v-if="visible">
-        <h1>Device Types</h1>
+        <AddDevice ref="addDeviceType"></AddDevice>
+        <ConfirmDialogue ref="confirmDialogue" />
         <div class="row">
-            <div class="col-sm-4 col-xs-4 col-lg-4 p-2"  v-for="device_type in device_types" v-bind:key="device_type.id">
+            <div class="col-sm-6 col-xs-6 col-lg-6 p-2">
+                <h1>Device Types</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-xs-6 col-lg-6 p-2"  v-for="device_type in device_types" v-bind:key="device_type.id">
             <div class="card border-light" style="min-width: 25%;">
                 <h3 class="card-header">{{ device_type.device_type_name }}</h3>
                 <div class="card-body">
@@ -18,6 +24,8 @@
 </template>
 
 <script>
+import ConfirmDialogue from '../components/ConfirmDialogue.vue';
+import AddDeviceType from '../components/AddDeviceType.vue';
 
     export default {
         data() {

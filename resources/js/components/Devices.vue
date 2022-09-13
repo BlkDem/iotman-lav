@@ -4,11 +4,10 @@
         <AddDevice ref="addDevice"></AddDevice>
         <ConfirmDialogue ref="confirmDialogue" />
         <div class="row">
-            <div class="col-sm-4 col-xs-4 col-lg-4 p-2">
+            <div class="col-sm-6 col-xs-6 col-lg-6 p-2">
                 <h1>Registered Devices</h1>
             </div>
-            <div class="col-sm-4 col-xs-4 col-lg-4 p-2"></div>
-            <div class="col-sm-4 col-xs-4 col-lg-4 p-2" style="text-align: right !important;">
+            <div class="col-sm-6 col-xs-6 col-lg-6 p-2" style="text-align: right !important;">
                 <button class="btn btn-primary" @click="compactView=true">
                     <i class="fas fa-list"></i>
                 </button>
@@ -143,7 +142,6 @@
 
 <script>
 import ConfirmDialogue from '../components/ConfirmDialogue.vue';
-
 import AddDevice from '../components/AddDevice.vue';
 import DeviceTypesCombo from '../components/DeviceTypesCombo.vue';
 import Paginator from '../components/Paginator.vue';
