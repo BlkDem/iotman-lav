@@ -23246,7 +23246,7 @@ var _hoisted_1 = {
   "class": "navbar navbar-expand-lg navbar-dark bg-primary my-4",
   style: {
     "position": "sticky",
-    "top": "20px",
+    "top": "0px",
     "z-index": "1"
   }
 };

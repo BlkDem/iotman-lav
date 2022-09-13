@@ -17,8 +17,6 @@
                 <button class="btn btn-primary" @click="setDevice">
                     Add Device
                 </button>
-
-
             </div>
         </div>
         <div>
