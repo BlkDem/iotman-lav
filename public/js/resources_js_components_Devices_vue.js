@@ -923,7 +923,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_Paginator = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Paginator");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [$data.visible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddDevice, {
+  return $data.visible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddDevice, {
     ref: "addDevice"
   }, null, 512
   /* NEED_PATCH */
@@ -1014,7 +1014,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }
     }, _hoisted_45, 8
     /* PROPS */
-    , _hoisted_43), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <ConfirmDialogue ref=\"confirmDialogue\" /> ")])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"card-body\">\n                    <div class=\"row\">\n                        <div class=\"col-sm-2 col-xs-2 col-lg-2 \"><img v-bind:src=\"device.device_type_image\" style=\"width: 90px; border-radius: 10px; box-shadow:0 0 10px blueviolet; \" /></div>\n                        <div class=\"col-sm-8 col-xs-8 col-lg-8\">\n                            <h6 class=\"card-title text-info\">{{device.device_type_name}}</h6>\n                            <p class=\"card-text\">{{device.device_type_desc}}</p>\n                            <p class=\"card-text\">{{device.device_hwid}}</p>\n                        </div>\n                        <div class=\"col-sm-2 col-xs-2 col-lg-2 \"></div>\n                    </div>\n                </div> ")], 8
+    , _hoisted_43), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <ConfirmDialogue ref=\"confirmDialogue\" /> ")])])])], 8
     /* PROPS */
     , _hoisted_31);
   }), 128
@@ -1023,9 +1023,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     ref: "paginatorDevices"
   }, null, 512
   /* NEED_PATCH */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-if=\"compactView\">\n            <div class=\"row\" v-for=\"(device, key) in devices\" v-bind:key=\"key\" v-bind:id=\"device.id\">\n\n                <div class=\"col-10\">\n\n                    <div class=\"card border-light\">\n                        <div>\n                            <img v-bind:src=\"device.device_type_image\" style=\"width: 100px; padding: 10px;\" />\n                        </div>\n                        <div>\n                            <h3 class=\"card-body\">{{ device.device_name }} <span class=\"text-info\">({{ device.id\n                                    }})</span>\n                                - {{ device.device_type_name }}\n                            </h3>\n                            <h6 class=\"card-subtitle text-muted\">{{ (device.device_desc === \"undefined\")? \"no\n                                description\" : device.device_desc}}</h6>\n                            <p>{{ device.device_hwid || \"no hardware address\" }}</p>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-2\">\n                    <button class=\"btn btn-info w-100\" @click=\"doEdit(key, device.id)\">\n                        <i class=\"fas fa-edit\" aria-hidden=\"true\"></i>\n                        Edit\n                    </button>\n\n                    <button class=\"btn btn-secondary  w-100\" @click=\"doDelete(key, device.id)\">\n                        <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\n                        Delete\n                    </button>\n                    <ConfirmDialogue ref=\"confirmDialogue\" />\n\n                </div>\n            </div>\n        </div>\n\n    </div> ")], 2112
-  /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
-  );
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),

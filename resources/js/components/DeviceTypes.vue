@@ -44,8 +44,6 @@
                             <i class="fa fa-trash" aria-hidden="true"></i>
                             Delete
                         </button>
-                        <!-- <ConfirmDialogue ref="confirmDialogue" /> -->
-
                     </div>
                 </div>
             </div>
@@ -103,6 +101,8 @@
 import ConfirmDialogue from '../components/ConfirmDialogue.vue';
 import AddDeviceType from '../components/AddDeviceType.vue';
 import Paginator from '../components/Paginator.vue';
+import MessagesConstants from '../components/strings_constants/messages';
+import DeviceStringConstants from '../components/strings_constants/device_types/index';
 
     export default {
         components: { ConfirmDialogue, AddDeviceType, Paginator},

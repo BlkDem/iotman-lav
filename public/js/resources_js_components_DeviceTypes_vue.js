@@ -175,6 +175,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ConfirmDialogue_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/ConfirmDialogue.vue */ "./resources/js/components/ConfirmDialogue.vue");
 /* harmony import */ var _components_AddDeviceType_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/AddDeviceType.vue */ "./resources/js/components/AddDeviceType.vue");
 /* harmony import */ var _components_Paginator_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Paginator.vue */ "./resources/js/components/Paginator.vue");
+/* harmony import */ var _components_strings_constants_messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/strings_constants/messages */ "./resources/js/components/strings_constants/messages.js");
+/* harmony import */ var _components_strings_constants_device_types_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/strings_constants/device_types/index */ "./resources/js/components/strings_constants/device_types/index.js");
+
+
 
 
 
@@ -655,7 +659,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }
     }, _hoisted_27, 8
     /* PROPS */
-    , _hoisted_24), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <ConfirmDialogue ref=\"confirmDialogue\" /> ")])])], 8
+    , _hoisted_24)])])], 8
     /* PROPS */
     , _hoisted_11);
   }), 128
@@ -764,6 +768,54 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   });
 }
+
+/***/ }),
+
+/***/ "./resources/js/components/strings_constants/device_types/index.js":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/strings_constants/device_types/index.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  DEVICE_TYPE_DELETING_CAPTION: "Delete",
+  DEVICE_TYPE_DELETING_MESSAGE: "Are you sure you want to delete this device type?",
+  DEVICE_TYPE_ADDING_TITLE: 'Adding Device Type',
+  DEVICE_TYPE_ADDING_MESSAGE: 'Adding Device Type',
+  DEVICE_TYPE_EDITING_TITLE: 'Editing Device Type',
+  DEVICE_TYPE_EDITING_MESSAGE: 'Editing Device Type',
+  DEVICE_TYPE_NAME_PLACEHOLDER: 'New Device Type',
+  DEVICE_TYPE_DESC_PLACEHOLDER: 'Device Type Desc',
+  DEVICE_TYPE_IMAGE_PLACEHOLDER: 'Device Type Image',
+  DEVICE_TYPE_ADDBUTTON_CAPTION: 'Add Device Type',
+  DEVICE_TYPE_EDITBUTTON_CAPTION: 'Edit Device Type'
+});
+
+/***/ }),
+
+/***/ "./resources/js/components/strings_constants/messages.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/strings_constants/messages.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  EDITED_MESSAGE: "Edited",
+  ADDED_MESSAGE: "Added",
+  DELETED_MESSAGE: "Deleted",
+  PROCESS_SUCCESSFULLY: "Successfully",
+  INSERTING_CANCELLED: "Inserting Cancelled",
+  EDITING_CANCELLED: "Editing Cancelled",
+  DELETING_CANCELLED: "Deleting Cancelled"
+});
 
 /***/ }),
 

@@ -82,59 +82,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-2 col-xs-2 col-lg-2 "><img v-bind:src="device.device_type_image" style="width: 90px; border-radius: 10px; box-shadow:0 0 10px blueviolet; " /></div>
-                        <div class="col-sm-8 col-xs-8 col-lg-8">
-                            <h6 class="card-title text-info">{{device.device_type_name}}</h6>
-                            <p class="card-text">{{device.device_type_desc}}</p>
-                            <p class="card-text">{{device.device_hwid}}</p>
-                        </div>
-                        <div class="col-sm-2 col-xs-2 col-lg-2 "></div>
-                    </div>
-                </div> -->
             </div>
         </div>
         <Paginator ref="paginatorDevices"></Paginator>
     </div>
-
-    <!-- <div v-if="compactView">
-            <div class="row" v-for="(device, key) in devices" v-bind:key="key" v-bind:id="device.id">
-
-                <div class="col-10">
-
-                    <div class="card border-light">
-                        <div>
-                            <img v-bind:src="device.device_type_image" style="width: 100px; padding: 10px;" />
-                        </div>
-                        <div>
-                            <h3 class="card-body">{{ device.device_name }} <span class="text-info">({{ device.id
-                                    }})</span>
-                                - {{ device.device_type_name }}
-                            </h3>
-                            <h6 class="card-subtitle text-muted">{{ (device.device_desc === "undefined")? "no
-                                description" : device.device_desc}}</h6>
-                            <p>{{ device.device_hwid || "no hardware address" }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <button class="btn btn-info w-100" @click="doEdit(key, device.id)">
-                        <i class="fas fa-edit" aria-hidden="true"></i>
-                        Edit
-                    </button>
-
-                    <button class="btn btn-secondary  w-100" @click="doDelete(key, device.id)">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                        Delete
-                    </button>
-                    <ConfirmDialogue ref="confirmDialogue" />
-
-                </div>
-            </div>
-        </div>
-
-    </div> -->
 
 </template>
 
