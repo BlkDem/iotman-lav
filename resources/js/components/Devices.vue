@@ -20,7 +20,7 @@
             </div>
         </div>
         <div>
-            <h4 class="text-primary">All registered devices ready for use</h4>
+            <h4 class="text-primary">{{ page_description }}</h4>
         </div>
 
         <div class="row" v-if="!compactView">
@@ -31,12 +31,12 @@
                     </h3>
                     <div class="card-body">
                         <h5 class="card-title text-info">{{ device.device_type_name }}</h5>
-                        <h6 class="card-subtitle text-muted">{{ (device.device_desc === "undefined")? "no description" :
+                        <h6 class="card-subtitle text-muted">{{ (device.device_desc === "undefined")? MessagesConstants.NO_DESCRIPTION :
                             device.device_desc}}</h6>
                     </div>
                     <img v-bind:src="device.device_type_image" />
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">HWID: {{ device.device_hwid || "no hardware address" }}</li>
+                        <li class="list-group-item">HWID: {{ device.device_hwid || DeviceStringConstants.NO_HWID }}</li>
                     </ul>
                     <div class="card-body">
                         <button class="btn btn-info" @click="doEdit(key, device.id)">
@@ -103,7 +103,7 @@ import MessagesConstants from '../components/strings_constants/messages';
         data() {
             return {
                 devices: [],
-                // deleteMsg: '',
+                page_description: '',
                 deleteModalResult: false,
                 visible: true,
                 compactView: true
@@ -111,6 +111,7 @@ import MessagesConstants from '../components/strings_constants/messages';
         },
 
         created() {
+            this.page_description = DeviceStringConstants.DEVICE_PAGE_DESCRIPTION;
             this.getDevices();
             this.itemIndex = 0;
         },
@@ -256,56 +257,6 @@ import MessagesConstants from '../components/strings_constants/messages';
 <style lang="scss" scoped>
     @import '../../sass/_variables.scss';
     @import '../../sass/aligns.scss';
-    .fade-enter-active,
-    .fade-leave-active {
-        transition: opacity 0.3s;
-    }
-    .fade-enter,
-    .fade-leave-to {
-        opacity: 0;
-    }
-    
-    .popup-modal {
-        color: $light;
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 0.5rem;
-        display: flex;
-        align-items: center;
-        z-index: 1;
-    }
-    
-    .window {
-        background: $primary;
-        border-radius: 5px;
-        box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
-        max-width: 480px;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 2.4rem;
-    }
-
-    .device-image {
-        width: 70px;
-        margin-top: -50px;
-        margin-bottom: -60px;
-        margin-left: -10px;
-        border-radius: 10px;
-        box-shadow: blueviolet 0px 0px 10px;    
-    }
-    
-    @media only screen and (min-width : 320px) and (max-width : 480px) {
-        .device-image {
-            width: 50px;
-            margin-top: -55px;
-            margin-bottom: -29px;
-            margin-left: -249px;
-            border-radius: 10px;
-            box-shadow: blueviolet 0px 0px 10px; 
-        }
-    }
+    @import '../../sass/dialogs.scss';
     
 </style>

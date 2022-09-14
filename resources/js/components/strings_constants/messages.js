@@ -6,4 +6,5 @@ export default {
     INSERTING_CANCELLED: "Inserting Cancelled",
     EDITING_CANCELLED: "Editing Cancelled",
     DELETING_CANCELLED: "Deleting Cancelled",
+    NO_DESCRIPTION: " no description ",
 }

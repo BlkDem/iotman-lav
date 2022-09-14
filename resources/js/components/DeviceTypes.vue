@@ -19,7 +19,7 @@
             </div>
         </div>
         <div>
-            <h4 class="text-primary">Device Types - things produced by Umolab</h4>
+            <h4 class="text-primary">{{ page_description }}</h4>
         </div>
 
         <div class="row" v-if="!compactView">
@@ -30,7 +30,7 @@
                     </h3>
                     <div class="card-body">
                         <h5 class="card-title text-info">{{ device_type.device_type_name }}</h5>
-                        <h6 class="card-subtitle text-muted">{{ (device_type.device_type_desc === "undefined")? "no description" :
+                        <h6 class="card-subtitle text-muted">{{ (device_type.device_type_desc === "undefined")? MessagesConstants.NO_DESCRIPTION :
                             device_type.device_type_desc}}</h6>
                     </div>
                     <img v-bind:src="device_type.device_type_image" />
@@ -115,6 +115,7 @@ import DeviceTypeStringConstants from '../components/strings_constants/device_ty
         },
 
         created() {
+            this.page_description = DeviceTypeStringConstants.DEVICE_TYPE_PAGE_DESCRIPTION;
             this.getDeviceTypes();
         },
 
@@ -218,9 +219,9 @@ import DeviceTypeStringConstants from '../components/strings_constants/device_ty
                                 MessagesConstants.PROCESS_SUCCESSFULLY
                             );
                         })
-                        // .then(resp => {
-                        //     this.setDeviceType(this.devices[key].device_type_id, this.devices[key]);
-                        // })
+                        .then(resp => {
+                            this.$root.$refs.DeviceRef.getDevices();
+                        })
                         .catch(error => {
                             console.log(error);
                         })
@@ -242,69 +243,9 @@ import DeviceTypeStringConstants from '../components/strings_constants/device_ty
     };
 </script>
 
-<style lang="scss" scoped>
-    
-    .fade-enter-active,
-    .fade-leave-active {
-        transition: opacity 0.3s;
-    }
-    .fade-enter,
-    .fade-leave-to {
-        opacity: 0;
-    }
-    
-    .popup-modal {
-        color: white;
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 0.5rem;
-        display: flex;
-        align-items: center;
-        z-index: 1;
-    }
-    
-    .window {
-        background: #6f42c1;
-        border-radius: 5px;
-        box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
-        max-width: 480px;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 2.4rem;
-    }
-
-    .align-left {
-        text-align: left !important;
-    }
-
-    .align-right {
-        text-align: right !important;
-    }
-    .align-center {
-        text-align: center !important;
-    }
-
-    .device-image {
-        width: 70px;
-        margin-top: -50px;
-        margin-bottom: -60px;
-        margin-left: -10px;
-        border-radius: 10px;
-        box-shadow: blueviolet 0px 0px 10px;    
-    }
-    
-    @media only screen and (min-width : 320px) and (max-width : 480px) {
-        .device-image {
-            width: 50px;
-            margin-top: -55px;
-            margin-bottom: -29px;
-            margin-left: -249px;
-            border-radius: 10px;
-            box-shadow: blueviolet 0px 0px 10px; 
-        }
-    }
+<style>
+    @import '../../sass/_variables.scss';
+    @import '../../sass/dialogs.scss';
+    @import '../../sass/aligns.scss';
     
 </style>

@@ -1,15 +1,18 @@
 <template>
     <PopupModal ref="popup">
         <div class="modal-header">
-            <h2 style="margin-top: 0">{{ title }}</h2>
+            <h2 class="w-100 text-center">{{ title }}</h2>
         </div>
         
-        <div class="modal-body">
-            <label>Device Type Name</label>
+        <div class="modal-body align-left">
+            <label class="px-2">Device Type Name</label>
             <input v-model="device_type_name" class="form-control p-2 mb-4" placeholder="Input Device Type Name"/>
-            <label class="ml-n4">Device Type Desc</label>
-            <input v-model="device_type_desc" class="form-control p-2 mb-4" placeholder="Input Device Type Desc"/>
-            <label class="ml-n4">Device Type Image</label>
+            <label class="px-2">Device Type Desc</label>
+            <textarea v-model="device_type_desc" class="form-control p-2 mb-4" style="min-height: 100px; max-height: 200px;" placeholder="Input Device Type Desc" cols="40" rows="3">
+            
+            </textarea>
+            <!-- <input v-model="device_type_desc" class="form-control p-2 mb-4" placeholder="Input Device Type Desc"/> -->
+            <label class="px-2">Device Type Image</label>
             <input v-model="device_type_image" class="form-control p-2 mb-4" placeholder="Input Device Type Image"/>
         </div>
         <div class="btns my-2 d-grid gap-2 px-4">
@@ -79,11 +82,7 @@ export default {
             })
         },
 
-        _confirm() {
-            //this.device_name = $('#device_name').val();
-            //this.device_desc = $('#device_desc').val();
-            //console.log(this.$refs.types);
-            
+        _confirm() {            
             this.$refs.popup.close()
             this.resolvePromise(true, this)
         },

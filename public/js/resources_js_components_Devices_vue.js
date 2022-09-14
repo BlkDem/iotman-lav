@@ -272,13 +272,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       devices: [],
-      // deleteMsg: '',
+      page_description: '',
       deleteModalResult: false,
       visible: true,
       compactView: true
     };
   },
   created: function created() {
+    this.page_description = _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_PAGE_DESCRIPTION;
     this.getDevices();
     this.itemIndex = 0;
   },
@@ -785,15 +786,9 @@ var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
 });
 
 var _hoisted_8 = [_hoisted_7];
-
-var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
-    "class": "text-primary"
-  }, "All registered devices ready for use")], -1
-  /* HOISTED */
-  );
-});
-
+var _hoisted_9 = {
+  "class": "text-primary"
+};
 var _hoisted_10 = {
   key: 0,
   "class": "row"
@@ -935,7 +930,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.setDevice && $options.setDevice.apply($options, arguments);
     })
-  }, " Add Device ")])]), _hoisted_9, !$data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.devices, function (device, key) {
+  }, " Add Device ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.page_description), 1
+  /* TEXT */
+  )]), !$data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.devices, function (device, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "col-sm-4 col-xs-4 col-lg-4 p-2",
       key: key,
@@ -946,13 +943,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_type_name), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_desc === "undefined" ? "no description" : device.device_desc), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_desc === "undefined" ? _ctx.MessagesConstants.NO_DESCRIPTION : device.device_desc), 1
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: device.device_type_image
     }, null, 8
     /* PROPS */
-    , _hoisted_18), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_20, "HWID: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_hwid || "no hardware address"), 1
+    , _hoisted_18), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_20, "HWID: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_hwid || _ctx.DeviceStringConstants.NO_HWID), 1
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-info",
@@ -1100,7 +1097,9 @@ __webpack_require__.r(__webpack_exports__);
   DEVICE_HWID_PLACEHOLDER: 'Device HWID',
   DEVICE_DEVICETYPEID_PLACEHOLDER: 'Device Type ID',
   DEVICE_ADDBUTTON_CAPTION: 'Add Device',
-  DEVICE_EDITBUTTON_CAPTION: 'Edit Device'
+  DEVICE_EDITBUTTON_CAPTION: 'Edit Device',
+  NO_HWID: "no hardware address",
+  DEVICE_PAGE_DESCRIPTION: "All registered devices ready for use"
 });
 
 /***/ }),
@@ -1122,7 +1121,8 @@ __webpack_require__.r(__webpack_exports__);
   PROCESS_SUCCESSFULLY: "Successfully",
   INSERTING_CANCELLED: "Inserting Cancelled",
   EDITING_CANCELLED: "Editing Cancelled",
-  DELETING_CANCELLED: "Deleting Cancelled"
+  DELETING_CANCELLED: "Deleting Cancelled",
+  NO_DESCRIPTION: " no description "
 });
 
 /***/ }),
@@ -1143,7 +1143,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".align-left[data-v-7c921fc2] {\n  text-align: left !important;\n}\n.align-right[data-v-7c921fc2] {\n  text-align: right !important;\n}\n.align-center[data-v-7c921fc2] {\n  text-align: center !important;\n}\n.fade-enter-active[data-v-7c921fc2],\n.fade-leave-active[data-v-7c921fc2] {\n  transition: opacity 0.3s;\n}\n.fade-enter[data-v-7c921fc2],\n.fade-leave-to[data-v-7c921fc2] {\n  opacity: 0;\n}\n.popup-modal[data-v-7c921fc2] {\n  color: #44d9e8;\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  padding: 0.5rem;\n  display: flex;\n  align-items: center;\n  z-index: 1;\n}\n.window[data-v-7c921fc2] {\n  background: #6f42c1;\n  border-radius: 5px;\n  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);\n  max-width: 480px;\n  margin-left: auto;\n  margin-right: auto;\n  padding: 2.4rem;\n}\n.device-image[data-v-7c921fc2] {\n  width: 70px;\n  margin-top: -50px;\n  margin-bottom: -60px;\n  margin-left: -10px;\n  border-radius: 10px;\n  box-shadow: blueviolet 0px 0px 10px;\n}\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n.device-image[data-v-7c921fc2] {\n    width: 50px;\n    margin-top: -55px;\n    margin-bottom: -29px;\n    margin-left: -249px;\n    border-radius: 10px;\n    box-shadow: blueviolet 0px 0px 10px;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".align-left[data-v-7c921fc2] {\n  text-align: left !important;\n}\n.align-right[data-v-7c921fc2] {\n  text-align: right !important;\n}\n.align-center[data-v-7c921fc2] {\n  text-align: center !important;\n}\n.fade-enter-active[data-v-7c921fc2],\n.fade-leave-active[data-v-7c921fc2] {\n  transition: opacity 0.3s;\n}\n.fade-enter[data-v-7c921fc2],\n.fade-leave-to[data-v-7c921fc2] {\n  opacity: 0;\n}\n.popup-modal[data-v-7c921fc2] {\n  color: #44d9e8;\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  padding: 0.5rem;\n  display: flex;\n  align-items: center;\n  z-index: 1;\n}\n.window[data-v-7c921fc2] {\n  background: #6f42c1;\n  border-radius: 5px;\n  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);\n  max-width: 480px;\n  margin-left: auto;\n  margin-right: auto;\n  padding: 1.6rem;\n}\n.device-image[data-v-7c921fc2] {\n  width: 70px;\n  margin-top: -50px;\n  margin-bottom: -60px;\n  margin-left: -10px;\n  border-radius: 10px;\n  box-shadow: blueviolet 0px 0px 10px;\n}\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n.device-image[data-v-7c921fc2] {\n    width: 50px;\n    margin-top: -55px;\n    margin-bottom: -29px;\n    margin-left: -249px;\n    border-radius: 10px;\n    box-shadow: blueviolet 0px 0px 10px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1166,7 +1166,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".fade-enter-active[data-v-0aa0398c],\n.fade-leave-active[data-v-0aa0398c] {\n  transition: opacity 0.3s;\n}\n.fade-enter[data-v-0aa0398c],\n.fade-leave-to[data-v-0aa0398c] {\n  opacity: 0;\n}\n.popup-modal[data-v-0aa0398c] {\n  color: white;\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  padding: 0.5rem;\n  display: flex;\n  height: 100vh;\n  z-index: 1;\n}\n.window[data-v-0aa0398c] {\n  background: #6f42c1;\n  border-radius: 5px;\n  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);\n  max-width: 480px;\n  margin-left: auto;\n  margin-right: auto;\n  padding: 1rem;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".align-left[data-v-0aa0398c] {\n  text-align: left !important;\n}\n.align-right[data-v-0aa0398c] {\n  text-align: right !important;\n}\n.align-center[data-v-0aa0398c] {\n  text-align: center !important;\n}\n.fade-enter-active[data-v-0aa0398c],\n.fade-leave-active[data-v-0aa0398c] {\n  transition: opacity 0.3s;\n}\n.fade-enter[data-v-0aa0398c],\n.fade-leave-to[data-v-0aa0398c] {\n  opacity: 0;\n}\n.popup-modal[data-v-0aa0398c] {\n  color: #44d9e8;\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  padding: 0.5rem;\n  display: flex;\n  align-items: center;\n  z-index: 1;\n}\n.window[data-v-0aa0398c] {\n  background: #6f42c1;\n  border-radius: 5px;\n  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);\n  max-width: 480px;\n  margin-left: auto;\n  margin-right: auto;\n  padding: 1.6rem;\n}\n.device-image[data-v-0aa0398c] {\n  width: 70px;\n  margin-top: -50px;\n  margin-bottom: -60px;\n  margin-left: -10px;\n  border-radius: 10px;\n  box-shadow: blueviolet 0px 0px 10px;\n}\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n.device-image[data-v-0aa0398c] {\n    width: 50px;\n    margin-top: -55px;\n    margin-bottom: -29px;\n    margin-left: -249px;\n    border-radius: 10px;\n    box-shadow: blueviolet 0px 0px 10px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

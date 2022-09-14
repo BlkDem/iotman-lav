@@ -13,4 +13,6 @@ export default {
     DEVICE_DEVICETYPEID_PLACEHOLDER: 'Device Type ID',
     DEVICE_ADDBUTTON_CAPTION: 'Add Device',
     DEVICE_EDITBUTTON_CAPTION: 'Edit Device',
+    NO_HWID: "no hardware address",
+    DEVICE_PAGE_DESCRIPTION: "All registered devices ready for use",
 }

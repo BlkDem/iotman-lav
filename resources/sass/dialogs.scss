@@ -1,0 +1,53 @@
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.3s;
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+
+.popup-modal {
+    color: $light;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+.window {
+    background: $primary;
+    border-radius: 5px;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.6rem;
+}
+
+.device-image {
+    width: 70px;
+    margin-top: -50px;
+    margin-bottom: -60px;
+    margin-left: -10px;
+    border-radius: 10px;
+    box-shadow: blueviolet 0px 0px 10px;
+}
+
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+    .device-image {
+        width: 50px;
+        margin-top: -55px;
+        margin-bottom: -29px;
+        margin-left: -249px;
+        border-radius: 10px;
+        box-shadow: blueviolet 0px 0px 10px;
+    }
+}

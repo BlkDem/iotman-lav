@@ -2,7 +2,7 @@
 export default {
     DEVICE_TYPE_DELETING_CAPTION: "Delete",
     DEVICE_TYPE_DELETING_MESSAGE: "Are you sure you want to delete this device type ",
-
+    DEVICE_TYPE_PAGE_DESCRIPTION: "Device Types - produced by Umolab",
     DEVICE_TYPE_ADDING_TITLE: 'Adding Device Type',
     DEVICE_TYPE_ADDING_MESSAGE: 'Adding Device Type',
     DEVICE_TYPE_EDITING_TITLE: 'Editing Device Type',
