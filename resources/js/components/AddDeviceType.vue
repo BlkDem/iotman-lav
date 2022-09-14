@@ -37,7 +37,6 @@ export default {
         device_type_name: undefined,
         device_type_desc: undefined,
         device_type_image: undefined,
-        device_type_id: undefined,
         okButton: undefined, // Text for confirm button; leave it empty because we don't know what we're using it for
         cancelButton: 'Cancel', // text for cancel button
         
@@ -55,9 +54,9 @@ export default {
             this.edit_mode = optsAdd.edit_mode;
             this.title = optsAdd.title
             this.message = optsAdd.message
-            this.device_type_name = optsAdd.device_name
-            this.device_type_desc = optsAdd.device_desc
-            this.device_type_image = optsAdd.device_hwid
+            this.device_type_name = optsAdd.device_type_name
+            this.device_type_desc = optsAdd.device_type_desc
+            this.device_type_image = optsAdd.device_type_image
             this.okButton = optsAdd.okButton
             if (optsAdd.cancelButton) {
                 this.cancelButton = optsAdd.cancelButton

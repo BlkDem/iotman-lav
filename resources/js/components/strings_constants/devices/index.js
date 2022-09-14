@@ -1,9 +1,7 @@
-const DEVICE_DELETING_CAPTION = "Delete"
-const DEVICE_DELETING_MESSAGE = "Are you sure you want to delete this device"
 
 export default {
-    DEVICE_DELETING_CAPTION: DEVICE_DELETING_CAPTION,
-    DEVICE_DELETING_MESSAGE: DEVICE_DELETING_MESSAGE,
+    DEVICE_DELETING_CAPTION: "Delete",
+    DEVICE_DELETING_MESSAGE: "Are you sure you want to delete this device ",
 
     DEVICE_ADDING_TITLE: 'Adding Device',
     DEVICE_ADDING_MESSAGE: 'Adding Device',

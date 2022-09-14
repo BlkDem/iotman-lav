@@ -254,7 +254,8 @@ import MessagesConstants from '../components/strings_constants/messages';
 </script>
 
 <style lang="scss" scoped>
-    
+    @import '../../sass/_variables.scss';
+    @import '../../sass/aligns.scss';
     .fade-enter-active,
     .fade-leave-active {
         transition: opacity 0.3s;
@@ -265,7 +266,7 @@ import MessagesConstants from '../components/strings_constants/messages';
     }
     
     .popup-modal {
-        color: white;
+        color: $light;
         position: fixed;
         top: 0;
         bottom: 0;
@@ -278,24 +279,13 @@ import MessagesConstants from '../components/strings_constants/messages';
     }
     
     .window {
-        background: #6f42c1;
+        background: $primary;
         border-radius: 5px;
         box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
         max-width: 480px;
         margin-left: auto;
         margin-right: auto;
         padding: 2.4rem;
-    }
-
-    .align-left {
-        text-align: left !important;
-    }
-
-    .align-right {
-        text-align: right !important;
-    }
-    .align-center {
-        text-align: center !important;
     }
 
     .device-image {

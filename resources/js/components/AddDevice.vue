@@ -1,17 +1,17 @@
 <template>
     <PopupModal ref="popup">
         <div class="modal-header">
-            <h2 style="margin-top: 0">{{ title }}</h2>
+            <h2 class="align-center w-100 pb-2">{{ title }}</h2>
         </div>
         
-        <div class="modal-body">
-            <label>Device Name</label>
+        <div class="modal-body align-left">
+            <label class="px-2">Device Name</label>
             <input v-model="device_name" class="form-control p-2 mb-4" placeholder="Input Device Name"/>
-            <label class="ml-n4">Device Desc</label>
+            <label class="px-2">Device Desc</label>
             <input v-model="device_desc" class="form-control p-2 mb-4" placeholder="Input Device Desc"/>
-            <label class="ml-n4">Device Hardware Address</label>
+            <label class="px-2">Device Hardware Address</label>
             <input v-model="device_hwid" class="form-control p-2 mb-4" placeholder="Input Device HWID"/>
-            <label class="ml-n4">Select Device Type {{device_type_id}}</label>
+            <label class="px-2">Select Device Type {{device_type_id}}</label>
             <DeviceTypesCombo ref="types" v-bind:id="device_type_id"></DeviceTypesCombo>
         </div>
         <div class="btns my-2 d-grid gap-2 px-4">
@@ -24,7 +24,6 @@
 <script>
 import PopupModal from './PopupModal.vue';
 import DeviceTypesCombo from './DeviceTypesCombo.vue' 
-import {ref} from 'vue'
 
 export default {
     name: 'AddDevice',
@@ -66,16 +65,9 @@ export default {
             if (optsAdd.cancelButton) {
                 this.cancelButton = optsAdd.cancelButton
             }
-            console.log(this);
-            // Once we set our config, we tell the popup modal to open 
 
             this.$refs.popup.open()
-            //console.log('gdti: ', this.$refs.types.getDeviceTypeID());
 
-
-            // if (this.edit_mode) {
-            //     console.log(this.$refs.popup);
-            // }
             
             // Return promise so the caller can get results
             return new Promise((resolve, reject) => {
@@ -85,9 +77,6 @@ export default {
         },
 
         _confirm() {
-            //this.device_name = $('#device_name').val();
-            //this.device_desc = $('#device_desc').val();
-            //console.log(this.$refs.types);
             this.device_type_id = this.$refs.types.getDeviceTypeID();
             console.log(this.device_type_id);
             this.$refs.popup.close()
@@ -103,3 +92,7 @@ export default {
     },
 }
 </script>
+
+<style>
+    @import '../../sass/aligns.scss';
+</style>

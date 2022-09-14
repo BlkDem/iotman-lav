@@ -35,12 +35,12 @@
                     </div>
                     <img v-bind:src="device_type.device_type_image" />
                    <div class="card-body">
-                        <button class="btn btn-info" @click="doEdit(key, device_type.id)">
+                        <button class="btn btn-info" @click="doEditType(key, device_type.id)">
                             <i class="fas fa-edit" aria-hidden="true"></i>
                             Edit
                         </button>
 
-                        <button class="btn btn-secondary" @click="doDelete(key, device_type.id)">
+                        <button class="btn btn-secondary" @click="doDeleteType(key, device_type.id)">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                             Delete
                         </button>
@@ -65,11 +65,11 @@
                             <h6>{{ device_type.device_type_desc }}</h6>
                         </div>
                         <div class="col-sm-2 col-xs-2 col-lg-2 align-right">
-                            <button class="btn btn-info mx-2" @click="doEdit(key, device_type.id)">
+                            <button class="btn btn-info mx-2" @click="doEditType(key, device_type.id)">
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
 
-                            <button class="btn btn-secondary" @click="doDelete(key, device_type.id)">
+                            <button class="btn btn-secondary" @click="doDeleteType(key, device_type.id)">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                             <!-- <ConfirmDialogue ref="confirmDialogue" /> -->
@@ -102,7 +102,7 @@ import ConfirmDialogue from '../components/ConfirmDialogue.vue';
 import AddDeviceType from '../components/AddDeviceType.vue';
 import Paginator from '../components/Paginator.vue';
 import MessagesConstants from '../components/strings_constants/messages';
-import DeviceStringConstants from '../components/strings_constants/device_types/index';
+import DeviceTypeStringConstants from '../components/strings_constants/device_types/index';
 
     export default {
         components: { ConfirmDialogue, AddDeviceType, Paginator},
@@ -128,6 +128,108 @@ import DeviceStringConstants from '../components/strings_constants/device_types/
                     })
                     .catch(err => console.log(err));
             },
+
+            async doDeleteType(key, id) {
+                
+                const ok = await this.$refs.confirmDialogue.showDialogue({
+                    title: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION,
+                    message: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_MESSAGE + this.device_types[key].device_type_name + '?',
+                    okButton: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION,
+                })
+                
+                if (ok) {
+                    axios.delete('/api/device_types/delete/' + id)
+                        .then(resp => {
+                            this.device_types.splice(key, 1);                            
+                            console.log(key, id, " - deleted");
+                            this.$root.$refs.toaster.setMessage(MessagesConstants.DELETED_MESSAGE, MessagesConstants.PROCESS_SUCCESSFULLY);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
+                } else {
+                    console.log(MessagesConstants.DELETING_CANCELLED);
+                }
+            },
+
+            async setDeviceType() {
+                const _add = await this.$refs.addDeviceType.showDialogue({
+                    edit_mode: false,
+                    title: DeviceTypeStringConstants.DEVICE_TYPE_ADDING_TITLE,
+                    message: DeviceTypeStringConstants.DEVICE_TYPE_ADDING_MESSAGE,
+                    device_type_name: DeviceTypeStringConstants.DEVICE_TYPE_NAME_PLACEHOLDER,
+                    device_type_desc: DeviceTypeStringConstants.DEVICE_TYPE_DESC_PLACEHOLDER,
+                    device_type_image: DeviceTypeStringConstants.DEVICE_TYPE_IMAGE_PLACEHOLDER,
+                    okButton: DeviceTypeStringConstants.DEVICE_TYPE_ADDBUTTON_CAPTION,
+                })
+
+                if (_add) {
+                    axios.post('/api/device_types/create/?device_type_name=' +  this.$refs.addDeviceType.device_type_name +
+                            '&device_type_image=' + this.$refs.addDeviceType.device_type_image + 
+                            '&device_type_desc=' + this.$refs.addDeviceType.device_type_desc)
+                        .then(resp => {
+                            console.log(resp['data']);
+                            let newDevice = {
+                                device_type_name: resp['data'].device_type_name,
+                                device_type_desc: resp['data'].device_type_desc,
+                                device_type_image: resp['data'].device_type_image,
+                                id: resp['data'].id
+                            }   
+                            this.device_types.push(newDevice);
+                            this.$root.$refs.toaster.setMessage(MessagesConstants.ADDED_MESSAGE, MessagesConstants.PROCESS_SUCCESSFULLY);
+                        })
+                        // .then(resp => {
+                        //     this.setDeviceType(this.devices[this.devices.length-1].device_type_id, this.devices[this.devices.length-1]);
+                        // })
+                        .catch(error => {
+                            console.log(error);
+                        })
+                } else {
+                    console.log(MessagesConstants.INSERTING_CANCELLED);
+                }
+
+            },
+            async doEditType(key, id) {
+                const _edit = await this.$refs.addDeviceType.showDialogue({
+                    edit_mode: true,
+                    title: DeviceTypeStringConstants.DEVICE_TYPE_EDITING_TITLE,
+                    message: DeviceTypeStringConstants.DEVICE_TYPE_EDITING_MESSAGE,
+                    device_type_name: this.device_types[key].device_type_name,
+                    device_type_desc: this.device_types[key].device_type_desc,
+                    device_type_image: this.device_types[key].device_type_image,
+                    okButton: DeviceTypeStringConstants.DEVICE_TYPE_EDITBUTTON_CAPTION,
+                })
+
+                if (_edit) {
+                    let editDeviceTypePost = '/api/device_types/update/'+id+
+                        '/?device_type_name=' + this.$refs.addDeviceType.device_type_name +
+                        '&device_type_image=' + this.$refs.addDeviceType.device_type_image + 
+                        '&device_type_desc=' + this.$refs.addDeviceType.device_type_desc;
+                    console.log(editDeviceTypePost);
+
+                    axios.put(editDeviceTypePost)
+                        .then(resp => {
+                            console.log(resp['data']);
+                            this.device_types[key].device_type_name = resp['data'].device_type_name;
+                            this.device_types[key].device_type_desc = resp['data'].device_type_desc;
+                            this.device_types[key].device_type_image = resp['data'].device_type_image;
+                            this.$root.$refs.toaster.setMessage(
+                                MessagesConstants.EDITED_MESSAGE, 
+                                MessagesConstants.PROCESS_SUCCESSFULLY
+                            );
+                        })
+                        // .then(resp => {
+                        //     this.setDeviceType(this.devices[key].device_type_id, this.devices[key]);
+                        // })
+                        .catch(error => {
+                            console.log(error);
+                        })
+                } else {
+                    console.log(MessagesConstants.EDITING_CANCELLED);
+                }
+
+            },
+
             ShowHide(isVisible) {
                 this.visible = isVisible;
             },
