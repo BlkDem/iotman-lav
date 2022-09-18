@@ -24,6 +24,7 @@
 <script>
 import PopupModal from './PopupModal.vue';
 import DeviceTypesCombo from './DeviceTypesCombo.vue' 
+import MessagesConstants from '../components/strings_constants/messages';
 
 export default {
     name: 'AddDevice',
@@ -41,7 +42,7 @@ export default {
         device_hwid: undefined,
         device_type_id: undefined,
         okButton: undefined, // Text for confirm button; leave it empty because we don't know what we're using it for
-        cancelButton: 'Cancel', // text for cancel button
+        cancelButton: MessagesConstants.CANCEL_STRING, // text for cancel button
         
         // Private variables
         resolvePromise: undefined,

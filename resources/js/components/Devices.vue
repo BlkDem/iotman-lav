@@ -5,7 +5,7 @@
         <ConfirmDialogue ref="confirmDialogue" />
         <div class="row">
             <div class="col-sm-6 col-xs-6 col-lg-6 p-2">
-                <h1>Registered Devices</h1>
+                <h1 class="align-left px-4">Registered Devices</h1>
             </div>
             <div class="col-sm-6 col-xs-6 col-lg-6 p-2" style="text-align: right !important;">
                 <button class="btn btn-primary" @click="compactView=true">
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div>
-            <h4 class="text-primary">{{ page_description }}</h4>
+            <h4 class="text-primary">{{ data_description }}</h4>
         </div>
 
         <div class="row" v-if="!compactView">
@@ -31,12 +31,11 @@
                     </h3>
                     <div class="card-body">
                         <h5 class="card-title text-info">{{ device.device_type_name }}</h5>
-                        <h6 class="card-subtitle text-muted">{{ (device.device_desc === "undefined")? MessagesConstants.NO_DESCRIPTION :
-                            device.device_desc}}</h6>
+                        <h6 class="card-subtitle text-muted">{{ device.device_desc }}</h6>
                     </div>
                     <img v-bind:src="device.device_type_image" />
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">HWID: {{ device.device_hwid || DeviceStringConstants.NO_HWID }}</li>
+                        <li class="list-group-item">HWID: {{ device.device_hwid }}</li>
                     </ul>
                     <div class="card-body">
                         <button class="btn btn-info" @click="doEdit(key, device.id)">
@@ -48,7 +47,6 @@
                             <i class="fa fa-trash" aria-hidden="true"></i>
                             Delete
                         </button>
-                        <!-- <ConfirmDialogue ref="confirmDialogue" /> -->
 
                     </div>
                 </div>
@@ -65,10 +63,10 @@
                             <img v-bind:src="device.device_type_image" class="device-image" />
                         </div>
                         <div class="col-sm-3 col-xs-3 col-lg-3  align-left">
-                            <h5>{{device.device_type_name}}<span class="text-info"> ({{ device.id}}) </span></h5>
+                            <h5>{{device.device_name}}<span class="text-info"> ({{ device.id}}) </span></h5>
                         </div>
                         <div class="col-sm-6 col-xs-4 col-lg-6 align-left">
-                            <h6>{{ device.device_name }}: HWID ({{device.device_hwid}})</h6>
+                            <h6>{{ device.device_type_name }}: HWID ({{device.device_hwid}})</h6>
                         </div>
                         <div class="col-sm-2 col-xs-2 col-lg-2 align-right">
                             <button class="btn btn-info mx-2" @click="doEdit(key, device.id)">
@@ -78,7 +76,6 @@
                             <button class="btn btn-secondary" @click="doDelete(key, device.id)">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
-                            <!-- <ConfirmDialogue ref="confirmDialogue" /> -->
                         </div>
                     </div>
                 </div>
@@ -95,7 +92,8 @@ import AddDevice from '../components/AddDevice.vue';
 import DeviceTypesCombo from '../components/DeviceTypesCombo.vue';
 import Paginator from '../components/Paginator.vue';
 import DeviceStringConstants from '../components/strings_constants/devices/index';
-import MessagesConstants from '../components/strings_constants/messages';
+import MessagesConstants from '../components/strings_constants/messages.js';
+import APIConstants from '../rest_api.js';
 
     export default {
         components: { ConfirmDialogue, AddDevice, DeviceTypesCombo, Paginator},
@@ -103,35 +101,51 @@ import MessagesConstants from '../components/strings_constants/messages';
         data() {
             return {
                 devices: [],
-                page_description: '',
-                deleteModalResult: false,
+                data_description: '',
                 visible: true,
                 compactView: true
             };
         },
 
         created() {
-            this.page_description = DeviceStringConstants.DEVICE_PAGE_DESCRIPTION;
-            this.getDevices();
-            this.itemIndex = 0;
+            this.data_description = DeviceStringConstants.DEVICE_DATA_DESCRIPTION; //device dataset description
+            this.getDevices(); //loading devices dataset via API
+            console.log('API version: ', APIConstants.apiVersion);
         },
 
         methods: {
-            
-            async doDelete(key, id) {
-                
-                const ok = await this.$refs.confirmDialogue.showDialogue({
+
+            //mutating 'null' 'undefined' to predefined consts
+            processStrings()   
+            {
+                this.devices.forEach((dev, key) => {
+                    this.devices[key].device_desc = (dev.device_desc == null)? 
+                        MessagesConstants.NO_DESCRIPTION : dev.device_desc;
+                    this.devices[key].device_hwid = (dev.device_hwid == null)? 
+                        DeviceStringConstants.NO_HWID : dev.device_hwid;
+                })
+            },
+
+            //deleting devices
+            async doDelete(key, id) { 
+                //deleting confirmation dialogue    
+                const ok = await this.$refs.confirmDialogue.showDialogue({ 
                     title: DeviceStringConstants.DEVICE_DELETING_CAPTION,
-                    message: DeviceStringConstants.DEVICE_DELETING_MESSAGE + this.devices[key].device_name + '?',
+                    message: DeviceStringConstants.DEVICE_DELETING_MESSAGE + '"' + 
+                    this.devices[key].device_name + '"?',
                     okButton: DeviceStringConstants.DEVICE_DELETING_CAPTION,
                 })
                 
                 if (ok) {
-                    axios.delete('/api/devices/delete/' + id)
+                    //deleting devices item via API
+                    axios.delete(APIConstants.api_device_delete + id)
                         .then(resp => {
                             this.devices.splice(key, 1);                            
                             console.log(key, id, " - deleted");
-                            this.$root.$refs.toaster.setMessage(MessagesConstants.DELETED_MESSAGE, MessagesConstants.PROCESS_SUCCESSFULLY);
+                            this.$root.$refs.toaster.setMessage(
+                                MessagesConstants.DELETED_MESSAGE, 
+                                MessagesConstants.PROCESS_SUCCESSFULLY
+                            );
                         })
                         .catch(error => {
                             console.log(error);
@@ -141,25 +155,29 @@ import MessagesConstants from '../components/strings_constants/messages';
                 }
             },
 
+            //loading devices dataset via API
             getDevices(api_url) {
-                api_url = api_url || '/api/devices/read';
-                fetch(api_url)
+                fetch(APIConstants.api_devices_read)
                     .then(response => response.json())
                     .then(response => {
                         this.devices = response.data;
+                        this.processStrings();
                     })
                     .catch(err => console.log(err));
             },
 
+            //setting Device Type to Device
             async setDeviceType($device_type_id, $item) {
-                axios.get('/api/device_types/read/' + $device_type_id)
+                axios.get(APIConstants.api_device_types_read + $device_type_id)
                     .then(resp_type => {
                         $item.device_type_image = resp_type['data'].data.device_type_image;
                         $item.device_type_name = resp_type['data'].data.device_type_name;
                     })
             },
 
+            //create Device
             async setDevice() {
+                //opening Device Dialogue
                 const _add = await this.$refs.addDevice.showDialogue({
                     edit_mode: false,
                     title: DeviceStringConstants.DEVICE_ADDING_TITLE,
@@ -172,7 +190,8 @@ import MessagesConstants from '../components/strings_constants/messages';
                 })
 
                 if (_add) {
-                    axios.post('/api/devices/create/?device_name=' +  this.$refs.addDevice.device_name +
+                    //creating Device via API
+                    axios.post(APIConstants.api_device_create + '?device_name=' +  this.$refs.addDevice.device_name +
                             '&device_type_id=' + this.$refs.addDevice.device_type_id + 
                             '&device_desc=' + this.$refs.addDevice.device_desc)
                         .then(resp => {
@@ -199,7 +218,10 @@ import MessagesConstants from '../components/strings_constants/messages';
                 }
 
             },
+
+            //edit Device
             async doEdit(key, id) {
+                //opening Device Dialogue
                 const _edit = await this.$refs.addDevice.showDialogue({
                     edit_mode: true,
                     title: DeviceStringConstants.DEVICE_EDITING_TITLE,
@@ -212,13 +234,14 @@ import MessagesConstants from '../components/strings_constants/messages';
                 })
 
                 if (_edit) {
-                    let editDevicePost = '/api/devices/update/'+id+
+                    let editDevicePost = APIConstants.api_device_update+id+
                         '/?device_name=' + this.$refs.addDevice.device_name +
                         '&device_type_id=' + this.$refs.addDevice.device_type_id + 
                         '&device_desc=' + this.$refs.addDevice.device_desc +
                         '&device_hwid=' + this.$refs.addDevice.device_hwid;
                     console.log(editDevicePost);
 
+                    //editing Device via API
                     axios.put(editDevicePost)
                         .then(resp => {
                             console.log(resp['data']);
@@ -242,21 +265,23 @@ import MessagesConstants from '../components/strings_constants/messages';
                 }
 
             },
+
+            // Show or Hide Devices page
             ShowHide(isVisible) {
                 this.visible = isVisible;
             },
 
-            getVisible() {
-                return this.visible;
-            },
+            // getVisible() {
+            //     return this.visible;
+            // },
         },
         
     };
 </script>
 
 <style lang="scss" scoped>
-    @import '../../sass/_variables.scss';
+    
     @import '../../sass/aligns.scss';
-    @import '../../sass/dialogs.scss';
+    @import '../../sass/lists.scss';
     
 </style>

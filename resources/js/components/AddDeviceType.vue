@@ -24,6 +24,7 @@
 
 <script>
 import PopupModal from './PopupModal.vue';
+import MessagesConstants from '../components/strings_constants/messages';
 import {ref} from 'vue'
 
 export default {
@@ -41,7 +42,7 @@ export default {
         device_type_desc: undefined,
         device_type_image: undefined,
         okButton: undefined, // Text for confirm button; leave it empty because we don't know what we're using it for
-        cancelButton: 'Cancel', // text for cancel button
+        cancelButton: MessagesConstants.CANCEL_STRING, // text for cancel button
         
         // Private variables
         resolvePromise: undefined,

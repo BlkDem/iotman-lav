@@ -68,3 +68,10 @@
         
     };
 </script>
+
+<style lang="scss" scoped>
+    @import '../../sass/_variables.scss';
+    @import '../../sass/dialogs.scss';
+    @import '../../sass/aligns.scss';
+    
+</style>

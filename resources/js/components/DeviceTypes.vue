@@ -4,7 +4,7 @@
         <ConfirmDialogue ref="confirmDialogue" />
         <div class="row">
             <div class="col-sm-6 col-xs-6 col-lg-6 p-2">
-                <h1>Device Types</h1>
+                <h1  class="align-left px-4">Device Types</h1>
             </div>
             <div class="col-sm-6 col-xs-6 col-lg-6 p-2" style="text-align: right !important;">
                 <button class="btn btn-primary" @click="compactView=true">
@@ -134,7 +134,7 @@ import DeviceTypeStringConstants from '../components/strings_constants/device_ty
                 
                 const ok = await this.$refs.confirmDialogue.showDialogue({
                     title: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION,
-                    message: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_MESSAGE + this.device_types[key].device_type_name + '?',
+                    message: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_MESSAGE + '"' + this.device_types[key].device_type_name + '"?',
                     okButton: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION,
                 })
                 
@@ -179,9 +179,6 @@ import DeviceTypeStringConstants from '../components/strings_constants/device_ty
                             this.device_types.push(newDevice);
                             this.$root.$refs.toaster.setMessage(MessagesConstants.ADDED_MESSAGE, MessagesConstants.PROCESS_SUCCESSFULLY);
                         })
-                        // .then(resp => {
-                        //     this.setDeviceType(this.devices[this.devices.length-1].device_type_id, this.devices[this.devices.length-1]);
-                        // })
                         .catch(error => {
                             console.log(error);
                         })
@@ -243,9 +240,9 @@ import DeviceTypeStringConstants from '../components/strings_constants/device_ty
     };
 </script>
 
-<style>
-    @import '../../sass/_variables.scss';
-    @import '../../sass/dialogs.scss';
+<style lang="scss" scoped>
+
+    @import '../../sass/lists.scss';
     @import '../../sass/aligns.scss';
     
 </style>

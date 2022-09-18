@@ -1,4 +1,5 @@
 export default {
+    CANCEL_STRING: "Cancel",
     EDITED_MESSAGE: "Edited",
     ADDED_MESSAGE: "Added", 
     DELETED_MESSAGE: "Deleted", 

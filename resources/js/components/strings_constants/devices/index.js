@@ -2,7 +2,7 @@
 export default {
     DEVICE_DELETING_CAPTION: "Delete",
     DEVICE_DELETING_MESSAGE: "Are you sure you want to delete this device ",
-
+    DEVICE_DATA_DESCRIPTION: "All registered devices ready for use",
     DEVICE_ADDING_TITLE: 'Adding Device',
     DEVICE_ADDING_MESSAGE: 'Adding Device',
     DEVICE_EDITING_TITLE: 'Editing Device',
@@ -14,5 +14,4 @@ export default {
     DEVICE_ADDBUTTON_CAPTION: 'Add Device',
     DEVICE_EDITBUTTON_CAPTION: 'Edit Device',
     NO_HWID: "no hardware address",
-    DEVICE_PAGE_DESCRIPTION: "All registered devices ready for use",
 }
