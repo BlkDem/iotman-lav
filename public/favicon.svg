@@ -1,0 +1,807 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW 2019 (64-Bit) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="56mm" height="56mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 21.039 21.039"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#546F6D;stroke-width:0.5635;stroke-miterlimit:22.9256}
+    .fil253 {fill:none;fill-rule:nonzero}
+    .fil1 {fill:#FCFBF8}
+    .fil18 {fill:#FBFBF8}
+    .fil17 {fill:#FBFBF7}
+    .fil15 {fill:#FAFBF7}
+    .fil16 {fill:#FAFAF7}
+    .fil14 {fill:#FAFBF7}
+    .fil13 {fill:#FAFAF7}
+    .fil12 {fill:#F9FAF7}
+    .fil10 {fill:#F8FAF6}
+    .fil11 {fill:#F8FAF6}
+    .fil9 {fill:#F7FAF6}
+    .fil8 {fill:#F7FAF6}
+    .fil7 {fill:#F7FAF5}
+    .fil5 {fill:#F6FAF6}
+    .fil6 {fill:#F6F9F5}
+    .fil4 {fill:#F5FAF6}
+    .fil3 {fill:#F5FAF5}
+    .fil2 {fill:#F4F9F5}
+    .fil20 {fill:#FEFEFE;fill-rule:nonzero}
+    .fil21 {fill:#FDFEFE;fill-rule:nonzero}
+    .fil22 {fill:#FDFDFD;fill-rule:nonzero}
+    .fil23 {fill:#FCFCFD;fill-rule:nonzero}
+    .fil24 {fill:#FBFCFC;fill-rule:nonzero}
+    .fil25 {fill:#FAFBFB;fill-rule:nonzero}
+    .fil26 {fill:#FAFAFA;fill-rule:nonzero}
+    .fil27 {fill:#F9F9FA;fill-rule:nonzero}
+    .fil28 {fill:#F8F9F8;fill-rule:nonzero}
+    .fil29 {fill:#F7F8F8;fill-rule:nonzero}
+    .fil30 {fill:#F6F7F7;fill-rule:nonzero}
+    .fil31 {fill:#F6F7F7;fill-rule:nonzero}
+    .fil32 {fill:#F5F6F7;fill-rule:nonzero}
+    .fil33 {fill:#F4F5F5;fill-rule:nonzero}
+    .fil34 {fill:#F3F5F5;fill-rule:nonzero}
+    .fil35 {fill:#F3F4F4;fill-rule:nonzero}
+    .fil36 {fill:#F3F4F4;fill-rule:nonzero}
+    .fil37 {fill:#F1F2F2;fill-rule:nonzero}
+    .fil38 {fill:#F0F2F2;fill-rule:nonzero}
+    .fil39 {fill:#F0F1F1;fill-rule:nonzero}
+    .fil40 {fill:#EFF0F1;fill-rule:nonzero}
+    .fil41 {fill:#EEEFF0;fill-rule:nonzero}
+    .fil42 {fill:#EDEEEF;fill-rule:nonzero}
+    .fil43 {fill:#ECEDEE;fill-rule:nonzero}
+    .fil44 {fill:#EAECEC;fill-rule:nonzero}
+    .fil45 {fill:#E9EBEC;fill-rule:nonzero}
+    .fil46 {fill:#E9EBEB;fill-rule:nonzero}
+    .fil47 {fill:#E8EAEB;fill-rule:nonzero}
+    .fil48 {fill:#E7E9E9;fill-rule:nonzero}
+    .fil49 {fill:#E6E8E8;fill-rule:nonzero}
+    .fil50 {fill:#E5E7E8;fill-rule:nonzero}
+    .fil51 {fill:#E3E6E6;fill-rule:nonzero}
+    .fil52 {fill:#E3E5E6;fill-rule:nonzero}
+    .fil53 {fill:#E3E5E5;fill-rule:nonzero}
+    .fil54 {fill:#E1E4E4;fill-rule:nonzero}
+    .fil55 {fill:#E1E3E3;fill-rule:nonzero}
+    .fil56 {fill:#DFE2E2;fill-rule:nonzero}
+    .fil57 {fill:#DEE1E2;fill-rule:nonzero}
+    .fil58 {fill:#DEE1E1;fill-rule:nonzero}
+    .fil59 {fill:#DDE0E0;fill-rule:nonzero}
+    .fil60 {fill:#DCDFDF;fill-rule:nonzero}
+    .fil61 {fill:#DBDEDE;fill-rule:nonzero}
+    .fil62 {fill:#DBDEDE;fill-rule:nonzero}
+    .fil63 {fill:#DADDDD;fill-rule:nonzero}
+    .fil64 {fill:#D8DCDC;fill-rule:nonzero}
+    .fil65 {fill:#D8DBDB;fill-rule:nonzero}
+    .fil66 {fill:#D6DADA;fill-rule:nonzero}
+    .fil67 {fill:#D6DADA;fill-rule:nonzero}
+    .fil68 {fill:#D5D9D9;fill-rule:nonzero}
+    .fil69 {fill:#D4D8D9;fill-rule:nonzero}
+    .fil70 {fill:#D4D7D8;fill-rule:nonzero}
+    .fil71 {fill:#D3D7D7;fill-rule:nonzero}
+    .fil72 {fill:#D2D6D6;fill-rule:nonzero}
+    .fil73 {fill:#D2D6D6;fill-rule:nonzero}
+    .fil74 {fill:#D1D5D5;fill-rule:nonzero}
+    .fil75 {fill:#D0D4D5;fill-rule:nonzero}
+    .fil76 {fill:#D0D4D4;fill-rule:nonzero}
+    .fil77 {fill:#CFD3D3;fill-rule:nonzero}
+    .fil78 {fill:#CED2D2;fill-rule:nonzero}
+    .fil79 {fill:#CED2D2;fill-rule:nonzero}
+    .fil80 {fill:#CDD1D2;fill-rule:nonzero}
+    .fil81 {fill:#CBD0D0;fill-rule:nonzero}
+    .fil82 {fill:#CBD0D0;fill-rule:nonzero}
+    .fil83 {fill:#CACECF;fill-rule:nonzero}
+    .fil84 {fill:#C9CECE;fill-rule:nonzero}
+    .fil85 {fill:#C9CECE;fill-rule:nonzero}
+    .fil86 {fill:#C8CDCC;fill-rule:nonzero}
+    .fil87 {fill:#C7CCCC;fill-rule:nonzero}
+    .fil88 {fill:#C6CCCC;fill-rule:nonzero}
+    .fil89 {fill:#C6CBCB;fill-rule:nonzero}
+    .fil90 {fill:#C5CACB;fill-rule:nonzero}
+    .fil91 {fill:#C4C9CA;fill-rule:nonzero}
+    .fil92 {fill:#C4C9C9;fill-rule:nonzero}
+    .fil93 {fill:#C3C9C8;fill-rule:nonzero}
+    .fil94 {fill:#C2C8C8;fill-rule:nonzero}
+    .fil95 {fill:#C2C7C7;fill-rule:nonzero}
+    .fil96 {fill:#C1C7C7;fill-rule:nonzero}
+    .fil97 {fill:#C0C6C6;fill-rule:nonzero}
+    .fil98 {fill:#BFC5C5;fill-rule:nonzero}
+    .fil99 {fill:#BFC5C5;fill-rule:nonzero}
+    .fil100 {fill:#BEC4C4;fill-rule:nonzero}
+    .fil101 {fill:#BDC4C4;fill-rule:nonzero}
+    .fil102 {fill:#BDC3C3;fill-rule:nonzero}
+    .fil103 {fill:#BCC2C3;fill-rule:nonzero}
+    .fil104 {fill:#BBC2C1;fill-rule:nonzero}
+    .fil105 {fill:#BBC1C1;fill-rule:nonzero}
+    .fil106 {fill:#BAC1C0;fill-rule:nonzero}
+    .fil107 {fill:#B9C0C0;fill-rule:nonzero}
+    .fil108 {fill:#B8BFBF;fill-rule:nonzero}
+    .fil109 {fill:#B8BFBF;fill-rule:nonzero}
+    .fil110 {fill:#B7BEBE;fill-rule:nonzero}
+    .fil111 {fill:#B6BDBD;fill-rule:nonzero}
+    .fil112 {fill:#B5BDBC;fill-rule:nonzero}
+    .fil113 {fill:#B4BCBC;fill-rule:nonzero}
+    .fil114 {fill:#B4BCBB;fill-rule:nonzero}
+    .fil115 {fill:#B3BABA;fill-rule:nonzero}
+    .fil116 {fill:#B2BABA;fill-rule:nonzero}
+    .fil117 {fill:#B1B9B8;fill-rule:nonzero}
+    .fil118 {fill:#B0B8B8;fill-rule:nonzero}
+    .fil119 {fill:#B0B8B8;fill-rule:nonzero}
+    .fil120 {fill:#AFB7B7;fill-rule:nonzero}
+    .fil121 {fill:#AEB7B7;fill-rule:nonzero}
+    .fil122 {fill:#AEB7B6;fill-rule:nonzero}
+    .fil123 {fill:#ADB5B5;fill-rule:nonzero}
+    .fil124 {fill:#ACB5B5;fill-rule:nonzero}
+    .fil125 {fill:#ABB4B3;fill-rule:nonzero}
+    .fil126 {fill:#AAB3B3;fill-rule:nonzero}
+    .fil127 {fill:#AAB3B2;fill-rule:nonzero}
+    .fil128 {fill:#A9B2B2;fill-rule:nonzero}
+    .fil129 {fill:#A8B2B1;fill-rule:nonzero}
+    .fil130 {fill:#A8B1B1;fill-rule:nonzero}
+    .fil131 {fill:#A7B0B0;fill-rule:nonzero}
+    .fil132 {fill:#A6B0B0;fill-rule:nonzero}
+    .fil133 {fill:#A6B0AF;fill-rule:nonzero}
+    .fil134 {fill:#A5AFAE;fill-rule:nonzero}
+    .fil135 {fill:#A4AEAE;fill-rule:nonzero}
+    .fil136 {fill:#A4AEAD;fill-rule:nonzero}
+    .fil137 {fill:#A3ADAD;fill-rule:nonzero}
+    .fil138 {fill:#A3ADAC;fill-rule:nonzero}
+    .fil139 {fill:#A2ACAC;fill-rule:nonzero}
+    .fil140 {fill:#A1ABAB;fill-rule:nonzero}
+    .fil141 {fill:#A1ABAA;fill-rule:nonzero}
+    .fil142 {fill:#A0ABAA;fill-rule:nonzero}
+    .fil143 {fill:#9FAAA9;fill-rule:nonzero}
+    .fil144 {fill:#9FA9A9;fill-rule:nonzero}
+    .fil145 {fill:#9EA9A8;fill-rule:nonzero}
+    .fil146 {fill:#9DA8A8;fill-rule:nonzero}
+    .fil147 {fill:#9DA8A7;fill-rule:nonzero}
+    .fil148 {fill:#9CA7A7;fill-rule:nonzero}
+    .fil149 {fill:#9BA6A6;fill-rule:nonzero}
+    .fil150 {fill:#9AA6A5;fill-rule:nonzero}
+    .fil151 {fill:#99A5A4;fill-rule:nonzero}
+    .fil152 {fill:#99A4A4;fill-rule:nonzero}
+    .fil153 {fill:#98A4A4;fill-rule:nonzero}
+    .fil154 {fill:#96A3A3;fill-rule:nonzero}
+    .fil155 {fill:#96A3A2;fill-rule:nonzero}
+    .fil156 {fill:#96A3A2;fill-rule:nonzero}
+    .fil157 {fill:#94A1A1;fill-rule:nonzero}
+    .fil158 {fill:#94A1A0;fill-rule:nonzero}
+    .fil159 {fill:#92A09F;fill-rule:nonzero}
+    .fil160 {fill:#92A09F;fill-rule:nonzero}
+    .fil161 {fill:#929F9F;fill-rule:nonzero}
+    .fil162 {fill:#909E9D;fill-rule:nonzero}
+    .fil163 {fill:#909D9D;fill-rule:nonzero}
+    .fil164 {fill:#8F9D9C;fill-rule:nonzero}
+    .fil165 {fill:#8E9D9C;fill-rule:nonzero}
+    .fil166 {fill:#8E9C9B;fill-rule:nonzero}
+    .fil167 {fill:#8D9B9B;fill-rule:nonzero}
+    .fil168 {fill:#8D9B9A;fill-rule:nonzero}
+    .fil169 {fill:#8C9A9A;fill-rule:nonzero}
+    .fil170 {fill:#8B9A99;fill-rule:nonzero}
+    .fil171 {fill:#8B9999;fill-rule:nonzero}
+    .fil172 {fill:#8A9998;fill-rule:nonzero}
+    .fil173 {fill:#899897;fill-rule:nonzero}
+    .fil174 {fill:#899897;fill-rule:nonzero}
+    .fil175 {fill:#889797;fill-rule:nonzero}
+    .fil176 {fill:#879796;fill-rule:nonzero}
+    .fil177 {fill:#879695;fill-rule:nonzero}
+    .fil178 {fill:#869695;fill-rule:nonzero}
+    .fil179 {fill:#859594;fill-rule:nonzero}
+    .fil180 {fill:#859594;fill-rule:nonzero}
+    .fil181 {fill:#849493;fill-rule:nonzero}
+    .fil182 {fill:#839493;fill-rule:nonzero}
+    .fil183 {fill:#839392;fill-rule:nonzero}
+    .fil184 {fill:#829392;fill-rule:nonzero}
+    .fil185 {fill:#819291;fill-rule:nonzero}
+    .fil186 {fill:#819190;fill-rule:nonzero}
+    .fil187 {fill:#809190;fill-rule:nonzero}
+    .fil188 {fill:#7F908F;fill-rule:nonzero}
+    .fil189 {fill:#7F908F;fill-rule:nonzero}
+    .fil190 {fill:#7E908E;fill-rule:nonzero}
+    .fil191 {fill:#7D8F8E;fill-rule:nonzero}
+    .fil192 {fill:#7D8E8D;fill-rule:nonzero}
+    .fil193 {fill:#7C8D8C;fill-rule:nonzero}
+    .fil194 {fill:#7B8D8C;fill-rule:nonzero}
+    .fil195 {fill:#7B8D8C;fill-rule:nonzero}
+    .fil196 {fill:#7A8C8B;fill-rule:nonzero}
+    .fil197 {fill:#798C8B;fill-rule:nonzero}
+    .fil198 {fill:#798B8A;fill-rule:nonzero}
+    .fil199 {fill:#788A89;fill-rule:nonzero}
+    .fil200 {fill:#778A89;fill-rule:nonzero}
+    .fil201 {fill:#778A89;fill-rule:nonzero}
+    .fil202 {fill:#768987;fill-rule:nonzero}
+    .fil203 {fill:#758987;fill-rule:nonzero}
+    .fil204 {fill:#758887;fill-rule:nonzero}
+    .fil205 {fill:#748786;fill-rule:nonzero}
+    .fil206 {fill:#738786;fill-rule:nonzero}
+    .fil207 {fill:#738785;fill-rule:nonzero}
+    .fil208 {fill:#728685;fill-rule:nonzero}
+    .fil209 {fill:#718584;fill-rule:nonzero}
+    .fil210 {fill:#708583;fill-rule:nonzero}
+    .fil211 {fill:#6F8483;fill-rule:nonzero}
+    .fil212 {fill:#6F8482;fill-rule:nonzero}
+    .fil213 {fill:#6E8382;fill-rule:nonzero}
+    .fil214 {fill:#6E8381;fill-rule:nonzero}
+    .fil215 {fill:#6C8281;fill-rule:nonzero}
+    .fil216 {fill:#6D8280;fill-rule:nonzero}
+    .fil217 {fill:#6C8180;fill-rule:nonzero}
+    .fil218 {fill:#6B807F;fill-rule:nonzero}
+    .fil219 {fill:#6A807E;fill-rule:nonzero}
+    .fil220 {fill:#697F7D;fill-rule:nonzero}
+    .fil221 {fill:#697F7D;fill-rule:nonzero}
+    .fil222 {fill:#687F7D;fill-rule:nonzero}
+    .fil223 {fill:#677E7C;fill-rule:nonzero}
+    .fil224 {fill:#667D7C;fill-rule:nonzero}
+    .fil225 {fill:#657C7B;fill-rule:nonzero}
+    .fil226 {fill:#657C7A;fill-rule:nonzero}
+    .fil227 {fill:#637B79;fill-rule:nonzero}
+    .fil228 {fill:#637B79;fill-rule:nonzero}
+    .fil229 {fill:#637A79;fill-rule:nonzero}
+    .fil230 {fill:#627A78;fill-rule:nonzero}
+    .fil231 {fill:#617977;fill-rule:nonzero}
+    .fil232 {fill:#607877;fill-rule:nonzero}
+    .fil233 {fill:#5F7876;fill-rule:nonzero}
+    .fil234 {fill:#5E7775;fill-rule:nonzero}
+    .fil235 {fill:#5E7775;fill-rule:nonzero}
+    .fil236 {fill:#5D7675;fill-rule:nonzero}
+    .fil237 {fill:#5C7674;fill-rule:nonzero}
+    .fil238 {fill:#5C7574;fill-rule:nonzero}
+    .fil239 {fill:#5C7573;fill-rule:nonzero}
+    .fil240 {fill:#5B7573;fill-rule:nonzero}
+    .fil241 {fill:#5B7472;fill-rule:nonzero}
+    .fil242 {fill:#5A7472;fill-rule:nonzero}
+    .fil243 {fill:#5A7372;fill-rule:nonzero}
+    .fil244 {fill:#597371;fill-rule:nonzero}
+    .fil245 {fill:#587371;fill-rule:nonzero}
+    .fil246 {fill:#587270;fill-rule:nonzero}
+    .fil247 {fill:#577270;fill-rule:nonzero}
+    .fil248 {fill:#57716F;fill-rule:nonzero}
+    .fil249 {fill:#56706F;fill-rule:nonzero}
+    .fil250 {fill:#56706E;fill-rule:nonzero}
+    .fil251 {fill:#55706E;fill-rule:nonzero}
+    .fil252 {fill:#556F6D;fill-rule:nonzero}
+    .fil19 {fill:#546F6D;fill-rule:nonzero}
+    .fil0 {fill:url(#id2)}
+   ]]>
+  </style>
+    <clipPath id="id0">
+     <path d="M10.5195 1.0077c5.2532,0 9.5118,4.2586 9.5118,9.5118 0,5.2532 -4.2586,9.5118 -9.5118,9.5118 -5.2532,0 -9.5118,-4.2586 -9.5118,-9.5118 0,-5.2532 4.2586,-9.5118 9.5118,-9.5118z"/>
+    </clipPath>
+    <clipPath id="id1" style="clip-rule:nonzero">
+     <path d="M5.6669 5.1737l2.4101 0 0 10.6917 -1.2131 0 -1.197 -1.1969 0 -9.4948zm9.7051 0l0 9.4948 -1.197 1.1969 -4.3673 0 0 -2.4101 3.1542 0 0 -8.2816 2.4101 0z"/>
+    </clipPath>
+  <radialGradient id="id2" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1 -0 -0 1 0 0)" cx="10.5195" cy="10.5195" r="10.5195" fx="10.5195" fy="10.5195">
+   <stop offset="0" style="stop-opacity:0.368627; stop-color:#FEFEFE"/>
+   <stop offset="0.690196" style="stop-opacity:0.729412; stop-color:#F6FBFE"/>
+   <stop offset="1" style="stop-opacity:0.886275; stop-color:#2B2A29"/>
+  </radialGradient>
+ </defs>
+ <g id="Слой_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path class="fil0" d="M10.5195 0c5.8097,0 10.5195,4.7098 10.5195,10.5195 0,5.8097 -4.7098,10.5195 -10.5195,10.5195 -5.8097,0 -10.5195,-4.7098 -10.5195,-10.5195 0,-5.8097 4.7098,-10.5195 10.5195,-10.5195z"/>
+  <g>
+   <g style="clip-path:url(#id0)">
+    <polygon class="fil1" points="1.0077,1.0077 20.0313,1.0077 20.0313,20.0313 1.0077,20.0313 "/>
+    <polygon id="1" class="fil2" points="10.4638,10.4638 10.5752,10.4638 10.5752,10.5752 10.4638,10.5752 "/>
+    <path id="2" class="fil2" d="M10.4824 10.4824l0 0.0743 0.0743 0 0 -0.0743 -0.0743 0zm-0.0557 -0.0557l0.1857 0 0 0.1857 -0.1857 0 0 -0.1857z"/>
+    <path id="3" class="fil2" d="M10.4452 10.4452l0 0.1486 0.1486 0 0 -0.1486 -0.1486 0zm-0.0557 -0.0557l0.2601 0 0 0.2601 -0.2601 0 0 -0.2601z"/>
+    <path id="4" class="fil2" d="M10.4081 10.4081l0 0.2229 0.2229 0 0 -0.2229 -0.2229 0zm-0.0557 -0.0557l0.3344 0 0 0.3344 -0.3344 0 0 -0.3344z"/>
+    <path id="5" class="fil2" d="M10.3709 10.3709l0 0.2973 0.2973 0 0 -0.2973 -0.2973 0zm-0.0557 -0.0557l0.4087 0 0 0.4087 -0.4087 0 0 -0.4087z"/>
+    <path id="6" class="fil2" d="M10.3337 10.3337l0 0.3716 0.3716 0 0 -0.3716 -0.3716 0zm-0.0557 -0.0557l0.483 0 0 0.483 -0.483 0 0 -0.483z"/>
+    <path id="7" class="fil2" d="M10.2966 10.2966l0 0.4459 0.4459 0 0 -0.4459 -0.4459 0zm-0.0557 -0.0557l0.5573 0 0 0.5573 -0.5573 0 0 -0.5573z"/>
+    <path id="8" class="fil2" d="M10.2594 10.2594l0 0.5202 0.5202 0 0 -0.5202 -0.5202 0zm-0.0557 -0.0557l0.6316 0 0 0.6316 -0.6316 0 0 -0.6316z"/>
+    <path id="9" class="fil2" d="M10.2223 10.2223l0 0.5945 0.5945 0 0 -0.5945 -0.5945 0zm-0.0557 -0.0557l0.7059 0 0 0.7059 -0.7059 0 0 -0.7059z"/>
+    <path id="10" class="fil2" d="M10.1851 10.1851l0 0.6688 0.6688 0 0 -0.6688 -0.6688 0zm-0.0557 -0.0557l0.7802 0 0 0.7802 -0.7802 0 0 -0.7802z"/>
+    <path id="11" class="fil2" d="M10.148 10.148l0 0.7431 0.7431 0 0 -0.7431 -0.7431 0zm-0.0557 -0.0557l0.8546 0 0 0.8546 -0.8546 0 0 -0.8546z"/>
+    <path id="12" class="fil2" d="M10.1108 10.1108l0 0.8174 0.8174 0 0 -0.8174 -0.8174 0zm-0.0557 -0.0557l0.9289 0 0 0.9289 -0.9289 0 0 -0.9289z"/>
+    <path id="13" class="fil2" d="M10.0736 10.0736l0 0.8918 0.8918 0 0 -0.8918 -0.8918 0zm-0.0557 -0.0557l1.0032 0 0 1.0032 -1.0032 0 0 -1.0032z"/>
+    <path id="14" class="fil3" d="M10.0365 10.0365l0 0.9661 0.9661 0 0 -0.9661 -0.9661 0zm-0.0557 -0.0557l1.0775 0 0 1.0775 -1.0775 0 0 -1.0775z"/>
+    <path id="15" class="fil3" d="M9.9993 9.9993l0 1.0404 1.0404 0 0 -1.0404 -1.0404 0zm-0.0557 -0.0557l1.1518 0 0 1.1518 -1.1518 0 0 -1.1518z"/>
+    <path id="16" class="fil3" d="M9.9622 9.9622l0 1.1147 1.1147 0 0 -1.1147 -1.1147 0zm-0.0557 -0.0557l1.2261 0 0 1.2261 -1.2261 0 0 -1.2261z"/>
+    <path id="17" class="fil3" d="M9.925 9.925l0 1.189 1.189 0 0 -1.189 -1.189 0zm-0.0557 -0.0557l1.3004 0 0 1.3004 -1.3004 0 0 -1.3004z"/>
+    <path id="18" class="fil3" d="M9.8879 9.8879l0 1.2633 1.2633 0 0 -1.2633 -1.2633 0zm-0.0557 -0.0557l1.3748 0 0 1.3748 -1.3748 0 0 -1.3748z"/>
+    <path id="19" class="fil3" d="M9.8507 9.8507l0 1.3376 1.3376 0 0 -1.3376 -1.3376 0zm-0.0557 -0.0557l1.4491 0 0 1.4491 -1.4491 0 0 -1.4491z"/>
+    <path id="20" class="fil3" d="M9.8136 9.8136l0 1.4119 1.4119 0 0 -1.4119 -1.4119 0zm-0.0558 -0.0558l1.5234 0 0 1.5234 -1.5234 0 0 -1.5234z"/>
+    <path id="21" class="fil3" d="M9.7764 9.7764l0 1.4862 1.4862 0 0 -1.4862 -1.4862 0zm-0.0558 -0.0558l1.5977 0 0 1.5977 -1.5977 0 0 -1.5977z"/>
+    <path id="22" class="fil3" d="M9.7393 9.7393l0 1.5605 1.5605 0 0 -1.5605 -1.5605 0zm-0.0558 -0.0558l1.672 0 0 1.672 -1.672 0 0 -1.672z"/>
+    <path id="23" class="fil3" d="M9.7021 9.7021l0 1.6348 1.6348 0 0 -1.6348 -1.6348 0zm-0.0558 -0.0558l1.7463 0 0 1.7463 -1.7463 0 0 -1.7463z"/>
+    <path id="24" class="fil3" d="M9.665 9.665l0 1.7091 1.7091 0 0 -1.7091 -1.7091 0zm-0.0558 -0.0558l1.8206 0 0 1.8206 -1.8206 0 0 -1.8206z"/>
+    <path id="25" class="fil3" d="M9.6278 9.6278l0 1.7834 1.7834 0 0 -1.7834 -1.7834 0zm-0.0558 -0.0558l1.8949 0 0 1.8949 -1.8949 0 0 -1.8949z"/>
+    <path id="26" class="fil3" d="M9.5906 9.5906l0 1.8577 1.8577 0 0 -1.8577 -1.8577 0zm-0.0558 -0.0558l1.9693 0 0 1.9693 -1.9693 0 0 -1.9693z"/>
+    <path id="27" class="fil4" d="M9.5535 9.5535l0 1.9321 1.9321 0 0 -1.9321 -1.9321 0zm-0.0558 -0.0558l2.0436 0 0 2.0436 -2.0436 0 0 -2.0436z"/>
+    <path id="28" class="fil4" d="M9.5163 9.5163l0 2.0064 2.0064 0 0 -2.0064 -2.0064 0zm-0.0558 -0.0558l2.1179 0 0 2.1179 -2.1179 0 0 -2.1179z"/>
+    <path id="29" class="fil4" d="M9.4792 9.4792l0 2.0807 2.0807 0 0 -2.0807 -2.0807 0zm-0.0558 -0.0558l2.1922 0 0 2.1922 -2.1922 0 0 -2.1922z"/>
+    <path id="30" class="fil4" d="M9.442 9.442l0 2.155 2.155 0 0 -2.155 -2.155 0zm-0.0558 -0.0558l2.2665 0 0 2.2665 -2.2665 0 0 -2.2665z"/>
+    <path id="31" class="fil4" d="M9.4049 9.4049l0 2.2293 2.2293 0 0 -2.2293 -2.2293 0zm-0.0558 -0.0558l2.3408 0 0 2.3408 -2.3408 0 0 -2.3408z"/>
+    <path id="32" class="fil4" d="M9.3677 9.3677l0 2.3036 2.3036 0 0 -2.3036 -2.3036 0zm-0.0558 -0.0558l2.4151 0 0 2.4151 -2.4151 0 0 -2.4151z"/>
+    <path id="33" class="fil4" d="M9.3306 9.3306l0 2.3779 2.3779 0 0 -2.3779 -2.3779 0zm-0.0558 -0.0558l2.4894 0 0 2.4894 -2.4894 0 0 -2.4894z"/>
+    <path id="34" class="fil4" d="M9.2934 9.2934l0 2.4523 2.4523 0 0 -2.4523 -2.4523 0zm-0.0558 -0.0558l2.5638 0 0 2.5638 -2.5638 0 0 -2.5638z"/>
+    <path id="35" class="fil4" d="M9.2562 9.2562l0 2.5266 2.5266 0 0 -2.5266 -2.5266 0zm-0.0558 -0.0558l2.6381 0 0 2.6381 -2.6381 0 0 -2.6381z"/>
+    <path id="36" class="fil4" d="M9.2191 9.2191l0 2.6009 2.6009 0 0 -2.6009 -2.6009 0zm-0.0558 -0.0558l2.7124 0 0 2.7124 -2.7124 0 0 -2.7124z"/>
+    <path id="37" class="fil4" d="M9.1819 9.1819l0 2.6752 2.6752 0 0 -2.6752 -2.6752 0zm-0.0557 -0.0557l2.7866 0 0 2.7866 -2.7866 0 0 -2.7866z"/>
+    <path id="38" class="fil4" d="M9.1448 9.1448l0 2.7495 2.7495 0 0 -2.7495 -2.7495 0zm-0.0557 -0.0557l2.8609 0 0 2.8609 -2.8609 0 0 -2.8609z"/>
+    <path id="39" class="fil4" d="M9.1076 9.1076l0 2.8238 2.8238 0 0 -2.8238 -2.8238 0zm-0.0557 -0.0557l2.9352 0 0 2.9352 -2.9352 0 0 -2.9352z"/>
+    <path id="40" class="fil5" d="M9.0705 9.0705l0 2.8981 2.8981 0 0 -2.8981 -2.8981 0zm-0.0557 -0.0557l3.0096 0 0 3.0096 -3.0096 0 0 -3.0096z"/>
+    <path id="41" class="fil5" d="M9.0333 9.0333l0 2.9724 2.9724 0 0 -2.9724 -2.9724 0zm-0.0557 -0.0557l3.0839 0 0 3.0839 -3.0839 0 0 -3.0839z"/>
+    <path id="42" class="fil5" d="M8.9961 8.9961l0 3.0468 3.0468 0 0 -3.0468 -3.0468 0zm-0.0557 -0.0557l3.1582 0 0 3.1582 -3.1582 0 0 -3.1582z"/>
+    <path id="43" class="fil5" d="M8.959 8.959l0 3.1211 3.1211 0 0 -3.1211 -3.1211 0zm-0.0557 -0.0557l3.2325 0 0 3.2325 -3.2325 0 0 -3.2325z"/>
+    <path id="44" class="fil6" d="M8.9218 8.9218l0 3.1954 3.1954 0 0 -3.1954 -3.1954 0zm-0.0557 -0.0557l3.3068 0 0 3.3068 -3.3068 0 0 -3.3068z"/>
+    <path id="45" class="fil6" d="M8.8847 8.8847l0 3.2697 3.2697 0 0 -3.2697 -3.2697 0zm-0.0557 -0.0557l3.3811 0 0 3.3811 -3.3811 0 0 -3.3811z"/>
+    <path id="46" class="fil6" d="M8.8475 8.8475l0 3.344 3.344 0 0 -3.344 -3.344 0zm-0.0557 -0.0557l3.4554 0 0 3.4554 -3.4554 0 0 -3.4554z"/>
+    <path id="47" class="fil6" d="M8.8104 8.8104l0 3.4183 3.4183 0 0 -3.4183 -3.4183 0zm-0.0557 -0.0557l3.5298 0 0 3.5298 -3.5298 0 0 -3.5298z"/>
+    <path id="48" class="fil6" d="M8.7732 8.7732l0 3.4926 3.4926 0 0 -3.4926 -3.4926 0zm-0.0557 -0.0557l3.6041 0 0 3.6041 -3.6041 0 0 -3.6041z"/>
+    <path id="49" class="fil6" d="M8.736 8.736l0 3.5669 3.5669 0 0 -3.5669 -3.5669 0zm-0.0557 -0.0557l3.6784 0 0 3.6784 -3.6784 0 0 -3.6784z"/>
+    <path id="50" class="fil6" d="M8.6989 8.6989l0 3.6413 3.6413 0 0 -3.6413 -3.6413 0zm-0.0557 -0.0557l3.7527 0 0 3.7527 -3.7527 0 0 -3.7527z"/>
+    <path id="51" class="fil6" d="M8.6617 8.6617l0 3.7156 3.7156 0 0 -3.7156 -3.7156 0zm-0.0557 -0.0557l3.827 0 0 3.827 -3.827 0 0 -3.827z"/>
+    <path id="52" class="fil6" d="M8.6246 8.6246l0 3.7899 3.7899 0 0 -3.7899 -3.7899 0zm-0.0557 -0.0557l3.9013 0 0 3.9013 -3.9013 0 0 -3.9013z"/>
+    <path id="53" class="fil6" d="M8.5874 8.5874l0 3.8642 3.8642 0 0 -3.8642 -3.8642 0zm-0.0557 -0.0557l3.9756 0 0 3.9756 -3.9756 0 0 -3.9756z"/>
+    <path id="54" class="fil6" d="M8.5503 8.5503l0 3.9385 3.9385 0 0 -3.9385 -3.9385 0zm-0.0557 -0.0557l4.0499 0 0 4.0499 -4.0499 0 0 -4.0499z"/>
+    <path id="55" class="fil6" d="M8.5131 8.5131l0 4.0128 4.0128 0 0 -4.0128 -4.0128 0zm-0.0557 -0.0557l4.1243 0 0 4.1243 -4.1243 0 0 -4.1243z"/>
+    <path id="56" class="fil6" d="M8.476 8.476l0 4.0871 4.0871 0 0 -4.0871 -4.0871 0zm-0.0558 -0.0558l4.1986 0 0 4.1986 -4.1986 0 0 -4.1986z"/>
+    <path id="57" class="fil6" d="M8.4388 8.4388l0 4.1614 4.1614 0 0 -4.1614 -4.1614 0zm-0.0558 -0.0558l4.2729 0 0 4.2729 -4.2729 0 0 -4.2729z"/>
+    <path id="58" class="fil6" d="M8.4017 8.4017l0 4.2357 4.2357 0 0 -4.2357 -4.2357 0zm-0.0558 -0.0558l4.3472 0 0 4.3472 -4.3472 0 0 -4.3472z"/>
+    <path id="59" class="fil6" d="M8.3645 8.3645l0 4.31 4.31 0 0 -4.31 -4.31 0zm-0.0558 -0.0558l4.4215 0 0 4.4215 -4.4215 0 0 -4.4215z"/>
+    <path id="60" class="fil6" d="M8.3274 8.3274l0 4.3843 4.3843 0 0 -4.3843 -4.3843 0zm-0.0558 -0.0558l4.4958 0 0 4.4958 -4.4958 0 0 -4.4958z"/>
+    <path id="61" class="fil6" d="M8.2902 8.2902l0 4.4586 4.4586 0 0 -4.4586 -4.4586 0zm-0.0558 -0.0558l4.5701 0 0 4.5701 -4.5701 0 0 -4.5701z"/>
+    <path id="62" class="fil6" d="M8.2531 8.2531l0 4.5329 4.5329 0 0 -4.5329 -4.5329 0zm-0.0558 -0.0558l4.6444 0 0 4.6444 -4.6444 0 0 -4.6444z"/>
+    <path id="63" class="fil6" d="M8.2159 8.2159l0 4.6073 4.6073 0 0 -4.6073 -4.6073 0zm-0.0558 -0.0558l4.7188 0 0 4.7188 -4.7188 0 0 -4.7188z"/>
+    <path id="64" class="fil6" d="M8.1787 8.1787l0 4.6816 4.6816 0 0 -4.6816 -4.6816 0zm-0.0558 -0.0558l4.7931 0 0 4.7931 -4.7931 0 0 -4.7931z"/>
+    <path id="65" class="fil7" d="M8.1416 8.1416l0 4.7559 4.7559 0 0 -4.7559 -4.7559 0zm-0.0558 -0.0558l4.8674 0 0 4.8674 -4.8674 0 0 -4.8674z"/>
+    <path id="66" class="fil7" d="M8.1044 8.1044l0 4.8302 4.8302 0 0 -4.8302 -4.8302 0zm-0.0558 -0.0558l4.9417 0 0 4.9417 -4.9417 0 0 -4.9417z"/>
+    <path id="67" class="fil7" d="M8.0673 8.0673l0 4.9045 4.9045 0 0 -4.9045 -4.9045 0zm-0.0558 -0.0558l5.016 0 0 5.016 -5.016 0 0 -5.016z"/>
+    <path id="68" class="fil7" d="M8.0301 8.0301l0 4.9788 4.9788 0 0 -4.9788 -4.9788 0zm-0.0558 -0.0558l5.0903 0 0 5.0903 -5.0903 0 0 -5.0903z"/>
+    <path id="69" class="fil7" d="M7.993 7.993l0 5.0531 5.0531 0 0 -5.0531 -5.0531 0zm-0.0558 -0.0558l5.1646 0 0 5.1646 -5.1646 0 0 -5.1646z"/>
+    <path id="70" class="fil7" d="M7.9558 7.9558l0 5.1274 5.1274 0 0 -5.1274 -5.1274 0zm-0.0558 -0.0558l5.2389 0 0 5.2389 -5.2389 0 0 -5.2389z"/>
+    <path id="71" class="fil7" d="M7.9186 7.9186l0 5.2018 5.2018 0 0 -5.2018 -5.2018 0zm-0.0558 -0.0558l5.3133 0 0 5.3133 -5.3133 0 0 -5.3133z"/>
+    <path id="72" class="fil7" d="M7.8815 7.8815l0 5.2761 5.2761 0 0 -5.2761 -5.2761 0zm-0.0558 -0.0558l5.3876 0 0 5.3876 -5.3876 0 0 -5.3876z"/>
+    <path id="73" class="fil7" d="M7.8443 7.8443l0 5.3504 5.3504 0 0 -5.3504 -5.3504 0zm-0.0557 -0.0557l5.4618 0 0 5.4618 -5.4618 0 0 -5.4618z"/>
+    <path id="74" class="fil7" d="M7.8072 7.8072l0 5.4247 5.4247 0 0 -5.4247 -5.4247 0zm-0.0557 -0.0557l5.5361 0 0 5.5361 -5.5361 0 0 -5.5361z"/>
+    <path id="75" class="fil7" d="M7.77 7.77l0 5.499 5.499 0 0 -5.499 -5.499 0zm-0.0557 -0.0557l5.6104 0 0 5.6104 -5.6104 0 0 -5.6104z"/>
+    <path id="76" class="fil7" d="M7.7329 7.7329l0 5.5733 5.5733 0 0 -5.5733 -5.5733 0zm-0.0557 -0.0557l5.6847 0 0 5.6847 -5.6847 0 0 -5.6847z"/>
+    <path id="77" class="fil7" d="M7.6957 7.6957l0 5.6476 5.6476 0 0 -5.6476 -5.6476 0zm-0.0557 -0.0557l5.7591 0 0 5.7591 -5.7591 0 0 -5.7591z"/>
+    <path id="78" class="fil8" d="M7.6586 7.6586l0 5.7219 5.7219 0 0 -5.7219 -5.7219 0zm-0.0557 -0.0557l5.8334 0 0 5.8334 -5.8334 0 0 -5.8334z"/>
+    <path id="79" class="fil8" d="M7.6214 7.6214l0 5.7963 5.7963 0 0 -5.7963 -5.7963 0zm-0.0557 -0.0557l5.9077 0 0 5.9077 -5.9077 0 0 -5.9077z"/>
+    <path id="80" class="fil8" d="M7.5842 7.5842l0 5.8706 5.8706 0 0 -5.8706 -5.8706 0zm-0.0557 -0.0557l5.982 0 0 5.982 -5.982 0 0 -5.982z"/>
+    <path id="81" class="fil8" d="M7.5471 7.5471l0 5.9449 5.9449 0 0 -5.9449 -5.9449 0zm-0.0557 -0.0557l6.0563 0 0 6.0563 -6.0563 0 0 -6.0563z"/>
+    <path id="82" class="fil8" d="M7.5099 7.5099l0 6.0192 6.0192 0 0 -6.0192 -6.0192 0zm-0.0557 -0.0557l6.1306 0 0 6.1306 -6.1306 0 0 -6.1306z"/>
+    <path id="83" class="fil8" d="M7.4728 7.4728l0 6.0935 6.0935 0 0 -6.0935 -6.0935 0zm-0.0557 -0.0557l6.2049 0 0 6.2049 -6.2049 0 0 -6.2049z"/>
+    <path id="84" class="fil8" d="M7.4356 7.4356l0 6.1678 6.1678 0 0 -6.1678 -6.1678 0zm-0.0557 -0.0557l6.2793 0 0 6.2793 -6.2793 0 0 -6.2793z"/>
+    <path id="85" class="fil8" d="M7.3985 7.3985l0 6.2421 6.2421 0 0 -6.2421 -6.2421 0zm-0.0557 -0.0557l6.3536 0 0 6.3536 -6.3536 0 0 -6.3536z"/>
+    <path id="86" class="fil8" d="M7.3613 7.3613l0 6.3164 6.3164 0 0 -6.3164 -6.3164 0zm-0.0557 -0.0557l6.4279 0 0 6.4279 -6.4279 0 0 -6.4279z"/>
+    <path id="87" class="fil8" d="M7.3241 7.3241l0 6.3908 6.3908 0 0 -6.3908 -6.3908 0zm-0.0557 -0.0557l6.5022 0 0 6.5022 -6.5022 0 0 -6.5022z"/>
+    <path id="88" class="fil8" d="M7.287 7.287l0 6.4651 6.4651 0 0 -6.4651 -6.4651 0zm-0.0557 -0.0557l6.5765 0 0 6.5765 -6.5765 0 0 -6.5765z"/>
+    <path id="89" class="fil8" d="M7.2498 7.2498l0 6.5394 6.5394 0 0 -6.5394 -6.5394 0zm-0.0557 -0.0557l6.6508 0 0 6.6508 -6.6508 0 0 -6.6508z"/>
+    <path id="90" class="fil8" d="M7.2127 7.2127l0 6.6137 6.6137 0 0 -6.6137 -6.6137 0zm-0.0557 -0.0557l6.7251 0 0 6.7251 -6.7251 0 0 -6.7251z"/>
+    <path id="91" class="fil9" d="M7.1755 7.1755l0 6.688 6.688 0 0 -6.688 -6.688 0zm-0.0557 -0.0557l6.7994 0 0 6.7994 -6.7994 0 0 -6.7994z"/>
+    <path id="92" class="fil9" d="M7.1384 7.1384l0 6.7623 6.7623 0 0 -6.7623 -6.7623 0zm-0.0557 -0.0557l6.8738 0 0 6.8738 -6.8738 0 0 -6.8738z"/>
+    <path id="93" class="fil9" d="M7.1012 7.1012l0 6.8366 6.8366 0 0 -6.8366 -6.8366 0zm-0.0558 -0.0558l6.9481 0 0 6.9481 -6.9481 0 0 -6.9481z"/>
+    <path id="94" class="fil9" d="M7.0641 7.0641l0 6.9109 6.9109 0 0 -6.9109 -6.9109 0zm-0.0558 -0.0558l7.0224 0 0 7.0224 -7.0224 0 0 -7.0224z"/>
+    <path id="95" class="fil9" d="M7.0269 7.0269l0 6.9852 6.9852 0 0 -6.9852 -6.9852 0zm-0.0558 -0.0558l7.0967 0 0 7.0967 -7.0967 0 0 -7.0967z"/>
+    <path id="96" class="fil9" d="M6.9898 6.9898l0 7.0595 7.0595 0 0 -7.0595 -7.0595 0zm-0.0558 -0.0558l7.171 0 0 7.171 -7.171 0 0 -7.171z"/>
+    <path id="97" class="fil9" d="M6.9526 6.9526l0 7.1338 7.1338 0 0 -7.1338 -7.1338 0zm-0.0558 -0.0558l7.2453 0 0 7.2453 -7.2453 0 0 -7.2453z"/>
+    <path id="98" class="fil9" d="M6.9155 6.9155l0 7.2081 7.2081 0 0 -7.2081 -7.2081 0zm-0.0558 -0.0558l7.3196 0 0 7.3196 -7.3196 0 0 -7.3196z"/>
+    <path id="99" class="fil9" d="M6.8783 6.8783l0 7.2824 7.2824 0 0 -7.2824 -7.2824 0zm-0.0558 -0.0558l7.3939 0 0 7.3939 -7.3939 0 0 -7.3939z"/>
+    <path id="100" class="fil9" d="M6.8411 6.8411l0 7.3568 7.3568 0 0 -7.3568 -7.3568 0zm-0.0558 -0.0558l7.4683 0 0 7.4683 -7.4683 0 0 -7.4683z"/>
+    <path id="101" class="fil9" d="M6.804 6.804l0 7.4311 7.4311 0 0 -7.4311 -7.4311 0zm-0.0558 -0.0558l7.5426 0 0 7.5426 -7.5426 0 0 -7.5426z"/>
+    <path id="102" class="fil9" d="M6.7668 6.7668l0 7.5054 7.5054 0 0 -7.5054 -7.5054 0zm-0.0558 -0.0558l7.6169 0 0 7.6169 -7.6169 0 0 -7.6169z"/>
+    <path id="103" class="fil9" d="M6.7297 6.7297l0 7.5797 7.5797 0 0 -7.5797 -7.5797 0zm-0.0558 -0.0558l7.6912 0 0 7.6912 -7.6912 0 0 -7.6912z"/>
+    <path id="104" class="fil9" d="M6.6925 6.6925l0 7.654 7.654 0 0 -7.654 -7.654 0zm-0.0558 -0.0558l7.7655 0 0 7.7655 -7.7655 0 0 -7.7655z"/>
+    <path id="105" class="fil9" d="M6.6554 6.6554l0 7.7283 7.7283 0 0 -7.7283 -7.7283 0zm-0.0558 -0.0558l7.8398 0 0 7.8398 -7.8398 0 0 -7.8398z"/>
+    <path id="106" class="fil9" d="M6.6182 6.6182l0 7.8026 7.8026 0 0 -7.8026 -7.8026 0zm-0.0558 -0.0558l7.9141 0 0 7.9141 -7.9141 0 0 -7.9141z"/>
+    <path id="107" class="fil9" d="M6.5811 6.5811l0 7.8769 7.8769 0 0 -7.8769 -7.8769 0zm-0.0558 -0.0558l7.9884 0 0 7.9884 -7.9884 0 0 -7.9884z"/>
+    <path id="108" class="fil9" d="M6.5439 6.5439l0 7.9513 7.9513 0 0 -7.9513 -7.9513 0zm-0.0558 -0.0558l8.0628 0 0 8.0628 -8.0628 0 0 -8.0628z"/>
+    <path id="109" class="fil9" d="M6.5067 6.5067l0 8.0256 8.0256 0 0 -8.0256 -8.0256 0zm-0.0558 -0.0558l8.1371 0 0 8.1371 -8.1371 0 0 -8.1371z"/>
+    <path id="110" class="fil9" d="M6.4696 6.4696l0 8.0999 8.0999 0 0 -8.0999 -8.0999 0zm-0.0557 -0.0557l8.2113 0 0 8.2113 -8.2113 0 0 -8.2113z"/>
+    <path id="111" class="fil9" d="M6.4324 6.4324l0 8.1742 8.1742 0 0 -8.1742 -8.1742 0zm-0.0557 -0.0557l8.2856 0 0 8.2856 -8.2856 0 0 -8.2856z"/>
+    <path id="112" class="fil9" d="M6.3953 6.3953l0 8.2485 8.2485 0 0 -8.2485 -8.2485 0zm-0.0557 -0.0557l8.3599 0 0 8.3599 -8.3599 0 0 -8.3599z"/>
+    <path id="113" class="fil9" d="M6.3581 6.3581l0 8.3228 8.3228 0 0 -8.3228 -8.3228 0zm-0.0557 -0.0557l8.4343 0 0 8.4343 -8.4343 0 0 -8.4343z"/>
+    <path id="114" class="fil9" d="M6.321 6.321l0 8.3971 8.3971 0 0 -8.3971 -8.3971 0zm-0.0557 -0.0557l8.5086 0 0 8.5086 -8.5086 0 0 -8.5086z"/>
+    <path id="115" class="fil9" d="M6.2838 6.2838l0 8.4714 8.4714 0 0 -8.4714 -8.4714 0zm-0.0557 -0.0557l8.5829 0 0 8.5829 -8.5829 0 0 -8.5829z"/>
+    <path id="116" class="fil10" d="M6.2466 6.2466l0 8.5458 8.5458 0 0 -8.5458 -8.5458 0zm-0.0557 -0.0557l8.6572 0 0 8.6572 -8.6572 0 0 -8.6572z"/>
+    <path id="117" class="fil10" d="M6.2095 6.2095l0 8.6201 8.6201 0 0 -8.6201 -8.6201 0zm-0.0557 -0.0557l8.7315 0 0 8.7315 -8.7315 0 0 -8.7315z"/>
+    <path id="118" class="fil10" d="M6.1723 6.1723l0 8.6944 8.6944 0 0 -8.6944 -8.6944 0zm-0.0557 -0.0557l8.8058 0 0 8.8058 -8.8058 0 0 -8.8058z"/>
+    <path id="119" class="fil10" d="M6.1352 6.1352l0 8.7687 8.7687 0 0 -8.7687 -8.7687 0zm-0.0557 -0.0557l8.8801 0 0 8.8801 -8.8801 0 0 -8.8801z"/>
+    <path id="120" class="fil10" d="M6.098 6.098l0 8.843 8.843 0 0 -8.843 -8.843 0zm-0.0557 -0.0557l8.9544 0 0 8.9544 -8.9544 0 0 -8.9544z"/>
+    <path id="121" class="fil10" d="M6.0609 6.0609l0 8.9173 8.9173 0 0 -8.9173 -8.9173 0zm-0.0557 -0.0557l9.0288 0 0 9.0288 -9.0288 0 0 -9.0288z"/>
+    <path id="122" class="fil10" d="M6.0237 6.0237l0 8.9916 8.9916 0 0 -8.9916 -8.9916 0zm-0.0557 -0.0557l9.1031 0 0 9.1031 -9.1031 0 0 -9.1031z"/>
+    <path id="123" class="fil10" d="M5.9865 5.9865l0 9.0659 9.0659 0 0 -9.0659 -9.0659 0zm-0.0557 -0.0557l9.1774 0 0 9.1774 -9.1774 0 0 -9.1774z"/>
+    <path id="124" class="fil10" d="M5.9494 5.9494l0 9.1403 9.1403 0 0 -9.1403 -9.1403 0zm-0.0557 -0.0557l9.2517 0 0 9.2517 -9.2517 0 0 -9.2517z"/>
+    <path id="125" class="fil10" d="M5.9122 5.9122l0 9.2146 9.2146 0 0 -9.2146 -9.2146 0zm-0.0557 -0.0557l9.326 0 0 9.326 -9.326 0 0 -9.326z"/>
+    <path id="126" class="fil10" d="M5.8751 5.8751l0 9.2889 9.2889 0 0 -9.2889 -9.2889 0zm-0.0557 -0.0557l9.4003 0 0 9.4003 -9.4003 0 0 -9.4003z"/>
+    <path id="127" class="fil10" d="M5.8379 5.8379l0 9.3632 9.3632 0 0 -9.3632 -9.3632 0zm-0.0557 -0.0557l9.4746 0 0 9.4746 -9.4746 0 0 -9.4746z"/>
+    <path id="128" class="fil10" d="M5.8008 5.8008l0 9.4375 9.4375 0 0 -9.4375 -9.4375 0zm-0.0557 -0.0557l9.5489 0 0 9.5489 -9.5489 0 0 -9.5489z"/>
+    <path id="129" class="fil11" d="M5.7636 5.7636l0 9.5118 9.5118 0 0 -9.5118 -9.5118 0zm-0.0558 -0.0558l9.6233 0 0 9.6233 -9.6233 0 0 -9.6233z"/>
+    <path id="130" class="fil11" d="M5.7265 5.7265l0 9.5861 9.5861 0 0 -9.5861 -9.5861 0zm-0.0558 -0.0558l9.6976 0 0 9.6976 -9.6976 0 0 -9.6976z"/>
+    <path id="131" class="fil11" d="M5.6893 5.6893l0 9.6604 9.6604 0 0 -9.6604 -9.6604 0zm-0.0558 -0.0558l9.7719 0 0 9.7719 -9.7719 0 0 -9.7719z"/>
+    <path id="132" class="fil11" d="M5.6522 5.6522l0 9.7347 9.7347 0 0 -9.7347 -9.7347 0zm-0.0558 -0.0558l9.8462 0 0 9.8462 -9.8462 0 0 -9.8462z"/>
+    <path id="133" class="fil11" d="M5.615 5.615l0 9.809 9.809 0 0 -9.809 -9.809 0zm-0.0558 -0.0558l9.9205 0 0 9.9205 -9.9205 0 0 -9.9205z"/>
+    <path id="134" class="fil11" d="M5.5779 5.5779l0 9.8833 9.8833 0 0 -9.8833 -9.8833 0zm-0.0558 -0.0558l9.9948 0 0 9.9948 -9.9948 0 0 -9.9948z"/>
+    <path id="135" class="fil11" d="M5.5407 5.5407l0 9.9576 9.9576 0 0 -9.9576 -9.9576 0zm-0.0558 -0.0558l10.0691 0 0 10.0691 -10.0691 0 0 -10.0691z"/>
+    <path id="136" class="fil11" d="M5.5036 5.5036l0 10.0319 10.0319 0 0 -10.0319 -10.0319 0zm-0.0558 -0.0558l10.1434 0 0 10.1434 -10.1434 0 0 -10.1434z"/>
+    <path id="137" class="fil11" d="M5.4664 5.4664l0 10.1063 10.1063 0 0 -10.1063 -10.1063 0zm-0.0558 -0.0558l10.2178 0 0 10.2178 -10.2178 0 0 -10.2178z"/>
+    <path id="138" class="fil11" d="M5.4292 5.4292l0 10.1806 10.1806 0 0 -10.1806 -10.1806 0zm-0.0558 -0.0558l10.2921 0 0 10.2921 -10.2921 0 0 -10.2921z"/>
+    <path id="139" class="fil11" d="M5.3921 5.3921l0 10.2549 10.2549 0 0 -10.2549 -10.2549 0zm-0.0558 -0.0558l10.3664 0 0 10.3664 -10.3664 0 0 -10.3664z"/>
+    <path id="140" class="fil11" d="M5.3549 5.3549l0 10.3292 10.3292 0 0 -10.3292 -10.3292 0zm-0.0558 -0.0558l10.4407 0 0 10.4407 -10.4407 0 0 -10.4407z"/>
+    <path id="141" class="fil11" d="M5.3178 5.3178l0 10.4035 10.4035 0 0 -10.4035 -10.4035 0zm-0.0558 -0.0558l10.515 0 0 10.515 -10.515 0 0 -10.515z"/>
+    <path id="142" class="fil12" d="M5.2806 5.2806l0 10.4778 10.4778 0 0 -10.4778 -10.4778 0zm-0.0558 -0.0558l10.5893 0 0 10.5893 -10.5893 0 0 -10.5893z"/>
+    <path id="143" class="fil12" d="M5.2435 5.2435l0 10.5521 10.5521 0 0 -10.5521 -10.5521 0zm-0.0558 -0.0558l10.6636 0 0 10.6636 -10.6636 0 0 -10.6636z"/>
+    <path id="144" class="fil12" d="M5.2063 5.2063l0 10.6264 10.6264 0 0 -10.6264 -10.6264 0zm-0.0558 -0.0558l10.738 0 0 10.738 -10.738 0 0 -10.738z"/>
+    <path id="145" class="fil12" d="M5.1691 5.1691l0 10.7008 10.7008 0 0 -10.7008 -10.7008 0zm-0.0558 -0.0558l10.8123 0 0 10.8123 -10.8123 0 0 -10.8123z"/>
+    <path id="146" class="fil12" d="M5.132 5.132l0 10.7751 10.7751 0 0 -10.7751 -10.7751 0zm-0.0557 -0.0557l10.8865 0 0 10.8865 -10.8865 0 0 -10.8865z"/>
+    <path id="147" class="fil12" d="M5.0948 5.0948l0 10.8494 10.8494 0 0 -10.8494 -10.8494 0zm-0.0557 -0.0557l10.9608 0 0 10.9608 -10.9608 0 0 -10.9608z"/>
+    <path id="148" class="fil12" d="M5.0577 5.0577l0 10.9237 10.9237 0 0 -10.9237 -10.9237 0zm-0.0557 -0.0557l11.0351 0 0 11.0351 -11.0351 0 0 -11.0351z"/>
+    <path id="149" class="fil12" d="M5.0205 5.0205l0 10.998 10.998 0 0 -10.998 -10.998 0zm-0.0557 -0.0557l11.1094 0 0 11.1094 -11.1094 0 0 -11.1094z"/>
+    <path id="150" class="fil12" d="M4.9834 4.9834l0 11.0723 11.0723 0 0 -11.0723 -11.0723 0zm-0.0557 -0.0557l11.1838 0 0 11.1838 -11.1838 0 0 -11.1838z"/>
+    <path id="151" class="fil12" d="M4.9462 4.9462l0 11.1466 11.1466 0 0 -11.1466 -11.1466 0zm-0.0557 -0.0557l11.2581 0 0 11.2581 -11.2581 0 0 -11.2581z"/>
+    <path id="152" class="fil12" d="M4.909 4.909l0 11.2209 11.2209 0 0 -11.2209 -11.2209 0zm-0.0557 -0.0557l11.3324 0 0 11.3324 -11.3324 0 0 -11.3324z"/>
+    <path id="153" class="fil12" d="M4.8719 4.8719l0 11.2953 11.2953 0 0 -11.2953 -11.2953 0zm-0.0557 -0.0557l11.4067 0 0 11.4067 -11.4067 0 0 -11.4067z"/>
+    <path id="154" class="fil12" d="M4.8347 4.8347l0 11.3696 11.3696 0 0 -11.3696 -11.3696 0zm-0.0557 -0.0557l11.481 0 0 11.481 -11.481 0 0 -11.481z"/>
+    <path id="155" class="fil12" d="M4.7976 4.7976l0 11.4439 11.4439 0 0 -11.4439 -11.4439 0zm-0.0557 -0.0557l11.5553 0 0 11.5553 -11.5553 0 0 -11.5553z"/>
+    <path id="156" class="fil12" d="M4.7604 4.7604l0 11.5182 11.5182 0 0 -11.5182 -11.5182 0zm-0.0557 -0.0557l11.6296 0 0 11.6296 -11.6296 0 0 -11.6296z"/>
+    <path id="157" class="fil12" d="M4.7233 4.7233l0 11.5925 11.5925 0 0 -11.5925 -11.5925 0zm-0.0557 -0.0557l11.7039 0 0 11.7039 -11.7039 0 0 -11.7039z"/>
+    <path id="158" class="fil12" d="M4.6861 4.6861l0 11.6668 11.6668 0 0 -11.6668 -11.6668 0zm-0.0557 -0.0557l11.7783 0 0 11.7783 -11.7783 0 0 -11.7783z"/>
+    <path id="159" class="fil12" d="M4.649 4.649l0 11.7411 11.7411 0 0 -11.7411 -11.7411 0zm-0.0557 -0.0557l11.8526 0 0 11.8526 -11.8526 0 0 -11.8526z"/>
+    <path id="160" class="fil12" d="M4.6118 4.6118l0 11.8155 11.8155 0 0 -11.8155 -11.8155 0zm-0.0557 -0.0557l11.9269 0 0 11.9269 -11.9269 0 0 -11.9269z"/>
+    <path id="161" class="fil12" d="M4.5746 4.5746l0 11.8898 11.8898 0 0 -11.8898 -11.8898 0zm-0.0557 -0.0557l12.0012 0 0 12.0012 -12.0012 0 0 -12.0012z"/>
+    <path id="162" class="fil12" d="M4.5375 4.5375l0 11.9641 11.9641 0 0 -11.9641 -11.9641 0zm-0.0557 -0.0557l12.0755 0 0 12.0755 -12.0755 0 0 -12.0755z"/>
+    <path id="163" class="fil12" d="M4.5003 4.5003l0 12.0384 12.0384 0 0 -12.0384 -12.0384 0zm-0.0557 -0.0557l12.1498 0 0 12.1498 -12.1498 0 0 -12.1498z"/>
+    <path id="164" class="fil12" d="M4.4632 4.4632l0 12.1127 12.1127 0 0 -12.1127 -12.1127 0zm-0.0557 -0.0557l12.2241 0 0 12.2241 -12.2241 0 0 -12.2241z"/>
+    <path id="165" class="fil12" d="M4.426 4.426l0 12.187 12.187 0 0 -12.187 -12.187 0zm-0.0557 -0.0557l12.2984 0 0 12.2984 -12.2984 0 0 -12.2984z"/>
+    <path id="166" class="fil12" d="M4.3889 4.3889l0 12.2613 12.2613 0 0 -12.2613 -12.2613 0zm-0.0558 -0.0558l12.3728 0 0 12.3728 -12.3728 0 0 -12.3728z"/>
+    <path id="167" class="fil13" d="M4.3517 4.3517l0 12.3356 12.3356 0 0 -12.3356 -12.3356 0zm-0.0558 -0.0558l12.4471 0 0 12.4471 -12.4471 0 0 -12.4471z"/>
+    <path id="168" class="fil13" d="M4.3146 4.3146l0 12.4099 12.4099 0 0 -12.4099 -12.4099 0zm-0.0558 -0.0558l12.5214 0 0 12.5214 -12.5214 0 0 -12.5214z"/>
+    <path id="169" class="fil13" d="M4.2774 4.2774l0 12.4842 12.4842 0 0 -12.4842 -12.4842 0zm-0.0558 -0.0558l12.5957 0 0 12.5957 -12.5957 0 0 -12.5957z"/>
+    <path id="170" class="fil13" d="M4.2403 4.2403l0 12.5585 12.5585 0 0 -12.5585 -12.5585 0zm-0.0558 -0.0558l12.67 0 0 12.67 -12.67 0 0 -12.67z"/>
+    <path id="171" class="fil13" d="M4.2031 4.2031l0 12.6328 12.6328 0 0 -12.6328 -12.6328 0zm-0.0558 -0.0558l12.7443 0 0 12.7443 -12.7443 0 0 -12.7443z"/>
+    <path id="172" class="fil13" d="M4.166 4.166l0 12.7071 12.7071 0 0 -12.7071 -12.7071 0zm-0.0558 -0.0558l12.8186 0 0 12.8186 -12.8186 0 0 -12.8186z"/>
+    <path id="173" class="fil13" d="M4.1288 4.1288l0 12.7814 12.7814 0 0 -12.7814 -12.7814 0zm-0.0558 -0.0558l12.893 0 0 12.893 -12.893 0 0 -12.893z"/>
+    <path id="174" class="fil13" d="M4.0916 4.0916l0 12.8558 12.8558 0 0 -12.8558 -12.8558 0zm-0.0558 -0.0558l12.9673 0 0 12.9673 -12.9673 0 0 -12.9673z"/>
+    <path id="175" class="fil13" d="M4.0545 4.0545l0 12.9301 12.9301 0 0 -12.9301 -12.9301 0zm-0.0558 -0.0558l13.0416 0 0 13.0416 -13.0416 0 0 -13.0416z"/>
+    <path id="176" class="fil13" d="M4.0173 4.0173l0 13.0044 13.0044 0 0 -13.0044 -13.0044 0zm-0.0558 -0.0558l13.1159 0 0 13.1159 -13.1159 0 0 -13.1159z"/>
+    <path id="177" class="fil13" d="M3.9802 3.9802l0 13.0787 13.0787 0 0 -13.0787 -13.0787 0zm-0.0558 -0.0558l13.1902 0 0 13.1902 -13.1902 0 0 -13.1902z"/>
+    <path id="178" class="fil13" d="M3.943 3.943l0 13.153 13.153 0 0 -13.153 -13.153 0zm-0.0558 -0.0558l13.2645 0 0 13.2645 -13.2645 0 0 -13.2645z"/>
+    <path id="179" class="fil13" d="M3.9059 3.9059l0 13.2273 13.2273 0 0 -13.2273 -13.2273 0zm-0.0558 -0.0558l13.3388 0 0 13.3388 -13.3388 0 0 -13.3388z"/>
+    <path id="180" class="fil14" d="M3.8687 3.8687l0 13.3016 13.3016 0 0 -13.3016 -13.3016 0zm-0.0558 -0.0558l13.4131 0 0 13.4131 -13.4131 0 0 -13.4131z"/>
+    <path id="181" class="fil14" d="M3.8315 3.8315l0 13.3759 13.3759 0 0 -13.3759 -13.3759 0zm-0.0558 -0.0558l13.4875 0 0 13.4875 -13.4875 0 0 -13.4875z"/>
+    <path id="182" class="fil14" d="M3.7944 3.7944l0 13.4503 13.4503 0 0 -13.4503 -13.4503 0zm-0.0558 -0.0558l13.5618 0 0 13.5618 -13.5618 0 0 -13.5618z"/>
+    <path id="183" class="fil14" d="M3.7572 3.7572l0 13.5246 13.5246 0 0 -13.5246 -13.5246 0zm-0.0557 -0.0557l13.636 0 0 13.636 -13.636 0 0 -13.636z"/>
+    <path id="184" class="fil14" d="M3.7201 3.7201l0 13.5989 13.5989 0 0 -13.5989 -13.5989 0zm-0.0557 -0.0557l13.7103 0 0 13.7103 -13.7103 0 0 -13.7103z"/>
+    <path id="185" class="fil14" d="M3.6829 3.6829l0 13.6732 13.6732 0 0 -13.6732 -13.6732 0zm-0.0557 -0.0557l13.7846 0 0 13.7846 -13.7846 0 0 -13.7846z"/>
+    <path id="186" class="fil14" d="M3.6458 3.6458l0 13.7475 13.7475 0 0 -13.7475 -13.7475 0zm-0.0557 -0.0557l13.8589 0 0 13.8589 -13.8589 0 0 -13.8589z"/>
+    <path id="187" class="fil14" d="M3.6086 3.6086l0 13.8218 13.8218 0 0 -13.8218 -13.8218 0zm-0.0557 -0.0557l13.9333 0 0 13.9333 -13.9333 0 0 -13.9333z"/>
+    <path id="188" class="fil14" d="M3.5715 3.5715l0 13.8961 13.8961 0 0 -13.8961 -13.8961 0zm-0.0557 -0.0557l14.0076 0 0 14.0076 -14.0076 0 0 -14.0076z"/>
+    <path id="189" class="fil14" d="M3.5343 3.5343l0 13.9705 13.9705 0 0 -13.9705 -13.9705 0zm-0.0557 -0.0557l14.0819 0 0 14.0819 -14.0819 0 0 -14.0819z"/>
+    <path id="190" class="fil14" d="M3.4971 3.4971l0 14.0448 14.0448 0 0 -14.0448 -14.0448 0zm-0.0557 -0.0557l14.1562 0 0 14.1562 -14.1562 0 0 -14.1562z"/>
+    <path id="191" class="fil14" d="M3.46 3.46l0 14.1191 14.1191 0 0 -14.1191 -14.1191 0zm-0.0557 -0.0557l14.2305 0 0 14.2305 -14.2305 0 0 -14.2305z"/>
+    <path id="192" class="fil14" d="M3.4228 3.4228l0 14.1934 14.1934 0 0 -14.1934 -14.1934 0zm-0.0557 -0.0557l14.3048 0 0 14.3048 -14.3048 0 0 -14.3048z"/>
+    <path id="193" class="fil15" d="M3.3857 3.3857l0 14.2677 14.2677 0 0 -14.2677 -14.2677 0zm-0.0557 -0.0557l14.3791 0 0 14.3791 -14.3791 0 0 -14.3791z"/>
+    <path id="194" class="fil15" d="M3.3485 3.3485l0 14.342 14.342 0 0 -14.342 -14.342 0zm-0.0557 -0.0557l14.4534 0 0 14.4534 -14.4534 0 0 -14.4534z"/>
+    <path id="195" class="fil15" d="M3.3114 3.3114l0 14.4163 14.4163 0 0 -14.4163 -14.4163 0zm-0.0557 -0.0557l14.5278 0 0 14.5278 -14.5278 0 0 -14.5278z"/>
+    <path id="196" class="fil15" d="M3.2742 3.2742l0 14.4906 14.4906 0 0 -14.4906 -14.4906 0zm-0.0557 -0.0557l14.6021 0 0 14.6021 -14.6021 0 0 -14.6021z"/>
+    <path id="197" class="fil15" d="M3.237 3.237l0 14.565 14.565 0 0 -14.565 -14.565 0zm-0.0557 -0.0557l14.6764 0 0 14.6764 -14.6764 0 0 -14.6764z"/>
+    <path id="198" class="fil15" d="M3.1999 3.1999l0 14.6393 14.6393 0 0 -14.6393 -14.6393 0zm-0.0557 -0.0557l14.7507 0 0 14.7507 -14.7507 0 0 -14.7507z"/>
+    <path id="199" class="fil15" d="M3.1627 3.1627l0 14.7136 14.7136 0 0 -14.7136 -14.7136 0zm-0.0557 -0.0557l14.825 0 0 14.825 -14.825 0 0 -14.825z"/>
+    <path id="200" class="fil15" d="M3.1256 3.1256l0 14.7879 14.7879 0 0 -14.7879 -14.7879 0zm-0.0557 -0.0557l14.8993 0 0 14.8993 -14.8993 0 0 -14.8993z"/>
+    <path id="201" class="fil15" d="M3.0884 3.0884l0 14.8622 14.8622 0 0 -14.8622 -14.8622 0zm-0.0557 -0.0557l14.9736 0 0 14.9736 -14.9736 0 0 -14.9736z"/>
+    <path id="202" class="fil15" d="M3.0513 3.0513l0 14.9365 14.9365 0 0 -14.9365 -14.9365 0zm-0.0557 -0.0557l15.048 0 0 15.048 -15.048 0 0 -15.048z"/>
+    <path id="203" class="fil15" d="M3.0141 3.0141l0 15.0108 15.0108 0 0 -15.0108 -15.0108 0zm-0.0558 -0.0558l15.1223 0 0 15.1223 -15.1223 0 0 -15.1223z"/>
+    <path id="204" class="fil15" d="M2.977 2.977l0 15.0851 15.0851 0 0 -15.0851 -15.0851 0zm-0.0558 -0.0558l15.1966 0 0 15.1966 -15.1966 0 0 -15.1966z"/>
+    <path id="205" class="fil15" d="M2.9398 2.9398l0 15.1594 15.1594 0 0 -15.1594 -15.1594 0zm-0.0558 -0.0558l15.2709 0 0 15.2709 -15.2709 0 0 -15.2709z"/>
+    <path id="206" class="fil15" d="M2.9027 2.9027l0 15.2337 15.2337 0 0 -15.2337 -15.2337 0zm-0.0558 -0.0558l15.3452 0 0 15.3452 -15.3452 0 0 -15.3452z"/>
+    <path id="207" class="fil15" d="M2.8655 2.8655l0 15.308 15.308 0 0 -15.308 -15.308 0zm-0.0558 -0.0558l15.4195 0 0 15.4195 -15.4195 0 0 -15.4195z"/>
+    <path id="208" class="fil15" d="M2.8284 2.8284l0 15.3823 15.3823 0 0 -15.3823 -15.3823 0zm-0.0558 -0.0558l15.4938 0 0 15.4938 -15.4938 0 0 -15.4938z"/>
+    <path id="209" class="fil15" d="M2.7912 2.7912l0 15.4566 15.4566 0 0 -15.4566 -15.4566 0zm-0.0558 -0.0558l15.5681 0 0 15.5681 -15.5681 0 0 -15.5681z"/>
+    <path id="210" class="fil15" d="M2.754 2.754l0 15.5309 15.5309 0 0 -15.5309 -15.5309 0zm-0.0558 -0.0558l15.6425 0 0 15.6425 -15.6425 0 0 -15.6425z"/>
+    <path id="211" class="fil15" d="M2.7169 2.7169l0 15.6053 15.6053 0 0 -15.6053 -15.6053 0zm-0.0558 -0.0558l15.7168 0 0 15.7168 -15.7168 0 0 -15.7168z"/>
+    <path id="212" class="fil15" d="M2.6797 2.6797l0 15.6796 15.6796 0 0 -15.6796 -15.6796 0zm-0.0558 -0.0558l15.7911 0 0 15.7911 -15.7911 0 0 -15.7911z"/>
+    <path id="213" class="fil15" d="M2.6426 2.6426l0 15.7539 15.7539 0 0 -15.7539 -15.7539 0zm-0.0558 -0.0558l15.8654 0 0 15.8654 -15.8654 0 0 -15.8654z"/>
+    <path id="214" class="fil16" d="M2.6054 2.6054l0 15.8282 15.8282 0 0 -15.8282 -15.8282 0zm-0.0558 -0.0558l15.9397 0 0 15.9397 -15.9397 0 0 -15.9397z"/>
+    <path id="215" class="fil16" d="M2.5683 2.5683l0 15.9025 15.9025 0 0 -15.9025 -15.9025 0zm-0.0558 -0.0558l16.014 0 0 16.014 -16.014 0 0 -16.014z"/>
+    <path id="216" class="fil16" d="M2.5311 2.5311l0 15.9768 15.9768 0 0 -15.9768 -15.9768 0zm-0.0558 -0.0558l16.0883 0 0 16.0883 -16.0883 0 0 -16.0883z"/>
+    <path id="217" class="fil16" d="M2.494 2.494l0 16.0511 16.0511 0 0 -16.0511 -16.0511 0zm-0.0558 -0.0558l16.1626 0 0 16.1626 -16.1626 0 0 -16.1626z"/>
+    <path id="218" class="fil17" d="M2.4568 2.4568l0 16.1255 16.1255 0 0 -16.1255 -16.1255 0zm-0.0558 -0.0558l16.237 0 0 16.237 -16.237 0 0 -16.237z"/>
+    <path id="219" class="fil17" d="M2.4196 2.4196l0 16.1998 16.1998 0 0 -16.1998 -16.1998 0zm-0.0557 -0.0557l16.3112 0 0 16.3112 -16.3112 0 0 -16.3112z"/>
+    <path id="220" class="fil17" d="M2.3825 2.3825l0 16.2741 16.2741 0 0 -16.2741 -16.2741 0zm-0.0557 -0.0557l16.3855 0 0 16.3855 -16.3855 0 0 -16.3855z"/>
+    <path id="221" class="fil17" d="M2.3453 2.3453l0 16.3484 16.3484 0 0 -16.3484 -16.3484 0zm-0.0557 -0.0557l16.4598 0 0 16.4598 -16.4598 0 0 -16.4598z"/>
+    <path id="222" class="fil17" d="M2.3082 2.3082l0 16.4227 16.4227 0 0 -16.4227 -16.4227 0zm-0.0557 -0.0557l16.5341 0 0 16.5341 -16.5341 0 0 -16.5341z"/>
+    <path id="223" class="fil17" d="M2.271 2.271l0 16.497 16.497 0 0 -16.497 -16.497 0zm-0.0557 -0.0557l16.6084 0 0 16.6084 -16.6084 0 0 -16.6084z"/>
+    <path id="224" class="fil17" d="M2.2339 2.2339l0 16.5713 16.5713 0 0 -16.5713 -16.5713 0zm-0.0557 -0.0557l16.6828 0 0 16.6828 -16.6828 0 0 -16.6828z"/>
+    <path id="225" class="fil17" d="M2.1967 2.1967l0 16.6456 16.6456 0 0 -16.6456 -16.6456 0zm-0.0557 -0.0557l16.7571 0 0 16.7571 -16.7571 0 0 -16.7571z"/>
+    <path id="226" class="fil17" d="M2.1595 2.1595l0 16.72 16.72 0 0 -16.72 -16.72 0zm-0.0557 -0.0557l16.8314 0 0 16.8314 -16.8314 0 0 -16.8314z"/>
+    <path id="227" class="fil17" d="M2.1224 2.1224l0 16.7943 16.7943 0 0 -16.7943 -16.7943 0zm-0.0557 -0.0557l16.9057 0 0 16.9057 -16.9057 0 0 -16.9057z"/>
+    <path id="228" class="fil17" d="M2.0852 2.0852l0 16.8686 16.8686 0 0 -16.8686 -16.8686 0zm-0.0557 -0.0557l16.98 0 0 16.98 -16.98 0 0 -16.98z"/>
+    <path id="229" class="fil17" d="M2.0481 2.0481l0 16.9429 16.9429 0 0 -16.9429 -16.9429 0zm-0.0557 -0.0557l17.0543 0 0 17.0543 -17.0543 0 0 -17.0543z"/>
+    <path id="230" class="fil17" d="M2.0109 2.0109l0 17.0172 17.0172 0 0 -17.0172 -17.0172 0zm-0.0557 -0.0557l17.1286 0 0 17.1286 -17.1286 0 0 -17.1286z"/>
+    <path id="231" class="fil18" d="M1.9738 1.9738l0 17.0915 17.0915 0 0 -17.0915 -17.0915 0zm-0.0557 -0.0557l17.203 0 0 17.203 -17.203 0 0 -17.203z"/>
+    <path id="232" class="fil18" d="M1.9366 1.9366l0 17.1658 17.1658 0 0 -17.1658 -17.1658 0zm-0.0557 -0.0557l17.2773 0 0 17.2773 -17.2773 0 0 -17.2773z"/>
+    <path id="233" class="fil18" d="M1.8995 1.8995l0 17.2401 17.2401 0 0 -17.2401 -17.2401 0zm-0.0557 -0.0557l17.3516 0 0 17.3516 -17.3516 0 0 -17.3516z"/>
+    <path id="234" class="fil18" d="M1.8623 1.8623l0 17.3145 17.3145 0 0 -17.3145 -17.3145 0zm-0.0557 -0.0557l17.4259 0 0 17.4259 -17.4259 0 0 -17.4259z"/>
+    <path id="235" class="fil18" d="M1.8251 1.8251l0 17.3888 17.3888 0 0 -17.3888 -17.3888 0zm-0.0557 -0.0557l17.5002 0 0 17.5002 -17.5002 0 0 -17.5002z"/>
+    <path id="236" class="fil18" d="M1.788 1.788l0 17.4631 17.4631 0 0 -17.4631 -17.4631 0zm-0.0557 -0.0557l17.5745 0 0 17.5745 -17.5745 0 0 -17.5745z"/>
+    <path id="237" class="fil18" d="M1.7508 1.7508l0 17.5374 17.5374 0 0 -17.5374 -17.5374 0zm-0.0557 -0.0557l17.6488 0 0 17.6488 -17.6488 0 0 -17.6488z"/>
+    <path id="238" class="fil18" d="M1.7137 1.7137l0 17.6117 17.6117 0 0 -17.6117 -17.6117 0zm-0.0557 -0.0557l17.7231 0 0 17.7231 -17.7231 0 0 -17.7231z"/>
+    <path id="239" class="fil18" d="M1.6765 1.6765l0 17.6859 17.6859 0 0 -17.6859 -17.6859 0zm-0.0558 -0.0558l17.7975 0 0 17.7975 -17.7975 0 0 -17.7975z"/>
+    <path id="240" class="fil18" d="M1.6394 1.6394l0 17.7603 17.7603 0 0 -17.7603 -17.7603 0zm-0.0558 -0.0558l17.8718 0 0 17.8718 -17.8718 0 0 -17.8718z"/>
+    <path id="241" class="fil18" d="M1.6022 1.6022l0 17.8346 17.8346 0 0 -17.8346 -17.8346 0zm-0.0558 -0.0558l17.9461 0 0 17.9461 -17.9461 0 0 -17.9461z"/>
+    <path id="242" class="fil18" d="M1.5651 1.5651l0 17.9089 17.9089 0 0 -17.9089 -17.9089 0zm-0.0558 -0.0558l18.0204 0 0 18.0204 -18.0204 0 0 -18.0204z"/>
+    <path id="243" class="fil18" d="M1.5279 1.5279l0 17.9832 17.9832 0 0 -17.9832 -17.9832 0zm-0.0558 -0.0558l18.0947 0 0 18.0947 -18.0947 0 0 -18.0947z"/>
+    <path id="244" class="fil1" d="M1.4908 1.4908l0 18.0575 18.0575 0 0 -18.0575 -18.0575 0zm-0.0558 -0.0558l18.169 0 0 18.169 -18.169 0 0 -18.169z"/>
+    <path id="245" class="fil1" d="M1.4536 1.4536l0 18.1318 18.1318 0 0 -18.1318 -18.1318 0zm-0.0558 -0.0558l18.2433 0 0 18.2433 -18.2433 0 0 -18.2433z"/>
+    <path id="246" class="fil1" d="M1.4165 1.4165l0 18.2061 18.2061 0 0 -18.2061 -18.2061 0zm-0.0558 -0.0558l18.3176 0 0 18.3176 -18.3176 0 0 -18.3176z"/>
+    <path id="247" class="fil1" d="M1.3793 1.3793l0 18.2804 18.2804 0 0 -18.2804 -18.2804 0zm-0.0558 -0.0558l18.392 0 0 18.392 -18.392 0 0 -18.392z"/>
+    <path id="248" class="fil1" d="M1.3421 1.3421l0 18.3548 18.3548 0 0 -18.3548 -18.3548 0zm-0.0558 -0.0558l18.4663 0 0 18.4663 -18.4663 0 0 -18.4663z"/>
+    <path id="249" class="fil1" d="M1.305 1.305l0 18.4291 18.4291 0 0 -18.4291 -18.4291 0zm-0.0558 -0.0558l18.5406 0 0 18.5406 -18.5406 0 0 -18.5406z"/>
+    <path id="250" class="fil1" d="M1.2678 1.2678l0 18.5034 18.5034 0 0 -18.5034 -18.5034 0zm-0.0558 -0.0558l18.6149 0 0 18.6149 -18.6149 0 0 -18.6149z"/>
+    <path id="251" class="fil1" d="M1.2307 1.2307l0 18.5777 18.5777 0 0 -18.5777 -18.5777 0zm-0.0558 -0.0558l18.6892 0 0 18.6892 -18.6892 0 0 -18.6892z"/>
+    <path id="252" class="fil1" d="M1.1935 1.1935l0 18.652 18.652 0 0 -18.652 -18.652 0zm-0.0558 -0.0558l18.7635 0 0 18.7635 -18.7635 0 0 -18.7635z"/>
+    <path id="253" class="fil1" d="M1.1564 1.1564l0 18.7263 18.7263 0 0 -18.7263 -18.7263 0zm-0.0558 -0.0558l18.8378 0 0 18.8378 -18.8378 0 0 -18.8378z"/>
+    <path id="254" class="fil1" d="M1.1192 1.1192l0 18.8006 18.8006 0 0 -18.8006 -18.8006 0zm-0.0558 -0.0558l18.9121 0 0 18.9121 -18.9121 0 0 -18.9121z"/>
+    <path id="255" class="fil1" d="M1.082 1.082l0 18.875 18.875 0 0 -18.875 -18.875 0zm-0.0558 -0.0558l18.9865 0 0 18.9865 -18.9865 0 0 -18.9865z"/>
+    <path id="256" class="fil1" d="M1.0449 1.0449l0 18.9493 18.9493 0 0 -18.9493 -18.9493 0zm-0.0372 -0.0372l19.0236 0 0 19.0236 -19.0236 0 0 -19.0236z"/>
+   </g>
+  </g>
+  <g>
+   <g style="clip-path:url(#id1)">
+    <polygon class="fil19" points="5.6669,5.1737 15.3721,5.1737 15.3721,15.8654 5.6669,15.8654 "/>
+    <polygon id="1" class="fil20" points="10.491,10.4882 10.5479,10.4882 10.5479,10.5509 10.491,10.5509 "/>
+    <path id="2" class="fil21" d="M10.5005 10.4986l0 0.0418 0.0379 0 0 -0.0418 -0.0379 0zm-0.0284 -0.0313l0.0948 0 0 0.1044 -0.0948 0 0 -0.1044z"/>
+    <path id="3" class="fil22" d="M10.4816 10.4777l0 0.0836 0.0758 0 0 -0.0836 -0.0758 0zm-0.0284 -0.0313l0.1327 0 0 0.1461 -0.1327 0 0 -0.1461z"/>
+    <path id="4" class="fil23" d="M10.4626 10.4569l0 0.1253 0.1137 0 0 -0.1253 -0.1137 0zm-0.0284 -0.0313l0.1706 0 0 0.1879 -0.1706 0 0 -0.1879z"/>
+    <path id="5" class="fil24" d="M10.4437 10.436l0 0.167 0.1516 0 0 -0.167 -0.1516 0zm-0.0284 -0.0313l0.2085 0 0 0.2297 -0.2085 0 0 -0.2297z"/>
+    <path id="6" class="fil25" d="M10.4247 10.4151l0 0.2088 0.1895 0 0 -0.2088 -0.1895 0zm-0.0284 -0.0313l0.2464 0 0 0.2715 -0.2464 0 0 -0.2715z"/>
+    <path id="7" class="fil26" d="M10.4058 10.3942l0 0.2506 0.2274 0 0 -0.2506 -0.2274 0zm-0.0284 -0.0313l0.2843 0 0 0.3133 -0.2843 0 0 -0.3133z"/>
+    <path id="8" class="fil27" d="M10.3868 10.3733l0 0.2924 0.2654 0 0 -0.2924 -0.2654 0zm-0.0284 -0.0313l0.3222 0 0 0.355 -0.3222 0 0 -0.355z"/>
+    <path id="9" class="fil28" d="M10.3679 10.3524l0 0.3341 0.3033 0 0 -0.3341 -0.3033 0zm-0.0284 -0.0313l0.3601 0 0 0.3967 -0.3601 0 0 -0.3967z"/>
+    <path id="10" class="fil29" d="M10.3489 10.3316l0 0.3758 0.3412 0 0 -0.3758 -0.3412 0zm-0.0284 -0.0313l0.3981 0 0 0.4385 -0.3981 0 0 -0.4385z"/>
+    <path id="11" class="fil30" d="M10.3299 10.3107l0 0.4176 0.3791 0 0 -0.4176 -0.3791 0zm-0.0284 -0.0313l0.436 0 0 0.4803 -0.436 0 0 -0.4803z"/>
+    <path id="12" class="fil31" d="M10.311 10.2898l0 0.4594 0.417 0 0 -0.4594 -0.417 0zm-0.0284 -0.0313l0.4739 0 0 0.5221 -0.4739 0 0 -0.5221z"/>
+    <path id="13" class="fil32" d="M10.292 10.2689l0 0.5012 0.4549 0 0 -0.5012 -0.4549 0zm-0.0284 -0.0313l0.5118 0 0 0.5638 -0.5118 0 0 -0.5638z"/>
+    <path id="14" class="fil33" d="M10.2731 10.248l0 0.543 0.4928 0 0 -0.543 -0.4928 0zm-0.0284 -0.0313l0.5497 0 0 0.6056 -0.5497 0 0 -0.6056z"/>
+    <path id="15" class="fil34" d="M10.2541 10.2272l0 0.5847 0.5307 0 0 -0.5847 -0.5307 0zm-0.0284 -0.0313l0.5876 0 0 0.6473 -0.5876 0 0 -0.6473z"/>
+    <path id="16" class="fil35" d="M10.2352 10.2063l0 0.6264 0.5687 0 0 -0.6264 -0.5687 0zm-0.0284 -0.0313l0.6255 0 0 0.6891 -0.6255 0 0 -0.6891z"/>
+    <path id="17" class="fil36" d="M10.2162 10.1854l0 0.6682 0.6066 0 0 -0.6682 -0.6066 0zm-0.0284 -0.0313l0.6634 0 0 0.7309 -0.6634 0 0 -0.7309z"/>
+    <path id="18" class="fil37" d="M10.1972 10.1645l0 0.71 0.6445 0 0 -0.71 -0.6445 0zm-0.0284 -0.0313l0.7014 0 0 0.7727 -0.7014 0 0 -0.7727z"/>
+    <path id="19" class="fil38" d="M10.1783 10.1436l0 0.7518 0.6824 0 0 -0.7518 -0.6824 0zm-0.0284 -0.0313l0.7393 0 0 0.8144 -0.7393 0 0 -0.8144z"/>
+    <path id="20" class="fil39" d="M10.1593 10.1227l0 0.7935 0.7203 0 0 -0.7935 -0.7203 0zm-0.0284 -0.0313l0.7772 0 0 0.8561 -0.7772 0 0 -0.8561z"/>
+    <path id="21" class="fil40" d="M10.1404 10.1019l0 0.8353 0.7582 0 0 -0.8353 -0.7582 0zm-0.0284 -0.0313l0.8151 0 0 0.8979 -0.8151 0 0 -0.8979z"/>
+    <path id="22" class="fil41" d="M10.1214 10.081l0 0.877 0.7961 0 0 -0.877 -0.7961 0zm-0.0284 -0.0313l0.853 0 0 0.9397 -0.853 0 0 -0.9397z"/>
+    <path id="23" class="fil41" d="M10.1025 10.0601l0 0.9188 0.834 0 0 -0.9188 -0.834 0zm-0.0284 -0.0313l0.8909 0 0 0.9815 -0.8909 0 0 -0.9815z"/>
+    <path id="24" class="fil42" d="M10.0835 10.0392l0 0.9606 0.872 0 0 -0.9606 -0.872 0zm-0.0284 -0.0313l0.9288 0 0 1.0232 -0.9288 0 0 -1.0232z"/>
+    <path id="25" class="fil43" d="M10.0646 10.0183l0 1.0024 0.9099 0 0 -1.0024 -0.9099 0zm-0.0284 -0.0313l0.9667 0 0 1.065 -0.9667 0 0 -1.065z"/>
+    <path id="26" class="fil43" d="M10.0456 9.9975l0 1.0441 0.9478 0 0 -1.0441 -0.9478 0zm-0.0284 -0.0313l1.0046 0 0 1.1067 -1.0046 0 0 -1.1067z"/>
+    <path id="27" class="fil44" d="M10.0266 9.9766l0 1.0859 0.9857 0 0 -1.0859 -0.9857 0zm-0.0284 -0.0313l1.0426 0 0 1.1485 -1.0426 0 0 -1.1485z"/>
+    <path id="28" class="fil45" d="M10.0077 9.9557l0 1.1276 1.0236 0 0 -1.1276 -1.0236 0zm-0.0284 -0.0313l1.0805 0 0 1.1903 -1.0805 0 0 -1.1903z"/>
+    <path id="29" class="fil46" d="M9.9887 9.9348l0 1.1694 1.0615 0 0 -1.1694 -1.0615 0zm-0.0284 -0.0313l1.1184 0 0 1.2321 -1.1184 0 0 -1.2321z"/>
+    <path id="30" class="fil47" d="M9.9698 9.9139l0 1.2112 1.0994 0 0 -1.2112 -1.0994 0zm-0.0284 -0.0313l1.1563 0 0 1.2738 -1.1563 0 0 -1.2738z"/>
+    <path id="31" class="fil48" d="M9.9508 9.893l0 1.253 1.1373 0 0 -1.253 -1.1373 0zm-0.0284 -0.0313l1.1942 0 0 1.3156 -1.1942 0 0 -1.3156z"/>
+    <path id="32" class="fil48" d="M9.9319 9.8722l0 1.2947 1.1752 0 0 -1.2947 -1.1752 0zm-0.0284 -0.0313l1.2321 0 0 1.3573 -1.2321 0 0 -1.3573z"/>
+    <path id="33" class="fil49" d="M9.9129 9.8513l0 1.3365 1.2131 0 0 -1.3365 -1.2131 0zm-0.0284 -0.0313l1.27 0 0 1.3991 -1.27 0 0 -1.3991z"/>
+    <path id="34" class="fil50" d="M9.894 9.8304l0 1.3782 1.251 0 0 -1.3782 -1.251 0zm-0.0284 -0.0313l1.3079 0 0 1.4409 -1.3079 0 0 -1.4409z"/>
+    <path id="35" class="fil50" d="M9.875 9.8095l0 1.42 1.289 0 0 -1.42 -1.289 0zm-0.0284 -0.0313l1.3458 0 0 1.4827 -1.3458 0 0 -1.4827z"/>
+    <path id="36" class="fil51" d="M9.856 9.7886l0 1.4618 1.3269 0 0 -1.4618 -1.3269 0zm-0.0284 -0.0313l1.3837 0 0 1.5244 -1.3837 0 0 -1.5244z"/>
+    <path id="37" class="fil52" d="M9.8371 9.7678l0 1.5035 1.3648 0 0 -1.5035 -1.3648 0zm-0.0284 -0.0313l1.4216 0 0 1.5662 -1.4216 0 0 -1.5662z"/>
+    <path id="38" class="fil53" d="M9.8181 9.7469l0 1.5453 1.4027 0 0 -1.5453 -1.4027 0zm-0.0284 -0.0313l1.4595 0 0 1.6079 -1.4595 0 0 -1.6079z"/>
+    <path id="39" class="fil54" d="M9.7992 9.726l0 1.587 1.4406 0 0 -1.587 -1.4406 0zm-0.0284 -0.0313l1.4975 0 0 1.6497 -1.4975 0 0 -1.6497z"/>
+    <path id="40" class="fil55" d="M9.7802 9.7051l0 1.6288 1.4785 0 0 -1.6288 -1.4785 0zm-0.0284 -0.0313l1.5354 0 0 1.6915 -1.5354 0 0 -1.6915z"/>
+    <path id="41" class="fil55" d="M9.7613 9.6842l0 1.6706 1.5164 0 0 -1.6706 -1.5164 0zm-0.0284 -0.0313l1.5733 0 0 1.7332 -1.5733 0 0 -1.7332z"/>
+    <path id="42" class="fil56" d="M9.7423 9.6633l0 1.7124 1.5543 0 0 -1.7124 -1.5543 0zm-0.0284 -0.0313l1.6112 0 0 1.775 -1.6112 0 0 -1.775z"/>
+    <path id="43" class="fil57" d="M9.7234 9.6425l0 1.7541 1.5922 0 0 -1.7541 -1.5922 0zm-0.0284 -0.0313l1.6491 0 0 1.8168 -1.6491 0 0 -1.8168z"/>
+    <path id="44" class="fil58" d="M9.7044 9.6216l0 1.7959 1.6302 0 0 -1.7959 -1.6302 0zm-0.0284 -0.0313l1.687 0 0 1.8585 -1.687 0 0 -1.8585z"/>
+    <path id="45" class="fil59" d="M9.6855 9.6007l0 1.8376 1.6681 0 0 -1.8376 -1.6681 0zm-0.0284 -0.0313l1.7249 0 0 1.9003 -1.7249 0 0 -1.9003z"/>
+    <path id="46" class="fil59" d="M9.6665 9.5798l0 1.8794 1.706 0 0 -1.8794 -1.706 0zm-0.0284 -0.0313l1.7628 0 0 1.9421 -1.7628 0 0 -1.9421z"/>
+    <path id="47" class="fil60" d="M9.6476 9.5589l0 1.9212 1.7439 0 0 -1.9212 -1.7439 0zm-0.0284 -0.0313l1.8008 0 0 1.9838 -1.8008 0 0 -1.9838z"/>
+    <path id="48" class="fil61" d="M9.6286 9.5381l0 1.9629 1.7818 0 0 -1.9629 -1.7818 0zm-0.0284 -0.0313l1.8387 0 0 2.0256 -1.8387 0 0 -2.0256z"/>
+    <path id="49" class="fil62" d="M9.6096 9.5172l0 2.0047 1.8197 0 0 -2.0047 -1.8197 0zm-0.0284 -0.0313l1.8766 0 0 2.0673 -1.8766 0 0 -2.0673z"/>
+    <path id="50" class="fil63" d="M9.5907 9.4963l0 2.0465 1.8576 0 0 -2.0465 -1.8576 0zm-0.0284 -0.0313l1.9145 0 0 2.1091 -1.9145 0 0 -2.1091z"/>
+    <path id="51" class="fil64" d="M9.5717 9.4754l0 2.0882 1.8955 0 0 -2.0882 -1.8955 0zm-0.0284 -0.0313l1.9524 0 0 2.1509 -1.9524 0 0 -2.1509z"/>
+    <path id="52" class="fil64" d="M9.5528 9.4545l0 2.13 1.9335 0 0 -2.13 -1.9335 0zm-0.0284 -0.0313l1.9903 0 0 2.1926 -1.9903 0 0 -2.1926z"/>
+    <path id="53" class="fil65" d="M9.5338 9.4336l0 2.1718 1.9714 0 0 -2.1718 -1.9714 0zm-0.0284 -0.0313l2.0282 0 0 2.2344 -2.0282 0 0 -2.2344z"/>
+    <path id="54" class="fil66" d="M9.5149 9.4128l0 2.2135 2.0093 0 0 -2.2135 -2.0093 0zm-0.0284 -0.0313l2.0661 0 0 2.2762 -2.0661 0 0 -2.2762z"/>
+    <path id="55" class="fil67" d="M9.4959 9.3919l0 2.2553 2.0472 0 0 -2.2553 -2.0472 0zm-0.0284 -0.0313l2.1041 0 0 2.3179 -2.1041 0 0 -2.3179z"/>
+    <path id="56" class="fil68" d="M9.477 9.371l0 2.2971 2.0851 0 0 -2.2971 -2.0851 0zm-0.0284 -0.0313l2.142 0 0 2.3597 -2.142 0 0 -2.3597z"/>
+    <path id="57" class="fil69" d="M9.458 9.3501l0 2.3388 2.123 0 0 -2.3388 -2.123 0zm-0.0284 -0.0313l2.1799 0 0 2.4015 -2.1799 0 0 -2.4015z"/>
+    <path id="58" class="fil70" d="M9.4391 9.3292l0 2.3806 2.1609 0 0 -2.3806 -2.1609 0zm-0.0284 -0.0313l2.2178 0 0 2.4432 -2.2178 0 0 -2.4432z"/>
+    <path id="59" class="fil71" d="M9.4201 9.3083l0 2.4223 2.1988 0 0 -2.4223 -2.1988 0zm-0.0284 -0.0313l2.2557 0 0 2.485 -2.2557 0 0 -2.485z"/>
+    <path id="60" class="fil72" d="M9.4011 9.2875l0 2.4641 2.2367 0 0 -2.4641 -2.2367 0zm-0.0284 -0.0313l2.2936 0 0 2.5268 -2.2936 0 0 -2.5268z"/>
+    <path id="61" class="fil73" d="M9.3822 9.2666l0 2.5059 2.2746 0 0 -2.5059 -2.2746 0zm-0.0284 -0.0313l2.3315 0 0 2.5685 -2.3315 0 0 -2.5685z"/>
+    <path id="62" class="fil74" d="M9.3632 9.2457l0 2.5476 2.3126 0 0 -2.5476 -2.3126 0zm-0.0284 -0.0313l2.3694 0 0 2.6103 -2.3694 0 0 -2.6103z"/>
+    <path id="63" class="fil75" d="M9.3443 9.2248l0 2.5894 2.3505 0 0 -2.5894 -2.3505 0zm-0.0284 -0.0313l2.4073 0 0 2.652 -2.4073 0 0 -2.652z"/>
+    <path id="64" class="fil76" d="M9.3253 9.2039l0 2.6312 2.3884 0 0 -2.6312 -2.3884 0zm-0.0284 -0.0313l2.4452 0 0 2.6938 -2.4452 0 0 -2.6938z"/>
+    <path id="65" class="fil77" d="M9.3064 9.1831l0 2.6729 2.4263 0 0 -2.6729 -2.4263 0zm-0.0284 -0.0313l2.4831 0 0 2.7356 -2.4831 0 0 -2.7356z"/>
+    <path id="66" class="fil78" d="M9.2874 9.1622l0 2.7147 2.4642 0 0 -2.7147 -2.4642 0zm-0.0284 -0.0313l2.521 0 0 2.7774 -2.521 0 0 -2.7774z"/>
+    <path id="67" class="fil79" d="M9.2685 9.1413l0 2.7565 2.5021 0 0 -2.7565 -2.5021 0zm-0.0284 -0.0313l2.559 0 0 2.8191 -2.559 0 0 -2.8191z"/>
+    <path id="68" class="fil80" d="M9.2495 9.1204l0 2.7982 2.54 0 0 -2.7982 -2.54 0zm-0.0284 -0.0313l2.5969 0 0 2.8609 -2.5969 0 0 -2.8609z"/>
+    <path id="69" class="fil81" d="M9.2305 9.0995l0 2.84 2.5779 0 0 -2.84 -2.5779 0zm-0.0284 -0.0313l2.6348 0 0 2.9026 -2.6348 0 0 -2.9026z"/>
+    <path id="70" class="fil81" d="M9.2116 9.0786l0 2.8817 2.6158 0 0 -2.8817 -2.6158 0zm-0.0284 -0.0313l2.6727 0 0 2.9444 -2.6727 0 0 -2.9444z"/>
+    <path id="71" class="fil82" d="M9.1926 9.0578l0 2.9235 2.6537 0 0 -2.9235 -2.6537 0zm-0.0284 -0.0313l2.7106 0 0 2.9862 -2.7106 0 0 -2.9862z"/>
+    <path id="72" class="fil83" d="M9.1737 9.0369l0 2.9653 2.6916 0 0 -2.9653 -2.6916 0zm-0.0284 -0.0313l2.7485 0 0 3.028 -2.7485 0 0 -3.028z"/>
+    <path id="73" class="fil84" d="M9.1547 9.016l0 3.0071 2.7296 0 0 -3.0071 -2.7296 0zm-0.0284 -0.0313l2.7864 0 0 3.0697 -2.7864 0 0 -3.0697z"/>
+    <path id="74" class="fil85" d="M9.1358 8.9951l0 3.0488 2.7675 0 0 -3.0488 -2.7675 0zm-0.0284 -0.0313l2.8243 0 0 3.1114 -2.8243 0 0 -3.1114z"/>
+    <path id="75" class="fil86" d="M9.1168 8.9742l0 3.0906 2.8054 0 0 -3.0906 -2.8054 0zm-0.0284 -0.0313l2.8622 0 0 3.1532 -2.8622 0 0 -3.1532z"/>
+    <path id="76" class="fil87" d="M9.0978 8.9534l0 3.1323 2.8433 0 0 -3.1323 -2.8433 0zm-0.0284 -0.0313l2.9002 0 0 3.195 -2.9002 0 0 -3.195z"/>
+    <path id="77" class="fil88" d="M9.0789 8.9325l0 3.1741 2.8812 0 0 -3.1741 -2.8812 0zm-0.0284 -0.0313l2.9381 0 0 3.2368 -2.9381 0 0 -3.2368z"/>
+    <path id="78" class="fil89" d="M9.0599 8.9116l0 3.2159 2.9191 0 0 -3.2159 -2.9191 0zm-0.0284 -0.0313l2.976 0 0 3.2785 -2.976 0 0 -3.2785z"/>
+    <path id="79" class="fil90" d="M9.041 8.8907l0 3.2577 2.957 0 0 -3.2577 -2.957 0zm-0.0284 -0.0313l3.0139 0 0 3.3203 -3.0139 0 0 -3.3203z"/>
+    <path id="80" class="fil91" d="M9.022 8.8698l0 3.2994 2.9949 0 0 -3.2994 -2.9949 0zm-0.0284 -0.0313l3.0518 0 0 3.362 -3.0518 0 0 -3.362z"/>
+    <path id="81" class="fil92" d="M9.0031 8.8489l0 3.3412 3.0329 0 0 -3.3412 -3.0329 0zm-0.0284 -0.0313l3.0897 0 0 3.4038 -3.0897 0 0 -3.4038z"/>
+    <path id="82" class="fil93" d="M8.9841 8.8281l0 3.3829 3.0708 0 0 -3.3829 -3.0708 0zm-0.0284 -0.0313l3.1276 0 0 3.4456 -3.1276 0 0 -3.4456z"/>
+    <path id="83" class="fil94" d="M8.9652 8.8072l0 3.4247 3.1087 0 0 -3.4247 -3.1087 0zm-0.0284 -0.0313l3.1655 0 0 3.4874 -3.1655 0 0 -3.4874z"/>
+    <path id="84" class="fil95" d="M8.9462 8.7863l0 3.4665 3.1466 0 0 -3.4665 -3.1466 0zm-0.0284 -0.0313l3.2035 0 0 3.5291 -3.2035 0 0 -3.5291z"/>
+    <path id="85" class="fil96" d="M8.9272 8.7654l0 3.5083 3.1845 0 0 -3.5083 -3.1845 0zm-0.0284 -0.0313l3.2414 0 0 3.5709 -3.2414 0 0 -3.5709z"/>
+    <path id="86" class="fil97" d="M8.9083 8.7445l0 3.55 3.2224 0 0 -3.55 -3.2224 0zm-0.0284 -0.0313l3.2793 0 0 3.6126 -3.2793 0 0 -3.6126z"/>
+    <path id="87" class="fil98" d="M8.8893 8.7237l0 3.5917 3.2603 0 0 -3.5917 -3.2603 0zm-0.0284 -0.0313l3.3172 0 0 3.6544 -3.3172 0 0 -3.6544z"/>
+    <path id="88" class="fil99" d="M8.8704 8.7028l0 3.6335 3.2982 0 0 -3.6335 -3.2982 0zm-0.0284 -0.0313l3.3551 0 0 3.6962 -3.3551 0 0 -3.6962z"/>
+    <path id="89" class="fil100" d="M8.8514 8.6819l0 3.6753 3.3362 0 0 -3.6753 -3.3362 0zm-0.0284 -0.0313l3.393 0 0 3.738 -3.393 0 0 -3.738z"/>
+    <path id="90" class="fil101" d="M8.8325 8.661l0 3.7171 3.3741 0 0 -3.7171 -3.3741 0zm-0.0284 -0.0313l3.4309 0 0 3.7797 -3.4309 0 0 -3.7797z"/>
+    <path id="91" class="fil102" d="M8.8135 8.6401l0 3.7589 3.412 0 0 -3.7589 -3.412 0zm-0.0284 -0.0313l3.4688 0 0 3.8214 -3.4688 0 0 -3.8214z"/>
+    <path id="92" class="fil103" d="M8.7945 8.6192l0 3.8006 3.4499 0 0 -3.8006 -3.4499 0zm-0.0284 -0.0313l3.5067 0 0 3.8632 -3.5067 0 0 -3.8632z"/>
+    <path id="93" class="fil104" d="M8.7756 8.5984l0 3.8423 3.4878 0 0 -3.8423 -3.4878 0zm-0.0284 -0.0313l3.5446 0 0 3.905 -3.5446 0 0 -3.905z"/>
+    <path id="94" class="fil105" d="M8.7566 8.5775l0 3.8841 3.5257 0 0 -3.8841 -3.5257 0zm-0.0284 -0.0313l3.5826 0 0 3.9468 -3.5826 0 0 -3.9468z"/>
+    <path id="95" class="fil106" d="M8.7377 8.5566l0 3.9259 3.5636 0 0 -3.9259 -3.5636 0zm-0.0284 -0.0313l3.6205 0 0 3.9886 -3.6205 0 0 -3.9886z"/>
+    <path id="96" class="fil107" d="M8.7187 8.5357l0 3.9677 3.6015 0 0 -3.9677 -3.6015 0zm-0.0284 -0.0313l3.6584 0 0 4.0303 -3.6584 0 0 -4.0303z"/>
+    <path id="97" class="fil108" d="M8.6998 8.5148l0 4.0094 3.6394 0 0 -4.0094 -3.6394 0zm-0.0284 -0.0313l3.6963 0 0 4.072 -3.6963 0 0 -4.072z"/>
+    <path id="98" class="fil109" d="M8.6808 8.494l0 4.0511 3.6773 0 0 -4.0511 -3.6773 0zm-0.0284 -0.0313l3.7342 0 0 4.1138 -3.7342 0 0 -4.1138z"/>
+    <path id="99" class="fil110" d="M8.6619 8.4731l0 4.0929 3.7152 0 0 -4.0929 -3.7152 0zm-0.0284 -0.0313l3.7721 0 0 4.1556 -3.7721 0 0 -4.1556z"/>
+    <path id="100" class="fil111" d="M8.6429 8.4522l0 4.1347 3.7531 0 0 -4.1347 -3.7531 0zm-0.0284 -0.0313l3.81 0 0 4.1974 -3.81 0 0 -4.1974z"/>
+    <path id="101" class="fil111" d="M8.624 8.4313l0 4.1765 3.791 0 0 -4.1765 -3.791 0zm-0.0284 -0.0313l3.8479 0 0 4.2391 -3.8479 0 0 -4.2391z"/>
+    <path id="102" class="fil112" d="M8.605 8.4104l0 4.2183 3.829 0 0 -4.2183 -3.829 0zm-0.0284 -0.0313l3.8858 0 0 4.2808 -3.8858 0 0 -4.2808z"/>
+    <path id="103" class="fil113" d="M8.586 8.3895l0 4.26 3.8669 0 0 -4.26 -3.8669 0zm-0.0284 -0.0313l3.9237 0 0 4.3226 -3.9237 0 0 -4.3226z"/>
+    <path id="104" class="fil114" d="M8.5671 8.3687l0 4.3017 3.9048 0 0 -4.3017 -3.9048 0zm-0.0284 -0.0313l3.9617 0 0 4.3644 -3.9617 0 0 -4.3644z"/>
+    <path id="105" class="fil115" d="M8.5481 8.3478l0 4.3435 3.9427 0 0 -4.3435 -3.9427 0zm-0.0284 -0.0313l3.9996 0 0 4.4062 -3.9996 0 0 -4.4062z"/>
+    <path id="106" class="fil116" d="M8.5292 8.3269l0 4.3853 3.9806 0 0 -4.3853 -3.9806 0zm-0.0284 -0.0313l4.0375 0 0 4.448 -4.0375 0 0 -4.448z"/>
+    <path id="107" class="fil116" d="M8.5102 8.306l0 4.4271 4.0185 0 0 -4.4271 -4.0185 0zm-0.0284 -0.0313l4.0754 0 0 4.4897 -4.0754 0 0 -4.4897z"/>
+    <path id="108" class="fil117" d="M8.4913 8.2851l0 4.4688 4.0564 0 0 -4.4688 -4.0564 0zm-0.0284 -0.0313l4.1133 0 0 4.5314 -4.1133 0 0 -4.5314z"/>
+    <path id="109" class="fil118" d="M8.4723 8.2642l0 4.5105 4.0943 0 0 -4.5105 -4.0943 0zm-0.0284 -0.0313l4.1512 0 0 4.5732 -4.1512 0 0 -4.5732z"/>
+    <path id="110" class="fil119" d="M8.4534 8.2434l0 4.5523 4.1323 0 0 -4.5523 -4.1323 0zm-0.0284 -0.0313l4.1891 0 0 4.615 -4.1891 0 0 -4.615z"/>
+    <path id="111" class="fil120" d="M8.4344 8.2225l0 4.5941 4.1702 0 0 -4.5941 -4.1702 0zm-0.0284 -0.0313l4.227 0 0 4.6568 -4.227 0 0 -4.6568z"/>
+    <path id="112" class="fil121" d="M8.4155 8.2016l0 4.6359 4.2081 0 0 -4.6359 -4.2081 0zm-0.0284 -0.0313l4.265 0 0 4.6985 -4.265 0 0 -4.6985z"/>
+    <path id="113" class="fil122" d="M8.3965 8.1807l0 4.6777 4.246 0 0 -4.6777 -4.246 0zm-0.0284 -0.0313l4.3029 0 0 4.7403 -4.3029 0 0 -4.7403z"/>
+    <path id="114" class="fil123" d="M8.3776 8.1598l0 4.7194 4.2839 0 0 -4.7194 -4.2839 0zm-0.0284 -0.0313l4.3408 0 0 4.782 -4.3408 0 0 -4.782z"/>
+    <path id="115" class="fil124" d="M8.3586 8.139l0 4.7611 4.3218 0 0 -4.7611 -4.3218 0zm-0.0284 -0.0313l4.3787 0 0 4.8238 -4.3787 0 0 -4.8238z"/>
+    <path id="116" class="fil124" d="M8.3396 8.1181l0 4.8029 4.3597 0 0 -4.8029 -4.3597 0zm-0.0284 -0.0313l4.4166 0 0 4.8656 -4.4166 0 0 -4.8656z"/>
+    <path id="117" class="fil125" d="M8.3207 8.0972l0 4.8447 4.3976 0 0 -4.8447 -4.3976 0zm-0.0284 -0.0313l4.4545 0 0 4.9074 -4.4545 0 0 -4.9074z"/>
+    <path id="118" class="fil126" d="M8.3017 8.0763l0 4.8865 4.4356 0 0 -4.8865 -4.4356 0zm-0.0284 -0.0313l4.4924 0 0 4.9491 -4.4924 0 0 -4.9491z"/>
+    <path id="119" class="fil127" d="M8.2828 8.0554l0 4.9282 4.4735 0 0 -4.9282 -4.4735 0zm-0.0284 -0.0313l4.5303 0 0 4.9908 -4.5303 0 0 -4.9908z"/>
+    <path id="120" class="fil128" d="M8.2638 8.0345l0 4.97 4.5114 0 0 -4.97 -4.5114 0zm-0.0284 -0.0313l4.5682 0 0 5.0326 -4.5682 0 0 -5.0326z"/>
+    <path id="121" class="fil129" d="M8.2449 8.0137l0 5.0117 4.5493 0 0 -5.0117 -4.5493 0zm-0.0284 -0.0313l4.6062 0 0 5.0744 -4.6062 0 0 -5.0744z"/>
+    <path id="122" class="fil130" d="M8.2259 7.9928l0 5.0535 4.5872 0 0 -5.0535 -4.5872 0zm-0.0284 -0.0313l4.6441 0 0 5.1162 -4.6441 0 0 -5.1162z"/>
+    <path id="123" class="fil131" d="M8.207 7.9719l0 5.0953 4.6251 0 0 -5.0953 -4.6251 0zm-0.0284 -0.0313l4.682 0 0 5.1579 -4.682 0 0 -5.1579z"/>
+    <path id="124" class="fil132" d="M8.188 7.951l0 5.1371 4.663 0 0 -5.1371 -4.663 0zm-0.0284 -0.0313l4.7199 0 0 5.1997 -4.7199 0 0 -5.1997z"/>
+    <path id="125" class="fil133" d="M8.169 7.9301l0 5.1788 4.7009 0 0 -5.1788 -4.7009 0zm-0.0284 -0.0313l4.7578 0 0 5.2414 -4.7578 0 0 -5.2414z"/>
+    <path id="126" class="fil134" d="M8.1501 7.9093l0 5.2206 4.7388 0 0 -5.2206 -4.7388 0zm-0.0284 -0.0313l4.7957 0 0 5.2832 -4.7957 0 0 -5.2832z"/>
+    <path id="127" class="fil135" d="M8.1311 7.8884l0 5.2623 4.7767 0 0 -5.2623 -4.7767 0zm-0.0284 -0.0313l4.8336 0 0 5.325 -4.8336 0 0 -5.325z"/>
+    <path id="128" class="fil136" d="M8.1122 7.8675l0 5.3041 4.8146 0 0 -5.3041 -4.8146 0zm-0.0284 -0.0313l4.8715 0 0 5.3668 -4.8715 0 0 -5.3668z"/>
+    <path id="129" class="fil137" d="M8.0932 7.8466l0 5.3459 4.8526 0 0 -5.3459 -4.8526 0zm-0.0284 -0.0313l4.9094 0 0 5.4085 -4.9094 0 0 -5.4085z"/>
+    <path id="130" class="fil138" d="M8.0743 7.8257l0 5.3876 4.8905 0 0 -5.3876 -4.8905 0zm-0.0284 -0.0313l4.9473 0 0 5.4503 -4.9473 0 0 -5.4503z"/>
+    <path id="131" class="fil139" d="M8.0553 7.8048l0 5.4294 4.9284 0 0 -5.4294 -4.9284 0zm-0.0284 -0.0313l4.9852 0 0 5.492 -4.9852 0 0 -5.492z"/>
+    <path id="132" class="fil140" d="M8.0364 7.784l0 5.4712 4.9663 0 0 -5.4712 -4.9663 0zm-0.0284 -0.0313l5.0231 0 0 5.5338 -5.0231 0 0 -5.5338z"/>
+    <path id="133" class="fil141" d="M8.0174 7.7631l0 5.5129 5.0042 0 0 -5.5129 -5.0042 0zm-0.0284 -0.0313l5.0611 0 0 5.5756 -5.0611 0 0 -5.5756z"/>
+    <path id="134" class="fil142" d="M7.9984 7.7422l0 5.5547 5.0421 0 0 -5.5547 -5.0421 0zm-0.0284 -0.0313l5.099 0 0 5.6173 -5.099 0 0 -5.6173z"/>
+    <path id="135" class="fil143" d="M7.9795 7.7213l0 5.5965 5.08 0 0 -5.5965 -5.08 0zm-0.0284 -0.0313l5.1369 0 0 5.6591 -5.1369 0 0 -5.6591z"/>
+    <path id="136" class="fil144" d="M7.9605 7.7004l0 5.6382 5.1179 0 0 -5.6382 -5.1179 0zm-0.0284 -0.0313l5.1748 0 0 5.7009 -5.1748 0 0 -5.7009z"/>
+    <path id="137" class="fil145" d="M7.9416 7.6795l0 5.68 5.1558 0 0 -5.68 -5.1558 0zm-0.0284 -0.0313l5.2127 0 0 5.7426 -5.2127 0 0 -5.7426z"/>
+    <path id="138" class="fil146" d="M7.9226 7.6587l0 5.7217 5.1938 0 0 -5.7217 -5.1938 0zm-0.0284 -0.0313l5.2506 0 0 5.7844 -5.2506 0 0 -5.7844z"/>
+    <path id="139" class="fil147" d="M7.9037 7.6378l0 5.7635 5.2317 0 0 -5.7635 -5.2317 0zm-0.0284 -0.0313l5.2885 0 0 5.8262 -5.2885 0 0 -5.8262z"/>
+    <path id="140" class="fil148" d="M7.8847 7.6169l0 5.8053 5.2696 0 0 -5.8053 -5.2696 0zm-0.0284 -0.0313l5.3264 0 0 5.8679 -5.3264 0 0 -5.8679z"/>
+    <path id="141" class="fil149" d="M7.8657 7.596l0 5.8471 5.3075 0 0 -5.8471 -5.3075 0zm-0.0284 -0.0313l5.3644 0 0 5.9097 -5.3644 0 0 -5.9097z"/>
+    <path id="142" class="fil149" d="M7.8468 7.5751l0 5.8888 5.3454 0 0 -5.8888 -5.3454 0zm-0.0284 -0.0313l5.4023 0 0 5.9515 -5.4023 0 0 -5.9515z"/>
+    <path id="143" class="fil150" d="M7.8278 7.5542l0 5.9306 5.3833 0 0 -5.9306 -5.3833 0zm-0.0284 -0.0313l5.4402 0 0 5.9932 -5.4402 0 0 -5.9932z"/>
+    <path id="144" class="fil151" d="M7.8089 7.5334l0 5.9723 5.4212 0 0 -5.9723 -5.4212 0zm-0.0284 -0.0313l5.4781 0 0 6.035 -5.4781 0 0 -6.035z"/>
+    <path id="145" class="fil152" d="M7.7899 7.5125l0 6.0141 5.4591 0 0 -6.0141 -5.4591 0zm-0.0284 -0.0313l5.516 0 0 6.0768 -5.516 0 0 -6.0768z"/>
+    <path id="146" class="fil153" d="M7.771 7.4916l0 6.0559 5.4971 0 0 -6.0559 -5.4971 0zm-0.0284 -0.0313l5.5539 0 0 6.1185 -5.5539 0 0 -6.1185z"/>
+    <path id="147" class="fil154" d="M7.752 7.4707l0 6.0976 5.535 0 0 -6.0976 -5.535 0zm-0.0284 -0.0313l5.5918 0 0 6.1603 -5.5918 0 0 -6.1603z"/>
+    <path id="148" class="fil155" d="M7.7331 7.4498l0 6.1394 5.5729 0 0 -6.1394 -5.5729 0zm-0.0284 -0.0313l5.6297 0 0 6.202 -5.6297 0 0 -6.202z"/>
+    <path id="149" class="fil156" d="M7.7141 7.4289l0 6.1812 5.6108 0 0 -6.1812 -5.6108 0zm-0.0284 -0.0313l5.6677 0 0 6.2438 -5.6677 0 0 -6.2438z"/>
+    <path id="150" class="fil157" d="M7.6951 7.4081l0 6.2229 5.6487 0 0 -6.2229 -5.6487 0zm-0.0284 -0.0313l5.7056 0 0 6.2856 -5.7056 0 0 -6.2856z"/>
+    <path id="151" class="fil157" d="M7.6762 7.3872l0 6.2647 5.6866 0 0 -6.2647 -5.6866 0zm-0.0284 -0.0313l5.7435 0 0 6.3273 -5.7435 0 0 -6.3273z"/>
+    <path id="152" class="fil158" d="M7.6572 7.3663l0 6.3065 5.7245 0 0 -6.3065 -5.7245 0zm-0.0284 -0.0313l5.7814 0 0 6.3691 -5.7814 0 0 -6.3691z"/>
+    <path id="153" class="fil159" d="M7.6383 7.3454l0 6.3482 5.7624 0 0 -6.3482 -5.7624 0zm-0.0284 -0.0313l5.8193 0 0 6.4109 -5.8193 0 0 -6.4109z"/>
+    <path id="154" class="fil160" d="M7.6193 7.3245l0 6.39 5.8003 0 0 -6.39 -5.8003 0zm-0.0284 -0.0313l5.8572 0 0 6.4526 -5.8572 0 0 -6.4526z"/>
+    <path id="155" class="fil161" d="M7.6004 7.3036l0 6.4318 5.8382 0 0 -6.4318 -5.8382 0zm-0.0284 -0.0313l5.8951 0 0 6.4944 -5.8951 0 0 -6.4944z"/>
+    <path id="156" class="fil162" d="M7.5814 7.2828l0 6.4735 5.8762 0 0 -6.4735 -5.8762 0zm-0.0284 -0.0313l5.933 0 0 6.5362 -5.933 0 0 -6.5362z"/>
+    <path id="157" class="fil162" d="M7.5624 7.2619l0 6.5153 5.9141 0 0 -6.5153 -5.9141 0zm-0.0284 -0.0313l5.9709 0 0 6.5779 -5.9709 0 0 -6.5779z"/>
+    <path id="158" class="fil163" d="M7.5435 7.241l0 6.557 5.952 0 0 -6.557 -5.952 0zm-0.0284 -0.0313l6.0088 0 0 6.6197 -6.0088 0 0 -6.6197z"/>
+    <path id="159" class="fil164" d="M7.5245 7.2201l0 6.5988 5.9899 0 0 -6.5988 -5.9899 0zm-0.0284 -0.0313l6.0467 0 0 6.6615 -6.0467 0 0 -6.6615z"/>
+    <path id="160" class="fil165" d="M7.5056 7.1992l0 6.6406 6.0278 0 0 -6.6406 -6.0278 0zm-0.0284 -0.0313l6.0846 0 0 6.7032 -6.0846 0 0 -6.7032z"/>
+    <path id="161" class="fil166" d="M7.4866 7.1784l0 6.6823 6.0657 0 0 -6.6823 -6.0657 0zm-0.0284 -0.0313l6.1225 0 0 6.745 -6.1225 0 0 -6.745z"/>
+    <path id="162" class="fil167" d="M7.4677 7.1575l0 6.7241 6.1036 0 0 -6.7241 -6.1036 0zm-0.0284 -0.0313l6.1605 0 0 6.7867 -6.1605 0 0 -6.7867z"/>
+    <path id="163" class="fil168" d="M7.4487 7.1366l0 6.7659 6.1415 0 0 -6.7659 -6.1415 0zm-0.0284 -0.0313l6.1984 0 0 6.8285 -6.1984 0 0 -6.8285z"/>
+    <path id="164" class="fil169" d="M7.4298 7.1157l0 6.8076 6.1794 0 0 -6.8076 -6.1794 0zm-0.0284 -0.0313l6.2363 0 0 6.8703 -6.2363 0 0 -6.8703z"/>
+    <path id="165" class="fil170" d="M7.4108 7.0948l0 6.8494 6.2173 0 0 -6.8494 -6.2173 0zm-0.0284 -0.0313l6.2742 0 0 6.9121 -6.2742 0 0 -6.9121z"/>
+    <path id="166" class="fil171" d="M7.3919 7.0739l0 6.8912 6.2552 0 0 -6.8912 -6.2552 0zm-0.0284 -0.0313l6.3121 0 0 6.9538 -6.3121 0 0 -6.9538z"/>
+    <path id="167" class="fil172" d="M7.3729 7.0531l0 6.9329 6.2932 0 0 -6.9329 -6.2932 0zm-0.0284 -0.0313l6.35 0 0 6.9956 -6.35 0 0 -6.9956z"/>
+    <path id="168" class="fil173" d="M7.354 7.0322l0 6.9747 6.3311 0 0 -6.9747 -6.3311 0zm-0.0284 -0.0313l6.3879 0 0 7.0373 -6.3879 0 0 -7.0373z"/>
+    <path id="169" class="fil174" d="M7.335 7.0113l0 7.0164 6.369 0 0 -7.0164 -6.369 0zm-0.0284 -0.0313l6.4259 0 0 7.0791 -6.4259 0 0 -7.0791z"/>
+    <path id="170" class="fil175" d="M7.316 6.9904l0 7.0582 6.4069 0 0 -7.0582 -6.4069 0zm-0.0284 -0.0313l6.4638 0 0 7.1209 -6.4638 0 0 -7.1209z"/>
+    <path id="171" class="fil176" d="M7.2971 6.9695l0 7.1 6.4448 0 0 -7.1 -6.4448 0zm-0.0284 -0.0313l6.5017 0 0 7.1627 -6.5017 0 0 -7.1627z"/>
+    <path id="172" class="fil177" d="M7.2781 6.9486l0 7.1418 6.4827 0 0 -7.1418 -6.4827 0zm-0.0284 -0.0313l6.5396 0 0 7.2044 -6.5396 0 0 -7.2044z"/>
+    <path id="173" class="fil178" d="M7.2592 6.9278l0 7.1835 6.5206 0 0 -7.1835 -6.5206 0zm-0.0284 -0.0313l6.5775 0 0 7.2461 -6.5775 0 0 -7.2461z"/>
+    <path id="174" class="fil179" d="M7.2402 6.9069l0 7.2253 6.5585 0 0 -7.2253 -6.5585 0zm-0.0284 -0.0313l6.6154 0 0 7.2879 -6.6154 0 0 -7.2879z"/>
+    <path id="175" class="fil180" d="M7.2213 6.886l0 7.267 6.5965 0 0 -7.267 -6.5965 0zm-0.0284 -0.0313l6.6533 0 0 7.3297 -6.6533 0 0 -7.3297z"/>
+    <path id="176" class="fil181" d="M7.2023 6.8651l0 7.3088 6.6344 0 0 -7.3088 -6.6344 0zm-0.0284 -0.0313l6.6912 0 0 7.3715 -6.6912 0 0 -7.3715z"/>
+    <path id="177" class="fil182" d="M7.1834 6.8442l0 7.3506 6.6723 0 0 -7.3506 -6.6723 0zm-0.0284 -0.0313l6.7292 0 0 7.4132 -6.7292 0 0 -7.4132z"/>
+    <path id="178" class="fil183" d="M7.1644 6.8233l0 7.3924 6.7102 0 0 -7.3924 -6.7102 0zm-0.0284 -0.0313l6.7671 0 0 7.455 -6.7671 0 0 -7.455z"/>
+    <path id="179" class="fil184" d="M7.1455 6.8025l0 7.4341 6.7481 0 0 -7.4341 -6.7481 0zm-0.0284 -0.0313l6.805 0 0 7.4967 -6.805 0 0 -7.4967z"/>
+    <path id="180" class="fil185" d="M7.1265 6.7816l0 7.4758 6.786 0 0 -7.4758 -6.786 0zm-0.0284 -0.0313l6.8429 0 0 7.5385 -6.8429 0 0 -7.5385z"/>
+    <path id="181" class="fil186" d="M7.1076 6.7607l0 7.5176 6.8239 0 0 -7.5176 -6.8239 0zm-0.0284 -0.0313l6.8808 0 0 7.5803 -6.8808 0 0 -7.5803z"/>
+    <path id="182" class="fil187" d="M7.0886 6.7398l0 7.5594 6.8618 0 0 -7.5594 -6.8618 0zm-0.0284 -0.0313l6.9187 0 0 7.6221 -6.9187 0 0 -7.6221z"/>
+    <path id="183" class="fil188" d="M7.0696 6.7189l0 7.6012 6.8998 0 0 -7.6012 -6.8998 0zm-0.0284 -0.0313l6.9566 0 0 7.6638 -6.9566 0 0 -7.6638z"/>
+    <path id="184" class="fil189" d="M7.0507 6.698l0 7.643 6.9377 0 0 -7.643 -6.9377 0zm-0.0284 -0.0313l6.9945 0 0 7.7055 -6.9945 0 0 -7.7055z"/>
+    <path id="185" class="fil190" d="M7.0317 6.6772l0 7.6847 6.9756 0 0 -7.6847 -6.9756 0zm-0.0284 -0.0313l7.0324 0 0 7.7473 -7.0324 0 0 -7.7473z"/>
+    <path id="186" class="fil191" d="M7.0128 6.6563l0 7.7264 7.0135 0 0 -7.7264 -7.0135 0zm-0.0284 -0.0313l7.0703 0 0 7.7891 -7.0703 0 0 -7.7891z"/>
+    <path id="187" class="fil192" d="M6.9938 6.6354l0 7.7682 7.0514 0 0 -7.7682 -7.0514 0zm-0.0284 -0.0313l7.1082 0 0 7.8309 -7.1082 0 0 -7.8309z"/>
+    <path id="188" class="fil192" d="M6.9749 6.6145l0 7.81 7.0893 0 0 -7.81 -7.0893 0zm-0.0284 -0.0313l7.1461 0 0 7.8727 -7.1461 0 0 -7.8727z"/>
+    <path id="189" class="fil193" d="M6.9559 6.5936l0 7.8518 7.1272 0 0 -7.8518 -7.1272 0zm-0.0284 -0.0313l7.1841 0 0 7.9144 -7.1841 0 0 -7.9144z"/>
+    <path id="190" class="fil194" d="M6.9369 6.5728l0 7.8935 7.1651 0 0 -7.8935 -7.1651 0zm-0.0284 -0.0313l7.222 0 0 7.9561 -7.222 0 0 -7.9561z"/>
+    <path id="191" class="fil195" d="M6.918 6.5519l0 7.9353 7.203 0 0 -7.9353 -7.203 0zm-0.0284 -0.0313l7.2599 0 0 7.9979 -7.2599 0 0 -7.9979z"/>
+    <path id="192" class="fil196" d="M6.899 6.531l0 7.977 7.2409 0 0 -7.977 -7.2409 0zm-0.0284 -0.0313l7.2978 0 0 8.0397 -7.2978 0 0 -8.0397z"/>
+    <path id="193" class="fil197" d="M6.8801 6.5101l0 8.0188 7.2788 0 0 -8.0188 -7.2788 0zm-0.0284 -0.0313l7.3357 0 0 8.0815 -7.3357 0 0 -8.0815z"/>
+    <path id="194" class="fil198" d="M6.8611 6.4892l0 8.0606 7.3167 0 0 -8.0606 -7.3167 0zm-0.0284 -0.0313l7.3736 0 0 8.1233 -7.3736 0 0 -8.1233z"/>
+    <path id="195" class="fil199" d="M6.8422 6.4683l0 8.1024 7.3546 0 0 -8.1024 -7.3546 0zm-0.0284 -0.0313l7.4115 0 0 8.165 -7.4115 0 0 -8.165z"/>
+    <path id="196" class="fil200" d="M6.8232 6.4475l0 8.1441 7.3926 0 0 -8.1441 -7.3926 0zm-0.0284 -0.0313l7.4494 0 0 8.2067 -7.4494 0 0 -8.2067z"/>
+    <path id="197" class="fil201" d="M6.8043 6.4266l0 8.1858 7.4305 0 0 -8.1858 -7.4305 0zm-0.0284 -0.0313l7.4873 0 0 8.2485 -7.4873 0 0 -8.2485z"/>
+    <path id="198" class="fil202" d="M6.7853 6.4057l0 8.2276 7.4684 0 0 -8.2276 -7.4684 0zm-0.0284 -0.0313l7.5253 0 0 8.2903 -7.5253 0 0 -8.2903z"/>
+    <path id="199" class="fil203" d="M6.7663 6.3848l0 8.2694 7.5063 0 0 -8.2694 -7.5063 0zm-0.0284 -0.0313l7.5632 0 0 8.3321 -7.5632 0 0 -8.3321z"/>
+    <path id="200" class="fil204" d="M6.7474 6.3639l0 8.3112 7.5442 0 0 -8.3112 -7.5442 0zm-0.0284 -0.0313l7.6011 0 0 8.3738 -7.6011 0 0 -8.3738z"/>
+    <path id="201" class="fil205" d="M6.7284 6.343l0 8.353 7.5821 0 0 -8.353 -7.5821 0zm-0.0284 -0.0313l7.639 0 0 8.4155 -7.639 0 0 -8.4155z"/>
+    <path id="202" class="fil206" d="M6.7095 6.3222l0 8.3947 7.62 0 0 -8.3947 -7.62 0zm-0.0284 -0.0313l7.6769 0 0 8.4573 -7.6769 0 0 -8.4573z"/>
+    <path id="203" class="fil207" d="M6.6905 6.3013l0 8.4364 7.6579 0 0 -8.4364 -7.6579 0zm-0.0284 -0.0313l7.7148 0 0 8.4991 -7.7148 0 0 -8.4991z"/>
+    <path id="204" class="fil208" d="M6.6716 6.2804l0 8.4782 7.6959 0 0 -8.4782 -7.6959 0zm-0.0284 -0.0313l7.7527 0 0 8.5409 -7.7527 0 0 -8.5409z"/>
+    <path id="205" class="fil209" d="M6.6526 6.2595l0 8.52 7.7338 0 0 -8.52 -7.7338 0zm-0.0284 -0.0313l7.7906 0 0 8.5827 -7.7906 0 0 -8.5827z"/>
+    <path id="206" class="fil209" d="M6.6336 6.2386l0 8.5618 7.7717 0 0 -8.5618 -7.7717 0zm-0.0284 -0.0313l7.8286 0 0 8.6244 -7.8286 0 0 -8.6244z"/>
+    <path id="207" class="fil210" d="M6.6147 6.2178l0 8.6035 7.8096 0 0 -8.6035 -7.8096 0zm-0.0284 -0.0313l7.8665 0 0 8.6661 -7.8665 0 0 -8.6661z"/>
+    <path id="208" class="fil211" d="M6.5957 6.1969l0 8.6452 7.8475 0 0 -8.6452 -7.8475 0zm-0.0284 -0.0313l7.9044 0 0 8.7079 -7.9044 0 0 -8.7079z"/>
+    <path id="209" class="fil212" d="M6.5768 6.176l0 8.687 7.8854 0 0 -8.687 -7.8854 0zm-0.0284 -0.0313l7.9423 0 0 8.7497 -7.9423 0 0 -8.7497z"/>
+    <path id="210" class="fil213" d="M6.5578 6.1551l0 8.7288 7.9233 0 0 -8.7288 -7.9233 0zm-0.0284 -0.0313l7.9802 0 0 8.7915 -7.9802 0 0 -8.7915z"/>
+    <path id="211" class="fil214" d="M6.5389 6.1342l0 8.7706 7.9612 0 0 -8.7706 -7.9612 0zm-0.0284 -0.0313l8.0181 0 0 8.8332 -8.0181 0 0 -8.8332z"/>
+    <path id="212" class="fil214" d="M6.5199 6.1133l0 8.8124 7.9992 0 0 -8.8124 -7.9992 0zm-0.0284 -0.0313l8.056 0 0 8.8749 -8.056 0 0 -8.8749z"/>
+    <path id="213" class="fil215" d="M6.501 6.0925l0 8.8541 8.0371 0 0 -8.8541 -8.0371 0zm-0.0284 -0.0313l8.0939 0 0 8.9167 -8.0939 0 0 -8.9167z"/>
+    <path id="214" class="fil216" d="M6.482 6.0716l0 8.8958 8.075 0 0 -8.8958 -8.075 0zm-0.0284 -0.0313l8.1318 0 0 8.9585 -8.1318 0 0 -8.9585z"/>
+    <path id="215" class="fil217" d="M6.463 6.0507l0 8.9376 8.1129 0 0 -8.9376 -8.1129 0zm-0.0284 -0.0313l8.1697 0 0 9.0003 -8.1697 0 0 -9.0003z"/>
+    <path id="216" class="fil218" d="M6.4441 6.0298l0 8.9794 8.1508 0 0 -8.9794 -8.1508 0zm-0.0284 -0.0313l8.2077 0 0 9.0421 -8.2077 0 0 -9.0421z"/>
+    <path id="217" class="fil218" d="M6.4251 6.0089l0 9.0212 8.1887 0 0 -9.0212 -8.1887 0zm-0.0284 -0.0313l8.2456 0 0 9.0838 -8.2456 0 0 -9.0838z"/>
+    <path id="218" class="fil219" d="M6.4062 5.9881l0 9.0629 8.2266 0 0 -9.0629 -8.2266 0zm-0.0284 -0.0313l8.2835 0 0 9.1255 -8.2835 0 0 -9.1255z"/>
+    <path id="219" class="fil220" d="M6.3872 5.9672l0 9.1047 8.2645 0 0 -9.1047 -8.2645 0zm-0.0284 -0.0313l8.3214 0 0 9.1673 -8.3214 0 0 -9.1673z"/>
+    <path id="220" class="fil221" d="M6.3683 5.9463l0 9.1464 8.3024 0 0 -9.1464 -8.3024 0zm-0.0284 -0.0313l8.3593 0 0 9.2091 -8.3593 0 0 -9.2091z"/>
+    <path id="221" class="fil222" d="M6.3493 5.9254l0 9.1882 8.3403 0 0 -9.1882 -8.3403 0zm-0.0284 -0.0313l8.3972 0 0 9.2509 -8.3972 0 0 -9.2509z"/>
+    <path id="222" class="fil223" d="M6.3304 5.9045l0 9.23 8.3782 0 0 -9.23 -8.3782 0zm-0.0284 -0.0313l8.4351 0 0 9.2926 -8.4351 0 0 -9.2926z"/>
+    <path id="223" class="fil223" d="M6.3114 5.8836l0 9.2718 8.4161 0 0 -9.2718 -8.4161 0zm-0.0284 -0.0313l8.473 0 0 9.3344 -8.473 0 0 -9.3344z"/>
+    <path id="224" class="fil224" d="M6.2924 5.8628l0 9.3135 8.4541 0 0 -9.3135 -8.4541 0zm-0.0284 -0.0313l8.5109 0 0 9.3761 -8.5109 0 0 -9.3761z"/>
+    <path id="225" class="fil225" d="M6.2735 5.8419l0 9.3553 8.492 0 0 -9.3553 -8.492 0zm-0.0284 -0.0313l8.5488 0 0 9.4179 -8.5488 0 0 -9.4179z"/>
+    <path id="226" class="fil225" d="M6.2545 5.821l0 9.397 8.5299 0 0 -9.397 -8.5299 0zm-0.0284 -0.0313l8.5867 0 0 9.4597 -8.5867 0 0 -9.4597z"/>
+    <path id="227" class="fil226" d="M6.2356 5.8001l0 9.4388 8.5678 0 0 -9.4388 -8.5678 0zm-0.0284 -0.0313l8.6247 0 0 9.5015 -8.6247 0 0 -9.5015z"/>
+    <path id="228" class="fil227" d="M6.2166 5.7792l0 9.4806 8.6057 0 0 -9.4806 -8.6057 0zm-0.0284 -0.0313l8.6626 0 0 9.5432 -8.6626 0 0 -9.5432z"/>
+    <path id="229" class="fil228" d="M6.1977 5.7583l0 9.5223 8.6436 0 0 -9.5223 -8.6436 0zm-0.0284 -0.0313l8.7005 0 0 9.585 -8.7005 0 0 -9.585z"/>
+    <path id="230" class="fil229" d="M6.1787 5.7375l0 9.5641 8.6815 0 0 -9.5641 -8.6815 0zm-0.0284 -0.0313l8.7384 0 0 9.6267 -8.7384 0 0 -9.6267z"/>
+    <path id="231" class="fil230" d="M6.1598 5.7166l0 9.6058 8.7194 0 0 -9.6058 -8.7194 0zm-0.0284 -0.0313l8.7763 0 0 9.6685 -8.7763 0 0 -9.6685z"/>
+    <path id="232" class="fil230" d="M6.1408 5.6957l0 9.6476 8.7574 0 0 -9.6476 -8.7574 0zm-0.0284 -0.0313l8.8142 0 0 9.7103 -8.8142 0 0 -9.7103z"/>
+    <path id="233" class="fil231" d="M6.1219 5.6748l0 9.6894 8.7953 0 0 -9.6894 -8.7953 0zm-0.0284 -0.0313l8.8521 0 0 9.752 -8.8521 0 0 -9.752z"/>
+    <path id="234" class="fil232" d="M6.1029 5.6539l0 9.7312 8.8332 0 0 -9.7312 -8.8332 0zm-0.0284 -0.0313l8.89 0 0 9.7938 -8.89 0 0 -9.7938z"/>
+    <path id="235" class="fil232" d="M6.084 5.6331l0 9.7729 8.8711 0 0 -9.7729 -8.8711 0zm-0.0284 -0.0313l8.928 0 0 9.8356 -8.928 0 0 -9.8356z"/>
+    <path id="236" class="fil233" d="M6.065 5.6122l0 9.8147 8.909 0 0 -9.8147 -8.909 0zm-0.0284 -0.0313l8.9659 0 0 9.8773 -8.9659 0 0 -9.8773z"/>
+    <path id="237" class="fil234" d="M6.046 5.5913l0 9.8564 8.9469 0 0 -9.8564 -8.9469 0zm-0.0284 -0.0313l9.0038 0 0 9.9191 -9.0038 0 0 -9.9191z"/>
+    <path id="238" class="fil235" d="M6.0271 5.5704l0 9.8982 8.9848 0 0 -9.8982 -8.9848 0zm-0.0284 -0.0313l9.0417 0 0 9.9609 -9.0417 0 0 -9.9609z"/>
+    <path id="239" class="fil236" d="M6.0081 5.5495l0 9.94 9.0227 0 0 -9.94 -9.0227 0zm-0.0284 -0.0313l9.0796 0 0 10.0026 -9.0796 0 0 -10.0026z"/>
+    <path id="240" class="fil237" d="M5.9892 5.5286l0 9.9817 9.0607 0 0 -9.9817 -9.0607 0zm-0.0284 -0.0313l9.1175 0 0 10.0444 -9.1175 0 0 -10.0444z"/>
+    <path id="241" class="fil238" d="M5.9702 5.5078l0 10.0235 9.0986 0 0 -10.0235 -9.0986 0zm-0.0284 -0.0313l9.1554 0 0 10.0862 -9.1554 0 0 -10.0862z"/>
+    <path id="242" class="fil239" d="M5.9513 5.4869l0 10.0653 9.1365 0 0 -10.0653 -9.1365 0zm-0.0284 -0.0313l9.1933 0 0 10.1279 -9.1933 0 0 -10.1279z"/>
+    <path id="243" class="fil240" d="M5.9323 5.466l0 10.107 9.1744 0 0 -10.107 -9.1744 0zm-0.0284 -0.0313l9.2313 0 0 10.1697 -9.2313 0 0 -10.1697z"/>
+    <path id="244" class="fil241" d="M5.9134 5.4451l0 10.1488 9.2123 0 0 -10.1488 -9.2123 0zm-0.0284 -0.0313l9.2692 0 0 10.2115 -9.2692 0 0 -10.2115z"/>
+    <path id="245" class="fil242" d="M5.8944 5.4242l0 10.1906 9.2502 0 0 -10.1906 -9.2502 0zm-0.0284 -0.0313l9.3071 0 0 10.2532 -9.3071 0 0 -10.2532z"/>
+    <path id="246" class="fil243" d="M5.8755 5.4034l0 10.2323 9.2881 0 0 -10.2323 -9.2881 0zm-0.0284 -0.0313l9.345 0 0 10.295 -9.345 0 0 -10.295z"/>
+    <path id="247" class="fil244" d="M5.8565 5.3825l0 10.2741 9.326 0 0 -10.2741 -9.326 0zm-0.0284 -0.0313l9.3829 0 0 10.3367 -9.3829 0 0 -10.3367z"/>
+    <path id="248" class="fil245" d="M5.8375 5.3616l0 10.3159 9.3639 0 0 -10.3159 -9.3639 0zm-0.0284 -0.0313l9.4208 0 0 10.3785 -9.4208 0 0 -10.3785z"/>
+    <path id="249" class="fil246" d="M5.8186 5.3407l0 10.3576 9.4018 0 0 -10.3576 -9.4018 0zm-0.0284 -0.0313l9.4587 0 0 10.4203 -9.4587 0 0 -10.4203z"/>
+    <path id="250" class="fil247" d="M5.7996 5.3198l0 10.3994 9.4397 0 0 -10.3994 -9.4397 0zm-0.0284 -0.0313l9.4966 0 0 10.462 -9.4966 0 0 -10.462z"/>
+    <path id="251" class="fil248" d="M5.7807 5.2989l0 10.4412 9.4777 0 0 -10.4412 -9.4777 0zm-0.0284 -0.0313l9.5345 0 0 10.5038 -9.5345 0 0 -10.5038z"/>
+    <path id="252" class="fil249" d="M5.7617 5.2781l0 10.4829 9.5156 0 0 -10.4829 -9.5156 0zm-0.0284 -0.0313l9.5724 0 0 10.5456 -9.5724 0 0 -10.5456z"/>
+    <path id="253" class="fil250" d="M5.7428 5.2572l0 10.5247 9.5535 0 0 -10.5247 -9.5535 0zm-0.0284 -0.0313l9.6103 0 0 10.5873 -9.6103 0 0 -10.5873z"/>
+    <path id="254" class="fil251" d="M5.7238 5.2363l0 10.5664 9.5914 0 0 -10.5664 -9.5914 0zm-0.0284 -0.0313l9.6482 0 0 10.6291 -9.6482 0 0 -10.6291z"/>
+    <path id="255" class="fil252" d="M5.7048 5.2154l0 10.6082 9.6293 0 0 -10.6082 -9.6293 0zm-0.0284 -0.0313l9.6862 0 0 10.6709 -9.6862 0 0 -10.6709z"/>
+    <path id="256" class="fil19" d="M5.6859 5.1945l0 10.65 9.6672 0 0 -10.65 -9.6672 0zm-0.0189 -0.0209l9.7051 0 0 10.6917 -9.7051 0 0 -10.6917z"/>
+   </g>
+   <path id="257" class="fil253 str0" d="M5.6669 5.1737l2.4101 0 0 10.6917 -1.2131 0 -1.197 -1.1969 0 -9.4948zm9.7051 0l0 9.4948 -1.197 1.1969 -4.3673 0 0 -2.4101 3.1542 0 0 -8.2816 2.4101 0z"/>
+  </g>
+ </g>
+</svg>
