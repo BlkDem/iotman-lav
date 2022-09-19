@@ -82,6 +82,7 @@
             </div>
         </div>
         <Paginator ref="paginatorDevices"></Paginator>
+        <!-- <MyMqtt></MyMqtt> -->
     </div>
 
 </template>
@@ -94,9 +95,10 @@ import Paginator from '../components/Paginator.vue';
 import DeviceStringConstants from '../components/strings_constants/devices/index';
 import MessagesConstants from '../components/strings_constants/messages.js';
 import APIConstants from '../rest_api.js';
+// import MyMqtt from '../components/MyMqtt.vue';
 
     export default {
-        components: { ConfirmDialogue, AddDevice, DeviceTypesCombo, Paginator},
+        components: { ConfirmDialogue, AddDevice, DeviceTypesCombo, Paginator, /*MyMqtt*/},
 
         data() {
             return {

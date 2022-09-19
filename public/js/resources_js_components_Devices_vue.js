@@ -265,6 +265,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+ // import MyMqtt from '../components/MyMqtt.vue';
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -272,6 +273,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     AddDevice: _components_AddDevice_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     DeviceTypesCombo: _components_DeviceTypesCombo_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     Paginator: _components_Paginator_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    /*MyMqtt*/
+
   },
   data: function data() {
     return {
@@ -1035,7 +1038,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     ref: "paginatorDevices"
   }, null, 512
   /* NEED_PATCH */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <MyMqtt></MyMqtt> ")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),

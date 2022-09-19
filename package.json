@@ -28,6 +28,7 @@
         "bootstrap-vue": "^2.22.0",
         "bootswatch": "^5.2.0",
         "moment": "^2.29.4",
+        "mqtt": "^4.3.7",
         "vue-axios": "^3.4.1",
         "vue-loader": "^17.0.0",
         "vue-luxon": "^0.10.0",
