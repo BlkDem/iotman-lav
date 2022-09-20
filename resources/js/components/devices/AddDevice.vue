@@ -22,9 +22,9 @@
 </template>
 
 <script>
-import PopupModal from './PopupModal.vue';
-import DeviceTypesCombo from './DeviceTypesCombo.vue' 
-import MessagesConstants from '../components/strings_constants/messages';
+import PopupModal from '../../components/common/PopupModal.vue';
+import DeviceTypesCombo from '../../components/device_types/DeviceTypesCombo.vue' 
+import MessagesConstants from '../../components/strings_constants/messages';
 
 export default {
     name: 'AddDevice',
@@ -95,5 +95,5 @@ export default {
 </script>
 
 <style>
-    @import '../../sass/aligns.scss';
+    @import '../../../sass/aligns.scss';
 </style>

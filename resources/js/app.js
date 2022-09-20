@@ -17,24 +17,23 @@ import { defineAsyncComponent } from 'vue';
 
 const app = createApp({});
 
-import Navbar from './components/Navbar.vue';
+import Navbar from './components/header/Navbar.vue';
 //import DeviceList from './components/DeviceList.vue';
 app.component('navbar', Navbar);
 
-import Toaster from './components/Toaster.vue';
+import Toaster from './components/common/Toaster.vue';
 app.component('toaster', Toaster);
 
-
-app.component('device-user-list', defineAsyncComponent(() =>
-  import('./components/UserDevices.vue')
+app.component('device-list', defineAsyncComponent(() =>
+  import('./components/devices/Devices.vue')
 ))
 
-app.component('device-list', defineAsyncComponent(() =>
-  import('./components/Devices.vue')
+app.component('device-user-list', defineAsyncComponent(() =>
+  import('./components/user_devices/UserDevices.vue')
 ))
 
 app.component('device-type-list', defineAsyncComponent(() =>
-  import('./components/DeviceTypes.vue')
+  import('./components/device_types/DeviceTypes.vue')
 ))
 
 /*app.component('delete-confirm', defineAsyncComponent(() =>

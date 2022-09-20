@@ -88,13 +88,13 @@
 </template>
 
 <script>
-import ConfirmDialogue from '../components/ConfirmDialogue.vue';
-import AddDevice from '../components/AddDevice.vue';
-import DeviceTypesCombo from '../components/DeviceTypesCombo.vue';
-import Paginator from '../components/Paginator.vue';
-import DeviceStringConstants from '../components/strings_constants/devices/index';
-import MessagesConstants from '../components/strings_constants/messages.js';
-import APIConstants from '../rest_api.js';
+import ConfirmDialogue from '../../components/common/ConfirmDialogue.vue';
+import AddDevice from './AddDevice.vue';
+import DeviceTypesCombo from '../../components/device_types/DeviceTypesCombo.vue';
+import Paginator from '../../components/Paginator.vue';
+import DeviceStringConstants from '../../components/strings_constants/devices/index';
+import MessagesConstants from '../../components/strings_constants/messages.js';
+import APIConstants from '../../rest_api.js';
 // import MyMqtt from '../components/MyMqtt.vue';
 
     export default {
@@ -283,7 +283,7 @@ import APIConstants from '../rest_api.js';
 
 <style lang="scss" scoped>
     
-    @import '../../sass/aligns.scss';
-    @import '../../sass/lists.scss';
+    @import '../../../sass/aligns.scss';
+    @import '../../../sass/lists.scss';
     
 </style>

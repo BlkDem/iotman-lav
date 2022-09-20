@@ -98,11 +98,11 @@
 </template>
 
 <script>
-import ConfirmDialogue from '../components/ConfirmDialogue.vue';
-import AddDeviceType from '../components/AddDeviceType.vue';
-import Paginator from '../components/Paginator.vue';
-import MessagesConstants from '../components/strings_constants/messages';
-import DeviceTypeStringConstants from '../components/strings_constants/device_types/index';
+import ConfirmDialogue from '../../components/common/ConfirmDialogue.vue';
+import AddDeviceType from './AddDeviceType.vue';
+import Paginator from '../../components/Paginator.vue';
+import MessagesConstants from '../../components/strings_constants/messages';
+import DeviceTypeStringConstants from '../../components/strings_constants/device_types/index';
 
     export default {
         components: { ConfirmDialogue, AddDeviceType, Paginator},
@@ -242,7 +242,7 @@ import DeviceTypeStringConstants from '../components/strings_constants/device_ty
 
 <style lang="scss" scoped>
 
-    @import '../../sass/lists.scss';
-    @import '../../sass/aligns.scss';
+    @import '../../../sass/lists.scss';
+    @import '../../../sass/aligns.scss';
     
 </style>

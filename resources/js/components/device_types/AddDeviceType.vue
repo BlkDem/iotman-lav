@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import PopupModal from './PopupModal.vue';
-import MessagesConstants from '../components/strings_constants/messages';
+import PopupModal from '../../components/common/PopupModal.vue';
+import MessagesConstants from '../../components/strings_constants/messages';
 import {ref} from 'vue'
 
 export default {
