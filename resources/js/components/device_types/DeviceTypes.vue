@@ -72,7 +72,6 @@
                             <button class="btn btn-secondary" @click="doDeleteType(key, device_type.id)">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
-                            <!-- <ConfirmDialogue ref="confirmDialogue" /> -->
                         </div>
                     </div>
                 </div>
@@ -81,26 +80,12 @@
         <Paginator ref="paginatorDevices"></Paginator>
     </div>
 
-        <!-- <div class="row">
-            <div class="col-sm-6 col-xs-6 col-lg-6 p-2"  v-for="device_type in device_types" v-bind:key="device_type.id">
-            <div class="card border-light" style="min-width: 25%;">
-                <h3 class="card-header">{{ device_type.device_type_name }}</h3>
-                <div class="card-body">
-                    <img v-bind:src="device_type.device_type_image">
-
-                    <h5 class="card-title">{{ device_type.device_type_desc }}</h5>
-
-                </div>
-            </div>
-            </div>
-        </div>
-    </div> -->
 </template>
 
 <script>
 import ConfirmDialogue from '../../components/common/ConfirmDialogue.vue';
 import AddDeviceType from './AddDeviceType.vue';
-import Paginator from '../../components/Paginator.vue';
+import Paginator from '../../components/common/Paginator.vue';
 import MessagesConstants from '../../components/strings_constants/messages';
 import DeviceTypeStringConstants from '../../components/strings_constants/device_types/index';
 

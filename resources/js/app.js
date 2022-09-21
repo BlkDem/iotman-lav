@@ -18,11 +18,15 @@ import { defineAsyncComponent } from 'vue';
 const app = createApp({});
 
 import Navbar from './components/header/Navbar.vue';
-//import DeviceList from './components/DeviceList.vue';
+
 app.component('navbar', Navbar);
 
 import Toaster from './components/common/Toaster.vue';
 app.component('toaster', Toaster);
+
+app.component('device-type-list', defineAsyncComponent(() =>
+  import('./components/device_types/DeviceTypes.vue')
+))
 
 app.component('device-list', defineAsyncComponent(() =>
   import('./components/devices/Devices.vue')
@@ -31,31 +35,5 @@ app.component('device-list', defineAsyncComponent(() =>
 app.component('device-user-list', defineAsyncComponent(() =>
   import('./components/user_devices/UserDevices.vue')
 ))
-
-app.component('device-type-list', defineAsyncComponent(() =>
-  import('./components/device_types/DeviceTypes.vue')
-))
-
-/*app.component('delete-confirm', defineAsyncComponent(() =>
-  import('./components/dialogues/DeleteConfirm.vue')
-))*/
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// Object.entries(import.meta.globEager('./**/*.vue')).forEach(([path, definition]) => {
-//     app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
-// });
-
-/**
- * Finally, we will attach the application instance to a HTML element with
- * an "id" attribute of "app". This element is included with the "auth"
- * scaffolding. Otherwise, you will need to add an element yourself.
- */
 
 app.mount('#app');

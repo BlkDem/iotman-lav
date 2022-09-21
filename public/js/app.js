@@ -23426,41 +23426,19 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)({});
- //import DeviceList from './components/DeviceList.vue';
 
 app.component('navbar', _components_header_Navbar_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
 app.component('toaster', _components_common_Toaster_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
+app.component('device-type-list', (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineAsyncComponent)(function () {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_device_types_DeviceTypes_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/device_types/DeviceTypes.vue */ "./resources/js/components/device_types/DeviceTypes.vue"));
+}));
 app.component('device-list', (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineAsyncComponent)(function () {
   return __webpack_require__.e(/*! import() */ "resources_js_components_devices_Devices_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/devices/Devices.vue */ "./resources/js/components/devices/Devices.vue"));
 }));
 app.component('device-user-list', (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineAsyncComponent)(function () {
   return __webpack_require__.e(/*! import() */ "resources_js_components_user_devices_UserDevices_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/user_devices/UserDevices.vue */ "./resources/js/components/user_devices/UserDevices.vue"));
 }));
-app.component('device-type-list', (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineAsyncComponent)(function () {
-  return __webpack_require__.e(/*! import() */ "resources_js_components_device_types_DeviceTypes_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/device_types/DeviceTypes.vue */ "./resources/js/components/device_types/DeviceTypes.vue"));
-}));
-/*app.component('delete-confirm', defineAsyncComponent(() =>
-  import('./components/dialogues/DeleteConfirm.vue')
-))*/
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-// Object.entries(import.meta.globEager('./**/*.vue')).forEach(([path, definition]) => {
-//     app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
-// });
-
-/**
- * Finally, we will attach the application instance to a HTML element with
- * an "id" attribute of "app". This element is included with the "auth"
- * scaffolding. Otherwise, you will need to add an element yourself.
- */
-
 app.mount('#app');
 
 /***/ }),
@@ -48711,7 +48689,7 @@ function compileToFunction(template, options) {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_devices_Devices_vue":1,"resources_js_components_user_devices_UserDevices_vue":1,"resources_js_components_device_types_DeviceTypes_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_device_types_DeviceTypes_vue":1,"resources_js_components_devices_Devices_vue":1,"resources_js_components_user_devices_UserDevices_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

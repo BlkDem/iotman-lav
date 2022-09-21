@@ -3,11 +3,27 @@
     <div v-if="visible">
         <AddDevice ref="addDevice"></AddDevice>
         <ConfirmDialogue ref="confirmDialogue" />
-        <div class="row">
+        <h1 class="align-left px-4 pb-3">Registered Devices</h1>
+        <div class="row" style="box-shadow: #6f42c1 0px 0px 10px; margin: 0px;">
             <div class="col-sm-6 col-xs-6 col-lg-6 p-2">
-                <h1 class="align-left px-4">Registered Devices</h1>
+                <div class="align-right">
+                    <input v-model="device_filter" class="form-control mt-2" style='float: right; width: 40%' placeholder="Filter"/>
+                </div>
+                <div class="align-right">
+                    <select v-model="selectSort" class='form-select mt-2 text-info' style="width: 40%; float: left; margin-right: 10px; margin-left: 8px;">
+                        <option value="" disabled hidden>Sorting</option>
+                        <option v-for="rule in sortRules" :key="rule.key" :value="rule.key">{{ rule.title }}</option>
+                    </select>    
+                </div>
+            
+                <div>
+                    <input class="form-check-input mt-3" type="checkbox" id="checkbox" v-model="checked"/>
+                    <label for="checkbox" class="mt-2 mx-1 text-info" style="margin-top: 0.75rem !important;">DESC</label>
+                </div>
             </div>
-            <div class="col-sm-6 col-xs-6 col-lg-6 p-2" style="text-align: right !important;">
+            <div class="col-sm-3 col-xs-3 col-lg-3 p-2" style="text-align: right !important;">
+            </div>
+            <div class="col-sm-3 col-xs-3 col-lg-3 p-2">
                 <button class="btn btn-primary" @click="compactView=true">
                     <i class="fas fa-list"></i>
                 </button>
@@ -18,13 +34,15 @@
                     Add Device
                 </button>
             </div>
-        </div>
-        <div>
-            <h4 class="text-primary">{{ data_description }}</h4>
+            
         </div>
 
-        <div class="row" v-if="!compactView">
-            <div class="col-sm-4 col-xs-4 col-lg-4 p-2" v-for="(device, key) in devices" v-bind:key="key"
+        <div>
+            <h5 class="text-primary my-2">{{ data_description }}</h5>
+        </div>
+
+        <div class="row my-2" v-if="!compactView">
+            <div class="col-sm-4 col-xs-4 col-lg-4 p-2" v-for="(device, key) in filteredDevices" v-bind:key="key"
                 v-bind:id="device.id">
                 <div class="card border-light">
                     <h3 class="card-header">{{ device.device_name }} <span class="text-info">({{ device.id }})</span>
@@ -54,8 +72,8 @@
         </div>
 
         <!-- compact view -->
-        <div v-if="compactView">
-            <div class="card border-primary mb-4 w-100" v-for="(device, key) in devices" v-bind:key="key"
+        <div v-if="compactView"  class="my-2">
+            <div class="card border-primary mb-4 w-100" v-for="(device, key) in filteredDevices" v-bind:key="key"
                 v-bind:id="device.id">
                 <div class="card-header">
                     <div class="row">
@@ -91,7 +109,7 @@
 import ConfirmDialogue from '../../components/common/ConfirmDialogue.vue';
 import AddDevice from './AddDevice.vue';
 import DeviceTypesCombo from '../../components/device_types/DeviceTypesCombo.vue';
-import Paginator from '../../components/Paginator.vue';
+import Paginator from '../../components/common/Paginator.vue';
 import DeviceStringConstants from '../../components/strings_constants/devices/index';
 import MessagesConstants from '../../components/strings_constants/messages.js';
 import APIConstants from '../../rest_api.js';
@@ -99,13 +117,22 @@ import APIConstants from '../../rest_api.js';
 
     export default {
         components: { ConfirmDialogue, AddDevice, DeviceTypesCombo, Paginator, /*MyMqtt*/},
-
+        
         data() {
             return {
                 devices: [],
+                filteredDevices: [],
                 data_description: '',
                 visible: true,
-                compactView: true
+                compactView: true,
+                device_filter: '',
+                selectSort: '',
+                sortOrder: '',
+                sortRules: [
+                    { key: 'device_name', title: 'By Name' },
+                    { key: 'id', title: 'By ID' },
+                ],
+                checked: false,
             };
         },
 
@@ -115,18 +142,92 @@ import APIConstants from '../../rest_api.js';
             console.log('API version: ', APIConstants.apiVersion);
         },
 
+        watch: {
+            device_filter: function() {
+                handler: this.doFilter()
+            },
+
+            selectSort: function() {
+                handler: this.doSort()
+            },
+
+            checked: function() {
+                handler: this.doSort()
+            }
+
+        },
+
+        computed: {
+            // doFilter() {
+            //     return this.devices.filter(device => {
+            //         const b = device.device_name.toLowerCase().indexOf(this.device_filter.toLowerCase()) >= 0;  
+            //         return b;
+            //     });
+            // },
+        },
+
         methods: {
+            doSort() {
+
+                const column = this.selectSort;
+                const order = (this.checked)?'DESC':'ASC';
+
+                const res = this.filteredDevices.sort(function(a, b) {
+                if (column === 'id')
+                {
+                    var nameA = a[column];
+                    var nameB = b[column];
+                }
+                else
+                {
+                    var nameA = a[column]+"".toUpperCase();
+                    var nameB = b[column]+"".toUpperCase();
+                }
+
+                if (order === "DESC" && nameA > nameB) {
+                    return -1;
+                }
+                if (order === "DESC" && nameA < nameB) {
+                    return 1;
+                }
+
+
+                if (order === "ASC" && nameA < nameB) {
+                    return -1;
+                }
+                if (order === "ASC" && nameA > nameB) {
+                    return 1;
+                }
+                return 0;
+                });
+            },
+
+            doFilter() {
+                this.filteredDevices = this.devices;
+                const res = this.filteredDevices.filter(device => {
+                    if (this.device_filter === '') return true;
+                    else
+                    return device.device_name.toLowerCase().indexOf(this.device_filter.toLowerCase()) > -1;  
+                });
+                if (this.devices.length > res.length)
+                {
+                    this.filteredDevices=res;
+                    this.doSort();
+                }
+                // return res;
+            },
 
             //mutating 'null' 'undefined' to predefined consts
             processStrings()   
             {
-                this.devices.forEach((dev, key) => {
-                    this.devices[key].device_desc = (dev.device_desc == null)? 
+                this.filteredDevices.forEach((dev, key) => {
+                    this.filteredDevices[key].device_desc = (dev.device_desc == null)? 
                         MessagesConstants.NO_DESCRIPTION : dev.device_desc;
-                    this.devices[key].device_hwid = (dev.device_hwid == null)? 
+                    this.filteredDevices[key].device_hwid = (dev.device_hwid == null)? 
                         DeviceStringConstants.NO_HWID : dev.device_hwid;
                 })
             },
+            
 
             //deleting devices
             async doDelete(key, id) { 
@@ -142,7 +243,8 @@ import APIConstants from '../../rest_api.js';
                     //deleting devices item via API
                     axios.delete(APIConstants.api_device_delete + id)
                         .then(resp => {
-                            this.devices.splice(key, 1);                            
+                            this.filteredDevices.splice(key, 1);
+                            this.devices = this.filteredDevices;                            
                             console.log(key, id, " - deleted");
                             this.$root.$refs.toaster.setMessage(
                                 MessagesConstants.DELETED_MESSAGE, 
@@ -162,8 +264,14 @@ import APIConstants from '../../rest_api.js';
                 fetch(APIConstants.api_devices_read)
                     .then(response => response.json())
                     .then(response => {
-                        this.devices = response.data;
+                        this.filteredDevices = response.data;
                         this.processStrings();
+                        this.devices = this.filteredDevices; 
+                    })
+                    .then (response => {
+                        // const newArray = this.devices.map(a => Object.assign({}, a));
+                        // console.log(this.devices);
+                        // console.log(newArray);
                     })
                     .catch(err => console.log(err));
             },
@@ -206,11 +314,11 @@ import APIConstants from '../../rest_api.js';
                                 device_type_image: '',
                                 id: resp['data'].id
                             }   
-                            this.devices.push(newDevice);
+                            this.filteredDevices.push(newDevice);
                             this.$root.$refs.toaster.setMessage(MessagesConstants.ADDED_MESSAGE, MessagesConstants.PROCESS_SUCCESSFULLY);
                         })
                         .then(resp => {
-                            this.setDeviceType(this.devices[this.devices.length-1].device_type_id, this.devices[this.devices.length-1]);
+                            this.setDeviceType(this.filteredDevices[this.filteredDevices.length-1].device_type_id, this.filteredDevices[this.filteredDevices.length-1]);
                         })
                         .catch(error => {
                             console.log(error);
@@ -224,14 +332,15 @@ import APIConstants from '../../rest_api.js';
             //edit Device
             async doEdit(key, id) {
                 //opening Device Dialogue
+                console.log(key, id);
                 const _edit = await this.$refs.addDevice.showDialogue({
                     edit_mode: true,
                     title: DeviceStringConstants.DEVICE_EDITING_TITLE,
                     message: DeviceStringConstants.DEVICE_EDITING_MESSAGE,
-                    device_name: this.devices[key].device_name,
-                    device_desc: this.devices[key].device_desc,
-                    device_hwid: this.devices[key].device_hwid,
-                    device_type_id: this.devices[key].device_type_id,
+                    device_name: this.filteredDevices[key].device_name,
+                    device_desc: this.filteredDevices[key].device_desc,
+                    device_hwid: this.filteredDevices[key].device_hwid,
+                    device_type_id: this.filteredDevices[key].device_type_id,
                     okButton: DeviceStringConstants.DEVICE_EDITBUTTON_CAPTION,
                 })
 
@@ -247,17 +356,18 @@ import APIConstants from '../../rest_api.js';
                     axios.put(editDevicePost)
                         .then(resp => {
                             console.log(resp['data']);
-                            this.devices[key].device_name = resp['data'].device_name;
-                            this.devices[key].device_desc = resp['data'].device_desc;
-                            this.devices[key].device_type_id = resp['data'].device_type_id;
-                            this.devices[key].device_hwid = resp['data'].device_hwid;
+                            this.filteredDevices[key].device_name = resp['data'].device_name;
+                            this.filteredDevices[key].device_desc = resp['data'].device_desc;
+                            this.filteredDevices[key].device_type_id = resp['data'].device_type_id;
+                            this.filteredDevices[key].device_hwid = resp['data'].device_hwid;
                             this.$root.$refs.toaster.setMessage(
                                 MessagesConstants.EDITED_MESSAGE, 
                                 MessagesConstants.PROCESS_SUCCESSFULLY
                             );
                         })
                         .then(resp => {
-                            this.setDeviceType(this.devices[key].device_type_id, this.devices[key]);
+                            this.setDeviceType(this.filteredDevices[key].device_type_id, this.devices[key]);
+                            this.devices = this.filteredDevices;
                         })
                         .catch(error => {
                             console.log(error);
@@ -282,8 +392,6 @@ import APIConstants from '../../rest_api.js';
 </script>
 
 <style lang="scss" scoped>
-    
-    @import '../../../sass/aligns.scss';
-    @import '../../../sass/lists.scss';
-    
+@import '../../../sass/aligns.scss';
+@import '../../../sass/lists.scss';
 </style>
