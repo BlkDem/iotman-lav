@@ -325,18 +325,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       devices: [],
       filteredDevices: [],
-      data_description: '',
+      data_description: "",
       visible: true,
       compactView: true,
-      device_filter: '',
-      selectSort: '',
-      sortOrder: '',
+      device_filter: "",
+      selectSort: "",
+      sortOrder: "ASC",
+      sortDirection: false,
+      sortColumn: "device_name",
       sortRules: [{
-        key: 'device_name',
-        title: 'By Name'
+        key: "device_name",
+        title: _components_strings_constants_messages_js__WEBPACK_IMPORTED_MODULE_5__["default"].SORT_BY_NAME
       }, {
-        key: 'id',
-        title: 'By ID'
+        key: "id",
+        title: _components_strings_constants_messages_js__WEBPACK_IMPORTED_MODULE_5__["default"].SORT_BY_ID
       }],
       checked: false
     };
@@ -346,7 +348,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     this.getDevices(); //loading devices dataset via API
 
-    console.log('API version: ', _rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].apiVersion);
+    console.log("API version: ", _rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].apiVersion);
   },
   watch: {
     device_filter: function device_filter() {
@@ -354,24 +356,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     selectSort: function selectSort() {
       handler: this.doSort();
-    },
-    checked: function checked() {
-      handler: this.doSort();
-    }
-  },
-  computed: {// doFilter() {
-    //     return this.devices.filter(device => {
-    //         const b = device.device_name.toLowerCase().indexOf(this.device_filter.toLowerCase()) >= 0;  
-    //         return b;
-    //     });
+    } // sortDirection: function () {
+    //     handler: this.doSort();
     // },
+
+  },
+  computed: {// sortDirection: function () {
+    //     sortOrder = (this.sortDirection)?'DESC':'ASC';
+    // }
   },
   methods: {
-    doSort: function doSort() {
-      var column = this.selectSort;
-      var order = this.checked ? 'DESC' : 'ASC';
-      var res = this.filteredDevices.sort(function (a, b) {
-        if (column === 'id') {
+    doSort: function doSort($c) {
+      var column = $c;
+      this.sortColumn = column;
+      var order = this.sortDirection;
+      this.filteredDevices.sort(function (a, b) {
+        if (column === "id") {
           var nameA = a[column];
           var nameB = b[column];
         } else {
@@ -379,19 +379,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           var nameB = b[column] + "".toUpperCase();
         }
 
-        if (order === "DESC" && nameA > nameB) {
+        if (order && nameA > nameB) {
           return -1;
         }
 
-        if (order === "DESC" && nameA < nameB) {
+        if (order && nameA < nameB) {
           return 1;
         }
 
-        if (order === "ASC" && nameA < nameB) {
+        if (!order && nameA < nameB) {
           return -1;
         }
 
-        if (order === "ASC" && nameA > nameB) {
+        if (!order && nameA > nameB) {
           return 1;
         }
 
@@ -403,7 +403,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       this.filteredDevices = this.devices;
       var res = this.filteredDevices.filter(function (device) {
-        if (_this.device_filter === '') return true;else return device.device_name.toLowerCase().indexOf(_this.device_filter.toLowerCase()) > -1;
+        if (_this.device_filter === "") return true;else return device.device_name.toLowerCase().indexOf(_this.device_filter.toLowerCase()) > -1;
       });
 
       if (this.devices.length > res.length) {
@@ -412,7 +412,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } // return res;
 
     },
-    //mutating 'null' 'undefined' to predefined consts
+    //convert 'null' 'undefined' to predefined consts
     processStrings: function processStrings() {
       var _this2 = this;
 
@@ -477,9 +477,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this4.processStrings();
 
         _this4.devices = _this4.filteredDevices;
-      }).then(function (response) {// const newArray = this.devices.map(a => Object.assign({}, a));
-        // console.log(this.devices);
-        // console.log(newArray);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -492,8 +489,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 axios.get(_rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].api_device_types_read + $device_type_id).then(function (resp_type) {
-                  $item.device_type_image = resp_type['data'].data.device_type_image;
-                  $item.device_type_name = resp_type['data'].data.device_type_name;
+                  $item.device_type_image = resp_type["data"].data.device_type_image;
+                  $item.device_type_name = resp_type["data"].data.device_type_name;
                 });
 
               case 1:
@@ -532,15 +529,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (_add) {
                   //creating Device via API
-                  axios.post(_rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].api_device_create + '?device_name=' + _this5.$refs.addDevice.device_name + '&device_type_id=' + _this5.$refs.addDevice.device_type_id + '&device_desc=' + _this5.$refs.addDevice.device_desc).then(function (resp) {
-                    console.log(resp['data']);
+                  axios.post(_rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].api_device_create + "?device_name=" + _this5.$refs.addDevice.device_name + "&device_type_id=" + _this5.$refs.addDevice.device_type_id + "&device_desc=" + _this5.$refs.addDevice.device_desc).then(function (resp) {
+                    console.log(resp["data"]);
                     var newDevice = {
-                      device_name: resp['data'].device_name,
-                      device_desc: resp['data'].device_desc,
-                      device_type_id: resp['data'].device_type_id,
-                      device_type_name: '',
-                      device_type_image: '',
-                      id: resp['data'].id
+                      device_name: resp["data"].device_name,
+                      device_desc: resp["data"].device_desc,
+                      device_type_id: resp["data"].device_type_id,
+                      device_type_name: "",
+                      device_type_image: "",
+                      id: resp["data"].id
                     };
 
                     _this5.filteredDevices.push(newDevice);
@@ -592,21 +589,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _edit = _context4.sent;
 
                 if (_edit) {
-                  editDevicePost = _rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].api_device_update + id + '/?device_name=' + _this6.$refs.addDevice.device_name + '&device_type_id=' + _this6.$refs.addDevice.device_type_id + '&device_desc=' + _this6.$refs.addDevice.device_desc + '&device_hwid=' + _this6.$refs.addDevice.device_hwid;
+                  editDevicePost = _rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].api_device_update + id + "/?device_name=" + _this6.$refs.addDevice.device_name + "&device_type_id=" + _this6.$refs.addDevice.device_type_id + "&device_desc=" + _this6.$refs.addDevice.device_desc + "&device_hwid=" + _this6.$refs.addDevice.device_hwid;
                   console.log(editDevicePost); //editing Device via API
 
                   axios.put(editDevicePost).then(function (resp) {
-                    console.log(resp['data']);
-                    _this6.filteredDevices[key].device_name = resp['data'].device_name;
-                    _this6.filteredDevices[key].device_desc = resp['data'].device_desc;
-                    _this6.filteredDevices[key].device_type_id = resp['data'].device_type_id;
-                    _this6.filteredDevices[key].device_hwid = resp['data'].device_hwid;
+                    console.log(resp["data"]);
+                    _this6.filteredDevices[key].device_name = resp["data"].device_name;
+                    _this6.filteredDevices[key].device_desc = resp["data"].device_desc;
+                    _this6.filteredDevices[key].device_type_id = resp["data"].device_type_id;
+                    _this6.filteredDevices[key].device_hwid = resp["data"].device_hwid;
 
                     _this6.$root.$refs.toaster.setMessage(_components_strings_constants_messages_js__WEBPACK_IMPORTED_MODULE_5__["default"].EDITED_MESSAGE, _components_strings_constants_messages_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY);
                   }).then(function (resp) {
-                    _this6.setDeviceType(_this6.filteredDevices[key].device_type_id, _this6.devices[key]);
-
                     _this6.devices = _this6.filteredDevices;
+
+                    _this6.setDeviceType(_this6.filteredDevices[key].device_type_id, _this6.filteredDevices[key]);
                   })["catch"](function (error) {
                     console.log(error);
                   });
@@ -944,34 +941,49 @@ var _hoisted_5 = {
   "class": "align-right"
 };
 var _hoisted_6 = {
-  "class": "align-right"
+  "class": "nav nav-pills pt-2 px-2"
+};
+var _hoisted_7 = {
+  "class": "nav-item dropdown w-100"
 };
 
-var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: "",
-    disabled: "",
-    hidden: ""
-  }, "Sorting", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_8 = ["value"];
-
-var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "checkbox",
-    "class": "mt-2 mx-1 text-info",
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "nav-link dropdown-toggle active w-50",
     style: {
-      "margin-top": "0.75rem !important"
-    }
-  }, "DESC", -1
+      "height": "2.3rem"
+    },
+    "data-bs-toggle": "dropdown",
+    href: "#",
+    role: "button",
+    "aria-haspopup": "true",
+    "aria-expanded": "true"
+  }, "Sort", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_9 = {
+  "class": "dropdown-menu",
+  style: {
+    "position": "absolute",
+    "inset": "0px auto auto 0px",
+    "margin": "0px",
+    "transform": "translate3d(0px, 42.4px, 0px)"
+  },
+  "data-popper-placement": "bottom-start"
+};
+var _hoisted_10 = ["value", "onClick"];
+
+var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "dropdown-divider"
+  }, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "col-sm-3 col-xs-3 col-lg-3 p-2",
     style: {
@@ -982,11 +994,11 @@ var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_11 = {
+var _hoisted_13 = {
   "class": "col-sm-3 col-xs-3 col-lg-3 p-2"
 };
 
-var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fas fa-list"
   }, null, -1
@@ -994,9 +1006,9 @@ var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_13 = [_hoisted_12];
+var _hoisted_15 = [_hoisted_14];
 
-var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fas fa-th-large"
   }, null, -1
@@ -1004,46 +1016,46 @@ var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_15 = [_hoisted_14];
-var _hoisted_16 = {
+var _hoisted_17 = [_hoisted_16];
+var _hoisted_18 = {
   "class": "text-primary my-2"
 };
-var _hoisted_17 = {
+var _hoisted_19 = {
   key: 0,
   "class": "row my-2"
 };
-var _hoisted_18 = ["id"];
-var _hoisted_19 = {
+var _hoisted_20 = ["id"];
+var _hoisted_21 = {
   "class": "card border-light"
 };
-var _hoisted_20 = {
+var _hoisted_22 = {
   "class": "card-header"
 };
-var _hoisted_21 = {
+var _hoisted_23 = {
   "class": "text-info"
 };
-var _hoisted_22 = {
+var _hoisted_24 = {
   "class": "card-body"
 };
-var _hoisted_23 = {
+var _hoisted_25 = {
   "class": "card-title text-info"
 };
-var _hoisted_24 = {
+var _hoisted_26 = {
   "class": "card-subtitle text-muted"
 };
-var _hoisted_25 = ["src"];
-var _hoisted_26 = {
+var _hoisted_27 = ["src"];
+var _hoisted_28 = {
   "class": "list-group list-group-flush"
 };
-var _hoisted_27 = {
+var _hoisted_29 = {
   "class": "list-group-item"
 };
-var _hoisted_28 = {
+var _hoisted_30 = {
   "class": "card-body"
 };
-var _hoisted_29 = ["onClick"];
+var _hoisted_31 = ["onClick"];
 
-var _hoisted_30 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_32 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fas fa-edit",
     "aria-hidden": "true"
@@ -1052,12 +1064,12 @@ var _hoisted_30 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Edit ");
+var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Edit ");
 
-var _hoisted_32 = [_hoisted_30, _hoisted_31];
-var _hoisted_33 = ["onClick"];
+var _hoisted_34 = [_hoisted_32, _hoisted_33];
+var _hoisted_35 = ["onClick"];
 
-var _hoisted_34 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_36 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fa fa-trash",
     "aria-hidden": "true"
@@ -1066,39 +1078,39 @@ var _hoisted_34 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete ");
+var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete ");
 
-var _hoisted_36 = [_hoisted_34, _hoisted_35];
-var _hoisted_37 = {
+var _hoisted_38 = [_hoisted_36, _hoisted_37];
+var _hoisted_39 = {
   key: 1,
   "class": "my-2"
 };
-var _hoisted_38 = ["id"];
-var _hoisted_39 = {
+var _hoisted_40 = ["id"];
+var _hoisted_41 = {
   "class": "card-header"
 };
-var _hoisted_40 = {
+var _hoisted_42 = {
   "class": "row"
 };
-var _hoisted_41 = {
+var _hoisted_43 = {
   "class": "col-sm-1 col-xs-1 col-lg-1"
 };
-var _hoisted_42 = ["src"];
-var _hoisted_43 = {
+var _hoisted_44 = ["src"];
+var _hoisted_45 = {
   "class": "col-sm-3 col-xs-3 col-lg-3 align-left"
 };
-var _hoisted_44 = {
+var _hoisted_46 = {
   "class": "text-info"
 };
-var _hoisted_45 = {
+var _hoisted_47 = {
   "class": "col-sm-6 col-xs-4 col-lg-6 align-left"
 };
-var _hoisted_46 = {
+var _hoisted_48 = {
   "class": "col-sm-2 col-xs-2 col-lg-2 align-right"
 };
-var _hoisted_47 = ["onClick"];
+var _hoisted_49 = ["onClick"];
 
-var _hoisted_48 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_50 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fas fa-edit",
     "aria-hidden": "true"
@@ -1107,10 +1119,10 @@ var _hoisted_48 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_49 = [_hoisted_48];
-var _hoisted_50 = ["onClick"];
+var _hoisted_51 = [_hoisted_50];
+var _hoisted_52 = ["onClick"];
 
-var _hoisted_51 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_53 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fa fa-trash",
     "aria-hidden": "true"
@@ -1119,7 +1131,7 @@ var _hoisted_51 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_52 = [_hoisted_51];
+var _hoisted_54 = [_hoisted_53];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_AddDevice = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AddDevice");
 
@@ -1142,130 +1154,125 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "form-control mt-2",
     style: {
       "float": "right",
-      "width": "40%"
+      "width": "50%",
+      "margin-left": "-200px"
     },
     placeholder: "Filter"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.device_filter]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.selectSort = $event;
-    }),
-    "class": "form-select mt-2 text-info",
-    style: {
-      "width": "40%",
-      "float": "left",
-      "margin-right": "10px",
-      "margin-left": "8px"
-    }
-  }, [_hoisted_7, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.sortRules, function (rule) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.device_filter]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"align-right\">\n                    <select\n                        v-model=\"selectSort\"\n                        class=\"form-select mt-2 text-info\"\n                        style=\"\n                            width: 40%;\n                            float: left;\n                            margin-right: 10px;\n                            margin-left: 8px;\n                        \"\n                    >\n                        <option value=\"\" disabled hidden>Sorting</option>\n                        <option\n                            v-for=\"rule in sortRules\"\n                            :key=\"rule.key\"\n                            :value=\"rule.key\"\n                        >\n                            {{ rule.title }}\n                        </option>\n                    </select>\n                </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div>\n                    <input\n                        class=\"form-check-input mt-3\"\n                        type=\"checkbox\"\n                        id=\"checkbox\"\n                        v-model=\"checked\"\n                    />\n                    <label\n                        for=\"checkbox\"\n                        class=\"mt-2 mx-1 text-info\"\n                        style=\"margin-top: 0.75rem !important\"\n                        >DESC</label\n                    >\n                </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.sortRules, function (rule) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+      "class": "dropdown-item",
+      style: {
+        "cursor": "handpoint"
+      },
       key: rule.key,
-      value: rule.key
+      value: rule.key,
+      onClick: function onClick($event) {
+        return $options.doSort(rule.key);
+      }
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(rule.title), 9
     /* TEXT, PROPS */
-    , _hoisted_8);
+    , _hoisted_10);
   }), 128
   /* KEYED_FRAGMENT */
-  ))], 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.selectSort]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "form-check-input mt-3",
-    type: "checkbox",
-    id: "checkbox",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $data.checked = $event;
+  )), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "dropdown-item",
+    href: "#",
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      $data.sortDirection = !$data.sortDirection;
+      $options.doSort($data.sortColumn);
     })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.checked]]), _hoisted_9])]), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.sortDirection ? "ASC" : "DESC"), 1
+  /* TEXT */
+  )])])])]), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary",
-    onClick: _cache[3] || (_cache[3] = function ($event) {
+    onClick: _cache[2] || (_cache[2] = function ($event) {
       return $data.compactView = true;
     })
-  }, _hoisted_13), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, _hoisted_15), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary m-2",
-    onClick: _cache[4] || (_cache[4] = function ($event) {
+    onClick: _cache[3] || (_cache[3] = function ($event) {
       return $data.compactView = false;
     })
-  }, _hoisted_15), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, _hoisted_17), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary",
-    onClick: _cache[5] || (_cache[5] = function () {
+    onClick: _cache[4] || (_cache[4] = function () {
       return $options.setDevice && $options.setDevice.apply($options, arguments);
     })
-  }, " Add Device ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.data_description), 1
+  }, " Add Device ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.data_description), 1
   /* TEXT */
-  )]), !$data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_17, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredDevices, function (device, key) {
+  )]), !$data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredDevices, function (device, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "col-sm-4 col-xs-4 col-lg-4 p-2",
       key: key,
       id: device.id
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_name) + " ", 1
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_name) + " ", 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_21, "(" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.id) + ")", 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_23, "(" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.id) + ")", 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_type_name), 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_type_name), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_desc), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_desc), 1
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: device.device_type_image
     }, null, 8
     /* PROPS */
-    , _hoisted_25), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_27, "HWID: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_hwid), 1
+    , _hoisted_27), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_29, " HWID: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_hwid), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-info",
       onClick: function onClick($event) {
         return $options.doEdit(key, device.id);
       }
-    }, _hoisted_32, 8
+    }, _hoisted_34, 8
     /* PROPS */
-    , _hoisted_29), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    , _hoisted_31), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-secondary",
       onClick: function onClick($event) {
         return $options.doDelete(key, device.id);
       }
-    }, _hoisted_36, 8
+    }, _hoisted_38, 8
     /* PROPS */
-    , _hoisted_33)])])], 8
+    , _hoisted_35)])])], 8
     /* PROPS */
-    , _hoisted_18);
+    , _hoisted_20);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" compact view "), $data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_37, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredDevices, function (device, key) {
+  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" compact view "), $data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_39, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredDevices, function (device, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "card border-primary mb-4 w-100",
       key: key,
       id: device.id
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: device.device_type_image,
       "class": "device-image"
     }, null, 8
     /* PROPS */
-    , _hoisted_42)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_name), 1
+    , _hoisted_44)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_45, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_name), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_44, " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.id) + ") ", 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_46, " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.id) + ") ", 1
     /* TEXT */
-    )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_45, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_type_name) + ": HWID (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_hwid) + ")", 1
+    )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_47, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_type_name) + ": HWID (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_hwid) + ") ", 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-info mx-2",
       onClick: function onClick($event) {
         return $options.doEdit(key, device.id);
       }
-    }, _hoisted_49, 8
+    }, _hoisted_51, 8
     /* PROPS */
-    , _hoisted_47), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    , _hoisted_49), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-secondary",
       onClick: function onClick($event) {
         return $options.doDelete(key, device.id);
       }
-    }, _hoisted_52, 8
+    }, _hoisted_54, 8
     /* PROPS */
-    , _hoisted_50)])])])], 8
+    , _hoisted_52)])])])], 8
     /* PROPS */
-    , _hoisted_38);
+    , _hoisted_40);
   }), 128
   /* KEYED_FRAGMENT */
   ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Paginator, {
@@ -1325,7 +1332,9 @@ __webpack_require__.r(__webpack_exports__);
   INSERTING_CANCELLED: "Inserting Cancelled",
   EDITING_CANCELLED: "Editing Cancelled",
   DELETING_CANCELLED: "Deleting Cancelled",
-  NO_DESCRIPTION: " no description "
+  NO_DESCRIPTION: " no description ",
+  SORT_BY_NAME: "By Name",
+  SORT_BY_ID: "By ID"
 });
 
 /***/ }),

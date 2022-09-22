@@ -970,7 +970,9 @@ __webpack_require__.r(__webpack_exports__);
   INSERTING_CANCELLED: "Inserting Cancelled",
   EDITING_CANCELLED: "Editing Cancelled",
   DELETING_CANCELLED: "Deleting Cancelled",
-  NO_DESCRIPTION: " no description "
+  NO_DESCRIPTION: " no description ",
+  SORT_BY_NAME: "By Name",
+  SORT_BY_ID: "By ID"
 });
 
 /***/ }),
