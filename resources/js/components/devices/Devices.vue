@@ -3,65 +3,31 @@
         <AddDevice ref="addDevice"></AddDevice>
         <ConfirmDialogue ref="confirmDialogue" />
         <h1 class="align-left px-4 pb-3">Registered Devices</h1>
-        <div class="row" style="box-shadow: #6f42c1 0px 0px 10px; margin: 0px">
-            <div class="col-sm-6 col-xs-6 col-lg-6 p-2">
+        <div class="row px-2 row-shadow">
+            <div class="col-sm-3 col-xs-3 col-lg-3 p-2">
                 <div class="align-right">
                     <input
                         v-model="device_filter"
                         class="form-control mt-2"
-                        style="float: right; width: 50%; margin-left: -200px;"
+                        style="float: right; width: 50%0"
                         placeholder="Filter"
                     />
                 </div>
-                <!-- <div class="align-right">
-                    <select
-                        v-model="selectSort"
-                        class="form-select mt-2 text-info"
-                        style="
-                            width: 40%;
-                            float: left;
-                            margin-right: 10px;
-                            margin-left: 8px;
-                        "
-                    >
-                        <option value="" disabled hidden>Sorting</option>
-                        <option
-                            v-for="rule in sortRules"
-                            :key="rule.key"
-                            :value="rule.key"
-                        >
-                            {{ rule.title }}
-                        </option>
-                    </select>
-                </div> -->
-
-                <!-- <div>
-                    <input
-                        class="form-check-input mt-3"
-                        type="checkbox"
-                        id="checkbox"
-                        v-model="checked"
-                    />
-                    <label
-                        for="checkbox"
-                        class="mt-2 mx-1 text-info"
-                        style="margin-top: 0.75rem !important"
-                        >DESC</label
-                    >
-                </div> -->
-
-                <ul class="nav nav-pills pt-2 px-2">
-                    <li class="nav-item dropdown w-100 ">
+            </div>
+            <div class="col-sm-3 col-xs-3 col-lg-3 p-2">
+                <ul class="nav nav-pills pt-2">
+                    <li class="nav-item dropdown w-100">
                         <button
-                            class="nav-link dropdown-toggle active w-50 "
-                            style='height: 2.3rem;'
+                            class="nav-link dropdown-toggle active"
+                            style="height: 2.3rem; width: 100%;"
                             data-bs-toggle="dropdown"
                             href="#"
                             role="button"
                             aria-haspopup="true"
                             aria-expanded="true"
-                            >Sort</button
                         >
+                            {{ SortName }}
+                        </button>
                         <div
                             class="dropdown-menu"
                             style="
@@ -74,12 +40,13 @@
                         >
                             <button
                                 class="dropdown-item"
-                                style="cursor: handpoint;"
+                                style="cursor: handpoint"
                                 v-for="rule in sortRules"
                                 :key="rule.key"
                                 :value="rule.key"
                                 @click="doSort(rule.key)"
-                                >{{ rule.title }}
+                            >
+                                {{ rule.title }}
                             </button>
                             <div class="dropdown-divider"></div>
                             <button
@@ -89,17 +56,14 @@
                                     sortDirection = !sortDirection;
                                     doSort(sortColumn);
                                 "
-                                >{{ sortDirection ? "ASC" : "DESC" }}</button
                             >
+                                {{ sortDirection ? "ASC" : "DESC" }}
+                            </button>
                         </div>
                     </li>
                 </ul>
             </div>
-            <div
-                class="col-sm-3 col-xs-3 col-lg-3 p-2"
-                style="text-align: right !important"
-            ></div>
-            <div class="col-sm-3 col-xs-3 col-lg-3 p-2">
+            <div class="col-sm-6 col-xs-6 col-lg-6 p-2 align-right">
                 <button class="btn btn-primary" @click="compactView = true">
                     <i class="fas fa-list"></i>
                 </button>
@@ -241,14 +205,13 @@ export default {
 
     data() {
         return {
-            devices: [],
-            filteredDevices: [],
-            data_description: "",
-            visible: true,
-            compactView: true,
-            device_filter: "",
-            selectSort: "",
-            sortOrder: "ASC",
+            devices: [], // api loaded list of devices
+            filteredDevices: [], //filtered array of devices
+            data_description: "", //table data description label
+            visible: true, //devices view visibilty
+            compactView: true, //copact view mode
+            device_filter: "", //filtering string 
+            sortOrder: MessagesConstants.SORT_ASC,
             sortDirection: false,
             sortColumn: "device_name",
             sortRules: [
@@ -273,16 +236,18 @@ export default {
         selectSort: function () {
             handler: this.doSort();
         },
-
-        // sortDirection: function () {
-        //     handler: this.doSort();
-        // },
     },
 
     computed: {
-        // sortDirection: function () {
-        //     sortOrder = (this.sortDirection)?'DESC':'ASC';
-        // }
+        SortName() {
+            let res = this.sortColumn === "id"
+                ? MessagesConstants.SORT_BY_ID
+                : MessagesConstants.SORT_BY_NAME;
+            res += ' ('; 
+            res += (!this.sortDirection)?MessagesConstants.SORT_ASC:MessagesConstants.SORT_DESC;
+            res += ')';
+            return res;
+        },
     },
 
     methods: {
@@ -394,6 +359,7 @@ export default {
                     this.filteredDevices = response.data;
                     this.processStrings();
                     this.devices = this.filteredDevices;
+                    this.doSort(this.sortColumn);
                 })
                 .catch((err) => console.log(err));
         },

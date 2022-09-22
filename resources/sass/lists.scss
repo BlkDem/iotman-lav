@@ -1,5 +1,9 @@
 @import '_variables.scss';
 
+.row-shadow {
+    box-shadow: $purple 0px 0px 10px; margin: 0px;
+}
+
 .device-image {
     width: 70px;
     margin-top: -50px;

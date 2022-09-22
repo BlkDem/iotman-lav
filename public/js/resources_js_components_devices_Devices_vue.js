@@ -324,13 +324,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       devices: [],
+      // api loaded list of devices
       filteredDevices: [],
+      //filtered array of devices
       data_description: "",
+      //table data description label
       visible: true,
+      //devices view visibilty
       compactView: true,
+      //copact view mode
       device_filter: "",
-      selectSort: "",
-      sortOrder: "ASC",
+      //filtering string 
+      sortOrder: _components_strings_constants_messages_js__WEBPACK_IMPORTED_MODULE_5__["default"].SORT_ASC,
       sortDirection: false,
       sortColumn: "device_name",
       sortRules: [{
@@ -356,14 +361,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     selectSort: function selectSort() {
       handler: this.doSort();
-    } // sortDirection: function () {
-    //     handler: this.doSort();
-    // },
-
+    }
   },
-  computed: {// sortDirection: function () {
-    //     sortOrder = (this.sortDirection)?'DESC':'ASC';
-    // }
+  computed: {
+    SortName: function SortName() {
+      var res = this.sortColumn === "id" ? _components_strings_constants_messages_js__WEBPACK_IMPORTED_MODULE_5__["default"].SORT_BY_ID : _components_strings_constants_messages_js__WEBPACK_IMPORTED_MODULE_5__["default"].SORT_BY_NAME;
+      res += ' (';
+      res += !this.sortDirection ? _components_strings_constants_messages_js__WEBPACK_IMPORTED_MODULE_5__["default"].SORT_ASC : _components_strings_constants_messages_js__WEBPACK_IMPORTED_MODULE_5__["default"].SORT_DESC;
+      res += ')';
+      return res;
+    }
   },
   methods: {
     doSort: function doSort($c) {
@@ -477,6 +484,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this4.processStrings();
 
         _this4.devices = _this4.filteredDevices;
+
+        _this4.doSort(_this4.sortColumn);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -928,42 +937,36 @@ var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
 });
 
 var _hoisted_3 = {
-  "class": "row",
-  style: {
-    "box-shadow": "#6f42c1 0px 0px 10px",
-    "margin": "0px"
-  }
+  "class": "row px-2 row-shadow"
 };
 var _hoisted_4 = {
-  "class": "col-sm-6 col-xs-6 col-lg-6 p-2"
+  "class": "col-sm-3 col-xs-3 col-lg-3 p-2"
 };
 var _hoisted_5 = {
   "class": "align-right"
 };
 var _hoisted_6 = {
-  "class": "nav nav-pills pt-2 px-2"
+  "class": "col-sm-3 col-xs-3 col-lg-3 p-2"
 };
 var _hoisted_7 = {
+  "class": "nav nav-pills pt-2"
+};
+var _hoisted_8 = {
   "class": "nav-item dropdown w-100"
 };
-
-var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "nav-link dropdown-toggle active w-50",
-    style: {
-      "height": "2.3rem"
-    },
-    "data-bs-toggle": "dropdown",
-    href: "#",
-    role: "button",
-    "aria-haspopup": "true",
-    "aria-expanded": "true"
-  }, "Sort", -1
-  /* HOISTED */
-  );
-});
-
 var _hoisted_9 = {
+  "class": "nav-link dropdown-toggle active",
+  style: {
+    "height": "2.3rem",
+    "width": "100%"
+  },
+  "data-bs-toggle": "dropdown",
+  href: "#",
+  role: "button",
+  "aria-haspopup": "true",
+  "aria-expanded": "true"
+};
+var _hoisted_10 = {
   "class": "dropdown-menu",
   style: {
     "position": "absolute",
@@ -973,9 +976,9 @@ var _hoisted_9 = {
   },
   "data-popper-placement": "bottom-start"
 };
-var _hoisted_10 = ["value", "onClick"];
+var _hoisted_11 = ["value", "onClick"];
 
-var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "dropdown-divider"
   }, null, -1
@@ -983,19 +986,8 @@ var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "col-sm-3 col-xs-3 col-lg-3 p-2",
-    style: {
-      "text-align": "right !important"
-    }
-  }, null, -1
-  /* HOISTED */
-  );
-});
-
 var _hoisted_13 = {
-  "class": "col-sm-3 col-xs-3 col-lg-3 p-2"
+  "class": "col-sm-6 col-xs-6 col-lg-6 p-2 align-right"
 };
 
 var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
@@ -1154,13 +1146,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "form-control mt-2",
     style: {
       "float": "right",
-      "width": "50%",
-      "margin-left": "-200px"
+      "width": "50%0"
     },
     placeholder: "Filter"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.device_filter]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"align-right\">\n                    <select\n                        v-model=\"selectSort\"\n                        class=\"form-select mt-2 text-info\"\n                        style=\"\n                            width: 40%;\n                            float: left;\n                            margin-right: 10px;\n                            margin-left: 8px;\n                        \"\n                    >\n                        <option value=\"\" disabled hidden>Sorting</option>\n                        <option\n                            v-for=\"rule in sortRules\"\n                            :key=\"rule.key\"\n                            :value=\"rule.key\"\n                        >\n                            {{ rule.title }}\n                        </option>\n                    </select>\n                </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div>\n                    <input\n                        class=\"form-check-input mt-3\"\n                        type=\"checkbox\"\n                        id=\"checkbox\"\n                        v-model=\"checked\"\n                    />\n                    <label\n                        for=\"checkbox\"\n                        class=\"mt-2 mx-1 text-info\"\n                        style=\"margin-top: 0.75rem !important\"\n                        >DESC</label\n                    >\n                </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.sortRules, function (rule) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.device_filter]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.SortName), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.sortRules, function (rule) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
       "class": "dropdown-item",
       style: {
@@ -1173,10 +1166,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(rule.title), 9
     /* TEXT, PROPS */
-    , _hoisted_10);
+    , _hoisted_11);
   }), 128
   /* KEYED_FRAGMENT */
-  )), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  )), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "dropdown-item",
     href: "#",
     onClick: _cache[1] || (_cache[1] = function ($event) {
@@ -1185,7 +1178,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.sortDirection ? "ASC" : "DESC"), 1
   /* TEXT */
-  )])])])]), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  )])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary",
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return $data.compactView = true;
@@ -1334,7 +1327,10 @@ __webpack_require__.r(__webpack_exports__);
   DELETING_CANCELLED: "Deleting Cancelled",
   NO_DESCRIPTION: " no description ",
   SORT_BY_NAME: "By Name",
-  SORT_BY_ID: "By ID"
+  SORT_BY_ID: "By ID",
+  SORT_NAME: "Sort",
+  SORT_ASC: "ASC",
+  SORT_DESC: "DESC"
 });
 
 /***/ }),
@@ -1411,7 +1407,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".align-left[data-v-6f4f8890] {\n  text-align: left !important;\n}\n.align-right[data-v-6f4f8890] {\n  text-align: right !important;\n}\n.align-center[data-v-6f4f8890] {\n  text-align: center !important;\n}\n.device-image[data-v-6f4f8890] {\n  width: 70px;\n  margin-top: -50px;\n  margin-bottom: -60px;\n  margin-left: -10px;\n  border-radius: 10px;\n  box-shadow: #6f42c1 0px 0px 10px;\n}\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n.device-image[data-v-6f4f8890] {\n    width: 50px;\n    margin-top: -55px;\n    margin-bottom: -29px;\n    margin-left: -249px;\n    border-radius: 10px;\n    box-shadow: #6f42c1 0px 0px 10px;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".align-left[data-v-6f4f8890] {\n  text-align: left !important;\n}\n.align-right[data-v-6f4f8890] {\n  text-align: right !important;\n}\n.align-center[data-v-6f4f8890] {\n  text-align: center !important;\n}\n.row-shadow[data-v-6f4f8890] {\n  box-shadow: #6f42c1 0px 0px 10px;\n  margin: 0px;\n}\n.device-image[data-v-6f4f8890] {\n  width: 70px;\n  margin-top: -50px;\n  margin-bottom: -60px;\n  margin-left: -10px;\n  border-radius: 10px;\n  box-shadow: #6f42c1 0px 0px 10px;\n}\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n.device-image[data-v-6f4f8890] {\n    width: 50px;\n    margin-top: -55px;\n    margin-bottom: -29px;\n    margin-left: -249px;\n    border-radius: 10px;\n    box-shadow: #6f42c1 0px 0px 10px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

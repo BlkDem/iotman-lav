@@ -11,4 +11,7 @@ export default {
 
     SORT_BY_NAME: "By Name",
     SORT_BY_ID: "By ID",
+    SORT_NAME: "Sort",
+    SORT_ASC: "ASC",
+    SORT_DESC: "DESC",
 }

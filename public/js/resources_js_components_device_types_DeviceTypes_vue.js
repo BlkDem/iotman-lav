@@ -972,7 +972,10 @@ __webpack_require__.r(__webpack_exports__);
   DELETING_CANCELLED: "Deleting Cancelled",
   NO_DESCRIPTION: " no description ",
   SORT_BY_NAME: "By Name",
-  SORT_BY_ID: "By ID"
+  SORT_BY_ID: "By ID",
+  SORT_NAME: "Sort",
+  SORT_ASC: "ASC",
+  SORT_DESC: "DESC"
 });
 
 /***/ }),
@@ -1016,7 +1019,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".device-image[data-v-c6c572a2] {\n  width: 70px;\n  margin-top: -50px;\n  margin-bottom: -60px;\n  margin-left: -10px;\n  border-radius: 10px;\n  box-shadow: #6f42c1 0px 0px 10px;\n}\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n.device-image[data-v-c6c572a2] {\n    width: 50px;\n    margin-top: -55px;\n    margin-bottom: -29px;\n    margin-left: -249px;\n    border-radius: 10px;\n    box-shadow: #6f42c1 0px 0px 10px;\n}\n}\n.align-left[data-v-c6c572a2] {\n  text-align: left !important;\n}\n.align-right[data-v-c6c572a2] {\n  text-align: right !important;\n}\n.align-center[data-v-c6c572a2] {\n  text-align: center !important;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".row-shadow[data-v-c6c572a2] {\n  box-shadow: #6f42c1 0px 0px 10px;\n  margin: 0px;\n}\n.device-image[data-v-c6c572a2] {\n  width: 70px;\n  margin-top: -50px;\n  margin-bottom: -60px;\n  margin-left: -10px;\n  border-radius: 10px;\n  box-shadow: #6f42c1 0px 0px 10px;\n}\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n.device-image[data-v-c6c572a2] {\n    width: 50px;\n    margin-top: -55px;\n    margin-bottom: -29px;\n    margin-left: -249px;\n    border-radius: 10px;\n    box-shadow: #6f42c1 0px 0px 10px;\n}\n}\n.align-left[data-v-c6c572a2] {\n  text-align: left !important;\n}\n.align-right[data-v-c6c572a2] {\n  text-align: right !important;\n}\n.align-center[data-v-c6c572a2] {\n  text-align: center !important;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
