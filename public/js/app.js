@@ -23422,7 +23422,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)({});
 
-app.component('navbar', _components_header_Navbar_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
+app.component('Navbar', _components_header_Navbar_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
 app.component('toaster', _components_common_Toaster_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
 app.component('device-type-list', (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineAsyncComponent)(function () {

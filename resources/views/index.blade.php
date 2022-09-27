@@ -7,11 +7,30 @@
     <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
     <title>Umolab Devices</title>
     <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
+    
+    /*
+    * checking and applying Application Theme via asset the specified CSS file
+    * All app.css in their folders /css/ThemeFolder/app.css and default theme in /css/app.css 
+    */
+    
+    @php      
+      $_themeCss = '/css/app.css';
+      $_themed = isset($_GET["theme"]);
+      if ($_themed)
+      {
+        $_themeName = $_GET["theme"];
+        if(file_exists(public_path('/css/' . $_themeName. '/app.css')))
+        {
+          $_themeCss = '/css/' . $_themeName. '/app.css';
+        }
+      }
+    @endphp
+    
+    <link rel="stylesheet" href="{{ asset($_themeCss) }}">
 </head>
 <body class="container-fluid">
 <div id="app" class="container text-center m-20">
-    <navbar></navbar>
+    <Navbar ref="navbar"></Navbar>
     <Toaster ref="toaster"></Toaster>
     <device-list ref="DeviceRef"></device-list>
     <device-type-list ref="DeviceTypeRef"></device-type-list>

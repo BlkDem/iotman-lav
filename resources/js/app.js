@@ -19,7 +19,7 @@ const app = createApp({});
 
 import Navbar from './components/header/Navbar.vue';
 
-app.component('navbar', Navbar);
+app.component('Navbar', Navbar);
 
 import Toaster from './components/common/Toaster.vue';
 app.component('toaster', Toaster);

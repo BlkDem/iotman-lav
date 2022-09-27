@@ -227,7 +227,7 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
 
 <style lang="scss" scoped>
 
-    @import '../../../sass/lists.scss';
-    @import '../../../sass/aligns.scss';
+    //@import '../../../sass/lists.scss';
+    //@import '../../../sass/aligns.scss';
     
 </style>

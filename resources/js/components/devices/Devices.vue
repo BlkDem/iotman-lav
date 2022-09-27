@@ -2,14 +2,14 @@
     <div v-if="visible">
         <AddDevice ref="addDevice"></AddDevice>
         <ConfirmDialogue ref="confirmDialogue" />
-        <h1 class="align-left px-4 pb-3" style='margin-top: 5rem;'>Registered Devices</h1>
-        <div class="row px-2 row-shadow">
+        <h1 class="align-left px-4 pb-3" style='margin-top: 5.5rem;'>Registered Devices</h1>
+        <!-- <div class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="col-sm-3 col-xs-3 col-lg-3 p-2">
                 <div class="align-right">
                     <input
                         v-model="device_filter"
                         class="form-control mt-2"
-                        style="float: right; width: 50%0"
+                        style="float: right; width: 50%"
                         placeholder="Filter"
                     />
                 </div>
@@ -77,7 +77,55 @@
                     Add Device
                 </button>
             </div>
-        </div>
+        </div> -->
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <input class="form-control me-sm-2" type="text" placeholder="Search" v-model="device_filter">
+        </li>
+        <li class="nav-item dropdown ">
+          <a class="nav-link dropdown-toggle mx-2" data-bs-toggle="dropdown" href="#" 
+            role="button" aria-haspopup="true" aria-expanded="false">{{ SortName }}</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#" v-for="rule in sortRules"
+                    :key="rule.key"
+                    :value="rule.key"
+                    @click="doSort(rule.key)">{{ rule.title }}</a>
+
+                    
+
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#"
+                                @click="
+                                    sortDirection = !sortDirection;
+                                    doSort(sortColumn);
+                                ">{{ sortDirection ? sortOrderStrings[0] : sortOrderStrings[1] }}</a>
+          </div>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <button class="btn btn-primary" @click="compactView = true">
+                    <i class="fas fa-list"></i>
+                </button>
+                <button
+                    class="btn btn-primary mx-2"
+                    @click="compactView = false"
+                >
+                    <i class="fas fa-th-large"></i>
+                </button>
+                <button class="btn btn-primary" @click="setDevice">
+                    Add Device
+                </button>
+        
+      </form>
+    </div>
+  </div>
+</nav>
+
 
         <div>
             <h5 class="text-primary my-2">{{ data_description }}</h5>
@@ -512,7 +560,29 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "../../../sass/aligns.scss";
-@import "../../../sass/lists.scss";
+<style lang="scss">
+
+//@import "../../../sass/app.scss";
+//@import "../../../sass/lists.scss";
+
+.device-image {
+    width: 70px;
+    margin-top: -50px;
+    margin-bottom: -60px;
+    margin-left: -10px;
+    border-radius: 10px;
+    box-shadow: #eee 0px 0px 8px;
+}
+
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+    .device-image {
+        width: 50px;
+        margin-top: -55px;
+        margin-bottom: -29px;
+        margin-left: -249px;
+        border-radius: 10px;
+        box-shadow: #eee 0px 0px 8px;
+    }
+}
+
 </style>

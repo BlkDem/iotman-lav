@@ -7,7 +7,7 @@
         <div class="modal-body align-left">
             <label class="px-2"><strong>Device Name</strong></label>
             <input v-model="device_name" class="form-control p-2 mb-2" placeholder="Input Device Name"/>
-            <label class="px-2"><strong>Device Desc</strong></label>
+            <label class="px-2"><strong>Device Description</strong></label>
             <input v-model="device_desc" class="form-control p-2 mb-2" placeholder="Input Device Desc"/>
             <label class="px-2"><strong>Device Hardware Address</strong></label>
             <input v-model="device_hwid" class="form-control p-2 mb-2" placeholder="Input Device HWID"/>
