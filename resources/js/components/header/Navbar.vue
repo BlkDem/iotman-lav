@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary my-4" style="position: sticky; top: 0px; z-index: 1;">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Umolab</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"

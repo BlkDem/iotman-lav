@@ -4,7 +4,7 @@
         <ConfirmDialogue ref="confirmDialogue" />
         <div class="row">
             <div class="col-sm-6 col-xs-6 col-lg-6 p-2">
-                <h1  class="align-left px-4">Device Types</h1>
+                <h1  class="align-left px-4 pb-3" style='margin-top: 5rem;'>Device Types</h1>
             </div>
             <div class="col-sm-6 col-xs-6 col-lg-6 p-2" style="text-align: right !important;">
                 <button class="btn btn-primary" @click="compactView=true">

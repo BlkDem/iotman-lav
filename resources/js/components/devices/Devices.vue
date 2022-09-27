@@ -2,7 +2,7 @@
     <div v-if="visible">
         <AddDevice ref="addDevice"></AddDevice>
         <ConfirmDialogue ref="confirmDialogue" />
-        <h1 class="align-left px-4 pb-3">Registered Devices</h1>
+        <h1 class="align-left px-4 pb-3" style='margin-top: 5rem;'>Registered Devices</h1>
         <div class="row px-2 row-shadow">
             <div class="col-sm-3 col-xs-3 col-lg-3 p-2">
                 <div class="align-right">
@@ -29,7 +29,7 @@
                             {{ SortName }}
                         </button>
                         <div
-                            class="dropdown-menu"
+                            class="dropdown-menu w-100"
                             style="
                                 position: absolute;
                                 inset: 0px auto auto 0px;
@@ -57,7 +57,7 @@
                                     doSort(sortColumn);
                                 "
                             >
-                                {{ sortDirection ? "ASC" : "DESC" }}
+                                {{ sortDirection ? sortOrderStrings[0] : sortOrderStrings[1] }}
                             </button>
                         </div>
                     </li>
@@ -211,6 +211,7 @@ export default {
             visible: true, //devices view visibilty
             compactView: true, //copact view mode
             device_filter: "", //filtering string 
+            sortOrderStrings: [MessagesConstants.SORT_ASC, MessagesConstants.SORT_DESC],
             sortOrder: MessagesConstants.SORT_ASC,
             sortDirection: false,
             sortColumn: "device_name",

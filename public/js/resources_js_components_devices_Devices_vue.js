@@ -335,6 +335,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       //copact view mode
       device_filter: "",
       //filtering string 
+      sortOrderStrings: [_components_strings_constants_messages_js__WEBPACK_IMPORTED_MODULE_5__["default"].SORT_ASC, _components_strings_constants_messages_js__WEBPACK_IMPORTED_MODULE_5__["default"].SORT_DESC],
       sortOrder: _components_strings_constants_messages_js__WEBPACK_IMPORTED_MODULE_5__["default"].SORT_ASC,
       sortDirection: false,
       sortColumn: "device_name",
@@ -930,7 +931,10 @@ var _hoisted_1 = {
 
 var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
-    "class": "align-left px-4 pb-3"
+    "class": "align-left px-4 pb-3",
+    style: {
+      "margin-top": "5rem"
+    }
   }, "Registered Devices", -1
   /* HOISTED */
   );
@@ -967,7 +971,7 @@ var _hoisted_9 = {
   "aria-expanded": "true"
 };
 var _hoisted_10 = {
-  "class": "dropdown-menu",
+  "class": "dropdown-menu w-100",
   style: {
     "position": "absolute",
     "inset": "0px auto auto 0px",
@@ -1176,7 +1180,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       $data.sortDirection = !$data.sortDirection;
       $options.doSort($data.sortColumn);
     })
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.sortDirection ? "ASC" : "DESC"), 1
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.sortDirection ? $data.sortOrderStrings[0] : $data.sortOrderStrings[1]), 1
   /* TEXT */
   )])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary",
