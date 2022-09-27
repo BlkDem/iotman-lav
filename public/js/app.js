@@ -23259,7 +23259,7 @@ var _hoisted_4 = {
   "class": "me-auto"
 };
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, "11 mins ago", -1
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, "Info", -1
 /* HOISTED */
 );
 

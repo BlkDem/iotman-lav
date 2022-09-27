@@ -5,13 +5,13 @@
         </div>
         
         <div class="modal-body align-left">
-            <label class="px-2">Device Name</label>
-            <input v-model="device_name" class="form-control p-2 mb-4" placeholder="Input Device Name"/>
-            <label class="px-2">Device Desc</label>
-            <input v-model="device_desc" class="form-control p-2 mb-4" placeholder="Input Device Desc"/>
-            <label class="px-2">Device Hardware Address</label>
-            <input v-model="device_hwid" class="form-control p-2 mb-4" placeholder="Input Device HWID"/>
-            <label class="px-2">Select Device Type {{device_type_id}}</label>
+            <label class="px-2"><strong>Device Name</strong></label>
+            <input v-model="device_name" class="form-control p-2 mb-2" placeholder="Input Device Name"/>
+            <label class="px-2"><strong>Device Desc</strong></label>
+            <input v-model="device_desc" class="form-control p-2 mb-2" placeholder="Input Device Desc"/>
+            <label class="px-2"><strong>Device Hardware Address</strong></label>
+            <input v-model="device_hwid" class="form-control p-2 mb-2" placeholder="Input Device HWID"/>
+            <label class="px-2"><strong>Select Device Type</strong></label>
             <DeviceTypesCombo ref="types" v-bind:id="device_type_id"></DeviceTypesCombo>
         </div>
         <div class="btns my-2 d-grid gap-2 px-4">

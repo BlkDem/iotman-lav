@@ -3,7 +3,7 @@
         <div class="toast hide toastBasic" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
             <div class="toast-header">
                 <strong class="me-auto">{{ header }}</strong>
-                <small>11 mins ago</small>
+                <small>Info</small>
                 <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close">
                     <span aria-hidden="true"></span>
                 </button>
@@ -41,7 +41,3 @@ export default {
 
 }
 </script>
-
-<style>
-
-</style>

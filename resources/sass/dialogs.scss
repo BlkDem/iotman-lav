@@ -1,4 +1,4 @@
-
+@import "./app.scss";
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 0.3s;
@@ -10,7 +10,7 @@
 }
 
 .popup-modal {
-    color: $light;
+    // color: $light;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -19,12 +19,14 @@
     padding: 0.5rem;
     display: flex;
     align-items: center;
-    z-index: 1;
+    z-index: 1031;
 }
 
 .window {
-    background: $primary;
-    border-radius: 5px;
+    //background-color: $dark;
+    background-color: $primary;
+    border: 1px solid $secondary;
+    border-radius: 10px;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
     max-width: 480px;
     margin-left: auto;
