@@ -13,7 +13,7 @@
     * All app.css in their folders /css/ThemeFolder/app.css and default theme in /css/app.css 
     */
     
-    @php      
+    <?php      
       $_themeCss = '/css/app.css';
       $_themed = isset($_GET["theme"]);
       if ($_themed)
@@ -24,7 +24,7 @@
           $_themeCss = '/css/' . $_themeName. '/app.css';
         }
       }
-    @endphp
+    ?>
     
     <link rel="stylesheet" href="{{ asset($_themeCss) }}">
 </head>
