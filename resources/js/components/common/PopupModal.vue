@@ -2,7 +2,7 @@
     <transition name="fade">
 
         <div class="popup-modal " v-if="isVisible">
-            <div class="window modal-dialog modal-content bg-primary">
+            <div class="window modal-dialog modal-content bg-light text-dark">
                 <slot></slot>
             </div>
         </div>

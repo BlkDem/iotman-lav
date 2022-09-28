@@ -4,23 +4,3 @@
 @import "~bootswatch/dist/yeti/variables";
 @import "~bootstrap/scss/bootstrap";
 @import "~bootswatch/dist/yeti/bootswatch";
-
-.device-image {
-    width: 70px;
-    margin-top: -50px;
-    margin-bottom: -60px;
-    margin-left: -10px;
-    border-radius: 10px;
-    box-shadow: #eee 0px 0px 8px;
-}
-
-@media only screen and (min-width : 320px) and (max-width : 480px) {
-    .device-image {
-        width: 50px;
-        margin-top: -55px;
-        margin-bottom: -29px;
-        margin-left: -249px;
-        border-radius: 10px;
-        box-shadow: #eee 0px 0px 8px;
-    }
-}

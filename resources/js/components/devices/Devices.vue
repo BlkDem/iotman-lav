@@ -198,14 +198,14 @@
                                 </span>
                             </h5>
                         </div>
-                        <div class="col-sm-6 col-xs-4 col-lg-6 align-left">
+                        <div class="col-sm-5 col-xs-5 col-lg-5 align-left">
                             <h6>
                                 {{ device.device_type_name }}: HWID ({{
                                     device.device_hwid
                                 }})
                             </h6>
                         </div>
-                        <div class="col-sm-2 col-xs-2 col-lg-2 align-right">
+                        <div class="col-sm-3 col-xs-3 col-lg-3 align-right">
                             <button
                                 class="btn btn-info mx-2"
                                 @click="doEdit(key, device.id)"

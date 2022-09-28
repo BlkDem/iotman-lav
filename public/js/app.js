@@ -23141,7 +23141,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _components_strings_constants_themes_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/strings_constants/themes.js */ "./resources/js/components/strings_constants/themes.js");
+/* harmony import */ var _themes_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../themes.js */ "./resources/js/themes.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -23169,7 +23169,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   methods: {
     readThemes: function readThemes() {
-      this.themes = _toConsumableArray(_components_strings_constants_themes_js__WEBPACK_IMPORTED_MODULE_0__["default"].Themes);
+      this.themes = _toConsumableArray(_themes_js__WEBPACK_IMPORTED_MODULE_0__["default"].Themes);
     },
     changeTheme: function changeTheme(_theme) {
       this.currentTheme = _theme;
@@ -23313,7 +23313,9 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "dropdown-menu",
   style: {
-    "margin-left": "-32px"
+    "margin-left": "-32px",
+    "max-height": "660px",
+    "overflow-y": "auto"
   }
 };
 var _hoisted_4 = ["onClick"];
@@ -23612,10 +23614,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/strings_constants/themes.js":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/strings_constants/themes.js ***!
-  \*************************************************************/
+/***/ "./resources/js/themes.js":
+/*!********************************!*\
+  !*** ./resources/js/themes.js ***!
+  \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";

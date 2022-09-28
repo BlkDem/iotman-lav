@@ -76,6 +76,7 @@ export default {
   },
 
   created() {
+
     //this.isDeviceTypesVisible = this.$root.$refs.DeviceTypeRef.getVisible();
     //console.log(this.$root.$refs.DeviceTypeRef);
   },

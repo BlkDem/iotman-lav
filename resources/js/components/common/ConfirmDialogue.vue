@@ -3,8 +3,8 @@
         <h2 style="margin-top: 0">{{ title }}</h2>
         <p>{{ message }}</p>
         <div class="btns">
-            <span class="btn btn-danger" @click="_confirm">{{ okButton }}</span>
-            <button class="btn btn-primary" @click="_cancel">{{ cancelButton }}</button>
+            <span class="btn btn-danger w-25 mx-1" @click="_confirm">{{ okButton }}</span>
+            <button class="btn btn-primary w-25 mx-1" @click="_cancel">{{ cancelButton }}</button>
         </div>
     </PopupModal>
 </template>
