@@ -28,6 +28,25 @@
     ?>
     
     <link rel="stylesheet" href="{{ asset($_themeCss) }}">
+    <style>
+      ::-webkit-scrollbar {
+        width: 10px; 
+      }
+ 
+      ::-webkit-scrollbar-thumb {   
+        /* border-radius: 30px; */
+        background: -webkit-gradient(linear,left top,left bottom,from(var(--bs-primary)),to(var(--bs-secondary)));
+        /* background: -webkit-gradient(linear-gradient(0, var(--bs-secondary), 0%, var(--bs-secondary), 50%, var(--bs-primary), 100%)); */
+        /* background: -webkit-gradient(linear-gradient(90deg, rgba(var(--bs-primary),1) 0%, rgba(var(--bs-secondary),1) 50%, rgba(var(--bs-rpimary),1) 100%)); */
+        /* box-shadow: inset 2px 2px 2px rgba(var(--bs-light),.25), inset -2px -2px 2px rgba(var(--bs-dark),.25);} */
+ 
+      ::-webkit-scrollbar-track {     
+        background-color: var(--bs-light);
+        border-radius:10px;
+        /* background: linear-gradient(to right, rgba(var(--bs-light),.25), rgba(var(--bs-light),.25) 1px, 
+          rgba(var(--bs-light),.25) 1px, rgba(var(--bs-light),.25)); */
+      }
+    </style>
 </head>
 <body class="container-fluid">
 <div id="app" class="container text-center m-20">

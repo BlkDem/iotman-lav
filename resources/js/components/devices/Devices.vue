@@ -235,7 +235,7 @@ import AddDevice from "./AddDevice.vue";
 import DeviceTypesCombo from "../../components/device_types/DeviceTypesCombo.vue";
 import Paginator from "../../components/common/Paginator.vue";
 import DeviceStringConstants from "../../components/strings_constants/devices/index";
-import MessagesConstants from "../../components/strings_constants/messages.js";
+import MessagesConstants from "../strings_constants/strings.js";
 import APIConstants from "../../rest_api.js";
 // import MyMqtt from '../components/MyMqtt.vue';
 

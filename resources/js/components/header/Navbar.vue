@@ -51,6 +51,9 @@
         <ul class="navbar-nav me-auto">
             <ThemeCombo ref="themeCombo"></ThemeCombo>
         </ul>
+        <ul class="navbar-nav me-auto">
+            <LangCombo ref="langCombo"></LangCombo>
+        </ul>
       </div>
     </div>
   </nav>
@@ -58,10 +61,13 @@
 
 <script>
 import ThemeCombo from "../../components/common/ThemeCombo.vue";
+import LangCombo from "../../components/common/LangCombo.vue";
+import MessagesConstants from "../strings_constants/strings.js";
 
 export default {
   components: {
     ThemeCombo,
+    LangCombo,
   },
 
   data() {
@@ -74,8 +80,14 @@ export default {
       isUserDevicesActive: false,
     };
   },
-
   created() {
+      fetch("/lang/RU.json")
+        .then(r => r.json())
+        .then(json => {
+          //console.log(json, json.messages.PROCESS_SUCCESSFULLY);
+          MessagesConstants.PROCESS_SUCCESSFULLY = json.messages.PROCESS_SUCCESSFULLY
+          MessagesConstants.SORT_NAME = json.messages.SORT_NAME
+        });
 
     //this.isDeviceTypesVisible = this.$root.$refs.DeviceTypeRef.getVisible();
     //console.log(this.$root.$refs.DeviceTypeRef);

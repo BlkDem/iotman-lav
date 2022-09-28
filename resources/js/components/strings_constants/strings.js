@@ -1,4 +1,8 @@
 export default {
+    DEVICE_TYPES: "Device Types",
+    DEVICES: "Devices",
+    USER_DEVICES: "User Devices",
+
     CANCEL_STRING: "Cancel",
     EDITED_MESSAGE: "Edited",
     ADDED_MESSAGE: "Added", 

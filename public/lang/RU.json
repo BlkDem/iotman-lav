@@ -1,21 +1,24 @@
 {
-    "messages": [
-        {
-            "CANCEL_STRING": "Отмена",
-            "EDITED_MESSAGE": "Изменено",
-            "ADDED_MESSAGE": "Добавлено", 
-            "DELETED_MESSAGE": "Удалено", 
-            "PROCESS_SUCCESSFULLY": "Успешно",
-            "INSERTING_CANCELLED": "Вставка отменена",
-            "EDITING_CANCELLED": "Редактирование отменено",
-            "DELETING_CANCELLED": "Удаление отменено",
-            "NO_DESCRIPTION": " нет описания ",
-    
-            "SORT_BY_NAME": "По имени",
-            "SORT_BY_ID": "По ID",
-            "SORT_NAME": "Сортировка",
-            "SORT_ASC": "ASC",
-            "SORT_DESC": "DESC"
-        }
-    ] 
+    "menu": {
+        "DEVICE_TYPES": "Типы",
+        "DEVICES": "Устройства",
+        "USER_DEVICES": "Пользовательские"
+    },
+
+    "messages": {
+        "CANCEL_STRING": "Отмена",
+        "EDITED_MESSAGE": "Изменено",
+        "ADDED_MESSAGE": "Добавлено",
+        "DELETED_MESSAGE": "Удалено",
+        "PROCESS_SUCCESSFULLY": "Успешно",
+        "INSERTING_CANCELLED": "Вставка отменена",
+        "EDITING_CANCELLED": "Редактирование отменено",
+        "DELETING_CANCELLED": "Удаление отменено",
+        "NO_DESCRIPTION": " нет описания ",
+        "SORT_BY_NAME": "По имени",
+        "SORT_BY_ID": "По ID",
+        "SORT_NAME": "Сортировка",
+        "SORT_ASC": "По возрастанию",
+        "SORT_DESC": "По убыванию"
+    }
 }

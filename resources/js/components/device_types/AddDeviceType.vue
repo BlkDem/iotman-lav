@@ -24,7 +24,7 @@
 
 <script>
 import PopupModal from '../../components/common/PopupModal.vue';
-import MessagesConstants from '../../components/strings_constants/messages';
+import MessagesConstants from '../strings_constants/strings';
 import {ref} from 'vue'
 
 export default {

@@ -24,7 +24,7 @@
 <script>
 import PopupModal from '../../components/common/PopupModal.vue';
 import DeviceTypesCombo from '../../components/device_types/DeviceTypesCombo.vue' 
-import MessagesConstants from '../../components/strings_constants/messages';
+import MessagesConstants from '../strings_constants/strings';
 
 export default {
     name: 'AddDevice',

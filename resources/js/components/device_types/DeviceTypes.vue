@@ -86,7 +86,7 @@
 import ConfirmDialogue from '../../components/common/ConfirmDialogue.vue';
 import AddDeviceType from './AddDeviceType.vue';
 import Paginator from '../../components/common/Paginator.vue';
-import MessagesConstants from '../../components/strings_constants/messages';
+import MessagesConstants from '../strings_constants/strings';
 import DeviceTypeStringConstants from '../../components/strings_constants/device_types/index';
 
     export default {
