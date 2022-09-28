@@ -95,19 +95,15 @@
                     :key="rule.key"
                     :value="rule.key"
                     @click="doSort(rule.key)">{{ rule.title }}</a>
-
-                    
-
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#"
-                                @click="
-                                    sortDirection = !sortDirection;
-                                    doSort(sortColumn);
-                                ">{{ sortDirection ? sortOrderStrings[0] : sortOrderStrings[1] }}</a>
+                <a class="dropdown-item" href="#"
+                    @click="sortDirection = !sortDirection; doSort(sortColumn);">
+                    {{ sortDirection ? sortOrderStrings[0] : sortOrderStrings[1] }}
+                </a>
           </div>
         </li>
       </ul>
-      <form class="d-flex">
+      <div class="d-flex">
         <button class="btn btn-primary" @click="compactView = true">
                     <i class="fas fa-list"></i>
                 </button>
@@ -121,7 +117,7 @@
                     Add Device
                 </button>
         
-      </form>
+      </div>
     </div>
   </div>
 </nav>
