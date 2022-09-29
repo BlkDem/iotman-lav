@@ -300,6 +300,10 @@ export default {
                     dev.device_hwid == null
                         ? DeviceStringConstants.NO_HWID
                         : dev.device_hwid;
+                this.filteredDevices[key].device_pass =
+                    dev.device_hwid == null
+                        ? DeviceStringConstants.NO_PASS
+                        : dev.device_pass;
             });
         },
 
@@ -372,6 +376,7 @@ export default {
                 device_name: DeviceStringConstants.DEVICE_NAME_PLACEHOLDER,
                 device_desc: DeviceStringConstants.DEVICE_DESC_PLACEHOLDER,
                 device_hwid: DeviceStringConstants.DEVICE_HWID_PLACEHOLDER,
+                device_pass: DeviceStringConstants.DEVICE_PASS_PLACEHOLDER,
                 device_type_id:
                     DeviceStringConstants.DEVICE_DEVICETYPEID_PLACEHOLDER,
                 okButton: DeviceStringConstants.DEVICE_ADDBUTTON_CAPTION,
@@ -386,6 +391,10 @@ export default {
                             this.$refs.addDevice.device_name +
                             "&device_type_id=" +
                             this.$refs.addDevice.device_type_id +
+                            "&device_pass=" +
+                            this.$refs.addDevice.device_pass +
+                            "&device_hwid=" +
+                            this.$refs.addDevice.device_hwid +
                             "&device_desc=" +
                             this.$refs.addDevice.device_desc
                     )
@@ -394,6 +403,8 @@ export default {
                         let newDevice = {
                             device_name: resp["data"].device_name,
                             device_desc: resp["data"].device_desc,
+                            device_pass: resp["data"].device_pass,
+                            device_hwid: resp["data"].device_hwid,
                             device_type_id: resp["data"].device_type_id,
                             device_type_name: "",
                             device_type_image: "",
@@ -434,6 +445,7 @@ export default {
                 device_name: this.filteredDevices[key].device_name,
                 device_desc: this.filteredDevices[key].device_desc,
                 device_hwid: this.filteredDevices[key].device_hwid,
+                device_pass: this.filteredDevices[key].device_pass,
                 device_type_id: this.filteredDevices[key].device_type_id,
                 okButton: DeviceStringConstants.DEVICE_EDITBUTTON_CAPTION,
             });
@@ -449,7 +461,9 @@ export default {
                     "&device_desc=" +
                     this.$refs.addDevice.device_desc +
                     "&device_hwid=" +
-                    this.$refs.addDevice.device_hwid;
+                    this.$refs.addDevice.device_hwid +
+                    "&device_pass=" +
+                    this.$refs.addDevice.device_pass;
                 console.log(editDevicePost);
 
                 //editing Device via API
@@ -465,6 +479,8 @@ export default {
                             resp["data"].device_type_id;
                         this.filteredDevices[key].device_hwid =
                             resp["data"].device_hwid;
+                        this.filteredDevices[key].device_pass =
+                            resp["data"].device_pass;
                         this.$root.$refs.toaster.setMessage(
                             MessagesConstants.EDITED_MESSAGE,
                             MessagesConstants.PROCESS_SUCCESSFULLY

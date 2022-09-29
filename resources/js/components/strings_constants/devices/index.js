@@ -10,8 +10,10 @@ export default {
     DEVICE_NAME_PLACEHOLDER: 'New Device',
     DEVICE_DESC_PLACEHOLDER: 'Device Desc',
     DEVICE_HWID_PLACEHOLDER: 'Device HWID',
+    DEVICE_PASS_PLACEHOLDER: 'Device Password',
     DEVICE_DEVICETYPEID_PLACEHOLDER: 'Device Type ID',
     DEVICE_ADDBUTTON_CAPTION: 'Add Device',
     DEVICE_EDITBUTTON_CAPTION: 'Edit Device',
     NO_HWID: "no hardware address",
+    NO_PASS: "no password",
 }

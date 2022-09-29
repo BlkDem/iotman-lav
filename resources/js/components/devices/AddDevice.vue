@@ -11,12 +11,14 @@
             <input v-model="device_desc" class="form-control p-2 mb-2" placeholder="Input Device Desc"/>
             <label class="px-2"><strong>Device Hardware Address</strong></label>
             <input v-model="device_hwid" class="form-control p-2 mb-2" placeholder="Input Device HWID"/>
+            <label class="px-2"><strong>Device Password</strong></label>
+            <input v-model="device_pass" class="form-control p-2 mb-2" placeholder="Input Device Password"/>
             <label class="px-2"><strong>Select Device Type</strong></label>
             <DeviceTypesCombo ref="types" v-bind:id="device_type_id"></DeviceTypesCombo>
         </div>
-        <div class="btns my-2 d-grid gap-2 px-4">
-            <button class="btn btn-danger" @click="_confirm">{{ okButton }}</button>
-            <button class="btn btn-secondary" @click="_cancel">{{ cancelButton }}</button>
+        <div>
+            <button class="btn btn-danger w-25 mx-1" @click="_confirm">{{ okButton }}</button>
+            <button class="btn btn-secondary w-25 mx-1" @click="_cancel">{{ cancelButton }}</button>
         </div>
     </PopupModal>
 </template>
@@ -40,6 +42,7 @@ export default {
         device_name: undefined,
         device_desc: undefined,
         device_hwid: undefined,
+        device_pass: undefined,
         device_type_id: undefined,
         okButton: undefined, // Text for confirm button; leave it empty because we don't know what we're using it for
         cancelButton: MessagesConstants.CANCEL_STRING, // text for cancel button
@@ -61,6 +64,7 @@ export default {
             this.device_name = optsAdd.device_name
             this.device_desc = optsAdd.device_desc
             this.device_hwid = optsAdd.device_hwid
+            this.device_pass = optsAdd.device_pass
             this.device_type_id = optsAdd.device_type_id
             this.okButton = optsAdd.okButton
             if (optsAdd.cancelButton) {

@@ -228,6 +228,7 @@ __webpack_require__.r(__webpack_exports__);
       device_name: undefined,
       device_desc: undefined,
       device_hwid: undefined,
+      device_pass: undefined,
       device_type_id: undefined,
       okButton: undefined,
       // Text for confirm button; leave it empty because we don't know what we're using it for
@@ -249,6 +250,7 @@ __webpack_require__.r(__webpack_exports__);
       this.device_name = optsAdd.device_name;
       this.device_desc = optsAdd.device_desc;
       this.device_hwid = optsAdd.device_hwid;
+      this.device_pass = optsAdd.device_pass;
       this.device_type_id = optsAdd.device_type_id;
       this.okButton = optsAdd.okButton;
 
@@ -440,6 +442,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.filteredDevices.forEach(function (dev, key) {
         _this2.filteredDevices[key].device_desc = dev.device_desc == null ? _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].NO_DESCRIPTION : dev.device_desc;
         _this2.filteredDevices[key].device_hwid = dev.device_hwid == null ? _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].NO_HWID : dev.device_hwid;
+        _this2.filteredDevices[key].device_pass = dev.device_hwid == null ? _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].NO_PASS : dev.device_pass;
       });
     },
     //deleting devices
@@ -543,6 +546,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   device_name: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_NAME_PLACEHOLDER,
                   device_desc: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_DESC_PLACEHOLDER,
                   device_hwid: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_HWID_PLACEHOLDER,
+                  device_pass: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_PASS_PLACEHOLDER,
                   device_type_id: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_DEVICETYPEID_PLACEHOLDER,
                   okButton: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_ADDBUTTON_CAPTION
                 });
@@ -552,11 +556,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (_add) {
                   //creating Device via API
-                  axios.post(_rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].api_device_create + "?device_name=" + _this5.$refs.addDevice.device_name + "&device_type_id=" + _this5.$refs.addDevice.device_type_id + "&device_desc=" + _this5.$refs.addDevice.device_desc).then(function (resp) {
+                  axios.post(_rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].api_device_create + "?device_name=" + _this5.$refs.addDevice.device_name + "&device_type_id=" + _this5.$refs.addDevice.device_type_id + "&device_pass=" + _this5.$refs.addDevice.device_pass + "&device_hwid=" + _this5.$refs.addDevice.device_hwid + "&device_desc=" + _this5.$refs.addDevice.device_desc).then(function (resp) {
                     console.log(resp["data"]);
                     var newDevice = {
                       device_name: resp["data"].device_name,
                       device_desc: resp["data"].device_desc,
+                      device_pass: resp["data"].device_pass,
+                      device_hwid: resp["data"].device_hwid,
                       device_type_id: resp["data"].device_type_id,
                       device_type_name: "",
                       device_type_image: "",
@@ -604,6 +610,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   device_name: _this6.filteredDevices[key].device_name,
                   device_desc: _this6.filteredDevices[key].device_desc,
                   device_hwid: _this6.filteredDevices[key].device_hwid,
+                  device_pass: _this6.filteredDevices[key].device_pass,
                   device_type_id: _this6.filteredDevices[key].device_type_id,
                   okButton: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_EDITBUTTON_CAPTION
                 });
@@ -612,7 +619,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _edit = _context4.sent;
 
                 if (_edit) {
-                  editDevicePost = _rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].api_device_update + id + "/?device_name=" + _this6.$refs.addDevice.device_name + "&device_type_id=" + _this6.$refs.addDevice.device_type_id + "&device_desc=" + _this6.$refs.addDevice.device_desc + "&device_hwid=" + _this6.$refs.addDevice.device_hwid;
+                  editDevicePost = _rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].api_device_update + id + "/?device_name=" + _this6.$refs.addDevice.device_name + "&device_type_id=" + _this6.$refs.addDevice.device_type_id + "&device_desc=" + _this6.$refs.addDevice.device_desc + "&device_hwid=" + _this6.$refs.addDevice.device_hwid + "&device_pass=" + _this6.$refs.addDevice.device_pass;
                   console.log(editDevicePost); //editing Device via API
 
                   axios.put(editDevicePost).then(function (resp) {
@@ -621,6 +628,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this6.filteredDevices[key].device_desc = resp["data"].device_desc;
                     _this6.filteredDevices[key].device_type_id = resp["data"].device_type_id;
                     _this6.filteredDevices[key].device_hwid = resp["data"].device_hwid;
+                    _this6.filteredDevices[key].device_pass = resp["data"].device_pass;
 
                     _this6.$root.$refs.toaster.setMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].EDITED_MESSAGE, _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY);
                   }).then(function (resp) {
@@ -849,13 +857,16 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "class": "px-2"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Device Password")], -1
+/* HOISTED */
+);
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "px-2"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Select Device Type")], -1
 /* HOISTED */
 );
 
-var _hoisted_8 = {
-  "class": "btns my-2 d-grid gap-2 px-4"
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_DeviceTypesCombo = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DeviceTypesCombo");
 
@@ -891,21 +902,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         placeholder: "Input Device HWID"
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.device_hwid]]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DeviceTypesCombo, {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.device_hwid]]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+          return $data.device_pass = $event;
+        }),
+        "class": "form-control p-2 mb-2",
+        placeholder: "Input Device Password"
+      }, null, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.device_pass]]), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DeviceTypesCombo, {
         ref: "types",
         id: $data.device_type_id
       }, null, 8
       /* PROPS */
-      , ["id"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-        "class": "btn btn-danger",
-        onClick: _cache[3] || (_cache[3] = function () {
+      , ["id"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        "class": "btn btn-danger w-25 mx-1",
+        onClick: _cache[4] || (_cache[4] = function () {
           return $options._confirm && $options._confirm.apply($options, arguments);
         })
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.okButton), 1
       /* TEXT */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-        "class": "btn btn-secondary",
-        onClick: _cache[4] || (_cache[4] = function () {
+        "class": "btn btn-secondary w-25 mx-1",
+        onClick: _cache[5] || (_cache[5] = function () {
           return $options._cancel && $options._cancel.apply($options, arguments);
         })
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.cancelButton), 1
@@ -1280,10 +1299,12 @@ __webpack_require__.r(__webpack_exports__);
   DEVICE_NAME_PLACEHOLDER: 'New Device',
   DEVICE_DESC_PLACEHOLDER: 'Device Desc',
   DEVICE_HWID_PLACEHOLDER: 'Device HWID',
+  DEVICE_PASS_PLACEHOLDER: 'Device Password',
   DEVICE_DEVICETYPEID_PLACEHOLDER: 'Device Type ID',
   DEVICE_ADDBUTTON_CAPTION: 'Add Device',
   DEVICE_EDITBUTTON_CAPTION: 'Edit Device',
-  NO_HWID: "no hardware address"
+  NO_HWID: "no hardware address",
+  NO_PASS: "no password"
 });
 
 /***/ }),
