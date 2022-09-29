@@ -23920,7 +23920,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  Themes: ['cosmo', 'cyborg', 'darkly', 'flatly', 'lumen', 'lux', 'materia', 'minty', 'morph', 'quartz', 'sandstone', 'simplex', 'slate', 'solar', 'superhero', 'united', 'vapor', 'yeti', 'zephyr']
+  Themes: ['cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'lux', 'materia', 'minty', 'morph', 'quartz', 'pulse', 'sandstone', 'simplex', 'sketchy', 'slate', 'solar', 'superhero', 'united', 'vapor', 'yeti', 'zephyr']
 });
 
 /***/ }),

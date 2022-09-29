@@ -1,85 +1,8 @@
 <template>
-    <div v-if="visible">
+    <div v-show="visible">
         <AddDevice ref="addDevice"></AddDevice>
         <ConfirmDialogue ref="confirmDialogue" />
         <h1 class="align-left px-4 pb-3" style='margin-top: 5.5rem;'>Registered Devices</h1>
-        <!-- <div class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="col-sm-3 col-xs-3 col-lg-3 p-2">
-                <div class="align-right">
-                    <input
-                        v-model="device_filter"
-                        class="form-control mt-2"
-                        style="float: right; width: 50%"
-                        placeholder="Filter"
-                    />
-                </div>
-            </div>
-            <div class="col-sm-3 col-xs-3 col-lg-3 p-2">
-                <ul class="nav nav-pills pt-2">
-                    <li class="nav-item dropdown w-100">
-                        <button
-                            class="nav-link dropdown-toggle active"
-                            style="height: 2.3rem; width: 100%;"
-                            data-bs-toggle="dropdown"
-                            href="#"
-                            role="button"
-                            aria-haspopup="true"
-                            aria-expanded="true"
-                        >
-                            {{ SortName }}
-                        </button>
-                        <div
-                            class="dropdown-menu w-100"
-                            style="
-                                position: absolute;
-                                inset: 0px auto auto 0px;
-                                margin: 0px;
-                                transform: translate3d(0px, 42.4px, 0px);
-                            "
-                            data-popper-placement="bottom-start"
-                        >
-                            <button
-                                class="dropdown-item"
-                                style="cursor: handpoint"
-                                v-for="rule in sortRules"
-                                :key="rule.key"
-                                :value="rule.key"
-                                @click="doSort(rule.key)"
-                            >
-                                {{ rule.title }}
-                            </button>
-                            <div class="dropdown-divider"></div>
-                            <button
-                                class="dropdown-item"
-                                href="#"
-                                @click="
-                                    sortDirection = !sortDirection;
-                                    doSort(sortColumn);
-                                "
-                            >
-                                {{ sortDirection ? sortOrderStrings[0] : sortOrderStrings[1] }}
-                            </button>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-sm-6 col-xs-6 col-lg-6 p-2 align-right">
-                <button class="btn btn-primary" @click="compactView = true">
-                    <i class="fas fa-list"></i>
-                </button>
-                <button
-                    class="btn btn-primary m-2"
-                    @click="compactView = false"
-                >
-                    <i class="fas fa-th-large"></i>
-                </button>
-                <button class="btn btn-primary" @click="setDevice">
-                    Add Device
-                </button>
-            </div>
-        </div> -->
-
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="navbarColor02">
@@ -127,7 +50,7 @@
             <h5 class="text-primary my-2">{{ data_description }}</h5>
         </div>
 
-        <div class="row my-2" v-if="!compactView">
+        <div class="row my-2" v-if="!getCompactView">
             <div
                 class="col-sm-4 col-xs-4 col-lg-4 p-2"
                 v-for="(device, key) in filteredDevices"
@@ -155,7 +78,7 @@
                     </ul>
                     <div class="card-body">
                         <button
-                            class="btn btn-info"
+                            class="btn btn-info w-50"
                             @click="doEdit(key, device.id)"
                         >
                             <i class="fas fa-edit" aria-hidden="true"></i>
@@ -163,7 +86,7 @@
                         </button>
 
                         <button
-                            class="btn btn-secondary"
+                            class="btn btn-secondary w-50"
                             @click="doDelete(key, device.id)"
                         >
                             <i class="fa fa-trash" aria-hidden="true"></i>
@@ -175,7 +98,7 @@
         </div>
 
         <!-- compact view -->
-        <div v-if="compactView" class="my-2">
+        <div v-show="getCompactView" class="my-2">
             <div
                 class="card border-primary mb-4 w-100"
                 v-for="(device, key) in filteredDevices"
@@ -268,9 +191,18 @@ export default {
     },
 
     created() {
+        if (localStorage.DeviceCompactView == null) {
+            localStorage.DeviceCompactView = this.compactView
+        }
         this.data_description = DeviceStringConstants.DEVICE_DATA_DESCRIPTION; //device dataset description
         this.getDevices(); //loading devices dataset via API
+        this.compactView = localStorage.DeviceCompactView
+        console.log(this.compactView)
         console.log("API version: ", APIConstants.apiVersion);
+    },
+
+    mounted() {
+         
     },
 
     watch: {
@@ -280,6 +212,10 @@ export default {
 
         selectSort: function () {
             handler: this.doSort();
+        },
+
+        compactView: function() {
+            localStorage.DeviceCompactView = this.compactView
         },
     },
 
@@ -292,6 +228,11 @@ export default {
             res += (!this.sortDirection)?MessagesConstants.SORT_ASC:MessagesConstants.SORT_DESC;
             res += ')';
             return res;
+        },
+
+        getCompactView() {
+            
+            return this.compactView
         },
     },
 
