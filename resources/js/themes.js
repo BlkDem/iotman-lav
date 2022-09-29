@@ -1,5 +1,6 @@
 export default {
     Themes: [
+        'cosmo', 
         'cyborg', 
         'darkly', 
         'flatly',

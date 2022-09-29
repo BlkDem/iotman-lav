@@ -5,7 +5,7 @@
             href="#"
             role="button"
             aria-haspopup="true"
-            aria-expanded="false">{{ theme_caption }} {{ (currentTheme=='')?'(Default)': '(' + currentTheme + ')'}}</a>
+            aria-expanded="false">{{ theme_caption }} <strong>{{ (currentTheme=='')?'(Default)': '(' + currentTheme + ')'}}</strong></a>
         <div class="dropdown-menu" style="margin-left: -32px; max-height: 660px; overflow-y: auto;">
             <a class="dropdown-item" href="#" v-for="theme in themes" :key="theme.id" @click='changeTheme(theme)'>{{ theme }}</a>
             <div class="dropdown-divider"></div>
@@ -23,14 +23,14 @@ export default {
   data () {
     return {
       themes:[],
-      currentTheme: 'Default',
+      currentTheme: '',
       theme_caption: 'Theme'
     }
   },
 
   created() {
     this.readThemes()
-    this.currentTheme = _currentTheme; 
+    this.currentTheme = (_currentTheme === '')?'Default':_currentTheme; 
   },
   
   methods: {
@@ -41,7 +41,7 @@ export default {
       this.currentTheme = _theme;
       localStorage.Theme = this.currentTheme;
       console.log(localStorage.Theme);
-      document.location.href = '/?theme=' + _theme;
+      document.location.href = (_theme==='')?'/':'/?theme=' + _theme;
     },
 
   }
