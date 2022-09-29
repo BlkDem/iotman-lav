@@ -17,8 +17,8 @@
             <DeviceTypesCombo ref="types" v-bind:id="device_type_id"></DeviceTypesCombo>
         </div>
         <div>
-            <button class="btn btn-danger w-25 mx-1" @click="_confirm">{{ okButton }}</button>
-            <button class="btn btn-secondary w-25 mx-1" @click="_cancel">{{ cancelButton }}</button>
+            <button class="btn btn-danger mx-1 btn-width-40" @click="_confirm">{{ okButton }}</button>
+            <button class="btn btn-secondary mx-1 btn-width-40" @click="_cancel">{{ cancelButton }}</button>
         </div>
     </PopupModal>
 </template>
