@@ -32,12 +32,24 @@ export default {
   
   methods: {
     readLangs() {
-      this.langs = [...LangList.Languages]
+        this.langs = [...LangList.Languages]
+        if (localStorage.Language!=null) {
+            this.currentLang = localStorage.Language
+        } 
+        else {
+            localStorage.Language = this.currentLang
+        }
     },
+
     changeLang(_lang) {
-      this.currentLang = _lang;
-      localStorage.Language = this.currentLang;
-      console.log(localStorage.Language);
+      this.currentLang = _lang
+      console.log(_lang)
+      localStorage.Language = _lang
+      this.$root.$refs.navbar.loadLang(_lang);
+    //   console.log('before', LangList.MessagesConstants)
+    //   LangList.loadLang(_lang)
+    //   console.log('after', LangList.MessagesConstants)
+    //   this.$root.$refs.navbar.setStrings(LangList.MessagesConstants);
     },
 
   }

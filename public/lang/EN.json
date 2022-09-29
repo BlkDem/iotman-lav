@@ -2,7 +2,8 @@
     "menu": {
         "DEVICE_TYPES": "Device Types",
         "DEVICES": "Devices",
-        "USER_DEVICES": "User Devices"
+        "USER_DEVICES": "User`s Devices",
+        "THEME": "Theme"
     },
 
     "messages": {

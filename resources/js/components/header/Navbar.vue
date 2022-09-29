@@ -22,7 +22,7 @@
               v-bind:class="{ active: isDeviceTypesActive }"
               @click="onDeviceTypesClick"
               href="#"
-              >Device Types</a
+              >{{ device_types_caption }}</a
             >
           </li>
           <li class="nav-item">
@@ -31,7 +31,7 @@
               v-bind:class="{ active: isDevicesActive }"
               @click="onDevicesClick"
               href="#"
-              >Devices</a
+              >{{ devices_caption }}</a
             >
           </li>
           <li class="nav-item">
@@ -40,14 +40,14 @@
               href="#"
               v-bind:class="{ active: isUserDevicesActive }"
               @click="onUserDevicesClick"
-              >User's Devices</a
+              >{{ user_devices_caption }}</a
             >
           </li>
           <!-- <ThemeCombo ref="themeCombo"></ThemeCombo> -->
         </ul>
       </div>
       <div class="d-flex">
-        <input class="form-control me-sm-2" type="text" placeholder="Search" />
+        <!-- <input class="form-control me-sm-2" type="text" placeholder="Search" /> -->
         <ul class="navbar-nav me-auto">
             <ThemeCombo ref="themeCombo"></ThemeCombo>
         </ul>
@@ -63,6 +63,7 @@
 import ThemeCombo from "../../components/common/ThemeCombo.vue";
 import LangCombo from "../../components/common/LangCombo.vue";
 import MessagesConstants from "../strings_constants/strings.js";
+import Langs from "../../langs";
 
 export default {
   components: {
@@ -78,22 +79,75 @@ export default {
       isDeviceTypesActive: false,
       isDevicesActive: true,
       isUserDevicesActive: false,
+
+        //menu
+      devices_caption: MessagesConstants.DEVICES,
+      device_types_caption: MessagesConstants.DEVICE_TYPES,
+      user_devices_caption: MessagesConstants.USER_DEVICES,
     };
   },
-  created() {
-      fetch("/lang/RU.json")
-        .then(r => r.json())
-        .then(json => {
-          //console.log(json, json.messages.PROCESS_SUCCESSFULLY);
-          MessagesConstants.PROCESS_SUCCESSFULLY = json.messages.PROCESS_SUCCESSFULLY
-          MessagesConstants.SORT_NAME = json.messages.SORT_NAME
-        });
 
-    //this.isDeviceTypesVisible = this.$root.$refs.DeviceTypeRef.getVisible();
-    //console.log(this.$root.$refs.DeviceTypeRef);
+  created() {
+
+    
   },
 
+    mounted() {
+        this.currentLang = (localStorage.Language!=null)?localStorage.Language:'EN'
+        this.loadLang(this.currentLang);
+    },
+
+
   methods: {
+
+    async loadLang(_lang) {
+        try {
+            const response = await  fetch("/lang/" + _lang + ".json");
+    
+            const json = await response.json();
+            console.log(_lang)
+            if (json != null) {
+                MessagesConstants.CANCEL_STRING = json.messages.CANCEL_STRING
+                MessagesConstants.EDITED_MESSAGE = json.messages.EDITED_MESSAGE
+                MessagesConstants.ADDED_MESSAGE = json.messages.ADDED_MESSAGE
+                MessagesConstants.DELETED_MESSAGE = json.messages.DELETED_MESSAGE
+                MessagesConstants.PROCESS_SUCCESSFULLY = json.messages.PROCESS_SUCCESSFULLY
+                MessagesConstants.INSERTING_CANCELLED = json.messages.INSERTING_CANCELLED
+                MessagesConstants.EDITING_CANCELLED = json.messages.EDITING_CANCELLED
+                MessagesConstants.DELETING_CANCELLED = json.messages.DELETING_CANCELLED
+                MessagesConstants.NO_DESCRIPTION = json.messages.NO_DESCRIPTION
+                MessagesConstants.SORT_BY_NAME = json.messages.SORT_BY_NAME
+                MessagesConstants.SORT_BY_ID = json.messages.SORT_BY_ID
+                MessagesConstants.SORT_NAME = json.messages.SORT_NAME
+                MessagesConstants.SORT_ASC = json.messages.SORT_ASC
+                MessagesConstants.SORT_DESC = json.messages.SORT_DESC
+                MessagesConstants.DEVICE_TYPES = json.menu.DEVICE_TYPES
+                MessagesConstants.DEVICES = json.menu.DEVICES
+                MessagesConstants.THEME = json.menu.THEME
+                MessagesConstants.USER_DEVICES = json.menu.USER_DEVICES
+    
+                this.setStrings()
+    
+            } else {
+                /* Handle responce errors */
+            }
+        } catch (error) {
+            /* Handle fetch errors */
+        }
+    },
+
+
+
+    setStrings() {
+
+        //navbar menu items
+        this.devices_caption = MessagesConstants.DEVICES
+        this.device_types_caption = MessagesConstants.DEVICE_TYPES
+        this.user_devices_caption = MessagesConstants.USER_DEVICES
+
+        this.$refs.themeCombo.theme_caption = MessagesConstants.THEME
+    },
+
     onDeviceTypesClick() {
       //this.isDeviceTypesVisible = !this.isDeviceTypesVisible;
       //this.isDeviceTypesActive = this.isDeviceTypesVisible;

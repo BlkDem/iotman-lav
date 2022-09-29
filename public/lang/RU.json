@@ -2,7 +2,8 @@
     "menu": {
         "DEVICE_TYPES": "Типы",
         "DEVICES": "Устройства",
-        "USER_DEVICES": "Пользовательские"
+        "USER_DEVICES": "Пользовательские",
+        "THEME": "Тема"
     },
 
     "messages": {
