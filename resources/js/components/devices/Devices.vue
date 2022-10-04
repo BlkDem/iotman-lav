@@ -1,5 +1,5 @@
 <template>
-  <div v-show="visible">
+  <div v-show="deviceVisible">
     <AddDevice ref="addDevice"></AddDevice>
     <ConfirmDialogue ref="confirmDialogue" />
     <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
@@ -69,7 +69,7 @@
     </nav>
 
     <div>
-      <h5 class="text-primary my-2">{{ data_description }}</h5>
+      <h5 class="text-primary my-2">{{ dataDescription }}</h5>
     </div>
 
     <div class="row my-2" v-if="!getCompactView">
@@ -170,6 +170,7 @@ import APIConstants from "../../rest_api.js";
 // import MyMqtt from '../components/MyMqtt.vue';
 
 export default {
+
   components: {
     ConfirmDialogue,
     AddDevice,
@@ -181,8 +182,8 @@ export default {
     return {
       devices: [], // api loaded list of devices
       filteredDevices: [], //filtered array of devices
-      data_description: "", //table data description label
-      visible: true, //devices view visibilty
+      dataDescription: "", //table data description label
+      deviceVisible: true, //devices view visibilty
       compactView: true, //copact view mode
       device_filter: "", //filtering string
       sortOrderStrings: [
@@ -204,14 +205,16 @@ export default {
     if (localStorage.DeviceCompactView == null) {
       localStorage.DeviceCompactView = this.compactView;
     }
-    this.data_description = DeviceStringConstants.DEVICE_DATA_DESCRIPTION; //device dataset description
+    this.dataDescription = DeviceStringConstants.DEVICE_DATA_DESCRIPTION; //device dataset description
     this.getDevices(); //loading devices dataset via API
-    this.compactView = localStorage.DeviceCompactView;
-    console.log(this.compactView);
     console.log("API version: ", APIConstants.apiVersion);
   },
 
-  mounted() {},
+  mounted() {
+    if (localStorage.getItem('DeviceCompactView')) {
+      this.compactView = (localStorage.getItem('DeviceCompactView') === 'true');
+    } 
+  },
 
   watch: {
     device_filter: function () {
@@ -503,12 +506,9 @@ export default {
 
     // Show or Hide Devices page
     ShowHide(isVisible) {
-      this.visible = isVisible;
+      this.deviceVisible = isVisible;
     },
 
-    // getVisible() {
-    //     return this.visible;
-    // },
   },
 };
 </script>

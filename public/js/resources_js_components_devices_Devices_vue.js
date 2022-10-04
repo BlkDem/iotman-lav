@@ -329,9 +329,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // api loaded list of devices
       filteredDevices: [],
       //filtered array of devices
-      data_description: "",
+      dataDescription: "",
       //table data description label
-      visible: true,
+      deviceVisible: true,
       //devices view visibilty
       compactView: true,
       //copact view mode
@@ -356,15 +356,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       localStorage.DeviceCompactView = this.compactView;
     }
 
-    this.data_description = _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_DATA_DESCRIPTION; //device dataset description
+    this.dataDescription = _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_DATA_DESCRIPTION; //device dataset description
 
     this.getDevices(); //loading devices dataset via API
 
-    this.compactView = localStorage.DeviceCompactView;
-    console.log(this.compactView);
     console.log("API version: ", _rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].apiVersion);
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    if (localStorage.getItem('DeviceCompactView')) {
+      this.compactView = localStorage.getItem('DeviceCompactView') === 'true';
+    }
+  },
   watch: {
     device_filter: function device_filter() {
       handler: this.doFilter();
@@ -652,11 +654,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Show or Hide Devices page
     ShowHide: function ShowHide(isVisible) {
-      this.visible = isVisible;
-    } // getVisible() {
-    //     return this.visible;
-    // },
-
+      this.deviceVisible = isVisible;
+    }
   }
 });
 
@@ -1190,7 +1189,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[4] || (_cache[4] = function () {
       return $options.setDevice && $options.setDevice.apply($options, arguments);
     })
-  }, " Add Device ")])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.data_description), 1
+  }, " Add Device ")])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.dataDescription), 1
   /* TEXT */
   )]), !$options.getCompactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredDevices, function (device, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
@@ -1273,7 +1272,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <MyMqtt></MyMqtt> ")], 512
   /* NEED_PATCH */
-  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.visible]]);
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.deviceVisible]]);
 }
 
 /***/ }),

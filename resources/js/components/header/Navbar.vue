@@ -149,8 +149,6 @@ export default {
     },
 
     onDeviceTypesClick() {
-      //this.isDeviceTypesVisible = !this.isDeviceTypesVisible;
-      //this.isDeviceTypesActive = this.isDeviceTypesVisible;
       this.isDevicesActive = false;
       this.isUserDevicesActive = false;
       this.isDeviceTypesActive = true;
@@ -158,7 +156,6 @@ export default {
       this.$root.$refs.DeviceRef.ShowHide(false);
       this.$root.$refs.DeviceUserRef.ShowHide(false);
       this.$root.$refs.DeviceTypeRef.ShowHide(true);
-      //this.$root.$refs.DeviceTypeRef.ShowHide(this.isDeviceTypesVisible);
     },
 
     onDevicesClick() {
@@ -169,9 +166,6 @@ export default {
       this.$root.$refs.DeviceRef.ShowHide(true);
       this.$root.$refs.DeviceUserRef.ShowHide(false);
       this.$root.$refs.DeviceTypeRef.ShowHide(false);
-      /*this.isDevicesVisible = !this.isDevicesVisible;
-            this.isDevicesActive = this.isDevicesVisible;
-            this.$root.$refs.DeviceRef.ShowHide(this.isDevicesVisible);*/
     },
 
     onUserDevicesClick() {

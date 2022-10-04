@@ -23398,14 +23398,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.$refs.themeCombo.theme_caption = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].THEME;
     },
     onDeviceTypesClick: function onDeviceTypesClick() {
-      //this.isDeviceTypesVisible = !this.isDeviceTypesVisible;
-      //this.isDeviceTypesActive = this.isDeviceTypesVisible;
       this.isDevicesActive = false;
       this.isUserDevicesActive = false;
       this.isDeviceTypesActive = true;
       this.$root.$refs.DeviceRef.ShowHide(false);
       this.$root.$refs.DeviceUserRef.ShowHide(false);
-      this.$root.$refs.DeviceTypeRef.ShowHide(true); //this.$root.$refs.DeviceTypeRef.ShowHide(this.isDeviceTypesVisible);
+      this.$root.$refs.DeviceTypeRef.ShowHide(true);
     },
     onDevicesClick: function onDevicesClick() {
       this.isDevicesActive = true;
@@ -23414,9 +23412,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.$root.$refs.DeviceRef.ShowHide(true);
       this.$root.$refs.DeviceUserRef.ShowHide(false);
       this.$root.$refs.DeviceTypeRef.ShowHide(false);
-      /*this.isDevicesVisible = !this.isDevicesVisible;
-            this.isDevicesActive = this.isDevicesVisible;
-            this.$root.$refs.DeviceRef.ShowHide(this.isDevicesVisible);*/
     },
     onUserDevicesClick: function onUserDevicesClick() {
       this.isDevicesActive = false;
@@ -23517,7 +23512,7 @@ var _hoisted_3 = {
   "class": "dropdown-menu",
   style: {
     "margin-left": "-32px",
-    "max-height": "660px",
+    "max-height": "600px",
     "overflow-y": "auto"
   }
 };
