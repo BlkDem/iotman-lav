@@ -3749,7 +3749,7 @@ textarea.form-control-lg {
   color: var(--bs-navbar-active-color);
 }
 .navbar-nav .dropdown-menu {
-  position: static;
+  position: absolute;
 }
 
 .navbar-text {
@@ -3834,7 +3834,7 @@ textarea.form-control-lg {
     display: none;
   }
   .navbar-expand-sm .offcanvas {
-    position: static;
+    position: absolute;
     z-index: auto;
     flex-grow: 1;
     width: auto !important;
@@ -3881,7 +3881,7 @@ textarea.form-control-lg {
     display: none;
   }
   .navbar-expand-md .offcanvas {
-    position: static;
+    position: absolute;
     z-index: auto;
     flex-grow: 1;
     width: auto !important;
@@ -3928,7 +3928,7 @@ textarea.form-control-lg {
     display: none;
   }
   .navbar-expand-lg .offcanvas {
-    position: static;
+    position: absolute;
     z-index: auto;
     flex-grow: 1;
     width: auto !important;
@@ -3975,7 +3975,7 @@ textarea.form-control-lg {
     display: none;
   }
   .navbar-expand-xl .offcanvas {
-    position: static;
+    position: absolute;
     z-index: auto;
     flex-grow: 1;
     width: auto !important;
@@ -4022,7 +4022,7 @@ textarea.form-control-lg {
     display: none;
   }
   .navbar-expand-xxl .offcanvas {
-    position: static;
+    position: absolute;
     z-index: auto;
     flex-grow: 1;
     width: auto !important;
@@ -4068,7 +4068,7 @@ textarea.form-control-lg {
   display: none;
 }
 .navbar-expand .offcanvas {
-  position: static;
+  position: absolute;
   z-index: auto;
   flex-grow: 1;
   width: auto !important;

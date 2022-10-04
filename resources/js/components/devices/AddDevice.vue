@@ -16,6 +16,7 @@
             <label class="px-2"><strong>Select Device Type</strong></label>
             <DeviceTypesCombo ref="types" v-bind:id="device_type_id"></DeviceTypesCombo>
         </div>
+        <hr>
         <div>
             <button class="btn btn-danger mx-1 btn-width-40" @click="_confirm">{{ okButton }}</button>
             <button class="btn btn-secondary mx-1 btn-width-40" @click="_cancel">{{ cancelButton }}</button>

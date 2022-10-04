@@ -6,7 +6,7 @@
             role="button"
             aria-haspopup="true"
             aria-expanded="false">{{ theme_caption }} <strong>{{ (currentTheme=='')?'(Default)': '(' + currentTheme + ')'}}</strong></a>
-        <div class="dropdown-menu" style="margin-left: -32px; max-height: 600px; overflow-y: auto;">
+        <div class="dropdown-menu theme-dropdown">
             <a class="dropdown-item" href="#" v-for="theme in themes" :key="theme.id" @click='changeTheme(theme)'>{{ theme }}</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" @click="changeTheme('')">Default</a>
@@ -47,3 +47,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .theme-dropdown {
+    margin-left: -32px; 
+    max-height: 400px; 
+    overflow-y: auto;
+  }
+</style>

@@ -1,6 +1,6 @@
 <template>
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle active"
+        <a class="nav-link dropdown-toggle active px-2"
             data-bs-toggle="dropdown"
             href="#"
             role="button"

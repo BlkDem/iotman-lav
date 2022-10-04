@@ -1,5 +1,5 @@
 <template>
-    <select v-model="id" class="form-select p-2 mb-4">
+    <select v-model="id" class="form-select p-2">
         <option v-for="(item, key) in items" v-bind:key="key" v-bind:value="item.id">
             {{ item.device_type_name }}
         </option>

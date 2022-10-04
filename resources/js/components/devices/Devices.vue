@@ -8,8 +8,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <div class="navbar-collapse" id="navbarColor02">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
+          <ul class="navbar-nav me-auto  d-flex">
+            <li class="nav-item  d-flex py-1">
               <input
                 class="form-control me-sm-2"
                 type="text"
@@ -17,7 +17,7 @@
                 v-model="device_filter"
               />
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown me-auto">
               <a
                 class="nav-link dropdown-toggle mx-2"
                 data-bs-toggle="dropdown"
@@ -27,7 +27,7 @@
                 aria-expanded="false"
                 >{{ SortName }}</a
               >
-              <div class="dropdown-menu">
+              <div class="dropdown-menu w-100">
                 <a
                   class="dropdown-item"
                   href="#"
@@ -123,7 +123,7 @@
         v-bind:id="device.id"
       >
         <div class="card-header">
-          <div class="row">
+          <div class="row vertical-center">
             <div class="col-sm-1 col-xs-1 col-lg-1">
               <img v-bind:src="device.device_type_image" class="device-image" />
             </div>
@@ -133,12 +133,12 @@
                 }}<span class="text-info"> ({{ device.id }}) </span>
               </h5>
             </div>
-            <div class="col-sm-5 col-xs-5 col-lg-5 align-left">
+            <div class="col-sm-6 col-xs-6 col-lg-6 align-left">
               <h6>
                 {{ device.device_type_name }}: HWID ({{ device.device_hwid }})
               </h6>
             </div>
-            <div class="col-sm-3 col-xs-3 col-lg-3 align-right">
+            <div class="col-sm-2 col-xs-2 col-lg-2 align-right">
               <button class="btn btn-info mx-2" @click="doEdit(key, device.id)">
                 <i class="fas fa-edit" aria-hidden="true"></i>
               </button>
@@ -517,9 +517,18 @@ export default {
 @import "../../../sass/aligns.scss";
 //@import "../../../sass/lists.scss";
 
+.vertical-center {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav .dropdown-menu {
+    position: absolute;
+}
+
 .device-image {
   width: 70px;
-  margin-top: -50px;
+  margin-top: -60px;
   margin-bottom: -60px;
   margin-left: -10px;
   border-radius: 10px;
@@ -528,10 +537,10 @@ export default {
 
 @media only screen and (min-width: 320px) and (max-width: 480px) {
   .device-image {
-    width: 50px;
-    margin-top: -55px;
+    width: 64px;
+    margin-top: -23px;
     margin-bottom: -29px;
-    margin-left: -249px;
+    margin-left: 210px;
     border-radius: 10px;
     box-shadow: #eee 0px 0px 8px;
   }
