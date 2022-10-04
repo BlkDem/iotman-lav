@@ -983,7 +983,7 @@ var _hoisted_6 = {
   "class": "nav-item d-flex py-1"
 };
 var _hoisted_7 = {
-  "class": "nav-item dropdown me-auto"
+  "class": "nav-item dropdown me-auto vertical-center"
 };
 var _hoisted_8 = {
   "class": "nav-link dropdown-toggle mx-2",

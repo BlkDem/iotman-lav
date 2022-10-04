@@ -17,7 +17,7 @@
                 v-model="device_filter"
               />
             </li>
-            <li class="nav-item dropdown me-auto">
+            <li class="nav-item dropdown me-auto vertical-center">
               <a
                 class="nav-link dropdown-toggle mx-2"
                 data-bs-toggle="dropdown"

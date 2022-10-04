@@ -12,6 +12,19 @@
             <a class="dropdown-item" href="#" @click="changeTheme('')">Default</a>
         </div>
     </li>
+
+
+    <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="themes" aria-expanded="true">
+              {{ theme_caption }} <strong>{{ (currentTheme=='')?'(Default)': '(' + currentTheme + ')'}}</strong></a>
+              <div class="dropdown-menu" aria-labelledby="themes" data-bs-popper="static" style="display: flex;
+                flex-wrap: wrap;
+                margin-left: -320px">
+                <a class="dropdown-item w-50" href="#" @click="changeTheme('')">Default</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item w-50" href="#" v-for="theme in themes" :key="theme.id" @click='changeTheme(theme)'>{{ theme }}</a>
+              </div>
+            </li> -->
 </template>
 
 <script>
