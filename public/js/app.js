@@ -23527,7 +23527,7 @@ var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
 });
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.theme_caption) + " ", 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.theme_caption) + " ", 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.currentTheme == '' ? '(Default)' : '(' + $data.currentTheme + ')'), 1
   /* TEXT */
@@ -23550,9 +23550,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.changeTheme('');
     })
-  }, "Default")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <li class=\"nav-item dropdown\">\n              <a class=\"nav-link dropdown-toggle\" data-bs-toggle=\"dropdown\" href=\"#\" id=\"themes\" aria-expanded=\"true\">\n              {{ theme_caption }} <strong>{{ (currentTheme=='')?'(Default)': '(' + currentTheme + ')'}}</strong></a>\n              <div class=\"dropdown-menu\" aria-labelledby=\"themes\" data-bs-popper=\"static\" style=\"display: flex;\n                flex-wrap: wrap;\n                margin-left: -320px\">\n                <a class=\"dropdown-item w-50\" href=\"#\" @click=\"changeTheme('')\">Default</a>\n                <div class=\"dropdown-divider\"></div>\n                <a class=\"dropdown-item w-50\" href=\"#\" v-for=\"theme in themes\" :key=\"theme.id\" @click='changeTheme(theme)'>{{ theme }}</a>\n              </div>\n            </li> ")], 2112
-  /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
-  );
+  }, "Default")])]);
 }
 
 /***/ }),
@@ -31167,7 +31165,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n@media only screen and (min-width: 320px) and (max-width: 965px) {\n.logo[data-v-573510b7] {\n    margin-left: -77px;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.logo[data-v-573510b7] {\n    margin-right: auto;\n    padding-left: 8px;\n}  \n\n\n/* @media only screen and (min-width: 320px) and (max-width: 965px) {\n  .logo {\n    margin-right: auto;\n   }  \n} */\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

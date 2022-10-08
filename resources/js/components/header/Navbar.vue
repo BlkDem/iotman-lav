@@ -191,9 +191,15 @@ export default {
 </script>
 
 <style scoped>
-@media only screen and (min-width: 320px) and (max-width: 965px) {
   .logo {
-    margin-left: -77px;
+    margin-right: auto;
+    padding-left: 8px;
    }  
-}
+
+
+/* @media only screen and (min-width: 320px) and (max-width: 965px) {
+  .logo {
+    margin-right: auto;
+   }  
+} */
 </style>

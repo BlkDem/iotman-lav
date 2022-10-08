@@ -211,8 +211,8 @@ export default {
   },
 
   mounted() {
-    if (localStorage.getItem('DeviceCompactView')) {
-      this.compactView = (localStorage.getItem('DeviceCompactView') === 'true');
+    if (localStorage.getItem('CompactView')) {
+      this.compactView = (localStorage.getItem('CompactView') === 'true');
     } 
   },
 
@@ -226,7 +226,7 @@ export default {
     },
 
     compactView: function () {
-      localStorage.DeviceCompactView = this.compactView;
+      localStorage.CompactView = this.compactView;
     },
   },
 
