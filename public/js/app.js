@@ -23221,7 +23221,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     return {
       themes: [],
       currentTheme: '',
-      theme_caption: 'Theme'
+      themeCaption: 'Theme'
     };
   },
   created: function created() {
@@ -23317,9 +23317,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       isDevicesActive: true,
       isUserDevicesActive: false,
       //menu
-      devices_caption: _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].DEVICES,
-      device_types_caption: _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].DEVICE_TYPES,
-      user_devices_caption: _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].USER_DEVICES
+      devicesCaption: _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].DEVICES,
+      deviceTypesCaption: _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].DEVICE_TYPES,
+      userDevicesCaption: _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].USER_DEVICES
     };
   },
   created: function created() {},
@@ -23392,37 +23392,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setStrings: function setStrings() {
       //navbar menu items
-      this.devices_caption = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].DEVICES;
-      this.device_types_caption = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].DEVICE_TYPES;
-      this.user_devices_caption = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].USER_DEVICES;
-      this.$refs.themeCombo.theme_caption = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].THEME;
+      this.devicesCaption = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].DEVICES;
+      this.deviceTypesCaption = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].DEVICE_TYPES;
+      this.userDevicesCaption = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].USER_DEVICES;
+      this.$refs.themeCombo.themeCaption = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].THEME;
+    },
+    setHideAll: function setHideAll() {
+      this.isDevicesActive = false;
+      this.isUserDevicesActive = false;
+      this.isDeviceTypesActive = false;
+      this.$root.$refs.DeviceRef.ShowHide(false);
+      this.$root.$refs.DeviceUserRef.ShowHide(false);
+      this.$root.$refs.DeviceTypeRef.ShowHide(false);
     },
     onDeviceTypesClick: function onDeviceTypesClick() {
-      this.isDevicesActive = false;
-      this.isUserDevicesActive = false;
+      this.setHideAll();
       this.isDeviceTypesActive = true;
-      this.$root.$refs.DeviceRef.ShowHide(false);
-      this.$root.$refs.DeviceUserRef.ShowHide(false);
-      this.$root.$refs.DeviceTypeRef.ShowHide(true);
+      this.$root.$refs.DeviceTypeRef.ShowHide(this.isDeviceTypesActive);
     },
     onDevicesClick: function onDevicesClick() {
+      this.setHideAll();
       this.isDevicesActive = true;
-      this.isUserDevicesActive = false;
-      this.isDeviceTypesActive = false;
-      this.$root.$refs.DeviceRef.ShowHide(true);
-      this.$root.$refs.DeviceUserRef.ShowHide(false);
-      this.$root.$refs.DeviceTypeRef.ShowHide(false);
+      this.$root.$refs.DeviceRef.ShowHide(this.isDevicesActive);
     },
     onUserDevicesClick: function onUserDevicesClick() {
-      this.isDevicesActive = false;
+      this.setHideAll();
       this.isUserDevicesActive = true;
-      this.isDeviceTypesActive = false;
-      this.$root.$refs.DeviceRef.ShowHide(false);
-      this.$root.$refs.DeviceUserRef.ShowHide(true);
-      this.$root.$refs.DeviceTypeRef.ShowHide(false);
-      /*this.isUserDevicesVisible = !this.isUserDevicesVisible;
-            this.isUserDevicesActive = this.isUserDevicesVisible;
-            this.$root.$refs.DeviceUserRef.ShowHide(this.isUserDevicesVisible);*/
+      this.$root.$refs.DeviceUserRef.ShowHide(this.isUserDevicesActive);
     },
     setMessage: function setMessage(message, header) {
       this.$refs.toaster.setMessage(message, header);
@@ -23527,7 +23523,7 @@ var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
 });
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.theme_caption) + " ", 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.themeCaption) + " ", 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.currentTheme == '' ? '(Default)' : '(' + $data.currentTheme + ')'), 1
   /* TEXT */
@@ -23701,7 +23697,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.onDeviceTypesClick && $options.onDeviceTypesClick.apply($options, arguments);
     }),
     href: "#"
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.device_types_caption), 3
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.deviceTypesCaption), 3
   /* TEXT, CLASS */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["nav-link", {
@@ -23711,7 +23707,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.onDevicesClick && $options.onDevicesClick.apply($options, arguments);
     }),
     href: "#"
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.devices_caption), 3
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.devicesCaption), 3
   /* TEXT, CLASS */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["nav-link", {
@@ -23721,7 +23717,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.onUserDevicesClick && $options.onUserDevicesClick.apply($options, arguments);
     })
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.user_devices_caption), 3
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.userDevicesCaption), 3
   /* TEXT, CLASS */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <ThemeCombo ref=\"themeCombo\"></ThemeCombo> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <input class=\"form-control me-sm-2\" type=\"text\" placeholder=\"Search\" /> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ThemeCombo, {
     ref: "themeCombo"

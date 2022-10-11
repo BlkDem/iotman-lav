@@ -15,9 +15,9 @@
             <label class="px-2">Device Type Image</label>
             <input v-model="device_type_image" class="form-control p-2 mb-4" placeholder="Input Device Type Image"/>
         </div>
-        <div class="btns my-2 d-grid gap-2 px-4">
-            <button class="btn btn-danger" @click="_confirm">{{ okButton }}</button>
-            <button class="btn btn-secondary" @click="_cancel">{{ cancelButton }}</button>
+        <div class="btns">
+            <button class="btn btn-danger mx-1 btn-width-40" @click="_confirm">{{ okButton }}</button>
+            <button class="btn btn-secondary mx-1 btn-width-40" @click="_cancel">{{ cancelButton }}</button>
         </div>
     </PopupModal>
 </template>

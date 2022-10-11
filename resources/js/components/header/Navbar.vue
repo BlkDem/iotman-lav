@@ -22,7 +22,7 @@
               v-bind:class="{ active: isDeviceTypesActive }"
               @click="onDeviceTypesClick"
               href="#"
-              >{{ device_types_caption }}</a
+              >{{ deviceTypesCaption }}</a
             >
           </li>
           <li class="nav-item">
@@ -31,7 +31,7 @@
               v-bind:class="{ active: isDevicesActive }"
               @click="onDevicesClick"
               href="#"
-              >{{ devices_caption }}</a
+              >{{ devicesCaption }}</a
             >
           </li>
           <li class="nav-item">
@@ -40,7 +40,7 @@
               href="#"
               v-bind:class="{ active: isUserDevicesActive }"
               @click="onUserDevicesClick"
-              >{{ user_devices_caption }}</a
+              >{{ userDevicesCaption }}</a
             >
           </li>
           <!-- <ThemeCombo ref="themeCombo"></ThemeCombo> -->
@@ -82,9 +82,9 @@ export default {
       isUserDevicesActive: false,
 
         //menu
-      devices_caption: MessagesConstants.DEVICES,
-      device_types_caption: MessagesConstants.DEVICE_TYPES,
-      user_devices_caption: MessagesConstants.USER_DEVICES,
+      devicesCaption: MessagesConstants.DEVICES,
+      deviceTypesCaption: MessagesConstants.DEVICE_TYPES,
+      userDevicesCaption: MessagesConstants.USER_DEVICES,
     };
   },
 
@@ -142,45 +142,38 @@ export default {
     setStrings() {
 
         //navbar menu items
-        this.devices_caption = MessagesConstants.DEVICES
-        this.device_types_caption = MessagesConstants.DEVICE_TYPES
-        this.user_devices_caption = MessagesConstants.USER_DEVICES
+        this.devicesCaption = MessagesConstants.DEVICES
+        this.deviceTypesCaption = MessagesConstants.DEVICE_TYPES
+        this.userDevicesCaption = MessagesConstants.USER_DEVICES
 
-        this.$refs.themeCombo.theme_caption = MessagesConstants.THEME
+        this.$refs.themeCombo.themeCaption = MessagesConstants.THEME
+    },
+
+    setHideAll() {
+      this.isDevicesActive = false;
+      this.isUserDevicesActive = false;
+      this.isDeviceTypesActive = false;
+      this.$root.$refs.DeviceRef.ShowHide(false);
+      this.$root.$refs.DeviceUserRef.ShowHide(false);
+      this.$root.$refs.DeviceTypeRef.ShowHide(false);
     },
 
     onDeviceTypesClick() {
-      this.isDevicesActive = false;
-      this.isUserDevicesActive = false;
+      this.setHideAll();
       this.isDeviceTypesActive = true;
-
-      this.$root.$refs.DeviceRef.ShowHide(false);
-      this.$root.$refs.DeviceUserRef.ShowHide(false);
-      this.$root.$refs.DeviceTypeRef.ShowHide(true);
+      this.$root.$refs.DeviceTypeRef.ShowHide(this.isDeviceTypesActive);
     },
 
     onDevicesClick() {
+      this.setHideAll();
       this.isDevicesActive = true;
-      this.isUserDevicesActive = false;
-      this.isDeviceTypesActive = false;
-
-      this.$root.$refs.DeviceRef.ShowHide(true);
-      this.$root.$refs.DeviceUserRef.ShowHide(false);
-      this.$root.$refs.DeviceTypeRef.ShowHide(false);
+      this.$root.$refs.DeviceRef.ShowHide(this.isDevicesActive);
     },
 
     onUserDevicesClick() {
-      this.isDevicesActive = false;
+      this.setHideAll();
       this.isUserDevicesActive = true;
-      this.isDeviceTypesActive = false;
-
-      this.$root.$refs.DeviceRef.ShowHide(false);
-      this.$root.$refs.DeviceUserRef.ShowHide(true);
-      this.$root.$refs.DeviceTypeRef.ShowHide(false);
-
-      /*this.isUserDevicesVisible = !this.isUserDevicesVisible;
-            this.isUserDevicesActive = this.isUserDevicesVisible;
-            this.$root.$refs.DeviceUserRef.ShowHide(this.isUserDevicesVisible);*/
+      this.$root.$refs.DeviceUserRef.ShowHide(this.isUserDevicesActive);
     },
 
     setMessage(message, header) {
