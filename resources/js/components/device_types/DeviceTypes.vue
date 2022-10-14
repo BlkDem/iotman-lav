@@ -6,7 +6,7 @@
     <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
       Device Types
     </h1>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
       <div class="container-fluid">
         <div class="navbar-collapse" id="navbarColor02">
           <ul class="navbar-nav me-auto  d-flex">

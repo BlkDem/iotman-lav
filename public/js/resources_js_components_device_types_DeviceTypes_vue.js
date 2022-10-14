@@ -786,7 +786,7 @@ var _hoisted_1 = /*#__PURE__*/_withScopeId(function () {
 });
 
 var _hoisted_2 = {
-  "class": "navbar navbar-expand-lg navbar-dark bg-dark"
+  "class": "navbar navbar-expand-lg navbar-dark bg-dark rounded"
 };
 var _hoisted_3 = {
   "class": "container-fluid"

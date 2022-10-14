@@ -967,7 +967,7 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_2 = {
-  "class": "navbar navbar-expand-lg navbar-dark bg-dark"
+  "class": "navbar navbar-expand-lg navbar-dark bg-dark rounded"
 };
 var _hoisted_3 = {
   "class": "container-fluid"
@@ -1407,7 +1407,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".align-left {\n  text-align: left !important;\n}\n.align-right {\n  text-align: right !important;\n}\n.align-center {\n  text-align: center !important;\n}\n.btn-width-40 {\n  width: 40% !important;\n}\n.vertical-center {\n  display: flex;\n  align-items: center;\n}\n.navbar-nav .dropdown-menu {\n  position: absolute;\n}\n.device-image {\n  width: 70px;\n  margin-top: -60px;\n  margin-bottom: -60px;\n  margin-left: -10px;\n  border-radius: 10px;\n  box-shadow: #eee 0px 0px 8px;\n}\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n.device-image {\n    width: 64px;\n    margin-top: -23px;\n    margin-bottom: -29px;\n    margin-left: 210px;\n    border-radius: 10px;\n    box-shadow: #eee 0px 0px 8px;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".align-left {\n  text-align: left !important;\n}\n.align-right {\n  text-align: right !important;\n}\n.align-center {\n  text-align: center !important;\n}\n.btn-width-40 {\n  width: 40% !important;\n}\n.vertical-center {\n  display: flex;\n  align-items: center;\n}\n.navbar-nav .dropdown-menu {\n  position: absolute;\n}\n.device-image {\n  width: 70px;\n  margin-top: -50%;\n  margin-bottom: -50%;\n  margin-left: -10px;\n  border-radius: 10px;\n  box-shadow: #eee 0px 0px 8px;\n}\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n.device-image {\n    width: 64px;\n    margin-top: -23px;\n    margin-bottom: -29px;\n    margin-left: 210px;\n    border-radius: 10px;\n    box-shadow: #eee 0px 0px 8px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
