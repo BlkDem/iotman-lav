@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_components_DeviceTypes_vue"],{
+(self["webpackChunkiotman_lav"] = self["webpackChunkiotman_lav"] || []).push([["resources_js_components_DeviceTypes_vue"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/AddDeviceType.vue?vue&type=script&lang=js":
 /*!*******************************************************************************************************************************************************************************************************!*\
@@ -35,6 +35,7 @@ __webpack_require__.r(__webpack_exports__);
       // Text for confirm button; leave it empty because we don't know what we're using it for
       cancelButton: 'Cancel',
       // text for cancel button
+
       // Private variables
       resolvePromise: undefined,
       rejectPromise: undefined
@@ -43,7 +44,6 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     showDialogue: function showDialogue() {
       var _this = this;
-
       var optsAdd = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       this.edit_mode = optsAdd.edit_mode;
       this.title = optsAdd.title;
@@ -52,19 +52,20 @@ __webpack_require__.r(__webpack_exports__);
       this.device_type_desc = optsAdd.device_desc;
       this.device_type_image = optsAdd.device_hwid;
       this.okButton = optsAdd.okButton;
-
       if (optsAdd.cancelButton) {
         this.cancelButton = optsAdd.cancelButton;
       }
+      console.log(this);
+      // Once we set our config, we tell the popup modal to open 
 
-      console.log(this); // Once we set our config, we tell the popup modal to open 
+      this.$refs.popup.open();
+      //console.log('gdti: ', this.$refs.types.getDeviceTypeID());
 
-      this.$refs.popup.open(); //console.log('gdti: ', this.$refs.types.getDeviceTypeID());
       // if (this.edit_mode) {
       //     console.log(this.$refs.popup);
       // }
-      // Return promise so the caller can get results
 
+      // Return promise so the caller can get results
       return new Promise(function (resolve, reject) {
         _this.resolvePromise = resolve;
         _this.rejectPromise = reject;
@@ -74,12 +75,14 @@ __webpack_require__.r(__webpack_exports__);
       //this.device_name = $('#device_name').val();
       //this.device_desc = $('#device_desc').val();
       //console.log(this.$refs.types);
+
       this.$refs.popup.close();
       this.resolvePromise(true, this);
     },
     _cancel: function _cancel() {
       this.$refs.popup.close();
-      this.resolvePromise(false); // Or you can throw an error
+      this.resolvePromise(false);
+      // Or you can throw an error
       // this.rejectPromise(new Error('User cancelled the dialogue'))
     }
   }
@@ -116,6 +119,7 @@ __webpack_require__.r(__webpack_exports__);
       // Text for confirm button; leave it empty because we don't know what we're using it for
       cancelButton: 'Cancel',
       // text for cancel button
+
       // Private variables
       resolvePromise: undefined,
       rejectPromise: undefined
@@ -130,19 +134,16 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     showDialogue: function showDialogue() {
       var _this = this;
-
       var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       this.title = opts.title;
       this.message = opts.message;
       this.okButton = opts.okButton;
-
       if (opts.cancelButton) {
         this.cancelButton = opts.cancelButton;
-      } // Once we set our config, we tell the popup modal to open 
-
-
-      this.$refs.popup.open(); // Return promise so the caller can get results
-
+      }
+      // Once we set our config, we tell the popup modal to open 
+      this.$refs.popup.open();
+      // Return promise so the caller can get results
       return new Promise(function (resolve, reject) {
         _this.resolvePromise = resolve;
         _this.rejectPromise = reject;
@@ -154,7 +155,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     _cancel: function _cancel() {
       this.$refs.popup.close();
-      this.resolvePromise(false); // Or you can throw an error
+      this.resolvePromise(false);
+      // Or you can throw an error
       // this.rejectPromise(new Error('User cancelled the dialogue'))
     }
   }
@@ -189,7 +191,6 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getDeviceTypes: function getDeviceTypes(api_url) {
       var _this = this;
-
       api_url = api_url || '/api/device_types/read/';
       fetch(api_url).then(function (response) {
         return response.json();
@@ -262,81 +263,55 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "modal-body"
 };
-
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Device Type Name", -1
-/* HOISTED */
-);
-
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Device Type Name", -1 /* HOISTED */);
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "class": "ml-n4"
-}, "Device Type Desc", -1
-/* HOISTED */
-);
-
+}, "Device Type Desc", -1 /* HOISTED */);
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "class": "ml-n4"
-}, "Device Type Image", -1
-/* HOISTED */
-);
-
+}, "Device Type Image", -1 /* HOISTED */);
 var _hoisted_7 = {
   "class": "btns my-2 d-grid gap-2 px-4"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_PopupModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("PopupModal");
-
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_PopupModal, {
     ref: "popup"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.title), 1
-      /* TEXT */
-      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.title), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $data.device_type_name = $event;
         }),
         "class": "form-control p-2 mb-4",
         placeholder: "Input Device Type Name"
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.device_type_name]]), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.device_type_name]]), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $data.device_type_desc = $event;
         }),
         "class": "form-control p-2 mb-4",
         placeholder: "Input Device Type Desc"
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.device_type_desc]]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.device_type_desc]]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $data.device_type_image = $event;
         }),
         "class": "form-control p-2 mb-4",
         placeholder: "Input Device Type Image"
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.device_type_image]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.device_type_image]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "btn btn-danger",
         onClick: _cache[3] || (_cache[3] = function () {
           return $options._confirm && $options._confirm.apply($options, arguments);
         })
-      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.okButton), 1
-      /* TEXT */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.okButton), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "btn btn-secondary",
         onClick: _cache[4] || (_cache[4] = function () {
           return $options._cancel && $options._cancel.apply($options, arguments);
         })
-      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.cancelButton), 1
-      /* TEXT */
-      )])];
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.cancelButton), 1 /* TEXT */)])];
     }),
-    _: 1
-    /* STABLE */
 
-  }, 512
-  /* NEED_PATCH */
-  );
+    _: 1 /* STABLE */
+  }, 512 /* NEED_PATCH */);
 }
 
 /***/ }),
@@ -363,37 +338,25 @@ var _hoisted_2 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_PopupModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("PopupModal");
-
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_PopupModal, {
     ref: "popup"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.title), 1
-      /* TEXT */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.message), 1
-      /* TEXT */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.title), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.message), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         "class": "btn btn-danger",
         onClick: _cache[0] || (_cache[0] = function () {
           return $options._confirm && $options._confirm.apply($options, arguments);
         })
-      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.okButton), 1
-      /* TEXT */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.okButton), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "btn btn-primary",
         onClick: _cache[1] || (_cache[1] = function () {
           return $options._cancel && $options._cancel.apply($options, arguments);
         })
-      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.cancelButton), 1
-      /* TEXT */
-      )])];
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.cancelButton), 1 /* TEXT */)])];
     }),
-    _: 1
-    /* STABLE */
 
-  }, 512
-  /* NEED_PATCH */
-  );
+    _: 1 /* STABLE */
+  }, 512 /* NEED_PATCH */);
 }
 
 /***/ }),
@@ -413,15 +376,11 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   key: 0
 };
-
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "row"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "col-sm-6 col-xs-6 col-lg-6 p-2"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Device Types")])], -1
-/* HOISTED */
-);
-
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Device Types")])], -1 /* HOISTED */);
 var _hoisted_3 = {
   "class": "row"
 };
@@ -443,33 +402,19 @@ var _hoisted_8 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_AddDevice = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AddDevice");
-
   var _component_ConfirmDialogue = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ConfirmDialogue");
-
   return $data.visible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddDevice, {
     ref: "addDeviceType"
-  }, null, 512
-  /* NEED_PATCH */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ConfirmDialogue, {
+  }, null, 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ConfirmDialogue, {
     ref: "confirmDialogue"
-  }, null, 512
-  /* NEED_PATCH */
-  ), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.device_types, function (device_type) {
+  }, null, 512 /* NEED_PATCH */), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.device_types, function (device_type) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "col-sm-6 col-xs-6 col-lg-6 p-2",
       key: device_type.id
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device_type.device_type_name), 1
-    /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device_type.device_type_name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: device_type.device_type_image
-    }, null, 8
-    /* PROPS */
-    , _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device_type.device_type_desc), 1
-    /* TEXT */
-    )])])]);
-  }), 128
-  /* KEYED_FRAGMENT */
-  ))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
+    }, null, 8 /* PROPS */, _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device_type.device_type_desc), 1 /* TEXT */)])])]);
+  }), 128 /* KEYED_FRAGMENT */))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),
@@ -486,11 +431,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-
 var _withScopeId = function _withScopeId(n) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-0aa0398c"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
 };
-
 var _hoisted_1 = {
   key: 0,
   "class": "popup-modal"
@@ -505,9 +448,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [$data.isVisible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {}, undefined, true)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
-    _: 3
-    /* FORWARDED */
-
+    _: 3 /* FORWARDED */
   });
 }
 
@@ -930,13 +871,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _AddDeviceType_vue_vue_type_template_id_40f36156__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddDeviceType.vue?vue&type=template&id=40f36156 */ "./resources/js/components/AddDeviceType.vue?vue&type=template&id=40f36156");
 /* harmony import */ var _AddDeviceType_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddDeviceType.vue?vue&type=script&lang=js */ "./resources/js/components/AddDeviceType.vue?vue&type=script&lang=js");
-/* harmony import */ var _home_maxim_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_projects_iotman_lav_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_home_maxim_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_AddDeviceType_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_AddDeviceType_vue_vue_type_template_id_40f36156__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/AddDeviceType.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_projects_iotman_lav_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_AddDeviceType_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_AddDeviceType_vue_vue_type_template_id_40f36156__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/AddDeviceType.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -957,13 +898,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ConfirmDialogue_vue_vue_type_template_id_5493551d__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ConfirmDialogue.vue?vue&type=template&id=5493551d */ "./resources/js/components/ConfirmDialogue.vue?vue&type=template&id=5493551d");
 /* harmony import */ var _ConfirmDialogue_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ConfirmDialogue.vue?vue&type=script&lang=js */ "./resources/js/components/ConfirmDialogue.vue?vue&type=script&lang=js");
-/* harmony import */ var _home_maxim_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_projects_iotman_lav_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_home_maxim_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ConfirmDialogue_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ConfirmDialogue_vue_vue_type_template_id_5493551d__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/ConfirmDialogue.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_projects_iotman_lav_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ConfirmDialogue_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ConfirmDialogue_vue_vue_type_template_id_5493551d__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/ConfirmDialogue.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -984,13 +925,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _DeviceTypes_vue_vue_type_template_id_741f9db0__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeviceTypes.vue?vue&type=template&id=741f9db0 */ "./resources/js/components/DeviceTypes.vue?vue&type=template&id=741f9db0");
 /* harmony import */ var _DeviceTypes_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DeviceTypes.vue?vue&type=script&lang=js */ "./resources/js/components/DeviceTypes.vue?vue&type=script&lang=js");
-/* harmony import */ var _home_maxim_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_projects_iotman_lav_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_home_maxim_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_DeviceTypes_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_DeviceTypes_vue_vue_type_template_id_741f9db0__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/DeviceTypes.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_projects_iotman_lav_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_DeviceTypes_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_DeviceTypes_vue_vue_type_template_id_741f9db0__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/DeviceTypes.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -1012,7 +953,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PopupModal_vue_vue_type_template_id_0aa0398c_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PopupModal.vue?vue&type=template&id=0aa0398c&scoped=true */ "./resources/js/components/PopupModal.vue?vue&type=template&id=0aa0398c&scoped=true");
 /* harmony import */ var _PopupModal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PopupModal.vue?vue&type=script&lang=js */ "./resources/js/components/PopupModal.vue?vue&type=script&lang=js");
 /* harmony import */ var _PopupModal_vue_vue_type_style_index_0_id_0aa0398c_lang_scss_scoped_true__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PopupModal.vue?vue&type=style&index=0&id=0aa0398c&lang=scss&scoped=true */ "./resources/js/components/PopupModal.vue?vue&type=style&index=0&id=0aa0398c&lang=scss&scoped=true");
-/* harmony import */ var _home_maxim_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_projects_iotman_lav_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -1020,7 +961,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,_home_maxim_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_PopupModal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_PopupModal_vue_vue_type_template_id_0aa0398c_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-0aa0398c"],['__file',"resources/js/components/PopupModal.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_projects_iotman_lav_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_PopupModal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_PopupModal_vue_vue_type_template_id_0aa0398c_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-0aa0398c"],['__file',"resources/js/components/PopupModal.vue"]])
 /* hot reload */
 if (false) {}
 
