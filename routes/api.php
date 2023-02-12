@@ -19,10 +19,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Auth routes
-
-Route::post('/login', [LoginController::class, 'login']);
-
 
 //CRUD routes for table 'device_types'
 
