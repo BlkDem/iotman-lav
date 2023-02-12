@@ -1,0 +1,26 @@
+export default {
+    Themes: [
+        'cosmo', 
+        'cyborg', 
+        'darkly', 
+        'flatly',
+        'journal',
+        'lumen', 
+        'lux', 
+        'materia', 
+        'minty', 
+        'morph', 
+        'quartz', 
+        'pulse', 
+        'sandstone', 
+        'simplex', 
+        'sketchy', 
+        'slate', 
+        'solar', 
+        'superhero',
+        'united', 
+        'vapor', 
+        'yeti', 
+        'zephyr',  
+    ]
+}
