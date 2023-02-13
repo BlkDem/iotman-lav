@@ -53,17 +53,25 @@
                 </div>
             </div>
 
-            <div class="row mb-0">
+            <div class="row mb-3">
                 <div class="col-md-6 offset-md-4">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary w-100">
                         {{ __('Login') }}
                     </button>
-
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 offset-md-4" style="display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;">
                     @if (Route::has('password.request'))
                     <a class="btn btn-link" href="{{ route('password.request') }}">
                         {{ __('Forgot Your Password?') }}
                     </a>
                     @endif
+                    <a class="btn btn-link" href="{{ route('register') }}">
+                        {{ __('Register') }}
+                    </a>
                 </div>
             </div>
         </form>
