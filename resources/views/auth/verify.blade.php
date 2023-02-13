@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class="card  border border-primary m-2">
+<div class="card  border border-primary m-2 py-4">
     <div class="card-header">{{ __('Verify Your Email Address') }}</div>
 
     <div class="card-body">

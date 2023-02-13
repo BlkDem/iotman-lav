@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="card border border-primary m-2">
+<div class="card border border-primary m-2 py-4">
     <div class="card-header text-center text-uppercase">
         <h1>{{ __('Register') }}</h1>
     </div>

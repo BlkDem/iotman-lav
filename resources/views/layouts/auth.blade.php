@@ -21,18 +21,18 @@
    -->
 
     <?php
-      echo "<script>var _currentTheme=''</script>";
-      $_themeCss = '/css/app.css';
-      $_themed = isset($_GET["theme"]);
-      if ($_themed)
-      {
-        $_themeName = $_GET["theme"];
-        if(file_exists(public_path('/css/' . $_themeName. '/app.css')))
-        {
-          $_themeCss = '/css/' . $_themeName. '/app.css';
-          echo "<script>_currentTheme='$_themeName'</script>";
-        }
-      }
+    //   echo "<script>var _currentTheme='vapor'</script>";
+      $_themeCss = '/css/vapor/app.css';
+    //   $_themed = true;
+    //   if ($_themed)
+    //   {
+    //     $_themeName = $_GET["theme"];
+    //     if(file_exists(public_path('/css/' . $_themeName. '/app.css')))
+    //     {
+    //       $_themeCss = '/css/' . $_themeName. '/app.css';
+    //       echo "<script>_currentTheme='$_themeName'</script>";
+    //     }
+    //   }
     ?>
 
     <link rel="stylesheet" href="{{ asset($_themeCss) }}">

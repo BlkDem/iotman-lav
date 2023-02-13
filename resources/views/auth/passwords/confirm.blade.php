@@ -1,7 +1,6 @@
 @extends('layouts.auth')
 
-@section('content')
-<div class="card  border border-primary m-2">
+@section('content') py-4">
     <div class="card-header">{{ __('Confirm Password') }}</div>
 
     <div class="card-body">
