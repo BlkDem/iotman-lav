@@ -7,7 +7,7 @@
     justify-content: center;">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card border border-primary p-4 m-2">
+            <div class="card border border-primary m-2">
                 <div class="card-header text-center text-uppercase"><h1>{{ __('Login') }}</h1></div>
 
                 <div class="card-body">

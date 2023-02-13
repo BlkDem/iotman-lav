@@ -70,7 +70,9 @@
         </nav>
 
         <main class="vh-100">
+        <div class="col-md-8">
             @yield('content')
+        </div>
         </main>
     </div>
 </body>
