@@ -7,13 +7,13 @@
     <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
     <title>Umolab Devices</title>
     <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
-    
-    
+
+
     <!-- * checking and applying Application Theme via asset the specified CSS file
-    * All app.css in their folders /css/ThemeFolder/app.css and default theme in /css/app.css 
+    * All app.css in their folders /css/ThemeFolder/app.css and default theme in /css/app.css
    -->
-    
-    <?php      
+
+    <?php
       echo "<script>var _currentTheme=''</script>";
       $_themeCss = '/css/app.css';
       $_themed = isset($_GET["theme"]);
@@ -27,24 +27,25 @@
         }
       }
     ?>
-    
+
     <link rel="stylesheet" href="{{ asset($_themeCss) }}">
     <style>
       ::-webkit-scrollbar {
-        width: 10px; 
+          width: 10px;
       }
- 
-      ::-webkit-scrollbar-thumb {   
-        /* border-radius: 30px; */
-        background: -webkit-gradient(linear,left top,left bottom,from(var(--bs-primary)),to(var(--bs-secondary)));
-        /* background: -webkit-gradient(linear-gradient(0, var(--bs-secondary), 0%, var(--bs-secondary), 50%, var(--bs-primary), 100%)); */
-        /* background: -webkit-gradient(linear-gradient(90deg, rgba(var(--bs-primary),1) 0%, rgba(var(--bs-secondary),1) 50%, rgba(var(--bs-rpimary),1) 100%)); */
-        /* box-shadow: inset 2px 2px 2px rgba(var(--bs-light),.25), inset -2px -2px 2px rgba(var(--bs-dark),.25);} */
- 
-      ::-webkit-scrollbar-track {     
-        background-color: var(--bs-light);
-        border-radius:10px;
-        /* background: linear-gradient(to right, rgba(var(--bs-light),.25), rgba(var(--bs-light),.25) 1px, 
+
+      ::-webkit-scrollbar-thumb {
+          /* border-radius: 30px; */
+          background: -webkit-gradient(linear, left top, left bottom, from(var(--bs-primary)), to(var(--bs-secondary)));
+          /* background: -webkit-gradient(linear-gradient(0, var(--bs-secondary), 0%, var(--bs-secondary), 50%, var(--bs-primary), 100%)); */
+          /* background: -webkit-gradient(linear-gradient(90deg, rgba(var(--bs-primary),1) 0%, rgba(var(--bs-secondary),1) 50%, rgba(var(--bs-rpimary),1) 100%)); */
+          /* box-shadow: inset 2px 2px 2px rgba(var(--bs-light),.25), inset -2px -2px 2px rgba(var(--bs-dark),.25); */
+      }
+
+      ::-webkit-scrollbar-track {
+          background-color: var(--bs-light);
+          border-radius: 10px;
+          /* background: linear-gradient(to right, rgba(var(--bs-light),.25), rgba(var(--bs-light),.25) 1px,
           rgba(var(--bs-light),.25) 1px, rgba(var(--bs-light),.25)); */
       }
     </style>
@@ -56,7 +57,7 @@
     <device-list ref="DeviceRef"></device-list>
     <device-type-list ref="DeviceTypeRef"></device-type-list>
     <device-user-list ref="DeviceUserRef"></device-user-list>
-    
+
 </div>
 
 <!-- Footer -->
@@ -64,7 +65,7 @@
   <!-- Section: Social media -->
   <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
     <!-- Left -->
-    
+
     <!-- Right -->
   </section>
   <!-- Section: Social media -->
@@ -77,7 +78,7 @@
         <!-- Grid column -->
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
           <!-- Content -->
-          
+
           <h6 class="text-uppercase fw-bold mb-4">
             <i class="fas fa-gem me-3"></i>Company name
           </h6>
