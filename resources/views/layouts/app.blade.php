@@ -13,66 +13,63 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+    <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+    
+    
+    <!-- * checking and applying Application Theme via asset the specified CSS file
+    * All app.css in their folders /css/ThemeFolder/app.css and default theme in /css/app.css 
+   -->
+    
+    <?php      
+      echo "<script>var _currentTheme=''</script>";
+      $_themeCss = '/css/app.css';
+      $_themed = isset($_GET["theme"]);
+      if ($_themed)
+      {
+        $_themeName = $_GET["theme"];
+        if(file_exists(public_path('/css/' . $_themeName. '/app.css')))
+        {
+          $_themeCss = '/css/' . $_themeName. '/app.css';
+          echo "<script>_currentTheme='$_themeName'</script>";
+        }
+      }
+    ?>
+    
+    <link rel="stylesheet" href="{{ asset($_themeCss) }}">
+    <style>
+      ::-webkit-scrollbar {
+        width: 10px; 
+      }
+ 
+      ::-webkit-scrollbar-thumb {   
+        /* border-radius: 30px; */
+        background: -webkit-gradient(linear,left top,left bottom,from(var(--bs-primary)),to(var(--bs-secondary)));
+        /* background: -webkit-gradient(linear-gradient(0, var(--bs-secondary), 0%, var(--bs-secondary), 50%, var(--bs-primary), 100%)); */
+        /* background: -webkit-gradient(linear-gradient(90deg, rgba(var(--bs-primary),1) 0%, rgba(var(--bs-secondary),1) 50%, rgba(var(--bs-rpimary),1) 100%)); */
+        /* box-shadow: inset 2px 2px 2px rgba(var(--bs-light),.25), inset -2px -2px 2px rgba(var(--bs-dark),.25);} */
+ 
+      ::-webkit-scrollbar-track {     
+        background-color: var(--bs-light);
+        border-radius:10px;
+        /* background: linear-gradient(to right, rgba(var(--bs-light),.25), rgba(var(--bs-light),.25) 1px, 
+          rgba(var(--bs-light),.25) 1px, rgba(var(--bs-light),.25)); */
+      }
+    </style>
+
     <!-- Scripts -->
   
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="vh-100">
             @yield('content')
         </main>
     </div>

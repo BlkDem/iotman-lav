@@ -1,11 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container vh-100" style="display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+            <div class="card border border-primary p-4 m-2">
+                <div class="card-header text-center text-uppercase"><h1>{{ __('Login') }}</h1></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">

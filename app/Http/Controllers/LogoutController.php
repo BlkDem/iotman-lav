@@ -15,10 +15,8 @@ class LogoutController extends Controller
      */
     public function perform()
     {
-        Session::flush();
-        
+        Session::flush();       
         Auth::logout();
-
-        return redirect('login');
+        return redirect('login?theme=vapor');
     }
 }
