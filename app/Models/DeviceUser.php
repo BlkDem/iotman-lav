@@ -38,9 +38,6 @@ class DeviceUser extends Model
         'user_device_name',
         'user_device_pass',
         'device_id',
-        'device_type_name',
-        'device_type_image',
-        'device_HWID',
         'user_id'
     ];
 }

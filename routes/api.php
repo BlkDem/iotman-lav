@@ -41,6 +41,6 @@ Route::delete('/devices/delete/{deleteDevice}', [DeviceController::class, 'destr
 Route::post('/user_devices/create', [DeviceUserController::class, 'store']);
 Route::get('/user_devices/read', [DeviceUsersViewController::class, 'index']);
 Route::get('/user_devices/read/{device_user_id}', [DeviceUsersViewController::class, 'show']);
-Route::put('/user_devices/update/{updateUserDevice}', [DeviceUserController::class, 'update']);
-Route::delete('/user_devices/delete/{deleteUserDevice}', [DeviceUserController::class, 'destroy']);
+Route::put('/user_devices/update/{updateDeviceUser}', [DeviceUserController::class, 'update']);
+Route::delete('/user_devices/delete/{deleteDeviceUser}', [DeviceUserController::class, 'destroy']);
 Route::get('/user_devices/show', [DeviceUserController::class, 'UserDevices']);
