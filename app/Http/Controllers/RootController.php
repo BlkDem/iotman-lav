@@ -12,16 +12,9 @@ class RootController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
-
-        /*$devices = Device::all();
-        foreach ($devices as $item){
-            $item->DeviceType;
-        }
-        return view('index', ['items' => $devices]);*/
-
         return view('index');
     }
 }

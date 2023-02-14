@@ -46,8 +46,8 @@
         }
 
         .data-in-center {
-            display: flex; flex-direction: column;
-            flex-wrap: nowrap;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
         }
 

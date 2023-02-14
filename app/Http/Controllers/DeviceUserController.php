@@ -5,30 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Device;
 use App\Models\DeviceUser;
 use Illuminate\Http\Request;
+use App\Http\Middleware\ValidatorRules;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 
 class DeviceUserController extends Controller
 {
-    
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function index(){
+        $devicesUserDataSet = DeviceUser::get();
+        if ($devicesUserDataSet->count() ==0)
+        {
+            return response()->json(['Error' => 'true', 'Message' => 'No Records Found'], 404);
+        }
+        return response()->json(['data' => $devicesUserDataSet], 200);
     }
 
     /**
@@ -40,22 +30,27 @@ class DeviceUserController extends Controller
     public function show($device_user_id)
     {
         $isPresent = DeviceUser::find($device_user_id);
-        return (is_null($isPresent))? 
+        return (is_null($isPresent))?
             response()->json(['Error' => 'true', 'Message' => 'Record ' . $device_user_id . ' Not Found'], 404)
-            : 
+            :
             response()->json($isPresent, 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\DeviceUser  $deviceUser
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(DeviceUser $deviceUser)
+    public function store(Request $request)
     {
-        //
+        $validator = ValidatorRules::MakeValidate($request, 'user_devices');
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+        try {
+            $newDeviceUser = DeviceUser::create($request->all());
+            return response()->json($newDeviceUser, 201);
+        }
+        catch (Exception $e) {
+            return response()->json('Creating Record Error: ' . $e, 400);
+        }
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -64,9 +59,19 @@ class DeviceUserController extends Controller
      * @param  \App\Models\DeviceUser  $deviceUser
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DeviceUser $deviceUser)
+    public function update(Request $request, DeviceUser $updateDeviceUser)
     {
-        //
+        $validator = ValidatorRules::MakeValidate($request, 'user_devices');
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+        try {
+            $updateDeviceUser->update($request->all());
+            return response()->json($updateDeviceUser, 200);
+        }
+        catch (Exception $e) {
+            return response()->json('Updating Record Error: ' . $e, 400);
+        }
     }
 
     /**
@@ -75,8 +80,15 @@ class DeviceUserController extends Controller
      * @param  \App\Models\DeviceUser  $deviceUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DeviceUser $deviceUser)
+    public function destroy(Request $request, DeviceUser $deleteDeviceUser)
     {
-        //
-    }
-}
+        try {
+            return ($deleteDeviceUser->delete($request->all()) !== null)?
+                response()->json(null, 204)
+                :
+                response()->json('Error deleting', 200);
+        }
+        catch (Exception $e) {
+            return response()->json('Deleting Record Error: ' . $e, 400);
+        }
+    }}
