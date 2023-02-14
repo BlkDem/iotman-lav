@@ -21,18 +21,7 @@
    -->
 
     <?php
-    //   echo "<script>var _currentTheme='vapor'</script>";
       $_themeCss = '/css/vapor/app.css';
-    //   $_themed = true;
-    //   if ($_themed)
-    //   {
-    //     $_themeName = $_GET["theme"];
-    //     if(file_exists(public_path('/css/' . $_themeName. '/app.css')))
-    //     {
-    //       $_themeCss = '/css/' . $_themeName. '/app.css';
-    //       echo "<script>_currentTheme='$_themeName'</script>";
-    //     }
-    //   }
     ?>
 
     <link rel="stylesheet" href="{{ asset($_themeCss) }}">
@@ -46,24 +35,25 @@
             background: -webkit-gradient(linear, left top, left bottom, from(var(--bs-primary)), to(var(--bs-secondary)));
             /* background: -webkit-gradient(linear-gradient(0, var(--bs-secondary), 0%, var(--bs-secondary), 50%, var(--bs-primary), 100%)); */
             /* background: -webkit-gradient(linear-gradient(90deg, rgba(var(--bs-primary),1) 0%, rgba(var(--bs-secondary),1) 50%, rgba(var(--bs-rpimary),1) 100%)); */
-            /* box-shadow: inset 2px 2px 2px rgba(var(--bs-light),.25), inset -2px -2px 2px rgba(var(--bs-dark),.25);} */
+            /* box-shadow: inset 2px 2px 2px rgba(var(--bs-light),.25), inset -2px -2px 2px rgba(var(--bs-dark),.25);*/
+        }
 
-            ::-webkit-scrollbar-track {
-                background-color: var(--bs-light);
-                border-radius: 10px;
-                /* background: linear-gradient(to right, rgba(var(--bs-light),.25), rgba(var(--bs-light),.25) 1px,
+        ::-webkit-scrollbar-track {
+            background-color: var(--bs-light);
+            border-radius: 10px;
+            /* background: linear-gradient(to right, rgba(var(--bs-light),.25), rgba(var(--bs-light),.25) 1px,
           rgba(var(--bs-light),.25) 1px, rgba(var(--bs-light),.25)); */
-            }
+        }
 
     </style>
 </head>
 
 <body class="container-fluid">
-    <div id="auth" class="container text-center m-20">
+    <div id="auth" class="container m-20">
         <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Umolab') }}
                 </a>
             </div>
         </nav>

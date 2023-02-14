@@ -43,9 +43,4 @@ class DeviceUser extends Model
         'device_HWID',
         'user_id'
     ];
-
-    public function UserDevices()
-    {
-        return $this->hasOne(Device::class, DeviceType::class);
-    }
 }
