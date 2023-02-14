@@ -31,7 +31,15 @@ class ValidatorRules extends Validator
                     'user_id' => 'required'
                 ];
                 break;
-                        
+
+            case 'users':
+                $_rulesArray = [
+                    'name' => 'required|min:3',
+                    'email' => 'required|min:6',
+                    'password' => 'required|min:8',
+                ];
+                break;
+
             default:
                 $_rulesArray =  [];
                 break;
@@ -41,6 +49,6 @@ class ValidatorRules extends Validator
 
     public static function MakeValidate(Request $request, String $table)
     {
-        return self::make($request->all(), self::GetRulesByTable($table));  
+        return self::make($request->all(), self::GetRulesByTable($table));
     }
 }

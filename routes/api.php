@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\DeviceTypeController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\DevicesViewController;
@@ -19,6 +20,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//CRUD routes for table 'users'
+
+Route::post('/users/create', [UserController::class, 'store']);
+Route::get('/users/read', [UserController::class, 'index']);
+Route::get('/users/read/{id}', [UserController::class, 'show']);
+Route::put('/users/update/{updateUser}', [UserController::class, 'update']);
+Route::delete('/users/delete/{deleteUser}', [UserController::class, 'destroy']);
 
 //CRUD routes for table 'device_types'
 
