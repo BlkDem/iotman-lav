@@ -45,6 +45,12 @@
           rgba(var(--bs-light),.25) 1px, rgba(var(--bs-light),.25)); */
         }
 
+        .data-in-center {
+            display: flex; flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: center;
+        }
+
     </style>
 </head>
 
@@ -58,10 +64,7 @@
             </div>
         </nav>
         <main class="vh-100">
-            <div class="container vh-100" style="display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;">
+            <div class="container vh-100 data-in-center">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         @yield('content')
