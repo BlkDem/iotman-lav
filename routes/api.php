@@ -6,6 +6,7 @@ use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\DevicesViewController;
 use App\Http\Controllers\DeviceUserController;
 use App\Http\Controllers\DeviceUsersViewController;
+use App\Http\Controllers\Auth\UserinfoController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,3 +53,6 @@ Route::get('/user_devices/read/{device_user_id}', [DeviceUsersViewController::cl
 Route::put('/user_devices/update/{updateDeviceUser}', [DeviceUserController::class, 'update']);
 Route::delete('/user_devices/delete/{deleteDeviceUser}', [DeviceUserController::class, 'destroy']);
 Route::get('/user_devices/show', [DeviceUserController::class, 'UserDevices']);
+
+//Auth Userinfo
+Route::get('/authuser', [UserinfoController::class, 'show']);

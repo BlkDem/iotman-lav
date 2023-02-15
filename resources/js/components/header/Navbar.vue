@@ -13,7 +13,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
      <a class="navbar-brand logo" href="#">Umolab</a>
- 
+
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
@@ -47,7 +47,18 @@
         </ul>
       </div>
       <div class="d-flex">
-        <!-- <input class="form-control me-sm-2" type="text" placeholder="Search" /> -->
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button"
+                    aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i>
+                </a>
+                <div class="dropdown-menu theme-dropdown">
+                    <a class="dropdown-item" href="#">{{ userName }}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#" @click="logout()">Logout</a>
+                </div>
+            </li>
+            </ul>
         <ul class="navbar-nav me-auto">
             <ThemeCombo ref="themeCombo"></ThemeCombo>
         </ul>
@@ -55,7 +66,7 @@
             <LangCombo ref="langCombo"></LangCombo>
         </ul>
       </div>
-           
+
     </div>
   </nav>
 </template>
@@ -85,26 +96,45 @@ export default {
       devicesCaption: MessagesConstants.DEVICES,
       deviceTypesCaption: MessagesConstants.DEVICE_TYPES,
       userDevicesCaption: MessagesConstants.USER_DEVICES,
+
+      // user menu
+      userName: '',
+      userId: 0,
     };
   },
 
   created() {
 
-    
+
   },
 
     mounted() {
         this.currentLang = (localStorage.Language!=null)?localStorage.Language:'EN'
         this.loadLang(this.currentLang);
+        this.loadUserInfo();
     },
 
 
   methods: {
 
+    async loadUserInfo() {
+        try {
+            const response = await fetch("/api/authuser");
+            const user = await response.json();
+            this.userName = user.name;
+            this.userId = user.ID;
+            console.log('user info: ID(' + this.userId + ') name: ' + this.userName);
+            console.log(user);
+        }
+        catch (error) {
+            console.log('error loading user info: ' + error);
+        }
+    },
+
     async loadLang(_lang) {
         try {
             const response = await  fetch("/lang/" + _lang + ".json");
-    
+
             const json = await response.json();
             console.log(_lang)
             if (json != null) {
@@ -126,9 +156,9 @@ export default {
                 MessagesConstants.DEVICES = json.menu.DEVICES
                 MessagesConstants.THEME = json.menu.THEME
                 MessagesConstants.USER_DEVICES = json.menu.USER_DEVICES
-    
+
                 this.setStrings()
-    
+
             } else {
                 /* Handle responce errors */
             }
@@ -179,20 +209,28 @@ export default {
     setMessage(message, header) {
       this.$refs.toaster.setMessage(message, header);
     },
+
+    logout() {
+        window.location.href = '/logout';
+    },
+
   },
 };
 </script>
 
 <style scoped>
   .logo {
-    margin-right: auto;
+    margin-right: 1rem;
     padding-left: 8px;
-   }  
+   }
 
+   .navbar-expand-lg .navbar-nav {
+        align-items: flex-start;
+    }
 
 /* @media only screen and (min-width: 320px) and (max-width: 965px) {
   .logo {
     margin-right: auto;
-   }  
+   }
 } */
 </style>
