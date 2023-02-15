@@ -16,7 +16,11 @@ class UserController extends Controller
         {
             return response()->json(['Error' => 'true', 'Message' => 'No Records Found'], 404);
         }
-        return response()->json(['data' => $usersDataSet], 200);
+
+        $_returnData = ['data' => $usersDataSet];
+        $_returnData['meta'] = Array('count' => $usersDataSet->count());
+
+        return response()->json($_returnData, 200);
     }
 
     public function show($id)

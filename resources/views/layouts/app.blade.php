@@ -24,7 +24,7 @@
 
     <?php
       echo "<script>var _currentTheme=''</script>";
-      $_themeCss = '/css/app.css';
+      $_themeCss = '/css/vapor/app.css';
       $_themed = isset($_GET["theme"]);
       if ($_themed)
       {
