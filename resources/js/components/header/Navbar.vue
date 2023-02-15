@@ -124,7 +124,7 @@ export default {
             this.userName = user.name;
             this.userId = user.ID;
             console.log('user info: ID(' + this.userId + ') name: ' + this.userName);
-            console.log(user);
+            // console.log(user);
         }
         catch (error) {
             console.log('error loading user info: ' + error);

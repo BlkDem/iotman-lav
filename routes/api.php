@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DeviceTypeController;
 use App\Http\Controllers\DeviceController;
@@ -20,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+//Login
+Route::post('/login', [AuthController::class, 'signin']);
 
 //CRUD routes for table 'users'
 
@@ -55,4 +59,8 @@ Route::delete('/user_devices/delete/{deleteDeviceUser}', [DeviceUserController::
 Route::get('/user_devices/show', [DeviceUserController::class, 'UserDevices']);
 
 //Auth Userinfo
-Route::get('/authuser', [UserinfoController::class, 'show']);
+Route::middleware('auth:sanctum')->group( function () {
+    Route::get('/authuser', [UserinfoController::class, 'show']);
+    Route::get('/user', [AuthController::class, 'UserInfo']);
+    Route::get('/username', [AuthController::class, 'GetUserName']);
+});

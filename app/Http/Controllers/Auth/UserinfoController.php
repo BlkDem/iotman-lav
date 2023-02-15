@@ -18,7 +18,8 @@ class UserinfoController extends Controller
                     'ID' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
-                    'password' => $user->password
+                    // 'password' => $user->password,
+                    // 'token' => $user->getRememberToken()
                 ]);
         }
         return response()->json(['User' => ' no info'], 200);
