@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'signin']);
 
 //CRUD routes for table 'users'
+Route::middleware('auth:sanctum')->group( function () {
 
 Route::post('/users/create', [UserController::class, 'store']);
 Route::get('/users/read', [UserController::class, 'index']);
@@ -59,7 +60,7 @@ Route::delete('/user_devices/delete/{deleteDeviceUser}', [DeviceUserController::
 Route::get('/user_devices/show', [DeviceUserController::class, 'UserDevices']);
 
 //Auth Userinfo
-Route::middleware('auth:sanctum')->group( function () {
+
     Route::get('/authuser', [UserinfoController::class, 'show']);
     Route::get('/user', [AuthController::class, 'UserInfo']);
     Route::get('/username', [AuthController::class, 'GetUserName']);
