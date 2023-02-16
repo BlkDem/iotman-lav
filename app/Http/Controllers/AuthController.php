@@ -10,15 +10,20 @@ use App\Models\User;
 
 class AuthController extends BaseController
 {
-    public function UserInfo()
+    public function UserInfo(Request $request)
     {
         $authUser = Auth::user();
         if ($authUser != null) {
             $success = Array(
-                'token' =>  $authUser->getRememberToken(),
+                'token' =>  $request->bearerToken(),
                 'name' =>  $authUser->name);
+                return $this->sendResponse($success, 'User Info');
         }
-        return $this->sendResponse($success, 'User Info');
+        else {
+            return $this->sendError('No user info');
+        }
+
+
     }
 
     public function signin(Request $request)

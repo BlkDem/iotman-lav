@@ -22,6 +22,6 @@ class UserinfoController extends Controller
                     // 'token' => $user->getRememberToken()
                 ]);
         }
-        return response()->json(['User' => ' no info'], 200);
+        return response()->json(['User' => 'No user info'], 200);
     }
 }
