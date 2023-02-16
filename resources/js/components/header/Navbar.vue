@@ -75,6 +75,7 @@
 import ThemeCombo from "../../components/common/ThemeCombo.vue";
 import LangCombo from "../../components/common/LangCombo.vue";
 import MessagesConstants from "../strings_constants/strings.js";
+import APIConstants from "../../rest_api.js";
 import Langs from "../../langs";
 
 export default {
@@ -119,10 +120,10 @@ export default {
 
     async loadUserInfo() {
         try {
-            const response = await fetch("/api/authuser");
+            const response = await fetch(APIConstants.api_user_info);
             const user = await response.json();
-            this.userName = user.name;
-            this.userId = user.ID;
+            this.userName = user.data.name;
+            this.userId = user.data.ID;
             console.log('user info: ID(' + this.userId + ') name: ' + this.userName);
             // console.log(user);
         }

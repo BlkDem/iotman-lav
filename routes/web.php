@@ -1,18 +1,20 @@
 <?php
 
-use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RootController;
 use Illuminate\Support\Facades\Auth;
 
 // Auth routes
 
-Route::post('/login', [LoginController::class, 'login']);
+//Route::post('/login', [LoginController::class, 'login']);
 Route::group(['middleware' => ['auth']], function() {
     /**
     * Logout Route
     */
-    Route::get('/logout', [LogoutController::class, 'perform']);
+    // Route::get('/logout', [LogoutController::class, 'perform']);
+    Route::get('/logout', [LoginController::class, 'logout']);
  });
 Route::get('/', [RootController::class, 'index']);
+Route::get('/home', [RootController::class, 'index']);
 Auth::routes();

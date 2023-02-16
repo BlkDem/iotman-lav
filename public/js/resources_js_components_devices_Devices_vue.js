@@ -1312,39 +1312,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/rest_api.js":
-/*!**********************************!*\
-  !*** ./resources/js/rest_api.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var apiPreffix = '/api/';
-var APIVersion = 1;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  apiVersion: APIVersion,
-  //Device Types CRUD 
-  api_device_type_create: apiPreffix + 'device_types/create/',
-  api_device_types_read: apiPreffix + 'device_types/read/',
-  api_device_type_update: apiPreffix + 'device_type/update/',
-  api_device_type_delete: apiPreffix + 'device_type/delete/',
-  //Devices CRUD 
-  api_device_create: apiPreffix + 'devices/create/',
-  api_devices_read: apiPreffix + 'devices/read/',
-  api_device_update: apiPreffix + 'devices/update/',
-  api_device_delete: apiPreffix + 'devices/delete/',
-  //User Devices CRUD 
-  api_user_device_create: apiPreffix + 'user_devices/create/',
-  api_user_devices_read: apiPreffix + 'user_devices/read/',
-  api_user_device_update: apiPreffix + 'user_devices/update/',
-  api_user_device_delete: apiPreffix + 'user_devices/delete/'
-});
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/PopupModal.vue?vue&type=style&index=0&id=9cfc8a2c&lang=scss&scoped=true":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/PopupModal.vue?vue&type=style&index=0&id=9cfc8a2c&lang=scss&scoped=true ***!

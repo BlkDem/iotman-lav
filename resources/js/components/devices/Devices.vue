@@ -213,7 +213,7 @@ export default {
   mounted() {
     if (localStorage.getItem('CompactView')) {
       this.compactView = (localStorage.getItem('CompactView') === 'true');
-    } 
+    }
   },
 
   watch: {

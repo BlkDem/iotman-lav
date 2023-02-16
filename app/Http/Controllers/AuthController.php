@@ -16,7 +16,9 @@ class AuthController extends BaseController
         if ($authUser != null) {
             $success = Array(
                 'token' =>  $request->bearerToken(),
-                'name' =>  $authUser->name);
+                'name' =>  $authUser->name,
+                'ID' =>  $authUser->id
+            );
                 return $this->sendResponse($success, 'User Info');
         }
         else {
