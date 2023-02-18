@@ -767,7 +767,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   USER_DEVICE_DELETING_CAPTION: "Delete",
   USER_DEVICE_DELETING_MESSAGE: "Are you sure you want to delete this user device?",
-  USER_DEVICE_DATA_DESCRIPTION: "All registered devices ready for use",
+  USER_DEVICE_DATA_DESCRIPTION: "User devices ready for use",
   UEVICE_ADDING_TITLE: 'Adding User Device',
   USER_DEVICE_ADDING_MESSAGE: 'Adding User Device',
   USER_DEVICE_EDITING_TITLE: 'Editing User Device',

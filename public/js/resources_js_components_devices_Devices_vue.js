@@ -442,9 +442,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       this.filteredDevices.forEach(function (dev, key) {
-        _this2.filteredDevices[key].device_desc = dev.device_desc == null ? _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].NO_DESCRIPTION : dev.device_desc;
-        _this2.filteredDevices[key].device_hwid = dev.device_hwid == null ? _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].NO_HWID : dev.device_hwid;
-        _this2.filteredDevices[key].device_pass = dev.device_hwid == null ? _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].NO_PASS : dev.device_pass;
+        var _dev$device_desc, _dev$device_hwid, _dev$device_pass;
+
+        _this2.filteredDevices[key].device_desc = (_dev$device_desc = dev.device_desc) !== null && _dev$device_desc !== void 0 ? _dev$device_desc : _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].NO_DESCRIPTION;
+        _this2.filteredDevices[key].device_hwid = (_dev$device_hwid = dev.device_hwid) !== null && _dev$device_hwid !== void 0 ? _dev$device_hwid : _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].NO_HWID;
+        _this2.filteredDevices[key].device_pass = (_dev$device_pass = dev.device_pass) !== null && _dev$device_pass !== void 0 ? _dev$device_pass : _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].NO_PASS;
       });
     },
     //deleting devices
@@ -500,7 +502,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }).then(function (response) {
         _this4.filteredDevices = response.data;
 
-        _this4.processStrings();
+        _this4.processStrings(); //console.log(response.data);
+
 
         _this4.devices = _this4.filteredDevices;
 
@@ -1196,6 +1199,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, " Add Device ")])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.dataDescription), 1
   /* TEXT */
   )]), !$options.getCompactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredDevices, function (device, key) {
+    var _device$device_desc, _device$device_hwid;
+
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "col-sm-4 col-xs-4 col-lg-4 p-2",
       key: key,
@@ -1206,13 +1211,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_type_name), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_desc), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_device$device_desc = device.device_desc) !== null && _device$device_desc !== void 0 ? _device$device_desc : 'no description'), 1
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: device.device_type_image
     }, null, 8
     /* PROPS */
-    , _hoisted_26), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_28, "HWID: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_hwid), 1
+    , _hoisted_26), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_28, "HWID: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_device$device_hwid = device.device_hwid) !== null && _device$device_hwid !== void 0 ? _device$device_hwid : 'no hardware address'), 1
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-info btn-width-40 mx-1",
@@ -1234,6 +1239,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), 128
   /* KEYED_FRAGMENT */
   ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" compact view "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredDevices, function (device, key) {
+    var _device$device_hwid2;
+
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "card border-primary mb-4 w-100",
       key: key,
@@ -1247,7 +1254,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_45, " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.id) + ") ", 1
     /* TEXT */
-    )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_type_name) + ": HWID (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_hwid) + ") ", 1
+    )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_type_name) + ": HWID (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_device$device_hwid2 = device.device_hwid) !== null && _device$device_hwid2 !== void 0 ? _device$device_hwid2 : 'no hardware address ') + ") ", 1
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_47, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-info mx-2",
