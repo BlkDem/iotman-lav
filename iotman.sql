@@ -174,13 +174,6 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Дамп данных таблицы `password_resets`
---
-
-INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
-('blkdem@blkdem.ru', '$2y$10$LWq8loHmlnKrKSi0l6nmvuQ/n.QIy01LqEFrrN2RlXBEo0HQoFigO', '2023-02-12 18:28:20');
-
 -- --------------------------------------------------------
 
 --
@@ -200,34 +193,6 @@ CREATE TABLE `personal_access_tokens` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Дамп данных таблицы `personal_access_tokens`
---
-
-INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 1, 'MyApp', '6da297eaa4ad5a195ad7a621d5f0becf1c24e439a88748edbd9268f29867cb45', '[\"*\"]', NULL, '2022-08-17 08:26:02', '2022-08-17 08:26:02'),
-(2, 'App\\Models\\User', 1, 'MyApp', '5b7d1c2ba46e1b5f845a805d6f144cbd6f5413a1edded7917b28cc55cad636e2', '[\"*\"]', NULL, '2022-08-17 08:28:13', '2022-08-17 08:28:13'),
-(3, 'App\\Models\\User', 1, 'MyApp', '4c937ecc60242ca72041f621065d6ee024921a082fdd279693aaba48baf650ca', '[\"*\"]', NULL, '2022-08-17 08:29:02', '2022-08-17 08:29:02'),
-(4, 'App\\Models\\User', 4, 'UmolabApp', 'e03e393d2961a03a06586f3f58d15df5847e6df7c6ac39cd34477b6cf126b8ed', '[\"*\"]', '2023-02-15 13:34:46', '2023-02-15 13:19:29', '2023-02-15 13:34:46'),
-(5, 'App\\Models\\User', 4, 'UmolabApp', '215bfb7fdabc425248341634bfe3b84ce610508a5763306b7a9fb621d056f422', '[\"*\"]', '2023-02-15 16:09:37', '2023-02-15 13:33:09', '2023-02-15 16:09:37'),
-(6, 'App\\Models\\User', 4, 'UmolabApp', '133316e975a0977de797c39c3682723cdf39b8324930f71af6f53d1d6d393683', '[\"*\"]', NULL, '2023-02-15 16:09:37', '2023-02-15 16:09:37'),
-(7, 'App\\Models\\User', 4, 'UmolabApp', '5c7f654358ae2a8ec98174e63d7051362c808509549d839500b330fc2be0e520', '[\"*\"]', '2023-02-15 16:17:30', '2023-02-15 16:09:49', '2023-02-15 16:17:30'),
-(8, 'App\\Models\\User', 4, 'UmolabApp', 'a7c3669d7af3076423e2a9f37a5b8c79c56bb391fb51e7f7ed753eff30241f0b', '[\"*\"]', NULL, '2023-02-15 16:10:15', '2023-02-15 16:10:15'),
-(9, 'App\\Models\\User', 4, 'UmolabApp', '8036ad293eae0d26d0cb95ba8d63a42ad93b203ee657ef1fb8bf75fda08dac40', '[\"*\"]', NULL, '2023-02-15 16:11:17', '2023-02-15 16:11:17'),
-(10, 'App\\Models\\User', 4, 'UmolabApp', '69b15848c180876bfb93bf4557f4616b9637cfcde7b19776f3d7354f67731c0d', '[\"*\"]', NULL, '2023-02-15 16:11:52', '2023-02-15 16:11:52'),
-(11, 'App\\Models\\User', 4, 'UmolabApp', '9b3e12f50c0104e9231ecc32289a6aab8f42ad9b3c191073bd296157aef64d9e', '[\"*\"]', NULL, '2023-02-15 16:13:05', '2023-02-15 16:13:05'),
-(12, 'App\\Models\\User', 4, 'UmolabApp', '0d204e6941a7ad6b94905755d45b92f2f5292485131eb7d71316eca784cc0fb8', '[\"*\"]', NULL, '2023-02-15 16:13:47', '2023-02-15 16:13:47'),
-(13, 'App\\Models\\User', 4, 'UmolabApp', '96931ba8b5f649f4c1c622eb46bc8bfea32686593a90acaa943d972f4f19c5d0', '[\"*\"]', NULL, '2023-02-15 16:16:49', '2023-02-15 16:16:49'),
-(14, 'App\\Models\\User', 4, 'UmolabApp', '744e47d7b7f00b6fc677533cd14d884cb2f00671bb4106933f7c92e56da0657c', '[\"*\"]', '2023-02-15 16:28:23', '2023-02-15 16:17:30', '2023-02-15 16:28:23'),
-(15, 'App\\Models\\User', 4, 'UmolabApp', '9ae5a970fc6857f10c4b05220e1e7dea1b50f715addaf7f5f7e0ba313a8d7dd9', '[\"*\"]', NULL, '2023-02-15 16:18:56', '2023-02-15 16:18:56'),
-(16, 'App\\Models\\User', 4, 'UmolabApp', 'd059d5ddb86eed81baf54604029e8d914dd9fbf32872573230074ab1f02563d5', '[\"*\"]', '2023-02-15 16:29:48', '2023-02-15 16:28:46', '2023-02-15 16:29:48'),
-(17, 'App\\Models\\User', 4, 'UmolabApp', '69b4ba4e2526ebf5f322529837c32d572a2699715900fa125ea1cafd60345d39', '[\"*\"]', NULL, '2023-02-15 16:29:48', '2023-02-15 16:29:48'),
-(18, 'App\\Models\\User', 4, 'UmolabApp', '9b18bcb31625a6fe148e2a83e4c1f83b521292ffd0eb7813730fcf3cb8e78fee', '[\"*\"]', '2023-02-15 16:41:04', '2023-02-15 16:34:16', '2023-02-15 16:41:04'),
-(19, 'App\\Models\\User', 4, 'UmolabApp', '18e5eea348ff24917ea3bf0913b2f9e5e79ae63f1ad10bda0f4a8bc7f8100611', '[\"*\"]', NULL, '2023-02-15 16:34:56', '2023-02-15 16:34:56'),
-(20, 'App\\Models\\User', 4, 'UmolabApp', 'b790cee20b62d79349bc74775a666a112ace3e5035a36dac8d1c0760d4e07dc3', '[\"*\"]', '2023-02-16 06:52:00', '2023-02-15 16:43:45', '2023-02-16 06:52:00');
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `users`
 --
 
@@ -241,16 +206,6 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Дамп данных таблицы `users`
---
-
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'maxim', 'umolab@umolab.ru', '2022-08-09 16:18:29', '$2y$10$weSyDR/BbmBirS4mbfV4ceHOboEPjnmkvcrBNbONSpJKxh4Y0IVIu', 'V4RlgzgzHPwJYQFiayj7sOj1j21vTyqAP3caADrpSLOnKHQ6JCxBIw7hkPEd', '2022-08-09 16:18:29', '2022-08-09 16:18:29'),
-(2, 'Максим Пятков', 'blkdem@blkdem.ru', NULL, '$2y$10$JR4SUDKr8Nc2jINLyq2BIuxDEdeyy01ULSSQykNz2onoAFS48z41y', NULL, '2023-02-11 13:27:04', '2023-02-11 13:27:04'),
-(3, 'MAKSIM PIATKOV', 'm_sp@mail.ru', NULL, '$2y$10$60wthuFe7vwJbeYUSAouLO/BsjYHN.v0SJzHVAZxIzqy6o1l3Epue', NULL, '2023-02-13 17:23:04', '2023-02-13 17:23:04'),
-(4, 'Umolab Devices', 'umolab.group@gmail.com', NULL, '$2y$10$.ExQFD/hqAcUNYsEhkH.2us87R3Xeevmg04Y0b5QT8sotgmJP86yq', NULL, '2023-02-15 13:13:47', '2023-02-15 13:13:47');
 
 -- --------------------------------------------------------
 
