@@ -12,16 +12,17 @@ class DevicesViewController extends Controller
         $devicesDataSet = DevicesView::get();
         if ($devicesDataSet->count() ==0)
         {
-            return response()->json(['Error' => 'true', 'Message' => 'No Records Found'], 404);    
+            return response()->json(['Error' => 'true', 'Message' => 'No Records Found'], 404);
         }
         return response()->json(['data' => $devicesDataSet], 200);
     }
 
     public function show($id)
     {
-        return (is_null(DevicesView::findOrFail($id)))? 
-            response()->json(['Error' => 'true', 'Message' => 'Record ' . $id . ' Not Found'], 404)
-            : 
-            response()->json(DevicesView::find($id), 200);
+        $res = DevicesView::find($id);
+        if (is_null($res)) {
+            return $this->sendError("No Record for id=$id Found");
+        }
+        return $this->sendResponse($res, "Device (id = $id) found");
     }
 }

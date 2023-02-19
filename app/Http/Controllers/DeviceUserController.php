@@ -80,15 +80,16 @@ class DeviceUserController extends Controller
      * @param  \App\Models\DeviceUser  $deviceUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, DeviceUser $deleteDeviceUser)
+    public function destroy($id)
     {
-        try {
-            return ($deleteDeviceUser->delete($request->all()) !== null)?
-                response()->json(null, 204)
-                :
-                response()->json('Error deleting', 200);
+
+        $userDeviceItem = DeviceUser::find($id);
+        if ($userDeviceItem === null) {
+            return $this->sendError("No Record for deleting Found");
         }
-        catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
-        }
-    }}
+
+        $userDeviceItem->delete($id);
+
+        return $this->sendResponse($userDeviceItem, "User Device $id deleted");
+    }
+}

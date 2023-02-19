@@ -11,10 +11,10 @@ class DeviceController extends Controller
 {
     public function store(Request $request)
     {
-        $validator = ValidatorRules::MakeValidate($request, 'devices');  
+        $validator = ValidatorRules::MakeValidate($request, 'devices');
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
-        }           
+        }
         try {
             $newDevice = Device::create($request->all());
             return response()->json($newDevice, 201);
@@ -26,10 +26,10 @@ class DeviceController extends Controller
 
     public function update(Request $request, Device $updateDevice)
     {
-        $validator = ValidatorRules::MakeValidate($request, 'devices'); 
+        $validator = ValidatorRules::MakeValidate($request, 'devices');
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
-        }  
+        }
         try {
             $updateDevice->update($request->all());
             return response()->json($updateDevice, 200);
@@ -39,16 +39,16 @@ class DeviceController extends Controller
         }
     }
 
-    public function destroy(Request $request, Device $deleteDevice)
+    public function destroy($id)
     {
-        try {            
-            return ($deleteDevice->delete($request->all()) !== null)? 
-                response()->json(null, 204)
-                : 
-                response()->json('Error deleting', 200);
+        $deviceItem = Device::find($id);
+        if ($deviceItem === null) {
+            return $this->sendError("No Record for deleting Found");
         }
-        catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
-        }    
+
+        $deviceItem->delete($id);
+
+        return $this->sendResponse($deviceItem, "Device $id deleted");
+
     }
 }
