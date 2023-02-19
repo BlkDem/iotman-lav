@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Device;
 use App\Models\DeviceUser;
 use Illuminate\Http\Request;
 use App\Http\Middleware\ValidatorRules;
 use Exception;
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model;
 
 class DeviceUserController extends Controller
 {
