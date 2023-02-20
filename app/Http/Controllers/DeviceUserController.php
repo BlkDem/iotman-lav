@@ -83,7 +83,7 @@ class DeviceUserController extends Controller
     {
 
         $userDeviceItem = DeviceUser::find($id);
-        if ($userDeviceItem === null) {
+        if ($userDeviceItem == null) {
             return $this->sendError("No Record for deleting Found");
         }
 

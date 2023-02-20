@@ -138,7 +138,6 @@
 
 import ConfirmDialogue from "../../components/common/ConfirmDialogue.vue";
 // import AddDevice from "./AddDevice.vue";
-// import DeviceTypesCombo from "../../components/device_types/DeviceTypesCombo.vue";
 import Paginator from "../../components/common/Paginator.vue";
 import UserDeviceStringConstants from "../../components/strings_constants/user_devices/index";
 import MessagesConstants from "../strings_constants/strings.js";

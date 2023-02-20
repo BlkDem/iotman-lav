@@ -8,7 +8,6 @@ use App\Http\Controllers\DevicesViewController;
 use App\Http\Controllers\DeviceUserController;
 use App\Http\Controllers\DeviceUsersViewController;
 use App\Http\Controllers\Auth\UserinfoController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserDevicesCountController;
 use Illuminate\Support\Facades\Route;
 
@@ -66,7 +65,8 @@ Route::get('/user_device_count/read/{id}', [UserDevicesCountController::class, '
 
 //Auth Userinfo
 
-    Route::get('/authuser', [UserinfoController::class, 'show']);
-    Route::get('/user', [AuthController::class, 'UserInfo']);
-    Route::get('/username', [AuthController::class, 'GetUserName']);
+Route::get('/authuser', [UserinfoController::class, 'show']);
+Route::get('/user', [AuthController::class, 'UserInfo']);
+Route::get('/username', [AuthController::class, 'GetUserName']);
+
 });

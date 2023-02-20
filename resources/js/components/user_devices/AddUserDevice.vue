@@ -3,7 +3,7 @@
         <div class="modal-header">
             <h2 class="align-center w-100 pb-2">{{ title }}</h2>
         </div>
-        
+
         <div class="modal-body align-left">
             <label class="px-2"><strong>Device Name</strong></label>
             <input v-model="device_name" class="form-control p-2 mb-2" placeholder="Input Device Name"/>
@@ -14,7 +14,8 @@
             <label class="px-2"><strong>Device Password</strong></label>
             <input v-model="device_pass" class="form-control p-2 mb-2" placeholder="Input Device Password"/>
             <label class="px-2"><strong>Select Device Type</strong></label>
-            <DeviceTypesCombo ref="types" v-bind:id="device_type_id"></DeviceTypesCombo>
+            <!-- <DeviceTypesCombo ref="types" v-bind:id="device_type_id"></DeviceTypesCombo> -->
+            <UserDeviceCombo ref="userDevices" v-bind:id="user_device.user_id" onchange="console.log('qwqwq')"></UserDeviceCombo>
         </div>
         <hr>
         <div>
@@ -26,13 +27,14 @@
 
 <script>
 import PopupModal from '../../components/common/PopupModal.vue';
-import DeviceTypesCombo from '../../components/device_types/DeviceTypesCombo.vue' 
+import DeviceTypesCombo from '../../components/device_types/DeviceTypesCombo.vue'
 import MessagesConstants from '../strings_constants/strings';
+import UserDeviceCombo from "../../components/user_devices/UserDeviceCombo.vue";
 
 export default {
     name: 'AddDevice',
 
-    components: { PopupModal, DeviceTypesCombo },
+    components: { PopupModal, DeviceTypesCombo, UserDeviceCombo, },
 
     data (){
         return {
@@ -47,18 +49,18 @@ export default {
         device_type_id: undefined,
         okButton: undefined, // Text for confirm button; leave it empty because we don't know what we're using it for
         cancelButton: MessagesConstants.CANCEL_STRING, // text for cancel button
-        
+
         // Private variables
         resolvePromise: undefined,
         rejectPromise: undefined,
         }
     },
-    
+
 
     methods: {
 
         showDialogue(optsAdd = {}) {
-            
+
             this.edit_mode = optsAdd.edit_mode;
             this.title = optsAdd.title
             this.message = optsAdd.message
@@ -74,7 +76,7 @@ export default {
 
             this.$refs.popup.open()
 
-            
+
             // Return promise so the caller can get results
             return new Promise((resolve, reject) => {
                 this.resolvePromise = resolve
