@@ -3,7 +3,8 @@
         "DEVICE_TYPES": "Типы",
         "DEVICES": "Устройства",
         "USER_DEVICES": "Пользовательские",
-        "THEME": "Тема"
+        "THEME": "Тема",
+        "LOGOUT_MENU": "Выйти"
     },
 
     "messages": {

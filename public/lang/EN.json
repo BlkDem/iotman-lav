@@ -3,7 +3,8 @@
         "DEVICE_TYPES": "Device Types",
         "DEVICES": "Devices",
         "USER_DEVICES": "User`s Devices",
-        "THEME": "Theme"
+        "THEME": "Theme",
+        "LOGOUT_MENU": "Logout"
     },
 
     "messages": {

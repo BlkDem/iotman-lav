@@ -6,8 +6,8 @@ export default {
 
     CANCEL_STRING: "Cancel",
     EDITED_MESSAGE: "Edited",
-    ADDED_MESSAGE: "Added", 
-    DELETED_MESSAGE: "Deleted", 
+    ADDED_MESSAGE: "Added",
+    DELETED_MESSAGE: "Deleted",
     PROCESS_SUCCESSFULLY: "Successfully",
     INSERTING_CANCELLED: "Inserting Cancelled",
     EDITING_CANCELLED: "Editing Cancelled",
@@ -19,4 +19,6 @@ export default {
     SORT_NAME: "Sort",
     SORT_ASC: "ASC",
     SORT_DESC: "DESC",
+
+    LOGOUT_MENU: "Logout",
 }

@@ -55,7 +55,7 @@
                 <div class="dropdown-menu theme-dropdown">
                     <a class="dropdown-item" href="#">{{ userName }}</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" @click="logout()">Logout</a>
+                    <a class="dropdown-item" href="#" @click="logout()">{{ userLogoutText }}</a>
                 </div>
             </li>
             </ul>
@@ -79,143 +79,155 @@ import APIConstants from "../../rest_api.js";
 import Langs from "../../langs";
 
 export default {
-  components: {
-    ThemeCombo,
-    LangCombo,
-  },
+    components: {
+        ThemeCombo,
+        LangCombo,
+    },
 
-  data() {
-    return {
-      isDeviceTypesVisible: false,
-      isDevicesVisible: true,
-      isUserDevicesVisible: false,
-      isDeviceTypesActive: false,
-      isDevicesActive: true,
-      isUserDevicesActive: false,
+    data() {
+        return {
+            isDeviceTypesVisible: false,
+            isDevicesVisible: true,
+            isUserDevicesVisible: false,
+            isDeviceTypesActive: false,
+            isDevicesActive: true,
+            isUserDevicesActive: false,
 
-        //menu
-      devicesCaption: MessagesConstants.DEVICES,
-      deviceTypesCaption: MessagesConstants.DEVICE_TYPES,
-      userDevicesCaption: MessagesConstants.USER_DEVICES,
+            //menu
+            devicesCaption: MessagesConstants.DEVICES,
+            deviceTypesCaption: MessagesConstants.DEVICE_TYPES,
+            userDevicesCaption: MessagesConstants.USER_DEVICES,
 
-      // user menu
-      userName: '',
-      userId: 0,
-    };
-  },
+            // user menu
+            userName: '',
+            userId: 0,
+            userLogoutText: "Logout",
+        };
+    },
 
-  created() {
+    created() {
 
 
-  },
+    },
 
-    mounted() {
-        this.currentLang = (localStorage.Language!=null)?localStorage.Language:'EN'
+    beforeMount () {
+        this.currentLang = (localStorage.Language != null) ? localStorage.Language : 'EN'
         this.loadLang(this.currentLang);
         this.loadUserInfo();
     },
 
+    mounted() {
 
-  methods: {
-
-    async loadUserInfo() {
-        try {
-            const response = await fetch(APIConstants.api_user_info);
-            const user = await response.json();
-            this.userName = user.data.name;
-            this.userId = user.data.ID;
-            console.log('user info: ID(' + this.userId + ') name: ' + this.userName);
-            // console.log(user);
-        }
-        catch (error) {
-            console.log('error loading user info: ' + error);
-        }
     },
 
-    async loadLang(_lang) {
-        try {
-            const response = await  fetch("/lang/" + _lang + ".json");
 
-            const json = await response.json();
-            console.log(_lang)
-            if (json != null) {
-                MessagesConstants.CANCEL_STRING = json.messages.CANCEL_STRING
-                MessagesConstants.EDITED_MESSAGE = json.messages.EDITED_MESSAGE
-                MessagesConstants.ADDED_MESSAGE = json.messages.ADDED_MESSAGE
-                MessagesConstants.DELETED_MESSAGE = json.messages.DELETED_MESSAGE
-                MessagesConstants.PROCESS_SUCCESSFULLY = json.messages.PROCESS_SUCCESSFULLY
-                MessagesConstants.INSERTING_CANCELLED = json.messages.INSERTING_CANCELLED
-                MessagesConstants.EDITING_CANCELLED = json.messages.EDITING_CANCELLED
-                MessagesConstants.DELETING_CANCELLED = json.messages.DELETING_CANCELLED
-                MessagesConstants.NO_DESCRIPTION = json.messages.NO_DESCRIPTION
-                MessagesConstants.SORT_BY_NAME = json.messages.SORT_BY_NAME
-                MessagesConstants.SORT_BY_ID = json.messages.SORT_BY_ID
-                MessagesConstants.SORT_NAME = json.messages.SORT_NAME
-                MessagesConstants.SORT_ASC = json.messages.SORT_ASC
-                MessagesConstants.SORT_DESC = json.messages.SORT_DESC
-                MessagesConstants.DEVICE_TYPES = json.menu.DEVICE_TYPES
-                MessagesConstants.DEVICES = json.menu.DEVICES
-                MessagesConstants.THEME = json.menu.THEME
-                MessagesConstants.USER_DEVICES = json.menu.USER_DEVICES
+    methods: {
 
-                this.setStrings()
-
-            } else {
-                /* Handle responce errors */
+        async loadUserInfo() {
+            try {
+                const response = await fetch(APIConstants.api_user_info);
+                const user = await response.json();
+                this.userName = user.data.name;
+                this.userId = user.data.ID;
+                console.log('user info: ID(' + this.userId + ') name: ' + this.userName);
+                // console.log(user);
+            } catch (error) {
+                console.log('error loading user info: ' + error);
             }
-        } catch (error) {
-            /* Handle fetch errors */
-        }
+        },
+
+        async loadLang(_lang) {
+            try {
+                const response = await fetch("/lang/" + _lang + ".json");
+
+                const json = await response.json();
+                console.log(_lang)
+                if (json != null) {
+                    MessagesConstants.CANCEL_STRING = json.messages.CANCEL_STRING
+                    MessagesConstants.EDITED_MESSAGE = json.messages.EDITED_MESSAGE
+                    MessagesConstants.ADDED_MESSAGE = json.messages.ADDED_MESSAGE
+                    MessagesConstants.DELETED_MESSAGE = json.messages.DELETED_MESSAGE
+
+                    MessagesConstants.PROCESS_SUCCESSFULLY = json.messages.PROCESS_SUCCESSFULLY
+                    MessagesConstants.INSERTING_CANCELLED = json.messages.INSERTING_CANCELLED
+                    MessagesConstants.EDITING_CANCELLED = json.messages.EDITING_CANCELLED
+                    MessagesConstants.DELETING_CANCELLED = json.messages.DELETING_CANCELLED
+                    MessagesConstants.NO_DESCRIPTION = json.messages.NO_DESCRIPTION
+
+                    MessagesConstants.SORT_BY_NAME = json.messages.SORT_BY_NAME
+                    MessagesConstants.SORT_BY_ID = json.messages.SORT_BY_ID
+                    MessagesConstants.SORT_NAME = json.messages.SORT_NAME
+                    MessagesConstants.SORT_ASC = json.messages.SORT_ASC
+                    MessagesConstants.SORT_DESC = json.messages.SORT_DESC
+
+                    MessagesConstants.DEVICE_TYPES = json.menu.DEVICE_TYPES
+                    MessagesConstants.DEVICES = json.menu.DEVICES
+                    MessagesConstants.USER_DEVICES = json.menu.USER_DEVICES
+                    MessagesConstants.THEME = json.menu.THEME
+
+                    MessagesConstants.LOGOUT_MENU = json.menu.LOGOUT_MENU
+
+                    this.setStrings()
+
+                } else {
+                    /* Handle responce errors */
+                }
+            } catch (error) {
+                /* Handle fetch errors */
+            }
+        },
+
+
+
+        setStrings() {
+
+            //navbar menu items
+            this.devicesCaption = MessagesConstants.DEVICES
+            this.deviceTypesCaption = MessagesConstants.DEVICE_TYPES
+            this.userDevicesCaption = MessagesConstants.USER_DEVICES
+
+            this.userLogoutText = MessagesConstants.LOGOUT_MENU
+
+            this.$refs.themeCombo.themeCaption = MessagesConstants.THEME
+
+        },
+
+        setHideAll() {
+            this.isDevicesActive = false;
+            this.isUserDevicesActive = false;
+            this.isDeviceTypesActive = false;
+            this.$root.$refs.DeviceRef.ShowHide(false);
+            this.$root.$refs.DeviceUserRef.ShowHide(false);
+            this.$root.$refs.DeviceTypeRef.ShowHide(false);
+        },
+
+        onDeviceTypesClick() {
+            this.setHideAll();
+            this.isDeviceTypesActive = true;
+            this.$root.$refs.DeviceTypeRef.ShowHide(this.isDeviceTypesActive);
+        },
+
+        onDevicesClick() {
+            this.setHideAll();
+            this.isDevicesActive = true;
+            this.$root.$refs.DeviceRef.ShowHide(this.isDevicesActive);
+        },
+
+        onUserDevicesClick() {
+            this.setHideAll();
+            this.isUserDevicesActive = true;
+            this.$root.$refs.DeviceUserRef.ShowHide(this.isUserDevicesActive);
+        },
+
+        setMessage(message, header) {
+            this.$refs.toaster.setMessage(message, header);
+        },
+
+        logout() {
+            window.location.href = '/logout';
+        },
+
     },
-
-
-
-    setStrings() {
-
-        //navbar menu items
-        this.devicesCaption = MessagesConstants.DEVICES
-        this.deviceTypesCaption = MessagesConstants.DEVICE_TYPES
-        this.userDevicesCaption = MessagesConstants.USER_DEVICES
-
-        this.$refs.themeCombo.themeCaption = MessagesConstants.THEME
-    },
-
-    setHideAll() {
-      this.isDevicesActive = false;
-      this.isUserDevicesActive = false;
-      this.isDeviceTypesActive = false;
-      this.$root.$refs.DeviceRef.ShowHide(false);
-      this.$root.$refs.DeviceUserRef.ShowHide(false);
-      this.$root.$refs.DeviceTypeRef.ShowHide(false);
-    },
-
-    onDeviceTypesClick() {
-      this.setHideAll();
-      this.isDeviceTypesActive = true;
-      this.$root.$refs.DeviceTypeRef.ShowHide(this.isDeviceTypesActive);
-    },
-
-    onDevicesClick() {
-      this.setHideAll();
-      this.isDevicesActive = true;
-      this.$root.$refs.DeviceRef.ShowHide(this.isDevicesActive);
-    },
-
-    onUserDevicesClick() {
-      this.setHideAll();
-      this.isUserDevicesActive = true;
-      this.$root.$refs.DeviceUserRef.ShowHide(this.isUserDevicesActive);
-    },
-
-    setMessage(message, header) {
-      this.$refs.toaster.setMessage(message, header);
-    },
-
-    logout() {
-        window.location.href = '/logout';
-    },
-
-  },
 };
 </script>
 

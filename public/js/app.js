@@ -23220,13 +23220,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   data: function data() {
     return {
       themes: [],
+      //temes list
       currentTheme: '',
-      themeCaption: 'Theme'
+      //binded theme name
+      themeCaption: 'Theme' //binded them prefix/caption
+
     };
   },
   created: function created() {},
   mounted: function mounted() {
-    this.readThemes();
+    this.readThemes(); //reading supported theme list from file themes.js
   },
   methods: {
     readThemes: function readThemes() {
@@ -23340,15 +23343,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       userDevicesCaption: _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].USER_DEVICES,
       // user menu
       userName: '',
-      userId: 0
+      userId: 0,
+      userLogoutText: "Logout"
     };
   },
   created: function created() {},
-  mounted: function mounted() {
+  beforeMount: function beforeMount() {
     this.currentLang = localStorage.Language != null ? localStorage.Language : 'EN';
     this.loadLang(this.currentLang);
     this.loadUserInfo();
   },
+  mounted: function mounted() {},
   methods: {
     loadUserInfo: function loadUserInfo() {
       var _this = this;
@@ -23429,8 +23434,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].SORT_DESC = json.messages.SORT_DESC;
                   _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].DEVICE_TYPES = json.menu.DEVICE_TYPES;
                   _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].DEVICES = json.menu.DEVICES;
-                  _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].THEME = json.menu.THEME;
                   _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].USER_DEVICES = json.menu.USER_DEVICES;
+                  _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].THEME = json.menu.THEME;
+                  _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].LOGOUT_MENU = json.menu.LOGOUT_MENU;
 
                   _this2.setStrings();
                 } else {
@@ -23457,6 +23463,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.devicesCaption = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].DEVICES;
       this.deviceTypesCaption = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].DEVICE_TYPES;
       this.userDevicesCaption = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].USER_DEVICES;
+      this.userLogoutText = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].LOGOUT_MENU;
       this.$refs.themeCombo.themeCaption = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__["default"].THEME;
     },
     setHideAll: function setHideAll() {
@@ -23609,7 +23616,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "dropdown-item",
     href: "#",
     onClick: _cache[0] || (_cache[0] = function ($event) {
-      return $options.changeTheme('');
+      return $options.changeTheme('Default');
     })
   }, "Default")])]);
 }
@@ -23830,7 +23837,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $options.logout();
     })
-  }, "Logout")])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ThemeCombo, {
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.userLogoutText), 1
+  /* TEXT */
+  )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ThemeCombo, {
     ref: "themeCombo"
   }, null, 512
   /* NEED_PATCH */
@@ -23961,7 +23970,8 @@ __webpack_require__.r(__webpack_exports__);
   SORT_BY_ID: "By ID",
   SORT_NAME: "Sort",
   SORT_ASC: "ASC",
-  SORT_DESC: "DESC"
+  SORT_DESC: "DESC",
+  LOGOUT_MENU: "Logout"
 });
 
 /***/ }),
