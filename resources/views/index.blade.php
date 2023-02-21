@@ -19,14 +19,14 @@
    -->
 
     <?php
-    echo "<script>var _currentTheme='Default'</script>";
+    echo "<script>var _newTheme='Default'</script>";
     $_themeCss = '/css/app.css';
     $_themed = isset($_GET["theme"]);
     if ($_themed) {
         $_themeName = $_GET["theme"];
         if (file_exists(public_path('/css/' . $_themeName . '/app.css'))) {
             $_themeCss = '/css/' . $_themeName . '/app.css';
-            echo "<script>_currentTheme='$_themeName'</script>";
+            echo "<script>_newTheme='$_themeName'</script>";
         }
     }
     ?>
