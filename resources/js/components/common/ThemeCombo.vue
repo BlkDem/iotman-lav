@@ -9,7 +9,7 @@
         <div class="dropdown-menu theme-dropdown">
             <a class="dropdown-item" href="#" v-for="theme in themes" :key="theme.id" @click='changeTheme(theme)'>{{ theme }}</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" @click="changeTheme('')">Default</a>
+            <a class="dropdown-item" href="#" @click="changeTheme('Default')">Default</a>
         </div>
     </li>
 </template>
@@ -22,9 +22,9 @@ export default {
 
     data() {
         return {
-            themes: [],
-            currentTheme: '',
-            themeCaption: 'Theme'
+            themes: [], //temes list
+            currentTheme: '', //binded theme name
+            themeCaption: 'Theme' //binded them prefix/caption
         }
     },
 
@@ -33,7 +33,7 @@ export default {
     },
 
     mounted () {
-        this.readThemes()
+        this.readThemes() //reading supported theme list from file themes.js
     },
 
     methods: {

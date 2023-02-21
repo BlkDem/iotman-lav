@@ -23230,31 +23230,28 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   methods: {
     readThemes: function readThemes() {
-      //loading themes list
-      this.themes = _toConsumableArray(_themes_js__WEBPACK_IMPORTED_MODULE_0__["default"].Themes);
-      this.currentTheme = localStorage.Theme; // set theme name
-      //window.alert("->" + _currentTheme + "<-");
+      this.themes = _toConsumableArray(_themes_js__WEBPACK_IMPORTED_MODULE_0__["default"].Themes); //loading themes list
 
-      if (_currentTheme === '') {
-        //check theme request param
-        _currentTheme = localStorage.Theme !== '' ? localStorage.Theme : 'Default'; //set default theme
+      this.currentTheme = _newTheme; // set theme name to combo caption
 
-        localStorage.Theme = _currentTheme;
-        document.location.href = '/?theme=' + _currentTheme; //redirect default
-      } // if (localStorage.Theme === '') { //check storage theme key
-      //     localStorage.Theme = _currentTheme; //save current theme param in storage
-      // }
+      if (_newTheme === '') {
+        //_newTheme - request param and JS var from backend in index.blade - check empty
+        _newTheme = localStorage.Theme !== '' ? localStorage.Theme : 'Default'; //set default or stored theme
 
+        localStorage.Theme = _newTheme; // save theme to storage
 
-      this.changeTheme(_currentTheme); //change theme
+        document.location.href = '/?theme=' + _newTheme; //redirect default or stored
+      }
+
+      this.changeTheme(_newTheme); //change theme
     },
-    changeTheme: function changeTheme(_theme) {
+    changeTheme: function changeTheme(theme) {
       // changing theme
-      if (localStorage.Theme !== _theme) {
-        //no action if the same
-        localStorage.Theme = _theme;
-        console.log('new theme: ', _theme);
-        document.location.href = '/?theme=' + _theme;
+      if (localStorage.Theme !== theme) {
+        //no action if the same theme
+        localStorage.Theme = theme; // save new theme to storage
+
+        document.location.href = '/?theme=' + theme; //redirect with new theme
       }
     }
   }
