@@ -23224,19 +23224,38 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       themeCaption: 'Theme'
     };
   },
-  created: function created() {
+  created: function created() {},
+  mounted: function mounted() {
     this.readThemes();
-    this.currentTheme = _currentTheme === '' ? 'Default' : _currentTheme;
   },
   methods: {
     readThemes: function readThemes() {
+      //loading themes list
       this.themes = _toConsumableArray(_themes_js__WEBPACK_IMPORTED_MODULE_0__["default"].Themes);
+      this.currentTheme = localStorage.Theme; // set theme name
+      //window.alert("->" + _currentTheme + "<-");
+
+      if (_currentTheme === '') {
+        //check theme request param
+        _currentTheme = localStorage.Theme !== '' ? localStorage.Theme : 'Default'; //set default theme
+
+        localStorage.Theme = _currentTheme;
+        document.location.href = '/?theme=' + _currentTheme; //redirect default
+      } // if (localStorage.Theme === '') { //check storage theme key
+      //     localStorage.Theme = _currentTheme; //save current theme param in storage
+      // }
+
+
+      this.changeTheme(_currentTheme); //change theme
     },
     changeTheme: function changeTheme(_theme) {
-      this.currentTheme = _theme;
-      localStorage.Theme = this.currentTheme;
-      console.log(localStorage.Theme);
-      document.location.href = _theme === '' ? '/' : '/?theme=' + _theme;
+      // changing theme
+      if (localStorage.Theme !== _theme) {
+        //no action if the same
+        localStorage.Theme = _theme;
+        console.log('new theme: ', _theme);
+        document.location.href = '/?theme=' + _theme;
+      }
     }
   }
 });

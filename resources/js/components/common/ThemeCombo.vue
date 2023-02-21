@@ -18,40 +18,61 @@
 import ThemesList from "../../themes.js";
 
 export default {
-  name: "ThemeCombo",
+    name: "ThemeCombo",
 
-  data () {
-    return {
-      themes:[],
-      currentTheme: '',
-      themeCaption: 'Theme'
+    data() {
+        return {
+            themes: [],
+            currentTheme: '',
+            themeCaption: 'Theme'
+        }
+    },
+
+    created() {
+
+    },
+
+    mounted () {
+        this.readThemes()
+    },
+
+    methods: {
+        readThemes() {  //loading themes list
+            this.themes = [...ThemesList.Themes]
+
+            this.currentTheme = localStorage.Theme; // set theme name
+
+            //window.alert("->" + _currentTheme + "<-");
+
+            if (_currentTheme === '') { //check theme request param
+
+                _currentTheme = (localStorage.Theme !== '') ? localStorage.Theme : 'Default'; //set default theme
+                localStorage.Theme = _currentTheme;
+                document.location.href = '/?theme=' + _currentTheme; //redirect default
+            }
+            // if (localStorage.Theme === '') { //check storage theme key
+            //     localStorage.Theme = _currentTheme; //save current theme param in storage
+            // }
+            this.changeTheme(_currentTheme); //change theme
+        },
+
+        changeTheme(_theme) { // changing theme
+            if (localStorage.Theme !== _theme) { //no action if the same
+
+                localStorage.Theme = _theme;
+                console.log('new theme: ', _theme);
+                document.location.href = '/?theme=' + _theme;
+            }
+        },
+
     }
-  },
-
-  created() {
-    this.readThemes()
-    this.currentTheme = (_currentTheme === '')?'Default':_currentTheme; 
-  },
-  
-  methods: {
-    readThemes() {
-      this.themes = [...ThemesList.Themes]
-    },
-    changeTheme(_theme) {
-      this.currentTheme = _theme;
-      localStorage.Theme = this.currentTheme;
-      console.log(localStorage.Theme);
-      document.location.href = (_theme==='')?'/':'/?theme=' + _theme;
-    },
-
-  }
 }
 </script>
 
 <style lang="scss" scoped>
   .theme-dropdown {
-    margin-left: -32px; 
-    max-height: 400px; 
+    margin-left: -32px;
+    max-height: 400px;
     overflow-y: auto;
   }
 </style>

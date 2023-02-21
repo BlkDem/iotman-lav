@@ -19,7 +19,7 @@
    -->
 
     <?php
-    echo "<script>var _currentTheme=''</script>";
+    echo "<script>var _currentTheme='Default'</script>";
     $_themeCss = '/css/app.css';
     $_themed = isset($_GET["theme"]);
     if ($_themed) {
