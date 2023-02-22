@@ -153,13 +153,13 @@ import APIConstants from "../../rest_api.js";
                 sortOrder: MessagesConstants.SORT_ASC,
                 sortDirection: false,
                 userDeviceVisible: false,
-                sortColumn: "user_name",
+                sortColumn: "user_device_name",
                 sortRules: [{
-                        key: "user_name",
+                        key: "user_device_name",
                         title: MessagesConstants.SORT_BY_NAME
                     },
                     {
-                        key: "user_id",
+                        key: "id",
                         title: MessagesConstants.SORT_BY_ID
                     },
                 ],
@@ -176,9 +176,9 @@ import APIConstants from "../../rest_api.js";
         },
 
         mounted() {
-            // if (localStorage.getItem('CompactView')) {
-            //     this.compactView=(localStorage.getItem('CompactView')==='true');
-            // }
+            if (localStorage.getItem('CompactView')) {
+                this.compactView=(localStorage.getItem('CompactView')==='true');
+            }
         },
 
         watch: {

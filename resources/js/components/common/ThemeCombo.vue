@@ -32,10 +32,6 @@ export default {
         this.readThemes() //loading themes list from file themes.js
     },
 
-    mounted () {
-
-    },
-
     methods: {
         readThemes() {
             this.themes = [...ThemesList.Themes] //loading themes list
@@ -52,11 +48,11 @@ export default {
             this.changeTheme(_newTheme); //change theme
         },
 
-        changeTheme(_theme) { // changing theme
-            if (localStorage.Theme !== _theme) { //no action if the same theme
+        changeTheme(new_theme) { // changing theme
+            if (localStorage.Theme !== new_theme) { //no action if the same theme
 
-                localStorage.Theme = _theme; //save a new theme
-                document.location.href = '/?theme=' + _theme; //redirect with a new theme
+                localStorage.Theme = new_theme; //save a new theme
+                document.location.href = '/?theme=' + new_theme; //redirect with a new theme
             }
         },
 

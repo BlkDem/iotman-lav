@@ -23,7 +23,6 @@ export default {
              header: ''
         }
     },
-    // props: ["message", "header"],
 
     methods: {
         setMessage(_header, _message) {
@@ -36,8 +35,5 @@ export default {
             $('.toastBasic').toast('hide');
         }
     },
-
-
-
 }
 </script>
