@@ -165,11 +165,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       dataDescription: "",
       //table data description label
       compactView: true
-    }, _defineProperty(_ref, "userDevice_filter", ""), _defineProperty(_ref, "sortOrderStrings", [_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_3__["default"].SORT_ASC, _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_3__["default"].SORT_DESC]), _defineProperty(_ref, "sortOrder", _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_3__["default"].SORT_ASC), _defineProperty(_ref, "sortDirection", false), _defineProperty(_ref, "userDeviceVisible", false), _defineProperty(_ref, "sortColumn", "user_name"), _defineProperty(_ref, "sortRules", [{
-      key: "user_name",
+    }, _defineProperty(_ref, "userDevice_filter", ""), _defineProperty(_ref, "sortOrderStrings", [_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_3__["default"].SORT_ASC, _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_3__["default"].SORT_DESC]), _defineProperty(_ref, "sortOrder", _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_3__["default"].SORT_ASC), _defineProperty(_ref, "sortDirection", false), _defineProperty(_ref, "userDeviceVisible", false), _defineProperty(_ref, "sortColumn", "user_device_name"), _defineProperty(_ref, "sortRules", [{
+      key: "user_device_name",
       title: _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_3__["default"].SORT_BY_NAME
     }, {
-      key: "user_id",
+      key: "id",
       title: _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_3__["default"].SORT_BY_ID
     }]), _ref;
   },
@@ -182,9 +182,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     this.getUserDevices();
   },
-  mounted: function mounted() {// if (localStorage.getItem('CompactView')) {
-    //     this.compactView=(localStorage.getItem('CompactView')==='true');
-    // }
+  mounted: function mounted() {
+    if (localStorage.getItem('CompactView')) {
+      this.compactView = localStorage.getItem('CompactView') === 'true';
+    }
   },
   watch: {
     userDevice_filter: function userDevice_filter() {
@@ -577,37 +578,46 @@ var _hoisted_46 = {
 };
 var _hoisted_47 = ["src"];
 var _hoisted_48 = {
-  "class": "col-sm-3 col-xs-3 col-lg-3 align-left"
+  "class": "col-sm-1 col-xs-1 col-lg-1"
 };
 var _hoisted_49 = {
   "class": "text-info"
 };
 var _hoisted_50 = {
-  "class": "col-sm-6 col-xs-6 col-lg-6 align-left"
+  "class": "col-sm-3 col-xs-3 col-lg-3 align-left"
 };
 var _hoisted_51 = {
+  "class": "col-sm- col-xs-2 col-lg-2 align-left"
+};
+var _hoisted_52 = {
+  "class": "text-info"
+};
+var _hoisted_53 = {
+  "class": "col-sm-3 col-xs-3 col-lg-3 align-left"
+};
+var _hoisted_54 = {
   "class": "col-sm-2 col-xs-2 col-lg-2 align-right"
 };
-var _hoisted_52 = ["onClick"];
+var _hoisted_55 = ["onClick"];
 
-var _hoisted_53 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-edit",
   "aria-hidden": "true"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_54 = [_hoisted_53];
-var _hoisted_55 = ["onClick"];
+var _hoisted_57 = [_hoisted_56];
+var _hoisted_58 = ["onClick"];
 
-var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_59 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fa fa-trash",
   "aria-hidden": "true"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_57 = [_hoisted_56];
+var _hoisted_60 = [_hoisted_59];
 function render(_ctx, _cache) {
   var _component_Paginator = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Paginator");
 
@@ -647,16 +657,24 @@ function render(_ctx, _cache) {
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.sortDirection ? _ctx.sortOrderStrings[0] : _ctx.sortOrderStrings[1]), 1
   /* TEXT */
   )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn btn-primary",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary", {
+      'disabled': _ctx.compactView
+    }]),
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return _ctx.compactView = true;
     })
-  }, _hoisted_14), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn btn-primary mx-2",
+  }, _hoisted_14, 2
+  /* CLASS */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary mx-2", {
+      'disabled': !_ctx.compactView
+    }]),
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return _ctx.compactView = false;
     })
-  }, _hoisted_16), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, _hoisted_16, 2
+  /* CLASS */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary",
     onClick: _cache[4] || (_cache[4] = function () {
       return _ctx.setDevice && _ctx.setDevice.apply(_ctx, arguments);
@@ -668,9 +686,9 @@ function render(_ctx, _cache) {
       "class": "p-2 col-sm-4 col-xs-4 col-lg-4",
       key: key,
       id: user_device.id
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.device_name), 1
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.user_device_name), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.device_type_name), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.device_name), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.device_desc), 1
     /* TEXT */
@@ -680,7 +698,7 @@ function render(_ctx, _cache) {
     /* PROPS */
     , _hoisted_25), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.device_type_desc), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_29, "Hardware Address HWID: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.device_hwid), 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_29, "HWID: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.device_hwid), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_30, "User Device ID: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.id), 1
     /* TEXT */
@@ -715,27 +733,29 @@ function render(_ctx, _cache) {
       "class": "device-image"
     }, null, 8
     /* PROPS */
-    , _hoisted_47)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.device_name) + " ", 1
+    , _hoisted_47)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_49, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.id), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_49, " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.id) + ") ", 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.user_device_name), 1
     /* TEXT */
-    )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.device_type_name) + ": HWID (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.device_hwid) + ") ", 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_52, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.device_name), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_53, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.device_hwid), 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_54, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-info mx-2",
       onClick: function onClick($event) {
         return _ctx.doEdit(key, user_device.id);
       }
-    }, _hoisted_54, 8
+    }, _hoisted_57, 8
     /* PROPS */
-    , _hoisted_52), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    , _hoisted_55), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-secondary",
       onClick: function onClick($event) {
         return _ctx.doDelete(key, user_device.id);
       }
-    }, _hoisted_57, 8
+    }, _hoisted_60, 8
     /* PROPS */
-    , _hoisted_55)])])])], 8
+    , _hoisted_58)])])])], 8
     /* PROPS */
     , _hoisted_43);
   }), 128

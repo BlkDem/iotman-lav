@@ -28,10 +28,10 @@
                         </li>
                     </ul>
                     <div class="d-flex">
-                        <button class="btn btn-primary" @click="compactView = true">
+                        <button class="btn btn-primary" :class="{'disabled' : compactView}"  @click="compactView = true">
                             <i class="fas fa-list"></i>
                         </button>
-                        <button class="btn btn-primary mx-2" @click="compactView = false">
+                        <button class="btn btn-primary mx-2" :class="{'disabled' : !compactView}"  @click="compactView = false">
                             <i class="fas fa-th-large"></i>
                         </button>
                         <button class="btn btn-primary" @click="setDevice">
@@ -52,9 +52,9 @@
                 <div class="p-2 col-sm-4 col-xs-4 col-lg-4" v-for="(user_device, key) in filteredUserDevices"
                     v-bind:key="key" v-bind:id="user_device.id">
                     <div class="card border-light">
-                        <h3 class="card-header">{{ user_device.device_name }}</h3>
+                        <h3 class="card-header">{{ user_device.user_device_name }}</h3>
                         <div class="card-body">
-                            <h5 class="card-title text-info">{{ user_device.device_type_name }}</h5>
+                            <h5 class="card-title text-info">{{ user_device.device_name }}</h5>
                             <h6 class="card-subtitle text-muted">{{ user_device.device_desc }}</h6>
                         </div>
                         <img v-bind:src="user_device.device_type_image">
@@ -62,7 +62,7 @@
                             <p class="card-text">{{ user_device.device_type_desc }}</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Hardware Address HWID: {{ user_device.device_hwid }}</li>
+                            <li class="list-group-item">HWID: {{ user_device.device_hwid }}</li>
                             <li class="list-group-item">User Device ID: {{ user_device.id }}</li>
                         </ul>
                         <div class="card-body">
@@ -92,15 +92,23 @@
                         <div class="col-sm-1 col-xs-1 col-lg-1">
                             <img v-bind:src="user_device.device_type_image" class="device-image" />
                         </div>
+                        <div class="col-sm-1 col-xs-1 col-lg-1">
+                            <span class="text-info"> {{ user_device.id }} </span>
+                        </div>
                         <div class="col-sm-3 col-xs-3 col-lg-3 align-left">
                             <h5>
-                                {{ user_device.device_name }}
-                                <span class="text-info"> ({{ user_device.id }}) </span>
+                                {{ user_device.user_device_name }}
+
                             </h5>
                         </div>
-                        <div class="col-sm-6 col-xs-6 col-lg-6 align-left">
+                        <div class="col-sm- col-xs-2 col-lg-2 align-left">
                             <h6>
-                                {{ user_device.device_type_name }}: HWID ({{ user_device.device_hwid }})
+                                <span class="text-info">{{ user_device.device_name }}</span>
+                            </h6>
+                        </div>
+                        <div class="col-sm-3 col-xs-3 col-lg-3 align-left">
+                            <h6>
+                                {{ user_device.device_hwid }}
                             </h6>
                         </div>
                         <div class="col-sm-2 col-xs-2 col-lg-2 align-right">
@@ -292,7 +300,7 @@ import APIConstants from "../../rest_api.js";
                         this.doSort(this.sortColumn);
                     }
                 )
-        .catch((err) => console.log(err));
+                .catch((err) => console.log(err));
                 },
             ShowHide(isVisible) {
                 this.userDeviceVisible = isVisible;

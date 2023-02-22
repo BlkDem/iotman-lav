@@ -27,10 +27,10 @@
                         </li>
                     </ul>
                     <div class="d-flex">
-                        <button class="btn btn-primary" @click="compactView = true">
+                        <button class="btn btn-primary " :class="{'disabled' : compactView}" @click="compactView = true">
                             <i class="fas fa-list"></i>
                         </button>
-                        <button class="btn btn-primary mx-2" @click="compactView = false">
+                        <button class="btn btn-primary mx-2" :class="{'disabled' : !compactView}" @click="compactView = false">
                             <i class="fas fa-th-large"></i>
                         </button>
                         <button class="btn btn-primary" @click="setDevice">
@@ -89,15 +89,24 @@
                         <div class="col-sm-1 col-xs-1 col-lg-1">
                             <img v-bind:src="device.device_type_image" class="device-image" />
                         </div>
-                        <div class="col-sm-3 col-xs-3 col-lg-3 align-left">
+                        <div class="col-sm-1 col-xs-1 col-lg-1 align-left">
                             <h5>
-                                {{ device.device_name
-                }}<span class="text-info"> ({{ device.id }}) </span>
+                                <span class="text-info"> {{ device.id }} </span>
                             </h5>
                         </div>
-                        <div class="col-sm-6 col-xs-6 col-lg-6 align-left">
+                        <div class="col-sm-2 col-xs-2 col-lg-2 align-left">
+                            <h5>
+                                {{ device.device_name}}
+                            </h5>
+                        </div>
+                        <div class="col-sm-3 col-xs-3 col-lg-3 align-left">
                             <h6>
-                                {{ device.device_type_name }}: HWID ({{ device.device_hwid ?? 'no hardware address ' }})
+                                <span class="text-info">{{ device.device_type_name }} </span>
+                            </h6>
+                        </div>
+                        <div class="col-sm-3 col-xs-3 col-lg-3 align-left">
+                            <h6>
+                                {{ device.device_hwid ?? 'no hardware address ' }}
                             </h6>
                         </div>
                         <div class="col-sm-2 col-xs-2 col-lg-2 align-right">

@@ -55,10 +55,10 @@
             </li>
           </ul>
           <div class="d-flex">
-            <button class="btn btn-primary" @click="compactView = true">
+            <button class="btn btn-primary"  :class="{'disabled' : compactView}" @click="compactView = true">
               <i class="fas fa-list"></i>
             </button>
-            <button class="btn btn-primary mx-2" @click="compactView = false">
+            <button class="btn btn-primary mx-2" :class="{'disabled' : !compactView}" @click="compactView = false">
               <i class="fas fa-th-large"></i>
             </button>
             <button class="btn btn-primary" @click="setDeviceType">
@@ -194,7 +194,7 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
         mounted() {
             if (localStorage.getItem('CompactView')) {
                 this.compactView = (localStorage.getItem('CompactView') === 'true');
-                } 
+                }
         },
 
     watch: {
@@ -231,7 +231,7 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
   },
 
 
-        methods: {   
+        methods: {
 
     doSort($c) {
       const column = $c;
@@ -270,7 +270,7 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
     doFilter() {
       this.filteredDeviceTypes = this.device_types;
       const res = this.filteredDeviceTypes.filter((device_type) => {
-        
+
         if (this.device_type_filter === "") return true;
         else
           return (
@@ -311,17 +311,17 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
             },
 
             async doDeleteType(key, id) {
-                
+
                 const ok = await this.$refs.confirmDialogue.showDialogue({
                     title: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION,
                     message: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_MESSAGE + '"' + this.device_types[key].device_type_name + '"?',
                     okButton: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION,
                 })
-                
+
                 if (ok) {
                     axios.delete('/api/device_types/delete/' + id)
                         .then(resp => {
-                            this.device_types.splice(key, 1);                            
+                            this.device_types.splice(key, 1);
                             console.log(key, id, " - deleted");
                             this.$root.$refs.toaster.setMessage(MessagesConstants.DELETED_MESSAGE, MessagesConstants.PROCESS_SUCCESSFULLY);
                         })
@@ -346,7 +346,7 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
 
                 if (_add) {
                     axios.post('/api/device_types/create/?device_type_name=' +  this.$refs.addDeviceType.device_type_name +
-                            '&device_type_image=' + this.$refs.addDeviceType.device_type_image + 
+                            '&device_type_image=' + this.$refs.addDeviceType.device_type_image +
                             '&device_type_desc=' + this.$refs.addDeviceType.device_type_desc)
                         .then(resp => {
                             console.log(resp['data']);
@@ -355,7 +355,7 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
                                 device_type_desc: resp['data'].device_type_desc,
                                 device_type_image: resp['data'].device_type_image,
                                 id: resp['data'].id
-                            }   
+                            }
                             this.device_types.push(newDevice);
                             this.$root.$refs.toaster.setMessage(MessagesConstants.ADDED_MESSAGE, MessagesConstants.PROCESS_SUCCESSFULLY);
                         })
@@ -381,7 +381,7 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
                 if (_edit) {
                     let editDeviceTypePost = '/api/device_types/update/'+id+
                         '/?device_type_name=' + this.$refs.addDeviceType.device_type_name +
-                        '&device_type_image=' + this.$refs.addDeviceType.device_type_image + 
+                        '&device_type_image=' + this.$refs.addDeviceType.device_type_image +
                         '&device_type_desc=' + this.$refs.addDeviceType.device_type_desc;
                     console.log(editDeviceTypePost);
 
@@ -392,7 +392,7 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
                             this.device_types[key].device_type_desc = resp['data'].device_type_desc;
                             this.device_types[key].device_type_image = resp['data'].device_type_image;
                             this.$root.$refs.toaster.setMessage(
-                                MessagesConstants.EDITED_MESSAGE, 
+                                MessagesConstants.EDITED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
                             );
                         })
@@ -416,7 +416,7 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
                 return this.deviceTypesVisible;
             }
         },
-        
+
     };
 </script>
 
@@ -424,5 +424,5 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
 
     //@import '../../../sass/lists.scss';
     //@import '../../../sass/aligns.scss';
-    
+
 </style>

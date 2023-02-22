@@ -23230,7 +23230,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   created: function created() {
     this.readThemes(); //loading themes list from file themes.js
   },
-  mounted: function mounted() {},
   methods: {
     readThemes: function readThemes() {
       this.themes = _toConsumableArray(_themes_js__WEBPACK_IMPORTED_MODULE_0__["default"].Themes); //loading themes list
@@ -23248,13 +23247,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       this.changeTheme(_newTheme); //change theme
     },
-    changeTheme: function changeTheme(_theme) {
+    changeTheme: function changeTheme(new_theme) {
       // changing theme
-      if (localStorage.Theme !== _theme) {
+      if (localStorage.Theme !== new_theme) {
         //no action if the same theme
-        localStorage.Theme = _theme; //save a new theme
+        localStorage.Theme = new_theme; //save a new theme
 
-        document.location.href = '/?theme=' + _theme; //redirect with a new theme
+        document.location.href = '/?theme=' + new_theme; //redirect with a new theme
       }
     }
   }
@@ -23280,7 +23279,6 @@ __webpack_require__.r(__webpack_exports__);
       header: ''
     };
   },
-  // props: ["message", "header"],
   methods: {
     setMessage: function setMessage(_header, _message) {
       this.header = _header;
