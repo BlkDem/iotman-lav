@@ -20,13 +20,9 @@
                                 <a class="dropdown-item" href="#" v-for="rule in sortRules" :key="rule.key"
                                     :value="rule.key" @click="doSort(rule.key)">{{ rule.title }}</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" @click="
-                    sortDirection = !sortDirection;
-                    doSort(sortColumn);
-                  ">
-                                    {{
-                    sortDirection ? sortOrderStrings[0] : sortOrderStrings[1]
-                  }}
+                                <a class="dropdown-item" href="#" @click="sortDirection = !sortDirection;
+                                    doSort(sortColumn); ">
+                                    {{ sortDirection ? sortOrderStrings[0] : sortOrderStrings[1] }}
                                 </a>
                             </div>
                         </li>
@@ -53,8 +49,8 @@
         <div>
             <!-- <h1>User Devices</h1> -->
             <div class="row my-2" v-if="!getCompactView">
-                <div class="p-2 col-sm-4 col-xs-4 col-lg-4" v-for="(user_device, key) in filteredUserDevices" v-bind:key="key"
-                    v-bind:id="user_device.id">
+                <div class="p-2 col-sm-4 col-xs-4 col-lg-4" v-for="(user_device, key) in filteredUserDevices"
+                    v-bind:key="key" v-bind:id="user_device.id">
                     <div class="card border-light">
                         <h3 class="card-header">{{ user_device.device_name }}</h3>
                         <div class="card-body">
@@ -87,54 +83,44 @@
                 </div>
             </div>
         </div>
-            <!-- compact view -->
-    <div v-show="getCompactView" class="my-2">
-      <div
-        class="card border-primary mb-4 w-100"
-        v-for="(user_device, key) in filteredUserDevices"
-        v-bind:key="key"
-        v-bind:id="user_device.id"
-      >
-        <div class="card-header">
-          <div class="row vertical-center">
-            <div class="col-sm-1 col-xs-1 col-lg-1">
-              <img v-bind:src="user_device.device_type_image" class="device-image" />
-            </div>
-            <div class="col-sm-3 col-xs-3 col-lg-3 align-left">
-              <h5>
-                {{ user_device.device_name
-                }}<span class="text-info"> ({{ user_device.id }}) </span>
-              </h5>
-            </div>
-            <div class="col-sm-6 col-xs-6 col-lg-6 align-left">
-              <h6>
-                {{ user_device.device_type_name }}: HWID ({{ user_device.device_hwid }})
-              </h6>
-            </div>
-            <div class="col-sm-2 col-xs-2 col-lg-2 align-right">
-              <button class="btn btn-info mx-2" @click="doEdit(key, user_device.id)">
-                <i class="fas fa-edit" aria-hidden="true"></i>
-              </button>
+        <!-- compact view -->
+        <div v-show="getCompactView" class="my-2">
+            <div class="card border-primary mb-4 w-100" v-for="(user_device, key) in filteredUserDevices"
+                v-bind:key="key" v-bind:id="user_device.id">
+                <div class="card-header">
+                    <div class="row vertical-center">
+                        <div class="col-sm-1 col-xs-1 col-lg-1">
+                            <img v-bind:src="user_device.device_type_image" class="device-image" />
+                        </div>
+                        <div class="col-sm-3 col-xs-3 col-lg-3 align-left">
+                            <h5>
+                                {{ user_device.device_name }}
+                                <span class="text-info"> ({{ user_device.id }}) </span>
+                            </h5>
+                        </div>
+                        <div class="col-sm-6 col-xs-6 col-lg-6 align-left">
+                            <h6>
+                                {{ user_device.device_type_name }}: HWID ({{ user_device.device_hwid }})
+                            </h6>
+                        </div>
+                        <div class="col-sm-2 col-xs-2 col-lg-2 align-right">
+                            <button class="btn btn-info mx-2" @click="doEdit(key, user_device.id)">
+                                <i class="fas fa-edit" aria-hidden="true"></i>
+                            </button>
 
-              <button
-                class="btn btn-secondary"
-                @click="doDelete(key, user_device.id)"
-              >
-                <i class="fa fa-trash" aria-hidden="true"></i>
-              </button>
+                            <button class="btn btn-secondary" @click="doDelete(key, user_device.id)">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-    <Paginator ref="paginatorDevices"></Paginator>
-
-
-
+        <Paginator ref="paginatorDevices"></Paginator>
     </div>
 </template>
 
-<script>
+<script lang="js">
 
 import ConfirmDialogue from "../../components/common/ConfirmDialogue.vue";
 // import AddDevice from "./AddDevice.vue";
@@ -190,9 +176,9 @@ import APIConstants from "../../rest_api.js";
         },
 
         mounted() {
-            if (localStorage.getItem('CompactView')) {
-                this.compactView=(localStorage.getItem('CompactView')==='true');
-            }
+            // if (localStorage.getItem('CompactView')) {
+            //     this.compactView=(localStorage.getItem('CompactView')==='true');
+            // }
         },
 
         watch: {

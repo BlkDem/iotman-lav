@@ -182,10 +182,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     this.getUserDevices();
   },
-  mounted: function mounted() {
-    if (localStorage.getItem('CompactView')) {
-      this.compactView = localStorage.getItem('CompactView') === 'true';
-    }
+  mounted: function mounted() {// if (localStorage.getItem('CompactView')) {
+    //     this.compactView=(localStorage.getItem('CompactView')==='true');
+    // }
   },
   watch: {
     userDevice_filter: function userDevice_filter() {
@@ -609,7 +608,7 @@ var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_57 = [_hoisted_56];
-function render(_ctx, _cache, $props, $setup, $data, $options) {
+function render(_ctx, _cache) {
   var _component_Paginator = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Paginator");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <AddDevice ref=\"addDevice\"></AddDevice>\n    <ConfirmDialogue ref=\"confirmDialogue\" /> "), _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -617,20 +616,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "text",
     placeholder: "Search",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return $data.userDevice_filter = $event;
+      return _ctx.userDevice_filter = $event;
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.userDevice_filter]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.SortName), 1
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.userDevice_filter]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.SortName), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.sortRules, function (rule) {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.sortRules, function (rule) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
       "class": "dropdown-item",
       href: "#",
       key: rule.key,
       value: rule.key,
       onClick: function onClick($event) {
-        return $options.doSort(rule.key);
+        return _ctx.doSort(rule.key);
       }
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(rule.title), 9
     /* TEXT, PROPS */
@@ -641,29 +640,30 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "dropdown-item",
     href: "#",
     onClick: _cache[1] || (_cache[1] = function ($event) {
-      $data.sortDirection = !$data.sortDirection;
-      $options.doSort($data.sortColumn);
+      _ctx.sortDirection = !_ctx.sortDirection;
+
+      _ctx.doSort(_ctx.sortColumn);
     })
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.sortDirection ? $data.sortOrderStrings[0] : $data.sortOrderStrings[1]), 1
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.sortDirection ? _ctx.sortOrderStrings[0] : _ctx.sortOrderStrings[1]), 1
   /* TEXT */
   )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary",
     onClick: _cache[2] || (_cache[2] = function ($event) {
-      return $data.compactView = true;
+      return _ctx.compactView = true;
     })
   }, _hoisted_14), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary mx-2",
     onClick: _cache[3] || (_cache[3] = function ($event) {
-      return $data.compactView = false;
+      return _ctx.compactView = false;
     })
   }, _hoisted_16), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary",
     onClick: _cache[4] || (_cache[4] = function () {
       return _ctx.setDevice && _ctx.setDevice.apply(_ctx, arguments);
     })
-  }, " Add Device ")])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.dataDescription), 1
+  }, " Add Device ")])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.dataDescription), 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h1>User Devices</h1> "), !$options.getCompactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredUserDevices, function (user_device, key) {
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h1>User Devices</h1> "), !_ctx.getCompactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.filteredUserDevices, function (user_device, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "p-2 col-sm-4 col-xs-4 col-lg-4",
       key: key,
@@ -705,7 +705,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , _hoisted_19);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" compact view "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredUserDevices, function (user_device, key) {
+  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" compact view "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.filteredUserDevices, function (user_device, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "card border-primary mb-4 w-100",
       key: key,
@@ -715,7 +715,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "device-image"
     }, null, 8
     /* PROPS */
-    , _hoisted_47)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.device_name), 1
+    , _hoisted_47)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.device_name) + " ", 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_49, " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user_device.id) + ") ", 1
     /* TEXT */
@@ -742,13 +742,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getCompactView]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Paginator, {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.getCompactView]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Paginator, {
     ref: "paginatorDevices"
   }, null, 512
   /* NEED_PATCH */
   )], 512
   /* NEED_PATCH */
-  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.userDeviceVisible]]);
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.userDeviceVisible]]);
 }
 
 /***/ }),

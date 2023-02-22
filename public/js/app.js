@@ -23220,41 +23220,41 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   data: function data() {
     return {
       themes: [],
-      //temes list
+      //themes list
       currentTheme: '',
-      //binded theme name
-      themeCaption: 'Theme' //binded them prefix/caption
+      //binded current theme combo caption
+      themeCaption: 'Theme' //binded theme caption preffix
 
     };
   },
-  created: function created() {},
-  mounted: function mounted() {
-    this.readThemes(); //reading supported theme list from file themes.js
+  created: function created() {
+    this.readThemes(); //loading themes list from file themes.js
   },
+  mounted: function mounted() {},
   methods: {
     readThemes: function readThemes() {
       this.themes = _toConsumableArray(_themes_js__WEBPACK_IMPORTED_MODULE_0__["default"].Themes); //loading themes list
 
-      this.currentTheme = _newTheme; // set theme name to combo caption
+      this.currentTheme = localStorage.Theme; // set binded theme combo caption
 
-      if (_newTheme === '') {
-        //_newTheme - request param and JS var from backend in index.blade - check empty
-        _newTheme = localStorage.Theme !== '' ? localStorage.Theme : 'Default'; //set default or stored theme
+      if (_newTheme === 'Default') {
+        //check theme request param '_newTheme' - backend var in index.blade.php
+        _newTheme = localStorage.Theme !== '' ? localStorage.Theme : 'Default'; //set default theme
 
-        localStorage.Theme = _newTheme; // save theme to storage
+        localStorage.Theme = _newTheme; // save request param theme to storage
 
         document.location.href = '/?theme=' + _newTheme; //redirect default or stored
       }
 
       this.changeTheme(_newTheme); //change theme
     },
-    changeTheme: function changeTheme(theme) {
+    changeTheme: function changeTheme(_theme) {
       // changing theme
-      if (localStorage.Theme !== theme) {
+      if (localStorage.Theme !== _theme) {
         //no action if the same theme
-        localStorage.Theme = theme; // save new theme to storage
+        localStorage.Theme = _theme; //save a new theme
 
-        document.location.href = '/?theme=' + theme; //redirect with new theme
+        document.location.href = '/?theme=' + _theme; //redirect with a new theme
       }
     }
   }
