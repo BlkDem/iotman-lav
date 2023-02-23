@@ -231,7 +231,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+@import "../../../sass/images.scss";
   .logo {
     margin-right: 1rem;
     padding-left: 8px;
@@ -240,6 +241,17 @@ export default {
    .navbar-expand-lg .navbar-nav {
         align-items: flex-start;
     }
+
+    .vertical-center {
+        display: flex;
+        align-items: baseline;
+    }
+
+    .navbar-nav .dropdown-menu {
+        position: absolute;
+    }
+
+
 
 /* @media only screen and (min-width: 320px) and (max-width: 965px) {
   .logo {

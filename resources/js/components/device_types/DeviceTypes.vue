@@ -159,7 +159,11 @@ import MessagesConstants from '../strings_constants/strings';
 import DeviceTypeStringConstants from '../../components/strings_constants/device_types/index';
 
     export default {
-        components: { ConfirmDialogue, AddDeviceType, Paginator},
+        components: {
+            ConfirmDialogue,
+            AddDeviceType,
+            Paginator
+        },
         data() {
             return {
                 device_types: [],
@@ -175,9 +179,14 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
                 sortOrder: MessagesConstants.SORT_ASC,
                 sortDirection: false,
                 sortColumn: "device_type_name",
-                sortRules: [
-                    { key: "device_type_name", title: MessagesConstants.SORT_BY_NAME },
-                    { key: "id", title: MessagesConstants.SORT_BY_ID },
+                sortRules: [{
+                        key: "device_type_name",
+                        title: MessagesConstants.SORT_BY_NAME
+                    },
+                    {
+                        key: "id",
+                        title: MessagesConstants.SORT_BY_ID
+                    },
                 ],
             };
         },
@@ -194,108 +203,108 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
         mounted() {
             if (localStorage.getItem('CompactView')) {
                 this.compactView = (localStorage.getItem('CompactView') === 'true');
-                }
+            }
         },
 
-    watch: {
-        device_type_filter: function () {
-            handler: this.doFilter();
+        watch: {
+            device_type_filter: function () {
+                handler: this.doFilter();
+            },
+
+            selectSort: function () {
+                handler: this.doSort();
+            },
+
+            compactView: function () {
+                localStorage.CompactView = this.compactView;
+            },
         },
 
-        selectSort: function () {
-            handler: this.doSort();
-        },
-
-        compactView: function () {
-            localStorage.CompactView = this.compactView;
-        },
-    },
-
-    computed: {
-        SortName() {
-            let res =
-            this.sortColumn === "id"
-                ? MessagesConstants.SORT_BY_ID
-                : MessagesConstants.SORT_BY_NAME;
+        computed: {
+            SortName() {
+                let res =
+                    this.sortColumn === "id" ?
+                    MessagesConstants.SORT_BY_ID :
+                    MessagesConstants.SORT_BY_NAME;
                 res += " (";
-                res += !this.sortDirection
-                ? MessagesConstants.SORT_ASC
-                : MessagesConstants.SORT_DESC;
+                res += !this.sortDirection ?
+                    MessagesConstants.SORT_ASC :
+                    MessagesConstants.SORT_DESC;
                 res += ")";
-            return res;
-    },
+                return res;
+            },
 
-    getCompactView() {
-      return this.compactView;
-    },
-  },
+            getCompactView() {
+                return this.compactView;
+            },
+        },
 
 
         methods: {
 
-    doSort($c) {
-      const column = $c;
-      this.sortColumn = column;
-      const order = this.sortDirection;
+            doSort($c) {
+                const column = $c;
+                this.sortColumn = column;
+                const order = this.sortDirection;
 
-      this.filteredDeviceTypes.sort(function (a, b) {
-        if (column === "id") {
-          var nameA = a[column];
-          var nameB = b[column];
-        } else {
-          var nameA = a[column] + "".toUpperCase();
-          var nameB = b[column] + "".toUpperCase();
-        }
+                this.filteredDeviceTypes.sort(function (a, b) {
+                    if (column === "id") {
+                        var nameA = a[column];
+                        var nameB = b[column];
+                    } else {
+                        var nameA = a[column] + "".toUpperCase();
+                        var nameB = b[column] + "".toUpperCase();
+                    }
 
-        if (order && nameA > nameB) {
-          return -1;
-        }
+                    if (order && nameA > nameB) {
+                        return -1;
+                    }
 
-        if (order && nameA < nameB) {
-          return 1;
-        }
+                    if (order && nameA < nameB) {
+                        return 1;
+                    }
 
-        if (!order && nameA < nameB) {
-          return -1;
-        }
+                    if (!order && nameA < nameB) {
+                        return -1;
+                    }
 
-        if (!order && nameA > nameB) {
-          return 1;
-        }
+                    if (!order && nameA > nameB) {
+                        return 1;
+                    }
 
-        return 0;
-      });
-    },
+                    return 0;
+                });
+            },
 
-    doFilter() {
-      this.filteredDeviceTypes = this.device_types;
-      const res = this.filteredDeviceTypes.filter((device_type) => {
+            doFilter() {
+                this.filteredDeviceTypes = this.device_types;
+                const res = this.filteredDeviceTypes.filter((device_type) => {
 
-        if (this.device_type_filter === "") return true;
-        else
-          return (
-            device_type.device_type_name
-              .toLowerCase()
-              .indexOf(this.device_type_filter.toLowerCase()) > -1
-          );
-      });
-      if (this.device_types.length > res.length) {
-        this.filteredDeviceTypes = res;
-        console.log(res)
-        this.doSort();
-      }
-      // return res;
-    },
+                    if (this.device_type_filter === "") return true;
+                    else
+                        return (
+                            device_type.device_type_name
+                            .toLowerCase()
+                            .indexOf(this.device_type_filter.toLowerCase()) > -1
+                        );
+                });
+                if (this.device_types.length > res.length) {
+                    this.filteredDeviceTypes = res;
+                    console.log(res)
+                    this.doSort();
+                }
+                // return res;
+            },
 
-    //convert 'null' 'undefined' to predefined consts
-    processStrings() {
-      this.filteredDeviceTypes.forEach((dev_type, key) => {
-        this.filteredDeviceTypes[key].device_type_desc =
-          dev_type.device_type_desc == null
-            ? MessagesConstants.NO_DESCRIPTION
-            : dev_type.device_type_desc;
-      });
-    },
+            //convert 'null' 'undefined' to predefined consts
+            processStrings() {
+                this.filteredDeviceTypes.forEach((dev_type, key) => {
+                    this.filteredDeviceTypes[key].device_type_desc =
+                        dev_type.device_type_desc == null ?
+                        MessagesConstants.NO_DESCRIPTION :
+                        dev_type.device_type_desc;
+                });
+            },
             getDeviceTypes(api_url) {
                 api_url = api_url || '/api/device_types/read/';
                 fetch(api_url)
@@ -312,13 +321,13 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
 
             async doDeleteType(key, id) {
 
-                const ok = await this.$refs.confirmDialogue.showDialogue({
+                const confirmDelete = await this.$refs.confirmDialogue.showDialogue({
                     title: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION,
                     message: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_MESSAGE + '"' + this.device_types[key].device_type_name + '"?',
                     okButton: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION,
                 })
 
-                if (ok) {
+                if (confirmDelete) {
                     axios.delete('/api/device_types/delete/' + id)
                         .then(resp => {
                             this.device_types.splice(key, 1);
@@ -345,7 +354,7 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
                 })
 
                 if (_add) {
-                    axios.post('/api/device_types/create/?device_type_name=' +  this.$refs.addDeviceType.device_type_name +
+                    axios.post('/api/device_types/create/?device_type_name=' + this.$refs.addDeviceType.device_type_name +
                             '&device_type_image=' + this.$refs.addDeviceType.device_type_image +
                             '&device_type_desc=' + this.$refs.addDeviceType.device_type_desc)
                         .then(resp => {
@@ -357,7 +366,10 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
                                 id: resp['data'].id
                             }
                             this.device_types.push(newDevice);
-                            this.$root.$refs.toaster.setMessage(MessagesConstants.ADDED_MESSAGE, MessagesConstants.PROCESS_SUCCESSFULLY);
+                            this.$root.$refs.toaster.setMessage(
+                                MessagesConstants.ADDED_MESSAGE,
+                                MessagesConstants.PROCESS_SUCCESSFULLY
+                            );
                         })
                         .catch(error => {
                             console.log(error);
@@ -379,7 +391,7 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
                 })
 
                 if (_edit) {
-                    let editDeviceTypePost = '/api/device_types/update/'+id+
+                    let editDeviceTypePost = '/api/device_types/update/' + id +
                         '/?device_type_name=' + this.$refs.addDeviceType.device_type_name +
                         '&device_type_image=' + this.$refs.addDeviceType.device_type_image +
                         '&device_type_desc=' + this.$refs.addDeviceType.device_type_desc;
@@ -420,9 +432,7 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
     };
 </script>
 
-<style lang="scss" scoped>
+<style>
 
-    //@import '../../../sass/lists.scss';
-    //@import '../../../sass/aligns.scss';
 
 </style>

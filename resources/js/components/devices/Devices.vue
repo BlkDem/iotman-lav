@@ -82,35 +82,27 @@
 
         <!-- compact view -->
         <div v-show="getCompactView" class="my-2">
-            <div class="card border-primary mb-4 w-100" v-for="(device, key) in filteredDevices" v-bind:key="key"
+            <div class="card border-primary mb-1 w-100" v-for="(device, key) in filteredDevices" v-bind:key="key"
                 v-bind:id="device.id">
-                <div class="card-header">
+                <div class="mx-2 my-2">
                     <div class="row vertical-center">
                         <div class="col-sm-1 col-xs-1 col-lg-1">
                             <img v-bind:src="device.device_type_image" class="device-image" />
                         </div>
                         <div class="col-sm-1 col-xs-1 col-lg-1 align-left">
-                            <h5>
                                 <span class="text-info"> {{ device.id }} </span>
-                            </h5>
                         </div>
                         <div class="col-sm-2 col-xs-2 col-lg-2 align-left">
-                            <h5>
                                 {{ device.device_name}}
-                            </h5>
                         </div>
                         <div class="col-sm-3 col-xs-3 col-lg-3 align-left">
-                            <h6>
                                 <span class="text-info">{{ device.device_type_name }} </span>
-                            </h6>
                         </div>
                         <div class="col-sm-3 col-xs-3 col-lg-3 align-left">
-                            <h6>
                                 {{ device.device_hwid ?? 'no hardware address ' }}
-                            </h6>
                         </div>
-                        <div class="col-sm-2 col-xs-2 col-lg-2 align-right">
-                            <button class="btn btn-info mx-2" @click="doEdit(key, device.id)">
+                        <div class="col-sm-2 col-xs-2 col-lg-2 edit-buttons">
+                            <button class="btn btn-info" @click="doEdit(key, device.id)">
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
 
@@ -287,7 +279,7 @@
             //deleting devices
             async doDelete(key, id) {
                 //deleting confirmation dialogue
-                const ok = await this.$refs.confirmDialogue.showDialogue({
+                const confirmDelete = await this.$refs.confirmDialogue.showDialogue({
                     title: DeviceStringConstants.DEVICE_DELETING_CAPTION,
                     message: DeviceStringConstants.DEVICE_DELETING_MESSAGE +
                         '"' +
@@ -296,7 +288,7 @@
                     okButton: DeviceStringConstants.DEVICE_DELETING_CAPTION,
                 });
 
-                if (ok) {
+                if (confirmDelete) {
                     //deleting devices item via API
                     axios
                         .delete(APIConstants.api_device_delete + id)
@@ -479,36 +471,4 @@
 </script>
 
 <style lang="scss">
-    @import "../../../sass/aligns.scss";
-    //@import "../../../sass/lists.scss";
-
-    .vertical-center {
-        display: flex;
-        align-items: center;
-    }
-
-    .navbar-nav .dropdown-menu {
-        position: absolute;
-    }
-
-    .device-image {
-        width: 70px;
-        margin-top: -50%;
-        margin-bottom: -50%;
-        margin-left: -10px;
-        border-radius: 10px;
-        box-shadow: #eee 0px 0px 8px;
-    }
-
-    @media only screen and (min-width: 320px) and (max-width: 480px) {
-        .device-image {
-            width: 64px;
-            margin-top: -23px;
-            margin-bottom: -29px;
-            margin-left: 210px;
-            border-radius: 10px;
-            box-shadow: #eee 0px 0px 8px;
-        }
-    }
-
 </style>

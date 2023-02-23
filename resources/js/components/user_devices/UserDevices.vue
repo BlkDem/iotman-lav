@@ -316,35 +316,5 @@ import APIConstants from "../../rest_api.js";
 </script>
 
 <style lang="scss">
-@import "../../../sass/aligns.scss";
-//@import "../../../sass/lists.scss";
 
-.vertical-center {
-    display: flex;
-    align-items: center;
-}
-
-.navbar-nav .dropdown-menu {
-    position: absolute;
-}
-
-.device-image {
-  width: 70px;
-  margin-top: -50%;
-  margin-bottom: -50%;
-  margin-left: -10px;
-  border-radius: 10px;
-  box-shadow: #eee 0px 0px 8px;
-}
-
-@media only screen and (min-width: 320px) and (max-width: 480px) {
-  .device-image {
-    width: 64px;
-    margin-top: -23px;
-    margin-bottom: -29px;
-    margin-left: 210px;
-    border-radius: 10px;
-    box-shadow: #eee 0px 0px 8px;
-  }
-}
 </style>
