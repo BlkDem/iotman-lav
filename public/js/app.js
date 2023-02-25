@@ -23866,13 +23866,13 @@ __webpack_require__.r(__webpack_exports__);
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)({});
 
 app.component('Navbar', _components_header_Navbar_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
+app.component('device-list', (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineAsyncComponent)(function () {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_devices_Devices_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/devices/Devices.vue */ "./resources/js/components/devices/Devices.vue"));
+}));
 
 app.component('toaster', _components_common_Toaster_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
 app.component('device-type-list', (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineAsyncComponent)(function () {
   return __webpack_require__.e(/*! import() */ "resources_js_components_device_types_DeviceTypes_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/device_types/DeviceTypes.vue */ "./resources/js/components/device_types/DeviceTypes.vue"));
-}));
-app.component('device-list', (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineAsyncComponent)(function () {
-  return __webpack_require__.e(/*! import() */ "resources_js_components_devices_Devices_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/devices/Devices.vue */ "./resources/js/components/devices/Devices.vue"));
 }));
 app.component('device-user-list', (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineAsyncComponent)(function () {
   return __webpack_require__.e(/*! import() */ "resources_js_components_user_devices_UserDevices_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/user_devices/UserDevices.vue */ "./resources/js/components/user_devices/UserDevices.vue"));
@@ -49917,7 +49917,7 @@ function compileToFunction(template, options) {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_device_types_DeviceTypes_vue":1,"resources_js_components_devices_Devices_vue":1,"resources_js_components_user_devices_UserDevices_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_devices_Devices_vue":1,"resources_js_components_device_types_DeviceTypes_vue":1,"resources_js_components_user_devices_UserDevices_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

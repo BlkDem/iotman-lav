@@ -157,6 +157,7 @@ import AddDeviceType from './AddDeviceType.vue';
 import Paginator from '../../components/common/Paginator.vue';
 import MessagesConstants from '../strings_constants/strings';
 import DeviceTypeStringConstants from '../../components/strings_constants/device_types/index';
+import Sorting from "../../components/common/js/Sorting.js";
 
     export default {
         components: {
@@ -242,38 +243,9 @@ import DeviceTypeStringConstants from '../../components/strings_constants/device
 
         methods: {
 
-            doSort($c) {
-                const column = $c;
-                this.sortColumn = column;
-                const order = this.sortDirection;
-
-                this.filteredDeviceTypes.sort(function (a, b) {
-                    if (column === "id") {
-                        var nameA = a[column];
-                        var nameB = b[column];
-                    } else {
-                        var nameA = a[column] + "".toUpperCase();
-                        var nameB = b[column] + "".toUpperCase();
-                    }
-
-                    if (order && nameA > nameB) {
-                        return -1;
-                    }
-
-                    if (order && nameA < nameB) {
-                        return 1;
-                    }
-
-                    if (!order && nameA < nameB) {
-                        return -1;
-                    }
-
-                    if (!order && nameA > nameB) {
-                        return 1;
-                    }
-
-                    return 0;
-                });
+            doSort($column) {
+                Sorting.doSort(this.filteredDeviceTypes, $column, this.sortDirection)
+                this.sortColumn = $column;
             },
 
             doFilter() {

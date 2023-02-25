@@ -21,15 +21,14 @@ import Navbar from './components/header/Navbar.vue';
 
 app.component('Navbar', Navbar);
 
+app.component('device-list', defineAsyncComponent(() =>
+  import('./components/devices/Devices.vue')
+))
 import Toaster from './components/common/Toaster.vue';
 app.component('toaster', Toaster);
 
 app.component('device-type-list', defineAsyncComponent(() =>
   import('./components/device_types/DeviceTypes.vue')
-))
-
-app.component('device-list', defineAsyncComponent(() =>
-  import('./components/devices/Devices.vue')
 ))
 
 app.component('device-user-list', defineAsyncComponent(() =>

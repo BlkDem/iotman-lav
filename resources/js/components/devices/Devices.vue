@@ -102,7 +102,7 @@
                                 {{ device.device_hwid ?? 'no hardware address ' }}
                         </div>
                         <div class="col-sm-2 col-xs-2 col-lg-2 edit-buttons">
-                            <button class="btn btn-info" @click="doEdit(key, device.id)">
+                            <button class="btn btn-info mx-2" @click="doEdit(key, device.id)">
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
 
@@ -127,6 +127,7 @@
     import DeviceStringConstants from "../../components/strings_constants/devices/index";
     import MessagesConstants from "../strings_constants/strings.js";
     import APIConstants from "../../rest_api.js";
+    import Sorting from "../../components/common/js/Sorting.js";
     // import MyMqtt from '../components/MyMqtt.vue';
 
     export default {
@@ -215,38 +216,9 @@
         },
 
         methods: {
-            doSort($c) {
-                const column = $c;
-                this.sortColumn = column;
-                const order = this.sortDirection;
-
-                this.filteredDevices.sort(function (a, b) {
-                    if (column === "id") {
-                        var nameA = a[column];
-                        var nameB = b[column];
-                    } else {
-                        var nameA = a[column] + "".toUpperCase();
-                        var nameB = b[column] + "".toUpperCase();
-                    }
-
-                    if (order && nameA > nameB) {
-                        return -1;
-                    }
-
-                    if (order && nameA < nameB) {
-                        return 1;
-                    }
-
-                    if (!order && nameA < nameB) {
-                        return -1;
-                    }
-
-                    if (!order && nameA > nameB) {
-                        return 1;
-                    }
-
-                    return 0;
-                });
+            doSort($column) {
+                Sorting.doSort(this.filteredDevices, $column, this.sortDirection)
+                this.sortColumn = $column;
             },
 
             doFilter() {

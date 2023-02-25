@@ -136,6 +136,7 @@ import Paginator from "../../components/common/Paginator.vue";
 import UserDeviceStringConstants from "../../components/strings_constants/user_devices/index";
 import MessagesConstants from "../strings_constants/strings.js";
 import APIConstants from "../../rest_api.js";
+import Sorting from "../../components/common/js/Sorting.js";
 
     export default {
         components: {
@@ -223,42 +224,9 @@ import APIConstants from "../../rest_api.js";
         },
 
         methods: {
-            doSort($c) {
-                const column=$c;
-                this.sortColumn=column;
-                const order=this.sortDirection;
-
-                this.filteredUserDevices.sort(function (a, b) {
-                        if (column==="id") {
-                            var nameA=a[column];
-                            var nameB=b[column];
-                        }
-
-                        else {
-                            var nameA=a[column] + "".toUpperCase();
-                            var nameB=b[column] + "".toUpperCase();
-                        }
-
-                        if (order && nameA > nameB) {
-                            return -1;
-                        }
-
-                        if (order && nameA < nameB) {
-                            return 1;
-                        }
-
-                        if ( !order && nameA < nameB) {
-                            return -1;
-                        }
-
-                        if ( !order && nameA> nameB) {
-                            return 1;
-                        }
-
-                        return 0;
-                    }
-
-                );
+            doSort($column) {
+                Sorting.doSort(this.filteredUserDevices, $column, this.sortDirection)
+                this.sortColumn = $column;
             },
 
             doFilter() {
