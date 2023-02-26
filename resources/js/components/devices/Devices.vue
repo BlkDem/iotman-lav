@@ -15,7 +15,7 @@
                         </li>
                         <li class="nav-item dropdown me-auto vertical-center">
                             <a class="nav-link dropdown-toggle mx-2" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">{{ SortName }}</a>
+                                aria-haspopup="true" aria-expanded="false">{{ SortingPopupCaption }}</a>
                             <div class="dropdown-menu w-100">
                                 <a class="dropdown-item" href="#" v-for="rule in sortRules" :key="rule.key"
                                     :value="rule.key" @click="doSort(rule.key)">{{ rule.title }}</a>
@@ -45,7 +45,7 @@
             <h5 class="text-primary my-2">{{ dataDescription }}</h5>
         </div>
 
-        <div class="row my-2" v-if="!getCompactView">
+        <div class="row my-2" v-if="!compactView">
             <div class="col-sm-4 col-xs-4 col-lg-4 p-2" v-for="(device, key) in filteredDevices" v-bind:key="key"
                 v-bind:id="device.id">
                 <div class="card border-light">
@@ -81,9 +81,9 @@
         </div>
 
         <!-- compact view -->
-        <div v-show="getCompactView" class="my-2">
+        <div v-show="compactView" class="my-2">
             <div class="card border-primary mb-1 w-100" v-for="(device, key) in filteredDevices" v-bind:key="key"
-                v-bind:id="device.id">
+                v-bind:id="device.id"   >
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
                         <div class="col-sm-1 col-xs-1 col-lg-1">
@@ -127,7 +127,8 @@
     import DeviceStringConstants from "../../components/strings_constants/devices/index";
     import MessagesConstants from "../strings_constants/strings.js";
     import APIConstants from "../../rest_api.js";
-    import Sorting from "../../components/common/js/Sorting.js";
+    import Sorting from "../common/js/Sorting.js";
+    import ParsingErrors from "../common/js/ParsingErrors.js";
     // import MyMqtt from '../components/MyMqtt.vue';
 
     export default {
@@ -197,22 +198,13 @@
         },
 
         computed: {
-            SortName() {
-                let res =
-                    this.sortColumn === "id" ?
-                    MessagesConstants.SORT_BY_ID :
-                    MessagesConstants.SORT_BY_NAME;
-                res += " (";
-                res += !this.sortDirection ?
-                    MessagesConstants.SORT_ASC :
-                    MessagesConstants.SORT_DESC;
-                res += ")";
-                return res;
+            SortingPopupCaption() {
+                return MessagesConstants.SortingCaption(this.sortColumn, this.sortDirection)
             },
 
-            getCompactView() {
-                return this.compactView;
-            },
+            // getCompactView() {
+            //     return this.compactView;
+            // },
         },
 
         methods: {
@@ -237,15 +229,6 @@
                     this.doSort();
                 }
                 // return res;
-            },
-
-            //convert 'null' 'undefined' to predefined consts
-            processStrings() {
-                this.filteredDevices.forEach((dev, key) => {
-                    this.filteredDevices[key].device_desc = dev.device_desc ?? MessagesConstants.NO_DESCRIPTION;
-                    this.filteredDevices[key].device_hwid = dev.device_hwid ?? DeviceStringConstants.NO_HWID;
-                    this.filteredDevices[key].device_pass = dev.device_pass ?? DeviceStringConstants.NO_PASS;
-                });
             },
 
             //deleting devices
@@ -282,12 +265,14 @@
             },
 
             //loading devices dataset via API
-            getDevices(api_url) {
+            getDevices() {
                 fetch(APIConstants.api_devices_read)
                     .then((response) => response.json())
                     .then((response) => {
                         this.filteredDevices = response.data;
-                        this.processStrings();
+                        //this.processStrings();
+                        //MessagesConstants.processDeviceStrings(this.filteredDevices);
+                        MessagesConstants.processDeviceStrings(this.filteredDevices)
                         //console.log(response.data);
                         this.devices = this.filteredDevices;
                         this.doSort(this.sortColumn);
@@ -296,7 +281,7 @@
             },
 
             //setting Device Type to Device
-            async setDeviceType($device_type_id, $item) {
+            async setDeviceType($device_type_id, $item) { //attach device type name and image to device
                 axios
                     .get(APIConstants.api_device_types_read + $device_type_id)
                     .then((resp_type) => {
@@ -312,11 +297,11 @@
                     edit_mode: false,
                     title: DeviceStringConstants.DEVICE_ADDING_TITLE,
                     message: DeviceStringConstants.DEVICE_ADDING_MESSAGE,
-                    device_name: DeviceStringConstants.DEVICE_NAME_PLACEHOLDER,
-                    device_desc: DeviceStringConstants.DEVICE_DESC_PLACEHOLDER,
-                    device_hwid: DeviceStringConstants.DEVICE_HWID_PLACEHOLDER,
-                    device_pass: DeviceStringConstants.DEVICE_PASS_PLACEHOLDER,
-                    device_type_id: DeviceStringConstants.DEVICE_DEVICETYPEID_PLACEHOLDER,
+                    device_name: "",
+                    device_desc: "",
+                    device_hwid: "",
+                    device_pass: "",
+                    device_type_id: "",
                     okButton: DeviceStringConstants.DEVICE_ADDBUTTON_CAPTION,
                 });
 
@@ -324,18 +309,12 @@
                     //creating Device via API
                     axios
                         .post(
-                            APIConstants.api_device_create +
-                            "?device_name=" +
-                            this.$refs.addDevice.device_name +
-                            "&device_type_id=" +
-                            this.$refs.addDevice.device_type_id +
-                            "&device_pass=" +
-                            this.$refs.addDevice.device_pass +
-                            "&device_hwid=" +
-                            this.$refs.addDevice.device_hwid +
-                            "&device_desc=" +
-                            this.$refs.addDevice.device_desc
-                        )
+                            APIConstants.api_device_create + "?device_name=" +
+                            this.$refs.addDevice.device_name + "&device_type_id=" +
+                            this.$refs.addDevice.device_type_id + "&device_pass=" +
+                            this.$refs.addDevice.device_pass + "&device_hwid=" +
+                            this.$refs.addDevice.device_hwid + "&device_desc=" +
+                            this.$refs.addDevice.device_desc)
                         .then((resp) => {
                             console.log(resp["data"]);
                             let newDevice = {
@@ -347,12 +326,12 @@
                                 device_type_name: "",
                                 device_type_image: "",
                                 id: resp["data"].id,
-                            };
+                            }
                             this.filteredDevices.push(newDevice);
                             this.$root.$refs.toaster.setMessage(
                                 MessagesConstants.ADDED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
-                            );
+                            )
                         })
                         .then((resp) => {
                             this.setDeviceType(
@@ -362,10 +341,14 @@
                             );
                         })
                         .catch((error) => {
-                            console.log(error);
-                        });
+                            console.log(error.response.data)
+                            this.$root.$refs.toaster.setMessage(
+                                ParsingErrors.getError(error.response.data),
+                                MessagesConstants.INSERTING_ERROR
+                            )
+                        })
                 } else {
-                    console.log(MessagesConstants.INSERTING_CANCELLED);
+                    console.log(MessagesConstants.INSERTING_CANCELLED)
                 }
             },
 

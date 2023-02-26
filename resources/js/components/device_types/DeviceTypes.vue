@@ -1,152 +1,114 @@
 <template>
 
-  <div v-show="deviceTypesVisible">
-    <AddDeviceType ref="addDeviceType"></AddDeviceType>
-    <ConfirmDialogue ref="confirmDialogue" />
-    <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
-      Device Types
-    </h1>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
-      <div class="container-fluid">
-        <div class="navbar-collapse" id="navbarColor02">
-          <ul class="navbar-nav me-auto  d-flex">
-            <li class="nav-item  d-flex py-1">
-              <input
-                class="form-control me-sm-2"
-                type="text"
-                placeholder="Search"
-                v-model="device_type_filter"
-              />
-            </li>
-            <li class="nav-item dropdown me-auto vertical-center">
-              <a
-                class="nav-link dropdown-toggle mx-2"
-                data-bs-toggle="dropdown"
-                href="#"
-                role="button"
-                aria-haspopup="true"
-                aria-expanded="false"
-                >{{ SortName }}</a
-              >
-              <div class="dropdown-menu w-100">
-                <a
-                  class="dropdown-item"
-                  href="#"
-                  v-for="rule in sortRules"
-                  :key="rule.key"
-                  :value="rule.key"
-                  @click="doSort(rule.key)"
-                  >{{ rule.title }}</a
-                >
-                <div class="dropdown-divider"></div>
-                <a
-                  class="dropdown-item"
-                  href="#"
-                  @click="
-                    sortDirection = !sortDirection;
-                    doSort(sortColumn);
-                  "
-                >
-                  {{
-                    sortDirection ? sortOrderStrings[0] : sortOrderStrings[1]
-                  }}
-                </a>
-              </div>
-            </li>
-          </ul>
-          <div class="d-flex">
-            <button class="btn btn-primary"  :class="{'disabled' : compactView}" @click="compactView = true">
-              <i class="fas fa-list"></i>
-            </button>
-            <button class="btn btn-primary mx-2" :class="{'disabled' : !compactView}" @click="compactView = false">
-              <i class="fas fa-th-large"></i>
-            </button>
-            <button class="btn btn-primary" @click="setDeviceType">
-              Add Device Type
-            </button>
-          </div>
+    <div v-show="deviceTypesVisible">
+        <AddDeviceType ref="addDeviceType"></AddDeviceType>
+        <ConfirmDialogue ref="confirmDialogue" />
+        <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
+            Device Types
+        </h1>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+            <div class="container-fluid">
+                <div class="navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav me-auto  d-flex">
+                        <li class="nav-item  d-flex py-1">
+                            <input class="form-control me-sm-2" type="text" placeholder="Search"
+                                v-model="device_type_filter" />
+                        </li>
+                        <li class="nav-item dropdown me-auto vertical-center">
+                            <a class="nav-link dropdown-toggle mx-2" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="false">{{ SortName }}</a>
+                            <div class="dropdown-menu w-100">
+                                <a class="dropdown-item" href="#" v-for="rule in sortRules" :key="rule.key"
+                                    :value="rule.key" @click="doSort(rule.key)">{{ rule.title }}</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" @click="
+                                                                    sortDirection = !sortDirection;
+                                                                    doSort(sortColumn);">
+                                    {{ sortDirection ? sortOrderStrings[0] : sortOrderStrings[1] }}
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <button class="btn btn-primary" :class="{'disabled' : compactView}" @click="compactView = true">
+                            <i class="fas fa-list"></i>
+                        </button>
+                        <button class="btn btn-primary mx-2" :class="{'disabled' : !compactView}"
+                            @click="compactView = false">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                        <button class="btn btn-primary" @click="setDeviceType">
+                            Add Device Type
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div>
+            <h5 class="text-primary my-2">{{ dataDescription }}</h5>
         </div>
-      </div>
-    </nav>
 
-    <div>
-      <h5 class="text-primary my-2">{{ dataDescription }}</h5>
-    </div>
+        <div class="row my-2" v-if="!compactView">
+            <div class="col-sm-4 col-xs-4 col-lg-4 p-2" v-for="(device_type, key) in filteredDeviceTypes"
+                v-bind:key="key" v-bind:id="device_type.id">
+                <div class="card border-light">
+                    <h3 class="card-header">
+                        {{ device_type.device_type_name }}
+                        <span class="text-info">({{ device_type.id }})</span>
+                    </h3>
+                    <div class="card-body">
+                        <h6 class="card-subtitle text-muted">
+                            {{ device_type.device_type_desc }}
+                        </h6>
+                    </div>
+                    <img v-bind:src="device_type.device_type_image" />
+                    <div class="card-body">
+                        <button class="btn btn-info btn-width-40 mx-1" @click="doEditType(key, device_type.id)">
+                            <i class="fas fa-edit" aria-hidden="true"></i>
+                            Edit
+                        </button>
 
-    <div class="row my-2" v-if="!getCompactView">
-      <div
-        class="col-sm-4 col-xs-4 col-lg-4 p-2"
-        v-for="(device_type, key) in filteredDeviceTypes" v-bind:key="key"
-                v-bind:id="device_type.id">
-        <div class="card border-light">
-          <h3 class="card-header">
-            {{ device_type.device_type_name }}
-            <span class="text-info">({{ device_type.id }})</span>
-          </h3>
-          <div class="card-body">
-            <h6 class="card-subtitle text-muted">
-              {{ device_type.device_type_desc }}
-            </h6>
-          </div>
-          <img v-bind:src="device_type.device_type_image" />
-          <div class="card-body">
-            <button class="btn btn-info btn-width-40 mx-1" @click="doEditType(key, device_type.id)">
-              <i class="fas fa-edit" aria-hidden="true"></i>
-              Edit
-            </button>
-
-            <button
-              class="btn btn-warning btn-width-40 mx-1"
-              @click="doDeleteType(key, device_type.id)"
-            >
-              <i class="fa fa-trash" aria-hidden="true"></i>
-              Delete
-            </button>
-          </div>
+                        <button class="btn btn-warning btn-width-40 mx-1" @click="doDeleteType(key, device_type.id)">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- compact view -->
-    <div v-show="getCompactView" class="my-2">
-      <div
-        class="card border-primary mb-4 w-100"
-        v-for="(device_type, key) in filteredDeviceTypes" v-bind:key="key"
-                v-bind:id="device_type.id">
-        <div class="card-header">
-          <div class="row vertical-center">
-            <div class="col-sm-1 col-xs-1 col-lg-1">
-              <img v-bind:src="device_type.device_type_image" class="device-image" />
-            </div>
-            <div class="col-sm-1 col-xs-1 col-lg-1 align-left">
-              <h5>
-                <span class="text-info"> {{ device_type.id }} </span>
-              </h5>
-            </div>
-            <div class="col-sm-7 col-xs-7 col-lg-7 align-left">
-              <h5>
-                {{ device_type.device_type_name  }}
-              </h5>
-            </div>
-            <div class="col-sm-3 col-xs-3 col-lg-3 align-right">
-              <button class="btn btn-info mx-2" @click="doEditType(key, device_type.id)">
-                <i class="fas fa-edit" aria-hidden="true"></i>
-              </button>
+        <!-- compact view -->
+        <div v-show="compactView" class="my-2">
+            <div class="card border-primary mb-1 w-100" v-for="(device_type, key) in filteredDeviceTypes"
+                v-bind:key="key" v-bind:id="device_type.id">
+                <div class="mx-2 my-2">
+                    <div class="row vertical-center">
+                        <div class="col-sm-1 col-xs-1 col-lg-1">
+                            <img v-bind:src="device_type.device_type_image" class="device-image" />
+                        </div>
+                        <div class="col-sm-1 col-xs-1 col-lg-1 align-left">
+                                <span class="text-info"> {{ device_type.id }} </span>
+                        </div>
+                        <div class="col-sm-7 col-xs-7 col-lg-7 align-left">
+                                {{ device_type.device_type_name  }}
+                        </div>
+                        <div class="col-sm-3 col-xs-3 col-lg-3  edit-buttons">
+                            <button class="btn btn-info mx-2" @click="doEditType(key, device_type.id)">
+                                <i class="fas fa-edit" aria-hidden="true"></i>
+                            </button>
 
-              <button
-                class="btn btn-secondary"
-                @click="doDeleteType(key, device_type.id)"
-              >
-                <i class="fa fa-trash" aria-hidden="true"></i>
-              </button>
+                            <button class="btn btn-secondary" @click="doDeleteType(key, device_type.id)">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+        <Paginator ref="paginatorDeviceTypes"></Paginator>
+        <!-- <MyMqtt></MyMqtt> -->
     </div>
-    <Paginator ref="paginatorDeviceTypes"></Paginator>
-    <!-- <MyMqtt></MyMqtt> -->
-  </div>
 
 
 </template>
@@ -155,7 +117,8 @@
 import ConfirmDialogue from '../../components/common/ConfirmDialogue.vue';
 import AddDeviceType from './AddDeviceType.vue';
 import Paginator from '../../components/common/Paginator.vue';
-import MessagesConstants from '../strings_constants/strings';
+import MessagesConstants from '../strings_constants/strings'
+import APIConstants from "../../rest_api.js";;
 import DeviceTypeStringConstants from '../../components/strings_constants/device_types/index';
 import Sorting from "../../components/common/js/Sorting.js";
 
@@ -194,11 +157,13 @@ import Sorting from "../../components/common/js/Sorting.js";
 
         created() {
             this.page_description = DeviceTypeStringConstants.DEVICE_TYPE_PAGE_DESCRIPTION;
-            this.getDeviceTypes();
+
             if (localStorage.DeviceTypeCompactView == null) {
                 localStorage.DeviceTypeCompactView = this.compactView;
             }
             this.dataDescription = DeviceTypeStringConstants.DEVICE_TYPE_DATA_DESCRIPTION; //device dataset description
+
+            this.getDeviceTypes();
         },
 
         mounted() {
@@ -223,21 +188,12 @@ import Sorting from "../../components/common/js/Sorting.js";
 
         computed: {
             SortName() {
-                let res =
-                    this.sortColumn === "id" ?
-                    MessagesConstants.SORT_BY_ID :
-                    MessagesConstants.SORT_BY_NAME;
-                res += " (";
-                res += !this.sortDirection ?
-                    MessagesConstants.SORT_ASC :
-                    MessagesConstants.SORT_DESC;
-                res += ")";
-                return res;
+                return MessagesConstants.SortingCaption(this.sortColumn, this.sortDirection)
             },
 
-            getCompactView() {
-                return this.compactView;
-            },
+            // getCompactView() {
+            //     return this.compactView;
+            // },
         },
 
 
@@ -268,23 +224,14 @@ import Sorting from "../../components/common/js/Sorting.js";
                 // return res;
             },
 
-            //convert 'null' 'undefined' to predefined consts
-            processStrings() {
-                this.filteredDeviceTypes.forEach((dev_type, key) => {
-                    this.filteredDeviceTypes[key].device_type_desc =
-                        dev_type.device_type_desc == null ?
-                        MessagesConstants.NO_DESCRIPTION :
-                        dev_type.device_type_desc;
-                });
-            },
-            getDeviceTypes(api_url) {
-                api_url = api_url || '/api/device_types/read/';
-                fetch(api_url)
+            getDeviceTypes() {
+                fetch(APIConstants.api_device_types_read)
                     .then(response => response.json())
                     .then(response => {
                         this.device_types = response.data;
                         this.filteredDeviceTypes = response.data;
-                        this.processStrings();
+                        // this.processStrings();
+                        MessagesConstants.processDeviceTypeStrings(this.filteredDeviceTypes)
                         this.device_types = this.filteredDeviceTypes;
                         this.doSort(this.sortColumn);
                     })

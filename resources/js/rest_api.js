@@ -17,10 +17,10 @@ export default {
     api_device_delete: apiPreffix + 'devices/delete/',
 
     //User Devices CRUD
-    api_user_device_create: apiPreffix + 'user_devices/create/',
+    api_user_device_create: apiPreffix + 'user_device/create/',
     api_user_devices_read: apiPreffix + 'user_devices/read/',
-    api_user_device_update: apiPreffix + 'user_devices/update/',
-    api_user_device_delete: apiPreffix + 'user_devices/delete/',
+    api_user_device_update: apiPreffix + 'user_device/update/',
+    api_user_device_delete: apiPreffix + 'user_device/delete/',
 
     //Users CRUD
     api_users_create: apiPreffix + 'users/create/',

@@ -10,9 +10,15 @@ export default {
     DELETED_MESSAGE: "Deleted",
     PROCESS_SUCCESSFULLY: "Successfully",
     INSERTING_CANCELLED: "Inserting Cancelled",
+    INSERTING_ERROR: "Inserting Error",
+
     EDITING_CANCELLED: "Editing Cancelled",
     DELETING_CANCELLED: "Deleting Cancelled",
+
+
     NO_DESCRIPTION: " no description ",
+    NO_HWID: " no device address",
+    NO_PASS: " no password",
 
     SORT_BY_NAME: "By Name",
     SORT_BY_ID: "By ID",
@@ -21,4 +27,43 @@ export default {
     SORT_DESC: "DESC",
 
     LOGOUT_MENU: "Logout",
+
+    //strings processing
+
+    SortingCaption($column, $direction) {
+        let res =
+            $column === "id" ?
+            this.SORT_BY_ID :
+            this.SORT_BY_NAME;
+        res += " (";
+        res += !$direction ?
+            this.SORT_ASC :
+            this.SORT_DESC;
+        res += ")";
+        return res;
+    },
+
+    processUserDeviceStrings($items) {
+        $items.forEach((dev, key)=> {
+                $items[key].device_desc=dev.device_desc==null ? this.NO_DESCRIPTION : dev.device_desc;
+                $items[key].device_hwid=dev.device_hwid==null ? this.NO_HWID : dev.device_hwid;
+                // this.filteredUserDevices[key].device_pass=dev.device_hwid==null ? DeviceStringConstants.NO_PASS : dev.device_pass;
+            }
+
+        );
+    },
+
+    processDeviceStrings($items) {
+        $items.forEach((dev, key) => {
+            $items[key].device_desc = dev.device_desc ?? this.NO_DESCRIPTION;
+            $items[key].device_hwid = dev.device_hwid ?? this.NO_HWID;
+            $items[key].device_pass = dev.device_pass ?? this.NO_PASS;
+        });
+    },
+
+    processDeviceTypeStrings($items) {
+        $items.forEach((dev, key) => {
+            $items[key].device_type_desc = dev.device_type_desc ?? this.NO_DESCRIPTION;
+        });
+    }
 }

@@ -48,7 +48,7 @@
 
         <div>
             <!-- <h1>User Devices</h1> -->
-            <div class="row my-2" v-if="!getCompactView">
+            <div class="row my-2" v-if="!compactView">
                 <div class="p-2 col-sm-4 col-xs-4 col-lg-4" v-for="(user_device, key) in filteredUserDevices"
                     v-bind:key="key" v-bind:id="user_device.id">
                     <div class="card border-light">
@@ -84,10 +84,10 @@
             </div>
         </div>
         <!-- compact view -->
-        <div v-show="getCompactView" class="my-2">
-            <div class="card border-primary mb-4 w-100" v-for="(user_device, key) in filteredUserDevices"
+        <div v-show="compactView" class="my-2">
+            <div class="card border-primary mb-1 w-100" v-for="(user_device, key) in filteredUserDevices"
                 v-bind:key="key" v-bind:id="user_device.id">
-                <div class="card-header">
+                <div class="mx-2 my-2">
                     <div class="row vertical-center">
                         <div class="col-sm-1 col-xs-1 col-lg-1">
                             <img v-bind:src="user_device.device_type_image" class="device-image" />
@@ -96,26 +96,18 @@
                             <span class="text-info"> {{ user_device.id }} </span>
                         </div>
                         <div class="col-sm-3 col-xs-3 col-lg-3 align-left">
-                            <h5>
                                 {{ user_device.user_device_name }}
-
-                            </h5>
                         </div>
                         <div class="col-sm- col-xs-2 col-lg-2 align-left">
-                            <h6>
                                 <span class="text-info">{{ user_device.device_name }}</span>
-                            </h6>
                         </div>
                         <div class="col-sm-3 col-xs-3 col-lg-3 align-left">
-                            <h6>
                                 {{ user_device.device_hwid }}
-                            </h6>
                         </div>
-                        <div class="col-sm-2 col-xs-2 col-lg-2 align-right">
+                        <div class="col-sm-2 col-xs-2 col-lg-2 edit-buttons">
                             <button class="btn btn-info mx-2" @click="doEdit(key, user_device.id)">
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
-
                             <button class="btn btn-secondary" @click="doDelete(key, user_device.id)">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
@@ -141,8 +133,6 @@ import Sorting from "../../components/common/js/Sorting.js";
     export default {
         components: {
             ConfirmDialogue,
-    // AddUseDevice,
-    // DeviceTypesCombo,
             Paginator /*MyMqtt*/,
         },
 
@@ -199,28 +189,19 @@ import Sorting from "../../components/common/js/Sorting.js";
                 handler: this.doSort();
             },
 
-            compactView: function () {
-                localStorage.CompactView=this.compactView;
-            },
+            // compactView: function () {
+            //     localStorage.CompactView=this.compactView;
+            // },
         },
 
         computed: {
             SortName() {
-                let res =
-                this.sortColumn === "id"
-                    ? MessagesConstants.SORT_BY_ID
-                    : MessagesConstants.SORT_BY_NAME;
-                res += " (";
-                res += !this.sortDirection
-                    ? MessagesConstants.SORT_ASC
-                    : MessagesConstants.SORT_DESC;
-                res += ")";
-            return res;
+                return MessagesConstants.SortingCaption(this.sortColumn, this.sortDirection)
             },
 
-            getCompactView() {
-                return this.compactView;
-            },
+            // getCompactView() {
+            //     return this.compactView;
+            // },
         },
 
         methods: {
@@ -236,34 +217,20 @@ import Sorting from "../../components/common/js/Sorting.js";
                         if (this.userDevice_filter==="") return true;
                         else return (user_device.device_name .toLowerCase() .indexOf(this.userDevice_filter.toLowerCase()) > -1);
                     }
-
-                );
+                )
 
                 if (this.user_devices.length > res.length) {
                     this.filteredUserDevices=res;
                     this.doSort();
                 }
-
-                // return res;
             },
 
-            //convert 'null' 'undefined' to predefined consts
-            processStrings() {
-                this.filteredUserDevices.forEach((dev, key)=> {
-                        this.filteredUserDevices[key].device_desc=dev.device_desc==null ? MessagesConstants.NO_DESCRIPTION : dev.device_desc;
-                        this.filteredUserDevices[key].device_hwid=dev.device_hwid==null ? DeviceStringConstants.NO_HWID : dev.device_hwid;
-                        // this.filteredUserDevices[key].device_pass=dev.device_hwid==null ? DeviceStringConstants.NO_PASS : dev.device_pass;
-                    }
-
-                );
-            },
-
-            getUserDevices(api_url) {
+            getUserDevices() {
                 fetch(APIConstants.api_user_devices_read)
                 .then((response) => response.json())
                 .then((response) => {
                         this.filteredUserDevices = response.data;
-                        this.processStrings();
+                        MessagesConstants.processUserDeviceStrings(this.filteredUserDevices);
                         this.user_devices = this.filteredUserDevices;
                         this.doSort(this.sortColumn);
                     }

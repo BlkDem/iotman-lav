@@ -9,51 +9,34 @@
 
 <script>
 
+
+import APIConstants from "../../rest_api";
+
 export default {
     name: 'UserDeviceCombo',
 
-    data (){
-        return {
-        // Parameters that change depending on the type of dialogue
-            title: undefined,
-            items: [],
-            //id: undefined,
-        }
-    },
+        data() {
+            return {
+                items: [],
+            }
+        },
 
-    props: ["id"],
+        props: ["id"],
 
-    // setup(props) {
+        created(props) {
+            this.getUserDevice();
+        },
 
-    // },
-
-    created(props) {
-        this.getUserDevice();
-    },
-
-    methods: {
-        async getUserDevice(api_url) {
-            api_url = api_url || '/api/users/read';
-            // console.log(api_url, this.device_type_id);
-             await fetch(api_url)
+        methods: {
+            async getUserDevice() {
+                await fetch(APIConstants.api_users_read)
                     .then(response => response.json())
                     .then(response => {
                         this.items = response.data;
                     })
-                    //.then(response => console.log(response))
                     .catch(err => console.log(err));
+            },
         },
-
-        // getDeviceTypeID() {
-        //     return this.id;
-        // },
-
-        // setId(){
-        //     //this.id=3;
-        //     console.log(this.props, this)
-        // }
-
-    },
-}
+    }
 
 </script>
