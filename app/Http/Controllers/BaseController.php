@@ -13,11 +13,14 @@ class BaseController extends Controller
      */
     public function sendResponse($result, $message)
     {
+
+        $_result = (isset($result["data"]))?$result["data"]:$result;
     	$response = [
             'success' => true,
-            'data'    => $result,
+            'data'    => $_result,
             'message' => $message,
         ];
+        // dd(response()->json($response));
         return response()->json($response, 200);
     }
 

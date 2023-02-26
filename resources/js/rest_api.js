@@ -5,7 +5,7 @@ export default {
     apiVersion: APIVersion,
 
     //Device Types CRUD
-    api_device_type_create: apiPreffix + 'device_types/create/',
+    api_device_type_create: apiPreffix + 'device_type/create/',
     api_device_types_read: apiPreffix + 'device_types/read/',
     api_device_type_update: apiPreffix + 'device_type/update/',
     api_device_type_delete: apiPreffix + 'device_type/delete/',

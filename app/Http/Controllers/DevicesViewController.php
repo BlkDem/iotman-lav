@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DevicesView;
+use App\Http\Controllers\BaseController as BaseController;
 
-class DevicesViewController extends Controller
+class DevicesViewController extends BaseController
 {
     public function index()
     {

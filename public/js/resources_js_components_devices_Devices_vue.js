@@ -142,7 +142,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'DeviceTypesCombo',
+  name: 'DeviceTypeCombo',
   data: function data() {
     return {
       // Parameters that change depending on the type of dialogue
@@ -152,7 +152,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   props: ["id"],
-  created: function created(props) {
+  created: function created() {
     this.getDeviceTypes();
   },
   methods: {
@@ -430,7 +430,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this2.devices = _this2.filteredDevices;
                     console.log(key, id, " - deleted");
 
-                    _this2.$root.$refs.toaster.setMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].DELETED_MESSAGE, _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY);
+                    _this2.$root.$refs.toaster.setMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY, _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].DELETED_MESSAGE);
                   })["catch"](function (error) {
                     console.log(error);
                   });
@@ -450,35 +450,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     getDevices: function getDevices() {
       var _this3 = this;
 
-      fetch(_rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].api_devices_read).then(function (response) {
-        return response.json();
-      }).then(function (response) {
-        _this3.filteredDevices = response.data; //this.processStrings();
-        //MessagesConstants.processDeviceStrings(this.filteredDevices);
-
-        _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].processDeviceStrings(_this3.filteredDevices); //console.log(response.data);
-
-        _this3.devices = _this3.filteredDevices;
-
-        _this3.doSort(_this3.sortColumn);
-      })["catch"](function (err) {
-        return console.log(err);
-      });
-    },
-    //setting Device Type to Device
-    setDeviceType: function setDeviceType($device_type_id, $item) {
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                //attach device type name and image to device
-                axios.get(_rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].api_device_types_read + $device_type_id).then(function (resp_type) {
-                  $item.device_type_image = resp_type["data"].data.device_type_image;
-                  $item.device_type_name = resp_type["data"].data.device_type_name;
+                _context2.next = 2;
+                return fetch(_rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].api_devices_read).then(function (response) {
+                  return response.json();
+                }).then(function (response) {
+                  _this3.filteredDevices = response.data;
+                  _this3.devices = _this3.filteredDevices;
+
+                  _this3.doSort(_this3.sortColumn);
+                })["catch"](function (err) {
+                  return console.log(err);
                 });
 
-              case 1:
+              case 2:
               case "end":
                 return _context2.stop();
             }
@@ -486,18 +475,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    //create Device
-    setDevice: function setDevice() {
-      var _this4 = this;
-
+    //setting Device Type to Device
+    setDeviceType: function setDeviceType($device_type_id, $item) {
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-        var _add;
-
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.next = 2;
+                //attach device type name and image to device
+                console.log($device_type_id, $item);
+                axios.get(_rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].api_device_types_read + $device_type_id).then(function (resp_type) {
+                  $item.device_type_image = resp_type["data"].data.device_type_image;
+                  $item.device_type_name = resp_type["data"].data.device_type_name;
+                });
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    //create Device
+    setDevice: function setDevice() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+        var _add;
+
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
                 return _this4.$refs.addDevice.showDialogue({
                   edit_mode: false,
                   title: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_ADDING_TITLE,
@@ -511,12 +522,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 2:
-                _add = _context3.sent;
+                _add = _context4.sent;
 
                 if (_add) {
                   //creating Device via API
                   axios.post(_rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].api_device_create + "?device_name=" + _this4.$refs.addDevice.device_name + "&device_type_id=" + _this4.$refs.addDevice.device_type_id + "&device_pass=" + _this4.$refs.addDevice.device_pass + "&device_hwid=" + _this4.$refs.addDevice.device_hwid + "&device_desc=" + _this4.$refs.addDevice.device_desc).then(function (resp) {
-                    console.log(resp["data"]);
+                    console.log(resp);
                     var newDevice = {
                       device_name: resp["data"].device_name,
                       device_desc: resp["data"].device_desc,
@@ -530,13 +541,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                     _this4.filteredDevices.push(newDevice);
 
-                    _this4.$root.$refs.toaster.setMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].ADDED_MESSAGE, _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY);
+                    _this4.devices = _this4.filteredDevices;
+
+                    _this4.$root.$refs.toaster.setMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY, resp["data"].device_name + ': ' + _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].ADDED_MESSAGE);
                   }).then(function (resp) {
                     _this4.setDeviceType(_this4.filteredDevices[_this4.filteredDevices.length - 1].device_type_id, _this4.filteredDevices[_this4.filteredDevices.length - 1]);
                   })["catch"](function (error) {
                     console.log(error.response.data);
 
-                    _this4.$root.$refs.toaster.setMessage(_common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__["default"].getError(error.response.data), _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].INSERTING_ERROR);
+                    _this4.$root.$refs.toaster.setMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].INSERTING_ERROR, _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__["default"].getError(error), _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__["default"].ERROR_LEVEL_ERROR);
                   });
                 } else {
                   console.log(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].INSERTING_CANCELLED);
@@ -544,60 +557,64 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 4:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }))();
     },
     //edit Device
     doEdit: function doEdit(key, id) {
       var _this5 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+        var _this5$filteredDevice, _this5$filteredDevice2, _this5$filteredDevice3;
+
         var _edit, editDevicePost;
 
-        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
                 //opening Device Dialogue
                 console.log(key, id);
-                _context4.next = 3;
+                _context5.next = 3;
                 return _this5.$refs.addDevice.showDialogue({
                   edit_mode: true,
                   title: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_EDITING_TITLE,
                   message: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_EDITING_MESSAGE,
                   device_name: _this5.filteredDevices[key].device_name,
-                  device_desc: _this5.filteredDevices[key].device_desc,
-                  device_hwid: _this5.filteredDevices[key].device_hwid,
-                  device_pass: _this5.filteredDevices[key].device_pass,
+                  device_desc: (_this5$filteredDevice = _this5.filteredDevices[key].device_desc) !== null && _this5$filteredDevice !== void 0 ? _this5$filteredDevice : "",
+                  device_hwid: (_this5$filteredDevice2 = _this5.filteredDevices[key].device_hwid) !== null && _this5$filteredDevice2 !== void 0 ? _this5$filteredDevice2 : "",
+                  device_pass: (_this5$filteredDevice3 = _this5.filteredDevices[key].device_pass) !== null && _this5$filteredDevice3 !== void 0 ? _this5$filteredDevice3 : "",
                   device_type_id: _this5.filteredDevices[key].device_type_id,
                   okButton: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_EDITBUTTON_CAPTION
                 });
 
               case 3:
-                _edit = _context4.sent;
+                _edit = _context5.sent;
 
                 if (_edit) {
                   editDevicePost = _rest_api_js__WEBPACK_IMPORTED_MODULE_6__["default"].api_device_update + id + "/?device_name=" + _this5.$refs.addDevice.device_name + "&device_type_id=" + _this5.$refs.addDevice.device_type_id + "&device_desc=" + _this5.$refs.addDevice.device_desc + "&device_hwid=" + _this5.$refs.addDevice.device_hwid + "&device_pass=" + _this5.$refs.addDevice.device_pass;
-                  console.log(editDevicePost); //editing Device via API
+                  console.log("Edit post: " + editDevicePost); //editing Device via API
 
                   axios.put(editDevicePost).then(function (resp) {
-                    console.log(resp["data"]);
+                    console.log("response: ", resp);
                     _this5.filteredDevices[key].device_name = resp["data"].device_name;
                     _this5.filteredDevices[key].device_desc = resp["data"].device_desc;
                     _this5.filteredDevices[key].device_type_id = resp["data"].device_type_id;
                     _this5.filteredDevices[key].device_hwid = resp["data"].device_hwid;
                     _this5.filteredDevices[key].device_pass = resp["data"].device_pass;
 
-                    _this5.$root.$refs.toaster.setMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].EDITED_MESSAGE, _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY);
+                    _this5.$root.$refs.toaster.setMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY, _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].EDITED_MESSAGE);
                   }).then(function (resp) {
                     _this5.devices = _this5.filteredDevices;
 
                     _this5.setDeviceType(_this5.filteredDevices[key].device_type_id, _this5.filteredDevices[key]);
                   })["catch"](function (error) {
-                    console.log(error);
+                    console.log(error.response.data);
+
+                    _this5.$root.$refs.toaster.setMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].INSERTING_ERROR, _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__["default"].getError(error), _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__["default"].ERROR_LEVEL_ERROR);
                   });
                 } else {
                   console.log(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].EDITING_CANCELLED);
@@ -605,10 +622,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 5:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4);
+        }, _callee5);
       }))();
     },
     // Show or Hide Devices page
@@ -1274,13 +1291,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  abs: "1234",
-  getError: function getError($data) {
-    var JSON_Obj = $data;
+  ERROR_LEVEL_INFO: 0,
+  ERROR_LEVEL_WARNING: 1,
+  ERROR_LEVEL_ERROR: 2,
+  getError: function getError($errorObject) {
+    var ValidResponse = $errorObject.response.data !== "" ? $errorObject.response.data : $errorObject;
     var _msg = "";
 
-    for (var key in JSON_Obj) {
-      _msg += key + ": " + JSON_Obj[key][0] + "\n\r";
+    for (var key in ValidResponse) {
+      _msg += key + ": " + ValidResponse[key][0] + "\n\r";
     }
 
     return _msg.slice(0, -1);
@@ -1301,7 +1320,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   doSort: function doSort($items, $column, $direction) {
-    console.log(this);
+    //console.log(this)
     var column = $column;
     var order = $direction;
     $items.sort(function (a, b) {

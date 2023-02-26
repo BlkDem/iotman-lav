@@ -92,7 +92,7 @@
                         <div class="col-sm-1 col-xs-1 col-lg-1">
                             <img v-bind:src="user_device.device_type_image" class="device-image" />
                         </div>
-                        <div class="col-sm-1 col-xs-1 col-lg-1">
+                        <div class="col-sm-1 col-xs-1 col-lg-1 align-left">
                             <span class="text-info"> {{ user_device.id }} </span>
                         </div>
                         <div class="col-sm-3 col-xs-3 col-lg-3 align-left">
@@ -128,7 +128,7 @@ import Paginator from "../../components/common/Paginator.vue";
 import UserDeviceStringConstants from "../../components/strings_constants/user_devices/index";
 import MessagesConstants from "../strings_constants/strings.js";
 import APIConstants from "../../rest_api.js";
-import Sorting from "../../components/common/js/Sorting.js";
+import Sorting from "../common/js/Sorting.js";
 
     export default {
         components: {
@@ -230,7 +230,7 @@ import Sorting from "../../components/common/js/Sorting.js";
                 .then((response) => response.json())
                 .then((response) => {
                         this.filteredUserDevices = response.data;
-                        MessagesConstants.processUserDeviceStrings(this.filteredUserDevices);
+                        //MessagesConstants.processDeviceStrings(this.filteredUserDevices);
                         this.user_devices = this.filteredUserDevices;
                         this.doSort(this.sortColumn);
                     }

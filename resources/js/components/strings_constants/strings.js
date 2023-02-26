@@ -13,6 +13,7 @@ export default {
     INSERTING_ERROR: "Inserting Error",
 
     EDITING_CANCELLED: "Editing Cancelled",
+    EDITING_ERROR: "Editing Error",
     DELETING_CANCELLED: "Deleting Cancelled",
 
 
@@ -43,27 +44,27 @@ export default {
         return res;
     },
 
-    processUserDeviceStrings($items) {
-        $items.forEach((dev, key)=> {
-                $items[key].device_desc=dev.device_desc==null ? this.NO_DESCRIPTION : dev.device_desc;
-                $items[key].device_hwid=dev.device_hwid==null ? this.NO_HWID : dev.device_hwid;
-                // this.filteredUserDevices[key].device_pass=dev.device_hwid==null ? DeviceStringConstants.NO_PASS : dev.device_pass;
-            }
+    // processUserDeviceStrings($items) {
+    //     $items.forEach((dev, key)=> {
+    //             $items[key].device_desc=dev.device_desc==null ? this.NO_DESCRIPTION : dev.device_desc;
+    //             $items[key].device_hwid=dev.device_hwid==null ? this.NO_HWID : dev.device_hwid;
+    //             $items[key].device_pass=dev.device_hwid==null ? this.NO_PASS : dev.device_pass;
+    //         }
 
-        );
-    },
+    //     );
+    // },
 
-    processDeviceStrings($items) {
-        $items.forEach((dev, key) => {
-            $items[key].device_desc = dev.device_desc ?? this.NO_DESCRIPTION;
-            $items[key].device_hwid = dev.device_hwid ?? this.NO_HWID;
-            $items[key].device_pass = dev.device_pass ?? this.NO_PASS;
-        });
-    },
+    // processDeviceStrings($items) {
+    //     $items.forEach((dev, key) => {
+    //         $items[key].device_desc = dev.device_desc ?? this.NO_DESCRIPTION;
+    //         $items[key].device_hwid = dev.device_hwid ?? this.NO_HWID;
+    //         $items[key].device_pass = dev.device_pass ?? this.NO_PASS;
+    //     });
+    // },
 
-    processDeviceTypeStrings($items) {
-        $items.forEach((dev, key) => {
-            $items[key].device_type_desc = dev.device_type_desc ?? this.NO_DESCRIPTION;
-        });
-    }
+    // processDeviceTypeStrings($items) {
+    //     $items.forEach((dev, key) => {
+    //         $items[key].device_type_desc = dev.device_type_desc ?? this.NO_DESCRIPTION;
+    //     });
+    // }
 }

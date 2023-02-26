@@ -252,8 +252,8 @@
                             this.devices = this.filteredDevices;
                             console.log(key, id, " - deleted");
                             this.$root.$refs.toaster.setMessage(
-                                MessagesConstants.DELETED_MESSAGE,
-                                MessagesConstants.PROCESS_SUCCESSFULLY
+                                MessagesConstants.PROCESS_SUCCESSFULLY,
+                                MessagesConstants.DELETED_MESSAGE
                             );
                         })
                         .catch((error) => {
@@ -265,15 +265,11 @@
             },
 
             //loading devices dataset via API
-            getDevices() {
-                fetch(APIConstants.api_devices_read)
+            async getDevices() {
+                await fetch(APIConstants.api_devices_read)
                     .then((response) => response.json())
                     .then((response) => {
                         this.filteredDevices = response.data;
-                        //this.processStrings();
-                        //MessagesConstants.processDeviceStrings(this.filteredDevices);
-                        MessagesConstants.processDeviceStrings(this.filteredDevices)
-                        //console.log(response.data);
                         this.devices = this.filteredDevices;
                         this.doSort(this.sortColumn);
                     })
@@ -282,6 +278,7 @@
 
             //setting Device Type to Device
             async setDeviceType($device_type_id, $item) { //attach device type name and image to device
+                console.log($device_type_id, $item)
                 axios
                     .get(APIConstants.api_device_types_read + $device_type_id)
                     .then((resp_type) => {
@@ -316,7 +313,7 @@
                             this.$refs.addDevice.device_hwid + "&device_desc=" +
                             this.$refs.addDevice.device_desc)
                         .then((resp) => {
-                            console.log(resp["data"]);
+                            console.log(resp);
                             let newDevice = {
                                 device_name: resp["data"].device_name,
                                 device_desc: resp["data"].device_desc,
@@ -327,24 +324,27 @@
                                 device_type_image: "",
                                 id: resp["data"].id,
                             }
-                            this.filteredDevices.push(newDevice);
+                            this.filteredDevices.push(newDevice)
+                            this.devices = this.filteredDevices
                             this.$root.$refs.toaster.setMessage(
-                                MessagesConstants.ADDED_MESSAGE,
-                                MessagesConstants.PROCESS_SUCCESSFULLY
+                                MessagesConstants.PROCESS_SUCCESSFULLY,
+                                resp["data"].device_name + ': ' + MessagesConstants.ADDED_MESSAGE
                             )
                         })
                         .then((resp) => {
+
                             this.setDeviceType(
-                                this.filteredDevices[this.filteredDevices.length - 1]
-                                .device_type_id,
+                                this.filteredDevices[this.filteredDevices.length - 1].device_type_id,
                                 this.filteredDevices[this.filteredDevices.length - 1]
                             );
                         })
                         .catch((error) => {
-                            console.log(error.response.data)
+                             console.log(error.response.data)
+
                             this.$root.$refs.toaster.setMessage(
-                                ParsingErrors.getError(error.response.data),
-                                MessagesConstants.INSERTING_ERROR
+                                MessagesConstants.INSERTING_ERROR,
+                                ParsingErrors.getError(error),
+                                ParsingErrors.ERROR_LEVEL_ERROR
                             )
                         })
                 } else {
@@ -355,18 +355,18 @@
             //edit Device
             async doEdit(key, id) {
                 //opening Device Dialogue
-                console.log(key, id);
+                console.log(key, id)
                 const _edit = await this.$refs.addDevice.showDialogue({
                     edit_mode: true,
                     title: DeviceStringConstants.DEVICE_EDITING_TITLE,
                     message: DeviceStringConstants.DEVICE_EDITING_MESSAGE,
                     device_name: this.filteredDevices[key].device_name,
-                    device_desc: this.filteredDevices[key].device_desc,
-                    device_hwid: this.filteredDevices[key].device_hwid,
-                    device_pass: this.filteredDevices[key].device_pass,
+                    device_desc: this.filteredDevices[key].device_desc ?? "",
+                    device_hwid: this.filteredDevices[key].device_hwid ?? "",
+                    device_pass: this.filteredDevices[key].device_pass ?? "",
                     device_type_id: this.filteredDevices[key].device_type_id,
                     okButton: DeviceStringConstants.DEVICE_EDITBUTTON_CAPTION,
-                });
+                })
 
                 if (_edit) {
                     let editDevicePost =
@@ -382,22 +382,22 @@
                         this.$refs.addDevice.device_hwid +
                         "&device_pass=" +
                         this.$refs.addDevice.device_pass;
-                    console.log(editDevicePost);
+                    console.log("Edit post: " + editDevicePost);
 
                     //editing Device via API
+
                     axios
                         .put(editDevicePost)
                         .then((resp) => {
-                            console.log(resp["data"]);
+                            console.log("response: ", resp);
                             this.filteredDevices[key].device_name = resp["data"].device_name;
                             this.filteredDevices[key].device_desc = resp["data"].device_desc;
-                            this.filteredDevices[key].device_type_id =
-                                resp["data"].device_type_id;
+                            this.filteredDevices[key].device_type_id = resp["data"].device_type_id;
                             this.filteredDevices[key].device_hwid = resp["data"].device_hwid;
                             this.filteredDevices[key].device_pass = resp["data"].device_pass;
                             this.$root.$refs.toaster.setMessage(
+                                MessagesConstants.PROCESS_SUCCESSFULLY,
                                 MessagesConstants.EDITED_MESSAGE,
-                                MessagesConstants.PROCESS_SUCCESSFULLY
                             );
                         })
                         .then((resp) => {
@@ -408,8 +408,13 @@
                             );
                         })
                         .catch((error) => {
-                            console.log(error);
-                        });
+                            console.log(error.response.data)
+                            this.$root.$refs.toaster.setMessage(
+                                MessagesConstants.INSERTING_ERROR,
+                                ParsingErrors.getError(error),
+                                ParsingErrors.ERROR_LEVEL_ERROR
+                            )
+                        })
                 } else {
                     console.log(MessagesConstants.EDITING_CANCELLED);
                 }

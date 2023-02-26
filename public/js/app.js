@@ -23276,11 +23276,31 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       message: '',
-      header: ''
+      header: '',
+      isError: false,
+      isWarning: false
     };
   },
   methods: {
     setMessage: function setMessage(_header, _message) {
+      var _errorLevel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+      this.isWarning = false;
+      this.isError = false;
+
+      switch (_errorLevel) {
+        case 1:
+          this.isWarning = true;
+          break;
+
+        case 2:
+          this.isError = true;
+          break;
+
+        default:
+          break;
+      }
+
       this.header = _header;
       this.message = _message;
       $('.toastBasic').toast('show');
@@ -23645,13 +23665,10 @@ var _hoisted_2 = {
   "data-delay": "3000"
 };
 var _hoisted_3 = {
-  "class": "toast-header"
-};
-var _hoisted_4 = {
   "class": "me-auto"
 };
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "button",
   "class": "btn-close ms-2 mb-1",
   "data-bs-dismiss": "toast",
@@ -23662,13 +23679,20 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_6 = {
+var _hoisted_5 = {
   "class": "toast-body"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.header), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["toast-header text-light bg-info", {
+      'bg-danger': $data.isError,
+      'br-warning': $data.isWarning
+    }])
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.header), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <small>Info</small> "), _hoisted_5]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.message), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <small>Info</small> "), _hoisted_4], 2
+  /* CLASS */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.message), 1
   /* TEXT */
   )])]);
 }
@@ -23946,6 +23970,7 @@ __webpack_require__.r(__webpack_exports__);
   INSERTING_CANCELLED: "Inserting Cancelled",
   INSERTING_ERROR: "Inserting Error",
   EDITING_CANCELLED: "Editing Cancelled",
+  EDITING_ERROR: "Editing Error",
   DELETING_CANCELLED: "Deleting Cancelled",
   NO_DESCRIPTION: " no description ",
   NO_HWID: " no device address",
@@ -23963,35 +23988,27 @@ __webpack_require__.r(__webpack_exports__);
     res += !$direction ? this.SORT_ASC : this.SORT_DESC;
     res += ")";
     return res;
-  },
-  processUserDeviceStrings: function processUserDeviceStrings($items) {
-    var _this = this;
+  } // processUserDeviceStrings($items) {
+  //     $items.forEach((dev, key)=> {
+  //             $items[key].device_desc=dev.device_desc==null ? this.NO_DESCRIPTION : dev.device_desc;
+  //             $items[key].device_hwid=dev.device_hwid==null ? this.NO_HWID : dev.device_hwid;
+  //             $items[key].device_pass=dev.device_hwid==null ? this.NO_PASS : dev.device_pass;
+  //         }
+  //     );
+  // },
+  // processDeviceStrings($items) {
+  //     $items.forEach((dev, key) => {
+  //         $items[key].device_desc = dev.device_desc ?? this.NO_DESCRIPTION;
+  //         $items[key].device_hwid = dev.device_hwid ?? this.NO_HWID;
+  //         $items[key].device_pass = dev.device_pass ?? this.NO_PASS;
+  //     });
+  // },
+  // processDeviceTypeStrings($items) {
+  //     $items.forEach((dev, key) => {
+  //         $items[key].device_type_desc = dev.device_type_desc ?? this.NO_DESCRIPTION;
+  //     });
+  // }
 
-    $items.forEach(function (dev, key) {
-      $items[key].device_desc = dev.device_desc == null ? _this.NO_DESCRIPTION : dev.device_desc;
-      $items[key].device_hwid = dev.device_hwid == null ? _this.NO_HWID : dev.device_hwid; // this.filteredUserDevices[key].device_pass=dev.device_hwid==null ? DeviceStringConstants.NO_PASS : dev.device_pass;
-    });
-  },
-  processDeviceStrings: function processDeviceStrings($items) {
-    var _this2 = this;
-
-    $items.forEach(function (dev, key) {
-      var _dev$device_desc, _dev$device_hwid, _dev$device_pass;
-
-      $items[key].device_desc = (_dev$device_desc = dev.device_desc) !== null && _dev$device_desc !== void 0 ? _dev$device_desc : _this2.NO_DESCRIPTION;
-      $items[key].device_hwid = (_dev$device_hwid = dev.device_hwid) !== null && _dev$device_hwid !== void 0 ? _dev$device_hwid : _this2.NO_HWID;
-      $items[key].device_pass = (_dev$device_pass = dev.device_pass) !== null && _dev$device_pass !== void 0 ? _dev$device_pass : _this2.NO_PASS;
-    });
-  },
-  processDeviceTypeStrings: function processDeviceTypeStrings($items) {
-    var _this3 = this;
-
-    $items.forEach(function (dev, key) {
-      var _dev$device_type_desc;
-
-      $items[key].device_type_desc = (_dev$device_type_desc = dev.device_type_desc) !== null && _dev$device_type_desc !== void 0 ? _dev$device_type_desc : _this3.NO_DESCRIPTION;
-    });
-  }
 });
 
 /***/ }),
@@ -24067,7 +24084,7 @@ var APIVersion = 1;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   apiVersion: APIVersion,
   //Device Types CRUD
-  api_device_type_create: apiPreffix + 'device_types/create/',
+  api_device_type_create: apiPreffix + 'device_type/create/',
   api_device_types_read: apiPreffix + 'device_types/read/',
   api_device_type_update: apiPreffix + 'device_type/update/',
   api_device_type_delete: apiPreffix + 'device_type/delete/',

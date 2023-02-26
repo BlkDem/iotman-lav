@@ -1,7 +1,7 @@
 <template>
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div class="toast hide toastBasic" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
-            <div class="toast-header">
+            <div class="toast-header text-light bg-info" :class="{'bg-danger': isError, 'br-warning': isWarning }">
                 <strong class="me-auto">{{ header }}</strong>
                 <!-- <small>Info</small> -->
                 <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close">
@@ -20,12 +20,27 @@ export default {
     data () {
         return {
              message: '',
-             header: ''
+             header: '',
+             isError: false,
+             isWarning: false
         }
     },
 
     methods: {
-        setMessage(_header, _message) {
+        setMessage(_header, _message, _errorLevel=0) {
+            this.isWarning = false
+            this.isError = false
+
+            switch (_errorLevel) {
+                case 1:
+                    this.isWarning = true
+                    break;
+                case 2:
+                    this.isError = true
+                    break;
+                default:
+                    break;
+            }
             this.header = _header;
             this.message = _message;
             $('.toastBasic').toast('show');

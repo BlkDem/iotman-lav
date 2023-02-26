@@ -136,7 +136,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_strings_constants_user_devices_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/strings_constants/user_devices/index */ "./resources/js/components/strings_constants/user_devices/index.js");
 /* harmony import */ var _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../strings_constants/strings.js */ "./resources/js/components/strings_constants/strings.js");
 /* harmony import */ var _rest_api_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../rest_api.js */ "./resources/js/rest_api.js");
-/* harmony import */ var _components_common_js_Sorting_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/common/js/Sorting.js */ "./resources/js/components/common/js/Sorting.js");
+/* harmony import */ var _common_js_Sorting_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/js/Sorting.js */ "./resources/js/components/common/js/Sorting.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
  // import AddDevice from "./AddDevice.vue";
@@ -208,7 +208,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     doSort: function doSort($column) {
-      _components_common_js_Sorting_js__WEBPACK_IMPORTED_MODULE_5__["default"].doSort(this.filteredUserDevices, $column, this.sortDirection);
+      _common_js_Sorting_js__WEBPACK_IMPORTED_MODULE_5__["default"].doSort(this.filteredUserDevices, $column, this.sortDirection);
       this.sortColumn = $column;
     },
     doFilter: function doFilter() {
@@ -230,8 +230,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       fetch(_rest_api_js__WEBPACK_IMPORTED_MODULE_4__["default"].api_user_devices_read).then(function (response) {
         return response.json();
       }).then(function (response) {
-        _this2.filteredUserDevices = response.data;
-        _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_3__["default"].processUserDeviceStrings(_this2.filteredUserDevices);
+        _this2.filteredUserDevices = response.data; //MessagesConstants.processDeviceStrings(this.filteredUserDevices);
+
         _this2.user_devices = _this2.filteredUserDevices;
 
         _this2.doSort(_this2.sortColumn);
@@ -534,7 +534,7 @@ var _hoisted_46 = {
 };
 var _hoisted_47 = ["src"];
 var _hoisted_48 = {
-  "class": "col-sm-1 col-xs-1 col-lg-1"
+  "class": "col-sm-1 col-xs-1 col-lg-1 align-left"
 };
 var _hoisted_49 = {
   "class": "text-info"
@@ -741,7 +741,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   doSort: function doSort($items, $column, $direction) {
-    console.log(this);
+    //console.log(this)
     var column = $column;
     var order = $direction;
     $items.sort(function (a, b) {

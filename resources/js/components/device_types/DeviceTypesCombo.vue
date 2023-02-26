@@ -12,7 +12,7 @@
 import APIConstants from "../../rest_api";
 
 export default {
-    name: 'DeviceTypesCombo',
+    name: 'DeviceTypeCombo',
 
     data (){
         return {
@@ -25,7 +25,7 @@ export default {
 
     props: ["id"],
 
-    created(props) {
+    created() {
         this.getDeviceTypes();
     },
 

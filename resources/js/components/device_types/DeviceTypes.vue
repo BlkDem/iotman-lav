@@ -121,6 +121,7 @@ import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../rest_api.js";;
 import DeviceTypeStringConstants from '../../components/strings_constants/device_types/index';
 import Sorting from "../../components/common/js/Sorting.js";
+import ParsingErrors from "../common/js/ParsingErrors.js";
 
     export default {
         components: {
@@ -231,7 +232,7 @@ import Sorting from "../../components/common/js/Sorting.js";
                         this.device_types = response.data;
                         this.filteredDeviceTypes = response.data;
                         // this.processStrings();
-                        MessagesConstants.processDeviceTypeStrings(this.filteredDeviceTypes)
+                        //MessagesConstants.processDeviceTypeStrings(this.filteredDeviceTypes)
                         this.device_types = this.filteredDeviceTypes;
                         this.doSort(this.sortColumn);
                     })
@@ -247,7 +248,7 @@ import Sorting from "../../components/common/js/Sorting.js";
                 })
 
                 if (confirmDelete) {
-                    axios.delete('/api/device_types/delete/' + id)
+                    axios.delete(APIConstants.api_device_type_delete + id)
                         .then(resp => {
                             this.device_types.splice(key, 1);
                             console.log(key, id, " - deleted");
@@ -266,16 +267,19 @@ import Sorting from "../../components/common/js/Sorting.js";
                     edit_mode: false,
                     title: DeviceTypeStringConstants.DEVICE_TYPE_ADDING_TITLE,
                     message: DeviceTypeStringConstants.DEVICE_TYPE_ADDING_MESSAGE,
-                    device_type_name: DeviceTypeStringConstants.DEVICE_TYPE_NAME_PLACEHOLDER,
-                    device_type_desc: DeviceTypeStringConstants.DEVICE_TYPE_DESC_PLACEHOLDER,
-                    device_type_image: DeviceTypeStringConstants.DEVICE_TYPE_IMAGE_PLACEHOLDER,
+                    device_type_name: "",
+                    device_type_desc: "",
+                    device_type_image: "",
                     okButton: DeviceTypeStringConstants.DEVICE_TYPE_ADDBUTTON_CAPTION,
                 })
 
                 if (_add) {
-                    axios.post('/api/device_types/create/?device_type_name=' + this.$refs.addDeviceType.device_type_name +
-                            '&device_type_image=' + this.$refs.addDeviceType.device_type_image +
-                            '&device_type_desc=' + this.$refs.addDeviceType.device_type_desc)
+                    axios.post(APIConstants.api_device_type_create, {
+                                device_type_name: this.$refs.addDeviceType.device_type_name,
+                                device_type_image: this.$refs.addDeviceType.device_type_image,
+                                device_type_desc: this.$refs.addDeviceType.device_type_desc
+                            }
+                        )
                         .then(resp => {
                             console.log(resp['data']);
                             let newDevice = {
@@ -291,7 +295,11 @@ import Sorting from "../../components/common/js/Sorting.js";
                             );
                         })
                         .catch(error => {
-                            console.log(error);
+                            this.$root.$refs.toaster.setMessage(
+                                MessagesConstants.INSERTING_ERROR,
+                                ParsingErrors.getError(error),
+                                ParsingErrors.ERROR_LEVEL_ERROR
+                            )
                         })
                 } else {
                     console.log(MessagesConstants.INSERTING_CANCELLED);
@@ -310,13 +318,14 @@ import Sorting from "../../components/common/js/Sorting.js";
                 })
 
                 if (_edit) {
-                    let editDeviceTypePost = '/api/device_types/update/' + id +
-                        '/?device_type_name=' + this.$refs.addDeviceType.device_type_name +
-                        '&device_type_image=' + this.$refs.addDeviceType.device_type_image +
-                        '&device_type_desc=' + this.$refs.addDeviceType.device_type_desc;
+                    let editDeviceTypePost = {
+                        device_type_name: this.$refs.addDeviceType.device_type_name,
+                        device_type_image: this.$refs.addDeviceType.device_type_image,
+                        device_type_desc: this.$refs.addDeviceType.device_type_desc
+                    }
                     console.log(editDeviceTypePost);
 
-                    axios.put(editDeviceTypePost)
+                    axios.put(APIConstants.api_device_type_update + id, editDeviceTypePost)
                         .then(resp => {
                             console.log(resp['data']);
                             this.device_types[key].device_type_name = resp['data'].device_type_name;
@@ -331,7 +340,11 @@ import Sorting from "../../components/common/js/Sorting.js";
                             this.$root.$refs.DeviceRef.getDevices();
                         })
                         .catch(error => {
-                            console.log(error);
+                            this.$root.$refs.toaster.setMessage(
+                                MessagesConstants.EDITING_ERROR,
+                                ParsingErrors.getError(error),
+                                ParsingErrors.ERROR_LEVEL_ERROR
+                            )
                         })
                 } else {
                     console.log(MessagesConstants.EDITING_CANCELLED);

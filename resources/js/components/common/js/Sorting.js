@@ -1,6 +1,6 @@
 export default {
     doSort($items, $column, $direction) {
-        console.log(this)
+        //console.log(this)
         const column = $column;
         const order = $direction;
 
