@@ -49,6 +49,16 @@
 				{
 					"name": "Create a device",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"url": {
@@ -244,8 +254,28 @@
 				{
 					"name": "Get a user devices collection",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{local}}/user_devices/read",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"user_devices",
+								"read"
+							]
+						}
 					},
 					"response": []
 				},
