@@ -197,17 +197,27 @@
 				{
 					"name": "Delete a device type",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{local}}/devices/delete/8",
+							"raw": "{{local}}/device_types/delete/14",
 							"host": [
 								"{{local}}"
 							],
 							"path": [
-								"devices",
+								"device_types",
 								"delete",
-								"8"
+								"14"
 							]
 						}
 					},
