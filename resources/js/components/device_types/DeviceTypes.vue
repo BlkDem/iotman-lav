@@ -124,11 +124,13 @@ import Sorting from "../../components/common/js/Sorting.js";
 import ParsingErrors from "../common/js/ParsingErrors.js";
 
     export default {
+
         components: {
             ConfirmDialogue,
             AddDeviceType,
             Paginator
         },
+
         data() {
             return {
                 device_types: [],
@@ -252,7 +254,7 @@ import ParsingErrors from "../common/js/ParsingErrors.js";
                         .then(resp => {
                             this.device_types.splice(key, 1);
                             // console.log(key, id, " - deleted");
-                            this.$root.$refs.toaster.setMessage(MessagesConstants.DELETED_MESSAGE, MessagesConstants.PROCESS_SUCCESSFULLY);
+                            this.$root.$refs.toaster.showMessage(MessagesConstants.DELETED_MESSAGE, MessagesConstants.PROCESS_SUCCESSFULLY);
                         })
                         .catch(error => {
                             console.log(error);
@@ -289,13 +291,15 @@ import ParsingErrors from "../common/js/ParsingErrors.js";
                                 id: resp['data'].id
                             }
                             this.device_types.push(newDevice);
-                            this.$root.$refs.toaster.setMessage(
+                            this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.ADDED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
                             );
                         })
                         .catch(error => {
-                            this.$root.$refs.toaster.setMessage(
+                            //
+                            //const Toaster = app.component('toaster')
+                            this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.INSERTING_ERROR,
                                 ParsingErrors.getError(error),
                                 ParsingErrors.ERROR_LEVEL_ERROR
@@ -333,16 +337,16 @@ import ParsingErrors from "../common/js/ParsingErrors.js";
                             this.device_types[key].device_type_name = resp['data'].device_type_name;
                             this.device_types[key].device_type_desc = resp['data'].device_type_desc;
                             this.device_types[key].device_type_image = resp['data'].device_type_image;
-                            this.$root.$refs.toaster.setMessage(
+                            this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.EDITED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
                             );
                         })
                         .then(resp => {
-                            this.$root.$refs.DeviceRef.getDevices();
+                            // this.$root.$refs.DeviceRef.getDevices();
                         })
                         .catch(error => {
-                            this.$root.$refs.toaster.setMessage(
+                            this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.EDITING_ERROR,
                                 ParsingErrors.getError(error),
                                 ParsingErrors.ERROR_LEVEL_ERROR

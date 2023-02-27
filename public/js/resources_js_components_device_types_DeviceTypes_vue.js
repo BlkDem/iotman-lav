@@ -366,7 +366,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this3.device_types.splice(key, 1); // console.log(key, id, " - deleted");
 
 
-                    _this3.$root.$refs.toaster.setMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].DELETED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].PROCESS_SUCCESSFULLY);
+                    _this3.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].DELETED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].PROCESS_SUCCESSFULLY);
                   })["catch"](function (error) {
                     console.log(error);
                   });
@@ -422,9 +422,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                     _this4.device_types.push(newDevice);
 
-                    _this4.$root.$refs.toaster.setMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].ADDED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].PROCESS_SUCCESSFULLY);
+                    _this4.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].ADDED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].PROCESS_SUCCESSFULLY);
                   })["catch"](function (error) {
-                    _this4.$root.$refs.toaster.setMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].INSERTING_ERROR, _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_7__["default"].getError(error), _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_7__["default"].ERROR_LEVEL_ERROR);
+                    //
+                    //const Toaster = app.component('toaster')
+                    _this4.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].INSERTING_ERROR, _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_7__["default"].getError(error), _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_7__["default"].ERROR_LEVEL_ERROR);
                   });
                 } else {
                   console.log(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].INSERTING_CANCELLED);
@@ -475,11 +477,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this5.device_types[key].device_type_desc = resp['data'].device_type_desc;
                     _this5.device_types[key].device_type_image = resp['data'].device_type_image;
 
-                    _this5.$root.$refs.toaster.setMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].EDITED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].PROCESS_SUCCESSFULLY);
-                  }).then(function (resp) {
-                    _this5.$root.$refs.DeviceRef.getDevices();
+                    _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].EDITED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].PROCESS_SUCCESSFULLY);
+                  }).then(function (resp) {// this.$root.$refs.DeviceRef.getDevices();
                   })["catch"](function (error) {
-                    _this5.$root.$refs.toaster.setMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].EDITING_ERROR, _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_7__["default"].getError(error), _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_7__["default"].ERROR_LEVEL_ERROR);
+                    _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].EDITING_ERROR, _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_7__["default"].getError(error), _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_7__["default"].ERROR_LEVEL_ERROR);
                   });
                 } else {
                   console.log(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].EDITING_CANCELLED);

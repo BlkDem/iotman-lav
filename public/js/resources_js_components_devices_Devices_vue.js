@@ -427,7 +427,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this2.devices = _this2.filteredDevices;
                     console.log(key, id, " - deleted");
 
-                    _this2.$root.$refs.toaster.setMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY, _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].DELETED_MESSAGE);
+                    _this2.$root.$refs.toaster.showMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY, _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].DELETED_MESSAGE);
                   })["catch"](function (error) {
                     console.log(error);
                   });
@@ -541,13 +541,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                     _this4.devices = _this4.filteredDevices;
 
-                    _this4.$root.$refs.toaster.setMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY, resp["data"].device_name + ': ' + _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].ADDED_MESSAGE);
+                    _this4.$root.$refs.toaster.showMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY, resp["data"].device_name + ': ' + _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].ADDED_MESSAGE);
                   }).then(function (resp) {
                     _this4.setDeviceType(_this4.filteredDevices[_this4.filteredDevices.length - 1].device_type_id, _this4.filteredDevices[_this4.filteredDevices.length - 1]);
                   })["catch"](function (error) {
                     console.log(error.response.data);
 
-                    _this4.$root.$refs.toaster.setMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].INSERTING_ERROR, _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__["default"].getError(error), _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__["default"].ERROR_LEVEL_ERROR);
+                    _this4.$root.$refs.toaster.showMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].INSERTING_ERROR, _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__["default"].getError(error), _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__["default"].ERROR_LEVEL_ERROR);
                   });
                 } else {
                   console.log(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].INSERTING_CANCELLED);
@@ -607,7 +607,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this5.filteredDevices[key].device_type_id = resp["data"].device_type_id;
                     _this5.filteredDevices[key].device_hwid = resp["data"].device_hwid; // this.filteredDevices[key].device_pass = resp["data"].device_pass;
 
-                    _this5.$root.$refs.toaster.setMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY, _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].EDITED_MESSAGE); // console.log("devices: ", this.filteredDevices);
+                    _this5.$root.$refs.toaster.showMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY, _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].EDITED_MESSAGE); // console.log("devices: ", this.filteredDevices);
 
                   }).then(function () {
                     _this5.devices = _this5.filteredDevices;
@@ -618,7 +618,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                     console.log((_error$response = error.response) === null || _error$response === void 0 ? void 0 : _error$response.data);
 
-                    _this5.$root.$refs.toaster.setMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].INSERTING_ERROR, _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__["default"].getError(error), _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__["default"].ERROR_LEVEL_ERROR);
+                    _this5.$root.$refs.toaster.showMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].INSERTING_ERROR, _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__["default"].getError(error), _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__["default"].ERROR_LEVEL_ERROR);
                   });
                 } else {
                   console.log(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].EDITING_CANCELLED);

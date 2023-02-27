@@ -17,6 +17,9 @@
 
 <script>
 export default {
+
+    name: "Toaster",
+
     data () {
         return {
              message: '',
@@ -27,7 +30,7 @@ export default {
     },
 
     methods: {
-        setMessage(_header, _message, _errorLevel=0) {
+        showMessage(_header, _message, _errorLevel=0) {
             this.isWarning = false
             this.isError = false
 

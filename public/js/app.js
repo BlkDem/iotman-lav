@@ -23273,6 +23273,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "Toaster",
   data: function data() {
     return {
       message: '',
@@ -23282,7 +23283,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    setMessage: function setMessage(_header, _message) {
+    showMessage: function showMessage(_header, _message) {
       var _errorLevel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
       this.isWarning = false;

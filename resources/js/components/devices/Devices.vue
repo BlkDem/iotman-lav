@@ -251,7 +251,7 @@
                             this.filteredDevices.splice(key, 1);
                             this.devices = this.filteredDevices;
                             console.log(key, id, " - deleted");
-                            this.$root.$refs.toaster.setMessage(
+                            this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.PROCESS_SUCCESSFULLY,
                                 MessagesConstants.DELETED_MESSAGE
                             );
@@ -326,7 +326,7 @@
                             }
                             this.filteredDevices.push(newDevice)
                             this.devices = this.filteredDevices
-                            this.$root.$refs.toaster.setMessage(
+                            this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.PROCESS_SUCCESSFULLY,
                                 resp["data"].device_name + ': ' + MessagesConstants.ADDED_MESSAGE
                             )
@@ -341,7 +341,7 @@
                         .catch((error) => {
                              console.log(error.response.data)
 
-                            this.$root.$refs.toaster.setMessage(
+                            this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.INSERTING_ERROR,
                                 ParsingErrors.getError(error),
                                 ParsingErrors.ERROR_LEVEL_ERROR
@@ -387,7 +387,7 @@
                             this.filteredDevices[key].device_type_id = resp["data"].device_type_id;
                             this.filteredDevices[key].device_hwid = resp["data"].device_hwid;
                             // this.filteredDevices[key].device_pass = resp["data"].device_pass;
-                            this.$root.$refs.toaster.setMessage(
+                            this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.PROCESS_SUCCESSFULLY,
                                 MessagesConstants.EDITED_MESSAGE,
                             );
@@ -402,7 +402,7 @@
                         })
                         .catch((error) => {
                             console.log(error.response?.data)
-                            this.$root.$refs.toaster.setMessage(
+                            this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.INSERTING_ERROR,
                                 ParsingErrors.getError(error),
                                 ParsingErrors.ERROR_LEVEL_ERROR
