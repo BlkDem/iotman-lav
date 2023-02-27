@@ -309,7 +309,7 @@
                             APIConstants.api_device_create + "?device_name=" +
                             this.$refs.addDevice.device_name + "&device_type_id=" +
                             this.$refs.addDevice.device_type_id + "&device_pass=" +
-                            this.$refs.addDevice.device_pass + "&device_hwid=" +
+                            // this.$refs.addDevice.device_pass + "&device_hwid=" +
                             this.$refs.addDevice.device_hwid + "&device_desc=" +
                             this.$refs.addDevice.device_desc)
                         .then((resp) => {
@@ -317,7 +317,7 @@
                             let newDevice = {
                                 device_name: resp["data"].device_name,
                                 device_desc: resp["data"].device_desc,
-                                device_pass: resp["data"].device_pass,
+                                // device_pass: resp["data"].device_pass,
                                 device_hwid: resp["data"].device_hwid,
                                 device_type_id: resp["data"].device_type_id,
                                 device_type_name: "",
@@ -363,44 +363,37 @@
                     device_name: this.filteredDevices[key].device_name,
                     device_desc: this.filteredDevices[key].device_desc ?? "",
                     device_hwid: this.filteredDevices[key].device_hwid ?? "",
-                    device_pass: this.filteredDevices[key].device_pass ?? "",
+                    // device_pass: this.filteredDevices[key].device_pass ?? "",
                     device_type_id: this.filteredDevices[key].device_type_id,
                     okButton: DeviceStringConstants.DEVICE_EDITBUTTON_CAPTION,
                 })
 
                 if (_edit) {
-                    let editDevicePost =
-                        APIConstants.api_device_update +
-                        id +
-                        "/?device_name=" +
-                        this.$refs.addDevice.device_name +
-                        "&device_type_id=" +
-                        this.$refs.addDevice.device_type_id +
-                        "&device_desc=" +
-                        this.$refs.addDevice.device_desc +
-                        "&device_hwid=" +
-                        this.$refs.addDevice.device_hwid +
-                        "&device_pass=" +
-                        this.$refs.addDevice.device_pass;
-                    console.log("Edit post: " + editDevicePost);
+                    let editDevicePost = {
+                            device_name: this.$refs.addDevice.device_name,
+                            device_type_id: this.$refs.addDevice.device_type_id,
+                            device_desc: this.$refs.addDevice.device_desc,
+                            device_hwid: this.$refs.addDevice.device_hwid
+                        }
 
                     //editing Device via API
 
                     axios
-                        .put(editDevicePost)
+                        .put(APIConstants.api_device_update + id, editDevicePost)
                         .then((resp) => {
-                            console.log("response: ", resp);
+                            // console.log("response.data: ", resp.data);
                             this.filteredDevices[key].device_name = resp["data"].device_name;
                             this.filteredDevices[key].device_desc = resp["data"].device_desc;
                             this.filteredDevices[key].device_type_id = resp["data"].device_type_id;
                             this.filteredDevices[key].device_hwid = resp["data"].device_hwid;
-                            this.filteredDevices[key].device_pass = resp["data"].device_pass;
+                            // this.filteredDevices[key].device_pass = resp["data"].device_pass;
                             this.$root.$refs.toaster.setMessage(
                                 MessagesConstants.PROCESS_SUCCESSFULLY,
                                 MessagesConstants.EDITED_MESSAGE,
                             );
+                            // console.log("devices: ", this.filteredDevices);
                         })
-                        .then((resp) => {
+                        .then(() => {
                             this.devices = this.filteredDevices;
                             this.setDeviceType(
                                 this.filteredDevices[key].device_type_id,
@@ -408,7 +401,7 @@
                             );
                         })
                         .catch((error) => {
-                            console.log(error.response.data)
+                            console.log(error.response?.data)
                             this.$root.$refs.toaster.setMessage(
                                 MessagesConstants.INSERTING_ERROR,
                                 ParsingErrors.getError(error),

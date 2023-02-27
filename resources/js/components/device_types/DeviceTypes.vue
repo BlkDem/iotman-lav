@@ -251,7 +251,7 @@ import ParsingErrors from "../common/js/ParsingErrors.js";
                     axios.delete(APIConstants.api_device_type_delete + id)
                         .then(resp => {
                             this.device_types.splice(key, 1);
-                            console.log(key, id, " - deleted");
+                            // console.log(key, id, " - deleted");
                             this.$root.$refs.toaster.setMessage(MessagesConstants.DELETED_MESSAGE, MessagesConstants.PROCESS_SUCCESSFULLY);
                         })
                         .catch(error => {
@@ -281,7 +281,7 @@ import ParsingErrors from "../common/js/ParsingErrors.js";
                             }
                         )
                         .then(resp => {
-                            console.log(resp['data']);
+                            // console.log(resp['data']);
                             let newDevice = {
                                 device_type_name: resp['data'].device_type_name,
                                 device_type_desc: resp['data'].device_type_desc,
@@ -307,15 +307,17 @@ import ParsingErrors from "../common/js/ParsingErrors.js";
 
             },
             async doEditType(key, id) {
-                const _edit = await this.$refs.addDeviceType.showDialogue({
-                    edit_mode: true,
-                    title: DeviceTypeStringConstants.DEVICE_TYPE_EDITING_TITLE,
-                    message: DeviceTypeStringConstants.DEVICE_TYPE_EDITING_MESSAGE,
-                    device_type_name: this.device_types[key].device_type_name,
-                    device_type_desc: this.device_types[key].device_type_desc,
-                    device_type_image: this.device_types[key].device_type_image,
-                    okButton: DeviceTypeStringConstants.DEVICE_TYPE_EDITBUTTON_CAPTION,
-                })
+                const _edit = await this.$refs.addDeviceType.showDialogue(
+                    {
+                        edit_mode: true,
+                        title: DeviceTypeStringConstants.DEVICE_TYPE_EDITING_TITLE,
+                        message: DeviceTypeStringConstants.DEVICE_TYPE_EDITING_MESSAGE,
+                        device_type_name: this.device_types[key].device_type_name,
+                        device_type_desc: this.device_types[key].device_type_desc,
+                        device_type_image: this.device_types[key].device_type_image,
+                        okButton: DeviceTypeStringConstants.DEVICE_TYPE_EDITBUTTON_CAPTION,
+                    }
+                )
 
                 if (_edit) {
                     let editDeviceTypePost = {
@@ -323,11 +325,11 @@ import ParsingErrors from "../common/js/ParsingErrors.js";
                         device_type_image: this.$refs.addDeviceType.device_type_image,
                         device_type_desc: this.$refs.addDeviceType.device_type_desc
                     }
-                    console.log(editDeviceTypePost);
+                    //console.log(editDeviceTypePost);
 
                     axios.put(APIConstants.api_device_type_update + id, editDeviceTypePost)
                         .then(resp => {
-                            console.log(resp['data']);
+                            // console.log(resp['data']);
                             this.device_types[key].device_type_name = resp['data'].device_type_name;
                             this.device_types[key].device_type_desc = resp['data'].device_type_desc;
                             this.device_types[key].device_type_image = resp['data'].device_type_image;

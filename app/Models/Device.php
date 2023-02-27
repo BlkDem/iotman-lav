@@ -43,7 +43,7 @@ class Device extends Model
         'id',
         'device_name',
         'device_desc',
-        'device_pass',
+        // 'device_pass',
         'device_hwid',
         'device_type_id',
         'device_type_name',
@@ -53,11 +53,11 @@ class Device extends Model
 
     public function DeviceTypes()
     {
-        return $this->hasMany(DeviceType::class);
+        return $this->hasOne(DeviceType::class);
     }
 
-    public function DeviceType()
-    {
-      return $this->belongsTo(DeviceType::class);
-    }
+    // public function DeviceType()
+    // {
+    //   return $this->belongsTo(DeviceType::class);
+    // }
 }

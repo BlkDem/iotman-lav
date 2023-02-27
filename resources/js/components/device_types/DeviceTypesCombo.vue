@@ -14,16 +14,15 @@ import APIConstants from "../../rest_api";
 export default {
     name: 'DeviceTypeCombo',
 
+    props: [
+        "id"
+    ],
+
     data (){
         return {
-        // Parameters that change depending on the type of dialogue
-            title: undefined,
             items: [],
-            //id: undefined,
         }
     },
-
-    props: ["id"],
 
     created() {
         this.getDeviceTypes();

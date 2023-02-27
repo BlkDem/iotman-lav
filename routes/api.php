@@ -38,7 +38,7 @@ Route::delete('/users/delete/{deleteUser}', [UserController::class, 'destroy']);
 
 Route::post('/device_type/create', [DeviceTypeController::class, 'store']);
 Route::get('/device_types/read', [DeviceTypeController::class, 'index']);
-Route::get('/device_type/read/{id}', [DeviceTypeController::class, 'show']);
+Route::get('/device_types/read/{id}', [DeviceTypeController::class, 'show']);
 Route::put('/device_type/update/{updateDeviceType}', [DeviceTypeController::class, 'update']);
 Route::delete('/device_types/delete/{id}', [DeviceTypeController::class, 'destroy']);
 

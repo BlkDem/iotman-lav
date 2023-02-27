@@ -363,9 +363,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (confirmDelete) {
                   axios["delete"](_rest_api_js__WEBPACK_IMPORTED_MODULE_4__["default"].api_device_type_delete + id).then(function (resp) {
-                    _this3.device_types.splice(key, 1);
+                    _this3.device_types.splice(key, 1); // console.log(key, id, " - deleted");
 
-                    console.log(key, id, " - deleted");
 
                     _this3.$root.$refs.toaster.setMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].DELETED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].PROCESS_SUCCESSFULLY);
                   })["catch"](function (error) {
@@ -413,7 +412,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     device_type_image: _this4.$refs.addDeviceType.device_type_image,
                     device_type_desc: _this4.$refs.addDeviceType.device_type_desc
                   }).then(function (resp) {
-                    console.log(resp['data']);
+                    // console.log(resp['data']);
                     var newDevice = {
                       device_type_name: resp['data'].device_type_name,
                       device_type_desc: resp['data'].device_type_desc,
@@ -468,10 +467,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     device_type_name: _this5.$refs.addDeviceType.device_type_name,
                     device_type_image: _this5.$refs.addDeviceType.device_type_image,
                     device_type_desc: _this5.$refs.addDeviceType.device_type_desc
-                  };
-                  console.log(editDeviceTypePost);
+                  }; //console.log(editDeviceTypePost);
+
                   axios.put(_rest_api_js__WEBPACK_IMPORTED_MODULE_4__["default"].api_device_type_update + id, editDeviceTypePost).then(function (resp) {
-                    console.log(resp['data']);
+                    // console.log(resp['data']);
                     _this5.device_types[key].device_type_name = resp['data'].device_type_name;
                     _this5.device_types[key].device_type_desc = resp['data'].device_type_desc;
                     _this5.device_types[key].device_type_image = resp['data'].device_type_image;
