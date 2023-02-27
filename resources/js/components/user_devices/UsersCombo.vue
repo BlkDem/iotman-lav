@@ -13,7 +13,7 @@
 import APIConstants from "../../rest_api";
 
 export default {
-    name: 'UserDeviceCombo',
+    name: 'UserCombo',
 
         data() {
             return {
@@ -24,11 +24,11 @@ export default {
         props: ["id"],
 
         created(props) {
-            this.getUserDevice();
+            this.getUsers();
         },
 
         methods: {
-            async getUserDevice() {
+            async getUsers() {
                 await fetch(APIConstants.api_users_read)
                     .then(response => response.json())
                     .then(response => {
@@ -36,6 +36,10 @@ export default {
                     })
                     .catch(err => console.log(err));
             },
+
+            getUserID() {
+                return this.id
+            }
         },
     }
 

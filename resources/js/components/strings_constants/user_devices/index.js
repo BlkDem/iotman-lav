@@ -4,7 +4,7 @@ export default {
     USER_DEVICE_DELETING_MESSAGE: "Are you sure you want to delete this user device?",
     USER_DEVICE_DATA_DESCRIPTION: "User devices ready for use",
 
-    UEVICE_ADDING_TITLE: 'Adding User Device',
+    USER_DEVICE_ADDING_TITLE: 'Adding User Device',
     USER_DEVICE_ADDING_MESSAGE: 'Adding User Device',
     USER_DEVICE_EDITING_TITLE: 'Editing User Device',
     USER_DEVICE_EDITING_MESSAGE: 'Editing User Device',

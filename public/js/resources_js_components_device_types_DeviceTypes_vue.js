@@ -236,7 +236,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-;
 
 
 
@@ -354,7 +353,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.next = 2;
                 return _this3.$refs.confirmDialogue.showDialogue({
                   title: _components_strings_constants_device_types_index__WEBPACK_IMPORTED_MODULE_5__["default"].DEVICE_TYPE_DELETING_CAPTION,
-                  message: _components_strings_constants_device_types_index__WEBPACK_IMPORTED_MODULE_5__["default"].DEVICE_TYPE_DELETING_MESSAGE + '"' + _this3.device_types[key].device_type_name + '"?',
+                  message: _components_strings_constants_device_types_index__WEBPACK_IMPORTED_MODULE_5__["default"].DEVICE_TYPE_DELETING_MESSAGE + '"' + _this3.filteredDeviceTypes[key].device_type_name + '"?',
                   okButton: _components_strings_constants_device_types_index__WEBPACK_IMPORTED_MODULE_5__["default"].DEVICE_TYPE_DELETING_CAPTION
                 });
 
@@ -363,8 +362,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (confirmDelete) {
                   axios["delete"](_rest_api_js__WEBPACK_IMPORTED_MODULE_4__["default"].api_device_type_delete + id).then(function (resp) {
-                    _this3.device_types.splice(key, 1); // console.log(key, id, " - deleted");
+                    _this3.filteredDeviceTypes.splice(key, 1);
 
+                    _this3.device_types = _this3.filteredDeviceTypes; // console.log(key, id, " - deleted");
 
                     _this3.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].DELETED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].PROCESS_SUCCESSFULLY);
                   })["catch"](function (error) {

@@ -118,7 +118,7 @@ import ConfirmDialogue from '../../components/common/ConfirmDialogue.vue';
 import AddDeviceType from './AddDeviceType.vue';
 import Paginator from '../../components/common/Paginator.vue';
 import MessagesConstants from '../strings_constants/strings'
-import APIConstants from "../../rest_api.js";;
+import APIConstants from "../../rest_api.js";
 import DeviceTypeStringConstants from '../../components/strings_constants/device_types/index';
 import Sorting from "../../components/common/js/Sorting.js";
 import ParsingErrors from "../common/js/ParsingErrors.js";
@@ -245,14 +245,15 @@ import ParsingErrors from "../common/js/ParsingErrors.js";
 
                 const confirmDelete = await this.$refs.confirmDialogue.showDialogue({
                     title: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION,
-                    message: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_MESSAGE + '"' + this.device_types[key].device_type_name + '"?',
+                    message: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_MESSAGE + '"' + this.filteredDeviceTypes[key].device_type_name + '"?',
                     okButton: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION,
                 })
 
                 if (confirmDelete) {
                     axios.delete(APIConstants.api_device_type_delete + id)
                         .then(resp => {
-                            this.device_types.splice(key, 1);
+                            this.filteredDeviceTypes.splice(key, 1);
+                            this.device_types = this.filteredDeviceTypes
                             // console.log(key, id, " - deleted");
                             this.$root.$refs.toaster.showMessage(MessagesConstants.DELETED_MESSAGE, MessagesConstants.PROCESS_SUCCESSFULLY);
                         })

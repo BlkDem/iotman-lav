@@ -40,7 +40,7 @@ Route::post('/device_type/create', [DeviceTypeController::class, 'store']);
 Route::get('/device_types/read', [DeviceTypeController::class, 'index']);
 Route::get('/device_types/read/{id}', [DeviceTypeController::class, 'show']);
 Route::put('/device_type/update/{updateDeviceType}', [DeviceTypeController::class, 'update']);
-Route::delete('/device_types/delete/{id}', [DeviceTypeController::class, 'destroy']);
+Route::delete('/device_type/delete/{id}', [DeviceTypeController::class, 'destroy']);
 
 //CRUD routes for table 'devices'
 
@@ -52,11 +52,11 @@ Route::delete('/devices/delete/{id}', [DeviceController::class, 'destroy']);
 
 //CRUD routes for table 'user_devices'
 
-Route::post('/user_devices/create', [DeviceUserController::class, 'store']);
+Route::post('/user_device/create', [DeviceUserController::class, 'store']);
 Route::get('/user_devices/read', [DeviceUsersViewController::class, 'index']);
 Route::get('/user_devices/read/{device_user_id}', [DeviceUsersViewController::class, 'show']);
-Route::put('/user_devices/update/{updateDeviceUser}', [DeviceUserController::class, 'update']);
-Route::delete('/user_devices/delete/{id}', [DeviceUserController::class, 'destroy']);
+Route::put('/user_device/update/{updateDeviceUser}', [DeviceUserController::class, 'update']);
+Route::delete('/user_device/delete/{id}', [DeviceUserController::class, 'destroy']);
 Route::get('/user_devices/show', [DeviceUserController::class, 'UserDevices']);
 
 //User Devices Count
