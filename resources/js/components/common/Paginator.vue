@@ -1,8 +1,8 @@
 <template>
     <div class="flex-right py-4">
         <ul class="pagination text-center">
-            <li class="page-item page-link disabled">
-                Total records: {{ recordsCount }}
+            <li class="page-item disabled">
+                <button class="page-link" >Total records: {{ recordsCount }} </button>
             </li>
         </ul>
         <div class="px-2">

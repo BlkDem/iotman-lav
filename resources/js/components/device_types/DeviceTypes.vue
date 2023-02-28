@@ -276,7 +276,7 @@ import ParsingErrors from "../common/js/ParsingErrors.js";
                             console.log(error);
                         })
                 } else {
-                    console.log(MessagesConstants.DELETING_CANCELLED);
+                    console.log(MessagesConstants.DELETING_CANCELLED)
                 }
             },
 
@@ -310,7 +310,7 @@ import ParsingErrors from "../common/js/ParsingErrors.js";
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.ADDED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
-                            );
+                            )
                         })
                         .catch(error => {
                             //
