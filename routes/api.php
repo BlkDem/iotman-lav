@@ -80,7 +80,6 @@ Route::get('/user_device_count/read', [UserDevicesCountController::class, 'index
 Route::get('/user_device_count/read/{id}', [UserDevicesCountController::class, 'show']);
 
 //Auth Userinfo
-
 Route::get('/authuser', [UserinfoController::class, 'show']);
 Route::get('/user', [AuthController::class, 'UserInfo']);
 Route::get('/username', [AuthController::class, 'GetUserName']);
