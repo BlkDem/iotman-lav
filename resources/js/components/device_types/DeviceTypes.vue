@@ -239,7 +239,7 @@ import ParsingErrors from "../common/js/ParsingErrors.js";
 
                         this.$refs.paginatorDeviceTypes.setPaginator(
                             {
-                                itemsCount: response.paginator.PagesCount,
+                                pagesCount: response.paginator.PagesCount,
                                 currentPage: response.paginator.CurrentPage,
                                 itemsPerPage: response.paginator.ItemsPerPage,
                                 recordsCount: response.paginator.RecordsCount

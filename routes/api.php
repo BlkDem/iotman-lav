@@ -22,17 +22,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/user/{name}', function ($name) {
+//     //
+// })->where('name', '[A-Za-z]+');
+
 //Login
 Route::post('/login', [AuthController::class, 'signin']);
 
 //CRUD routes for table 'users'
 Route::middleware('auth:sanctum')->group( function () {
 
-Route::post('/users/create', [UserController::class, 'store']);
-Route::get('/users/read', [UserController::class, 'index']);
-Route::get('/users/read/{id}', [UserController::class, 'show']);
-Route::put('/users/update/{updateUser}', [UserController::class, 'update']);
-Route::delete('/users/delete/{deleteUser}', [UserController::class, 'destroy']);
+Route::controller(UserController::class)->group(function () {
+    Route::post('/users/create', 'store');
+    Route::get('/users/read', 'index');
+    Route::get('/users/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get('/users/read/{id}', 'show');
+    Route::put('/users/update/{updateUser}', 'update');
+    Route::delete('/users/delete/{deleteUser}', 'destroy');
+});
+
+// Route::post('/users/create', [UserController::class, 'store']);
+// Route::get('/users/read', [UserController::class, 'index']);
+// Route::get('/users/read/{id}', [UserController::class, 'show']);
+// Route::put('/users/update/{updateUser}', [UserController::class, 'update']);
+// Route::delete('/users/delete/{deleteUser}', [UserController::class, 'destroy']);
 
 //CRUD routes for table 'device_types'
 

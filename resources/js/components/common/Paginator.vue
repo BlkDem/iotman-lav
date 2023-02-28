@@ -23,16 +23,17 @@
 
         </div>
         <ul class="pagination text-center">
-            <li class="page-item" :class="{'disabled': (currentPage==1)}">
-                <button class="page-link" href="#">&laquo;</button>
+            <li class="page-item" :class="{'disabled': (currentPage==1)}" v-on:click="setPage(1, itemsPerPage)">
+                <button class="page-link" >&laquo;</button>
             </li>
             <li class="page-item" :class="{'disabled': (page==currentPage)}"
-                 v-for="(page, key) in pages"
+                 v-for="(page, key) in pagesCount"
                  v-bind:key="key" v-bind:page="page">
-                    <button class="page-link" href="#" v-on:click="setPage(page, itemsPerPage)">{{ page }}</button>
+                    <button class="page-link" v-on:click="setPage(page, itemsPerPage)">{{ page }}</button>
             </li>
             <li class="page-item">
-                <button class="page-link" :class="{'disabled': (pages==currentPage)}" href="#">&raquo;</button>
+                <button class="page-link" :class="{'disabled': (pagesCount==currentPage)}"
+                    v-on:click="setPage(pagesCount, itemsPerPage)">&raquo;</button>
             </li>
         </ul>
     </div>
@@ -52,7 +53,7 @@ export default {
 
     data() {
         return {
-            pages: 0,
+            pagesCount: 0,
             currentPage: 0,
             itemsPerPage: 0,
             recordsCount: 0,
@@ -74,7 +75,7 @@ export default {
 
     methods: {
         setPaginator(optsAdd = {}) {
-            this.pages = optsAdd.itemsCount
+            this.pagesCount = optsAdd.pagesCount
             this.currentPage = optsAdd.currentPage
             this.itemsPerPage = optsAdd.itemsPerPage
             this.recordsCount = optsAdd.recordsCount

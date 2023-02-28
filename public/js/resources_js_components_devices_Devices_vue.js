@@ -97,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
   // ],
   data: function data() {
     return {
-      pages: 0,
+      pagesCount: 0,
       currentPage: 0,
       itemsPerPage: 0,
       recordsCount: 0,
@@ -114,7 +114,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     setPaginator: function setPaginator() {
       var optsAdd = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      this.pages = optsAdd.itemsCount;
+      this.pagesCount = optsAdd.pagesCount;
       this.currentPage = optsAdd.currentPage;
       this.itemsPerPage = optsAdd.itemsPerPage;
       this.recordsCount = optsAdd.recordsCount; //console.log(this.pages, this.currentPage)
@@ -502,7 +502,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this3.filteredDevices = response.data; //Paginator setup
 
                   _this3.$refs.paginatorDevices.setPaginator({
-                    itemsCount: response.paginator.PagesCount,
+                    pagesCount: response.paginator.PagesCount,
                     currentPage: response.paginator.CurrentPage,
                     itemsPerPage: response.paginator.ItemsPerPage,
                     recordsCount: response.paginator.RecordsCount
@@ -799,8 +799,7 @@ var _hoisted_8 = {
 };
 
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "page-link",
-  href: "#"
+  "class": "page-link"
 }, "«", -1
 /* HOISTED */
 );
@@ -850,10 +849,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["page-item", {
       'disabled': $data.currentPage == 1
-    }])
+    }]),
+    onClick: _cache[3] || (_cache[3] = function ($event) {
+      return $options.setPage(1, $data.itemsPerPage);
+    })
   }, _hoisted_10, 2
   /* CLASS */
-  ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.pages, function (page, key) {
+  ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.pagesCount, function (page, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["page-item", {
         'disabled': page == $data.currentPage
@@ -862,7 +864,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       page: page
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "page-link",
-      href: "#",
       onClick: function onClick($event) {
         return $options.setPage(page, $data.itemsPerPage);
       }
@@ -875,9 +876,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["page-link", {
-      'disabled': $data.pages == $data.currentPage
+      'disabled': $data.pagesCount == $data.currentPage
     }]),
-    href: "#"
+    onClick: _cache[4] || (_cache[4] = function ($event) {
+      return $options.setPage($data.pagesCount, $data.itemsPerPage);
+    })
   }, "»", 2
   /* CLASS */
   )])])]);

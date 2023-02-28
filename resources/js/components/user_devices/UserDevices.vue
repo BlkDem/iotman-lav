@@ -228,7 +228,7 @@ import Sorting from "../common/js/Sorting.js";
                         //MessagesConstants.processDeviceStrings(this.filteredUserDevices);
                         this.$refs.paginatorUserDevices.setPaginator(
                             {
-                                itemsCount: response.paginator.PagesCount,
+                                pagesCount: response.paginator.PagesCount,
                                 currentPage: response.paginator.CurrentPage,
                                 itemsPerPage: response.paginator.ItemsPerPage,
                                 recordsCount: response.paginator.RecordsCount
