@@ -34,9 +34,10 @@ class ValidatorRules extends Validator
 
             case 'users':
                 $_rulesArray = [
-                    'name' => 'required|min:3',
-                    'email' => 'required|min:6',
-                    'password' => 'required|min:8',
+                    'name' => 'required',
+                    'email' => 'required|email',
+                    'password' => 'required',
+                    'confirm_password' => 'required|same:password',
                 ];
                 break;
 

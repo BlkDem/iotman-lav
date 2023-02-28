@@ -173,7 +173,7 @@
                 localStorage.DeviceCompactView = this.compactView;
             }
             this.dataDescription = DeviceStringConstants.DEVICE_DATA_DESCRIPTION; //device dataset description
-            this.getDevices(); //loading devices dataset via API
+            this.getData(); //loading devices dataset via API
             console.log("API version: ", APIConstants.apiVersion);
         },
 
@@ -265,11 +265,22 @@
             },
 
             //loading devices dataset via API
-            async getDevices() {
-                await fetch(APIConstants.api_devices_read)
+            async getData(_currentPage=1, _itemsPerPage=5) {
+                await fetch(APIConstants.api_devices_read_page + _currentPage + "/" + _itemsPerPage)
                     .then((response) => response.json())
                     .then((response) => {
                         this.filteredDevices = response.data;
+
+                        //Paginator setup
+                        this.$refs.paginatorDevices.setPaginator(
+                            {
+                                itemsCount: response.paginator.PagesCount,
+                                currentPage: response.paginator.CurrentPage,
+                                itemsPerPage: response.paginator.ItemsPerPage,
+                                recordsCount: response.paginator.RecordsCount
+                            }
+                        )
+
                         this.devices = this.filteredDevices;
                         this.doSort(this.sortColumn);
                     })
@@ -305,13 +316,13 @@
                 if (_add) {
                     //creating Device via API
                     axios
-                        .post(
-                            APIConstants.api_device_create + "?device_name=" +
-                            this.$refs.addDevice.device_name + "&device_type_id=" +
-                            this.$refs.addDevice.device_type_id + "&device_pass=" +
-                            // this.$refs.addDevice.device_pass + "&device_hwid=" +
-                            this.$refs.addDevice.device_hwid + "&device_desc=" +
-                            this.$refs.addDevice.device_desc)
+                        .post(APIConstants.api_device_create, {
+                                device_name: this.$refs.addDevice.device_name,
+                                device_type_id: this.$refs.addDevice.device_type_id,
+                                device_hwid:  this.$refs.addDevice.device_hwid,
+                                device_desc: this.$refs.addDevice.device_desc
+                            }
+                        )
                         .then((resp) => {
                             console.log(resp);
                             let newDevice = {

@@ -11,13 +11,28 @@ use App\Http\Controllers\PaginatorController;
 
 class DeviceTypeController extends BaseController
 {
-    public function index($currentPage, $itemsPerPage){
+
+
+    public function index(){
+
         $res = DeviceType::orderBy('device_type_name', 'asc')->get();
-        $paginator = PaginatorController::Paginate($res->count(), (int)($itemsPerPage ?? 10), $currentPage);
-        return $this->sendResponse($res, "Devices List", $paginator);
-        //return response()->json(['data' => DeviceType::orderBy('device_type_name', 'asc')->get()], 200);
-        // return response()->json(['data' => DeviceType::get()], 200);
-        //return response()->json(DeviceType::get(), 200);
+
+        $paginator = PaginatorController::Paginate($res->count(), 1, 1);
+
+        return $this->sendResponse($res, "Device Types List", $paginator);
+    }
+
+    public function page($currentPage=0, $itemsPerPage=10){
+
+        $page = (int)$currentPage;
+
+        $offset = $itemsPerPage*--$page;
+        $res = DeviceType::limit($itemsPerPage)->offset($offset)->orderBy('device_type_name', 'asc')->get();
+        $total = DeviceType::get();
+
+        $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
+
+        return $this->sendResponse($res, "Device Types List", $paginator);
     }
 
     public function show($id) {

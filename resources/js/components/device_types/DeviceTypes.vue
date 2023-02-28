@@ -166,7 +166,7 @@ import ParsingErrors from "../common/js/ParsingErrors.js";
             }
             this.dataDescription = DeviceTypeStringConstants.DEVICE_TYPE_DATA_DESCRIPTION; //device dataset description
 
-            this.getDeviceTypes();
+            this.getData();
         },
 
         mounted() {
@@ -227,14 +227,25 @@ import ParsingErrors from "../common/js/ParsingErrors.js";
                 // return res;
             },
 
-            getDeviceTypes() {
-                fetch(APIConstants.api_device_types_read)
+            async getData(_currentPage=1, _itemsPerPage=5) {
+                fetch(APIConstants.api_devices_types_read_page + _currentPage + "/" + _itemsPerPage)
                     .then(response => response.json())
                     .then(response => {
                         this.device_types = response.data;
                         this.filteredDeviceTypes = response.data;
                         // this.processStrings();
                         //MessagesConstants.processDeviceTypeStrings(this.filteredDeviceTypes)
+
+
+                        this.$refs.paginatorDeviceTypes.setPaginator(
+                            {
+                                itemsCount: response.paginator.PagesCount,
+                                currentPage: response.paginator.CurrentPage,
+                                itemsPerPage: response.paginator.ItemsPerPage,
+                                recordsCount: response.paginator.RecordsCount
+                            }
+                        )
+
                         this.device_types = this.filteredDeviceTypes;
                         this.doSort(this.sortColumn);
                     })
@@ -245,7 +256,8 @@ import ParsingErrors from "../common/js/ParsingErrors.js";
 
                 const confirmDelete = await this.$refs.confirmDialogue.showDialogue({
                     title: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION,
-                    message: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_MESSAGE + '"' + this.filteredDeviceTypes[key].device_type_name + '"?',
+                    message: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_MESSAGE + '"' +
+                    this.filteredDeviceTypes[key].device_type_name + '"?',
                     okButton: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION,
                 })
 
@@ -255,7 +267,10 @@ import ParsingErrors from "../common/js/ParsingErrors.js";
                             this.filteredDeviceTypes.splice(key, 1);
                             this.device_types = this.filteredDeviceTypes
                             // console.log(key, id, " - deleted");
-                            this.$root.$refs.toaster.showMessage(MessagesConstants.DELETED_MESSAGE, MessagesConstants.PROCESS_SUCCESSFULLY);
+                            this.$root.$refs.toaster.showMessage(
+                                MessagesConstants.DELETED_MESSAGE,
+                                MessagesConstants.PROCESS_SUCCESSFULLY
+                            )
                         })
                         .catch(error => {
                             console.log(error);

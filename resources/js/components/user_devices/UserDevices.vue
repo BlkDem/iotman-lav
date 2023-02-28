@@ -116,7 +116,7 @@
                 </div>
             </div>
         </div>
-        <Paginator ref="paginatorDevices"></Paginator>
+        <Paginator ref="paginatorUserDevices"></Paginator>
     </div>
 </template>
 
@@ -172,7 +172,7 @@ import Sorting from "../common/js/Sorting.js";
             // }
 
             this.dataDescription = UserDeviceStringConstants.USER_DEVICE_DATA_DESCRIPTION; //device dataset description
-            this.getUserDevices();
+            this.getData();
         },
 
         mounted() {
@@ -220,12 +220,21 @@ import Sorting from "../common/js/Sorting.js";
                 }
             },
 
-            getUserDevices() {
-                fetch(APIConstants.api_user_devices_read)
-                    .then((response) => response.json())
+            async getData(_currentPage=1, _itemsPerPage=5) {
+                fetch(APIConstants.api_user_devices_read_page + _currentPage + "/" + _itemsPerPage)
+                                    .then((response) => response.json())
                     .then((response) => {
                         this.filteredUserDevices = response.data;
                         //MessagesConstants.processDeviceStrings(this.filteredUserDevices);
+                        this.$refs.paginatorUserDevices.setPaginator(
+                            {
+                                itemsCount: response.paginator.PagesCount,
+                                currentPage: response.paginator.CurrentPage,
+                                itemsPerPage: response.paginator.ItemsPerPage,
+                                recordsCount: response.paginator.RecordsCount
+                            }
+                        )
+
                         this.user_devices = this.filteredUserDevices;
                         this.doSort(this.sortColumn);
                     })

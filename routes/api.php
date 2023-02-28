@@ -38,7 +38,7 @@ Route::delete('/users/delete/{deleteUser}', [UserController::class, 'destroy']);
 
 Route::post('/device_type/create', [DeviceTypeController::class, 'store']);
 Route::get('/device_types/read/', [DeviceTypeController::class, 'index']);
-Route::get('/device_types/read/page/{currentPage}/{itemsPerPage}', [DeviceTypeController::class, 'index']);
+Route::get('/device_types/read/page/{currentPage}/{itemsPerPage}', [DeviceTypeController::class, 'page']);
 Route::get('/device_types/read/{id}', [DeviceTypeController::class, 'show']);
 Route::put('/device_type/update/{updateDeviceType}', [DeviceTypeController::class, 'update']);
 Route::delete('/device_type/delete/{id}', [DeviceTypeController::class, 'destroy']);
@@ -47,14 +47,16 @@ Route::delete('/device_type/delete/{id}', [DeviceTypeController::class, 'destroy
 
 Route::post('/devices/create', [DeviceController::class, 'store']);
 Route::get('/devices/read', [DevicesViewController::class, 'index']);
+Route::get('/devices/read/page/{currentPage}/{itemsPerPage}', [DevicesViewController::class, 'page']);
 Route::get('/devices/read/{id}', [DevicesViewController::class, 'show']);
 Route::put('/devices/update/{updateDevice}', [DeviceController::class, 'update']);
 Route::delete('/devices/delete/{id}', [DeviceController::class, 'destroy']);
 
 //CRUD routes for table 'user_devices'
 
-Route::post('/user_device/create', [DeviceUserController::class, 'store']);
-Route::get('/user_devices/read', [DeviceUsersViewController::class, 'index']);
+Route::post('/user_device/create/', [DeviceUserController::class, 'store']);
+Route::get('/user_devices/read/', [DeviceUsersViewController::class, 'index']);
+Route::get('/user_devices/read/page/{currentPage}/{itemsPerPage}', [DeviceUsersViewController::class, 'page']);
 Route::get('/user_devices/read/{device_user_id}', [DeviceUsersViewController::class, 'show']);
 Route::put('/user_device/update/{updateDeviceUser}', [DeviceUserController::class, 'update']);
 Route::delete('/user_device/delete/{id}', [DeviceUserController::class, 'destroy']);
