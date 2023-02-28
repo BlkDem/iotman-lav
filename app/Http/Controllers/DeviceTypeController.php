@@ -7,11 +7,15 @@ use App\Models\DeviceType;
 use App\Http\Middleware\ValidatorRules;
 use Exception;
 use App\Http\Controllers\BaseController as BaseController;
+use App\Http\Controllers\PaginatorController;
 
 class DeviceTypeController extends BaseController
 {
-    public function index(){
-        return response()->json(['data' => DeviceType::orderBy('device_type_name', 'desc')->get()], 200);
+    public function index($currentPage, $itemsPerPage){
+        $res = DeviceType::orderBy('device_type_name', 'asc')->get();
+        $paginator = PaginatorController::Paginate($res->count(), (int)($itemsPerPage ?? 10), $currentPage);
+        return $this->sendResponse($res, "Devices List", $paginator);
+        //return response()->json(['data' => DeviceType::orderBy('device_type_name', 'asc')->get()], 200);
         // return response()->json(['data' => DeviceType::get()], 200);
         //return response()->json(DeviceType::get(), 200);
     }

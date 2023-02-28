@@ -167,9 +167,9 @@ import Sorting from "../common/js/Sorting.js";
         },
 
         created() {
-            if (localStorage.UserDeviceCompactView == null) {
-                localStorage.UserDeviceCompactView = this.compactView;
-            }
+            // if (localStorage.UserDeviceCompactView == null) {
+            //     localStorage.UserDeviceCompactView = this.compactView;
+            // }
 
             this.dataDescription = UserDeviceStringConstants.USER_DEVICE_DATA_DESCRIPTION; //device dataset description
             this.getUserDevices();
@@ -189,20 +189,12 @@ import Sorting from "../common/js/Sorting.js";
             selectSort: function () {
                 handler: this.doSort();
             },
-
-            // compactView: function () {
-            //     localStorage.CompactView=this.compactView;
-            // },
         },
 
         computed: {
             SortName() {
                 return MessagesConstants.SortingCaption(this.sortColumn, this.sortDirection)
             },
-
-            // getCompactView() {
-            //     return this.compactView;
-            // },
         },
 
         methods: {

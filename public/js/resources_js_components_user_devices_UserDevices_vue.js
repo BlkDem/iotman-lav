@@ -340,10 +340,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }]), _ref;
   },
   created: function created() {
-    if (localStorage.UserDeviceCompactView == null) {
-      localStorage.UserDeviceCompactView = this.compactView;
-    }
-
+    // if (localStorage.UserDeviceCompactView == null) {
+    //     localStorage.UserDeviceCompactView = this.compactView;
+    // }
     this.dataDescription = _components_strings_constants_user_devices_index__WEBPACK_IMPORTED_MODULE_3__["default"].USER_DEVICE_DATA_DESCRIPTION; //device dataset description
 
     this.getUserDevices();
@@ -359,18 +358,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     selectSort: function selectSort() {
       handler: this.doSort();
-    } // compactView: function () {
-    //     localStorage.CompactView=this.compactView;
-    // },
-
+    }
   },
   computed: {
     SortName: function SortName() {
       return _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_4__["default"].SortingCaption(this.sortColumn, this.sortDirection);
-    } // getCompactView() {
-    //     return this.compactView;
-    // },
-
+    }
   },
   methods: {
     doSort: function doSort($column) {

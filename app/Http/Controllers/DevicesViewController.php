@@ -10,7 +10,7 @@ class DevicesViewController extends BaseController
 {
     public function index()
     {
-        $devicesDataSet = DevicesView::get();
+        $devicesDataSet = DevicesView::orderBy('device_name', 'asc')->get();
         if ($devicesDataSet->count() ==0)
         {
             return response()->json(['Error' => 'true', 'Message' => 'No Records Found'], 404);

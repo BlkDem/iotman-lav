@@ -37,7 +37,8 @@ Route::delete('/users/delete/{deleteUser}', [UserController::class, 'destroy']);
 //CRUD routes for table 'device_types'
 
 Route::post('/device_type/create', [DeviceTypeController::class, 'store']);
-Route::get('/device_types/read', [DeviceTypeController::class, 'index']);
+Route::get('/device_types/read/', [DeviceTypeController::class, 'index']);
+Route::get('/device_types/read/page/{currentPage}/{itemsPerPage}', [DeviceTypeController::class, 'index']);
 Route::get('/device_types/read/{id}', [DeviceTypeController::class, 'show']);
 Route::put('/device_type/update/{updateDeviceType}', [DeviceTypeController::class, 'update']);
 Route::delete('/device_type/delete/{id}', [DeviceTypeController::class, 'destroy']);
