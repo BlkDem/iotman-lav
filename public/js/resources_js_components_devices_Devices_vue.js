@@ -543,7 +543,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                     _this4.$root.$refs.toaster.showMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY, resp["data"].device_name + ': ' + _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].ADDED_MESSAGE);
                   }).then(function (resp) {
-                    _this4.setDeviceType(_this4.filteredDevices[_this4.filteredDevices.length - 1].device_type_id, _this4.filteredDevices[_this4.filteredDevices.length - 1]);
+                    _this4.setDeviceType(_this4.filteredDevices.at(-1).device_type_id, _this4.filteredDevices.at(-1));
                   })["catch"](function (error) {
                     console.log(error.response.data);
 

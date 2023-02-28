@@ -212,11 +212,14 @@ import Sorting from "../common/js/Sorting.js";
             },
 
             doFilter() {
-                this.filteredUserDevices = this.user_devices;
+
+                if (this.filteredUserDevices != this.user_devices) {
+                    this.filteredUserDevices = this.user_devices
+                }
 
                 const res = this.filteredUserDevices.filter((user_device) => {
                     if (this.userDevice_filter === "") return true;
-                    else return (user_device.device_name.toLowerCase().indexOf(this.userDevice_filter.toLowerCase()) > -1);
+                    else return (user_device.user_device_name.toLowerCase().indexOf(this.userDevice_filter.toLowerCase()) > -1);
                 })
 
                 if (this.user_devices.length > res.length) {
@@ -266,7 +269,7 @@ import Sorting from "../common/js/Sorting.js";
                 axios
                     .get(APIConstants.api_user_devices_read + $user_device_id)
                     .then((resp_user_devices) => {
-                        console.log(resp_user_devices.data.data, this.filteredUserDevices[$key])
+                        //console.log(resp_user_devices.data.data, this.filteredUserDevices[$key])
                         this.filteredUserDevices[$key].device_type_image = resp_user_devices["data"].data.device_type_image;
                         this.filteredUserDevices[$key].device_name = resp_user_devices["data"].data.device_name;
                         this.filteredUserDevices[$key].device_hwid = resp_user_devices["data"].data.device_hwid;
@@ -311,7 +314,7 @@ import Sorting from "../common/js/Sorting.js";
                             this.filteredUserDevices.push(newUserDevice);
                             this.user_devices = this.filteredUserDevices
 
-                            this.getNewUserDeviceView(this.filteredUserDevices[this.filteredUserDevices.length - 1].id,
+                            this.getNewUserDeviceView(this.filteredUserDevices.at(-1).id,
                                 (this.filteredUserDevices.length - 1))
 
                             this.$root.$refs.toaster.showMessage(
@@ -363,6 +366,9 @@ import Sorting from "../common/js/Sorting.js";
                             this.filteredUserDevices[key].user_device_pass = resp['data'].user_device_pass;
                             this.filteredUserDevices[key].device_id = resp['data'].device_id;
                             this.filteredUserDevices[key].user_id = resp['data'].user_id;
+
+                            this.getNewUserDeviceView(this.filteredUserDevices[key].id, key)
+
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.EDITED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY

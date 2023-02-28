@@ -334,8 +334,8 @@
                         .then((resp) => {
 
                             this.setDeviceType(
-                                this.filteredDevices[this.filteredDevices.length - 1].device_type_id,
-                                this.filteredDevices[this.filteredDevices.length - 1]
+                                this.filteredDevices.at(-1).device_type_id,
+                                this.filteredDevices.at(-1)
                             );
                         })
                         .catch((error) => {

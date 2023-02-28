@@ -380,9 +380,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     doFilter: function doFilter() {
       var _this = this;
 
-      this.filteredUserDevices = this.user_devices;
+      if (this.filteredUserDevices != this.user_devices) {
+        this.filteredUserDevices = this.user_devices;
+      }
+
       var res = this.filteredUserDevices.filter(function (user_device) {
-        if (_this.userDevice_filter === "") return true;else return user_device.device_name.toLowerCase().indexOf(_this.userDevice_filter.toLowerCase()) > -1;
+        if (_this.userDevice_filter === "") return true;else return user_device.user_device_name.toLowerCase().indexOf(_this.userDevice_filter.toLowerCase()) > -1;
       });
 
       if (this.user_devices.length > res.length) {
@@ -451,7 +454,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       //attach device type name and image to device
       axios.get(_rest_api_js__WEBPACK_IMPORTED_MODULE_5__["default"].api_user_devices_read + $user_device_id).then(function (resp_user_devices) {
-        console.log(resp_user_devices.data.data, _this4.filteredUserDevices[$key]);
+        //console.log(resp_user_devices.data.data, this.filteredUserDevices[$key])
         _this4.filteredUserDevices[$key].device_type_image = resp_user_devices["data"].data.device_type_image;
         _this4.filteredUserDevices[$key].device_name = resp_user_devices["data"].data.device_name;
         _this4.filteredUserDevices[$key].device_hwid = resp_user_devices["data"].data.device_hwid;
@@ -507,7 +510,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                     _this5.user_devices = _this5.filteredUserDevices;
 
-                    _this5.getNewUserDeviceView(_this5.filteredUserDevices[_this5.filteredUserDevices.length - 1].id, _this5.filteredUserDevices.length - 1);
+                    _this5.getNewUserDeviceView(_this5.filteredUserDevices.at(-1).id, _this5.filteredUserDevices.length - 1);
 
                     _this5.$root.$refs.toaster.showMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_4__["default"].ADDED_MESSAGE, _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_4__["default"].PROCESS_SUCCESSFULLY);
                   })["catch"](function (error) {
@@ -567,6 +570,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     _this6.filteredUserDevices[key].user_device_pass = resp['data'].user_device_pass;
                     _this6.filteredUserDevices[key].device_id = resp['data'].device_id;
                     _this6.filteredUserDevices[key].user_id = resp['data'].user_id;
+
+                    _this6.getNewUserDeviceView(_this6.filteredUserDevices[key].id, key);
 
                     _this6.$root.$refs.toaster.showMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_4__["default"].EDITED_MESSAGE, _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_4__["default"].PROCESS_SUCCESSFULLY);
                   }).then(function (resp) {// this.$root.$refs.DeviceRef.getDevices();
