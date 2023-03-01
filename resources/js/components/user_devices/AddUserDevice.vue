@@ -65,7 +65,7 @@ export default {
     methods: {
 
         showDialogue(optsAdd = {}) {
-            console.log(optsAdd)
+            //console.log(optsAdd)
             this.edit_mode = optsAdd.edit_mode;
             this.title = optsAdd.title
             this.message = optsAdd.message

@@ -1,8 +1,9 @@
 <template>
-    <div class="flex-right py-4">
+    <div class="mb-4"></div>
+    <div class="flex-right rounded-2 pt-2">
         <ul class="pagination text-center">
-            <li class="page-item disabled">
-                <button class="page-link" >Total records: {{ recordsCount }} </button>
+            <li class="page-item">
+                <button class="page-link" disabled>Total records: [ {{ recordsCount }} ] </button>
             </li>
         </ul>
         <div class="px-2">
@@ -22,7 +23,7 @@
         <div class="px-2">
 
         </div>
-        <ul class="pagination text-center">
+        <ul class="pagination text-center mx-3">
             <li class="page-item" :class="{'disabled': (currentPage==1)}" v-on:click="setPage(1, itemsPerPage)">
                 <button class="page-link" >&laquo;</button>
             </li>
