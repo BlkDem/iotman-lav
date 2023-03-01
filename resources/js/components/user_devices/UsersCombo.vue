@@ -1,5 +1,5 @@
 <template>
-    <select v-model="id" class="form-select p-2">
+    <select :value="id" class="form-select p-2" @change="setUserID($event.target.value)">
         <option v-for="(item, key) in items" v-bind:key="key" v-bind:value="item.id">
             {{ item.name }}
         </option>
@@ -18,13 +18,19 @@ export default {
         data() {
             return {
                 items: [],
+                user_id: ""
             }
         },
 
-        props: ["id"],
+        props: {
+            id: {
+                required: true
+            }
+        },
 
         created(props) {
             this.getUsers();
+            this.user_id = this.id
         },
 
         methods: {
@@ -38,8 +44,14 @@ export default {
             },
 
             getUserID() {
-                return this.id
-            }
+                return this.user_id
+            },
+
+            setUserID($id) {
+                console.log($id)
+                this.user_id = $id
+            },
+
         },
     }
 

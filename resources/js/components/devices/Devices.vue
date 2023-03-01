@@ -366,7 +366,8 @@
             //edit Device
             async doEdit(key, id) {
                 //opening Device Dialogue
-                console.log(key, id)
+                //console.log(key, id)
+                // this.$refs.addDevice.setDeviceTypeID(this.filteredDevices[key].device_type_id)
                 const _edit = await this.$refs.addDevice.showDialogue({
                     edit_mode: true,
                     title: DeviceStringConstants.DEVICE_EDITING_TITLE,

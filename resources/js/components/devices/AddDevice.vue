@@ -14,7 +14,7 @@
             <!-- <label class="px-2"><strong>Device Password</strong></label>
             <input v-model="device_pass" class="form-control p-2 mb-2" placeholder="Input Device Password"/> -->
             <label class="px-2"><strong>Select Device Type</strong></label>
-            <DeviceTypesCombo ref="types" v-bind:id="device_type_id"></DeviceTypesCombo>
+            <DeviceTypesCombo ref="types" v-bind:id="device_type_id" :device_type_id="device_type_id"></DeviceTypesCombo>
         </div>
         <hr>
         <div>
@@ -67,6 +67,7 @@ export default {
             this.device_hwid = optsAdd.device_hwid
             // this.device_pass = optsAdd.device_pass
             this.device_type_id = optsAdd.device_type_id
+            // this.$refs.types.id = this.device_type_id
             this.okButton = optsAdd.okButton
             if (optsAdd.cancelButton) {
                 this.cancelButton = optsAdd.cancelButton

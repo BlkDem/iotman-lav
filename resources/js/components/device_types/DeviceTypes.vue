@@ -2,6 +2,7 @@
 
     <div v-show="deviceTypesVisible">
         <AddDeviceType ref="addDeviceType"></AddDeviceType>
+
         <ConfirmDialogue ref="confirmDialogue" />
         <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
             Device Types
@@ -15,6 +16,7 @@
                                 v-model="device_type_filter" />
                         </li>
                         <li class="nav-item dropdown me-auto vertical-center">
+                            <button v-on:click="openImager()"></button>
                             <a class="nav-link dropdown-toggle mx-2" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="true" aria-expanded="false">{{ SortName }}</a>
                             <div class="dropdown-menu w-100">
@@ -107,6 +109,7 @@
             </div>
         </div>
         <Paginator ref="paginatorDeviceTypes"></Paginator>
+        <Imager ref="imager"/>
         <!-- <MyMqtt></MyMqtt> -->
     </div>
 
@@ -122,13 +125,15 @@ import APIConstants from "../../rest_api.js";
 import DeviceTypeStringConstants from '../../components/strings_constants/device_types/index';
 import Sorting from "../../components/common/js/Sorting.js";
 import ParsingErrors from "../common/js/ParsingErrors.js";
+import Imager from '../../components/common/Imager.vue';
 
     export default {
 
         components: {
             ConfirmDialogue,
             AddDeviceType,
-            Paginator
+            Paginator,
+            Imager
         },
 
         data() {
@@ -201,6 +206,10 @@ import ParsingErrors from "../common/js/ParsingErrors.js";
 
 
         methods: {
+
+            openImager() {
+                this.$refs.imager.createImager()
+            },
 
             doSort($column) {
                 Sorting.doSort(this.filteredDeviceTypes, $column, this.sortDirection)
