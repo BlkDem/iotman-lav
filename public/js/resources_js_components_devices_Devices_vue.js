@@ -486,6 +486,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
+    //Fill empty values
+    fillEmptyValues: function fillEmptyValues() {
+      this.filteredDevices = this.filteredDevices.map(function (item) {
+        var _item$device_desc, _item$device_hwid;
+        item.device_desc = (_item$device_desc = item.device_desc) !== null && _item$device_desc !== void 0 ? _item$device_desc : _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].NO_DESCRIPTION;
+        item.device_hwid = (_item$device_hwid = item.device_hwid) !== null && _item$device_hwid !== void 0 ? _item$device_hwid : _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].NO_HWID;
+        return item;
+      });
+    },
     //loading devices dataset via API
     getData: function getData() {
       var _arguments = arguments,
@@ -510,6 +519,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   itemsPerPage: response.paginator.ItemsPerPage,
                   recordsCount: response.paginator.RecordsCount
                 });
+                _this3.fillEmptyValues();
+
+                // console.log(this.filteredDevices)
+
+                //store items buffer
                 _this3.devices = _this3.filteredDevices;
                 _this3.doSort(_this3.sortColumn);
               })["catch"](function (err) {
@@ -571,7 +585,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   device_hwid: _this4.$refs.addDevice.device_hwid,
                   device_desc: _this4.$refs.addDevice.device_desc
                 }).then(function (resp) {
-                  console.log(resp);
+                  // console.log(resp);
                   var newDevice = {
                     device_name: resp["data"].device_name,
                     device_desc: resp["data"].device_desc,
@@ -583,6 +597,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     id: resp["data"].id
                   };
                   _this4.filteredDevices.push(newDevice);
+                  _this4.fillEmptyValues();
                   _this4.devices = _this4.filteredDevices;
                   _this4.$root.$refs.toaster.showMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY, resp["data"].device_name + ': ' + _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].ADDED_MESSAGE);
                 }).then(function (resp) {
@@ -605,7 +620,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     doEdit: function doEdit(key, id) {
       var _this5 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
-        var _this5$filteredDevice, _this5$filteredDevice2;
         var _edit, editDevicePost;
         return _regeneratorRuntime().wrap(function _callee5$(_context5) {
           while (1) switch (_context5.prev = _context5.next) {
@@ -616,9 +630,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 title: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_EDITING_TITLE,
                 message: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_EDITING_MESSAGE,
                 device_name: _this5.filteredDevices[key].device_name,
-                device_desc: (_this5$filteredDevice = _this5.filteredDevices[key].device_desc) !== null && _this5$filteredDevice !== void 0 ? _this5$filteredDevice : "",
-                device_hwid: (_this5$filteredDevice2 = _this5.filteredDevices[key].device_hwid) !== null && _this5$filteredDevice2 !== void 0 ? _this5$filteredDevice2 : "",
-                // device_pass: this.filteredDevices[key].device_pass ?? "",
+                device_desc: _this5.filteredDevices[key].device_desc === _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].NO_DESCRIPTION ? "" : _this5.filteredDevices[key].device_desc,
+                device_hwid: _this5.filteredDevices[key].device_hwid === _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].NO_HWID ? "" : _this5.filteredDevices[key].device_hwid,
                 device_type_id: _this5.filteredDevices[key].device_type_id,
                 okButton: _components_strings_constants_devices_index__WEBPACK_IMPORTED_MODULE_4__["default"].DEVICE_EDITBUTTON_CAPTION
               });
@@ -638,11 +651,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this5.filteredDevices[key].device_type_id = resp["data"].device_type_id;
                   _this5.filteredDevices[key].device_hwid = resp["data"].device_hwid;
                   // this.filteredDevices[key].device_pass = resp["data"].device_pass;
-                  _this5.$root.$refs.toaster.showMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY, _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].EDITED_MESSAGE);
                   // console.log("devices: ", this.filteredDevices);
                 }).then(function () {
+                  _this5.fillEmptyValues();
                   _this5.devices = _this5.filteredDevices;
                   _this5.setDeviceType(_this5.filteredDevices[key].device_type_id, _this5.filteredDevices[key]);
+                  _this5.$root.$refs.toaster.showMessage(_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].PROCESS_SUCCESSFULLY, _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_5__["default"].EDITED_MESSAGE);
+                }).then(function (resp) {
+                  _this5.$root.$refs.DeviceUserRef.getData();
                 })["catch"](function (error) {
                   var _error$response;
                   console.log((_error$response = error.response) === null || _error$response === void 0 ? void 0 : _error$response.data);
@@ -1185,14 +1201,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.setDevice && $options.setDevice.apply($options, arguments);
     })
   }, " Add Device ")])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.dataDescription), 1 /* TEXT */)]), !$data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredDevices, function (device, key) {
-    var _device$device_desc, _device$device_hwid;
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "col-sm-4 col-xs-4 col-lg-4 p-2 fade-in",
       key: key,
       id: device.id
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_name) + " ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_22, "(" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.id) + ")", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_type_name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_device$device_desc = device.device_desc) !== null && _device$device_desc !== void 0 ? _device$device_desc : 'no description'), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_name) + " ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_22, "(" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.id) + ")", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_type_name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_desc), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: device.device_type_image
-    }, null, 8 /* PROPS */, _hoisted_26), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_28, "HWID: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_device$device_hwid = device.device_hwid) !== null && _device$device_hwid !== void 0 ? _device$device_hwid : 'no hardware address'), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    }, null, 8 /* PROPS */, _hoisted_26), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_28, "HWID: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_hwid), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-info btn-width-40 mx-1",
       onClick: function onClick($event) {
         return $options.doEdit(key, device.id);
@@ -1204,7 +1219,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }
     }, [_hoisted_33, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete ")], 8 /* PROPS */, _hoisted_32)])])], 8 /* PROPS */, _hoisted_19);
   }), 128 /* KEYED_FRAGMENT */))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" compact view "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredDevices, function (device, key) {
-    var _device$device_hwid2;
+    var _device$device_hwid;
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "card border-primary mb-1 w-100 fade-in",
       key: key,
@@ -1212,7 +1227,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: device.device_type_image,
       "class": "device-image"
-    }, null, 8 /* PROPS */, _hoisted_39)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.id), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_44, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_type_name), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_device$device_hwid2 = device.device_hwid) !== null && _device$device_hwid2 !== void 0 ? _device$device_hwid2 : 'no hardware address '), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    }, null, 8 /* PROPS */, _hoisted_39)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.id), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_44, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(device.device_type_name), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_device$device_hwid = device.device_hwid) !== null && _device$device_hwid !== void 0 ? _device$device_hwid : 'no hardware address '), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-info mx-2",
       onClick: function onClick($event) {
         return $options.doEdit(key, device.id);

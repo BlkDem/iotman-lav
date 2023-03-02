@@ -58,12 +58,12 @@
                             {{ device.device_type_name }}
                         </h5>
                         <h6 class="card-subtitle text-muted">
-                            {{ device.device_desc ?? 'no description'}}
+                            {{ device.device_desc }}
                         </h6>
                     </div>
                     <img v-bind:src="device.device_type_image" />
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">HWID: {{ device.device_hwid ?? 'no hardware address' }}</li>
+                        <li class="list-group-item">HWID: {{ device.device_hwid }}</li>
                     </ul>
                     <div class="card-body">
                         <button class="btn btn-info btn-width-40 mx-1" @click="doEdit(key, device.id)">
@@ -264,6 +264,15 @@
                 }
             },
 
+            //Fill empty values
+            fillEmptyValues() {
+                this.filteredDevices = this.filteredDevices.map((item) => {
+                item.device_desc = item.device_desc ?? MessagesConstants.NO_DESCRIPTION
+                item.device_hwid = item.device_hwid ?? MessagesConstants.NO_HWID
+                return item
+                })
+            },
+
             //loading devices dataset via API
             async getData(_currentPage=1, _itemsPerPage=5) {
                 await fetch(APIConstants.api_devices_read_page + _currentPage + "/" + _itemsPerPage)
@@ -281,6 +290,11 @@
                             }
                         )
 
+                        this.fillEmptyValues()
+
+                        // console.log(this.filteredDevices)
+
+                        //store items buffer
                         this.devices = this.filteredDevices;
                         this.doSort(this.sortColumn);
                     })
@@ -324,7 +338,7 @@
                             }
                         )
                         .then((resp) => {
-                            console.log(resp);
+                            // console.log(resp);
                             let newDevice = {
                                 device_name: resp["data"].device_name,
                                 device_desc: resp["data"].device_desc,
@@ -336,6 +350,7 @@
                                 id: resp["data"].id,
                             }
                             this.filteredDevices.push(newDevice)
+                            this.fillEmptyValues()
                             this.devices = this.filteredDevices
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.PROCESS_SUCCESSFULLY,
@@ -373,9 +388,10 @@
                     title: DeviceStringConstants.DEVICE_EDITING_TITLE,
                     message: DeviceStringConstants.DEVICE_EDITING_MESSAGE,
                     device_name: this.filteredDevices[key].device_name,
-                    device_desc: this.filteredDevices[key].device_desc ?? "",
-                    device_hwid: this.filteredDevices[key].device_hwid ?? "",
-                    // device_pass: this.filteredDevices[key].device_pass ?? "",
+                    device_desc: (this.filteredDevices[key].device_desc === MessagesConstants.NO_DESCRIPTION)? "":
+                                                                            this.filteredDevices[key].device_desc,
+                    device_hwid: (this.filteredDevices[key].device_hwid === MessagesConstants.NO_HWID)? "":
+                                                                            this.filteredDevices[key].device_hwid,
                     device_type_id: this.filteredDevices[key].device_type_id,
                     okButton: DeviceStringConstants.DEVICE_EDITBUTTON_CAPTION,
                 })
@@ -399,19 +415,28 @@
                             this.filteredDevices[key].device_type_id = resp["data"].device_type_id;
                             this.filteredDevices[key].device_hwid = resp["data"].device_hwid;
                             // this.filteredDevices[key].device_pass = resp["data"].device_pass;
-                            this.$root.$refs.toaster.showMessage(
-                                MessagesConstants.PROCESS_SUCCESSFULLY,
-                                MessagesConstants.EDITED_MESSAGE,
-                            );
                             // console.log("devices: ", this.filteredDevices);
                         })
                         .then(() => {
+
+                            this.fillEmptyValues()
                             this.devices = this.filteredDevices;
                             this.setDeviceType(
                                 this.filteredDevices[key].device_type_id,
                                 this.filteredDevices[key]
+                            )
+
+                            this.$root.$refs.toaster.showMessage(
+                                MessagesConstants.PROCESS_SUCCESSFULLY,
+                                MessagesConstants.EDITED_MESSAGE,
                             );
+
                         })
+
+                        .then(resp => {
+                            this.$root.$refs.DeviceUserRef.getData();
+                        })
+
                         .catch((error) => {
                             console.log(error.response?.data)
                             this.$root.$refs.toaster.showMessage(

@@ -368,7 +368,7 @@ import Imager from '../../components/common/Imager.vue';
                             );
                         })
                         .then(resp => {
-                            this.$root.$refs.DeviceRef.getDevices();
+                            this.$root.$refs.DeviceRef.getData();
                         })
                         .catch(error => {
                             this.$root.$refs.toaster.showMessage(

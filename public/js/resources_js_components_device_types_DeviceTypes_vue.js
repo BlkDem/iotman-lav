@@ -587,7 +587,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this5.device_types[key].device_type_image = resp['data'].device_type_image;
                   _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].EDITED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].PROCESS_SUCCESSFULLY);
                 }).then(function (resp) {
-                  _this5.$root.$refs.DeviceRef.getDevices();
+                  _this5.$root.$refs.DeviceRef.getData();
                 })["catch"](function (error) {
                   _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].EDITING_ERROR, _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_7__["default"].getError(error), _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_7__["default"].ERROR_LEVEL_ERROR);
                 });
