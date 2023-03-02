@@ -1,4 +1,7 @@
 <template>
+
+
+
     <div v-show="userDeviceVisible">
         <AddUserDevice ref="addUserDevice"></AddUserDevice>
         <ConfirmDialogue ref="confirmDialogue" />
@@ -49,7 +52,7 @@
         <div>
             <!-- <h1>User Devices</h1> -->
             <div class="row my-2" v-if="!compactView">
-                <div class="p-2 col-sm-4 col-xs-4 col-lg-4" v-for="(user_device, key) in filteredUserDevices"
+                <div class="p-2 col-sm-4 col-xs-4 col-lg-4 fade-in" v-for="(user_device, key) in filteredUserDevices"
                     v-bind:key="key" v-bind:id="user_device.id">
                     <div class="card border-light">
                         <h3 class="card-header">{{ user_device.user_device_name }}</h3>
@@ -84,8 +87,9 @@
             </div>
         </div>
         <!-- compact view -->
-        <div v-show="compactView" class="my-2">
-            <div class="card border-primary mb-1 w-100" v-for="(user_device, key) in filteredUserDevices"
+        <div v-if="compactView" class="my-2">
+
+            <div class="card border-primary mb-1 w-100 fade-in" v-for="(user_device, key) in filteredUserDevices"
                 v-bind:key="key" v-bind:id="user_device.id">
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
@@ -95,13 +99,16 @@
                         <div class="col-sm-1 col-xs-1 col-lg-1 align-left">
                             <span class="text-info"> {{ user_device.id }} </span>
                         </div>
-                        <div class="col-sm-3 col-xs-3 col-lg-3 align-left">
+                        <div class="col-sm-2 col-xs-2 col-lg-2 align-left">
+                                {{ user_device.user_name }}
+                        </div>
+                        <div class="col-sm-2 col-xs-2 col-lg-2 align-left">
                                 {{ user_device.user_device_name }}
                         </div>
                         <div class="col-sm- col-xs-2 col-lg-2 align-left">
                                 <span class="text-info">{{ user_device.device_name }}</span>
                         </div>
-                        <div class="col-sm-3 col-xs-3 col-lg-3 align-left">
+                        <div class="col-sm-2 col-xs-2 col-lg-2 align-left">
                                 {{ user_device.device_hwid }}
                         </div>
                         <div class="col-sm-2 col-xs-2 col-lg-2 edit-buttons">
@@ -118,9 +125,10 @@
         </div>
         <Paginator ref="paginatorUserDevices"></Paginator>
     </div>
+
 </template>
 
-<script lang="js">
+<script lang = "js">
 
 import ConfirmDialogue from "../../components/common/ConfirmDialogue.vue";
 import AddUserDevice from "./AddUserDevice.vue";
@@ -132,279 +140,285 @@ import Sorting from "../common/js/Sorting.js";
 import ParsingErrors from "../common/js/ParsingErrors.js";
 
 
-    export default {
-        components: {
-            ConfirmDialogue,
-            AddUserDevice,
-            Paginator /*MyMqtt*/ ,
+export default {
+    components: {
+        ConfirmDialogue,
+        AddUserDevice,
+        Paginator /*MyMqtt*/ ,
+    },
+
+    data() {
+        return {
+            userDeviceVisible: true,
+            userDevice_filter: "",
+            user_devices: [],
+            filteredUserDevices: [], //filtered array of devices
+            dataDescription: "", //table data description label
+            compactView: true, //copact view mode
+            userDevice_filter: "", //filtering string
+            sortOrderStrings: [
+                MessagesConstants.SORT_ASC,
+                MessagesConstants.SORT_DESC,
+            ],
+            sortOrder: MessagesConstants.SORT_ASC,
+            sortDirection: false,
+            userDeviceVisible: false,
+            sortColumn: "user_device_name",
+            sortRules: [{
+                    key: "user_device_name",
+                    title: MessagesConstants.SORT_BY_NAME
+                },
+                {
+                    key: "id",
+                    title: MessagesConstants.SORT_BY_ID
+                },
+            ],
+        };
+    },
+
+    created() {
+        if (localStorage.UserDeviceCompactView == null) {
+            localStorage.UserDeviceCompactView = this.compactView;
+        }
+
+        this.dataDescription = UserDeviceStringConstants.USER_DEVICE_DATA_DESCRIPTION; //device dataset description
+        this.getData();
+    },
+
+    mounted() {
+        if (localStorage.getItem('CompactView')) {
+            this.compactView = (localStorage.getItem('CompactView') === 'true');
+        }
+    },
+
+    watch: {
+        userDevice_filter: function () {
+            handler: this.doFilter();
         },
 
-        data() {
-            return {
-                userDeviceVisible: true,
-                userDevice_filter: "",
-                user_devices: [],
-                filteredUserDevices: [], //filtered array of devices
-                dataDescription: "", //table data description label
-                compactView: true, //copact view mode
-                userDevice_filter: "", //filtering string
-                sortOrderStrings: [
-                    MessagesConstants.SORT_ASC,
-                    MessagesConstants.SORT_DESC,
-                ],
-                sortOrder: MessagesConstants.SORT_ASC,
-                sortDirection: false,
-                userDeviceVisible: false,
-                sortColumn: "user_device_name",
-                sortRules: [{
-                        key: "user_device_name",
-                        title: MessagesConstants.SORT_BY_NAME
-                    },
-                    {
-                        key: "id",
-                        title: MessagesConstants.SORT_BY_ID
-                    },
-                ],
-            };
+        selectSort: function () {
+            handler: this.doSort();
         },
 
-        created() {
-            // if (localStorage.UserDeviceCompactView == null) {
-            //     localStorage.UserDeviceCompactView = this.compactView;
-            // }
+        compactView: function () {
+            localStorage.CompactView = this.compactView;
+        },
+    },
 
-            this.dataDescription = UserDeviceStringConstants.USER_DEVICE_DATA_DESCRIPTION; //device dataset description
-            this.getData();
+    computed: {
+        SortName() {
+            return MessagesConstants.SortingCaption(this.sortColumn, this.sortDirection)
+        },
+    },
+
+    methods: {
+        doSort($column) {
+            Sorting.doSort(this.filteredUserDevices, $column, this.sortDirection)
+            this.sortColumn = $column;
         },
 
-        mounted() {
-            if (localStorage.getItem('CompactView')) {
-                this.compactView = (localStorage.getItem('CompactView') === 'true');
+        doFilter() {
+
+            if (this.filteredUserDevices != this.user_devices) {
+                this.filteredUserDevices = this.user_devices
+            }
+
+            const res = this.filteredUserDevices.filter((user_device) => {
+                if (this.userDevice_filter === "") return true;
+                else return (user_device.user_device_name.toLowerCase().indexOf(this.userDevice_filter.toLowerCase()) > -1);
+            })
+
+            if (this.user_devices.length > res.length) {
+                this.filteredUserDevices = res;
+                this.doSort();
+            }
+        },
+        async getData(_currentPage = 1, _itemsPerPage = 5) {
+            fetch(APIConstants.api_user_devices_read_page + _currentPage + "/" + _itemsPerPage)
+                .then((response) => response.json())
+                .then((response) => {
+                    this.filteredUserDevices = response.data;
+                    //MessagesConstants.processDeviceStrings(this.filteredUserDevices);
+                    this.$refs.paginatorUserDevices.setPaginator({
+                        pagesCount: response.paginator.PagesCount,
+                        currentPage: response.paginator.CurrentPage,
+                        itemsPerPage: response.paginator.ItemsPerPage,
+                        recordsCount: response.paginator.RecordsCount
+                    })
+                    console.log(this.filteredUserDevices)
+                    this.filteredUserDevices = this.filteredUserDevices.map((item) => {
+                        item.device_desc = (item.device_desc == null) ? MessagesConstants.NO_DESCRIPTION : item.device_desc
+                        return item
+                    })
+
+                    this.user_devices = this.filteredUserDevices;
+                    this.doSort(this.sortColumn);
+                })
+                .catch((err) => console.log(err));
+        },
+
+
+        async doUserDeviceDelete(key, id) {
+
+            const confirmDelete = await this.$refs.confirmDialogue.showDialogue({
+                title: UserDeviceStringConstants.USER_DEVICE_DELETING_CAPTION,
+                message: UserDeviceStringConstants.USER_DEVICE_DELETING_MESSAGE + '"' + this.filteredUserDevices[key].user_device_name + '"?',
+                okButton: UserDeviceStringConstants.USER_DEVICE_DELETING_CAPTION,
+            })
+
+            if (confirmDelete) {
+                axios.delete(APIConstants.api_user_device_delete + id)
+                    .then(resp => {
+                        this.filteredUserDevices.splice(key, 1);
+                        this.user_devices = this.filteredUserDevices
+                        // console.log(key, id, " - deleted");
+                        this.$root.$refs.toaster.showMessage(MessagesConstants.DELETED_MESSAGE, MessagesConstants.PROCESS_SUCCESSFULLY);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            } else {
+                console.log(MessagesConstants.DELETING_CANCELLED);
             }
         },
 
-        watch: {
-            userDevice_filter: function () {
-                handler: this.doFilter();
-            },
-
-            selectSort: function () {
-                handler: this.doSort();
-            },
+        getNewUserDeviceView($user_device_id, $key) { //attach device type name and image to device
+            axios
+                .get(APIConstants.api_user_devices_read + $user_device_id)
+                .then((resp_user_devices) => {
+                    //console.log(resp_user_devices.data.data, this.filteredUserDevices[$key])
+                    this.filteredUserDevices[$key].device_type_image = resp_user_devices["data"].data.device_type_image;
+                    this.filteredUserDevices[$key].device_name = resp_user_devices["data"].data.device_name;
+                    this.filteredUserDevices[$key].device_hwid = resp_user_devices["data"].data.device_hwid;
+                });
         },
 
-        computed: {
-            SortName() {
-                return MessagesConstants.SortingCaption(this.sortColumn, this.sortDirection)
-            },
-        },
+        async setUserDevice() {
+            const _add = await this.$refs.addUserDevice.showDialogue({
+                edit_mode: false,
+                title: UserDeviceStringConstants.USER_DEVICE_ADDING_TITLE,
+                message: UserDeviceStringConstants.USER_DEVICE_ADDING_MESSAGE,
+                user_device_name: "",
+                user_device_pass: "",
+                device_desc: "",
+                device_id: "",
+                user_id: "",
+                okButton: UserDeviceStringConstants.USER_DEVICE_ADDBUTTON_CAPTION,
+            })
 
-        methods: {
-            doSort($column) {
-                Sorting.doSort(this.filteredUserDevices, $column, this.sortDirection)
-                this.sortColumn = $column;
-            },
+            if (_add) {
 
-            doFilter() {
-
-                if (this.filteredUserDevices != this.user_devices) {
-                    this.filteredUserDevices = this.user_devices
-                }
-
-                const res = this.filteredUserDevices.filter((user_device) => {
-                    if (this.userDevice_filter === "") return true;
-                    else return (user_device.user_device_name.toLowerCase().indexOf(this.userDevice_filter.toLowerCase()) > -1);
-                })
-
-                if (this.user_devices.length > res.length) {
-                    this.filteredUserDevices = res;
-                    this.doSort();
-                }
-            },
-
-            async getData(_currentPage=1, _itemsPerPage=5) {
-                fetch(APIConstants.api_user_devices_read_page + _currentPage + "/" + _itemsPerPage)
-                                    .then((response) => response.json())
-                    .then((response) => {
-                        this.filteredUserDevices = response.data;
-                        //MessagesConstants.processDeviceStrings(this.filteredUserDevices);
-                        this.$refs.paginatorUserDevices.setPaginator(
-                            {
-                                pagesCount: response.paginator.PagesCount,
-                                currentPage: response.paginator.CurrentPage,
-                                itemsPerPage: response.paginator.ItemsPerPage,
-                                recordsCount: response.paginator.RecordsCount
-                            }
-                        )
-
-                        this.user_devices = this.filteredUserDevices;
-                        this.doSort(this.sortColumn);
-                    })
-                    .catch((err) => console.log(err));
-            },
-
-
-            async doUserDeviceDelete(key, id) {
-
-                const confirmDelete = await this.$refs.confirmDialogue.showDialogue({
-                    title: UserDeviceStringConstants.USER_DEVICE_DELETING_CAPTION,
-                    message: UserDeviceStringConstants.USER_DEVICE_DELETING_MESSAGE + '"' + this.filteredUserDevices[key].user_device_name + '"?',
-                    okButton: UserDeviceStringConstants.USER_DEVICE_DELETING_CAPTION,
-                })
-
-                if (confirmDelete) {
-                    axios.delete(APIConstants.api_user_device_delete + id)
-                        .then(resp => {
-                            this.filteredUserDevices.splice(key, 1);
-                            this.user_devices = this.filteredUserDevices
-                            // console.log(key, id, " - deleted");
-                            this.$root.$refs.toaster.showMessage(MessagesConstants.DELETED_MESSAGE, MessagesConstants.PROCESS_SUCCESSFULLY);
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        })
-                } else {
-                    console.log(MessagesConstants.DELETING_CANCELLED);
-                }
-            },
-
-            getNewUserDeviceView($user_device_id, $key) { //attach device type name and image to device
-                axios
-                    .get(APIConstants.api_user_devices_read + $user_device_id)
-                    .then((resp_user_devices) => {
-                        //console.log(resp_user_devices.data.data, this.filteredUserDevices[$key])
-                        this.filteredUserDevices[$key].device_type_image = resp_user_devices["data"].data.device_type_image;
-                        this.filteredUserDevices[$key].device_name = resp_user_devices["data"].data.device_name;
-                        this.filteredUserDevices[$key].device_hwid = resp_user_devices["data"].data.device_hwid;
-                    });
-            },
-
-            async setUserDevice() {
-                const _add = await this.$refs.addUserDevice.showDialogue({
-                    edit_mode: false,
-                    title: UserDeviceStringConstants.USER_DEVICE_ADDING_TITLE,
-                    message: UserDeviceStringConstants.USER_DEVICE_ADDING_MESSAGE,
-                    user_device_name: "",
-                    user_device_pass: "",
-                    device_desc: "",
-                    device_id: "",
-                    user_id: "",
-                    okButton: UserDeviceStringConstants.USER_DEVICE_ADDBUTTON_CAPTION,
-                })
-
-                if (_add) {
-
-                    axios.post(APIConstants.api_user_device_create, {
-                            user_device_name: this.$refs.addUserDevice.user_device_name,
-                            user_device_pass: this.$refs.addUserDevice.user_device_pass,
-                            device_id: this.$refs.addUserDevice.device_id,
-                            user_id: this.$refs.addUserDevice.user_id
-                        })
-                        .then(resp => {
-                            //console.log(resp.data);
-                            let newUserDevice = {
-                                user_device_name: resp['data'].user_device_name,
-                                user_device_pass: resp['data'].user_device_pass,
-                                device_id: resp['data'].device_id,
-                                user_id: resp['data'].user_id,
-                                device_type_image: "",
-                                device_name: "",
-                                device_hwid: "",
-                                device_desc: "",
-                                id: resp['data'].id
-                            }
-                            //console.log("newUserDevice", newUserDevice)
-                            this.filteredUserDevices.push(newUserDevice);
-                            this.user_devices = this.filteredUserDevices
-
-                            this.getNewUserDeviceView(this.filteredUserDevices.at(-1).id,
-                                (this.filteredUserDevices.length - 1))
-
-                            this.$root.$refs.toaster.showMessage(
-                                MessagesConstants.ADDED_MESSAGE,
-                                MessagesConstants.PROCESS_SUCCESSFULLY
-                            );
-                        })
-                        .catch(error => {
-                            //
-                            //const Toaster = app.component('toaster')
-                            this.$root.$refs.toaster.showMessage(
-                                MessagesConstants.INSERTING_ERROR,
-                                ParsingErrors.getError(error),
-                                ParsingErrors.ERROR_LEVEL_ERROR
-                            )
-                        })
-                } else {
-                    console.log(MessagesConstants.INSERTING_CANCELLED);
-                }
-
-            },
-
-            async doUserDeviceEdit(key, id) {
-                const _edit = await this.$refs.addUserDevice.showDialogue({
-                    edit_mode: true,
-                    title: UserDeviceStringConstants.USER_DEVICE_EDITING_TITLE,
-                    message: UserDeviceStringConstants.USER_DEVICE_EDITING_MESSAGE,
-                    user_device_name: this.filteredUserDevices[key].user_device_name,
-                    user_device_pass: this.filteredUserDevices[key].user_device_pass,
-                    device_desc: this.filteredUserDevices[key].device_desc,
-                    device_id: this.filteredUserDevices[key].device_id,
-                    user_id: this.filteredUserDevices[key].user_id,
-                    okButton: UserDeviceStringConstants.USER_DEVICE_EDITBUTTON_CAPTION,
-                })
-
-                if (_edit) {
-                    let editUserDevicePost = {
+                axios.post(APIConstants.api_user_device_create, {
                         user_device_name: this.$refs.addUserDevice.user_device_name,
                         user_device_pass: this.$refs.addUserDevice.user_device_pass,
                         device_id: this.$refs.addUserDevice.device_id,
                         user_id: this.$refs.addUserDevice.user_id
-                    }
-                    console.log(editUserDevicePost);
+                    })
+                    .then(resp => {
+                        //console.log(resp.data);
+                        let newUserDevice = {
+                            user_device_name: resp['data'].user_device_name,
+                            user_device_pass: resp['data'].user_device_pass,
+                            device_id: resp['data'].device_id,
+                            user_id: resp['data'].user_id,
+                            device_type_image: "",
+                            device_name: "",
+                            device_hwid: "",
+                            device_desc: "",
+                            id: resp['data'].id
+                        }
+                        //console.log("newUserDevice", newUserDevice)
+                        this.filteredUserDevices.push(newUserDevice);
+                        this.user_devices = this.filteredUserDevices
 
-                    axios.put(APIConstants.api_user_device_update + id, editUserDevicePost)
-                        .then(resp => {
-                            // console.log(resp['data']);
-                            this.filteredUserDevices[key].user_device_name = resp['data'].user_device_name;
-                            this.filteredUserDevices[key].user_device_pass = resp['data'].user_device_pass;
-                            this.filteredUserDevices[key].device_id = resp['data'].device_id;
-                            this.filteredUserDevices[key].user_id = resp['data'].user_id;
+                        this.getNewUserDeviceView(this.filteredUserDevices.at(-1).id,
+                            (this.filteredUserDevices.length - 1))
 
-                            this.getNewUserDeviceView(this.filteredUserDevices[key].id, key)
+                        this.$root.$refs.toaster.showMessage(
+                            MessagesConstants.ADDED_MESSAGE,
+                            MessagesConstants.PROCESS_SUCCESSFULLY
+                        );
+                    })
+                    .catch(error => {
+                        //
+                        //const Toaster = app.component('toaster')
+                        this.$root.$refs.toaster.showMessage(
+                            MessagesConstants.INSERTING_ERROR,
+                            ParsingErrors.getError(error),
+                            ParsingErrors.ERROR_LEVEL_ERROR
+                        )
+                    })
+            } else {
+                console.log(MessagesConstants.INSERTING_CANCELLED);
+            }
 
-                            this.$root.$refs.toaster.showMessage(
-                                MessagesConstants.EDITED_MESSAGE,
-                                MessagesConstants.PROCESS_SUCCESSFULLY
-                            );
-                        })
-                        .then(resp => {
-                            // this.$root.$refs.DeviceRef.getDevices();
-                        })
-                        .catch(error => {
-                            this.$root.$refs.toaster.showMessage(
-                                MessagesConstants.EDITING_ERROR,
-                                ParsingErrors.getError(error),
-                                ParsingErrors.ERROR_LEVEL_ERROR
-                            )
-                        })
-                } else {
-                    console.log(MessagesConstants.EDITING_CANCELLED);
-                }
-
-            },
-
-
-
-            ShowHide(isVisible) {
-                this.userDeviceVisible = isVisible;
-            },
-
-            // getVisible() {
-            //     return this.visible;
-            // }
         },
 
-    };
+        async doUserDeviceEdit(key, id) {
+            const _edit = await this.$refs.addUserDevice.showDialogue({
+                edit_mode: true,
+                title: UserDeviceStringConstants.USER_DEVICE_EDITING_TITLE,
+                message: UserDeviceStringConstants.USER_DEVICE_EDITING_MESSAGE,
+                user_device_name: this.filteredUserDevices[key].user_device_name,
+                user_device_pass: this.filteredUserDevices[key].user_device_pass,
+                device_desc: this.filteredUserDevices[key].device_desc,
+                device_id: this.filteredUserDevices[key].device_id,
+                user_id: this.filteredUserDevices[key].user_id,
+                okButton: UserDeviceStringConstants.USER_DEVICE_EDITBUTTON_CAPTION,
+            })
+
+            if (_edit) {
+                let editUserDevicePost = {
+                    user_device_name: this.$refs.addUserDevice.user_device_name,
+                    user_device_pass: this.$refs.addUserDevice.user_device_pass,
+                    device_id: this.$refs.addUserDevice.device_id,
+                    user_id: this.$refs.addUserDevice.user_id
+                }
+                console.log(editUserDevicePost);
+
+                axios.put(APIConstants.api_user_device_update + id, editUserDevicePost)
+                    .then(resp => {
+                        // console.log(resp['data']);
+                        this.filteredUserDevices[key].user_device_name = resp['data'].user_device_name;
+                        this.filteredUserDevices[key].user_device_pass = resp['data'].user_device_pass;
+                        this.filteredUserDevices[key].device_id = resp['data'].device_id;
+                        this.filteredUserDevices[key].user_id = resp['data'].user_id;
+
+                        this.getNewUserDeviceView(this.filteredUserDevices[key].id, key)
+
+                        this.$root.$refs.toaster.showMessage(
+                            MessagesConstants.EDITED_MESSAGE,
+                            MessagesConstants.PROCESS_SUCCESSFULLY
+                        );
+                    })
+                    .then(resp => {
+                        // this.$root.$refs.DeviceRef.getDevices();
+                    })
+                    .catch(error => {
+                        this.$root.$refs.toaster.showMessage(
+                            MessagesConstants.EDITING_ERROR,
+                            ParsingErrors.getError(error),
+                            ParsingErrors.ERROR_LEVEL_ERROR
+                        )
+                    })
+            } else {
+                console.log(MessagesConstants.EDITING_CANCELLED);
+            }
+
+        },
+
+
+
+        ShowHide(isVisible) {
+            this.userDeviceVisible = isVisible;
+        },
+
+        // getVisible() {
+        //     return this.visible;
+        // }
+    },
+
+};
 
 </script>
 

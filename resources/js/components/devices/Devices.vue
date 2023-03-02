@@ -46,7 +46,7 @@
         </div>
 
         <div class="row my-2" v-if="!compactView">
-            <div class="col-sm-4 col-xs-4 col-lg-4 p-2" v-for="(device, key) in filteredDevices" v-bind:key="key"
+            <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(device, key) in filteredDevices" v-bind:key="key"
                 v-bind:id="device.id">
                 <div class="card border-light">
                     <h3 class="card-header">
@@ -82,7 +82,7 @@
 
         <!-- compact view -->
         <div v-show="compactView" class="my-2">
-            <div class="card border-primary mb-1 w-100" v-for="(device, key) in filteredDevices" v-bind:key="key"
+            <div class="card border-primary mb-1 w-100 fade-in" v-for="(device, key) in filteredDevices" v-bind:key="key"
                 v-bind:id="device.id"   >
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
@@ -436,4 +436,19 @@
 </script>
 
 <style lang="scss">
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 0.2s;
+}
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
 </style>

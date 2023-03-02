@@ -2,11 +2,11 @@
     <!-- Wrap the image or canvas element with a block element (container) -->
     <PopupModal ref="popup">
         <div >
-            <vue-cropper ref="cropper" :src="image" style="height: 400px;">
+            <vue-cropper ref="cropper" :src="image" style="height: 100%; width: 100%;">
             </vue-cropper>
             <hr>
             <div>
-                <button class="btn btn-danger mx-1 btn-width-40" @click="_confirm">{{ okButton }}</button>
+                <button class="btn btn-danger mx-1 btn-width-40" @click="_ok">{{ okButton }}</button>
                 <button class="btn btn-secondary mx-1 btn-width-40" @click="_cancel">{{ cancelButton }}</button>
             </div>
         </div>
@@ -44,23 +44,8 @@ export default {
 
     methods: {
         createImager(optsAdd = {}) {
-            //const image = document.getElementsById('imageEdit');
-            //const mode0 = image
-            // console.log(image)
-            // const cropper = new Cropper(image, {
-            //     aspectRatio: 1 / 1,
-            //     crop(event) {
-            //         console.log(event.detail.x);
-            //         console.log(event.detail.y);
-            //         console.log(event.detail.width);
-            //         console.log(event.detail.height);
-            //         console.log(event.detail.rotate);
-            //         console.log(event.detail.scaleX);
-            //         console.log(event.detail.scaleY);
-            //     },
-            // }
-            // )
-            this.$refs.popup.open()
+
+            this.$refs.popup.open(1)
 
             return new Promise((resolve, reject) => {
                 this.resolvePromise = resolve
@@ -68,7 +53,7 @@ export default {
             })
         },
 
-        _confirm() {
+        _ok() {
             this.$refs.popup.close()
             this.resolvePromise(true, this)
         },

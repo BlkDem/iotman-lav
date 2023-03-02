@@ -52,7 +52,7 @@
         </div>
 
         <div class="row my-2" v-if="!compactView">
-            <div class="col-sm-4 col-xs-4 col-lg-4 p-2" v-for="(device_type, key) in filteredDeviceTypes"
+            <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(device_type, key) in filteredDeviceTypes"
                 v-bind:key="key" v-bind:id="device_type.id">
                 <div class="card border-light">
                     <h3 class="card-header">
@@ -82,7 +82,7 @@
 
         <!-- compact view -->
         <div v-show="compactView" class="my-2">
-            <div class="card border-primary mb-1 w-100" v-for="(device_type, key) in filteredDeviceTypes"
+            <div class="card border-primary mb-1 w-100 fade-in" v-for="(device_type, key) in filteredDeviceTypes"
                 v-bind:key="key" v-bind:id="device_type.id">
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
@@ -368,7 +368,7 @@ import Imager from '../../components/common/Imager.vue';
                             );
                         })
                         .then(resp => {
-                            // this.$root.$refs.DeviceRef.getDevices();
+                            this.$root.$refs.DeviceRef.getDevices();
                         })
                         .catch(error => {
                             this.$root.$refs.toaster.showMessage(
