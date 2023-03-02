@@ -1,74 +1,60 @@
 <template>
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
-    <div class="container-fluid">
- <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarColor01"
-        aria-controls="navbarColor01"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-     <a class="navbar-brand logo" href="#">Umolab</a>
+      <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+              aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand logo" href="/">Umolab</a>
 
-      <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              v-bind:class="{ active: isDeviceTypesActive }"
-              @click="onDeviceTypesClick"
-              href="#"
-              >{{ deviceTypesCaption }}</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              v-bind:class="{ active: isDevicesActive }"
-              @click="onDevicesClick"
-              href="#"
-              >{{ devicesCaption }}</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              href="#"
-              v-bind:class="{ active: isUserDevicesActive }"
-              @click="onUserDevicesClick"
-              >{{ userDevicesCaption }}</a
-            >
-          </li>
-          <!-- <ThemeCombo ref="themeCombo"></ThemeCombo> -->
-        </ul>
+          <div class="collapse navbar-collapse" id="navbarColor01">
+              <ul class="navbar-nav me-auto">
+                  <li class="nav-item">
+                      <!-- <a class="nav-link" v-bind:class="{ active: isDeviceTypesActive }" @click="onDeviceTypesClick"
+                          href="#">{{ deviceTypesCaption }}</a> -->
+                          <router-link class="nav-link" to="/device_types">{{ deviceTypesCaption }}</router-link>
+                  </li>
+                  <li class="nav-item">
+                      <!-- <a class="nav-link" v-bind:class="{ active: isDevicesActive }" @click="onDevicesClick"
+                          href="#">{{ devicesCaption }}</a> -->
+                          <router-link class="nav-link" to="/devices">{{ devicesCaption }}</router-link>
+                  </li>
+                  <li class="nav-item">
+                      <!-- <a class="nav-link" href="#" v-bind:class="{ active: isUserDevicesActive }"
+                          @click="onUserDevicesClick">{{ userDevicesCaption }}</a> -->
+                          <router-link class="nav-link" to="/user_devices">{{ userDevicesCaption }}</router-link>
+                  </li>
+                  <!-- <ThemeCombo ref="themeCombo"></ThemeCombo> -->
+              </ul>
+          </div>
+          <div class="d-flex">
+              <ul class="navbar-nav me-auto">
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button"
+                          aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i>
+                      </a>
+                      <div class="dropdown-menu theme-dropdown">
+                          <a class="dropdown-item" href="#">{{ userName }}</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#" @click="logout()">{{ userLogoutText }}</a>
+                      </div>
+                  </li>
+              </ul>
+              <ul class="navbar-nav me-auto">
+                  <ThemeCombo ref="themeCombo"></ThemeCombo>
+              </ul>
+              <ul class="navbar-nav me-auto">
+                  <LangCombo ref="langCombo"></LangCombo>
+              </ul>
+          </div>
+          <!-- <router-view /> -->
       </div>
-      <div class="d-flex">
-        <ul class="navbar-nav me-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button"
-                    aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i>
-                </a>
-                <div class="dropdown-menu theme-dropdown">
-                    <a class="dropdown-item" href="#">{{ userName }}</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" @click="logout()">{{ userLogoutText }}</a>
-                </div>
-            </li>
-            </ul>
-        <ul class="navbar-nav me-auto">
-            <ThemeCombo ref="themeCombo"></ThemeCombo>
-        </ul>
-        <ul class="navbar-nav me-auto">
-            <LangCombo ref="langCombo"></LangCombo>
-        </ul>
-      </div>
-
-    </div>
   </nav>
+  <div>
+    <router-view />
+  </div>
+  <!-- <Toaster ref="toaster"/> -->
+
 </template>
 
 <script>
@@ -76,19 +62,18 @@ import ThemeCombo from "../../components/common/ThemeCombo.vue";
 import LangCombo from "../../components/common/LangCombo.vue";
 import MessagesConstants from "../strings_constants/strings.js";
 import APIConstants from "../../rest_api.js";
+// import Toaster from "../../components/common/Toaster.vue"
 import Langs from "../../langs";
 
 export default {
     components: {
         ThemeCombo,
         LangCombo,
+        // Toaster
     },
 
     data() {
         return {
-            isDeviceTypesVisible: false,
-            isDevicesVisible: true,
-            isUserDevicesVisible: false,
             isDeviceTypesActive: false,
             isDevicesActive: true,
             isUserDevicesActive: false,

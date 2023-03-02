@@ -2,7 +2,8 @@
 
 
 
-    <div v-show="userDeviceVisible">
+    <!-- <div v-show="userDeviceVisible"> -->
+        <div>
         <AddUserDevice ref="addUserDevice"></AddUserDevice>
         <ConfirmDialogue ref="confirmDialogue" />
         <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
@@ -245,7 +246,7 @@ export default {
                         itemsPerPage: response.paginator.ItemsPerPage,
                         recordsCount: response.paginator.RecordsCount
                     })
-                    console.log(this.filteredUserDevices)
+
                     this.filteredUserDevices = this.filteredUserDevices.map((item) => {
                         item.device_desc = (item.device_desc == null) ? MessagesConstants.NO_DESCRIPTION : item.device_desc
                         return item

@@ -41,6 +41,20 @@ class ValidatorRules extends Validator
                 ];
                 break;
 
+            case 'albums':
+                $_rulesArray = [
+                    'album_name' => 'required|min:3',
+                    'album_desc' => 'required',
+                ];
+                break;
+
+            case 'images':
+                $_rulesArray = [
+                    'image_name' => 'required|min:3',
+                    'album_id' => 'required',
+                ];
+                break;
+
             default:
                 $_rulesArray =  [];
                 break;

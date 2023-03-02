@@ -7,7 +7,7 @@
 import './bootstrap';
 import { createApp } from 'vue';
 import { defineAsyncComponent } from 'vue';
-
+import Navbar from './components/header/Navbar.vue';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -15,24 +15,14 @@ import { defineAsyncComponent } from 'vue';
  * to use in your application's views. An example is included for you.
  */
 
-const app = createApp({});
+// import { Vue } from 'vue'
+// import { VueRouter } from 'vue-router'
 
-import Navbar from './components/header/Navbar.vue';
-
-app.component('Navbar', Navbar);
-
-app.component('device-list', defineAsyncComponent(() =>
-  import('./components/devices/Devices.vue')
-))
+// Vue.use(VueRouter)
+import router from './router'
 import Toaster from './components/common/Toaster.vue';
+
+const app = createApp({});
+app.component('Navbar', Navbar);
 app.component('toaster', Toaster);
-
-app.component('device-type-list', defineAsyncComponent(() =>
-  import('./components/device_types/DeviceTypes.vue')
-))
-
-app.component('device-user-list', defineAsyncComponent(() =>
-  import('./components/user_devices/UserDevices.vue')
-))
-
-app.mount('#app');
+app.use(router).mount('#app');

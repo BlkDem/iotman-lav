@@ -58,9 +58,9 @@
     <div id="app" class="container text-center m-20">
         <Navbar ref="navbar"></Navbar>
         <Toaster ref="toaster"></Toaster>
-        <device-list ref="DeviceRef"></device-list>
-        <device-type-list ref="DeviceTypeRef"></device-type-list>
-        <device-user-list ref="DeviceUserRef"></device-user-list>
+        <!-- <device-list ref="DeviceRef"></device-list> -->
+        <!-- <device-type-list ref="DeviceTypeRef"></device-type-list>
+        <device-user-list ref="DeviceUserRef"></device-user-list> -->
     </div>
 
     <!-- Footer -->

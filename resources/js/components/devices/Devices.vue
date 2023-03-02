@@ -42,7 +42,7 @@
         </nav>
 
         <div>
-            <h5 class="text-primary my-2">{{ dataDescription }}</h5>
+            <h5 class="text-primary my-2">{{ dataDescription }} </h5>
         </div>
 
         <div class="row my-2" v-if="!compactView">
@@ -251,6 +251,7 @@
                             this.filteredDevices.splice(key, 1);
                             this.devices = this.filteredDevices;
                             console.log(key, id, " - deleted");
+
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.PROCESS_SUCCESSFULLY,
                                 MessagesConstants.DELETED_MESSAGE
@@ -329,6 +330,7 @@
 
                 if (_add) {
                     //creating Device via API
+                    console.log(this.$root.$refs, this.$refs, this.$parent.$refs)
                     axios
                         .post(APIConstants.api_device_create, {
                                 device_name: this.$refs.addDevice.device_name,
@@ -352,6 +354,7 @@
                             this.filteredDevices.push(newDevice)
                             this.fillEmptyValues()
                             this.devices = this.filteredDevices
+
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.PROCESS_SUCCESSFULLY,
                                 resp["data"].device_name + ': ' + MessagesConstants.ADDED_MESSAGE
@@ -365,7 +368,7 @@
                             );
                         })
                         .catch((error) => {
-                             console.log(error.response.data)
+                            //  console.log(error.response.data)
 
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.INSERTING_ERROR,
@@ -438,7 +441,7 @@
                         })
 
                         .catch((error) => {
-                            console.log(error.response?.data)
+                            // console.log(error.response?.data)
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.INSERTING_ERROR,
                                 ParsingErrors.getError(error),

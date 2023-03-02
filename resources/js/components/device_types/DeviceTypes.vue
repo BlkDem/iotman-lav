@@ -1,6 +1,6 @@
 <template>
 
-    <div v-show="deviceTypesVisible">
+    <div>
         <AddDeviceType ref="addDeviceType"></AddDeviceType>
 
         <ConfirmDialogue ref="confirmDialogue" />
