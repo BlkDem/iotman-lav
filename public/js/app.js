@@ -39240,7 +39240,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".flex {\n    display: flex;\n}\n\n.image-badge {\n    width: 24px;\n    height: 24px;\n    margin-left: -10px;\n}\n\n.device-image {\n    width: 40px;\n    /*margin-bottom: -15px;\n    margin-top: -15px;*/\n    border-radius: 5px;\n}\n\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n    .device-image {\n        width: 36px;\n        margin-top: -23px;\n        margin-bottom: -29px;\n        margin-left: 210px;\n        border-radius: 10px;\n        //box-shadow: #eee 0px 0px 8px;\n    }\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".flex {\n    display: flex;\n}\n\n/*.image-badge {\n    width: 24px;\n    height: 24px;\n    margin-left: -10px;\n}*/\n\n.device-image {\n    width: 40px;\n    /*margin-bottom: -15px;\n    margin-top: -15px;*/\n    border-radius: 5px;\n}\n\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n    .device-image {\n        width: 36px;\n        margin-top: -23px;\n        margin-bottom: -29px;\n        margin-left: 210px;\n        border-radius: 10px;\n        //box-shadow: #eee 0px 0px 8px;\n    }\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

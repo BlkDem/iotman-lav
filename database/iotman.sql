@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Мар 02 2023 г., 16:18
+-- Время создания: Мар 03 2023 г., 12:24
 -- Версия сервера: 10.4.27-MariaDB
 -- Версия PHP: 8.1.12
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- База данных: `iotman`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `albums`
+--
+
+CREATE TABLE `albums` (
+  `id` int(11) NOT NULL,
+  `album_name` varchar(255) NOT NULL,
+  `album_desc` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `albums`
+--
+
+INSERT INTO `albums` (`id`, `album_name`, `album_desc`, `created_at`, `updated_at`) VALUES
+(1, 'Umolab Devices', 'Devices produced by Umolab Group', '2023-03-02 15:59:19', '2023-03-02 15:59:19'),
+(2, 'test', 'desc', '2023-03-02 13:28:20', '2023-03-02 13:28:20');
 
 -- --------------------------------------------------------
 
@@ -138,6 +160,32 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `images`
+--
+
+CREATE TABLE `images` (
+  `id` int(11) NOT NULL,
+  `image_name` varchar(255) NOT NULL,
+  `image_desc` varchar(255) DEFAULT NULL,
+  `album_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `images`
+--
+
+INSERT INTO `images` (`id`, `image_name`, `image_desc`, `album_id`, `created_at`, `updated_at`) VALUES
+(1, 'blog.jpg', 'Devices produced by Umolab Group', 1, '2023-03-02 13:34:17', '2023-03-02 13:34:17'),
+(2, 'd_200.png', 'Devices produced by Umolab Group', 1, '2023-03-02 13:36:11', '2023-03-02 13:36:11'),
+(3, 'dp_200.png', 'Devices produced by Umolab Group', 1, '2023-03-02 13:36:11', '2023-03-02 13:36:11'),
+(4, 'g1_200.png', 'Devices produced by Umolab Group', 1, '2023-03-02 13:36:11', '2023-03-02 13:36:11'),
+(5, 'u1_200.png', 'Devices produced by Umolab Group', 1, '2023-03-02 13:36:11', '2023-03-02 13:36:11');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `migrations`
 --
 
@@ -158,7 +206,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2022_08_08_070048_device_types', 1),
 (6, '2022_08_09_155326_devices', 1),
-(7, '2022_08_09_160325_user_devices', 1);
+(7, '2022_08_09_160325_user_devices', 1),
+(8, '2023_03_02_152456_create_albums_table', 2),
+(9, '2023_03_02_160023_create_images_table', 3);
 
 -- --------------------------------------------------------
 
@@ -222,7 +272,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (17, 'App\\Models\\User', 4, 'UmolabApp', '69b4ba4e2526ebf5f322529837c32d572a2699715900fa125ea1cafd60345d39', '[\"*\"]', NULL, '2023-02-15 16:29:48', '2023-02-15 16:29:48'),
 (18, 'App\\Models\\User', 4, 'UmolabApp', '9b18bcb31625a6fe148e2a83e4c1f83b521292ffd0eb7813730fcf3cb8e78fee', '[\"*\"]', '2023-02-15 16:41:04', '2023-02-15 16:34:16', '2023-02-15 16:41:04'),
 (19, 'App\\Models\\User', 4, 'UmolabApp', '18e5eea348ff24917ea3bf0913b2f9e5e79ae63f1ad10bda0f4a8bc7f8100611', '[\"*\"]', NULL, '2023-02-15 16:34:56', '2023-02-15 16:34:56'),
-(20, 'App\\Models\\User', 4, 'UmolabApp', 'b790cee20b62d79349bc74775a666a112ace3e5035a36dac8d1c0760d4e07dc3', '[\"*\"]', '2023-03-02 05:59:14', '2023-02-15 16:43:45', '2023-03-02 05:59:14');
+(20, 'App\\Models\\User', 4, 'UmolabApp', 'b790cee20b62d79349bc74775a666a112ace3e5035a36dac8d1c0760d4e07dc3', '[\"*\"]', '2023-03-03 07:49:40', '2023-02-15 16:43:45', '2023-03-03 07:49:40');
 
 -- --------------------------------------------------------
 
@@ -325,6 +375,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
+-- Индексы таблицы `albums`
+--
+ALTER TABLE `albums`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `devices`
 --
 ALTER TABLE `devices`
@@ -343,6 +399,14 @@ ALTER TABLE `device_types`
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Индексы таблицы `images`
+--
+ALTER TABLE `images`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `image_name_idx` (`image_name`),
+  ADD KEY `album_id` (`album_id`);
 
 --
 -- Индексы таблицы `migrations`
@@ -384,6 +448,12 @@ ALTER TABLE `user_devices`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `albums`
+--
+ALTER TABLE `albums`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT для таблицы `devices`
 --
 ALTER TABLE `devices`
@@ -402,10 +472,16 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT для таблицы `images`
+--
+ALTER TABLE `images`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT для таблицы `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT для таблицы `personal_access_tokens`
@@ -434,6 +510,12 @@ ALTER TABLE `user_devices`
 --
 ALTER TABLE `devices`
   ADD CONSTRAINT `devices_device_type_id_foreign` FOREIGN KEY (`device_type_id`) REFERENCES `device_types` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `images`
+--
+ALTER TABLE `images`
+  ADD CONSTRAINT `images_ibfk_1` FOREIGN KEY (`album_id`) REFERENCES `albums` (`id`) ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `user_devices`
