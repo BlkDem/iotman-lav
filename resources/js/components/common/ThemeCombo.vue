@@ -1,6 +1,6 @@
 <template>
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle active"
+        <a class="nav-link dropdown-toggle active  a_cap"
             data-bs-toggle="dropdown"
             href="#"
             role="button"
@@ -8,8 +8,8 @@
             aria-expanded="false">
                 <!-- {{ themeCaption }}  -->
                 {{ (currentTheme=='')?'(Default)': currentTheme }}</a>
-        <div class="dropdown-menu theme-dropdown">
-            <a class="dropdown-item" href="#" v-for="theme in themes" :key="theme.id" @click='changeTheme(theme)'>{{ theme }}</a>
+        <div class="dropdown-menu theme-dropdown ">
+            <a class="dropdown-item a_cap" href="#" v-for="theme in themes" :key="theme.id" @click='changeTheme(theme)'>{{ theme }}</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" @click="changeTheme('Default')">Default</a>
         </div>

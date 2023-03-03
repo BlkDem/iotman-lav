@@ -10,34 +10,33 @@
 
           <div class="collapse navbar-collapse" id="navbarColor01">
               <ul class="navbar-nav me-auto">
-                  <li class="nav-item" v-for="(route, key) in routes"
-                        v-bind:key="key" v-bind:name="route.name">
+                  <li class="nav-item" v-for="(route, key) in routes" v-bind:key="key" v-bind:name="route.name">
 
-                        <router-link class="nav-link" v-bind:to="route.path"
-                                v-bind:class="{ active: this.$router.currentRoute._value.path === route.path }">
-                                <i v-if="route.icon != ''" :class="route.icon"></i> {{ route.name }}
-                        </router-link>
+                      <router-link class="nav-link" v-bind:to="route.path"
+                          v-bind:class="{ active: this.$router.currentRoute._value.path === route.path }">
+                          <i v-if="route.icon != ''" :class="route.icon" class="ml-1"></i> {{ route.name }}
+                      </router-link>
                   </li>
               </ul>
           </div>
           <div class="d-flex">
               <ul class="navbar-nav me-auto">
+                  <ThemeCombo ref="themeCombo"></ThemeCombo>
+              </ul>
+              <ul class="navbar-nav me-auto ">
+                  <LangCombo ref="langCombo"></LangCombo>
+              </ul>
+              <ul class="navbar-nav me-auto">
                   <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button"
-                          aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i>
-                      </a>
-                      <div class="dropdown-menu theme-dropdown">
+                      <a class="nav-link dropdown-toggle active px-2" data-bs-toggle="dropdown" href="#" role="button"
+                          aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i></a>
+                      <div class="dropdown-menu" style="margin-left: -106px;">
                           <a class="dropdown-item" href="#">{{ userName }}</a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="#" @click="logout()">{{ userLogoutText }}</a>
                       </div>
                   </li>
-              </ul>
-              <ul class="navbar-nav me-auto">
-                  <ThemeCombo ref="themeCombo"></ThemeCombo>
-              </ul>
-              <ul class="navbar-nav me-auto">
-                  <LangCombo ref="langCombo"></LangCombo>
+
               </ul>
           </div>
           <!-- <router-view /> -->

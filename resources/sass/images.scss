@@ -19,6 +19,10 @@
     margin-bottom: 00px;
 }
 
+a.a_cap:first-letter {
+    text-transform: uppercase;
+}
+
 @media only screen and (min-width: 320px) and (max-width: 480px) {
     .device-image {
         width: 100px;
@@ -34,5 +38,12 @@
     .container {
         padding: 0;
         width: 100%;
+    }
+
+    .navbar > .container-fluid {
+        display: flex;
+        flex-wrap: inherit;
+        align-items: center;
+        justify-content: flex-start;
     }
 }
