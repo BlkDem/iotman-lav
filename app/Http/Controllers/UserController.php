@@ -5,12 +5,37 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Middleware\ValidatorRules;
+use App\Http\Controllers\BaseController;
+use App\Http\Controllers\PaginatorController;
 use Exception;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
-    public function index()
+
+    public function index(){
+
+        $res = User::orderBy('name', 'asc')->get();
+
+        $paginator = PaginatorController::Paginate($res->count(), 1, 1);
+
+        return $this->sendResponse($res, "Device Types List", $paginator);
+    }
+
+    public function page($currentPage=0, $itemsPerPage=10)
     {
+
+        $page = (int)$currentPage;
+
+        $offset = $itemsPerPage*--$page;
+        $res = User::limit($itemsPerPage)->offset($offset)->orderBy('name', 'asc')->get();
+        $total = User::get();
+
+        $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
+
+        return $this->sendResponse($res, "Users List", $paginator);
+
+
+
         $usersDataSet = User::get();
         if ($usersDataSet->count() ==0)
         {

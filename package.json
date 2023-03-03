@@ -11,6 +11,7 @@
     },
     "devDependencies": {
         "@popperjs/core": "^2.10.2",
+        "@types/vue-cropperjs": "^4.1.2",
         "@vitejs/plugin-vue": "^3.0.1",
         "axios": "^0.27",
         "bootstrap": "^5.2.0",
@@ -27,13 +28,16 @@
         "@vue/compiler-sfc": "^3.2.37",
         "bootstrap-vue": "^2.22.0",
         "bootswatch": "^5.2.0",
+        "cropperjs": "^1.5.13",
         "fs": "^0.0.1-security",
         "fs-extra": "^10.1.0",
         "moment": "^2.29.4",
         "mqtt": "^4.3.7",
         "vue-axios": "^3.4.1",
+        "vue-cropperjs": "^5.0.0",
         "vue-loader": "^17.0.0",
         "vue-luxon": "^0.10.0",
-        "vue-router": "^4.1.4"
+        "vue-router": "^4.0.13",
+        "vue-toasted": "^1.1.28"
     }
 }

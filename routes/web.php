@@ -13,5 +13,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/logout', [LoginController::class, 'logout']);
  });
 Route::get('/', [RootController::class, 'index']);
-Route::get('/home', [RootController::class, 'index']);
+Route::get('/device_types', [RootController::class, 'index']);
+Route::get('/user_devices', [RootController::class, 'index']);
+Route::get('/devices', [RootController::class, 'index']);
+Route::get('/imagelib', [RootController::class, 'index']);
+// Route::get('/home', [RootController::class, 'index']);
 Auth::routes();

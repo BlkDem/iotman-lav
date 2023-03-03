@@ -19,14 +19,14 @@
    -->
 
     <?php
-    echo "<script>var _currentTheme=''</script>";
+    echo "<script>var _newTheme='Default'</script>";
     $_themeCss = '/css/app.css';
     $_themed = isset($_GET["theme"]);
     if ($_themed) {
         $_themeName = $_GET["theme"];
         if (file_exists(public_path('/css/' . $_themeName . '/app.css'))) {
             $_themeCss = '/css/' . $_themeName . '/app.css';
-            echo "<script>_currentTheme='$_themeName'</script>";
+            echo "<script>_newTheme='$_themeName'</script>";
         }
     }
     ?>
@@ -58,9 +58,9 @@
     <div id="app" class="container text-center m-20">
         <Navbar ref="navbar"></Navbar>
         <Toaster ref="toaster"></Toaster>
-        <device-list ref="DeviceRef"></device-list>
-        <device-type-list ref="DeviceTypeRef"></device-type-list>
-        <device-user-list ref="DeviceUserRef"></device-user-list>
+        <!-- <device-list ref="DeviceRef"></device-list> -->
+        <!-- <device-type-list ref="DeviceTypeRef"></device-type-list>
+        <device-user-list ref="DeviceUserRef"></device-user-list> -->
     </div>
 
     <!-- Footer -->

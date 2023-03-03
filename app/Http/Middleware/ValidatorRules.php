@@ -34,9 +34,24 @@ class ValidatorRules extends Validator
 
             case 'users':
                 $_rulesArray = [
-                    'name' => 'required|min:3',
-                    'email' => 'required|min:6',
-                    'password' => 'required|min:8',
+                    'name' => 'required',
+                    'email' => 'required|email',
+                    'password' => 'required',
+                    'confirm_password' => 'required|same:password',
+                ];
+                break;
+
+            case 'albums':
+                $_rulesArray = [
+                    'album_name' => 'required|min:3',
+                    'album_desc' => 'required',
+                ];
+                break;
+
+            case 'images':
+                $_rulesArray = [
+                    'image_name' => 'required|min:3',
+                    'album_id' => 'required',
                 ];
                 break;
 

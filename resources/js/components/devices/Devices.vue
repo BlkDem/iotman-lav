@@ -15,7 +15,7 @@
                         </li>
                         <li class="nav-item dropdown me-auto vertical-center">
                             <a class="nav-link dropdown-toggle mx-2" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">{{ SortName }}</a>
+                                aria-haspopup="true" aria-expanded="false">{{ SortingPopupCaption }}</a>
                             <div class="dropdown-menu w-100">
                                 <a class="dropdown-item" href="#" v-for="rule in sortRules" :key="rule.key"
                                     :value="rule.key" @click="doSort(rule.key)">{{ rule.title }}</a>
@@ -27,10 +27,10 @@
                         </li>
                     </ul>
                     <div class="d-flex">
-                        <button class="btn btn-primary" @click="compactView = true">
+                        <button class="btn btn-primary " :class="{'disabled' : compactView}" @click="compactView = true">
                             <i class="fas fa-list"></i>
                         </button>
-                        <button class="btn btn-primary mx-2" @click="compactView = false">
+                        <button class="btn btn-primary mx-2" :class="{'disabled' : !compactView}" @click="compactView = false">
                             <i class="fas fa-th-large"></i>
                         </button>
                         <button class="btn btn-primary" @click="setDevice">
@@ -42,11 +42,11 @@
         </nav>
 
         <div>
-            <h5 class="text-primary my-2">{{ dataDescription }}</h5>
+            <h5 class="text-primary my-2">{{ dataDescription }} </h5>
         </div>
 
-        <div class="row my-2" v-if="!getCompactView">
-            <div class="col-sm-4 col-xs-4 col-lg-4 p-2" v-for="(device, key) in filteredDevices" v-bind:key="key"
+        <div class="row my-2" v-if="!compactView">
+            <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(device, key) in filteredDevices" v-bind:key="key"
                 v-bind:id="device.id">
                 <div class="card border-light">
                     <h3 class="card-header">
@@ -58,12 +58,12 @@
                             {{ device.device_type_name }}
                         </h5>
                         <h6 class="card-subtitle text-muted">
-                            {{ device.device_desc ?? 'no description'}}
+                            {{ device.device_desc }}
                         </h6>
                     </div>
                     <img v-bind:src="device.device_type_image" />
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">HWID: {{ device.device_hwid ?? 'no hardware address' }}</li>
+                        <li class="list-group-item">HWID: {{ device.device_hwid }}</li>
                     </ul>
                     <div class="card-body">
                         <button class="btn btn-info btn-width-40 mx-1" @click="doEdit(key, device.id)">
@@ -81,26 +81,27 @@
         </div>
 
         <!-- compact view -->
-        <div v-show="getCompactView" class="my-2">
-            <div class="card border-primary mb-4 w-100" v-for="(device, key) in filteredDevices" v-bind:key="key"
-                v-bind:id="device.id">
-                <div class="card-header">
+        <div v-show="compactView" class="my-2">
+            <div class="card border-primary mb-1 w-100 fade-in" v-for="(device, key) in filteredDevices" v-bind:key="key"
+                v-bind:id="device.id"   >
+                <div class="mx-2 my-2">
                     <div class="row vertical-center">
-                        <div class="col-sm-1 col-xs-1 col-lg-1">
+                        <div class="col-sm-1 col-xs-1 col-lg-1 flex">
                             <img v-bind:src="device.device_type_image" class="device-image" />
                         </div>
+                        <div class="col-sm-1 col-xs-1 col-lg-1 align-left">
+                                <span class="text-info"> {{ device.id }} </span>
+                        </div>
+                        <div class="col-sm-2 col-xs-2 col-lg-2 align-left">
+                                {{ device.device_name}}
+                        </div>
                         <div class="col-sm-3 col-xs-3 col-lg-3 align-left">
-                            <h5>
-                                {{ device.device_name
-                }}<span class="text-info"> ({{ device.id }}) </span>
-                            </h5>
+                                <span class="text-info">{{ device.device_type_name }} </span>
                         </div>
-                        <div class="col-sm-6 col-xs-6 col-lg-6 align-left">
-                            <h6>
-                                {{ device.device_type_name }}: HWID ({{ device.device_hwid ?? 'no hardware address ' }})
-                            </h6>
+                        <div class="col-sm-3 col-xs-3 col-lg-3 align-left">
+                                {{ device.device_hwid ?? 'no hardware address ' }}
                         </div>
-                        <div class="col-sm-2 col-xs-2 col-lg-2 align-right">
+                        <div class="col-sm-2 col-xs-2 col-lg-2 edit-buttons">
                             <button class="btn btn-info mx-2" @click="doEdit(key, device.id)">
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
@@ -126,6 +127,8 @@
     import DeviceStringConstants from "../../components/strings_constants/devices/index";
     import MessagesConstants from "../strings_constants/strings.js";
     import APIConstants from "../../rest_api.js";
+    import Sorting from "../common/js/Sorting.js";
+    import ParsingErrors from "../common/js/ParsingErrors.js";
     // import MyMqtt from '../components/MyMqtt.vue';
 
     export default {
@@ -170,7 +173,7 @@
                 localStorage.DeviceCompactView = this.compactView;
             }
             this.dataDescription = DeviceStringConstants.DEVICE_DATA_DESCRIPTION; //device dataset description
-            this.getDevices(); //loading devices dataset via API
+            this.getData(); //loading devices dataset via API
             console.log("API version: ", APIConstants.apiVersion);
         },
 
@@ -195,57 +198,19 @@
         },
 
         computed: {
-            SortName() {
-                let res =
-                    this.sortColumn === "id" ?
-                    MessagesConstants.SORT_BY_ID :
-                    MessagesConstants.SORT_BY_NAME;
-                res += " (";
-                res += !this.sortDirection ?
-                    MessagesConstants.SORT_ASC :
-                    MessagesConstants.SORT_DESC;
-                res += ")";
-                return res;
+            SortingPopupCaption() {
+                return MessagesConstants.SortingCaption(this.sortColumn, this.sortDirection)
             },
 
-            getCompactView() {
-                return this.compactView;
-            },
+            // getCompactView() {
+            //     return this.compactView;
+            // },
         },
 
         methods: {
-            doSort($c) {
-                const column = $c;
-                this.sortColumn = column;
-                const order = this.sortDirection;
-
-                this.filteredDevices.sort(function (a, b) {
-                    if (column === "id") {
-                        var nameA = a[column];
-                        var nameB = b[column];
-                    } else {
-                        var nameA = a[column] + "".toUpperCase();
-                        var nameB = b[column] + "".toUpperCase();
-                    }
-
-                    if (order && nameA > nameB) {
-                        return -1;
-                    }
-
-                    if (order && nameA < nameB) {
-                        return 1;
-                    }
-
-                    if (!order && nameA < nameB) {
-                        return -1;
-                    }
-
-                    if (!order && nameA > nameB) {
-                        return 1;
-                    }
-
-                    return 0;
-                });
+            doSort($column) {
+                Sorting.doSort(this.filteredDevices, $column, this.sortDirection)
+                this.sortColumn = $column;
             },
 
             doFilter() {
@@ -266,19 +231,10 @@
                 // return res;
             },
 
-            //convert 'null' 'undefined' to predefined consts
-            processStrings() {
-                this.filteredDevices.forEach((dev, key) => {
-                    this.filteredDevices[key].device_desc = dev.device_desc ?? MessagesConstants.NO_DESCRIPTION;
-                    this.filteredDevices[key].device_hwid = dev.device_hwid ?? DeviceStringConstants.NO_HWID;
-                    this.filteredDevices[key].device_pass = dev.device_pass ?? DeviceStringConstants.NO_PASS;
-                });
-            },
-
             //deleting devices
             async doDelete(key, id) {
                 //deleting confirmation dialogue
-                const ok = await this.$refs.confirmDialogue.showDialogue({
+                const confirmDelete = await this.$refs.confirmDialogue.showDialogue({
                     title: DeviceStringConstants.DEVICE_DELETING_CAPTION,
                     message: DeviceStringConstants.DEVICE_DELETING_MESSAGE +
                         '"' +
@@ -287,7 +243,7 @@
                     okButton: DeviceStringConstants.DEVICE_DELETING_CAPTION,
                 });
 
-                if (ok) {
+                if (confirmDelete) {
                     //deleting devices item via API
                     axios
                         .delete(APIConstants.api_device_delete + id)
@@ -295,9 +251,10 @@
                             this.filteredDevices.splice(key, 1);
                             this.devices = this.filteredDevices;
                             console.log(key, id, " - deleted");
-                            this.$root.$refs.toaster.setMessage(
-                                MessagesConstants.DELETED_MESSAGE,
-                                MessagesConstants.PROCESS_SUCCESSFULLY
+
+                            this.$root.$refs.toaster.showMessage(
+                                MessagesConstants.PROCESS_SUCCESSFULLY,
+                                MessagesConstants.DELETED_MESSAGE
                             );
                         })
                         .catch((error) => {
@@ -308,14 +265,37 @@
                 }
             },
 
+            //Fill empty values
+            fillEmptyValues() {
+                this.filteredDevices = this.filteredDevices.map((item) => {
+                item.device_desc = item.device_desc ?? MessagesConstants.NO_DESCRIPTION
+                item.device_hwid = item.device_hwid ?? MessagesConstants.NO_HWID
+                return item
+                })
+            },
+
             //loading devices dataset via API
-            getDevices(api_url) {
-                fetch(APIConstants.api_devices_read)
+            async getData(_currentPage=1, _itemsPerPage=5) {
+                await fetch(APIConstants.api_devices_read_page + _currentPage + "/" + _itemsPerPage)
                     .then((response) => response.json())
                     .then((response) => {
                         this.filteredDevices = response.data;
-                        this.processStrings();
-                        //console.log(response.data);
+
+                        //Paginator setup
+                        this.$refs.paginatorDevices.setPaginator(
+                            {
+                                pagesCount: response.paginator.PagesCount,
+                                currentPage: response.paginator.CurrentPage,
+                                itemsPerPage: response.paginator.ItemsPerPage,
+                                recordsCount: response.paginator.RecordsCount
+                            }
+                        )
+
+                        this.fillEmptyValues()
+
+                        // console.log(this.filteredDevices)
+
+                        //store items buffer
                         this.devices = this.filteredDevices;
                         this.doSort(this.sortColumn);
                     })
@@ -323,7 +303,8 @@
             },
 
             //setting Device Type to Device
-            async setDeviceType($device_type_id, $item) {
+            async setDeviceType($device_type_id, $item) { //attach device type name and image to device
+                console.log($device_type_id, $item)
                 axios
                     .get(APIConstants.api_device_types_read + $device_type_id)
                     .then((resp_type) => {
@@ -339,121 +320,134 @@
                     edit_mode: false,
                     title: DeviceStringConstants.DEVICE_ADDING_TITLE,
                     message: DeviceStringConstants.DEVICE_ADDING_MESSAGE,
-                    device_name: DeviceStringConstants.DEVICE_NAME_PLACEHOLDER,
-                    device_desc: DeviceStringConstants.DEVICE_DESC_PLACEHOLDER,
-                    device_hwid: DeviceStringConstants.DEVICE_HWID_PLACEHOLDER,
-                    device_pass: DeviceStringConstants.DEVICE_PASS_PLACEHOLDER,
-                    device_type_id: DeviceStringConstants.DEVICE_DEVICETYPEID_PLACEHOLDER,
+                    device_name: "",
+                    device_desc: "",
+                    device_hwid: "",
+                    device_pass: "",
+                    device_type_id: "",
                     okButton: DeviceStringConstants.DEVICE_ADDBUTTON_CAPTION,
                 });
 
                 if (_add) {
                     //creating Device via API
+                    console.log(this.$root.$refs, this.$refs, this.$parent.$refs)
                     axios
-                        .post(
-                            APIConstants.api_device_create +
-                            "?device_name=" +
-                            this.$refs.addDevice.device_name +
-                            "&device_type_id=" +
-                            this.$refs.addDevice.device_type_id +
-                            "&device_pass=" +
-                            this.$refs.addDevice.device_pass +
-                            "&device_hwid=" +
-                            this.$refs.addDevice.device_hwid +
-                            "&device_desc=" +
-                            this.$refs.addDevice.device_desc
+                        .post(APIConstants.api_device_create, {
+                                device_name: this.$refs.addDevice.device_name,
+                                device_type_id: this.$refs.addDevice.device_type_id,
+                                device_hwid:  this.$refs.addDevice.device_hwid,
+                                device_desc: this.$refs.addDevice.device_desc
+                            }
                         )
                         .then((resp) => {
-                            console.log(resp["data"]);
+                            // console.log(resp);
                             let newDevice = {
                                 device_name: resp["data"].device_name,
                                 device_desc: resp["data"].device_desc,
-                                device_pass: resp["data"].device_pass,
+                                // device_pass: resp["data"].device_pass,
                                 device_hwid: resp["data"].device_hwid,
                                 device_type_id: resp["data"].device_type_id,
                                 device_type_name: "",
                                 device_type_image: "",
                                 id: resp["data"].id,
-                            };
-                            this.filteredDevices.push(newDevice);
-                            this.$root.$refs.toaster.setMessage(
-                                MessagesConstants.ADDED_MESSAGE,
-                                MessagesConstants.PROCESS_SUCCESSFULLY
-                            );
+                            }
+                            this.filteredDevices.push(newDevice)
+                            this.fillEmptyValues()
+                            this.devices = this.filteredDevices
+
+                            this.$root.$refs.toaster.showMessage(
+                                MessagesConstants.PROCESS_SUCCESSFULLY,
+                                resp["data"].device_name + ': ' + MessagesConstants.ADDED_MESSAGE
+                            )
                         })
                         .then((resp) => {
+
                             this.setDeviceType(
-                                this.filteredDevices[this.filteredDevices.length - 1]
-                                .device_type_id,
-                                this.filteredDevices[this.filteredDevices.length - 1]
+                                this.filteredDevices.at(-1).device_type_id,
+                                this.filteredDevices.at(-1)
                             );
                         })
                         .catch((error) => {
-                            console.log(error);
-                        });
+                            //  console.log(error.response.data)
+
+                            this.$root.$refs.toaster.showMessage(
+                                MessagesConstants.INSERTING_ERROR,
+                                ParsingErrors.getError(error),
+                                ParsingErrors.ERROR_LEVEL_ERROR
+                            )
+                        })
                 } else {
-                    console.log(MessagesConstants.INSERTING_CANCELLED);
+                    console.log(MessagesConstants.INSERTING_CANCELLED)
                 }
             },
 
             //edit Device
             async doEdit(key, id) {
                 //opening Device Dialogue
-                console.log(key, id);
+                //console.log(key, id)
+                // this.$refs.addDevice.setDeviceTypeID(this.filteredDevices[key].device_type_id)
                 const _edit = await this.$refs.addDevice.showDialogue({
                     edit_mode: true,
                     title: DeviceStringConstants.DEVICE_EDITING_TITLE,
                     message: DeviceStringConstants.DEVICE_EDITING_MESSAGE,
                     device_name: this.filteredDevices[key].device_name,
-                    device_desc: this.filteredDevices[key].device_desc,
-                    device_hwid: this.filteredDevices[key].device_hwid,
-                    device_pass: this.filteredDevices[key].device_pass,
+                    device_desc: (this.filteredDevices[key].device_desc === MessagesConstants.NO_DESCRIPTION)? "":
+                                                                            this.filteredDevices[key].device_desc,
+                    device_hwid: (this.filteredDevices[key].device_hwid === MessagesConstants.NO_HWID)? "":
+                                                                            this.filteredDevices[key].device_hwid,
                     device_type_id: this.filteredDevices[key].device_type_id,
                     okButton: DeviceStringConstants.DEVICE_EDITBUTTON_CAPTION,
-                });
+                })
 
                 if (_edit) {
-                    let editDevicePost =
-                        APIConstants.api_device_update +
-                        id +
-                        "/?device_name=" +
-                        this.$refs.addDevice.device_name +
-                        "&device_type_id=" +
-                        this.$refs.addDevice.device_type_id +
-                        "&device_desc=" +
-                        this.$refs.addDevice.device_desc +
-                        "&device_hwid=" +
-                        this.$refs.addDevice.device_hwid +
-                        "&device_pass=" +
-                        this.$refs.addDevice.device_pass;
-                    console.log(editDevicePost);
+                    let editDevicePost = {
+                            device_name: this.$refs.addDevice.device_name,
+                            device_type_id: this.$refs.addDevice.device_type_id,
+                            device_desc: this.$refs.addDevice.device_desc,
+                            device_hwid: this.$refs.addDevice.device_hwid
+                        }
 
                     //editing Device via API
+
                     axios
-                        .put(editDevicePost)
+                        .put(APIConstants.api_device_update + id, editDevicePost)
                         .then((resp) => {
-                            console.log(resp["data"]);
+                            // console.log("response.data: ", resp.data);
                             this.filteredDevices[key].device_name = resp["data"].device_name;
                             this.filteredDevices[key].device_desc = resp["data"].device_desc;
-                            this.filteredDevices[key].device_type_id =
-                                resp["data"].device_type_id;
+                            this.filteredDevices[key].device_type_id = resp["data"].device_type_id;
                             this.filteredDevices[key].device_hwid = resp["data"].device_hwid;
-                            this.filteredDevices[key].device_pass = resp["data"].device_pass;
-                            this.$root.$refs.toaster.setMessage(
-                                MessagesConstants.EDITED_MESSAGE,
-                                MessagesConstants.PROCESS_SUCCESSFULLY
-                            );
+                            // this.filteredDevices[key].device_pass = resp["data"].device_pass;
+                            // console.log("devices: ", this.filteredDevices);
                         })
-                        .then((resp) => {
+                        .then(() => {
+
+                            this.fillEmptyValues()
                             this.devices = this.filteredDevices;
                             this.setDeviceType(
                                 this.filteredDevices[key].device_type_id,
                                 this.filteredDevices[key]
+                            )
+
+                            this.$root.$refs.toaster.showMessage(
+                                MessagesConstants.PROCESS_SUCCESSFULLY,
+                                MessagesConstants.EDITED_MESSAGE,
                             );
+
                         })
+
+                        .then(resp => {
+                            this.$root.$refs.DeviceUserRef.getData();
+                        })
+
                         .catch((error) => {
-                            console.log(error);
-                        });
+                            // console.log(error.response?.data)
+                            this.$root.$refs.toaster.showMessage(
+                                MessagesConstants.INSERTING_ERROR,
+                                ParsingErrors.getError(error),
+                                ParsingErrors.ERROR_LEVEL_ERROR
+                            )
+                        })
                 } else {
                     console.log(MessagesConstants.EDITING_CANCELLED);
                 }
@@ -470,36 +464,19 @@
 </script>
 
 <style lang="scss">
-    @import "../../../sass/aligns.scss";
-    //@import "../../../sass/lists.scss";
-
-    .vertical-center {
-        display: flex;
-        align-items: center;
-    }
-
-    .navbar-nav .dropdown-menu {
-        position: absolute;
-    }
-
-    .device-image {
-        width: 70px;
-        margin-top: -50%;
-        margin-bottom: -50%;
-        margin-left: -10px;
-        border-radius: 10px;
-        box-shadow: #eee 0px 0px 8px;
-    }
-
-    @media only screen and (min-width: 320px) and (max-width: 480px) {
-        .device-image {
-            width: 64px;
-            margin-top: -23px;
-            margin-bottom: -29px;
-            margin-left: 210px;
-            border-radius: 10px;
-            box-shadow: #eee 0px 0px 8px;
-        }
-    }
-
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 0.2s;
+}
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
 </style>

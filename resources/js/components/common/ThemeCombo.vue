@@ -9,7 +9,7 @@
         <div class="dropdown-menu theme-dropdown">
             <a class="dropdown-item" href="#" v-for="theme in themes" :key="theme.id" @click='changeTheme(theme)'>{{ theme }}</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" @click="changeTheme('')">Default</a>
+            <a class="dropdown-item" href="#" @click="changeTheme('Default')">Default</a>
         </div>
     </li>
 </template>
@@ -18,40 +18,52 @@
 import ThemesList from "../../themes.js";
 
 export default {
-  name: "ThemeCombo",
+    name: "ThemeCombo",
 
-  data () {
-    return {
-      themes:[],
-      currentTheme: '',
-      themeCaption: 'Theme'
+    data() {
+        return {
+            themes: [], //themes list
+            currentTheme: '', //binded current theme combo caption
+            themeCaption: 'Theme' //binded theme caption preffix
+        }
+    },
+
+    created() {
+        this.readThemes() //loading themes list from file themes.js
+    },
+
+    methods: {
+        readThemes() {
+            this.themes = [...ThemesList.Themes] //loading themes list
+
+            this.currentTheme = localStorage.Theme; // set binded theme combo caption
+
+            if (_newTheme === 'Default') { //check theme request param '_newTheme' - backend var in index.blade.php
+
+                 _newTheme = (localStorage.Theme !== '') ? localStorage.Theme : 'Default'; //set default theme
+                 localStorage.Theme = _newTheme; // save request param theme to storage
+                document.location.href = '/?theme=' + _newTheme; //redirect default or stored
+            }
+
+            this.changeTheme(_newTheme); //change theme
+        },
+
+        changeTheme(new_theme) { // changing theme
+            if (localStorage.Theme !== new_theme) { //no action if the same theme
+
+                localStorage.Theme = new_theme; //save a new theme
+                document.location.href = '/?theme=' + new_theme; //redirect with a new theme
+            }
+        },
+
     }
-  },
-
-  created() {
-    this.readThemes()
-    this.currentTheme = (_currentTheme === '')?'Default':_currentTheme; 
-  },
-  
-  methods: {
-    readThemes() {
-      this.themes = [...ThemesList.Themes]
-    },
-    changeTheme(_theme) {
-      this.currentTheme = _theme;
-      localStorage.Theme = this.currentTheme;
-      console.log(localStorage.Theme);
-      document.location.href = (_theme==='')?'/':'/?theme=' + _theme;
-    },
-
-  }
 }
 </script>
 
 <style lang="scss" scoped>
   .theme-dropdown {
-    margin-left: -32px; 
-    max-height: 400px; 
+    margin-left: -32px;
+    max-height: 400px;
     overflow-y: auto;
   }
 </style>

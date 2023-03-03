@@ -5,50 +5,52 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Device;
 use App\Http\Middleware\ValidatorRules;
+use App\Http\Controllers\BaseController as BaseController;
 use Exception;
 
-class DeviceController extends Controller
+class DeviceController extends BaseController
 {
     public function store(Request $request)
     {
-        $validator = ValidatorRules::MakeValidate($request, 'devices');  
+        $validator = ValidatorRules::MakeValidate($request, 'devices');
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
-        }           
+        }
         try {
             $newDevice = Device::create($request->all());
             return response()->json($newDevice, 201);
         }
         catch (Exception $e) {
-            return response()->json('Creating Record Error: ' . $e, 400);
+            return $this->sendError('Creating Record Error: ' . $e);
         }
     }
 
     public function update(Request $request, Device $updateDevice)
     {
-        $validator = ValidatorRules::MakeValidate($request, 'devices'); 
+        $validator = ValidatorRules::MakeValidate($request, 'devices');
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
-        }  
+        }
         try {
             $updateDevice->update($request->all());
             return response()->json($updateDevice, 200);
+            //return $this->sendResponse($updateDevice, "Device updated");
         }
         catch (Exception $e) {
-            return response()->json('Updating Record Error: ' . $e, 400);
+            return $this->sendError('Updating Record Error: ' . $e);
         }
     }
 
-    public function destroy(Request $request, Device $deleteDevice)
+    public function destroy($id)
     {
-        try {            
-            return ($deleteDevice->delete($request->all()) !== null)? 
-                response()->json(null, 204)
-                : 
-                response()->json('Error deleting', 200);
+        $deviceItem = Device::find($id);
+        if ($deviceItem === null) {
+            return $this->sendError("No Record for deleting Found");
         }
-        catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
-        }    
+
+        $deviceItem->delete($id);
+
+        return $this->sendResponse($deviceItem, "Device $id deleted");
+
     }
 }

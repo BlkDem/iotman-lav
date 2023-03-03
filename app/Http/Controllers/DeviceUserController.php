@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Device;
 use App\Models\DeviceUser;
 use Illuminate\Http\Request;
 use App\Http\Middleware\ValidatorRules;
 use Exception;
-use Illuminate\Database\Eloquent\Model;
+use App\Http\Controllers\BaseController as BaseController;
+// use Illuminate\Database\Eloquent\Model;
 
-class DeviceUserController extends Controller
+class DeviceUserController extends BaseController
 {
 
     public function index(){
@@ -80,15 +80,16 @@ class DeviceUserController extends Controller
      * @param  \App\Models\DeviceUser  $deviceUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, DeviceUser $deleteDeviceUser)
+    public function destroy($id)
     {
-        try {
-            return ($deleteDeviceUser->delete($request->all()) !== null)?
-                response()->json(null, 204)
-                :
-                response()->json('Error deleting', 200);
+
+        $userDeviceItem = DeviceUser::find($id);
+        if ($userDeviceItem == null) {
+            return $this->sendError("No Record for deleting Found");
         }
-        catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
-        }
-    }}
+
+        $userDeviceItem->delete($id);
+
+        return $this->sendResponse($userDeviceItem, "User Device $id deleted");
+    }
+}

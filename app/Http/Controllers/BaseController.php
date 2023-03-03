@@ -11,13 +11,17 @@ class BaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function sendResponse($result, $message)
+    public function sendResponse($result, $message, $paginator="")
     {
+
+        $_result = (isset($result["data"]))?$result["data"]:$result;
     	$response = [
             'success' => true,
-            'data'    => $result,
+            'data'    => $_result,
             'message' => $message,
+            'paginator' => $paginator
         ];
+        // dd(response()->json($response));
         return response()->json($response, 200);
     }
 

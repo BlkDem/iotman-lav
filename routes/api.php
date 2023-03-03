@@ -8,7 +8,9 @@ use App\Http\Controllers\DevicesViewController;
 use App\Http\Controllers\DeviceUserController;
 use App\Http\Controllers\DeviceUsersViewController;
 use App\Http\Controllers\Auth\UserinfoController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\UserDevicesCountController;
+use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,46 +24,84 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/user/{name}', function ($name) {
+//     //
+// })->where('name', '[A-Za-z]+');
+
 //Login
 Route::post('/login', [AuthController::class, 'signin']);
 
 //CRUD routes for table 'users'
 Route::middleware('auth:sanctum')->group( function () {
 
-Route::post('/users/create', [UserController::class, 'store']);
-Route::get('/users/read', [UserController::class, 'index']);
-Route::get('/users/read/{id}', [UserController::class, 'show']);
-Route::put('/users/update/{updateUser}', [UserController::class, 'update']);
-Route::delete('/users/delete/{deleteUser}', [UserController::class, 'destroy']);
+//CRUD routes for model 'users'
 
-//CRUD routes for table 'device_types'
+Route::controller(UserController::class)->group(function () {
+    Route::post('/user/create', 'store');
+    Route::get('/users/read', 'index');
+    Route::get('/users/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get('/user/read/{id}', 'show');
+    Route::put('/user/update/{updateUser}', 'update');
+    Route::delete('/user/delete/{id}', 'destroy');
+});
 
-Route::post('/device_types/create', [DeviceTypeController::class, 'store']);
-Route::get('/device_types/read', [DeviceTypeController::class, 'index']);
+//CRUD routes for model 'images'
+
+Route::controller(ImageController::class)->group(function () {
+    Route::post('/image/create', 'store');
+    Route::get('/images/read', 'index');
+    Route::get('/images/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get('/image/read/{id}', 'show');
+    Route::put('/image/update/{updateImage}', 'update');
+    Route::delete('/image/delete/{id}', 'destroy');
+});
+
+//CRUD routes for model 'albums'
+
+Route::controller(AlbumController::class)->group(function () {
+    Route::post('/album/create', 'store');
+    Route::get('/albums/read', 'index');
+    Route::get('/albums/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get('/album/read/{id}', 'show');
+    Route::put('/album/update/{updateImage}', 'update');
+    Route::delete('/album/delete/{id}', 'destroy');
+});
+
+//CRUD routes for model 'device_types'
+
+Route::post('/device_type/create', [DeviceTypeController::class, 'store']);
+Route::get('/device_types/read/', [DeviceTypeController::class, 'index']);
+Route::get('/device_types/read/page/{currentPage}/{itemsPerPage}', [DeviceTypeController::class, 'page']);
 Route::get('/device_types/read/{id}', [DeviceTypeController::class, 'show']);
-Route::put('/device_types/update/{updateDeviceType}', [DeviceTypeController::class, 'update']);
-Route::delete('/device_types/delete/{deleteDeviceType}', [DeviceTypeController::class, 'destroy']);
+Route::put('/device_type/update/{updateDeviceType}', [DeviceTypeController::class, 'update']);
+Route::delete('/device_type/delete/{id}', [DeviceTypeController::class, 'destroy']);
 
-//CRUD routes for table 'devices'
+//CRUD routes for model 'devices'
 
 Route::post('/devices/create', [DeviceController::class, 'store']);
 Route::get('/devices/read', [DevicesViewController::class, 'index']);
+Route::get('/devices/read/page/{currentPage}/{itemsPerPage}', [DevicesViewController::class, 'page']);
 Route::get('/devices/read/{id}', [DevicesViewController::class, 'show']);
 Route::put('/devices/update/{updateDevice}', [DeviceController::class, 'update']);
-Route::delete('/devices/delete/{deleteDevice}', [DeviceController::class, 'destroy']);
+Route::delete('/devices/delete/{id}', [DeviceController::class, 'destroy']);
 
-//CRUD routes for table 'user_devices'
+//CRUD routes for model 'user_devices'
 
-Route::post('/user_devices/create', [DeviceUserController::class, 'store']);
-Route::get('/user_devices/read', [DeviceUsersViewController::class, 'index']);
+Route::post('/user_device/create/', [DeviceUserController::class, 'store']);
+Route::get('/user_devices/read/', [DeviceUsersViewController::class, 'index']);
+Route::get('/user_devices/read/page/{currentPage}/{itemsPerPage}', [DeviceUsersViewController::class, 'page']);
 Route::get('/user_devices/read/{device_user_id}', [DeviceUsersViewController::class, 'show']);
-Route::put('/user_devices/update/{updateDeviceUser}', [DeviceUserController::class, 'update']);
-Route::delete('/user_devices/delete/{deleteDeviceUser}', [DeviceUserController::class, 'destroy']);
+Route::put('/user_device/update/{updateDeviceUser}', [DeviceUserController::class, 'update']);
+Route::delete('/user_device/delete/{id}', [DeviceUserController::class, 'destroy']);
 Route::get('/user_devices/show', [DeviceUserController::class, 'UserDevices']);
 
-//Auth Userinfo
+//User Devices Count
+Route::get('/user_device_count/read', [UserDevicesCountController::class, 'index']);
+Route::get('/user_device_count/read/{id}', [UserDevicesCountController::class, 'show']);
 
-    Route::get('/authuser', [UserinfoController::class, 'show']);
-    Route::get('/user', [AuthController::class, 'UserInfo']);
-    Route::get('/username', [AuthController::class, 'GetUserName']);
+//Auth Userinfo
+Route::get('/authuser', [UserinfoController::class, 'show']);
+Route::get('/user', [AuthController::class, 'UserInfo']);
+Route::get('/username', [AuthController::class, 'GetUserName']);
+
 });
