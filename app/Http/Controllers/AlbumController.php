@@ -31,7 +31,7 @@ class AlbumController extends BaseController
         $page = (int)$currentPage;
 
         $offset = $itemsPerPage*--$page;
-        $res = Album::limit($itemsPerPage)->offset($offset)->orderBy('device_type_name', 'asc')->get();
+        $res = Album::limit($itemsPerPage)->offset($offset)->orderBy('album_name', 'asc')->get();
         $total = Album::get();
 
         $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);

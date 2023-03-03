@@ -1,4 +1,5 @@
 <template>
+
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
       <div class="container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
@@ -9,21 +10,29 @@
 
           <div class="collapse navbar-collapse" id="navbarColor01">
               <ul class="navbar-nav me-auto">
-                  <li class="nav-item">
-                      <!-- <a class="nav-link" v-bind:class="{ active: isDeviceTypesActive }" @click="onDeviceTypesClick"
-                          href="#">{{ deviceTypesCaption }}</a> -->
-                          <router-link class="nav-link" to="/device_types">{{ deviceTypesCaption }}</router-link>
+                  <li class="nav-item" v-for="(route, key) in routes"
+                        v-bind:key="key" v-bind:name="route.name">
+                        <router-link class="nav-link" v-bind:to="route.path"
+                                v-bind:class="{ active: this.$router.currentRoute._value.path === route.path }">
+                            {{ route.name }}
+                        </router-link>
+                  </li>
+                  <!-- <li class="nav-item">
+                          <router-link class="nav-link" to="/devices"
+                                v-bind:class="{ active: this.$router.currentRoute._value.path == '/devices' }">
+                          {{ devicesCaption }}
+                          </router-link>
                   </li>
                   <li class="nav-item">
-                      <!-- <a class="nav-link" v-bind:class="{ active: isDevicesActive }" @click="onDevicesClick"
-                          href="#">{{ devicesCaption }}</a> -->
-                          <router-link class="nav-link" to="/devices">{{ devicesCaption }}</router-link>
+                          <router-link class="nav-link" to="/user_devices"
+                                v-bind:class="{ active: this.$router.currentRoute._value.path == '/user_devices' }">
+                           {{ userDevicesCaption }}</router-link>
                   </li>
                   <li class="nav-item">
-                      <!-- <a class="nav-link" href="#" v-bind:class="{ active: isUserDevicesActive }"
-                          @click="onUserDevicesClick">{{ userDevicesCaption }}</a> -->
-                          <router-link class="nav-link" to="/user_devices">{{ userDevicesCaption }}</router-link>
-                  </li>
+                          <router-link class="nav-link" to="/imagelib"
+                                v-bind:class="{ active: this.$router.currentRoute._value.path == '/imagelib' }">
+                           {{ imagesCaption }}</router-link>
+                  </li> -->
                   <!-- <ThemeCombo ref="themeCombo"></ThemeCombo> -->
               </ul>
           </div>
@@ -49,7 +58,9 @@
           </div>
           <!-- <router-view /> -->
       </div>
+
   </nav>
+
   <div>
     <router-view />
   </div>
@@ -62,14 +73,13 @@ import ThemeCombo from "../../components/common/ThemeCombo.vue";
 import LangCombo from "../../components/common/LangCombo.vue";
 import MessagesConstants from "../strings_constants/strings.js";
 import APIConstants from "../../rest_api.js";
-// import Toaster from "../../components/common/Toaster.vue"
+
 import Langs from "../../langs";
 
 export default {
     components: {
         ThemeCombo,
         LangCombo,
-        // Toaster
     },
 
     data() {
@@ -82,21 +92,23 @@ export default {
             devicesCaption: MessagesConstants.DEVICES,
             deviceTypesCaption: MessagesConstants.DEVICE_TYPES,
             userDevicesCaption: MessagesConstants.USER_DEVICES,
+            imagesCaption: MessagesConstants.IMAGES,
 
             // user menu
             userName: '',
             userId: 0,
             userLogoutText: "Logout",
+
+            routes: [],
         };
     },
 
     created() {
-
-
+        this.getRoutes()
     },
 
     beforeMount () {
-        this.currentLang = (localStorage.Language != null) ? localStorage.Language : 'EN'
+        this.currentLang = localStorage.Language ?? 'EN'
         this.loadLang(this.currentLang);
         this.loadUserInfo();
     },
@@ -107,6 +119,16 @@ export default {
 
 
     methods: {
+
+        getRoutes() {
+            this.$router.options.routes.forEach(route => {
+                this.routes.push({
+                    name: route.name,
+                    path: route.path
+                })
+            })
+            console.log(this.$router.options)
+        },
 
         async loadUserInfo() {
             try {
@@ -229,7 +251,7 @@ export default {
 
     .vertical-center {
         display: flex;
-        align-items: baseline;
+        align-items: center;
     }
 
     .navbar-nav .dropdown-menu {

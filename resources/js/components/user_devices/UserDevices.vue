@@ -92,10 +92,13 @@
 
             <div class="card border-primary mb-1 w-100 fade-in" v-for="(user_device, key) in filteredUserDevices"
                 v-bind:key="key" v-bind:id="user_device.id">
-                <div class="mx-2 my-2">
+                <div class="mx-2 my-1">
                     <div class="row vertical-center">
-                        <div class="col-sm-1 col-xs-1 col-lg-1">
+                        <div class="col-sm-1 col-xs-1 col-lg-1 flex">
                             <img v-bind:src="user_device.device_type_image" class="device-image" />
+                            <!-- <span class="badge light text-white bg-primary rounded-circle image-badge">
+                                {{ user_device.id }}
+                            </span> -->
                         </div>
                         <div class="col-sm-1 col-xs-1 col-lg-1 align-left">
                             <span class="text-info"> {{ user_device.id }} </span>

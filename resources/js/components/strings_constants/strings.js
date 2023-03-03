@@ -1,4 +1,6 @@
 export default {
+    IMAGES: "Images",
+    ALBUMS: "Albums",
     DEVICE_TYPES: "Device Types",
     DEVICES: "Devices",
     USER_DEVICES: "User`s Devices",

@@ -86,7 +86,7 @@
                 v-bind:id="device.id"   >
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
-                        <div class="col-sm-1 col-xs-1 col-lg-1">
+                        <div class="col-sm-1 col-xs-1 col-lg-1 flex">
                             <img v-bind:src="device.device_type_image" class="device-image" />
                         </div>
                         <div class="col-sm-1 col-xs-1 col-lg-1 align-left">

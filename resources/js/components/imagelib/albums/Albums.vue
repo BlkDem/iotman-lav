@@ -1,11 +1,11 @@
 <template>
 
     <div>
-        <AddDeviceType ref="addDeviceType"></AddDeviceType>
+        <AddAlbum ref="addImage" />
 
         <ConfirmDialogue ref="confirmDialogue" />
         <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
-            Device Types
+            Albums
         </h1>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
             <div class="container-fluid">
@@ -13,10 +13,10 @@
                     <ul class="navbar-nav me-auto  d-flex">
                         <li class="nav-item  d-flex py-1">
                             <input class="form-control me-sm-2" type="text" placeholder="Search"
-                                v-model="device_type_filter" />
+                                v-model="album_filter" />
                         </li>
                         <li class="nav-item dropdown me-auto vertical-center">
-                            <button v-on:click="openImager()"></button>
+                            <!-- <button v-on:click="openImager()"></button> -->
                             <a class="nav-link dropdown-toggle mx-2" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="true" aria-expanded="false">{{ SortName }}</a>
                             <div class="dropdown-menu w-100">
@@ -39,8 +39,8 @@
                             @click="compactView = false">
                             <i class="fas fa-th-large"></i>
                         </button>
-                        <button class="btn btn-primary" @click="setDeviceType">
-                            Add Device Type
+                        <button class="btn btn-primary" @click="setAlbum">
+                            Add Album
                         </button>
                     </div>
                 </div>
@@ -52,26 +52,30 @@
         </div>
 
         <div class="row my-2" v-if="!compactView">
-            <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(device_type, key) in filteredDeviceTypes"
-                v-bind:key="key" v-bind:id="device_type.id">
+            <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(album, key) in filteredAlbums"
+                v-bind:key="key" v-bind:id="album.id">
                 <div class="card border-light">
                     <h3 class="card-header">
-                        {{ device_type.device_type_name }}
-                        <span class="text-info">({{ device_type.id }})</span>
+                        {{ album.album_name }}
+                        <span class="text-info">({{ album.id }})</span>
                     </h3>
                     <div class="card-body">
                         <h6 class="card-subtitle text-muted">
-                            {{ device_type.device_type_desc }}
+                            {{ album.album_desc }}
                         </h6>
                     </div>
-                    <img v-bind:src="device_type.device_type_image" />
                     <div class="card-body">
-                        <button class="btn btn-info btn-width-40 mx-1" @click="doEditType(key, device_type.id)">
+                            <i class="fas fa-images fa-8x"></i>
+                    </div>
+
+                    <!-- <img v-bind:src="device_type.device_type_image" /> -->
+                    <div class="card-body">
+                        <button class="btn btn-info btn-width-40 mx-1" @click="doEditAlbum(key, album.id)">
                             <i class="fas fa-edit" aria-hidden="true"></i>
                             Edit
                         </button>
 
-                        <button class="btn btn-warning btn-width-40 mx-1" @click="doDeleteType(key, device_type.id)">
+                        <button class="btn btn-warning btn-width-40 mx-1" @click="doDeleteAlbum(key, album.id)">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                             Delete
                         </button>
@@ -82,25 +86,26 @@
 
         <!-- compact view -->
         <div v-show="compactView" class="my-2">
-            <div class="card border-primary mb-1 w-100 fade-in" v-for="(device_type, key) in filteredDeviceTypes"
-                v-bind:key="key" v-bind:id="device_type.id">
+            <div class="card border-primary mb-1 w-100 fade-in" v-for="(album, key) in filteredAlbums"
+                v-bind:key="key" v-bind:id="album.id">
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
-                        <div class="col-sm-1 col-xs-1 col-lg-1 flex ">
-                            <img v-bind:src="device_type.device_type_image" class="device-image" />
+                        <div class="col-sm-1 col-xs-1 col-lg-1 flex">
+                            <i class="fas fa-images fa-2x"></i>
+                            <!-- <img v-bind:src="album.device_type_image" class="device-image" /> -->
                         </div>
                         <div class="col-sm-1 col-xs-1 col-lg-1 align-left">
-                                <span class="text-info"> {{ device_type.id }} </span>
+                                <span class="text-info"> {{ album.id }} </span>
                         </div>
                         <div class="col-sm-7 col-xs-7 col-lg-7 align-left">
-                                {{ device_type.device_type_name  }}
+                                {{ album.album_name  }}
                         </div>
                         <div class="col-sm-3 col-xs-3 col-lg-3  edit-buttons">
-                            <button class="btn btn-info mx-2" @click="doEditType(key, device_type.id)">
+                            <button class="btn btn-info mx-2" @click="doEditType(key, album.id)">
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
 
-                            <button class="btn btn-secondary" @click="doDeleteType(key, device_type.id)">
+                            <button class="btn btn-secondary" @click="doDeleteType(key, album.id)">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -109,7 +114,7 @@
             </div>
         </div>
         <Paginator ref="paginatorDeviceTypes"></Paginator>
-        <Imager ref="imager"/>
+        <!-- <Imager ref="imager"/> -->
         <!-- <MyMqtt></MyMqtt> -->
     </div>
 
@@ -117,42 +122,42 @@
 </template>
 
 <script>
-import ConfirmDialogue from '../../components/common/ConfirmDialogue.vue';
-import AddDeviceType from './AddDeviceType.vue';
-import Paginator from '../../components/common/Paginator.vue';
-import MessagesConstants from '../strings_constants/strings'
-import APIConstants from "../../rest_api.js";
-import DeviceTypeStringConstants from '../../components/strings_constants/device_types/index';
-import Sorting from "../../components/common/js/Sorting.js";
-import ParsingErrors from "../common/js/ParsingErrors.js";
-import Imager from '../../components/common/Imager.vue';
+import ConfirmDialogue from '../../../components/common/ConfirmDialogue.vue';
+import AddAlbum from './AddAlbum.vue';
+import Paginator from '../../../components/common/Paginator.vue';
+import MessagesConstants from '../../strings_constants/strings'
+import APIConstants from "../../../rest_api.js";
+import AlbumStringConstants from '../../../components/strings_constants/images/index';
+import Sorting from "../../../components/common/js/Sorting.js";
+import ParsingErrors from "../../common/js/ParsingErrors.js";
+// import Imager from '../../components/common/Imager.vue';
 
     export default {
 
         components: {
             ConfirmDialogue,
-            AddDeviceType,
+            AddAlbum,
             Paginator,
-            Imager
+            // Imager
         },
 
         data() {
             return {
-                device_types: [],
-                deviceTypesVisible: false,
+                albums: [],
+                // deviceTypesVisible: false,
                 compactView: true,
-                filteredDeviceTypes: [], //filtered array of devices
+                filteredAlbums: [], //filtered array of devices
                 dataDescription: "", //table data description label
-                device_type_filter: "", //filtering string
+                album_filter: "", //filtering string
                 sortOrderStrings: [
                     MessagesConstants.SORT_ASC,
                     MessagesConstants.SORT_DESC,
                 ],
                 sortOrder: MessagesConstants.SORT_ASC,
                 sortDirection: false,
-                sortColumn: "device_type_name",
+                sortColumn: "album_name",
                 sortRules: [{
-                        key: "device_type_name",
+                        key: "album_name",
                         title: MessagesConstants.SORT_BY_NAME
                     },
                     {
@@ -164,12 +169,12 @@ import Imager from '../../components/common/Imager.vue';
         },
 
         created() {
-            this.page_description = DeviceTypeStringConstants.DEVICE_TYPE_PAGE_DESCRIPTION;
+            this.page_description = AlbumStringConstants.DEVICE_TYPE_PAGE_DESCRIPTION;
 
-            if (localStorage.DeviceTypeCompactView == null) {
-                localStorage.DeviceTypeCompactView = this.compactView;
-            }
-            this.dataDescription = DeviceTypeStringConstants.DEVICE_TYPE_DATA_DESCRIPTION; //device dataset description
+            // if (localStorage.DeviceTypeCompactView == null) {
+            //     localStorage.DeviceTypeCompactView = this.compactView;
+            // }
+            this.dataDescription = AlbumStringConstants.DEVICE_TYPE_DATA_DESCRIPTION; //device dataset description
 
             this.getData();
         },
@@ -181,7 +186,7 @@ import Imager from '../../components/common/Imager.vue';
         },
 
         watch: {
-            device_type_filter: function () {
+            album_filter: function () {
                 handler: this.doFilter();
             },
 
@@ -207,43 +212,42 @@ import Imager from '../../components/common/Imager.vue';
 
         methods: {
 
-            openImager() {
-                this.$refs.imager.createImager()
-            },
+            // openImager() {
+            //     this.$refs.imager.createImager()
+            // },
 
             doSort($column) {
-                Sorting.doSort(this.filteredDeviceTypes, $column, this.sortDirection)
+                Sorting.doSort(this.filteredAlbums, $column, this.sortDirection)
                 this.sortColumn = $column;
             },
 
             doFilter() {
-                this.filteredDeviceTypes = this.device_types;
-                const res = this.filteredDeviceTypes.filter((device_type) => {
+                this.filteredAlbums = this.albums;
+                const res = this.filteredAlbums.filter((album) => {
 
-                    if (this.device_type_filter === "") return true;
+                    if (this.album_filter === "") return true;
                     else
                         return (
-                            device_type.device_type_name
+                            album.album_name
                             .toLowerCase()
-                            .indexOf(this.device_type_filter.toLowerCase()) > -1
+                            .indexOf(this.album_filter.toLowerCase()) > -1
                         );
                 });
-                if (this.device_types.length > res.length) {
-                    this.filteredDeviceTypes = res;
-                    console.log(res)
-                    this.doSort();
+                if (this.albums.length > res.length) {
+                    this.filteredAlbums = res
+                    this.doSort()
                 }
                 // return res;
             },
 
             async getData(_currentPage=1, _itemsPerPage=5) {
-                fetch(APIConstants.api_devices_types_read_page + _currentPage + "/" + _itemsPerPage)
+                fetch(APIConstants.api_albums_read_page + _currentPage + "/" + _itemsPerPage)
                     .then(response => response.json())
                     .then(response => {
-                        this.device_types = response.data;
-                        this.filteredDeviceTypes = response.data;
+                        this.albums = response.data
+                        this.filteredAlbums = response.data
                         // this.processStrings();
-                        //MessagesConstants.processDeviceTypeStrings(this.filteredDeviceTypes)
+                        //MessagesConstants.processDeviceTypeStrings(this.filteredAlbum)
 
 
                         this.$refs.paginatorDeviceTypes.setPaginator(
@@ -255,26 +259,26 @@ import Imager from '../../components/common/Imager.vue';
                             }
                         )
 
-                        this.device_types = this.filteredDeviceTypes;
-                        this.doSort(this.sortColumn);
+                        this.albums = this.filteredAlbums
+                        this.doSort(this.sortColumn)
                     })
-                    .catch(err => console.log(err));
+                    .catch(err => console.log(err))
             },
 
-            async doDeleteType(key, id) {
+            async doDeleteAlbum(key, id) {
 
                 const confirmDelete = await this.$refs.confirmDialogue.showDialogue({
-                    title: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION,
-                    message: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_MESSAGE + '"' +
-                    this.filteredDeviceTypes[key].device_type_name + '"?',
-                    okButton: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION,
+                    title: AlbumStringConstants.ALBUM_DELETING_CAPTION,
+                    message: AlbumStringConstants.ALBUM_DELETING_MESSAGE + '"' +
+                    this.filteredAlbums[key].album_name + '"?',
+                    okButton: AlbumStringConstants.ALBUM_DELETING_CAPTION,
                 })
 
                 if (confirmDelete) {
                     axios.delete(APIConstants.api_device_type_delete + id)
                         .then(resp => {
-                            this.filteredDeviceTypes.splice(key, 1);
-                            this.device_types = this.filteredDeviceTypes
+                            this.filteredAlbums.splice(key, 1);
+                            this.albums = this.filteredAlbums
                             // console.log(key, id, " - deleted");
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.DELETED_MESSAGE,
@@ -289,33 +293,33 @@ import Imager from '../../components/common/Imager.vue';
                 }
             },
 
-            async setDeviceType() {
-                const _add = await this.$refs.addDeviceType.showDialogue({
+            async setAlbum() {
+                const _add = await this.$refs.addAlbum.showDialogue({
                     edit_mode: false,
-                    title: DeviceTypeStringConstants.DEVICE_TYPE_ADDING_TITLE,
-                    message: DeviceTypeStringConstants.DEVICE_TYPE_ADDING_MESSAGE,
-                    device_type_name: "",
-                    device_type_desc: "",
-                    device_type_image: "",
-                    okButton: DeviceTypeStringConstants.DEVICE_TYPE_ADDBUTTON_CAPTION,
+                    title: AlbumStringConstants.ALBUM_ADDING_TITLE,
+                    message: AlbumStringConstants.ALBUM_ADDING_MESSAGE,
+                    album_name: "",
+                    album_desc: "",
+                    // device_type_image: "",
+                    okButton: AlbumStringConstants.ALBUM_ADDBUTTON_CAPTION,
                 })
 
                 if (_add) {
-                    axios.post(APIConstants.api_device_type_create, {
-                                device_type_name: this.$refs.addDeviceType.device_type_name,
-                                device_type_image: this.$refs.addDeviceType.device_type_image,
-                                device_type_desc: this.$refs.addDeviceType.device_type_desc
+                    axios.post(APIConstants.api_album_create, {
+                                album_name: this.$refs.addDeviceType.album_name,
+                                // album_image: this.$refs.addDeviceType.album_image,
+                                album_desc: this.$refs.addDeviceType.album_desc
                             }
                         )
                         .then(resp => {
                             // console.log(resp['data']);
-                            let newDevice = {
-                                device_type_name: resp['data'].device_type_name,
-                                device_type_desc: resp['data'].device_type_desc,
-                                device_type_image: resp['data'].device_type_image,
+                            let newAlbum = {
+                                album_name:  resp['data'].album_name,
+                                album_desc:  resp['data'].album_desc,
+                                // album_image: resp['data'].album_image,
                                 id: resp['data'].id
                             }
-                            this.device_types.push(newDevice);
+                            this.albums.push(newAlbum);
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.ADDED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
@@ -335,40 +339,40 @@ import Imager from '../../components/common/Imager.vue';
                 }
 
             },
-            async doEditType(key, id) {
-                const _edit = await this.$refs.addDeviceType.showDialogue(
+            async doEditAlbum(key, id) {
+                const _edit = await this.$refs.addAlbum.showDialogue(
                     {
                         edit_mode: true,
-                        title: DeviceTypeStringConstants.DEVICE_TYPE_EDITING_TITLE,
-                        message: DeviceTypeStringConstants.DEVICE_TYPE_EDITING_MESSAGE,
-                        device_type_name: this.device_types[key].device_type_name,
-                        device_type_desc: this.device_types[key].device_type_desc,
-                        device_type_image: this.device_types[key].device_type_image,
-                        okButton: DeviceTypeStringConstants.DEVICE_TYPE_EDITBUTTON_CAPTION,
+                        title: AlbumStringConstants.ALBUM_EDITING_TITLE,
+                        message: AlbumStringConstants.ALBUM_EDITING_MESSAGE,
+                        album_name:  this.albums[key].album_name,
+                        album_desc:  this.albums[key].album_desc,
+                        // device_type_image: this.albums[key].device_type_image,
+                        okButton: AlbumStringConstants.ALBUM_EDITBUTTON_CAPTION,
                     }
                 )
 
                 if (_edit) {
                     let editDeviceTypePost = {
-                        device_type_name: this.$refs.addDeviceType.device_type_name,
-                        device_type_image: this.$refs.addDeviceType.device_type_image,
-                        device_type_desc: this.$refs.addDeviceType.device_type_desc
+                        album_name:  this.$refs.addAlbum.album_name,
+                        // album_image: this.$refs.addAlbum.album_image,
+                        album_desc:  this.$refs.addAlbum.album_desc
                     }
                     //console.log(editDeviceTypePost);
 
-                    axios.put(APIConstants.api_device_type_update + id, editDeviceTypePost)
+                    axios.put(APIConstants.api_album_update + id, editDeviceTypePost)
                         .then(resp => {
                             // console.log(resp['data']);
-                            this.device_types[key].device_type_name = resp['data'].device_type_name;
-                            this.device_types[key].device_type_desc = resp['data'].device_type_desc;
-                            this.device_types[key].device_type_image = resp['data'].device_type_image;
+                            this.albums[key].album_name =  resp['data'].album_name;
+                            this.albums[key].album_desc =  resp['data'].album_desc;
+                            // this.albums[key].device_type_image = resp['data'].device_type_image;
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.EDITED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
                             );
                         })
                         .then(resp => {
-                            this.$root.$refs.DeviceRef.getData();
+                            // this.$root.$refs.DeviceRef.getData();
                         })
                         .catch(error => {
                             this.$root.$refs.toaster.showMessage(
@@ -383,19 +387,11 @@ import Imager from '../../components/common/Imager.vue';
 
             },
 
-            ShowHide(isVisible) {
-                this.deviceTypesVisible = isVisible;
-            },
-
-            getVisible() {
-                return this.deviceTypesVisible;
-            }
         },
 
     };
 </script>
 
 <style>
-
 
 </style>
