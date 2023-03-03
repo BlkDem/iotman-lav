@@ -11,25 +11,30 @@ const routes = [
     path: "/",
     name: "Wellcome",
     component: Home,
+    icon: "fas fa-home",
   },
   {
     path: "/device_types",
     name: "Device Types",
+    icon: "fas fa-layer-group",
     component: DeviceTypes,
   },
   {
     path: "/devices",
     name: "Devices",
+    icon: "fas fa-sun",
     component: Devices,
   },
   {
     path: "/user_devices",
     name: "User Devices",
+    icon: "fas fa-users",
     component: UserDevices,
   },
   {
     path: "/imagelib",
     name: "Images Library",
+    icon: "fas fa-images",
     component: Albums,
   },
 ];

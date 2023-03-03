@@ -11,7 +11,7 @@
             <div class="container-fluid">
                 <div class="navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav me-auto  d-flex">
-                        <li class="nav-item  d-flex py-1">
+                        <li class="nav-item  d-flex py-1  w-100">
                             <input class="form-control me-sm-2" type="text" placeholder="Search"
                                 v-model="device_type_filter" />
                         </li>

@@ -12,28 +12,12 @@
               <ul class="navbar-nav me-auto">
                   <li class="nav-item" v-for="(route, key) in routes"
                         v-bind:key="key" v-bind:name="route.name">
+
                         <router-link class="nav-link" v-bind:to="route.path"
                                 v-bind:class="{ active: this.$router.currentRoute._value.path === route.path }">
-                            {{ route.name }}
+                                <i v-if="route.icon != ''" :class="route.icon"></i> {{ route.name }}
                         </router-link>
                   </li>
-                  <!-- <li class="nav-item">
-                          <router-link class="nav-link" to="/devices"
-                                v-bind:class="{ active: this.$router.currentRoute._value.path == '/devices' }">
-                          {{ devicesCaption }}
-                          </router-link>
-                  </li>
-                  <li class="nav-item">
-                          <router-link class="nav-link" to="/user_devices"
-                                v-bind:class="{ active: this.$router.currentRoute._value.path == '/user_devices' }">
-                           {{ userDevicesCaption }}</router-link>
-                  </li>
-                  <li class="nav-item">
-                          <router-link class="nav-link" to="/imagelib"
-                                v-bind:class="{ active: this.$router.currentRoute._value.path == '/imagelib' }">
-                           {{ imagesCaption }}</router-link>
-                  </li> -->
-                  <!-- <ThemeCombo ref="themeCombo"></ThemeCombo> -->
               </ul>
           </div>
           <div class="d-flex">
@@ -124,10 +108,12 @@ export default {
             this.$router.options.routes.forEach(route => {
                 this.routes.push({
                     name: route.name,
-                    path: route.path
+                    path: route.path,
+                    icon: route.icon ?? ""
                 })
             })
-            console.log(this.$router.options)
+            // console.log(this.$router)
+            console.log(this.routes)
         },
 
         async loadUserInfo() {

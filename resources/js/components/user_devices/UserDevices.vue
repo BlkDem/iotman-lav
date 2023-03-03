@@ -13,7 +13,7 @@
             <div class="container-fluid">
                 <div class="navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav me-auto  d-flex">
-                        <li class="nav-item  d-flex py-1">
+                        <li class="nav-item  d-flex py-1  w-100">
                             <input class="form-control me-sm-2" type="text" placeholder="Search"
                                 v-model="userDevice_filter" />
                         </li>
@@ -53,7 +53,7 @@
         <div>
             <!-- <h1>User Devices</h1> -->
             <div class="row my-2" v-if="!compactView">
-                <div class="p-2 col-sm-4 col-xs-4 col-lg-4 fade-in" v-for="(user_device, key) in filteredUserDevices"
+                <div class="p-2 col-sm-4 col-xs-4 col-lg-4 fade-in" style="margin-bottom: 50px;" v-for="(user_device, key) in filteredUserDevices"
                     v-bind:key="key" v-bind:id="user_device.id">
                     <div class="card border-light">
                         <h3 class="card-header">{{ user_device.user_device_name }}</h3>

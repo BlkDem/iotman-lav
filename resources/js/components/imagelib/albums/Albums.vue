@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <AddAlbum ref="addImage" />
+        <AddAlbum ref="addAlbum" />
 
         <ConfirmDialogue ref="confirmDialogue" />
         <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
@@ -101,11 +101,11 @@
                                 {{ album.album_name  }}
                         </div>
                         <div class="col-sm-3 col-xs-3 col-lg-3  edit-buttons">
-                            <button class="btn btn-info mx-2" @click="doEditType(key, album.id)">
+                            <button class="btn btn-info mx-2" @click="doEditAlbum(key, album.id)">
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
 
-                            <button class="btn btn-secondary" @click="doDeleteType(key, album.id)">
+                            <button class="btn btn-secondary" @click="doDeleteAlbum(key, album.id)">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -275,7 +275,7 @@ import ParsingErrors from "../../common/js/ParsingErrors.js";
                 })
 
                 if (confirmDelete) {
-                    axios.delete(APIConstants.api_device_type_delete + id)
+                    axios.delete(APIConstants.api_album_delete + id)
                         .then(resp => {
                             this.filteredAlbums.splice(key, 1);
                             this.albums = this.filteredAlbums
@@ -306,9 +306,8 @@ import ParsingErrors from "../../common/js/ParsingErrors.js";
 
                 if (_add) {
                     axios.post(APIConstants.api_album_create, {
-                                album_name: this.$refs.addDeviceType.album_name,
-                                // album_image: this.$refs.addDeviceType.album_image,
-                                album_desc: this.$refs.addDeviceType.album_desc
+                                album_name: this.$refs.addAlbum.album_name,
+                                album_desc: this.$refs.addAlbum.album_desc
                             }
                         )
                         .then(resp => {
@@ -353,14 +352,14 @@ import ParsingErrors from "../../common/js/ParsingErrors.js";
                 )
 
                 if (_edit) {
-                    let editDeviceTypePost = {
+                    let editAlbum = {
                         album_name:  this.$refs.addAlbum.album_name,
                         // album_image: this.$refs.addAlbum.album_image,
                         album_desc:  this.$refs.addAlbum.album_desc
                     }
-                    //console.log(editDeviceTypePost);
+                    console.log(editAlbum);
 
-                    axios.put(APIConstants.api_album_update + id, editDeviceTypePost)
+                    axios.put(APIConstants.api_album_update + id, editAlbum)
                         .then(resp => {
                             // console.log(resp['data']);
                             this.albums[key].album_name =  resp['data'].album_name;
