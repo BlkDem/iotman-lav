@@ -32,15 +32,18 @@
                         </li>
                     </ul>
                     <div class="d-flex">
-                        <button class="btn btn-primary" :class="{'disabled' : compactView}" @click="compactView = true">
+                        <button class="btn btn-primary  mx-2" :class="{'disabled' : compactView}" @click="compactView = true">
                             <i class="fas fa-list"></i>
                         </button>
-                        <button class="btn btn-primary mx-2" :class="{'disabled' : !compactView}"
+                        <button class="btn btn-primary" :class="{'disabled' : !compactView}"
                             @click="compactView = false">
                             <i class="fas fa-th-large"></i>
                         </button>
-                        <button class="btn btn-primary" @click="setAlbum">
+                        <button class="btn btn-primary mx-2" @click="setAlbum">
                             Add Album
+                        </button>
+                        <button class="btn btn-primary" @click="getData">
+                            <i class="fas fa-sync-alt"></i>
                         </button>
                     </div>
                 </div>
@@ -65,7 +68,7 @@
                         </h6>
                     </div>
                     <div class="card-body">
-                            <i class="fas fa-images fa-8x"></i>
+                            <i class="fas fa-images fa-8x text-info"></i>
                     </div>
 
                     <!-- <img v-bind:src="device_type.device_type_image" /> -->
@@ -91,7 +94,7 @@
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
                         <div class="col-sm-1 col-xs-1 col-lg-1 flex">
-                            <i class="fas fa-images fa-2x"></i>
+                            <i class="fas fa-images fa-2x text-info"></i>
                             <!-- <img v-bind:src="album.device_type_image" class="device-image" /> -->
                         </div>
                         <div class="col-sm-1 col-xs-1 col-lg-1 align-left">
@@ -169,7 +172,7 @@ import ParsingErrors from "../../common/js/ParsingErrors.js";
         },
 
         created() {
-            this.page_description = AlbumStringConstants.DEVICE_TYPE_PAGE_DESCRIPTION;
+            // this.page_description = AlbumStringConstants.DEVICE_TYPE_PAGE_DESCRIPTION;
 
             // if (localStorage.DeviceTypeCompactView == null) {
             //     localStorage.DeviceTypeCompactView = this.compactView;
