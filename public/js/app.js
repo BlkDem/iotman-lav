@@ -28532,7 +28532,7 @@ __webpack_require__.r(__webpack_exports__);
   // loadLang() {
   //     if (localStorage.Language!=null) {
   //         this.currentLang = localStorage.Language
-  //     } 
+  //     }
 
   // fetch("/lang/" + this.currentLang + ".json")
   // .then(r => r.json())
