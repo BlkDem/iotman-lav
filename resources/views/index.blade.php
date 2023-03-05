@@ -56,12 +56,6 @@
 
 <body class="container-fluid">
     <div id="app" class="container text-center m-20">
-        <Navbar ref="navbar"></Navbar>
-        <Toaster ref="toaster"></Toaster>
-
-        <div>
-            <router-view />
-        </div>
 
         <!-- <device-list ref="DeviceRef"></device-list> -->
         <!-- <device-type-list ref="DeviceTypeRef"></device-type-list>
