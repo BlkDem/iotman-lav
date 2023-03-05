@@ -28188,29 +28188,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_App_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/App.vue */ "./resources/js/components/App.vue");
 /* harmony import */ var _components_header_Navbar_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/header/Navbar.vue */ "./resources/js/components/header/Navbar.vue");
 /* harmony import */ var _components_common_Toaster_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/common/Toaster.vue */ "./resources/js/components/common/Toaster.vue");
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
 
 
-// import { Vue } from 'vue'
-
-// import { defineAsyncComponent } from 'vue';
-
-// import { Vue } from 'vue'
-// import { VueRouter } from 'vue-router'
-
-// Vue.use(VueRouter)
-// import { createApp } from 'vue'
 
 
 
  //resources\js\components\common\Toaster.vue
 
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)(_components_App_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
-// const app = createApp(App);
 app.component('Navbar', _components_header_Navbar_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
 app.component('Toaster', _components_common_Toaster_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
 app.use(_router__WEBPACK_IMPORTED_MODULE_2__["default"]).mount('#app');
