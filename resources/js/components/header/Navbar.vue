@@ -17,7 +17,7 @@
                     <ThemeCombo ref="themeCombo"></ThemeCombo>
                 </ul>
                 <ul class="navbar-nav me-auto ">
-                    <LangCombo ref="langCombo"></LangCombo>
+                    <LangCombo></LangCombo>
                 </ul>
                 <ul class="navbar-nav me-auto">
                     <UserMenu></UserMenu>
@@ -30,19 +30,19 @@
 </template>
 
 <script>
-import ThemeCombo from "../../components/common/ThemeCombo.vue";
-import LangCombo from "../../components/common/LangCombo.vue";
-import AppMenu from "../common/AppMenu.vue";
-import UserMenu from "../../components/common/UserMenu.vue";
+// import ThemeCombo from "../../components/common/ThemeCombo.vue";
+// import LangCombo from "../../components/common/LangCombo.vue";
+// import AppMenu from "../common/AppMenu.vue";
+// import UserMenu from "../../components/common/UserMenu.vue";
 
 import Langs from "../../langs";
 
 export default {
     components: {
-        ThemeCombo,
-        LangCombo,
-        AppMenu,
-        UserMenu
+        // ThemeCombo,
+        // LangCombo,
+        // AppMenu,
+        // UserMenu
     },
 
     data() {

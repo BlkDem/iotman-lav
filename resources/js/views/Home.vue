@@ -6,20 +6,22 @@
 </template>
 
 <script>
-import AppMenu from '../components/common/AppMenu.vue';
+// import AppMenu from '../components/common/AppMenu.vue';
+import MessagesConstants from "../components/strings_constants/strings.js";
 
 export default {
 
-    components: {AppMenu},
+    // components: {AppMenu},
 
     data() {
+
         return {
-            pageCaption: ""
+            pageCaption: MessagesConstants.HOME ?? "Welcome"
         }
     },
 
     created() {
-        this.pageCaption = "Umolab Data Manager"
+        // this.pageCaption = "Umolab Data Manager"
     },
 
 }

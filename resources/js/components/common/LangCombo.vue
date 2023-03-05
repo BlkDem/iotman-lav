@@ -16,6 +16,9 @@
 import LangList from "../../langs.js";
 import MessagesConstants from "../strings_constants/strings.js";
 
+import lang_EN from "/lang/EN/index"
+import lang_RU from "/lang/RU/index"
+
 
 export default {
     name: "LangCombo",
@@ -50,7 +53,19 @@ export default {
             this.currentLang = _lang
             //console.log(_lang)
             localStorage.Language = _lang
-            this.loadLang(_lang)
+            if (_lang === 'EN') this.setActiveLang(lang_EN)
+            if (_lang === 'RU') this.setActiveLang(lang_RU)
+            // console.log(MessagesConstants.HOME)
+            //this.loadLang(_lang)
+        },
+
+        setActiveLang(_langObject) {
+            for (var key in _langObject) {
+                if (MessagesConstants.hasOwnProperty(key)) {
+                    MessagesConstants[key] = _langObject[key]
+                }
+            }
+            console.log(MessagesConstants.HOME);
         },
 
         async loadLang(_lang) {
