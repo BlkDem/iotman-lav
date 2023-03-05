@@ -1,4 +1,6 @@
 export default {
+    HOME: "Welcome",
+    LIBRARY: "Images Library",
     IMAGES: "Images",
     ALBUMS: "Albums",
     DEVICE_TYPES: "Device Types",

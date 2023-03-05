@@ -3,7 +3,7 @@
         <AddDevice ref="addDevice"></AddDevice>
         <ConfirmDialogue ref="confirmDialogue" />
         <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
-            Registered Devices
+            {{ pageCaption }}
         </h1>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
             <div class="container-fluid">
@@ -143,6 +143,7 @@
         data() {
             return {
                 devices: [], // api loaded list of devices
+                pageCaption: MessagesConstants.DEVICES ?? 'Devices',
                 filteredDevices: [], //filtered array of devices
                 dataDescription: "", //table data description label
                 deviceVisible: true, //devices view visibilty

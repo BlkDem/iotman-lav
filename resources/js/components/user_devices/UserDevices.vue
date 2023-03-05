@@ -7,7 +7,7 @@
         <AddUserDevice ref="addUserDevice"></AddUserDevice>
         <ConfirmDialogue ref="confirmDialogue" />
         <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
-            User Devices
+            {{ pageCaption }}
         </h1>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
             <div class="container-fluid">
@@ -156,6 +156,7 @@ export default {
             userDeviceVisible: true,
             userDevice_filter: "",
             user_devices: [],
+            pageCaption: MessagesConstants.USER_DEVICES ?? "User Devices",
             filteredUserDevices: [], //filtered array of devices
             dataDescription: "", //table data description label
             compactView: true, //copact view mode

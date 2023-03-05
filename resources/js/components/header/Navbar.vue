@@ -9,7 +9,7 @@
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
-                    <AppMenu></AppMenu>
+                    <AppMenu ref="appMenu"></AppMenu>
                 </ul>
             </div>
             <div class="d-flex">
@@ -32,7 +32,6 @@
 <script>
 import ThemeCombo from "../../components/common/ThemeCombo.vue";
 import LangCombo from "../../components/common/LangCombo.vue";
-import MessagesConstants from "../strings_constants/strings.js";
 import AppMenu from "../common/AppMenu.vue";
 import UserMenu from "../../components/common/UserMenu.vue";
 
@@ -57,13 +56,17 @@ export default {
     },
 
     methods: {
+        newLang(event)
+        {
+            console.log('navbar', event)
+        }
     },
 };
 </script>
 
 <style>
-/* @import "../../../sass/images.scss";
-  .logo {
+    @import "../../../sass/images.scss";
+  /* .logo {
     margin-right: 1rem;
     padding-left: 8px;
    }
@@ -79,8 +82,8 @@ export default {
 
     .navbar-nav .dropdown-menu {
         position: absolute;
-    }
- */
+    } */
+
 
 
 /* @media only screen and (min-width: 320px) and (max-width: 965px) {

@@ -1,11 +1,11 @@
 <template>
 
-    <div>
+    <div >
         <AddDeviceType ref="addDeviceType"></AddDeviceType>
 
         <ConfirmDialogue ref="confirmDialogue" />
         <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
-            Device Types
+            {{ pageCaption }}
         </h1>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
             <div class="container-fluid">
@@ -16,7 +16,7 @@
                                 v-model="device_type_filter" />
                         </li>
                         <li class="nav-item dropdown me-auto vertical-center">
-                            <button v-on:click="openImager()"></button>
+                            <!-- <button v-on:click="openImager()"></button> -->
                             <a class="nav-link dropdown-toggle mx-2" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="true" aria-expanded="false">{{ SortName }}</a>
                             <div class="dropdown-menu w-100">
@@ -141,6 +141,7 @@ import Imager from '../../components/common/Imager.vue';
                 device_types: [],
                 deviceTypesVisible: false,
                 compactView: true,
+                pageCaption: MessagesConstants.DEVICE_TYPES ?? 'Device Types',
                 filteredDeviceTypes: [], //filtered array of devices
                 dataDescription: "", //table data description label
                 device_type_filter: "", //filtering string
@@ -161,6 +162,10 @@ import Imager from '../../components/common/Imager.vue';
                     },
                 ],
             };
+        },
+
+        newLang(event) {
+            console.log(event)
         },
 
         created() {

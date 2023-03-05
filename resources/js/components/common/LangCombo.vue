@@ -14,14 +14,19 @@
 
 <script>
 import LangList from "../../langs.js";
+import MessagesConstants from "../strings_constants/strings.js";
+
 
 export default {
     name: "LangCombo",
+    emits: [
+        "newLang"
+    ],
 
     data() {
         return {
             langs: [],
-            currentLang: 'EN',
+            currentLang: localStorage.Language ?? 'EN',
         }
     },
 
@@ -38,11 +43,12 @@ export default {
             } else {
                 localStorage.Language = this.currentLang
             }
+            this.changeLang(this.currentLang)
         },
 
         changeLang(_lang) {
             this.currentLang = _lang
-            console.log(_lang)
+            //console.log(_lang)
             localStorage.Language = _lang
             this.loadLang(_lang)
         },
@@ -71,6 +77,9 @@ export default {
                     MessagesConstants.SORT_ASC = json.messages.SORT_ASC
                     MessagesConstants.SORT_DESC = json.messages.SORT_DESC
 
+                    MessagesConstants.HOME = json.menu.HOME
+                    MessagesConstants.ALBUMS = json.menu.ALBUMS
+
                     MessagesConstants.DEVICE_TYPES = json.menu.DEVICE_TYPES
                     MessagesConstants.DEVICES = json.menu.DEVICES
                     MessagesConstants.USER_DEVICES = json.menu.USER_DEVICES
@@ -79,7 +88,7 @@ export default {
                     MessagesConstants.LOGOUT_MENU = json.menu.LOGOUT_MENU
 
 
-                    this.setStrings()
+
 
                 } else {
                     console.log('Warning! No lang data!')
@@ -87,20 +96,11 @@ export default {
             } catch (error) {
                 console.log('Error! Can`t gat lang data!')
             }
+            this.setStrings()
         },
 
         setStrings() {
-
-            //navbar menu items
-            // this.devicesCaption = MessagesConstants.DEVICES
-            // this.deviceTypesCaption = MessagesConstants.DEVICE_TYPES
-            // this.userDevicesCaption = MessagesConstants.USER_DEVICES
-
-            // this.userLogoutText = MessagesConstants.LOGOUT_MENU
-
-            console.log(MessagesConstants)
-            // this.$refs.themeCombo.themeCaption = MessagesConstants.THEME
-
+            this.$emit('newLang', MessagesConstants)
         },
 
     }

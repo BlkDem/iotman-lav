@@ -5,7 +5,7 @@
 
         <ConfirmDialogue ref="confirmDialogue" />
         <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
-            Albums
+            {{ pageCaption }}
         </h1>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
             <div class="container-fluid">
@@ -149,6 +149,7 @@ import ParsingErrors from "../../common/js/ParsingErrors.js";
                 albums: [],
                 // deviceTypesVisible: false,
                 compactView: true,
+                pageCaption: MessagesConstants.ALBUMS ?? 'Albums',
                 filteredAlbums: [], //filtered array of devices
                 dataDescription: "", //table data description label
                 album_filter: "", //filtering string
