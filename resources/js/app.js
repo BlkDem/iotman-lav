@@ -25,3 +25,4 @@ app.component('Toaster', Toaster);
 app.component('AppMenu', AppMenu);
 
 app.use(router).mount('#app');
+

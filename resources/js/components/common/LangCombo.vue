@@ -8,6 +8,9 @@
             aria-expanded="false">{{ (currentLang=='')?'EN': currentLang}}</a>
         <div class="dropdown-menu" style="margin-left: -106px;">
             <a class="dropdown-item" href="#" v-for="lang in langs" :key="lang.id" @click='changeLang(lang)'>{{ lang }}</a>
+            <!-- <a class="dropdown-item" href="#" v-for="lang in langs" :key="lang.id"
+                v-on:click="$emit('click', $event)">{{ lang }}</a> -->
+
         </div>
     </li>
 </template>
@@ -23,19 +26,24 @@ import lang_RU from "/lang/RU/index"
 export default {
     name: "LangCombo",
     emits: [
-        "newLang"
+        "newLang",
+        "click"
     ],
 
     data() {
         return {
             langs: [],
-            currentLang: localStorage.Language ?? 'EN',
+            currentLang: 'EN'//localStorage.Language ?? 'EN',
         }
     },
 
     created() {
         this.readLangs()
         //this.currentLang = _currentTheme;
+    },
+
+    mounted() {
+        this.currentLang = localStorage.Language ?? 'EN'
     },
 
     methods: {
@@ -55,6 +63,7 @@ export default {
             localStorage.Language = _lang
             if (_lang === 'EN') this.setActiveLang(lang_EN)
             if (_lang === 'RU') this.setActiveLang(lang_RU)
+            this.$emit('click', _lang)
             // console.log(MessagesConstants.HOME)
             //this.loadLang(_lang)
         },
@@ -65,57 +74,15 @@ export default {
                     MessagesConstants[key] = _langObject[key]
                 }
             }
-            console.log(MessagesConstants.HOME);
-        },
 
-        async loadLang(_lang) {
-            try {
-                const response = await fetch("/lang/" + _lang + ".json");
-
-                const json = await response.json();
-                console.log(_lang)
-                if (json != null) {
-                    MessagesConstants.CANCEL_STRING = json.messages.CANCEL_STRING
-                    MessagesConstants.EDITED_MESSAGE = json.messages.EDITED_MESSAGE
-                    MessagesConstants.ADDED_MESSAGE = json.messages.ADDED_MESSAGE
-                    MessagesConstants.DELETED_MESSAGE = json.messages.DELETED_MESSAGE
-
-                    MessagesConstants.PROCESS_SUCCESSFULLY = json.messages.PROCESS_SUCCESSFULLY
-                    MessagesConstants.INSERTING_CANCELLED = json.messages.INSERTING_CANCELLED
-                    MessagesConstants.EDITING_CANCELLED = json.messages.EDITING_CANCELLED
-                    MessagesConstants.DELETING_CANCELLED = json.messages.DELETING_CANCELLED
-                    MessagesConstants.NO_DESCRIPTION = json.messages.NO_DESCRIPTION
-
-                    MessagesConstants.SORT_BY_NAME = json.messages.SORT_BY_NAME
-                    MessagesConstants.SORT_BY_ID = json.messages.SORT_BY_ID
-                    MessagesConstants.SORT_NAME = json.messages.SORT_NAME
-                    MessagesConstants.SORT_ASC = json.messages.SORT_ASC
-                    MessagesConstants.SORT_DESC = json.messages.SORT_DESC
-
-                    MessagesConstants.HOME = json.menu.HOME
-                    MessagesConstants.ALBUMS = json.menu.ALBUMS
-
-                    MessagesConstants.DEVICE_TYPES = json.menu.DEVICE_TYPES
-                    MessagesConstants.DEVICES = json.menu.DEVICES
-                    MessagesConstants.USER_DEVICES = json.menu.USER_DEVICES
-                    MessagesConstants.THEME = json.menu.THEME
-
-                    MessagesConstants.LOGOUT_MENU = json.menu.LOGOUT_MENU
-
-
-
-
-                } else {
-                    console.log('Warning! No lang data!')
-                }
-            } catch (error) {
-                console.log('Error! Can`t gat lang data!')
-            }
-            this.setStrings()
+            // console.log(this.$parent, this.$parent.$refs, this.$root.$refs)
+            this.$root.$emit('newLang', MessagesConstants)
+            this.$parent.newLang(_langObject)
+            // console.log(MessagesConstants.HOME);
         },
 
         setStrings() {
-            this.$emit('newLang', MessagesConstants)
+
         },
 
     }

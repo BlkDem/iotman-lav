@@ -17,10 +17,10 @@
                     <ThemeCombo ref="themeCombo"></ThemeCombo>
                 </ul>
                 <ul class="navbar-nav me-auto ">
-                    <LangCombo></LangCombo>
+                    <LangCombo ref="langCombo" v-on:click="handleClick"></LangCombo>
                 </ul>
                 <ul class="navbar-nav me-auto">
-                    <UserMenu></UserMenu>
+                    <UserMenu ref="userMenu"></UserMenu>
                 </ul>
             </div>
         </div>
@@ -38,6 +38,12 @@
 import Langs from "../../langs";
 
 export default {
+
+    emits: [
+        // 'changeLang',
+        'click'
+    ],
+
     components: {
         // ThemeCombo,
         // LangCombo,
@@ -58,7 +64,18 @@ export default {
     methods: {
         newLang(event)
         {
-            console.log('navbar', event)
+             console.log('navbar', event)
+            if (this.$refs.appMenu != null) this.$refs.appMenu.setLang(event)
+        },
+
+        changeLang(_lang) {
+            console.log('change', _lang)
+        },
+
+        handleClick(_event)
+        {
+            // console.log('click', _event)
+            this.$emit('click', _event)
         }
     },
 };

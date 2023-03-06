@@ -1,6 +1,8 @@
 <template>
     <div class="nav-item" v-for="(route, key) in routes" v-bind:key="key" v-bind:name="route.name">
-        <router-link class="nav-link" v-bind:to="route.path"
+        <router-link class="nav-link"
+
+            v-bind:to="route.path"
             v-bind:class="{ active: this.$router.currentRoute._value.path === route.path }">
             <i v-if="route.icon != ''" :class="route.icon" class="ml-1"></i> {{ route.name }}
         </router-link>
@@ -37,7 +39,13 @@ methods: {
 
     setLang(event)
     {
-        console.log('event menu', event)
+        // console.log('event menu', event)
+        this.routes = []
+        this.getRoutes()
+    },
+
+    newLang(event) {
+        console.log('appmenu event', event)
     }
 }
 }
