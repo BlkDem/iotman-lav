@@ -1,9 +1,10 @@
 <template>
-    <div id="main">
-        <Navbar ref="navbar" v-on:click="onClick"></Navbar>
+    <div>
+        <Navbar ref="navbar"></Navbar>
         <Toaster ref="toaster"></Toaster>
+        <router-view />
     </div>
-  <router-view />
+
 </template>
 
 <script>
@@ -13,12 +14,6 @@
 export default {
     name: 'App',
     components: { },
-    emits: [
-        'click',
-        'newLang',
-        'handleClick',
-        'onClick'
-    ],
     data()
     {
         return {
@@ -27,16 +22,7 @@ export default {
     },
 
     mounted() {
-        //console.log(this.$root.components)
     },
-
-    handleClick(_lang) {
-        console.log('app click', _lang)
-    },
-
-    onClick(_lang) {
-        console.log('App', _lang)
-    }
 }
 </script>
 

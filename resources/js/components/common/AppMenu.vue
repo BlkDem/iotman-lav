@@ -14,6 +14,8 @@ import MessagesConstants from "../strings_constants/strings.js";
 
 export default {
 
+props: ['refresh'],
+
 data() {
     return {
         routes: [],
@@ -22,6 +24,7 @@ data() {
 
 mounted() {
     this.getRoutes()
+    // console.log(this.refresh)
 },
 
 methods: {

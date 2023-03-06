@@ -13,6 +13,7 @@
 <script>
 
 import APIConstants from "../../rest_api.js";
+import MessagesConstants from "../strings_constants/strings.js";
 
 export default {
 
@@ -20,7 +21,7 @@ export default {
         return {
             userName: '',
             userId: 0,
-            userLogoutText: "Logout",
+            userLogoutText: MessagesConstants.LOGOUT_MENU ?? "Logout",
         }
     },
 
@@ -46,6 +47,10 @@ export default {
         logout() {
             window.location.href = '/logout';
         },
+
+        setLang(event) {
+            this.userLogoutText = MessagesConstants.LOGOUT_MENU ?? "Logout"
+        }
 
     }
 }

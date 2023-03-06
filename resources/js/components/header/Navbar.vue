@@ -17,7 +17,7 @@
                     <ThemeCombo ref="themeCombo"></ThemeCombo>
                 </ul>
                 <ul class="navbar-nav me-auto ">
-                    <LangCombo ref="langCombo" v-on:click="handleClick"></LangCombo>
+                    <LangCombo ref="langCombo"></LangCombo>
                 </ul>
                 <ul class="navbar-nav me-auto">
                     <UserMenu ref="userMenu"></UserMenu>
@@ -30,82 +30,24 @@
 </template>
 
 <script>
-// import ThemeCombo from "../../components/common/ThemeCombo.vue";
-// import LangCombo from "../../components/common/LangCombo.vue";
-// import AppMenu from "../common/AppMenu.vue";
-// import UserMenu from "../../components/common/UserMenu.vue";
-
-import Langs from "../../langs";
 
 export default {
 
-    emits: [
-        // 'changeLang',
-        'click'
-    ],
-
-    components: {
-        // ThemeCombo,
-        // LangCombo,
-        // AppMenu,
-        // UserMenu
-    },
-
-    data() {
-        return {
-
-            //menu
-
-            // user menu
-            // routes: [],
-        };
-    },
+    emits: ['newLangUp'],
 
     methods: {
         newLang(event)
         {
-             console.log('navbar', event)
+            //  console.log('navbar', event)
             if (this.$refs.appMenu != null) this.$refs.appMenu.setLang(event)
+            if (this.$refs.userMenu != null) this.$refs.userMenu.setLang(event)
+            //  this.$parent.$emit('newLangUp')
         },
 
-        changeLang(_lang) {
-            console.log('change', _lang)
-        },
-
-        handleClick(_event)
-        {
-            // console.log('click', _event)
-            this.$emit('click', _event)
-        }
     },
 };
 </script>
 
 <style>
     @import "../../../sass/images.scss";
-  /* .logo {
-    margin-right: 1rem;
-    padding-left: 8px;
-   }
-
-   .navbar-expand-lg .navbar-nav {
-        align-items: flex-start;
-    }
-
-    .vertical-center {
-        display: flex;
-        align-items: center;
-    }
-
-    .navbar-nav .dropdown-menu {
-        position: absolute;
-    } */
-
-
-
-/* @media only screen and (min-width: 320px) and (max-width: 965px) {
-  .logo {
-    margin-right: auto;
-   }
-} */
 </style>
