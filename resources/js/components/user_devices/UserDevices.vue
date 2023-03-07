@@ -267,7 +267,8 @@ export default {
 
             const confirmDelete = await this.$refs.confirmDialogue.showDialogue({
                 title: UserDeviceStringConstants.USER_DEVICE_DELETING_CAPTION,
-                message: UserDeviceStringConstants.USER_DEVICE_DELETING_MESSAGE + '"' + this.filteredUserDevices[key].user_device_name + '"?',
+                message: UserDeviceStringConstants.USER_DEVICE_DELETING_MESSAGE + '"' +
+                this.filteredUserDevices[key].user_device_name + '"?',
                 okButton: UserDeviceStringConstants.USER_DEVICE_DELETING_CAPTION,
             })
 
@@ -277,7 +278,8 @@ export default {
                         this.filteredUserDevices.splice(key, 1);
                         this.user_devices = this.filteredUserDevices
                         // console.log(key, id, " - deleted");
-                        this.$root.$refs.toaster.showMessage(MessagesConstants.DELETED_MESSAGE, MessagesConstants.PROCESS_SUCCESSFULLY);
+                        this.$root.$refs.toaster.showMessage(MessagesConstants.DELETED_MESSAGE,
+                            MessagesConstants.PROCESS_SUCCESSFULLY);
                     })
                     .catch(error => {
                         console.log(error);

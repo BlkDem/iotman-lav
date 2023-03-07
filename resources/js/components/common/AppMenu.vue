@@ -1,10 +1,9 @@
 <template>
     <div class="nav-item" v-for="(route, key) in routes" v-bind:key="key" v-bind:name="route.name">
         <router-link class="nav-link"
-
             v-bind:to="route.path"
-            v-bind:class="{ active: this.$router.currentRoute._value.path === route.path }">
-            <i v-if="route.icon != ''" :class="route.icon" class="ml-1"></i> {{ route.name }}
+            v-bind:class="{ active: this.$router.currentRoute._value.path === route.path, 'my-2': margins == 2}">
+            <i v-if="route.icon != ''" :class="route.icon" class="ml-2"></i> {{ route.name }}
         </router-link>
     </div>
 </template>
@@ -14,11 +13,16 @@ import MessagesConstants from "../strings_constants/strings.js";
 
 export default {
 
-props: ['refresh'],
+props: {
+    margins: {
+        type: Number
+    }
+},
 
 data() {
     return {
         routes: [],
+        // margins: 2
     }
 },
 

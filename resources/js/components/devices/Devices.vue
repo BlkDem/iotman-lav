@@ -182,7 +182,12 @@
             if (localStorage.getItem('CompactView')) {
                 this.compactView = (localStorage.getItem('CompactView') === 'true');
             }
+            this.emitter.on("new-lang", _lang => {
+            this.setLang(_lang)
+        });
+
         },
+
 
         watch: {
             device_filter: function () {
@@ -454,11 +459,9 @@
                 }
             },
 
-            // Show or Hide Devices page
-            ShowHide(isVisible) {
-                this.deviceVisible = isVisible;
-            },
-
+            setLang(_lang) {
+                this.pageCaption = _lang.HOME ?? 'Welcome'
+            }
         },
     };
 

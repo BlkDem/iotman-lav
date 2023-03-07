@@ -55,7 +55,7 @@
 </head>
 
 <body class="container-fluid">
-    <div id="app" class="container text-center m-20">
+    <div id="app" class="container">
 
         <!-- <device-list ref="DeviceRef"></device-list> -->
         <!-- <device-type-list ref="DeviceTypeRef"></device-type-list>

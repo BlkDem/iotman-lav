@@ -1,5 +1,5 @@
 export default {
-    HOME: "Добро пожаловать",
+    HOME: "Umolab Devices",
     LIBRARY: "Библиотека",
     IMAGES: "Изображения",
     ALBUMS: "Альбомы",
@@ -32,6 +32,10 @@ export default {
     SORT_DESC: "По убыванию",
 
     LOGOUT_MENU: "Выход",
+
+    menuBlockCaption: 'Меню',
+    informationBlockCaption: 'Информация',
+    logBlockCaption: 'Логи',
 
     //strings processing
 

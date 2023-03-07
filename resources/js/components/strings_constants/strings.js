@@ -33,6 +33,10 @@ export default {
 
     LOGOUT_MENU: "Logout",
 
+    menuBlockCaption: 'Menu',
+    informationBlockCaption: 'Information',
+    logBlockCaption: 'Log',
+
     //strings processing
 
     SortingCaption($column, $direction) {
