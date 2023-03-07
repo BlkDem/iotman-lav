@@ -9,7 +9,13 @@
                 <!-- {{ themeCaption }}  -->
                 {{ (currentTheme=='')?'(Default)': currentTheme }}</a>
         <div class="dropdown-menu theme-dropdown ">
-            <a class="dropdown-item a_cap" href="#" v-for="theme in themes" :key="theme.id" @click='changeTheme(theme)'>{{ theme }}</a>
+            <a class="dropdown-item a_cap" href="#"
+                v-for="theme in themes"
+                :key="theme.id"
+                @click='changeTheme(theme)'
+                >
+                {{ theme }}
+            </a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" @click="changeTheme('Default')">Default</a>
         </div>
@@ -45,6 +51,7 @@ export default {
                 this.changeTheme(_newTheme); //change theme
             }
         },
+
         changeTheme(new_theme) { // changing theme
             if (localStorage.Theme !== new_theme) { //no action if the same theme
                 localStorage.Theme = new_theme; //save a new theme
