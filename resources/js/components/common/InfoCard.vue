@@ -14,7 +14,7 @@
             <p class="card-text">
                 {{ infoCardText }}
             </p>
-            <p class="card-text" v-if="moreInfoVisible">
+            <p class="card-text fade-in" v-if="moreInfoVisible">
                 {{ infoCardMoreText }}
             </p>
             <button class="btn btn-primary"

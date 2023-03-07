@@ -20,12 +20,13 @@
 
     <?php
     echo "<script>var _newTheme='Default'</script>";
-    $_themeCss = '/css/app.css';
-    $_themed = isset($_GET["theme"]);
-    if ($_themed) {
+    $_themeCss = '/css/vapor/app.css';
+
+    if (isset($_GET["theme"])) {
         $_themeName = $_GET["theme"];
         if (file_exists(public_path('/css/' . $_themeName . '/app.css'))) {
             $_themeCss = '/css/' . $_themeName . '/app.css';
+            // echo("<h1 style='position: absolute; z-index: 1034;'>$_themeCss</h1>");
             echo "<script>_newTheme='$_themeName'</script>";
         }
     }

@@ -10,8 +10,8 @@
                 {{ (currentTheme=='')?'(Default)': currentTheme }}</a>
         <div class="dropdown-menu theme-dropdown ">
             <a class="dropdown-item a_cap" href="#" v-for="theme in themes" :key="theme.id" @click='changeTheme(theme)'>{{ theme }}</a>
-            <!-- <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" @click="changeTheme('Default')">Default</a> -->
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" @click="changeTheme('Default')">Default</a>
         </div>
     </li>
 </template>
@@ -37,27 +37,20 @@ export default {
     methods: {
         readThemes() {
             this.themes = [...ThemesList.Themes] //loading themes list
-
-            this.currentTheme = localStorage.Theme; // set binded theme combo caption
-
-            if (_newTheme === 'Default') { //check theme request param '_newTheme' - backend var in index.blade.php
-
-                 _newTheme = (localStorage.Theme !== '') ? localStorage.Theme : 'Default'; //set default theme
-                 localStorage.Theme = _newTheme; // save request param theme to storage
-                document.location.href = '/?theme=' + _newTheme; //redirect default or stored
+            this.currentTheme = _newTheme; // set binded theme combo caption
+            if ((_newTheme === 'Default') && (document.location.search === '')) { //check theme request param '_newTheme' - backend var in index.blade.php
+                 document.location.href = (localStorage.Theme == null)?'/?theme=Default':'/?theme='+localStorage.Theme; //redirect default or stored
             }
-
-            this.changeTheme(_newTheme); //change theme
+            else {
+                this.changeTheme(_newTheme); //change theme
+            }
         },
-
         changeTheme(new_theme) { // changing theme
             if (localStorage.Theme !== new_theme) { //no action if the same theme
-
                 localStorage.Theme = new_theme; //save a new theme
                 document.location.href = '/?theme=' + new_theme; //redirect with a new theme
             }
         },
-
     }
 }
 </script>
