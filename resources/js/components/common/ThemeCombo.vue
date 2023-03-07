@@ -10,8 +10,8 @@
                 {{ (currentTheme=='')?'(Default)': currentTheme }}</a>
         <div class="dropdown-menu theme-dropdown ">
             <a class="dropdown-item a_cap" href="#" v-for="theme in themes" :key="theme.id" @click='changeTheme(theme)'>{{ theme }}</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" @click="changeTheme('Default')">Default</a>
+            <!-- <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" @click="changeTheme('Default')">Default</a> -->
         </div>
     </li>
 </template>
