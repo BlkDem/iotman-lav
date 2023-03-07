@@ -1,7 +1,7 @@
 <template>
-    <select v-bind="id" @change="setId($event.target.value)" class="form-select">
-        <option v-for="(item, key) in items" v-bind:key="key" v-bind:value="item.id">
-            {{ item.name }}
+    <select v-bind="id" @change="setKeyID($event.target.value)" class="form-select">
+        <option v-for="(item, key) in dataItems" v-bind:key="key" v-bind:value="item.id">
+            {{ item[nameField] }}
         </option>
     </select>
 
@@ -9,12 +9,14 @@
 
 <script>
 
+import DeviceTypeData from "../../api/dsDeviceType";
+
 export default {
 
     data (){
         return {
-            items: [],
-            //id: undefined,
+            modelValue: undefined,
+            dataItems: []
         }
     },
 
@@ -24,15 +26,31 @@ export default {
         },
         items: {
             type: Array,
+        },
+        nameField: {
+            type: String,
+            default: 'device_type_name'
+        },
+        dataTable: {
+            type: String,
         }
     },
 
     created() {
+        const a = async () => {
+            const _data = await DeviceTypeData.getGeviceTypeData()
+             this.dataItems = _data.data.data
+             console.log('asyc', _data.data.data)
+
+            // console.log(await DeviceTypeData.getGeviceTypeData())
+        }
+        console.log('sync', a())
     },
 
     methods: {
-        setId(_value) {
-            this.id = _value
+        setKeyID(_value) {
+            this.modelValue = _value
+            console.log(_value)
         }
     },
 }

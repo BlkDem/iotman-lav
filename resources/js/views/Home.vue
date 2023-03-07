@@ -3,6 +3,8 @@
         {{ pageCaption }}
     </h1>
 
+    <data-set-select></data-set-select>
+
     <div class="row">
         <!-- page menu -->
         <div class="col-sm-3 col-lg-3 col-md-3">
@@ -52,15 +54,18 @@
 <script>
 import CommonCard from '../components/common/CommonCard.vue';
 import InfoCard from '../components/common/InfoCard.vue';
+import DataSetSelectVue from '../components/db/DataSetSelect.vue';
 
 import MessagesConstants from "../components/strings_constants/strings.js";
+import DataSetSelect  from "../components/db/DataSetSelect.vue";
 
 export default {
     name: 'Home',
 
     components: {
             CommonCard,
-            InfoCard
+            InfoCard,
+            DataSetSelect
         },
 
     data() {
