@@ -1,5 +1,9 @@
 <template>
-    <select v-bind="id" @change="setKeyID($event.target.value)" class="form-select">
+    <select
+        :dataTableReadApi="dataTableReadApi"
+        :nameField="nameField"
+        @change="doChange($event.target.value)"
+        class="form-select">
         <option v-for="(item, key) in dataItems" v-bind:key="key" v-bind:value="item.id">
             {{ item[nameField] }}
         </option>
@@ -9,48 +13,50 @@
 
 <script>
 
-import DeviceTypeData from "../../api/dsDeviceType";
+// import DeviceTypeData from "../../api/dsDeviceType";
+import APIConstants from "../../rest_api.js";
 
 export default {
 
     data (){
         return {
-            modelValue: undefined,
+            // retValue: undefined,
             dataItems: []
         }
     },
+
+    emits: ['MySelect'],
 
     props: {
         id: {
             type: Number,
         },
-        items: {
-            type: Array,
-        },
+
         nameField: {
             type: String,
             default: 'device_type_name'
         },
-        dataTable: {
+        dataTableReadApi: {
             type: String,
         }
     },
 
     created() {
-        const a = async () => {
-            const _data = await DeviceTypeData.getGeviceTypeData()
-             this.dataItems = _data.data.data
-             console.log('asyc', _data.data.data)
-
-            // console.log(await DeviceTypeData.getGeviceTypeData())
-        }
-        console.log('sync', a())
+        (async () => {
+            const _data = await APIConstants.getData(this.dataTableReadApi)
+            this.dataItems = _data.data.data
+            this.retValue = this.modelValue
+        })()
     },
 
     methods: {
-        setKeyID(_value) {
-            this.modelValue = _value
-            console.log(_value)
+        doChange(_value) {
+            this.$emit('MySelect', _value)
+            // console.log(_value)
+        },
+
+        getItems() {
+            return this.dataItems;
         }
     },
 }

@@ -183,8 +183,8 @@
                 this.compactView = (localStorage.getItem('CompactView') === 'true');
             }
             this.emitter.on("new-lang", _lang => {
-            this.setLang(_lang)
-        });
+                this.setLang(_lang)
+            });
 
         },
 

@@ -3,7 +3,13 @@
         {{ pageCaption }}
     </h1>
 
-    <data-set-select></data-set-select>
+    <data-set-select @MySelect="myDeviceTypeSelect(value, _obj)" name="deviceTypes"
+        :dataTableReadApi="deviceTypesApi" :nameField="'device_type_name'"> </data-set-select>
+    <data-set-select @MySelect="myDeviceSelect(value, _obj)" name="devices"
+        :dataTableReadApi="devicesApi" :nameField="'device_name'"> </data-set-select>
+
+    <h1>{{tmpDeviceType}}</h1>
+    <h1>{{tmpDevice}}</h1>
 
     <div class="row">
         <!-- page menu -->
@@ -54,8 +60,7 @@
 <script>
 import CommonCard from '../components/common/CommonCard.vue';
 import InfoCard from '../components/common/InfoCard.vue';
-import DataSetSelectVue from '../components/db/DataSetSelect.vue';
-
+import APIConstants from "../rest_api";
 import MessagesConstants from "../components/strings_constants/strings.js";
 import DataSetSelect  from "../components/db/DataSetSelect.vue";
 
@@ -76,6 +81,10 @@ export default {
             informationBlockCaption: 'Information',
             logBlockCaption: 'Log',
             margins: 2,
+            deviceTypesApi: '',
+            devicesApi: '',
+            tmpDeviceType: '',
+            tmpDevice: '',
 
             infoCardData: [
                 {
@@ -102,6 +111,10 @@ export default {
     },
 
     created() {
+
+        this.deviceTypesApi = APIConstants.api_device_types_read
+        this.devicesApi = APIConstants.api_devices_read
+
         this.pageCaption = MessagesConstants.HOME ?? 'Welcome'
         this.menuBlockCaption = MessagesConstants.menuBlockCaption ?? 'Menu'
         this.informationBlockCaption = MessagesConstants.informationBlockCaption ?? 'Information'
@@ -111,8 +124,7 @@ export default {
     mounted() {
 
         this.emitter.on("new-lang", _lang => {
-        // console.log(_lang)
-        this.setLang(_lang)
+            this.setLang(_lang)
         });
     },
 
@@ -122,6 +134,14 @@ export default {
             this.menuBlockCaption = _lang.menuBlockCaption ?? 'Menu'
             this.informationBlockCaption = _lang.informationBlockCaption ?? 'Information'
             this.logBlockCaption = _lang.logBlockCaption ?? 'Log'
+        },
+
+        myDeviceSelect(value, obj){
+            this.tmpDevice = event.target.value
+        },
+
+        myDeviceTypeSelect(value, obj){
+            this.tmpDeviceType = event.target.value
         }
     },
 
