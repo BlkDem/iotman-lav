@@ -3,10 +3,21 @@
         {{ pageCaption }}
     </h1>
 
-    <data-set-select @MySelect="myDeviceTypeSelect(value, _obj)" name="deviceTypes"
-        :dataTableReadApi="deviceTypesApi" :nameField="'device_type_name'"> </data-set-select>
-    <data-set-select @MySelect="myDeviceSelect(value, _obj)" name="devices"
-        :dataTableReadApi="devicesApi" :nameField="'device_name'"> </data-set-select>
+    <data-set-select
+        name="deviceTypes"
+        :value="device_type_id"
+        :dataTableReadApi="deviceTypesApi"
+        :nameField="'device_type_name'"
+        @onDataSelect="myDeviceTypeSelect">
+    </data-set-select>
+
+    <data-set-select
+        @onDataSelect="myDeviceSelect"
+        name="devices"
+        :value="device_id"
+        :dataTableReadApi="devicesApi"
+        :nameField="'device_name'">
+    </data-set-select>
 
     <h1>{{tmpDeviceType}}</h1>
     <h1>{{tmpDevice}}</h1>
@@ -86,6 +97,9 @@ export default {
             tmpDeviceType: '',
             tmpDevice: '',
 
+            device_type_id: undefined,
+            device_id: undefined,
+
             infoCardData: [
                 {
                     infoCardCaption: "07.03.2023 16:22",
@@ -136,11 +150,13 @@ export default {
             this.logBlockCaption = _lang.logBlockCaption ?? 'Log'
         },
 
-        myDeviceSelect(value, obj){
+        myDeviceSelect(){
+            console.log(event.target.value)
             this.tmpDevice = event.target.value
         },
 
-        myDeviceTypeSelect(value, obj){
+        myDeviceTypeSelect(){
+            console.log(event.target.value)
             this.tmpDeviceType = event.target.value
         }
     },

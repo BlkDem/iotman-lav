@@ -1,5 +1,6 @@
 <template>
     <select
+        :value="value"
         :dataTableReadApi="dataTableReadApi"
         :nameField="nameField"
         @change="doChange($event.target.value)"
@@ -13,19 +14,18 @@
 
 <script>
 
-// import DeviceTypeData from "../../api/dsDeviceType";
 import APIConstants from "../../rest_api.js";
 
 export default {
 
     data (){
         return {
-            // retValue: undefined,
-            dataItems: []
+            dataItems: [],
+            value: undefined,
         }
     },
 
-    emits: ['MySelect'],
+    emits: ['onDataSelect'],
 
     props: {
         id: {
@@ -51,7 +51,8 @@ export default {
 
     methods: {
         doChange(_value) {
-            this.$emit('MySelect', _value)
+            // this.value = _value
+            this.$emit('onDataSelect', _value)
             // console.log(_value)
         },
 
