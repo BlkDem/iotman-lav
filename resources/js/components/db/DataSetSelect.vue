@@ -51,13 +51,16 @@ export default {
 
     methods: {
         doChange(_value) {
-            // this.value = _value
+            this.value = _value
             this.$emit('onDataSelect', _value)
-            // console.log(_value)
         },
 
         getItems() {
             return this.dataItems;
+        },
+
+        getCurrentValue() {
+            return this.value
         }
     },
 }

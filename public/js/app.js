@@ -24343,12 +24343,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     doChange: function doChange(_value) {
-      // this.value = _value
+      this.value = _value;
       this.$emit('onDataSelect', _value);
-      // console.log(_value)
     },
     getItems: function getItems() {
       return this.dataItems;
+    },
+    getCurrentValue: function getCurrentValue() {
+      return this.value;
     }
   }
 });
