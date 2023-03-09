@@ -1,6 +1,6 @@
 <template>
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div class="toast hide toastBasic" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
+        <div class="toast hide toastBasic" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
             <div class="toast-header text-light bg-info" :class="{'bg-danger': isError, 'br-warning': isWarning }">
                 <strong class="me-auto">{{ header }}</strong>
                 <!-- <small>Info</small> -->

@@ -1,15 +1,17 @@
 <template>
-    <div v-show="deviceVisible">
+    <div style="margin-top: 5.5rem">
+    </div>
+    <common-card :cardCaption="pageCaption">
         <AddDevice ref="addDevice"></AddDevice>
         <ConfirmDialogue ref="confirmDialogue" />
-        <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
-            Registered Devices
-        </h1>
+        <!-- <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
+            {{ pageCaption }}
+        </h1> -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
             <div class="container-fluid">
                 <div class="navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav me-auto  d-flex">
-                        <li class="nav-item  d-flex py-1">
+                        <li class="nav-item  d-flex py-1  w-100">
                             <input class="form-control me-sm-2" type="text" placeholder="Search"
                                 v-model="device_filter" />
                         </li>
@@ -45,7 +47,7 @@
             <h5 class="text-primary my-2">{{ dataDescription }} </h5>
         </div>
 
-        <div class="row my-2" v-if="!compactView">
+        <div class="row my-2" v-show="!compactView">
             <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(device, key) in filteredDevices" v-bind:key="key"
                 v-bind:id="device.id">
                 <div class="card border-light">
@@ -116,7 +118,7 @@
         </div>
         <Paginator ref="paginatorDevices"></Paginator>
         <!-- <MyMqtt></MyMqtt> -->
-    </div>
+    </common-card>
 </template>
 
 <script>
@@ -143,6 +145,7 @@
         data() {
             return {
                 devices: [], // api loaded list of devices
+                pageCaption: MessagesConstants.DEVICES ?? 'Devices',
                 filteredDevices: [], //filtered array of devices
                 dataDescription: "", //table data description label
                 deviceVisible: true, //devices view visibilty
@@ -181,7 +184,12 @@
             if (localStorage.getItem('CompactView')) {
                 this.compactView = (localStorage.getItem('CompactView') === 'true');
             }
+            this.emitter.on("new-lang", _lang => {
+                this.setLang(_lang)
+            });
+
         },
+
 
         watch: {
             device_filter: function () {
@@ -304,7 +312,7 @@
 
             //setting Device Type to Device
             async setDeviceType($device_type_id, $item) { //attach device type name and image to device
-                console.log($device_type_id, $item)
+                // console.log($device_type_id, $item)
                 axios
                     .get(APIConstants.api_device_types_read + $device_type_id)
                     .then((resp_type) => {
@@ -368,7 +376,7 @@
                             );
                         })
                         .catch((error) => {
-                            //  console.log(error.response.data)
+                              console.log('error -> ', error)
 
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.INSERTING_ERROR,
@@ -437,27 +445,27 @@
                         })
 
                         .then(resp => {
-                            this.$root.$refs.DeviceUserRef.getData();
+
                         })
 
                         .catch((error) => {
-                            // console.log(error.response?.data)
+                             console.log(error)
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.INSERTING_ERROR,
                                 ParsingErrors.getError(error),
                                 ParsingErrors.ERROR_LEVEL_ERROR
                             )
                         })
+
+                        // this.$root.$refs.DeviceUserRef.getData();
                 } else {
                     console.log(MessagesConstants.EDITING_CANCELLED);
                 }
             },
 
-            // Show or Hide Devices page
-            ShowHide(isVisible) {
-                this.deviceVisible = isVisible;
-            },
-
+            setLang(_lang) {
+                this.pageCaption = _lang.HOME ?? 'Welcome'
+            }
         },
     };
 

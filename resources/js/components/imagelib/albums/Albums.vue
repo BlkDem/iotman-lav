@@ -1,12 +1,14 @@
 <template>
+        <div style="margin-top: 5.5rem">
+        </div>
 
-    <div>
-        <AddAlbum ref="addImage" />
+    <common-card :cardCaption="pageCaption">
+        <AddAlbum ref="addAlbum" />
 
         <ConfirmDialogue ref="confirmDialogue" />
-        <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
-            Albums
-        </h1>
+        <!-- <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
+            {{ pageCaption }}
+        </h1> -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
             <div class="container-fluid">
                 <div class="navbar-collapse" id="navbarColor02">
@@ -32,15 +34,18 @@
                         </li>
                     </ul>
                     <div class="d-flex">
-                        <button class="btn btn-primary" :class="{'disabled' : compactView}" @click="compactView = true">
+                        <button class="btn btn-primary  mx-2" :class="{'disabled' : compactView}" @click="compactView = true">
                             <i class="fas fa-list"></i>
                         </button>
-                        <button class="btn btn-primary mx-2" :class="{'disabled' : !compactView}"
+                        <button class="btn btn-primary" :class="{'disabled' : !compactView}"
                             @click="compactView = false">
                             <i class="fas fa-th-large"></i>
                         </button>
-                        <button class="btn btn-primary" @click="setAlbum">
+                        <button class="btn btn-primary mx-2" @click="setAlbum">
                             Add Album
+                        </button>
+                        <button class="btn btn-primary" @click="getData">
+                            <i class="fas fa-sync-alt"></i>
                         </button>
                     </div>
                 </div>
@@ -51,7 +56,7 @@
             <h5 class="text-primary my-2">{{ dataDescription }}</h5>
         </div>
 
-        <div class="row my-2" v-if="!compactView">
+        <div class="row my-2" v-show="!compactView">
             <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(album, key) in filteredAlbums"
                 v-bind:key="key" v-bind:id="album.id">
                 <div class="card border-light">
@@ -65,7 +70,7 @@
                         </h6>
                     </div>
                     <div class="card-body">
-                            <i class="fas fa-images fa-8x"></i>
+                            <i class="fas fa-images fa-8x text-info"></i>
                     </div>
 
                     <!-- <img v-bind:src="device_type.device_type_image" /> -->
@@ -91,7 +96,7 @@
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
                         <div class="col-sm-1 col-xs-1 col-lg-1 flex">
-                            <i class="fas fa-images fa-2x"></i>
+                            <i class="fas fa-images fa-2x text-info"></i>
                             <!-- <img v-bind:src="album.device_type_image" class="device-image" /> -->
                         </div>
                         <div class="col-sm-1 col-xs-1 col-lg-1 align-left">
@@ -101,11 +106,11 @@
                                 {{ album.album_name  }}
                         </div>
                         <div class="col-sm-3 col-xs-3 col-lg-3  edit-buttons">
-                            <button class="btn btn-info mx-2" @click="doEditType(key, album.id)">
+                            <button class="btn btn-info mx-2" @click="doEditAlbum(key, album.id)">
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
 
-                            <button class="btn btn-secondary" @click="doDeleteType(key, album.id)">
+                            <button class="btn btn-secondary" @click="doDeleteAlbum(key, album.id)">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -116,7 +121,7 @@
         <Paginator ref="paginatorDeviceTypes"></Paginator>
         <!-- <Imager ref="imager"/> -->
         <!-- <MyMqtt></MyMqtt> -->
-    </div>
+    </common-card>
 
 
 </template>
@@ -146,6 +151,7 @@ import ParsingErrors from "../../common/js/ParsingErrors.js";
                 albums: [],
                 // deviceTypesVisible: false,
                 compactView: true,
+                pageCaption: MessagesConstants.ALBUMS ?? 'Albums',
                 filteredAlbums: [], //filtered array of devices
                 dataDescription: "", //table data description label
                 album_filter: "", //filtering string
@@ -169,12 +175,12 @@ import ParsingErrors from "../../common/js/ParsingErrors.js";
         },
 
         created() {
-            this.page_description = AlbumStringConstants.DEVICE_TYPE_PAGE_DESCRIPTION;
+            // this.page_description = AlbumStringConstants.DEVICE_TYPE_PAGE_DESCRIPTION;
 
             // if (localStorage.DeviceTypeCompactView == null) {
             //     localStorage.DeviceTypeCompactView = this.compactView;
             // }
-            this.dataDescription = AlbumStringConstants.DEVICE_TYPE_DATA_DESCRIPTION; //device dataset description
+            this.dataDescription = AlbumStringConstants.ALBUM_DATA_DESCRIPTION; //device dataset description
 
             this.getData();
         },
@@ -275,7 +281,7 @@ import ParsingErrors from "../../common/js/ParsingErrors.js";
                 })
 
                 if (confirmDelete) {
-                    axios.delete(APIConstants.api_device_type_delete + id)
+                    axios.delete(APIConstants.api_album_delete + id)
                         .then(resp => {
                             this.filteredAlbums.splice(key, 1);
                             this.albums = this.filteredAlbums
@@ -306,9 +312,8 @@ import ParsingErrors from "../../common/js/ParsingErrors.js";
 
                 if (_add) {
                     axios.post(APIConstants.api_album_create, {
-                                album_name: this.$refs.addDeviceType.album_name,
-                                // album_image: this.$refs.addDeviceType.album_image,
-                                album_desc: this.$refs.addDeviceType.album_desc
+                                album_name: this.$refs.addAlbum.album_name,
+                                album_desc: this.$refs.addAlbum.album_desc
                             }
                         )
                         .then(resp => {
@@ -353,14 +358,14 @@ import ParsingErrors from "../../common/js/ParsingErrors.js";
                 )
 
                 if (_edit) {
-                    let editDeviceTypePost = {
+                    let editAlbum = {
                         album_name:  this.$refs.addAlbum.album_name,
                         // album_image: this.$refs.addAlbum.album_image,
                         album_desc:  this.$refs.addAlbum.album_desc
                     }
-                    //console.log(editDeviceTypePost);
+                    console.log(editAlbum);
 
-                    axios.put(APIConstants.api_album_update + id, editDeviceTypePost)
+                    axios.put(APIConstants.api_album_update + id, editAlbum)
                         .then(resp => {
                             // console.log(resp['data']);
                             this.albums[key].album_name =  resp['data'].album_name;

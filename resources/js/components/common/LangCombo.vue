@@ -8,50 +8,86 @@
             aria-expanded="false">{{ (currentLang=='')?'EN': currentLang}}</a>
         <div class="dropdown-menu" style="margin-left: -106px;">
             <a class="dropdown-item" href="#" v-for="lang in langs" :key="lang.id" @click='changeLang(lang)'>{{ lang }}</a>
+            <!-- <a class="dropdown-item" href="#" v-for="lang in langs" :key="lang.id"
+                v-on:click="$emit('click', $event)">{{ lang }}</a> -->
+
         </div>
     </li>
 </template>
 
 <script>
 import LangList from "../../langs.js";
+import MessagesConstants from "../strings_constants/strings.js";
+
+import lang_EN from "/lang/EN/index"
+import lang_RU from "/lang/RU/index"
+
 
 export default {
-  name: "LangCombo",
+    name: "LangCombo",
+    emits: [
+        "newLang",
+        // "click"
+    ],
 
-  data () {
-    return {
-      langs:[],
-      currentLang: 'EN',
-    }
-  },
-
-  created() {
-    this.readLangs()
-    //this.currentLang = _currentTheme; 
-  },
-  
-  methods: {
-    readLangs() {
-        this.langs = [...LangList.Languages]
-        if (localStorage.Language!=null) {
-            this.currentLang = localStorage.Language
-        } 
-        else {
-            localStorage.Language = this.currentLang
+    data() {
+        return {
+            langs: [],
+            currentLang: 'EN'//localStorage.Language ?? 'EN',
         }
     },
 
-    changeLang(_lang) {
-      this.currentLang = _lang
-      console.log(_lang)
-      localStorage.Language = _lang
-      this.$root.$refs.navbar.loadLang(_lang);
-    //   console.log('before', LangList.MessagesConstants)
-    //   LangList.loadLang(_lang)
-    //   console.log('after', LangList.MessagesConstants)
-    //   this.$root.$refs.navbar.setStrings(LangList.MessagesConstants);
+    created() {
+        this.readLangs()
+        //this.currentLang = _currentTheme;
     },
 
-  }
+    mounted() {
+        this.currentLang = localStorage.Language ?? 'EN'
+    },
+
+    methods: {
+        readLangs() {
+            this.langs = [...LangList.Languages]
+            if (localStorage.Language != null) {
+                this.currentLang = localStorage.Language
+            } else {
+                localStorage.Language = this.currentLang
+            }
+            this.changeLang(this.currentLang)
+        },
+
+        changeLang(_lang) {
+            this.currentLang = _lang
+            //console.log(_lang)
+            localStorage.Language = _lang
+            if (_lang === 'EN') this.setActiveLang(lang_EN)
+            if (_lang === 'RU') this.setActiveLang(lang_RU)
+            // this.$emit('click', _lang)
+            // console.log(MessagesConstants.HOME)
+            //this.loadLang(_lang)
+        },
+
+        setActiveLang(_langObject) {
+            for (var key in _langObject) {
+                if (MessagesConstants.hasOwnProperty(key)) {
+                    MessagesConstants[key] = _langObject[key]
+                }
+            }
+
+            // console.log(this.$parent.$parent, this.$parent.$refs, this.$root.$refs)
+            // this.$root.$emit('newLang', MessagesConstants)
+            this.$parent.newLang(_langObject)
+            this.emitter.emit("new-lang", _langObject);
+            // this.$parent.$parent.newLangUp()
+            // console.log(this.$router.currentRoute._value)
+            // console.log(MessagesConstants.HOME);
+        },
+
+        setStrings() {
+
+        },
+
+    }
 }
 </script>

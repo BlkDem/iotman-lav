@@ -1,28 +1,40 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
 
 import './bootstrap';
 import { createApp } from 'vue';
-import { defineAsyncComponent } from 'vue';
-import Navbar from './components/header/Navbar.vue';
-
-/**
- * Next, we will create a fresh Vue application instance. You may then begin
- * registering components with the application instance so they are ready
- * to use in your application's views. An example is included for you.
- */
-
-// import { Vue } from 'vue'
-// import { VueRouter } from 'vue-router'
-
-// Vue.use(VueRouter)
 import router from './router'
-import Toaster from './components/common/Toaster.vue';
 
-const app = createApp({});
+import LangCombo from './components/common/LangCombo.vue';
+import App from './components/App.vue';
+import Navbar from './components/header/Navbar.vue';
+import AppMenu from './components/common/AppMenu.vue';
+import ThemeCombo from './components/common/ThemeCombo.vue';
+import UserMenu from './components/common/UserMenu.vue';
+import Toaster from './components/common/Toaster.vue'; //resources\js\components\common\Toaster.vue
+import CommonCard from './components/common/CommonCard.vue';
+import InfoCard from './components/common/InfoCard.vue';
+
+import mitt from 'mitt';
+const emitter = mitt();
+
+const app = createApp(App);
+
+app.config.globalProperties.emitter = emitter;
+
+app.component('LangCombo', LangCombo);
+
 app.component('Navbar', Navbar);
-app.component('toaster', Toaster);
+
+app.component('UserMenu', UserMenu);
+
+app.component('ThemeCombo', ThemeCombo);
+
+app.component('Toaster', Toaster);
+
+app.component('CommonCard', CommonCard);
+
+app.component('InfoCard', InfoCard);
+
+app.component('AppMenu', AppMenu);
+
 app.use(router).mount('#app');
+

@@ -19,6 +19,7 @@
     padding: 0.5rem;
     display: flex;
     align-items: center;
+    backdrop-filter: blur(5px);
     z-index: 1031;
 }
 

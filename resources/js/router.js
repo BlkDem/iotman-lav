@@ -9,28 +9,38 @@ import Albums from "./components/imagelib/albums/Albums.vue"
 const routes = [
   {
     path: "/",
-    name: "Wellcome",
+    name: "Welcome",
     component: Home,
+    icon: "fas fa-home",
+    ID: "HOME"
   },
   {
     path: "/device_types",
     name: "Device Types",
+    icon: "fas fa-layer-group",
     component: DeviceTypes,
+    ID: "DEVICE_TYPES"
   },
   {
     path: "/devices",
     name: "Devices",
+    icon: "fas fa-sun",
     component: Devices,
+    ID: "DEVICES"
   },
   {
     path: "/user_devices",
     name: "User Devices",
+    icon: "fas fa-users",
     component: UserDevices,
+    ID: "USER_DEVICES"
   },
   {
     path: "/imagelib",
     name: "Images Library",
+    icon: "fas fa-images",
     component: Albums,
+    ID: "LIBRARY"
   },
 ];
 

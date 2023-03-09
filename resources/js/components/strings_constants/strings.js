@@ -1,4 +1,6 @@
 export default {
+    HOME: "Welcome",
+    LIBRARY: "Images Library",
     IMAGES: "Images",
     ALBUMS: "Albums",
     DEVICE_TYPES: "Device Types",
@@ -30,6 +32,10 @@ export default {
     SORT_DESC: "DESC",
 
     LOGOUT_MENU: "Logout",
+
+    menuBlockCaption: 'Menu',
+    informationBlockCaption: 'Information',
+    logBlockCaption: 'Log',
 
     //strings processing
 

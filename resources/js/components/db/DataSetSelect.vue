@@ -1,59 +1,67 @@
 <template>
-    <select v-model="id" class="form-select">
-        <option v-for="(item, key) in items" v-bind:key="key" v-bind:value="item.id">
-            {{ item.device_type_name }}
+    <select
+        :value="value"
+        :dataTableReadApi="dataTableReadApi"
+        :nameField="nameField"
+        @change="doChange($event.target.value)"
+        class="form-select">
+        <option v-for="(item, key) in dataItems" v-bind:key="key" v-bind:value="item.id">
+            {{ item[nameField] }}
         </option>
-    </select>   
-    
+    </select>
+
 </template>
 
 <script>
 
+import APIConstants from "../../rest_api.js";
+
 export default {
-    name: 'types',
 
     data (){
         return {
-        // Parameters that change depending on the type of dialogue
-            title: undefined,
-            items: [],
-            //id: undefined,
+            dataItems: [],
+            value: undefined,
         }
     },
 
-    props: ["id"], 
+    emits: ['onDataSelect'],
 
-    setup(props) {
-        
+    props: {
+        id: {
+            type: Number,
+        },
+
+        nameField: {
+            type: String,
+            default: 'device_type_name'
+        },
+        dataTableReadApi: {
+            type: String,
+        }
     },
 
-    created(props) {        
-        this.getDeviceTypes();
+    created() {
+        (async () => {
+            const _data = await APIConstants.getData(this.dataTableReadApi)
+            this.dataItems = _data.data.data
+            this.retValue = this.modelValue
+        })()
     },
 
     methods: {
-        async getDeviceTypes(api_url) {
-            api_url = api_url || '/api/device_types/read';
-            // console.log(api_url, this.device_type_id);
-             await fetch(api_url)
-                    .then(response => response.json())
-                    .then(response => {                        
-                        this.items = response.data;
-                        console.log(this.items)
-                    })
-                    //.then(response => console.log(response))
-                    .catch(err => console.log(err));
+        doChange(_value) {
+            this.value = _value
+            this.$emit('onDataSetSelect', _value)
         },
 
-        getDeviceTypeID() {
-            return this.id;
+        getItems() {
+            return this.dataItems;
         },
 
-        setId(){
-            //this.id=3;
-            console.log(this.props, this)
+        getCurrentValue() {
+            return this.value
         }
-
     },
 }
 

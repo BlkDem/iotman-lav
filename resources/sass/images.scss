@@ -9,19 +9,39 @@
 }*/
 
 .device-image {
-    width: 40px;
-    /*margin-bottom: -15px;
-    margin-top: -15px;*/
+    height: 2.6rem;
     border-radius: 5px;
+}
+
+.card-space {
+    margin-bottom: 00px;
+}
+
+a.a_cap:first-letter {
+    text-transform: uppercase;
 }
 
 @media only screen and (min-width: 320px) and (max-width: 480px) {
     .device-image {
-        width: 36px;
-        margin-top: -23px;
-        margin-bottom: -29px;
-        margin-left: 210px;
+        width: 100px;
+        /* margin-top: -23px; */
+        margin-bottom: -91px;
+        margin-left: 249px;
         border-radius: 10px;
-        //box-shadow: #eee 0px 0px 8px;
+        /*box-shadow: #eee 0px 0px 8px;*/
+    }
+    .card-space {
+        margin-bottom: 20px;
+    }
+    .container {
+        padding: 0;
+        width: 100%;
+    }
+
+    .navbar > .container-fluid {
+        display: flex;
+        flex-wrap: inherit;
+        align-items: center;
+        justify-content: flex-start;
     }
 }

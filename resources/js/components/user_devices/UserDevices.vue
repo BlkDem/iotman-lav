@@ -1,19 +1,22 @@
 <template>
 
 
+        <div style="margin-top: 5.5rem">
+            <!-- {{ pageCaption }} -->
+        </div>
 
     <!-- <div v-show="userDeviceVisible"> -->
-        <div>
+        <common-card :cardCaption="pageCaption" >
         <AddUserDevice ref="addUserDevice"></AddUserDevice>
         <ConfirmDialogue ref="confirmDialogue" />
-        <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
-            User Devices
-        </h1>
+        <!-- <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
+            {{ pageCaption }}
+        </h1> -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
             <div class="container-fluid">
                 <div class="navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav me-auto  d-flex">
-                        <li class="nav-item  d-flex py-1">
+                        <li class="nav-item  d-flex py-1  w-100">
                             <input class="form-control me-sm-2" type="text" placeholder="Search"
                                 v-model="userDevice_filter" />
                         </li>
@@ -52,8 +55,8 @@
 
         <div>
             <!-- <h1>User Devices</h1> -->
-            <div class="row my-2" v-if="!compactView">
-                <div class="p-2 col-sm-4 col-xs-4 col-lg-4 fade-in" v-for="(user_device, key) in filteredUserDevices"
+            <div class="row my-2" v-show="!compactView">
+                <div class="p-2 col-sm-4 col-xs-4 col-lg-4 fade-in" style="margin-bottom: 50px;" v-for="(user_device, key) in filteredUserDevices"
                     v-bind:key="key" v-bind:id="user_device.id">
                     <div class="card border-light">
                         <h3 class="card-header">{{ user_device.user_device_name }}</h3>
@@ -88,7 +91,7 @@
             </div>
         </div>
         <!-- compact view -->
-        <div v-if="compactView" class="my-2">
+        <div v-show="compactView" class="my-2">
 
             <div class="card border-primary mb-1 w-100 fade-in" v-for="(user_device, key) in filteredUserDevices"
                 v-bind:key="key" v-bind:id="user_device.id">
@@ -128,7 +131,7 @@
             </div>
         </div>
         <Paginator ref="paginatorUserDevices"></Paginator>
-    </div>
+    </common-card>
 
 </template>
 
@@ -156,6 +159,7 @@ export default {
             userDeviceVisible: true,
             userDevice_filter: "",
             user_devices: [],
+            pageCaption: MessagesConstants.USER_DEVICES ?? "User Devices",
             filteredUserDevices: [], //filtered array of devices
             dataDescription: "", //table data description label
             compactView: true, //copact view mode
@@ -266,7 +270,8 @@ export default {
 
             const confirmDelete = await this.$refs.confirmDialogue.showDialogue({
                 title: UserDeviceStringConstants.USER_DEVICE_DELETING_CAPTION,
-                message: UserDeviceStringConstants.USER_DEVICE_DELETING_MESSAGE + '"' + this.filteredUserDevices[key].user_device_name + '"?',
+                message: UserDeviceStringConstants.USER_DEVICE_DELETING_MESSAGE + '"' +
+                this.filteredUserDevices[key].user_device_name + '"?',
                 okButton: UserDeviceStringConstants.USER_DEVICE_DELETING_CAPTION,
             })
 
@@ -276,7 +281,8 @@ export default {
                         this.filteredUserDevices.splice(key, 1);
                         this.user_devices = this.filteredUserDevices
                         // console.log(key, id, " - deleted");
-                        this.$root.$refs.toaster.showMessage(MessagesConstants.DELETED_MESSAGE, MessagesConstants.PROCESS_SUCCESSFULLY);
+                        this.$root.$refs.toaster.showMessage(MessagesConstants.DELETED_MESSAGE,
+                            MessagesConstants.PROCESS_SUCCESSFULLY);
                     })
                     .catch(error => {
                         console.log(error);

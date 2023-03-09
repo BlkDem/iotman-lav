@@ -63,7 +63,7 @@ Route::controller(AlbumController::class)->group(function () {
     Route::get('/albums/read', 'index');
     Route::get('/albums/read/page/{currentPage}/{itemsPerPage}', 'page');
     Route::get('/album/read/{id}', 'show');
-    Route::put('/album/update/{updateImage}', 'update');
+    Route::put('/album/update/{updateAlbum}', 'update');
     Route::delete('/album/delete/{id}', 'destroy');
 });
 

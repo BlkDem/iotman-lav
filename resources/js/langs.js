@@ -4,23 +4,23 @@ export default {
     MessagesConstants: MessagesStrings,
 
     Languages: [
-        'EN', 
-        'RU', 
+        'EN',
+        'RU',
     ],
 
     LanguageStrings: [],
 
     currentLang: 'EN',
 
-    
+
 
 
     // loadLang() {
     //     if (localStorage.Language!=null) {
     //         this.currentLang = localStorage.Language
-    //     } 
+    //     }
 
-        
+
         // fetch("/lang/" + this.currentLang + ".json")
         // .then(r => r.json())
         // .then(json => {
@@ -49,11 +49,11 @@ export default {
             // this.$root.$refs.navbar.devices_caption = Langs.MessagesConstants.DEVICES
             // this.$root.$refs.navbar.device_types_caption = Langs.MessagesConstants.DEVICE_TYPES
             // this.$root.$refs.navbar.user_devices_caption = Langs.MessagesConstants.USER_DEVICES
-    
+
             // this.$refs.themeCombo.theme_caption = Langs.MessagesConstants.THEME
-    
+
             // console.log(this.$refs.themeCombo.theme_caption)
-    
+
 
         // });
 

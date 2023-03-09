@@ -20,12 +20,13 @@
 
     <?php
     echo "<script>var _newTheme='Default'</script>";
-    $_themeCss = '/css/app.css';
-    $_themed = isset($_GET["theme"]);
-    if ($_themed) {
+    $_themeCss = '/css/vapor/app.css';
+
+    if (isset($_GET["theme"])) {
         $_themeName = $_GET["theme"];
         if (file_exists(public_path('/css/' . $_themeName . '/app.css'))) {
             $_themeCss = '/css/' . $_themeName . '/app.css';
+            // echo("<h1 style='position: absolute; z-index: 1034;'>$_themeCss</h1>");
             echo "<script>_newTheme='$_themeName'</script>";
         }
     }
@@ -55,9 +56,8 @@
 </head>
 
 <body class="container-fluid">
-    <div id="app" class="container text-center m-20">
-        <Navbar ref="navbar"></Navbar>
-        <Toaster ref="toaster"></Toaster>
+    <div id="app" class="container">
+
         <!-- <device-list ref="DeviceRef"></device-list> -->
         <!-- <device-type-list ref="DeviceTypeRef"></device-type-list>
         <device-user-list ref="DeviceUserRef"></device-user-list> -->

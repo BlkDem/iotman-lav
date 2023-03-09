@@ -1,21 +1,18 @@
 <template>
-    <PopupModal ref="popup">
+    <PopupModal ref="popup" @keydown="onKeyDown" @click="onDialogClick">
         <div class="modal-header">
             <h2 class="w-100 text-center">{{ title }}</h2>
         </div>
 
         <div class="modal-body align-left">
             <label class="px-2">Album Name</label>
-            <input v-model="album_name" class="form-control p-2 mb-4" placeholder="Input Album Name"/>
+            <input v-model="album_name" class="form-control p-2 mb-4" placeholder="Input Album Name" />
             <label class="px-2">Album Desc</label>
-            <textarea v-model="album_desc" class="form-control p-2 mb-4" style="min-height: 100px; max-height: 200px;" placeholder="Input Device Type Desc" cols="40" rows="3">
-
+            <textarea v-model="album_desc" class="form-control p-2 mb-4" style="min-height: 100px; max-height: 200px;"
+                placeholder="Input Device Type Desc" cols="40" rows="3">
             </textarea>
-            <!-- <input v-model="device_type_desc" class="form-control p-2 mb-4" placeholder="Input Device Type Desc"/> -->
-            <!-- <label class="px-2">Device Type Image</label>
-            <input v-model="device_type_image" class="form-control p-2 mb-4" placeholder="Input Device Type Image"/> -->
         </div>
-        <div class="btns">
+        <div class="align-center">
             <button class="btn btn-danger mx-1 btn-width-40" @click="_confirm">{{ okButton }}</button>
             <button class="btn btn-secondary mx-1 btn-width-40" @click="_cancel">{{ cancelButton }}</button>
         </div>
@@ -25,7 +22,6 @@
 <script>
 import PopupModal from '../../../components/common/PopupModal.vue';
 import MessagesConstants from '../../strings_constants/strings';
-import {ref} from 'vue'
 
 export default {
     name: 'AddAlbum',
@@ -94,6 +90,15 @@ export default {
             // Or you can throw an error
             // this.rejectPromise(new Error('User cancelled the dialogue'))
         },
+
+        onKeyDown(){
+            if (event.key === 'Escape') this._cancel()
+        },
+
+        onDialogClick() {
+            if (event.target.className === 'popup-modal') this._cancel()
+            // console.log(event, (event.target.className === 'popup-modal'))
+        }
     },
 }
 </script>

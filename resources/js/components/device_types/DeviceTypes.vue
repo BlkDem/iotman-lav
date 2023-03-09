@@ -1,22 +1,25 @@
 <template>
+    <div style="margin-top: 5.5rem">
+        <!-- {{ pageCaption }} -->
+    </div>
 
-    <div>
+    <common-card :cardCaption="pageCaption">
         <AddDeviceType ref="addDeviceType"></AddDeviceType>
 
         <ConfirmDialogue ref="confirmDialogue" />
-        <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
-            Device Types
-        </h1>
+        <!-- <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
+            {{ pageCaption }}
+        </h1> -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
             <div class="container-fluid">
                 <div class="navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav me-auto  d-flex">
-                        <li class="nav-item  d-flex py-1">
+                        <li class="nav-item  d-flex py-1  w-100">
                             <input class="form-control me-sm-2" type="text" placeholder="Search"
                                 v-model="device_type_filter" />
                         </li>
                         <li class="nav-item dropdown me-auto vertical-center">
-                            <button v-on:click="openImager()"></button>
+                            <!-- <button v-on:click="openImager()"></button> -->
                             <a class="nav-link dropdown-toggle mx-2" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="true" aria-expanded="false">{{ SortName }}</a>
                             <div class="dropdown-menu w-100">
@@ -90,10 +93,10 @@
                             <img v-bind:src="device_type.device_type_image" class="device-image" />
                         </div>
                         <div class="col-sm-1 col-xs-1 col-lg-1 align-left">
-                                <span class="text-info"> {{ device_type.id }} </span>
+                            <span class="text-info"> {{ device_type.id }} </span>
                         </div>
                         <div class="col-sm-7 col-xs-7 col-lg-7 align-left">
-                                {{ device_type.device_type_name  }}
+                            {{ device_type.device_type_name  }}
                         </div>
                         <div class="col-sm-3 col-xs-3 col-lg-3  edit-buttons">
                             <button class="btn btn-info mx-2" @click="doEditType(key, device_type.id)">
@@ -109,10 +112,9 @@
             </div>
         </div>
         <Paginator ref="paginatorDeviceTypes"></Paginator>
-        <Imager ref="imager"/>
+        <Imager ref="imager" />
         <!-- <MyMqtt></MyMqtt> -->
-    </div>
-
+    </common-card>
 
 </template>
 
@@ -141,6 +143,7 @@ import Imager from '../../components/common/Imager.vue';
                 device_types: [],
                 deviceTypesVisible: false,
                 compactView: true,
+                pageCaption: MessagesConstants.DEVICE_TYPES ?? 'Device Types',
                 filteredDeviceTypes: [], //filtered array of devices
                 dataDescription: "", //table data description label
                 device_type_filter: "", //filtering string
@@ -161,6 +164,10 @@ import Imager from '../../components/common/Imager.vue';
                     },
                 ],
             };
+        },
+
+        newLang(event) {
+            console.log(event)
         },
 
         created() {
