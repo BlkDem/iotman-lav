@@ -18,7 +18,7 @@
                 :device_type_id="device_type_id"
                 :dataTableReadApi="deviceTypesApi"
                 :nameField="'device_type_name'"
-                @onDataSelect="myDeviceTypeSelect">
+                @onDataSetSelect="deviceTypeSelect">
             </data-set-select>
 
         </div>
@@ -99,9 +99,6 @@ export default {
         },
 
         _confirm() {
-            //  this.device_type_id = this.$refs.types.getDeviceTypeID();
-            //  this.device_type_id = myDeviceTypeSelect();
-            // console.log("device type is: ", this.device_type_id);
             this.$refs.popup.close()
             this.resolvePromise(true, this)
         },
@@ -109,11 +106,9 @@ export default {
         _cancel() {
             this.$refs.popup.close()
             this.resolvePromise(false)
-            // Or you can throw an error
-            // this.rejectPromise(new Error('User cancelled the dialogue'))
         },
 
-        myDeviceTypeSelect(){
+        deviceTypeSelect(){
             // console.log(event.target.value)
             this.device_type_id = event.target.value
         }

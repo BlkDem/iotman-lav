@@ -19,8 +19,10 @@
         :nameField="'device_name'">
     </data-set-select> -->
 
-    <h1>{{tmpDeviceType}}</h1>
-    <h1>{{tmpDevice}}</h1>
+    <!-- <color-picker :value="color" @newColor="changeColor"></color-picker> -->
+
+
+    <!-- <h1>{{ color.toUpperCase() }}</h1> -->
 
     <div class="row">
         <!-- page menu -->
@@ -73,7 +75,8 @@ import CommonCard from '../components/common/CommonCard.vue';
 import InfoCard from '../components/common/InfoCard.vue';
 import APIConstants from "../rest_api";
 import MessagesConstants from "../components/strings_constants/strings.js";
-import DataSetSelect  from "../components/db/DataSetSelect.vue";
+
+import ColorPicker from '../components/common/ColorPicker.vue';
 
 export default {
     name: 'Home',
@@ -81,7 +84,7 @@ export default {
     components: {
             CommonCard,
             InfoCard,
-            DataSetSelect
+            ColorPicker,
         },
 
     data() {
@@ -94,8 +97,8 @@ export default {
             margins: 2,
             deviceTypesApi: '',
             devicesApi: '',
-            tmpDeviceType: '',
-            tmpDevice: '',
+            // tmpDeviceType: '',
+            color: '#AA00BB',
 
             device_type_id: undefined,
             device_id: undefined,
@@ -150,14 +153,9 @@ export default {
             this.logBlockCaption = _lang.logBlockCaption ?? 'Log'
         },
 
-        myDeviceSelect(){
+        changeColor(){
             console.log(event.target.value)
-            this.tmpDevice = event.target.value
-        },
-
-        myDeviceTypeSelect(){
-            console.log(event.target.value)
-            this.tmpDeviceType = event.target.value
+            this.color = event.target.value
         }
     },
 

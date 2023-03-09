@@ -52,7 +52,7 @@ export default {
     methods: {
         doChange(_value) {
             this.value = _value
-            this.$emit('onDataSelect', _value)
+            this.$emit('onDataSetSelect', _value)
         },
 
         getItems() {

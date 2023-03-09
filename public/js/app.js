@@ -23699,6 +23699,39 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/ColorPicker.vue?vue&type=script&lang=js":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/ColorPicker.vue?vue&type=script&lang=js ***!
+  \************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    color: {
+      type: String
+    }
+  },
+  emits: ['new-color'],
+  data: function data() {
+    return {
+      // color: undefined,
+    };
+  },
+  methods: {
+    selectColor: function selectColor(_a) {
+      this.$emit('new-color', event.target.value);
+      // console.log('qw ', event.target.value)
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/CommonCard.vue?vue&type=script&lang=js":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/CommonCard.vue?vue&type=script&lang=js ***!
@@ -24348,7 +24381,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   methods: {
     doChange: function doChange(_value) {
       this.value = _value;
-      this.$emit('onDataSelect', _value);
+      this.$emit('onDataSetSelect', _value);
     },
     getItems: function getItems() {
       return this.dataItems;
@@ -24907,19 +24940,14 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     _confirm: function _confirm() {
-      //  this.device_type_id = this.$refs.types.getDeviceTypeID();
-      //  this.device_type_id = myDeviceTypeSelect();
-      // console.log("device type is: ", this.device_type_id);
       this.$refs.popup.close();
       this.resolvePromise(true, this);
     },
     _cancel: function _cancel() {
       this.$refs.popup.close();
       this.resolvePromise(false);
-      // Or you can throw an error
-      // this.rejectPromise(new Error('User cancelled the dialogue'))
     },
-    myDeviceTypeSelect: function myDeviceTypeSelect() {
+    deviceTypeSelect: function deviceTypeSelect() {
       // console.log(event.target.value)
       this.device_type_id = event.target.value;
     }
@@ -26239,7 +26267,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_common_InfoCard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/common/InfoCard.vue */ "./resources/js/components/common/InfoCard.vue");
 /* harmony import */ var _rest_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../rest_api */ "./resources/js/rest_api.js");
 /* harmony import */ var _components_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/strings_constants/strings.js */ "./resources/js/components/strings_constants/strings.js");
-/* harmony import */ var _components_db_DataSetSelect_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/db/DataSetSelect.vue */ "./resources/js/components/db/DataSetSelect.vue");
+/* harmony import */ var _components_common_ColorPicker_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/common/ColorPicker.vue */ "./resources/js/components/common/ColorPicker.vue");
 
 
 
@@ -26250,7 +26278,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     CommonCard: _components_common_CommonCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     InfoCard: _components_common_InfoCard_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    DataSetSelect: _components_db_DataSetSelect_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    ColorPicker: _components_common_ColorPicker_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: function data() {
     return {
@@ -26261,8 +26289,8 @@ __webpack_require__.r(__webpack_exports__);
       margins: 2,
       deviceTypesApi: '',
       devicesApi: '',
-      tmpDeviceType: '',
-      tmpDevice: '',
+      // tmpDeviceType: '',
+      color: '#AA00BB',
       device_type_id: undefined,
       device_id: undefined,
       infoCardData: [{
@@ -26307,13 +26335,9 @@ __webpack_require__.r(__webpack_exports__);
       this.informationBlockCaption = (_lang$informationBloc = _lang.informationBlockCaption) !== null && _lang$informationBloc !== void 0 ? _lang$informationBloc : 'Information';
       this.logBlockCaption = (_lang$logBlockCaption = _lang.logBlockCaption) !== null && _lang$logBlockCaption !== void 0 ? _lang$logBlockCaption : 'Log';
     },
-    myDeviceSelect: function myDeviceSelect() {
+    changeColor: function changeColor() {
       console.log(event.target.value);
-      this.tmpDevice = event.target.value;
-    },
-    myDeviceTypeSelect: function myDeviceTypeSelect() {
-      console.log(event.target.value);
-      this.tmpDeviceType = event.target.value;
+      this.color = event.target.value;
     }
   }
 });
@@ -26385,6 +26409,32 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       _: 2 /* DYNAMIC */
     }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["to", "class"])], 8 /* PROPS */, _hoisted_1);
   }), 128 /* KEYED_FRAGMENT */);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/ColorPicker.vue?vue&type=template&id=342f2298":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/ColorPicker.vue?vue&type=template&id=342f2298 ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = ["value"];
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
+    type: "color",
+    value: $props.color,
+    onInput: _cache[0] || (_cache[0] = function ($event) {
+      return $options.selectColor($event);
+    })
+  }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_1);
 }
 
 /***/ }),
@@ -27409,8 +27459,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         device_type_id: $data.device_type_id,
         dataTableReadApi: $data.deviceTypesApi,
         nameField: 'device_type_name',
-        onOnDataSelect: $options.myDeviceTypeSelect
-      }, null, 8 /* PROPS */, ["value", "device_type_id", "dataTableReadApi", "onOnDataSelect"])]), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        onOnDataSetSelect: $options.deviceTypeSelect
+      }, null, 8 /* PROPS */, ["value", "device_type_id", "dataTableReadApi", "onOnDataSetSelect"])]), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "btn btn-danger mx-1 btn-width-40",
         onClick: _cache[3] || (_cache[3] = function () {
           return $options._confirm && $options._confirm.apply($options, arguments);
@@ -28544,7 +28594,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_AppMenu = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AppMenu");
   var _component_CommonCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("CommonCard");
   var _component_InfoCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InfoCard");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.pageCaption), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <data-set-select\n        name=\"deviceTypes\"\n        :value=\"device_type_id\"\n        :dataTableReadApi=\"deviceTypesApi\"\n        :nameField=\"'device_type_name'\"\n        @onDataSelect=\"myDeviceTypeSelect\">\n    </data-set-select>\n\n    <data-set-select\n        @onDataSelect=\"myDeviceSelect\"\n        name=\"devices\"\n        :value=\"device_id\"\n        :dataTableReadApi=\"devicesApi\"\n        :nameField=\"'device_name'\">\n    </data-set-select> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.tmpDeviceType), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.tmpDevice), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" page menu "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CommonCard, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.pageCaption), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <data-set-select\n        name=\"deviceTypes\"\n        :value=\"device_type_id\"\n        :dataTableReadApi=\"deviceTypesApi\"\n        :nameField=\"'device_type_name'\"\n        @onDataSelect=\"myDeviceTypeSelect\">\n    </data-set-select>\n\n    <data-set-select\n        @onDataSelect=\"myDeviceSelect\"\n        name=\"devices\"\n        :value=\"device_id\"\n        :dataTableReadApi=\"devicesApi\"\n        :nameField=\"'device_name'\">\n    </data-set-select> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <color-picker :value=\"color\" @newColor=\"changeColor\"></color-picker> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h1>{{ color.toUpperCase() }}</h1> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" page menu "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CommonCard, {
     ref: "menuCard",
     cardCaption: $data.menuBlockCaption,
     margins: $data.margins
@@ -28881,10 +28931,10 @@ __webpack_require__.r(__webpack_exports__);
   DEVICE_TYPE_DELETING_MESSAGE: "Are you sure you want to delete this device type ",
   DEVICE_TYPE_DATA_DESCRIPTION: "All producing devices types",
   DEVICE_TYPE_PAGE_DESCRIPTION: "Device Types - produced by Umolab",
-  DEVICE_TYPE_ADDING_TITLE: 'Adding Device Type',
-  DEVICE_TYPE_ADDING_MESSAGE: 'Adding Device Type',
-  DEVICE_TYPE_EDITING_TITLE: 'Editing Device Type',
-  DEVICE_TYPE_EDITING_MESSAGE: 'Editing Device Type',
+  DEVICE_TYPE_ADDING_TITLE: 'Add Device Type',
+  DEVICE_TYPE_ADDING_MESSAGE: 'Add Device Type',
+  DEVICE_TYPE_EDITING_TITLE: 'Edit Device Type',
+  DEVICE_TYPE_EDITING_MESSAGE: 'Edit Device Type',
   DEVICE_TYPE_NAME_PLACEHOLDER: 'New Device Type',
   DEVICE_TYPE_DESC_PLACEHOLDER: 'Device Type Desc',
   DEVICE_TYPE_IMAGE_PLACEHOLDER: 'Device Type Image',
@@ -28909,10 +28959,10 @@ __webpack_require__.r(__webpack_exports__);
   DEVICE_DELETING_CAPTION: "Delete",
   DEVICE_DELETING_MESSAGE: "Are you sure you want to delete this device ",
   DEVICE_DATA_DESCRIPTION: "All registered devices ready for use",
-  DEVICE_ADDING_TITLE: 'Adding Device',
-  DEVICE_ADDING_MESSAGE: 'Adding Device',
-  DEVICE_EDITING_TITLE: 'Editing Device',
-  DEVICE_EDITING_MESSAGE: 'Editing Device',
+  DEVICE_ADDING_TITLE: 'Add Device',
+  DEVICE_ADDING_MESSAGE: 'Add Device',
+  DEVICE_EDITING_TITLE: 'Edit Device',
+  DEVICE_EDITING_MESSAGE: 'Edit Device',
   DEVICE_NAME_PLACEHOLDER: 'New Device',
   DEVICE_DESC_PLACEHOLDER: 'Device Desc',
   DEVICE_HWID_PLACEHOLDER: 'Device HWID',
@@ -58528,6 +58578,34 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/components/common/ColorPicker.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/common/ColorPicker.vue ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ColorPicker_vue_vue_type_template_id_342f2298__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ColorPicker.vue?vue&type=template&id=342f2298 */ "./resources/js/components/common/ColorPicker.vue?vue&type=template&id=342f2298");
+/* harmony import */ var _ColorPicker_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ColorPicker.vue?vue&type=script&lang=js */ "./resources/js/components/common/ColorPicker.vue?vue&type=script&lang=js");
+/* harmony import */ var C_projects_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,C_projects_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ColorPicker_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ColorPicker_vue_vue_type_template_id_342f2298__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/common/ColorPicker.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/components/common/CommonCard.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/components/common/CommonCard.vue ***!
@@ -59259,6 +59337,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/common/ColorPicker.vue?vue&type=script&lang=js":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/common/ColorPicker.vue?vue&type=script&lang=js ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ColorPicker_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ColorPicker_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./ColorPicker.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/ColorPicker.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/components/common/CommonCard.vue?vue&type=script&lang=js":
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/common/CommonCard.vue?vue&type=script&lang=js ***!
@@ -59671,6 +59765,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_AppMenu_vue_vue_type_template_id_458bcfe7__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_AppMenu_vue_vue_type_template_id_458bcfe7__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./AppMenu.vue?vue&type=template&id=458bcfe7 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/AppMenu.vue?vue&type=template&id=458bcfe7");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/common/ColorPicker.vue?vue&type=template&id=342f2298":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/common/ColorPicker.vue?vue&type=template&id=342f2298 ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ColorPicker_vue_vue_type_template_id_342f2298__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ColorPicker_vue_vue_type_template_id_342f2298__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./ColorPicker.vue?vue&type=template&id=342f2298 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/ColorPicker.vue?vue&type=template&id=342f2298");
 
 
 /***/ }),
