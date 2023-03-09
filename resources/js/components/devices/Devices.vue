@@ -1,10 +1,12 @@
 <template>
-    <div v-show="deviceVisible">
+    <div style="margin-top: 5.5rem">
+    </div>
+    <common-card :cardCaption="pageCaption">
         <AddDevice ref="addDevice"></AddDevice>
         <ConfirmDialogue ref="confirmDialogue" />
-        <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
+        <!-- <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
             {{ pageCaption }}
-        </h1>
+        </h1> -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
             <div class="container-fluid">
                 <div class="navbar-collapse" id="navbarColor02">
@@ -45,7 +47,7 @@
             <h5 class="text-primary my-2">{{ dataDescription }} </h5>
         </div>
 
-        <div class="row my-2" v-if="!compactView">
+        <div class="row my-2" v-show="!compactView">
             <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(device, key) in filteredDevices" v-bind:key="key"
                 v-bind:id="device.id">
                 <div class="card border-light">
@@ -116,7 +118,7 @@
         </div>
         <Paginator ref="paginatorDevices"></Paginator>
         <!-- <MyMqtt></MyMqtt> -->
-    </div>
+    </common-card>
 </template>
 
 <script>

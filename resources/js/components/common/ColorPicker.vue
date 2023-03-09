@@ -22,9 +22,9 @@ export default {
     },
 
     methods: {
-        selectColor(_a) {
-            this.$emit('new-color', event.target.value)
-            // console.log('qw ', event.target.value)
+        selectColor() {
+            this.$emit('new-color', event.target.value.toUpperCase())
+            // console.log('qw ', event.target.value.toUpperCase())
         }
     }
 

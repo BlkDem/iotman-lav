@@ -22,7 +22,7 @@
     <!-- <color-picker :value="color" @newColor="changeColor"></color-picker> -->
 
 
-    <!-- <h1>{{ color.toUpperCase() }}</h1> -->
+    <!-- <h1>{{ color }}</h1> -->
 
     <div class="row">
         <!-- page menu -->
@@ -71,21 +71,21 @@
 </template>
 
 <script>
-import CommonCard from '../components/common/CommonCard.vue';
-import InfoCard from '../components/common/InfoCard.vue';
+// import CommonCard from '../components/common/CommonCard.vue';
+// import InfoCard from '../components/common/InfoCard.vue';
 import APIConstants from "../rest_api";
 import MessagesConstants from "../components/strings_constants/strings.js";
 
-import ColorPicker from '../components/common/ColorPicker.vue';
+// import ColorPicker from '../components/common/ColorPicker.vue';
 
 export default {
     name: 'Home',
 
-    components: {
-            CommonCard,
-            InfoCard,
-            ColorPicker,
-        },
+    // components: {
+    //         CommonCard,
+    //         InfoCard,
+    //         ColorPicker,
+    //     },
 
     data() {
 
@@ -153,9 +153,8 @@ export default {
             this.logBlockCaption = _lang.logBlockCaption ?? 'Log'
         },
 
-        changeColor(){
-            console.log(event.target.value)
-            this.color = event.target.value
+        changeColor(_color){
+            this.color = _color
         }
     },
 

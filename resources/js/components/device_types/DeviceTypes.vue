@@ -1,12 +1,15 @@
 <template>
+    <div style="margin-top: 5.5rem">
+        <!-- {{ pageCaption }} -->
+    </div>
 
-    <div >
+    <common-card :cardCaption="pageCaption">
         <AddDeviceType ref="addDeviceType"></AddDeviceType>
 
         <ConfirmDialogue ref="confirmDialogue" />
-        <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
+        <!-- <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
             {{ pageCaption }}
-        </h1>
+        </h1> -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
             <div class="container-fluid">
                 <div class="navbar-collapse" id="navbarColor02">
@@ -90,10 +93,10 @@
                             <img v-bind:src="device_type.device_type_image" class="device-image" />
                         </div>
                         <div class="col-sm-1 col-xs-1 col-lg-1 align-left">
-                                <span class="text-info"> {{ device_type.id }} </span>
+                            <span class="text-info"> {{ device_type.id }} </span>
                         </div>
                         <div class="col-sm-7 col-xs-7 col-lg-7 align-left">
-                                {{ device_type.device_type_name  }}
+                            {{ device_type.device_type_name  }}
                         </div>
                         <div class="col-sm-3 col-xs-3 col-lg-3  edit-buttons">
                             <button class="btn btn-info mx-2" @click="doEditType(key, device_type.id)">
@@ -109,10 +112,9 @@
             </div>
         </div>
         <Paginator ref="paginatorDeviceTypes"></Paginator>
-        <Imager ref="imager"/>
+        <Imager ref="imager" />
         <!-- <MyMqtt></MyMqtt> -->
-    </div>
-
+    </common-card>
 
 </template>
 

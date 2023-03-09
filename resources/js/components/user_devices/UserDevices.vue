@@ -1,14 +1,17 @@
 <template>
 
 
+        <div style="margin-top: 5.5rem">
+            <!-- {{ pageCaption }} -->
+        </div>
 
     <!-- <div v-show="userDeviceVisible"> -->
-        <div>
+        <common-card :cardCaption="pageCaption" >
         <AddUserDevice ref="addUserDevice"></AddUserDevice>
         <ConfirmDialogue ref="confirmDialogue" />
-        <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
+        <!-- <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
             {{ pageCaption }}
-        </h1>
+        </h1> -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
             <div class="container-fluid">
                 <div class="navbar-collapse" id="navbarColor02">
@@ -52,7 +55,7 @@
 
         <div>
             <!-- <h1>User Devices</h1> -->
-            <div class="row my-2" v-if="!compactView">
+            <div class="row my-2" v-show="!compactView">
                 <div class="p-2 col-sm-4 col-xs-4 col-lg-4 fade-in" style="margin-bottom: 50px;" v-for="(user_device, key) in filteredUserDevices"
                     v-bind:key="key" v-bind:id="user_device.id">
                     <div class="card border-light">
@@ -88,7 +91,7 @@
             </div>
         </div>
         <!-- compact view -->
-        <div v-if="compactView" class="my-2">
+        <div v-show="compactView" class="my-2">
 
             <div class="card border-primary mb-1 w-100 fade-in" v-for="(user_device, key) in filteredUserDevices"
                 v-bind:key="key" v-bind:id="user_device.id">
@@ -128,7 +131,7 @@
             </div>
         </div>
         <Paginator ref="paginatorUserDevices"></Paginator>
-    </div>
+    </common-card>
 
 </template>
 
