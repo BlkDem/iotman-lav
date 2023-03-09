@@ -24,9 +24,10 @@ a.a_cap:first-letter {
 @media only screen and (min-width: 320px) and (max-width: 480px) {
     .device-image {
         width: 100px;
+        height: 100px;
         /* margin-top: -23px; */
         margin-bottom: -91px;
-        margin-left: 249px;
+        margin-left: 219px;
         border-radius: 10px;
         /*box-shadow: #eee 0px 0px 8px;*/
     }
@@ -42,6 +43,13 @@ a.a_cap:first-letter {
         display: flex;
         flex-wrap: inherit;
         align-items: center;
+        justify-content: flex-start;
+    }
+
+    .edit-buttons {
+        /* display: flex;*/
+        margin-top: 16px;
+        margin-bottom: 8px;
         justify-content: flex-start;
     }
 }

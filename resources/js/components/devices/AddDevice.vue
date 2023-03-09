@@ -1,5 +1,5 @@
 <template>
-    <PopupModal ref="popup">
+    <PopupModal ref="popup" class="fade-in" @keydown="onKeyDown" @click="onDialogClick">
         <div class="modal-header">
             <h2 class="align-center w-100 pb-2">{{ title }}</h2>
         </div>
@@ -111,7 +111,19 @@ export default {
         deviceTypeSelect(){
             // console.log(event.target.value)
             this.device_type_id = event.target.value
+        },
+
+        onKeyDown(){
+            // console.log('qwqw')
+            if (event.key === 'Escape') this._cancel()
+        },
+
+        onDialogClick() {
+            //  console.log(event, (event.target.className === 'popup-modal fade-in'))
+
+            if (event.target.className === 'popup-modal fade-in') this._cancel()
         }
+
 
     },
 }

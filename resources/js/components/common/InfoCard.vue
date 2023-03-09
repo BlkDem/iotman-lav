@@ -18,7 +18,7 @@
                 {{ infoCardMoreText }}
             </p>
             <button class="btn btn-primary"
-                @click="moreInfoVisible=!moreInfoVisible"
+                @click="showMoreClick"
                 v-show="infoCardMoreText.length>0" >
                 {{ infoCardMoreButtonCaption }}
             </button>
@@ -45,10 +45,10 @@ export default {
             default: ''
         },
 
-        infoCardMoreButtonCaption: {
-            type: String,
-            default: 'More'
-        },
+        // infoCardMoreButtonCaption: {
+        //     type: String,
+        //     default: 'More'
+        // },
 
         marginBottom: {
             type: Number,
@@ -67,17 +67,21 @@ export default {
     },
 
     data() {
-        return {
-            buttonVisible: false,
-            moreInfoVisible: false,
+            return {
+                buttonVisible: false,
+                moreInfoVisible: false,
+                infoCardMoreButtonCaption: 'More'
+            }
+        },
 
-            methods: {
-                showMoreClick() {
-
-                }
+        methods: {
+            showMoreClick() {
+                // console.log(this.moreInfoVisible)
+                this.moreInfoVisible = !this.moreInfoVisible
+                this.infoCardMoreButtonCaption = (this.moreInfoVisible) ? 'Less' : 'More'
             }
         }
+
     }
-}
 
 </script>

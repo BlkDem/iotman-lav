@@ -85,7 +85,7 @@ export default {
         },
 
         setPage(_currentPage, _itemsPerPage) {
-            this.$parent.getData(_currentPage, _itemsPerPage)
+            this.$parent.$parent.getData(_currentPage, _itemsPerPage)
         }
 
     },

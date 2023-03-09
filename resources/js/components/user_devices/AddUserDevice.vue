@@ -1,5 +1,5 @@
 <template>
-    <PopupModal ref="popup">
+    <PopupModal ref="popup" class="fade-in" @keydown="onKeyDown" @click="onDialogClick">
         <div class="modal-header">
             <h2 class="align-center w-100 pb-2">{{ title }}</h2>
         </div>
@@ -103,6 +103,16 @@ export default {
             // Or you can throw an error
             // this.rejectPromise(new Error('User cancelled the dialogue'))
         },
+
+        onKeyDown(){
+            if (event.key === 'Escape') this._cancel()
+        },
+
+        onDialogClick() {
+            if (event.target.className === 'popup-modal fade-in') this._cancel()
+            // console.log(event, (event.target.className === 'popup-modal'))
+        }
+
     },
 }
 </script>

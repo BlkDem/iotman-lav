@@ -53,13 +53,13 @@
         </nav>
 
         <div>
-            <h5 class="text-primary my-2">{{ dataDescription }}</h5>
+            <h5 class="text-primary my-2 align-center">{{ dataDescription }}</h5>
         </div>
 
         <div class="row my-2" v-show="!compactView">
             <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(album, key) in filteredAlbums"
                 v-bind:key="key" v-bind:id="album.id">
-                <div class="card border-light">
+                <div class="card border-light align-center">
                     <h3 class="card-header">
                         {{ album.album_name }}
                         <span class="text-info">({{ album.id }})</span>

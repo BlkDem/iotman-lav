@@ -20,7 +20,7 @@
 
     <?php
     echo "<script>var _newTheme='Default'</script>";
-    $_themeCss = '/css/vapor/app.css';
+    $_themeCss = '/css/slate/app.css';
 
     if (isset($_GET["theme"])) {
         $_themeName = $_GET["theme"];

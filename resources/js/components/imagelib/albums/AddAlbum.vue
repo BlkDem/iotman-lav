@@ -1,5 +1,5 @@
 <template>
-    <PopupModal ref="popup" @keydown="onKeyDown" @click="onDialogClick">
+    <PopupModal ref="popup"  class="fade-in" @keydown="onKeyDown" @click="onDialogClick">
         <div class="modal-header">
             <h2 class="w-100 text-center">{{ title }}</h2>
         </div>
@@ -96,7 +96,7 @@ export default {
         },
 
         onDialogClick() {
-            if (event.target.className === 'popup-modal') this._cancel()
+            if (event.target.className === 'popup-modal fade-in') this._cancel()
             // console.log(event, (event.target.className === 'popup-modal'))
         }
     },

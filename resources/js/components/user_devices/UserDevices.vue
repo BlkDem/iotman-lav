@@ -50,7 +50,7 @@
         </nav>
 
         <div>
-            <h5 class="text-primary my-2">{{ dataDescription }}</h5>
+            <h5 class="text-primary my-2 align-center">{{ dataDescription }}</h5>
         </div>
 
         <div>
@@ -58,7 +58,7 @@
             <div class="row my-2" v-show="!compactView">
                 <div class="p-2 col-sm-4 col-xs-4 col-lg-4 fade-in" style="margin-bottom: 50px;" v-for="(user_device, key) in filteredUserDevices"
                     v-bind:key="key" v-bind:id="user_device.id">
-                    <div class="card border-light">
+                    <div class="card border-light align-center">
                         <h3 class="card-header">{{ user_device.user_device_name }}</h3>
                         <div class="card-body">
                             <h5 class="card-title text-info">{{ user_device.device_name }}</h5>
