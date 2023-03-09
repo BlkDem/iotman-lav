@@ -20,7 +20,7 @@
             <UserCombo ref="users_combo" v-bind:id="user_id"></UserCombo>
         </div>
         <hr>
-        <div>
+        <div class="align-center">
             <button class="btn btn-danger mx-1 btn-width-40" @click="_confirm">{{ okButton }}</button>
             <button class="btn btn-secondary mx-1 btn-width-40" @click="_cancel">{{ cancelButton }}</button>
         </div>

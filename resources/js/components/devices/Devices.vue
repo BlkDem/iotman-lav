@@ -310,7 +310,7 @@
 
             //setting Device Type to Device
             async setDeviceType($device_type_id, $item) { //attach device type name and image to device
-                console.log($device_type_id, $item)
+                // console.log($device_type_id, $item)
                 axios
                     .get(APIConstants.api_device_types_read + $device_type_id)
                     .then((resp_type) => {
@@ -374,7 +374,7 @@
                             );
                         })
                         .catch((error) => {
-                            //  console.log(error.response.data)
+                              console.log('error -> ', error)
 
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.INSERTING_ERROR,
@@ -443,17 +443,19 @@
                         })
 
                         .then(resp => {
-                            this.$root.$refs.DeviceUserRef.getData();
+
                         })
 
                         .catch((error) => {
-                            // console.log(error.response?.data)
+                             console.log(error)
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.INSERTING_ERROR,
                                 ParsingErrors.getError(error),
                                 ParsingErrors.ERROR_LEVEL_ERROR
                             )
                         })
+
+                        // this.$root.$refs.DeviceUserRef.getData();
                 } else {
                     console.log(MessagesConstants.EDITING_CANCELLED);
                 }

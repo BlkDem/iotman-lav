@@ -3,7 +3,7 @@
         {{ pageCaption }}
     </h1>
 
-    <data-set-select
+    <!-- <data-set-select
         name="deviceTypes"
         :value="device_type_id"
         :dataTableReadApi="deviceTypesApi"
@@ -17,7 +17,7 @@
         :value="device_id"
         :dataTableReadApi="devicesApi"
         :nameField="'device_name'">
-    </data-set-select>
+    </data-set-select> -->
 
     <h1>{{tmpDeviceType}}</h1>
     <h1>{{tmpDevice}}</h1>

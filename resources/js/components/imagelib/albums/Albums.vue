@@ -178,7 +178,7 @@ import ParsingErrors from "../../common/js/ParsingErrors.js";
             // if (localStorage.DeviceTypeCompactView == null) {
             //     localStorage.DeviceTypeCompactView = this.compactView;
             // }
-            this.dataDescription = AlbumStringConstants.DEVICE_TYPE_DATA_DESCRIPTION; //device dataset description
+            this.dataDescription = AlbumStringConstants.ALBUM_DATA_DESCRIPTION; //device dataset description
 
             this.getData();
         },

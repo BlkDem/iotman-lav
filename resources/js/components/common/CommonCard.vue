@@ -1,9 +1,18 @@
 <template>
             <div class="card card-border my-4">
                 <div class="card-body border-4 border-top border-bottom rounded-bottom rounded-top border-secondary">
-                    <h3 class="card-title align-left px-2 ">{{ cardCaption }}</h3>
+                    <div class="card-caption">
+                        <h3 class="card-title align-left px-2 ">{{ cardCaption }}</h3>
+                        <button class="btn btn-primary btn-rounded" :class="{'hide': !isCollapsed}" @click="isCollapsed=!isCollapsed">
+                            <i class="fas fa-caret-down"></i>
+                        </button>
+                        <button class="btn btn-primary btn-rounded" :class="{'hide': isCollapsed}" @click="isCollapsed=!isCollapsed">
+                            <i class="fas fa-caret-up" ></i>
+                        </button>
+                    </div>
+                    <!-- <h3 class="card-title align-left px-2 ">{{ cardCaption }}</h3> -->
                     <!-- <p class="card-text">Paragraph</p> -->
-                    <div class="py-4 align-left" :class="{'mx-2': margins}">
+                    <div class="py-4 align-left" :class="{'mx-2': margins, 'collapse': isCollapsed}">
                         <slot></slot>
                     </div>
                 </div>
@@ -23,6 +32,11 @@ export default {
         margins: {
             type: Number,
             default: 0
+        },
+
+        isCollapsed: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -31,3 +45,14 @@ export default {
     // }
 }
 </script>
+
+<style scoped>
+.card-caption {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.hide {
+    display: none;
+}
+</style>

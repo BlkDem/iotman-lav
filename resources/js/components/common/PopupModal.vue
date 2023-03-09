@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade" :duration="{ enter: 1000, leave: 200 }">
+    <transition name="fade" >
 
         <div class="popup-modal " v-if="isVisible">
             <div class="window modal-dialog modal-content bg-light text-dark"

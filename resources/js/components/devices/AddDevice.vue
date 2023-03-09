@@ -11,13 +11,19 @@
             <input v-model="device_desc" class="form-control p-2 mb-2" placeholder="Input Device Desc"/>
             <label class="px-2"><strong>Device Hardware Address</strong></label>
             <input v-model="device_hwid" class="form-control p-2 mb-2" placeholder="Input Device HWID"/>
-            <!-- <label class="px-2"><strong>Device Password</strong></label>
-            <input v-model="device_pass" class="form-control p-2 mb-2" placeholder="Input Device Password"/> -->
             <label class="px-2"><strong>Select Device Type</strong></label>
-            <DeviceTypesCombo ref="types" v-bind:id="device_type_id" :device_type_id="device_type_id"></DeviceTypesCombo>
+            <data-set-select
+                name="deviceTypes"
+                :value="device_type_id"
+                :device_type_id="device_type_id"
+                :dataTableReadApi="deviceTypesApi"
+                :nameField="'device_type_name'"
+                @onDataSelect="myDeviceTypeSelect">
+            </data-set-select>
+
         </div>
         <hr>
-        <div>
+        <div class="align-center">
             <button class="btn btn-danger mx-1 btn-width-40" @click="_confirm">{{ okButton }}</button>
             <button class="btn btn-secondary mx-1 btn-width-40" @click="_cancel">{{ cancelButton }}</button>
         </div>
@@ -26,13 +32,16 @@
 
 <script>
 import PopupModal from '../../components/common/PopupModal.vue';
-import DeviceTypesCombo from '../../components/device_types/DeviceTypesCombo.vue'
 import MessagesConstants from '../strings_constants/strings';
+import APIConstants from "../../rest_api";
+import DataSetSelect  from "../../components/db/DataSetSelect.vue";
+
+
 
 export default {
     name: 'AddDevice',
 
-    components: { PopupModal, DeviceTypesCombo },
+    components: { PopupModal, DataSetSelect },
 
     data (){
         return {
@@ -51,7 +60,13 @@ export default {
         // Private variables
         resolvePromise: undefined,
         rejectPromise: undefined,
+
+        deviceTypesApi: undefined
         }
+    },
+
+    created() {
+        this.deviceTypesApi = APIConstants.api_device_types_read
     },
 
 
@@ -84,7 +99,8 @@ export default {
         },
 
         _confirm() {
-            this.device_type_id = this.$refs.types.getDeviceTypeID();
+            //  this.device_type_id = this.$refs.types.getDeviceTypeID();
+            //  this.device_type_id = myDeviceTypeSelect();
             // console.log("device type is: ", this.device_type_id);
             this.$refs.popup.close()
             this.resolvePromise(true, this)
@@ -96,6 +112,12 @@ export default {
             // Or you can throw an error
             // this.rejectPromise(new Error('User cancelled the dialogue'))
         },
+
+        myDeviceTypeSelect(){
+            // console.log(event.target.value)
+            this.device_type_id = event.target.value
+        }
+
     },
 }
 </script>

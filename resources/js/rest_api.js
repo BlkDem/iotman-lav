@@ -51,7 +51,7 @@ export default {
     dataItems: [],
 
     getData(_api) {
-        console.log(_api)
+        // console.log(_api)
         return axios.get(_api)
     },
 
