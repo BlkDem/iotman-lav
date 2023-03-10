@@ -36,12 +36,6 @@ return [
             'throw' => false,
         ],
 
-        'temp' => [
-            'driver' => 'local',
-            'root' => storage_path('storage/public/'),
-            'throw' => false,
-        ],
-
         'public' => [
             'driver' => 'local',
             'root' => storage_path('public'),
