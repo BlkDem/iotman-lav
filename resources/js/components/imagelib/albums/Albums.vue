@@ -53,7 +53,7 @@
         </nav>
 
         <div>
-            <h5 class="text-primary my-2 align-center">{{ dataDescription }}</h5>
+            <!-- <h5 class="text-primary my-2 align-center">{{ dataDescription }}</h5> -->
         </div>
 
         <div class="row my-2" v-show="!compactView">

@@ -27,19 +27,17 @@ export default {
     name: "LangCombo",
     emits: [
         "newLang",
-        // "click"
     ],
 
     data() {
         return {
             langs: [],
-            currentLang: 'EN'//localStorage.Language ?? 'EN',
+            currentLang: 'EN'
         }
     },
 
     created() {
         this.readLangs()
-        //this.currentLang = _currentTheme;
     },
 
     mounted() {
@@ -63,9 +61,6 @@ export default {
             localStorage.Language = _lang
             if (_lang === 'EN') this.setActiveLang(lang_EN)
             if (_lang === 'RU') this.setActiveLang(lang_RU)
-            // this.$emit('click', _lang)
-            // console.log(MessagesConstants.HOME)
-            //this.loadLang(_lang)
         },
 
         setActiveLang(_langObject) {
@@ -74,14 +69,8 @@ export default {
                     MessagesConstants[key] = _langObject[key]
                 }
             }
-
-            // console.log(this.$parent.$parent, this.$parent.$refs, this.$root.$refs)
-            // this.$root.$emit('newLang', MessagesConstants)
             this.$parent.newLang(_langObject)
             this.emitter.emit("new-lang", _langObject);
-            // this.$parent.$parent.newLangUp()
-            // console.log(this.$router.currentRoute._value)
-            // console.log(MessagesConstants.HOME);
         },
 
         setStrings() {

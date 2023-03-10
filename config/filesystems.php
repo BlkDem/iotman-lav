@@ -38,14 +38,22 @@ return [
 
         'temp' => [
             'driver' => 'local',
-            'root' => storage_path('storage/app/public/'),
+            'root' => storage_path('storage/public/'),
             'throw' => false,
         ],
 
         'public' => [
             'driver' => 'local',
             'root' => storage_path('public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL').'/public',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'images' => [
+            'driver' => 'local',
+            'root' => storage_path('public/images'),
+            'url' => env('APP_URL').'/public/images',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -76,7 +84,7 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        public_path('storage') => storage_path('public'),
     ],
 
 ];

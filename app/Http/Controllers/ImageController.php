@@ -55,7 +55,7 @@ class ImageController extends BaseController
             return response()->json($newDeviceType, 201);
         }
         catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
+            return response()->json('Store Record Error: ' . $e, 400);
         }
     }
 

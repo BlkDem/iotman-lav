@@ -79,23 +79,24 @@
                 <!-- Grid row -->
                 <div class="row mt-3">
                     <!-- Grid column -->
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <div class="col-md-6 col-lg-4 col-xl-3 mx-auto mb-4">
                         <!-- Content -->
 
                         <h6 class="text-uppercase fw-bold mb-4">
-                            <i class="fas fa-gem me-3"></i>Company name
+                            <!-- <i class="fas fa-gem me-3"></i> -->
+                            <strong>Umolab</strong> Group
                         </h6>
 
                         <p>
-                            Here you can use rows and columns to organize your footer content. Lorem ipsum
-                            dolor sit amet, consectetur adipisicing elit.
-                        </p>
+                        <object type="image/svg+xml" data="images/logo/u-logo2.svg" id="object_1" class="icon logo"
+                            style="width: 300px;">
+                        </object>
+                    </p>
                     </div>
                     <!-- Grid column -->
 
                     <!-- Grid column -->
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <!-- Links -->
+                    <!-- <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                         <h6 class="text-uppercase fw-bold mb-4">
                             Products
                         </h6>
@@ -111,26 +112,25 @@
                         <p>
                             <a href="#!" class="text-reset">Laravel</a>
                         </p>
-                    </div>
+                    </div> -->
                     <!-- Grid column -->
 
                     <!-- Grid column -->
                     <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">
                             Useful links
                         </h6>
                         <p>
-                            <a href="#!" class="text-reset">Pricing</a>
+                            <a href="#" class="text-reset" style="text-decoration: none;">Pricing</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Settings</a>
+                            <a href="#" class="text-reset" style="text-decoration: none;">Settings</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Orders</a>
+                            <a href="#" class="text-reset" style="text-decoration: none;">Orders</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Help</a>
+                            <a href="#" class="text-reset" style="text-decoration: none;">Help</a>
                         </p>
                     </div>
                     <!-- Grid column -->

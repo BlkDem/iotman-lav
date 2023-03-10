@@ -5,7 +5,11 @@
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand logo" href="/">Umolab</a>
+            <!-- <a class="logo" href="/"> -->
+                <object type="image/svg+xml" data="images/logo/u-logo2.svg" id="object_1" class="icon logo"
+                    style="width: 120px;">
+                </object>
+            <!-- </a> -->
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">

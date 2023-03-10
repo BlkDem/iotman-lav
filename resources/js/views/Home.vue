@@ -24,6 +24,9 @@
 
     <!-- <h1>{{ color }}</h1> -->
 
+
+    <!-- <svg><use x="0" y="0" xlink:href="#object_1" /></svg> -->
+
     <div class="row">
         <!-- page menu -->
         <div class="col-sm-3 col-lg-3 col-md-3">

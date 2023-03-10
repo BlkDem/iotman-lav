@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\UserinfoController;
 use App\Http\Controllers\UserDevicesCountController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ImageStoreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,9 +53,12 @@ Route::controller(ImageController::class)->group(function () {
     Route::get('/images/read', 'index');
     Route::get('/images/read/page/{currentPage}/{itemsPerPage}', 'page');
     Route::get('/image/read/{id}', 'show');
-    Route::put('/image/update/{updateImage}', 'update');
+    Route::put('/image/update/{updateImageId}', 'update');
     Route::delete('/image/delete/{id}', 'destroy');
 });
+
+
+Route::post('/image/update_image/{imageId}', [ImageStoreController::class, 'updateImage']);
 
 //CRUD routes for model 'albums'
 

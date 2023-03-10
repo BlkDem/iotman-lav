@@ -3,7 +3,7 @@
         <!-- {{ pageCaption }} -->
     </div>
 
-    <common-card :cardCaption="pageCaption">
+    <common-card :cardCaption="pageCaption" :isCollapseButtonHidden="true">
         <AddDeviceType ref="addDeviceType"></AddDeviceType>
 
         <ConfirmDialogue ref="confirmDialogue" />
@@ -51,7 +51,7 @@
         </nav>
 
         <div>
-            <h5 class="text-primary my-2 align-center">{{ dataDescription }}</h5>
+            <!-- <h5 class="text-primary my-2 align-center">{{ dataDescription }}</h5> -->
         </div>
 
         <div class="row my-2" v-if="!compactView">
@@ -126,6 +126,7 @@ import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../rest_api.js";
 import DeviceTypeStringConstants from '../../components/strings_constants/device_types/index';
 import Sorting from "../../components/common/js/Sorting.js";
+import Filtering from "../../components/common/js/Filtering.js";
 import ParsingErrors from "../common/js/ParsingErrors.js";
 import Imager from '../../components/common/Imager.vue';
 
@@ -225,21 +226,23 @@ import Imager from '../../components/common/Imager.vue';
 
             doFilter() {
                 this.filteredDeviceTypes = this.device_types;
-                const res = this.filteredDeviceTypes.filter((device_type) => {
+                this.filteredDeviceTypes = Filtering.doFilter(this.filteredDeviceTypes, 'device_type_name', this.device_type_filter)
+                // this.doSort();
+                // const res = this.filteredDeviceTypes.filter((device_type) => {
 
-                    if (this.device_type_filter === "") return true;
-                    else
-                        return (
-                            device_type.device_type_name
-                            .toLowerCase()
-                            .indexOf(this.device_type_filter.toLowerCase()) > -1
-                        );
-                });
-                if (this.device_types.length > res.length) {
-                    this.filteredDeviceTypes = res;
-                    console.log(res)
-                    this.doSort();
-                }
+                //     if (this.device_type_filter === "") return true;
+                //     else
+                //         return (
+                //             device_type.device_type_name
+                //             .toLowerCase()
+                //             .indexOf(this.device_type_filter.toLowerCase()) > -1
+                //         );
+                // });
+                // if (this.device_types.length > res.length) {
+                //     this.filteredDeviceTypes = res;
+                //     console.log(res)
+                //     this.doSort();
+                // }
                 // return res;
             },
 

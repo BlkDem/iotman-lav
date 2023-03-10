@@ -23723,6 +23723,10 @@ __webpack_require__.r(__webpack_exports__);
     isCollapsed: {
       type: Boolean,
       "default": false
+    },
+    isCollapseButtonHidden: {
+      type: Boolean,
+      "default": false
     }
   }
 
@@ -23962,18 +23966,15 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "LangCombo",
-  emits: ["newLang"
-  // "click"
-  ],
+  emits: ["newLang"],
   data: function data() {
     return {
       langs: [],
-      currentLang: 'EN' //localStorage.Language ?? 'EN',
+      currentLang: 'EN'
     };
   },
   created: function created() {
     this.readLangs();
-    //this.currentLang = _currentTheme;
   },
   mounted: function mounted() {
     var _localStorage$Languag;
@@ -23995,9 +23996,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       localStorage.Language = _lang;
       if (_lang === 'EN') this.setActiveLang(_lang_EN_index__WEBPACK_IMPORTED_MODULE_2__["default"]);
       if (_lang === 'RU') this.setActiveLang(_lang_RU_index__WEBPACK_IMPORTED_MODULE_3__["default"]);
-      // this.$emit('click', _lang)
-      // console.log(MessagesConstants.HOME)
-      //this.loadLang(_lang)
     },
     setActiveLang: function setActiveLang(_langObject) {
       for (var key in _langObject) {
@@ -24005,14 +24003,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_1__["default"][key] = _langObject[key];
         }
       }
-
-      // console.log(this.$parent.$parent, this.$parent.$refs, this.$root.$refs)
-      // this.$root.$emit('newLang', MessagesConstants)
       this.$parent.newLang(_langObject);
       this.emitter.emit("new-lang", _langObject);
-      // this.$parent.$parent.newLangUp()
-      // console.log(this.$router.currentRoute._value)
-      // console.log(MessagesConstants.HOME);
     },
     setStrings: function setStrings() {}
   }
@@ -24479,12 +24471,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _rest_api_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../rest_api.js */ "./resources/js/rest_api.js");
 /* harmony import */ var _components_strings_constants_device_types_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/strings_constants/device_types/index */ "./resources/js/components/strings_constants/device_types/index.js");
 /* harmony import */ var _components_common_js_Sorting_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/common/js/Sorting.js */ "./resources/js/components/common/js/Sorting.js");
-/* harmony import */ var _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/js/ParsingErrors.js */ "./resources/js/components/common/js/ParsingErrors.js");
-/* harmony import */ var _components_common_Imager_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/common/Imager.vue */ "./resources/js/components/common/Imager.vue");
+/* harmony import */ var _components_common_js_Filtering_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/common/js/Filtering.js */ "./resources/js/components/common/js/Filtering.js");
+/* harmony import */ var _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../common/js/ParsingErrors.js */ "./resources/js/components/common/js/ParsingErrors.js");
+/* harmony import */ var _components_common_Imager_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/common/Imager.vue */ "./resources/js/components/common/Imager.vue");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -24499,7 +24493,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     ConfirmDialogue: _components_common_ConfirmDialogue_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     AddDeviceType: _AddDeviceType_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Paginator: _components_common_Paginator_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Imager: _components_common_Imager_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
+    Imager: _components_common_Imager_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
   },
   data: function data() {
     var _MessagesConstants$DE;
@@ -24571,21 +24565,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.sortColumn = $column;
     },
     doFilter: function doFilter() {
-      var _this = this;
       this.filteredDeviceTypes = this.device_types;
-      var res = this.filteredDeviceTypes.filter(function (device_type) {
-        if (_this.device_type_filter === "") return true;else return device_type.device_type_name.toLowerCase().indexOf(_this.device_type_filter.toLowerCase()) > -1;
-      });
-      if (this.device_types.length > res.length) {
-        this.filteredDeviceTypes = res;
-        console.log(res);
-        this.doSort();
-      }
+      this.filteredDeviceTypes = _components_common_js_Filtering_js__WEBPACK_IMPORTED_MODULE_7__["default"].doFilter(this.filteredDeviceTypes, 'device_type_name', this.device_type_filter);
+      // this.doSort();
+      // const res = this.filteredDeviceTypes.filter((device_type) => {
+
+      //     if (this.device_type_filter === "") return true;
+      //     else
+      //         return (
+      //             device_type.device_type_name
+      //             .toLowerCase()
+      //             .indexOf(this.device_type_filter.toLowerCase()) > -1
+      //         );
+      // });
+      // if (this.device_types.length > res.length) {
+      //     this.filteredDeviceTypes = res;
+      //     console.log(res)
+      //     this.doSort();
+      // }
       // return res;
     },
     getData: function getData() {
       var _arguments = arguments,
-        _this2 = this;
+        _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var _currentPage, _itemsPerPage;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -24596,19 +24598,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               fetch(_rest_api_js__WEBPACK_IMPORTED_MODULE_4__["default"].api_devices_types_read_page + _currentPage + "/" + _itemsPerPage).then(function (response) {
                 return response.json();
               }).then(function (response) {
-                _this2.device_types = response.data;
-                _this2.filteredDeviceTypes = response.data;
+                _this.device_types = response.data;
+                _this.filteredDeviceTypes = response.data;
                 // this.processStrings();
                 //MessagesConstants.processDeviceTypeStrings(this.filteredDeviceTypes)
 
-                _this2.$refs.paginatorDeviceTypes.setPaginator({
+                _this.$refs.paginatorDeviceTypes.setPaginator({
                   pagesCount: response.paginator.PagesCount,
                   currentPage: response.paginator.CurrentPage,
                   itemsPerPage: response.paginator.ItemsPerPage,
                   recordsCount: response.paginator.RecordsCount
                 });
-                _this2.device_types = _this2.filteredDeviceTypes;
-                _this2.doSort(_this2.sortColumn);
+                _this.device_types = _this.filteredDeviceTypes;
+                _this.doSort(_this.sortColumn);
               })["catch"](function (err) {
                 return console.log(err);
               });
@@ -24620,26 +24622,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     doDeleteType: function doDeleteType(key, id) {
-      var _this3 = this;
+      var _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var confirmDelete;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return _this3.$refs.confirmDialogue.showDialogue({
+              return _this2.$refs.confirmDialogue.showDialogue({
                 title: _components_strings_constants_device_types_index__WEBPACK_IMPORTED_MODULE_5__["default"].DEVICE_TYPE_DELETING_CAPTION,
-                message: _components_strings_constants_device_types_index__WEBPACK_IMPORTED_MODULE_5__["default"].DEVICE_TYPE_DELETING_MESSAGE + '"' + _this3.filteredDeviceTypes[key].device_type_name + '"?',
+                message: _components_strings_constants_device_types_index__WEBPACK_IMPORTED_MODULE_5__["default"].DEVICE_TYPE_DELETING_MESSAGE + '"' + _this2.filteredDeviceTypes[key].device_type_name + '"?',
                 okButton: _components_strings_constants_device_types_index__WEBPACK_IMPORTED_MODULE_5__["default"].DEVICE_TYPE_DELETING_CAPTION
               });
             case 2:
               confirmDelete = _context2.sent;
               if (confirmDelete) {
                 axios["delete"](_rest_api_js__WEBPACK_IMPORTED_MODULE_4__["default"].api_device_type_delete + id).then(function (resp) {
-                  _this3.filteredDeviceTypes.splice(key, 1);
-                  _this3.device_types = _this3.filteredDeviceTypes;
+                  _this2.filteredDeviceTypes.splice(key, 1);
+                  _this2.device_types = _this2.filteredDeviceTypes;
                   // console.log(key, id, " - deleted");
-                  _this3.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].DELETED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].PROCESS_SUCCESSFULLY);
+                  _this2.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].DELETED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].PROCESS_SUCCESSFULLY);
                 })["catch"](function (error) {
                   console.log(error);
                 });
@@ -24654,14 +24656,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     setDeviceType: function setDeviceType() {
-      var _this4 = this;
+      var _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         var _add;
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
               _context3.next = 2;
-              return _this4.$refs.addDeviceType.showDialogue({
+              return _this3.$refs.addDeviceType.showDialogue({
                 edit_mode: false,
                 title: _components_strings_constants_device_types_index__WEBPACK_IMPORTED_MODULE_5__["default"].DEVICE_TYPE_ADDING_TITLE,
                 message: _components_strings_constants_device_types_index__WEBPACK_IMPORTED_MODULE_5__["default"].DEVICE_TYPE_ADDING_MESSAGE,
@@ -24674,9 +24676,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _add = _context3.sent;
               if (_add) {
                 axios.post(_rest_api_js__WEBPACK_IMPORTED_MODULE_4__["default"].api_device_type_create, {
-                  device_type_name: _this4.$refs.addDeviceType.device_type_name,
-                  device_type_image: _this4.$refs.addDeviceType.device_type_image,
-                  device_type_desc: _this4.$refs.addDeviceType.device_type_desc
+                  device_type_name: _this3.$refs.addDeviceType.device_type_name,
+                  device_type_image: _this3.$refs.addDeviceType.device_type_image,
+                  device_type_desc: _this3.$refs.addDeviceType.device_type_desc
                 }).then(function (resp) {
                   // console.log(resp['data']);
                   var newDevice = {
@@ -24685,12 +24687,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     device_type_image: resp['data'].device_type_image,
                     id: resp['data'].id
                   };
-                  _this4.device_types.push(newDevice);
-                  _this4.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].ADDED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].PROCESS_SUCCESSFULLY);
+                  _this3.device_types.push(newDevice);
+                  _this3.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].ADDED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].PROCESS_SUCCESSFULLY);
                 })["catch"](function (error) {
                   //
                   //const Toaster = app.component('toaster')
-                  _this4.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].INSERTING_ERROR, _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_7__["default"].getError(error), _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_7__["default"].ERROR_LEVEL_ERROR);
+                  _this3.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].INSERTING_ERROR, _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__["default"].getError(error), _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__["default"].ERROR_LEVEL_ERROR);
                 });
               } else {
                 console.log(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].INSERTING_CANCELLED);
@@ -24703,40 +24705,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     doEditType: function doEditType(key, id) {
-      var _this5 = this;
+      var _this4 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
         var _edit, editDeviceTypePost;
         return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) switch (_context4.prev = _context4.next) {
             case 0:
               _context4.next = 2;
-              return _this5.$refs.addDeviceType.showDialogue({
+              return _this4.$refs.addDeviceType.showDialogue({
                 edit_mode: true,
                 title: _components_strings_constants_device_types_index__WEBPACK_IMPORTED_MODULE_5__["default"].DEVICE_TYPE_EDITING_TITLE,
                 message: _components_strings_constants_device_types_index__WEBPACK_IMPORTED_MODULE_5__["default"].DEVICE_TYPE_EDITING_MESSAGE,
-                device_type_name: _this5.device_types[key].device_type_name,
-                device_type_desc: _this5.device_types[key].device_type_desc,
-                device_type_image: _this5.device_types[key].device_type_image,
+                device_type_name: _this4.device_types[key].device_type_name,
+                device_type_desc: _this4.device_types[key].device_type_desc,
+                device_type_image: _this4.device_types[key].device_type_image,
                 okButton: _components_strings_constants_device_types_index__WEBPACK_IMPORTED_MODULE_5__["default"].DEVICE_TYPE_EDITBUTTON_CAPTION
               });
             case 2:
               _edit = _context4.sent;
               if (_edit) {
                 editDeviceTypePost = {
-                  device_type_name: _this5.$refs.addDeviceType.device_type_name,
-                  device_type_image: _this5.$refs.addDeviceType.device_type_image,
-                  device_type_desc: _this5.$refs.addDeviceType.device_type_desc
+                  device_type_name: _this4.$refs.addDeviceType.device_type_name,
+                  device_type_image: _this4.$refs.addDeviceType.device_type_image,
+                  device_type_desc: _this4.$refs.addDeviceType.device_type_desc
                 }; //console.log(editDeviceTypePost);
                 axios.put(_rest_api_js__WEBPACK_IMPORTED_MODULE_4__["default"].api_device_type_update + id, editDeviceTypePost).then(function (resp) {
                   // console.log(resp['data']);
-                  _this5.device_types[key].device_type_name = resp['data'].device_type_name;
-                  _this5.device_types[key].device_type_desc = resp['data'].device_type_desc;
-                  _this5.device_types[key].device_type_image = resp['data'].device_type_image;
-                  _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].EDITED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].PROCESS_SUCCESSFULLY);
+                  _this4.device_types[key].device_type_name = resp['data'].device_type_name;
+                  _this4.device_types[key].device_type_desc = resp['data'].device_type_desc;
+                  _this4.device_types[key].device_type_image = resp['data'].device_type_image;
+                  _this4.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].EDITED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].PROCESS_SUCCESSFULLY);
                 }).then(function (resp) {
-                  _this5.$root.$refs.DeviceRef.getData();
+                  _this4.$root.$refs.DeviceRef.getData();
                 })["catch"](function (error) {
-                  _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].EDITING_ERROR, _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_7__["default"].getError(error), _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_7__["default"].ERROR_LEVEL_ERROR);
+                  _this4.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].EDITING_ERROR, _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__["default"].getError(error), _common_js_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_8__["default"].ERROR_LEVEL_ERROR);
                 });
               } else {
                 console.log(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].EDITING_CANCELLED);
@@ -26448,7 +26450,12 @@ var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
 });
 var _hoisted_8 = [_hoisted_7];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaption), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  var _$props$isCollapseBut;
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaption), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+      'hide': (_$props$isCollapseBut = $props.isCollapseButtonHidden) !== null && _$props$isCollapseBut !== void 0 ? _$props$isCollapseBut : false
+    })
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-rounded", {
       'hide': !$props.isCollapsed
     }]),
@@ -26462,7 +26469,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $props.isCollapsed = !$props.isCollapsed;
     })
-  }, _hoisted_8, 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h3 class=\"card-title align-left px-2 \">{{ cardCaption }}</h3> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <p class=\"card-text\">Paragraph</p> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  }, _hoisted_8, 2 /* CLASS */)], 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h3 class=\"card-title align-left px-2 \">{{ cardCaption }}</h3> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <p class=\"card-text\">Paragraph</p> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["py-4 align-left", {
       'mx-2': $props.margins,
       'collapse': $props.isCollapsed
@@ -26659,7 +26666,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return $options.changeLang(lang);
       }
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(lang), 9 /* TEXT, PROPS */, _hoisted_4);
-  }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <a class=\"dropdown-item\" href=\"#\" v-for=\"lang in langs\" :key=\"lang.id\"\r\n                v-on:click=\"$emit('click', $event)\">{{ lang }}</a> ")])]);
+  }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <a class=\"dropdown-item\" href=\"#\" v-for=\"lang in langs\" :key=\"lang.id\"\n                v-on:click=\"$emit('click', $event)\">{{ lang }}</a> ")])]);
 }
 
 /***/ }),
@@ -27153,9 +27160,7 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "fas fa-th-large"
 }, null, -1 /* HOISTED */);
 var _hoisted_16 = [_hoisted_15];
-var _hoisted_17 = {
-  "class": "text-primary my-2 align-center"
-};
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h5 class=\"text-primary my-2 align-center\">{{ dataDescription }}</h5> ")], -1 /* HOISTED */);
 var _hoisted_18 = {
   key: 0,
   "class": "row my-2"
@@ -27235,7 +27240,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Imager = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Imager");
   var _component_common_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("common-card");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_common_card, {
-    cardCaption: $data.pageCaption
+    cardCaption: $data.pageCaption,
+    isCollapseButtonHidden: true
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddDeviceType, {
@@ -27285,7 +27291,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: _cache[4] || (_cache[4] = function () {
           return $options.setDeviceType && $options.setDeviceType.apply($options, arguments);
         })
-      }, " Add Device Type ")])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.dataDescription), 1 /* TEXT */)]), !$data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredDeviceTypes, function (device_type, key) {
+      }, " Add Device Type ")])])])]), _hoisted_17, !$data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredDeviceTypes, function (device_type, key) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           "class": "col-sm-4 col-xs-4 col-lg-4 p-2 fade-in",
           key: key,
@@ -27521,9 +27527,7 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "fas fa-th-large"
 }, null, -1 /* HOISTED */);
 var _hoisted_16 = [_hoisted_15];
-var _hoisted_17 = {
-  "class": "text-primary my-2 align-center"
-};
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h5 class=\"text-primary my-2 align-center\">{{ dataDescription }} </h5> ")], -1 /* HOISTED */);
 var _hoisted_18 = {
   "class": "row my-2"
 };
@@ -27669,7 +27673,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: _cache[4] || (_cache[4] = function () {
           return $options.setDevice && $options.setDevice.apply($options, arguments);
         })
-      }, " Add Device ")])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.dataDescription), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredDevices, function (device, key) {
+      }, " Add Device ")])])])]), _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredDevices, function (device, key) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           "class": "col-sm-4 col-xs-4 col-lg-4 p-2 fade-in",
           key: key,
@@ -27779,10 +27783,15 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "navbar-toggler-icon"
 })], -1 /* HOISTED */);
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  "class": "navbar-brand logo",
-  href: "/"
-}, "Umolab", -1 /* HOISTED */);
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("object", {
+  type: "image/svg+xml",
+  data: "images/logo/u-logo2.svg",
+  id: "object_1",
+  "class": "icon logo",
+  style: {
+    "width": "120px"
+  }
+}, null, -1 /* HOISTED */);
 var _hoisted_5 = {
   "class": "collapse navbar-collapse",
   id: "navbarColor01"
@@ -27807,7 +27816,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ThemeCombo = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ThemeCombo");
   var _component_LangCombo = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LangCombo");
   var _component_UserMenu = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("UserMenu");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AppMenu, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <a class=\"logo\" href=\"/\"> "), _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" </a> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AppMenu, {
     ref: "appMenu"
   }, null, 512 /* NEED_PATCH */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ThemeCombo, {
     ref: "themeCombo"
@@ -27964,9 +27973,7 @@ var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "fas fa-sync-alt"
 }, null, -1 /* HOISTED */);
 var _hoisted_18 = [_hoisted_17];
-var _hoisted_19 = {
-  "class": "text-primary my-2 align-center"
-};
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h5 class=\"text-primary my-2 align-center\">{{ dataDescription }}</h5> ")], -1 /* HOISTED */);
 var _hoisted_20 = {
   "class": "row my-2"
 };
@@ -28104,7 +28111,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: _cache[5] || (_cache[5] = function () {
           return $options.getData && $options.getData.apply($options, arguments);
         })
-      }, _hoisted_18)])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.dataDescription), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredAlbums, function (album, key) {
+      }, _hoisted_18)])])])]), _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredAlbums, function (album, key) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           "class": "col-sm-4 col-xs-4 col-lg-4 p-2 fade-in",
           key: key,
@@ -28295,9 +28302,7 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "fas fa-th-large"
 }, null, -1 /* HOISTED */);
 var _hoisted_16 = [_hoisted_15];
-var _hoisted_17 = {
-  "class": "text-primary my-2 align-center"
-};
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h5 class=\"text-primary my-2 align-center\">{{ dataDescription }}</h5> ")], -1 /* HOISTED */);
 var _hoisted_18 = {
   "class": "row my-2"
 };
@@ -28458,7 +28463,7 @@ function render(_ctx, _cache) {
         onClick: _cache[4] || (_cache[4] = function () {
           return _ctx.setUserDevice && _ctx.setUserDevice.apply(_ctx, arguments);
         })
-      }, " Add Device ")])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.dataDescription), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h1>User Devices</h1> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.filteredUserDevices, function (user_device, key) {
+      }, " Add Device ")])])])]), _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h1>User Devices</h1> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.filteredUserDevices, function (user_device, key) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           "class": "p-2 col-sm-4 col-xs-4 col-lg-4 fade-in",
           style: {
@@ -28595,7 +28600,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_AppMenu = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AppMenu");
   var _component_CommonCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("CommonCard");
   var _component_InfoCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InfoCard");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.pageCaption), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <data-set-select\r\n        name=\"deviceTypes\"\r\n        :value=\"device_type_id\"\r\n        :dataTableReadApi=\"deviceTypesApi\"\r\n        :nameField=\"'device_type_name'\"\r\n        @onDataSelect=\"myDeviceTypeSelect\">\r\n    </data-set-select>\r\n\r\n    <data-set-select\r\n        @onDataSelect=\"myDeviceSelect\"\r\n        name=\"devices\"\r\n        :value=\"device_id\"\r\n        :dataTableReadApi=\"devicesApi\"\r\n        :nameField=\"'device_name'\">\r\n    </data-set-select> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <color-picker :value=\"color\" @newColor=\"changeColor\"></color-picker> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h1>{{ color }}</h1> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" page menu "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CommonCard, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.pageCaption), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <data-set-select\n        name=\"deviceTypes\"\n        :value=\"device_type_id\"\n        :dataTableReadApi=\"deviceTypesApi\"\n        :nameField=\"'device_type_name'\"\n        @onDataSelect=\"myDeviceTypeSelect\">\n    </data-set-select>\n\n    <data-set-select\n        @onDataSelect=\"myDeviceSelect\"\n        name=\"devices\"\n        :value=\"device_id\"\n        :dataTableReadApi=\"devicesApi\"\n        :nameField=\"'device_name'\">\n    </data-set-select> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <color-picker :value=\"color\" @newColor=\"changeColor\"></color-picker> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h1>{{ color }}</h1> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <svg><use x=\"0\" y=\"0\" xlink:href=\"#object_1\" /></svg> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" page menu "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CommonCard, {
     ref: "menuCard",
     cardCaption: $data.menuBlockCaption,
     margins: $data.margins
@@ -28844,6 +28849,34 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
 //     enabledTransports: ['ws', 'wss'],
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/common/js/Filtering.js":
+/*!********************************************************!*\
+  !*** ./resources/js/components/common/js/Filtering.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  doFilter: function doFilter($items, $column, $filter) {
+    //console.log(this)
+    var column = $column;
+    if ($filter === "") return $items;
+    var res = $items.filter(function (item) {
+      return item[$column].toLowerCase().indexOf($filter.toLowerCase()) > -1;
+    });
+    if ($items.length > res.length) {
+      console.log(res);
+      return res;
+    }
+  }
+});
 
 /***/ }),
 
@@ -39966,7 +39999,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.card-caption[data-v-46b81424] {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\n}\n.hide[data-v-46b81424] {\r\n    display: none;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.card-caption[data-v-46b81424] {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.hide[data-v-46b81424] {\n    display: none;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -40041,7 +40074,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_sass_images_scss__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -40065,7 +40098,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".flex {\n    display: flex;\n}\n\n/*.image-badge {\n    width: 24px;\n    height: 24px;\n    margin-left: -10px;\n}*/\n\n.device-image {\n    height: 2.6rem;\n    border-radius: 5px;\n}\n\n.card-space {\n    margin-bottom: 00px;\n}\n\na.a_cap:first-letter {\n    text-transform: uppercase;\n}\n\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n    .device-image {\n        width: 100px;\n        height: 100px;\n        /* margin-top: -23px; */\n        margin-bottom: -91px;\n        margin-left: 219px;\n        border-radius: 10px;\n        /*box-shadow: #eee 0px 0px 8px;*/\n    }\n    .card-space {\n        margin-bottom: 20px;\n    }\n    .container {\n        padding: 0;\n        width: 100%;\n    }\n\n    .navbar > .container-fluid {\n        display: flex;\n        flex-wrap: inherit;\n        align-items: center;\n        justify-content: flex-start;\n    }\n\n    .edit-buttons {\n        /* display: flex;*/\n        margin-top: 16px;\n        margin-bottom: 8px;\n        justify-content: flex-start;\n    }\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".flex {\n    display: flex;\n}\n\n/*.image-badge {\n    width: 24px;\n    height: 24px;\n    margin-left: -10px;\n}*/\n\n.logo {\n    display: flex;\n    margin-right: 16px;\n}\n\n.device-image {\n    height: 2.6rem;\n    border-radius: 5px;\n}\n\n.card-space {\n    margin-bottom: 00px;\n}\n\na.a_cap:first-letter {\n    text-transform: uppercase;\n}\n\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n    .device-image {\n        width: 100px;\n        height: 100px;\n        /* margin-top: -23px; */\n        margin-bottom: -91px;\n        margin-left: 219px;\n        border-radius: 10px;\n        /*box-shadow: #eee 0px 0px 8px;*/\n    }\n    .card-space {\n        margin-bottom: 20px;\n    }\n    .container {\n        padding: 0;\n        width: 100%;\n    }\n\n    .navbar > .container-fluid {\n        display: flex;\n        flex-wrap: inherit;\n        align-items: center;\n        justify-content: flex-start;\n    }\n\n    .edit-buttons {\n        /* display: flex;*/\n        margin-top: 16px;\n        margin-bottom: 8px;\n        justify-content: flex-start;\n    }\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
