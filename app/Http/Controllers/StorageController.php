@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\BaseController;
 use Storage;
 
 
-class StorageController extends BaseController
+class StorageController extends Controller
 {
     public static function SaveFile($_storage, $_filename, $_file) {
-        // Save Image in Storage folder
+        // Save Image in Storage
         try {
             Storage::disk($_storage)->put($_filename, file_get_contents($_file));
             return
@@ -17,7 +16,6 @@ class StorageController extends BaseController
                     'success' => true,
                     'message' => 'file saved to storage'
                 ];
-
         }
         catch (\Exception $e) {
             return

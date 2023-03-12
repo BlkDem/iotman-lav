@@ -1,5 +1,6 @@
 .flex {
     display: flex;
+    align-items: center;
 }
 
 /*.image-badge {
@@ -11,6 +12,8 @@
 .logo {
     display: flex;
     margin-right: 16px;
+    margin-left: 4px;
+    width: 36px;
 }
 
 .device-image {

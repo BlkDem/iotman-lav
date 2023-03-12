@@ -6,10 +6,12 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- <a class="logo" href="/"> -->
-                <object type="image/svg+xml" data="images/logo/u-logo2.svg" id="object_1" class="icon logo"
-                    style="width: 120px;">
-                </object>
+                <!-- <object type="image/svg+xml" data="images/logo/u4.svg" id="object_1" class="icon logo"
+                    >
+                </object> -->
             <!-- </a> -->
+            <Logo class="logo"/>
+
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
@@ -35,7 +37,18 @@
 
 <script>
 
+import Logo from "../common/Logo.vue"
+
 export default {
+
+    components: {Logo},
+
+    data() {
+        return {
+            styleCSS: '/css/app.css',
+        }
+
+    },
 
     emits: ['newLangUp'],
 

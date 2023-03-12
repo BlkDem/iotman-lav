@@ -24,22 +24,27 @@ class ImageStoreController extends BaseController
             $_extension = '';
             $_file = '';
 
+            //check record exists
+            $newImage = Image::find($imageId);
+            if ($newImage == null)
+            return $this->sendError("Record not found");
+
+            //check file exists
             if ($request->files->count() == 0)
             return $this->sendError("No data for update");
 
+            //check valid fieldname
             $_file = $request->file($_image);
             if ($_file == null)
             return $this->sendError("No valid files for update");
 
+            //check valid file extension
             $_extension = $_file->getClientOriginalExtension();
             if (!$this->ValidExtension($_extension))
             return $this->sendError("Invalid file extension");
 
+            //make unic-filename
             $newImageName = Str::random(32).".".$_extension;
-
-            $newImage = Image::find($imageId);
-            if ($newImage == null)
-            return $this->sendError("Record not found");
 
             // save to storage
             $save_result = StorageController::SaveFile('images', $newImageName, $_file);
@@ -47,17 +52,18 @@ class ImageStoreController extends BaseController
                 return $this->sendError("Error saving to disk");
             }
 
+            //apply new file name
             $newImage->image_name = $newImageName;
+
+            //save record
             $newImage->save();
 
-            // Return Json Response
+            // Return susccess
             return $this->sendResponse($newImage, "Post successfully updated");
 
         } catch (\Exception $e) {
-            // Return Json Response
-            return response()->json([
-                'message' => "Something went really wrong!",
-            ],500);
+            // Return error
+            return $this->sendError("Error updating image: ", $e);
         }
 }
 }
