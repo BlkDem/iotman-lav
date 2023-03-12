@@ -1,7 +1,6 @@
 export default {
     doFilter($items, $column, $filter) {
-        //console.log(this)
-        const column = $column;
+
         if ($filter === "") return $items;
 
         const res = $items.filter((item) => {
@@ -13,7 +12,7 @@ export default {
         });
         if ($items.length > res.length) {
 
-            console.log(res)
+            // console.log(res)
             return res;
 
         }

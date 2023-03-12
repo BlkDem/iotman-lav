@@ -10,45 +10,16 @@
         <!-- <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
             {{ pageCaption }}
         </h1> -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
-            <div class="container-fluid">
-                <div class="navbar-collapse" id="navbarColor02">
-                    <ul class="navbar-nav me-auto  d-flex">
-                        <li class="nav-item  d-flex py-1  w-100">
-                            <input class="form-control me-sm-2" type="text" placeholder="Search"
-                                v-model="device_type_filter" />
-                        </li>
-                        <li class="nav-item dropdown me-auto vertical-center">
-                            <!-- <button v-on:click="openImager()"></button> -->
-                            <a class="nav-link dropdown-toggle mx-2" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">{{ SortName }}</a>
-                            <div class="dropdown-menu w-100">
-                                <a class="dropdown-item" href="#" v-for="rule in sortRules" :key="rule.key"
-                                    :value="rule.key" @click="doSort(rule.key)">{{ rule.title }}</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" @click="
-                                                                    sortDirection = !sortDirection;
-                                                                    doSort(sortColumn);">
-                                    {{ sortDirection ? sortOrderStrings[0] : sortOrderStrings[1] }}
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="d-flex">
-                        <button class="btn btn-primary" :class="{'disabled' : compactView}" @click="compactView = true">
-                            <i class="fas fa-list"></i>
-                        </button>
-                        <button class="btn btn-primary mx-2" :class="{'disabled' : !compactView}"
-                            @click="compactView = false">
-                            <i class="fas fa-th-large"></i>
-                        </button>
-                        <button class="btn btn-primary" @click="setDeviceType">
-                            Add Device Type
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </nav>
+
+        <table-nav
+            :compactView="compactView"
+            :sortColumn="sortColumn"
+            :sortRules="sortRules"
+            @setCompactView="setCompactView"
+            @addEvent="setDeviceType"
+            @updateSortedData="updateSortedData"
+            @updateFilteredData="updateFilteredData"
+        ></table-nav>
 
         <div>
             <!-- <h5 class="text-primary my-2 align-center">{{ dataDescription }}</h5> -->
@@ -130,24 +101,27 @@ import Filtering from "../../components/common/js/Filtering.js";
 import ParsingErrors from "../common/js/ParsingErrors.js";
 import Imager from '../../components/common/Imager.vue';
 
+import TableNav from '../db/TableBar/TableNav.vue';
+
     export default {
 
         components: {
             ConfirmDialogue,
             AddDeviceType,
             Paginator,
-            Imager
+            Imager,
+            TableNav
         },
 
         data() {
             return {
-                device_types: [],
+                deviceTypes: [],
                 deviceTypesVisible: false,
                 compactView: true,
                 pageCaption: MessagesConstants.DEVICE_TYPES ?? 'Device Types',
                 filteredDeviceTypes: [], //filtered array of devices
                 dataDescription: "", //table data description label
-                device_type_filter: "", //filtering string
+                // device_type_filter: "", //filtering string
                 sortOrderStrings: [
                     MessagesConstants.SORT_ASC,
                     MessagesConstants.SORT_DESC,
@@ -188,28 +162,10 @@ import Imager from '../../components/common/Imager.vue';
             }
         },
 
-        watch: {
-            device_type_filter: function () {
-                handler: this.doFilter();
-            },
-
-            selectSort: function () {
-                handler: this.doSort();
-            },
-
-            compactView: function () {
-                localStorage.CompactView = this.compactView;
-            },
-        },
-
         computed: {
             SortName() {
                 return MessagesConstants.SortingCaption(this.sortColumn, this.sortDirection)
             },
-
-            // getCompactView() {
-            //     return this.compactView;
-            // },
         },
 
 
@@ -219,42 +175,23 @@ import Imager from '../../components/common/Imager.vue';
                 this.$refs.imager.createImager()
             },
 
-            doSort($column) {
-                Sorting.doSort(this.filteredDeviceTypes, $column, this.sortDirection)
-                this.sortColumn = $column;
+            updateSortedData($column, $direction) {
+                this.sortDirection = $direction
+                this.sortColumn = $column
+                Sorting.doSort(this.filteredDeviceTypes, this.sortColumn, this.sortDirection)
             },
 
-            doFilter() {
-                this.filteredDeviceTypes = this.device_types;
-                this.filteredDeviceTypes = Filtering.doFilter(this.filteredDeviceTypes, 'device_type_name', this.device_type_filter)
-                // this.doSort();
-                // const res = this.filteredDeviceTypes.filter((device_type) => {
-
-                //     if (this.device_type_filter === "") return true;
-                //     else
-                //         return (
-                //             device_type.device_type_name
-                //             .toLowerCase()
-                //             .indexOf(this.device_type_filter.toLowerCase()) > -1
-                //         );
-                // });
-                // if (this.device_types.length > res.length) {
-                //     this.filteredDeviceTypes = res;
-                //     console.log(res)
-                //     this.doSort();
-                // }
-                // return res;
+            updateFilteredData($filter) {
+                this.filteredDeviceTypes = this.deviceTypes;
+                this.filteredDeviceTypes = Filtering.doFilter(this.filteredDeviceTypes, 'device_type_name', $filter)
             },
 
             async getData(_currentPage=1, _itemsPerPage=5) {
                 fetch(APIConstants.api_devices_types_read_page + _currentPage + "/" + _itemsPerPage)
                     .then(response => response.json())
                     .then(response => {
-                        this.device_types = response.data;
+                        this.deviceTypes = response.data;
                         this.filteredDeviceTypes = response.data;
-                        // this.processStrings();
-                        //MessagesConstants.processDeviceTypeStrings(this.filteredDeviceTypes)
-
 
                         this.$refs.paginatorDeviceTypes.setPaginator(
                             {
@@ -265,8 +202,8 @@ import Imager from '../../components/common/Imager.vue';
                             }
                         )
 
-                        this.device_types = this.filteredDeviceTypes;
-                        this.doSort(this.sortColumn);
+                        this.deviceTypes = this.filteredDeviceTypes;
+                        this.updateSortedData(this.sortColumn, this.$direction);
                     })
                     .catch(err => console.log(err));
             },
@@ -284,7 +221,7 @@ import Imager from '../../components/common/Imager.vue';
                     axios.delete(APIConstants.api_device_type_delete + id)
                         .then(resp => {
                             this.filteredDeviceTypes.splice(key, 1);
-                            this.device_types = this.filteredDeviceTypes
+                            this.deviceTypes = this.filteredDeviceTypes
                             // console.log(key, id, " - deleted");
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.DELETED_MESSAGE,
@@ -325,7 +262,7 @@ import Imager from '../../components/common/Imager.vue';
                                 device_type_image: resp['data'].device_type_image,
                                 id: resp['data'].id
                             }
-                            this.device_types.push(newDevice);
+                            this.deviceTypes.push(newDevice);
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.ADDED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
@@ -351,9 +288,9 @@ import Imager from '../../components/common/Imager.vue';
                         edit_mode: true,
                         title: DeviceTypeStringConstants.DEVICE_TYPE_EDITING_TITLE,
                         message: DeviceTypeStringConstants.DEVICE_TYPE_EDITING_MESSAGE,
-                        device_type_name: this.device_types[key].device_type_name,
-                        device_type_desc: this.device_types[key].device_type_desc,
-                        device_type_image: this.device_types[key].device_type_image,
+                        device_type_name: this.deviceTypes[key].device_type_name,
+                        device_type_desc: this.deviceTypes[key].device_type_desc,
+                        device_type_image: this.deviceTypes[key].device_type_image,
                         okButton: DeviceTypeStringConstants.DEVICE_TYPE_EDITBUTTON_CAPTION,
                     }
                 )
@@ -369,9 +306,9 @@ import Imager from '../../components/common/Imager.vue';
                     axios.put(APIConstants.api_device_type_update + id, editDeviceTypePost)
                         .then(resp => {
                             // console.log(resp['data']);
-                            this.device_types[key].device_type_name = resp['data'].device_type_name;
-                            this.device_types[key].device_type_desc = resp['data'].device_type_desc;
-                            this.device_types[key].device_type_image = resp['data'].device_type_image;
+                            this.deviceTypes[key].device_type_name = resp['data'].device_type_name;
+                            this.deviceTypes[key].device_type_desc = resp['data'].device_type_desc;
+                            this.deviceTypes[key].device_type_image = resp['data'].device_type_image;
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.EDITED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
@@ -399,6 +336,11 @@ import Imager from '../../components/common/Imager.vue';
 
             getVisible() {
                 return this.deviceTypesVisible;
+            },
+
+            setCompactView(value) {
+                console.log(value)
+                this.compactView = Boolean(value)
             }
         },
 
