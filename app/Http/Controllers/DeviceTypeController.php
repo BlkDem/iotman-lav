@@ -70,6 +70,20 @@ class DeviceTypeController extends BaseController
         }
     }
 
+    public function patch(Request $request, $id, $field, $value){
+        try {
+            $patchDeviceType = DeviceType::whereId($id);
+            $patchDeviceType->update([
+                "$field" => $value
+            ]);
+            $res = DeviceType::find($id);
+            return response()->json($res, 200);
+        }
+        catch (Exception $e) {
+            return response()->json('Deleting Record Error: ' . $e, 400);
+        }
+    }
+
     public function destroy($id) {
         $deviceTypeItem = DeviceType::find($id);
         if ($deviceTypeItem === null) {

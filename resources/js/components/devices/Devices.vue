@@ -7,41 +7,16 @@
         <!-- <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
             {{ pageCaption }}
         </h1> -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
-            <div class="container-fluid">
-                <div class="navbar-collapse" id="navbarColor02">
-                    <ul class="navbar-nav me-auto  d-flex">
-                        <li class="nav-item  d-flex py-1  w-100">
-                            <input class="form-control me-sm-2" type="text" placeholder="Search"
-                                v-model="device_filter" />
-                        </li>
-                        <li class="nav-item dropdown me-auto vertical-center">
-                            <a class="nav-link dropdown-toggle mx-2" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">{{ SortingPopupCaption }}</a>
-                            <div class="dropdown-menu w-100">
-                                <a class="dropdown-item" href="#" v-for="rule in sortRules" :key="rule.key"
-                                    :value="rule.key" @click="doSort(rule.key)">{{ rule.title }}</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" @click="sortDirection = !sortDirection; doSort(sortColumn);">
-                                    {{sortDirection ? sortOrderStrings[0] : sortOrderStrings[1]}}
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="d-flex">
-                        <button class="btn btn-primary " :class="{'disabled' : compactView}" @click="compactView = true">
-                            <i class="fas fa-list"></i>
-                        </button>
-                        <button class="btn btn-primary mx-2" :class="{'disabled' : !compactView}" @click="compactView = false">
-                            <i class="fas fa-th-large"></i>
-                        </button>
-                        <button class="btn btn-primary" @click="setDevice">
-                            Add Device
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </nav>
+
+        <table-nav
+            :compactView="compactView"
+            :sortColumn="sortColumn"
+            :sortRules="sortRules"
+            @setCompactView="setCompactView"
+            @addEvent="setDevice"
+            @updateSortedData="updateSortedData"
+            @updateFilteredData="updateFilteredData"
+        ></table-nav>
 
         <div>
             <!-- <h5 class="text-primary my-2 align-center">{{ dataDescription }} </h5> -->
@@ -130,7 +105,10 @@
     import MessagesConstants from "../strings_constants/strings.js";
     import APIConstants from "../../api/rest_api";
     import Sorting from "../common/js/Sorting.js";
+    import Filtering from "../common/js/Filtering.js";
     import ParsingErrors from "../common/js/ParsingErrors.js";
+
+    import TableNav from '../../components/common/TableBar/TableNav.vue';
     // import MyMqtt from '../components/MyMqtt.vue';
 
     export default {
@@ -140,6 +118,7 @@
             AddDevice,
             DeviceTypesCombo,
             Paginator /*MyMqtt*/ ,
+            TableNav
         },
 
         data() {
@@ -148,7 +127,6 @@
                 pageCaption: MessagesConstants.DEVICES ?? 'Devices',
                 filteredDevices: [], //filtered array of devices
                 dataDescription: "", //table data description label
-                deviceVisible: true, //devices view visibilty
                 compactView: true, //copact view mode
                 device_filter: "", //filtering string
                 sortOrderStrings: [
@@ -184,6 +162,7 @@
             if (localStorage.getItem('CompactView')) {
                 this.compactView = (localStorage.getItem('CompactView') === 'true');
             }
+
             this.emitter.on("new-lang", _lang => {
                 this.setLang(_lang)
             });
@@ -195,49 +174,33 @@
             device_filter: function () {
                 handler: this.doFilter();
             },
-
-            selectSort: function () {
-                handler: this.doSort();
-            },
-
-            compactView: function () {
-                localStorage.CompactView = this.compactView;
-            },
         },
 
         computed: {
             SortingPopupCaption() {
                 return MessagesConstants.SortingCaption(this.sortColumn, this.sortDirection)
             },
-
-            // getCompactView() {
-            //     return this.compactView;
-            // },
         },
 
         methods: {
-            doSort($column) {
-                Sorting.doSort(this.filteredDevices, $column, this.sortDirection)
-                this.sortColumn = $column;
+
+            updateSortedData($column, $direction) {
+                this.sortDirection = $direction
+                this.sortColumn = $column
+                Sorting.doSort(this.filteredDevices, this.sortColumn, this.sortDirection)
             },
 
-            doFilter() {
+            updateFilteredData($filter) {
                 this.filteredDevices = this.devices;
-                const res = this.filteredDevices.filter((device) => {
-                    if (this.device_filter === "") return true;
-                    else
-                        return (
-                            device.device_name
-                            .toLowerCase()
-                            .indexOf(this.device_filter.toLowerCase()) > -1
-                        );
-                });
-                if (this.devices.length > res.length) {
-                    this.filteredDevices = res;
-                    this.doSort();
-                }
-                // return res;
+                this.filteredDevices = Filtering.doFilter(this.filteredDevices, this.sortColumn, $filter)
             },
+
+            setCompactView(value) {
+                console.log(value)
+                this.compactView = Boolean(value)
+            },
+
+
 
             //deleting devices
             async doDelete(key, id) {
@@ -300,12 +263,9 @@
                         )
 
                         this.fillEmptyValues()
-
-                        // console.log(this.filteredDevices)
-
-                        //store items buffer
+                          //store items buffer
                         this.devices = this.filteredDevices;
-                        this.doSort(this.sortColumn);
+                        this.updateSortedData(this.sortColumn);
                     })
                     .catch((err) => console.log(err));
             },
@@ -464,7 +424,7 @@
             },
 
             setLang(_lang) {
-                this.pageCaption = _lang.HOME ?? 'Welcome'
+                this.pageCaption = _lang.DEVICES ?? 'Devices'
             }
         },
     };

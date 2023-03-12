@@ -77,6 +77,7 @@ Route::post('/device_type/create', [DeviceTypeController::class, 'store']);
 Route::get('/device_types/read/', [DeviceTypeController::class, 'index']);
 Route::get('/device_types/read/page/{currentPage}/{itemsPerPage}', [DeviceTypeController::class, 'page']);
 Route::get('/device_types/read/{id}', [DeviceTypeController::class, 'show']);
+Route::patch('/device_type/patch/{id}/{field}/{value}', [DeviceTypeController::class, 'patch']);
 Route::put('/device_type/update/{updateDeviceType}', [DeviceTypeController::class, 'update']);
 Route::delete('/device_type/delete/{id}', [DeviceTypeController::class, 'destroy']);
 

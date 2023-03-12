@@ -34,7 +34,7 @@ export default {
 
         nameField: {
             type: String,
-            default: 'device_type_name'
+            // default: ''
         },
         dataTableReadApi: {
             type: String,

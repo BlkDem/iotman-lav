@@ -99,6 +99,7 @@ export default {
 
         setCompactView(value) {
             this.compactView = value
+            localStorage.setItem('CompactView', value)
             this.$emit('setCompactView', value)
         }
     },

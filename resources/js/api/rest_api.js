@@ -23,6 +23,7 @@ export default {
     api_device_types_read: apiPreffix + 'device_types/read/',
     api_devices_types_read_page: apiPreffix + 'device_types/read/page/',
     api_device_type_update: apiPreffix + 'device_type/update/',
+    api_device_type_patch: apiPreffix + 'device_type/patch/',
     api_device_type_delete: apiPreffix + 'device_type/delete/',
 
     //Devices CRUD
