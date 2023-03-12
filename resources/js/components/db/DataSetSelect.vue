@@ -14,7 +14,7 @@
 
 <script>
 
-import APIConstants from "../../rest_api.js";
+import APIConstants from "../../api/rest_api";
 
 export default {
 

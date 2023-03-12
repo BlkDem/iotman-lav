@@ -76,7 +76,7 @@
 <script>
 // import CommonCard from '../components/common/CommonCard.vue';
 // import InfoCard from '../components/common/InfoCard.vue';
-import APIConstants from "../rest_api";
+import APIConstants from "../api/rest_api";
 import MessagesConstants from "../components/strings_constants/strings.js";
 
 // import ColorPicker from '../components/common/ColorPicker.vue';

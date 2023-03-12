@@ -128,7 +128,7 @@
     import Paginator from "../../components/common/Paginator.vue";
     import DeviceStringConstants from "../../components/strings_constants/devices/index";
     import MessagesConstants from "../strings_constants/strings.js";
-    import APIConstants from "../../rest_api.js";
+    import APIConstants from "../../api/rest_api";
     import Sorting from "../common/js/Sorting.js";
     import ParsingErrors from "../common/js/ParsingErrors.js";
     // import MyMqtt from '../components/MyMqtt.vue';

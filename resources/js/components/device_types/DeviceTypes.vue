@@ -123,7 +123,7 @@ import ConfirmDialogue from '../../components/common/ConfirmDialogue.vue';
 import AddDeviceType from './AddDeviceType.vue';
 import Paginator from '../../components/common/Paginator.vue';
 import MessagesConstants from '../strings_constants/strings'
-import APIConstants from "../../rest_api.js";
+import APIConstants from "../../api/rest_api";
 import DeviceTypeStringConstants from '../../components/strings_constants/device_types/index';
 import Sorting from "../../components/common/js/Sorting.js";
 import Filtering from "../../components/common/js/Filtering.js";

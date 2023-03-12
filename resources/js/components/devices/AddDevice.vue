@@ -33,7 +33,7 @@
 <script>
 import PopupModal from '../../components/common/PopupModal.vue';
 import MessagesConstants from '../strings_constants/strings';
-import APIConstants from "../../rest_api";
+import APIConstants from "../../api/rest_api";
 import DataSetSelect  from "../../components/db/DataSetSelect.vue";
 
 

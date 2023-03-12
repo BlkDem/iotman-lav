@@ -131,7 +131,7 @@ import ConfirmDialogue from '../../../components/common/ConfirmDialogue.vue';
 import AddAlbum from './AddAlbum.vue';
 import Paginator from '../../../components/common/Paginator.vue';
 import MessagesConstants from '../../strings_constants/strings'
-import APIConstants from "../../../rest_api.js";
+import APIConstants from "../../../api/rest_api";
 import AlbumStringConstants from '../../../components/strings_constants/images/index';
 import Sorting from "../../../components/common/js/Sorting.js";
 import ParsingErrors from "../../common/js/ParsingErrors.js";

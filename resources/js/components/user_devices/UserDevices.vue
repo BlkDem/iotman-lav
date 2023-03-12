@@ -142,7 +142,7 @@ import AddUserDevice from "./AddUserDevice.vue";
 import Paginator from "../../components/common/Paginator.vue";
 import UserDeviceStringConstants from "../../components/strings_constants/user_devices/index";
 import MessagesConstants from "../strings_constants/strings.js";
-import APIConstants from "../../rest_api.js";
+import APIConstants from "../../api/rest_api.js";
 import Sorting from "../common/js/Sorting.js";
 import ParsingErrors from "../common/js/ParsingErrors.js";
 

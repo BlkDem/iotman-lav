@@ -10,7 +10,7 @@
 <script>
 
 
-import APIConstants from "../../rest_api";
+import APIConstants from "../../api/rest_api.js";
 
 export default {
     name: 'UserCombo',

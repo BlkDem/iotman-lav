@@ -12,7 +12,7 @@
 
 <script>
 
-import APIConstants from "../../rest_api.js";
+import APIConstants from "../../api/rest_api";
 import MessagesConstants from "../strings_constants/strings.js";
 
 export default {

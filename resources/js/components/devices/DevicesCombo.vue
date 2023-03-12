@@ -9,7 +9,7 @@
 
 <script>
 
-import APIConstants from "../../rest_api";
+import APIConstants from "../../api/rest_api";
 
 export default {
     name: 'DeviceCombo',
