@@ -3,30 +3,6 @@
         {{ pageCaption }}
     </h1>
 
-    <!-- <data-set-select
-        name="deviceTypes"
-        :value="device_type_id"
-        :dataTableReadApi="deviceTypesApi"
-        :nameField="'device_type_name'"
-        @onDataSelect="myDeviceTypeSelect">
-    </data-set-select>
-
-    <data-set-select
-        @onDataSelect="myDeviceSelect"
-        name="devices"
-        :value="device_id"
-        :dataTableReadApi="devicesApi"
-        :nameField="'device_name'">
-    </data-set-select> -->
-
-    <!-- <color-picker :value="color" @newColor="changeColor"></color-picker> -->
-
-
-    <!-- <h1>{{ color }}</h1> -->
-
-
-    <!-- <svg><use x="0" y="0" xlink:href="#object_1" /></svg> -->
-
     <div class="row">
         <!-- page menu -->
         <div class="col-sm-3 col-lg-3 col-md-3">
@@ -37,16 +13,20 @@
         <!-- page content -->
         <div class="col-sm-6 col-lg-6 col-md-6">
             <CommonCard ref="menuCard" :cardCaption="informationBlockCaption">
-                <InfoCard v-for="(itemCard, key) in infoCardData"
+                <InfoCard v-for="(itemCard, key) in devBlogs"
+                    :class="{
+                                'bg-info': key % 2 === 0,
+                                'bg-success': key % 2 === 1,
+                            }"
                     :key="key"
-                    :infoCardCaption="itemCard.infoCardCaption"
-                    :infoCardTitle="itemCard.infoCardTitle"
-                    :infoCardText="itemCard.infoCardText"
+                    :infoCardCaption="itemCard.created_at"
+                    :infoCardTitle="itemCard.dev_blog_name"
+                    :infoCardText="itemCard.dev_blog_desc"
                     :infoCardMoreButtonCaption="itemCard.infoCardMoreButtonCaption"
-                    :marginBottom="itemCard.marginBottom"
+                    :marginBottom="2"
                     :buttonVisible="itemCard.buttonVisible"
-                    :bgColor="itemCard.bgColor"
-                    :infoCardMoreText="itemCard.infoCardMoreText"
+
+
                 >
 
                 </InfoCard>
@@ -71,6 +51,7 @@
     <div class="w-100 mx-4 my-2 align-left" style="font-size: 1.4rem; font-weight: 400;">
         <!-- <AppMenu ref="homeAppMenu"></AppMenu> -->
     </div>
+<!-- <router-view /> -->
 </template>
 
 <script>
@@ -102,33 +83,35 @@ export default {
             deviceTypesApi: '',
             devicesApi: '',
             // tmpDeviceType: '',
-            color: '#AA00BB',
+            bgColor: 'bg-success',
 
             device_type_id: undefined,
             device_id: undefined,
 
-            infoCardData: [
-                {
-                    infoCardCaption: "07.03.2023 16:22",
-                    infoCardTitle: marked.parse("Home **page** blocks complieted"),
-                    infoCardText: marked.parse("[Marked] How To Use The **Marked** Demo\r\n"+
-                                                "\r\n" +
-                                                "[Marked]: https://github.com/markedjs/marked/"),
-                    infoCardMoreText: "More text...",
-                    marginBottom: 2,
-                    //buttonVisible: true,
-                    bgColor: 'bg-success'
-                },
-                {
-                    infoCardCaption: "06.03.2023 10:20",
-                    infoCardTitle: "Home page blocks starting...",
-                    infoCardText: "Now we are starting to arrange blocks on the home page.",
-                    infoCardMoreText: "More text...",
-                    marginBottom: 2,
-                    //buttonVisible: false,
-                    bgColor: 'bg-info'
-                },
-            ]
+            devBlogs: [],
+
+            // infoCardData: [
+            //     {
+            //         infoCardCaption: "07.03.2023 16:22",
+            //         infoCardTitle: marked.parse("Home **page** blocks complieted"),
+            //         infoCardText: marked.parse("[Marked] How To Use The **Marked** Demo\r\n"+
+            //                                     "\r\n" +
+            //                                     "[Marked]: https://github.com/markedjs/marked/"),
+            //         infoCardMoreText: "More text...",
+            //         marginBottom: 2,
+            //         //buttonVisible: true,
+            //         bgColor: 'bg-success'
+            //     },
+            //     {
+            //         infoCardCaption: "06.03.2023 10:20",
+            //         infoCardTitle: "Home page blocks starting...",
+            //         infoCardText: "Now we are starting to arrange blocks on the home page.",
+            //         infoCardMoreText: "More text...",
+            //         marginBottom: 2,
+            //         //buttonVisible: false,
+            //         bgColor: 'bg-info'
+            //     },
+            // ]
 
         }
     },
@@ -138,10 +121,13 @@ export default {
         this.deviceTypesApi = APIConstants.api_device_types_read
         this.devicesApi = APIConstants.api_devices_read
 
-        this.pageCaption = MessagesConstants.HOME ?? 'Welcome'
+        this.pageCaption = MessagesConstants.HOME ?? 'Umolab Devices'
         this.menuBlockCaption = MessagesConstants.menuBlockCaption ?? 'Menu'
         this.informationBlockCaption = MessagesConstants.informationBlockCaption ?? 'Information'
         this.logBlockCaption = MessagesConstants.logBlockCaption ?? 'Log'
+
+        this.getBlogData()
+
     },
 
     mounted() {
@@ -151,7 +137,17 @@ export default {
         });
     },
 
+    watch: {
+
+    },
+
     methods: {
+        async getBlogData() {
+            const _data = await axios.get(APIConstants.api_dev_blog_read)
+            // console.log(_data)
+            this.devBlogs = _data.data.data
+        },
+
         setLang(_lang) {
             this.pageCaption = _lang.HOME ?? 'Welcome'
             this.menuBlockCaption = _lang.menuBlockCaption ?? 'Menu'

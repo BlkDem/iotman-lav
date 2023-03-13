@@ -1,5 +1,5 @@
 export default {
-    HOME: "Welcome",
+    HOME: "Umolab Devices",
     LIBRARY: "Images Library",
     IMAGES: "Images",
     ALBUMS: "Albums",

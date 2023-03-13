@@ -2,8 +2,6 @@
     <div class="card text-white"
             :class="{
                 'mb-4': marginBottom,
-                'bg-info': bgColor === 'bg-info',
-                'bg-success': bgColor === 'bg-success',
             }"
         >
         <div class="card-header">
@@ -11,15 +9,15 @@
         </div>
         <div class="card-body">
             <h5 class="card-title"><span v-html="infoCardTitle"></span></h5>
-            <p class="card-text">
+            <p class="card-text  fade-in my-2" v-if="moreInfoVisible">
                 <span v-html="infoCardText"></span>
             </p>
-            <p class="card-text fade-in" v-if="moreInfoVisible">
+            <!-- <p class="card-text fade-in" v-if="moreInfoVisible">
                 {{ infoCardMoreText }}
-            </p>
+            </p> -->
             <button class="btn btn-primary"
                 @click="showMoreClick"
-                v-show="infoCardMoreText.length>0" >
+                v-show="infoCardText.length>0" >
                 {{ infoCardMoreButtonCaption }}
             </button>
         </div>
@@ -55,10 +53,10 @@ export default {
             default: 0
         },
 
-        bgColor: {
-            type: String,
-            default: ''
-        },
+        // bgColor: {
+        //     type: String,
+        //     default: ''
+        // },
 
         infoCardMoreText: {
             type: String,

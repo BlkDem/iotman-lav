@@ -9,38 +9,66 @@ import Albums from "./components/imagelib/albums/Albums.vue"
 const routes = [
   {
     path: "/",
-    name: "Welcome",
+    name: "Umolab Devices",
     component: Home,
     icon: "fas fa-home",
-    ID: "HOME"
+    ID: "HOME",
+    visible: true,
+    children: [
+        {
+            path: "device_types",
+            name: "Device Types",
+            icon: "fas fa-layer-group",
+            component: DeviceTypes,
+            ID: "DEVICE_TYPES_1"
+        },
+        {
+            path: "devices",
+            name: "Devices",
+            icon: "fas fa-sun",
+            component: Devices,
+            ID: "DEVICES_1"
+          },
+          {
+            path: "/user_devices",
+            name: "User Devices",
+            icon: "fas fa-users",
+            component: UserDevices,
+            ID: "USER_DEVICES"
+          },
+        ]
   },
   {
     path: "/device_types",
     name: "Device Types",
     icon: "fas fa-layer-group",
     component: DeviceTypes,
-    ID: "DEVICE_TYPES"
+    ID: "DEVICE_TYPES",
+    visible: false
   },
   {
     path: "/devices",
     name: "Devices",
     icon: "fas fa-sun",
     component: Devices,
-    ID: "DEVICES"
+    ID: "DEVICES",
+    visible: false
   },
   {
     path: "/user_devices",
     name: "User Devices",
     icon: "fas fa-users",
     component: UserDevices,
-    ID: "USER_DEVICES"
+    ID: "USER_DEVICES",
+    visible: false
   },
   {
     path: "/imagelib",
     name: "Images Library",
     icon: "fas fa-images",
     component: Albums,
-    ID: "LIBRARY"
+    ID: "LIBRARY",
+    visible: true
   },
 ];
 

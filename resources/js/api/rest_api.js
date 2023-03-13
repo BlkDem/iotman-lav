@@ -4,6 +4,13 @@ const APIVersion = 1;
 export default {
     apiVersion: APIVersion,
 
+    //DevBlogs CRUD
+    api_dev_blog_create: apiPreffix +    'dev_blog/create/',
+    api_dev_blog_read: apiPreffix +      'dev_blogs/read/',
+    api_dev_blog_read_page: apiPreffix + 'dev_blogs/read/page/',
+    api_dev_blogupdate: apiPreffix +     'dev_blog/update/',
+    api_dev_blogdelete: apiPreffix +     'dev_blog/delete/',
+
     //Albums CRUD
     api_album_create: apiPreffix + 'album/create/',
     api_albums_read: apiPreffix + 'albums/read/',

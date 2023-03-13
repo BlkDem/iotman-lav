@@ -23663,27 +23663,59 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      routes: []
+      routes: [],
+      children: [],
+      chBkp: []
       // margins: 2
     };
   },
   mounted: function mounted() {
     this.getRoutes();
-    // console.log(this.refresh)
+    // console.log(this.children)
   },
 
   methods: {
+    checkChildren: function checkChildren($parentRouteName) {
+      this.children = this.chBkp;
+      var _ch = this.children.filter(function (a) {
+        console.log(a.parent, $parentRouteName);
+        return a.parent === $parentRouteName;
+      });
+
+      // const res = (_ch > 0)
+      console.log('filtered: ', _ch);
+      return _ch;
+    },
     getRoutes: function getRoutes() {
       var _this = this;
       this.$router.options.routes.forEach(function (route) {
-        var _MessagesConstants$ro, _MessagesConstants$ro2, _route$icon;
         // console.log(route.ID, MessagesConstants[route.ID], this.routes.length)
-        _this.routes.push({
-          ID: (_MessagesConstants$ro = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_0__["default"][route.ID]) !== null && _MessagesConstants$ro !== void 0 ? _MessagesConstants$ro : route.name,
-          name: (_MessagesConstants$ro2 = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_0__["default"][route.ID]) !== null && _MessagesConstants$ro2 !== void 0 ? _MessagesConstants$ro2 : route.name,
-          path: route.path,
-          icon: (_route$icon = route.icon) !== null && _route$icon !== void 0 ? _route$icon : ""
-        });
+        if (route.visible === true) {
+          var _MessagesConstants$ro, _MessagesConstants$ro2, _route$icon;
+          _this.routes.push({
+            ID: (_MessagesConstants$ro = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_0__["default"][route.ID]) !== null && _MessagesConstants$ro !== void 0 ? _MessagesConstants$ro : route.name,
+            name: (_MessagesConstants$ro2 = _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_0__["default"][route.ID]) !== null && _MessagesConstants$ro2 !== void 0 ? _MessagesConstants$ro2 : route.name,
+            path: route.path,
+            icon: (_route$icon = route.icon) !== null && _route$icon !== void 0 ? _route$icon : ""
+          });
+        }
+        // if (this.routes.children > 0)
+        // console.log(route.children > 0)
+        if (route.children != null) {
+          route.children.forEach(function (child) {
+            var _route$icon2;
+            console.log('populate: ', child, route.name);
+            _this.children.push({
+              parent: route.name,
+              ID: child.ID,
+              name: child.name,
+              path: child.path,
+              icon: (_route$icon2 = route.icon) !== null && _route$icon2 !== void 0 ? _route$icon2 : ""
+            });
+          });
+          _this.chBkp = _this.children;
+          console.log('bkp: ', _this.chBkp);
+        }
       });
     },
     setLang: function setLang(event) {
@@ -23912,10 +23944,11 @@ __webpack_require__.r(__webpack_exports__);
       type: Number,
       "default": 0
     },
-    bgColor: {
-      type: String,
-      "default": ''
-    },
+    // bgColor: {
+    //     type: String,
+    //     default: ''
+    // },
+
     infoCardMoreText: {
       type: String,
       "default": ''
@@ -26354,6 +26387,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_rest_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/rest_api */ "./resources/js/api/rest_api.js");
 /* harmony import */ var _components_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/strings_constants/strings.js */ "./resources/js/components/strings_constants/strings.js");
 /* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! marked */ "./node_modules/marked/lib/marked.esm.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 // import CommonCard from '../components/common/CommonCard.vue';
 // import InfoCard from '../components/common/InfoCard.vue';
 
@@ -26379,36 +26416,44 @@ __webpack_require__.r(__webpack_exports__);
       deviceTypesApi: '',
       devicesApi: '',
       // tmpDeviceType: '',
-      color: '#AA00BB',
+      bgColor: 'bg-success',
       device_type_id: undefined,
       device_id: undefined,
-      infoCardData: [{
-        infoCardCaption: "07.03.2023 16:22",
-        infoCardTitle: marked__WEBPACK_IMPORTED_MODULE_2__.marked.parse("Home **page** blocks complieted"),
-        infoCardText: marked__WEBPACK_IMPORTED_MODULE_2__.marked.parse("[Marked] How To Use The **Marked** Demo\r\n" + "\r\n" + "[Marked]: https://github.com/markedjs/marked/"),
-        infoCardMoreText: "More text...",
-        marginBottom: 2,
-        //buttonVisible: true,
-        bgColor: 'bg-success'
-      }, {
-        infoCardCaption: "06.03.2023 10:20",
-        infoCardTitle: "Home page blocks starting...",
-        infoCardText: "Now we are starting to arrange blocks on the home page.",
-        infoCardMoreText: "More text...",
-        marginBottom: 2,
-        //buttonVisible: false,
-        bgColor: 'bg-info'
-      }]
+      devBlogs: []
+
+      // infoCardData: [
+      //     {
+      //         infoCardCaption: "07.03.2023 16:22",
+      //         infoCardTitle: marked.parse("Home **page** blocks complieted"),
+      //         infoCardText: marked.parse("[Marked] How To Use The **Marked** Demo\r\n"+
+      //                                     "\r\n" +
+      //                                     "[Marked]: https://github.com/markedjs/marked/"),
+      //         infoCardMoreText: "More text...",
+      //         marginBottom: 2,
+      //         //buttonVisible: true,
+      //         bgColor: 'bg-success'
+      //     },
+      //     {
+      //         infoCardCaption: "06.03.2023 10:20",
+      //         infoCardTitle: "Home page blocks starting...",
+      //         infoCardText: "Now we are starting to arrange blocks on the home page.",
+      //         infoCardMoreText: "More text...",
+      //         marginBottom: 2,
+      //         //buttonVisible: false,
+      //         bgColor: 'bg-info'
+      //     },
+      // ]
     };
   },
   created: function created() {
     var _MessagesConstants$HO, _MessagesConstants$me, _MessagesConstants$in, _MessagesConstants$lo;
     this.deviceTypesApi = _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].api_device_types_read;
     this.devicesApi = _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].api_devices_read;
-    this.pageCaption = (_MessagesConstants$HO = _components_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_1__["default"].HOME) !== null && _MessagesConstants$HO !== void 0 ? _MessagesConstants$HO : 'Welcome';
+    this.pageCaption = (_MessagesConstants$HO = _components_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_1__["default"].HOME) !== null && _MessagesConstants$HO !== void 0 ? _MessagesConstants$HO : 'Umolab Devices';
     this.menuBlockCaption = (_MessagesConstants$me = _components_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_1__["default"].menuBlockCaption) !== null && _MessagesConstants$me !== void 0 ? _MessagesConstants$me : 'Menu';
     this.informationBlockCaption = (_MessagesConstants$in = _components_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_1__["default"].informationBlockCaption) !== null && _MessagesConstants$in !== void 0 ? _MessagesConstants$in : 'Information';
     this.logBlockCaption = (_MessagesConstants$lo = _components_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_1__["default"].logBlockCaption) !== null && _MessagesConstants$lo !== void 0 ? _MessagesConstants$lo : 'Log';
+    this.getBlogData();
   },
   mounted: function mounted() {
     var _this = this;
@@ -26416,7 +26461,28 @@ __webpack_require__.r(__webpack_exports__);
       _this.setLang(_lang);
     });
   },
+  watch: {},
   methods: {
+    getBlogData: function getBlogData() {
+      var _this2 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var _data;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return axios.get(_api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].api_dev_blog_read);
+            case 2:
+              _data = _context.sent;
+              // console.log(_data)
+              _this2.devBlogs = _data.data.data;
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee);
+      }))();
+    },
     setLang: function setLang(_lang) {
       var _lang$HOME, _lang$menuBlockCaptio, _lang$informationBloc, _lang$logBlockCaption;
       this.pageCaption = (_lang$HOME = _lang.HOME) !== null && _lang$HOME !== void 0 ? _lang$HOME : 'Welcome';
@@ -26472,15 +26538,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = ["name"];
+var _hoisted_2 = {
+  key: 1,
+  "class": "nav-link dropdown-toggle",
+  "data-bs-toggle": "dropdown",
+  role: "button",
+  "aria-haspopup": "true",
+  "aria-expanded": "false"
+};
+var _hoisted_3 = {
+  "class": "dropdown-menu"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.routes, function (route, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      "class": "nav-item",
+      "class": "nav-item dropdown",
       key: key,
       name: route.name
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    }, [$options.checkChildren(route.name).length === 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+      key: 0,
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["nav-link", {
         active: _this.$router.currentRoute._value.path === route.path,
         'my-2': $props.margins == 2
@@ -26495,7 +26573,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }),
 
       _: 2 /* DYNAMIC */
-    }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["to", "class"])], 8 /* PROPS */, _hoisted_1);
+    }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["to", "class"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $options.checkChildren(route.name).length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [route.icon != '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", {
+      key: 0,
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([route.icon, "ml-2"])
+    }, null, 2 /* CLASS */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(route.name), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.checkChildren(route.name), function (child, key1) {
+      return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+        "class": "dropdown-item",
+        key: key1,
+        to: child.path
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [child.icon != '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", {
+            key: 0,
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([child.icon, "ml-2"])
+          }, null, 2 /* CLASS */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(child.name), 1 /* TEXT */)];
+        }),
+
+        _: 2 /* DYNAMIC */
+      }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["to"]);
+    }), 128 /* KEYED_FRAGMENT */))])], 8 /* PROPS */, _hoisted_1);
   }), 128 /* KEYED_FRAGMENT */);
 }
 
@@ -26695,30 +26791,25 @@ var _hoisted_3 = {
 };
 var _hoisted_4 = ["innerHTML"];
 var _hoisted_5 = {
-  "class": "card-text"
+  key: 0,
+  "class": "card-text fade-in my-2"
 };
 var _hoisted_6 = ["innerHTML"];
-var _hoisted_7 = {
-  key: 0,
-  "class": "card-text fade-in"
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["card text-white", {
-      'mb-4': $props.marginBottom,
-      'bg-info': $props.bgColor === 'bg-info',
-      'bg-success': $props.bgColor === 'bg-success'
+      'mb-4': $props.marginBottom
     }])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.infoCardCaption), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     innerHTML: $props.infoCardTitle
-  }, null, 8 /* PROPS */, _hoisted_4)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  }, null, 8 /* PROPS */, _hoisted_4)]), $data.moreInfoVisible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     innerHTML: $props.infoCardText
-  }, null, 8 /* PROPS */, _hoisted_6)]), $data.moreInfoVisible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.infoCardMoreText), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, null, 8 /* PROPS */, _hoisted_6)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <p class=\"card-text fade-in\" v-if=\"moreInfoVisible\">\n                {{ infoCardMoreText }}\n            </p> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary",
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.showMoreClick && $options.showMoreClick.apply($options, arguments);
     })
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.infoCardMoreButtonCaption), 513 /* TEXT, NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $props.infoCardMoreText.length > 0]])])], 2 /* CLASS */);
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.infoCardMoreButtonCaption), 513 /* TEXT, NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $props.infoCardText.length > 0]])])], 2 /* CLASS */);
 }
 
 /***/ }),
@@ -28721,7 +28812,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_AppMenu = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AppMenu");
   var _component_CommonCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("CommonCard");
   var _component_InfoCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InfoCard");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.pageCaption), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <data-set-select\n        name=\"deviceTypes\"\n        :value=\"device_type_id\"\n        :dataTableReadApi=\"deviceTypesApi\"\n        :nameField=\"'device_type_name'\"\n        @onDataSelect=\"myDeviceTypeSelect\">\n    </data-set-select>\n\n    <data-set-select\n        @onDataSelect=\"myDeviceSelect\"\n        name=\"devices\"\n        :value=\"device_id\"\n        :dataTableReadApi=\"devicesApi\"\n        :nameField=\"'device_name'\">\n    </data-set-select> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <color-picker :value=\"color\" @newColor=\"changeColor\"></color-picker> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h1>{{ color }}</h1> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <svg><use x=\"0\" y=\"0\" xlink:href=\"#object_1\" /></svg> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" page menu "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CommonCard, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.pageCaption), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" page menu "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CommonCard, {
     ref: "menuCard",
     cardCaption: $data.menuBlockCaption,
     margins: $data.margins
@@ -28738,18 +28829,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     cardCaption: $data.informationBlockCaption
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.infoCardData, function (itemCard, key) {
+      return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.devBlogs, function (itemCard, key) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_InfoCard, {
+          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+            'bg-info': key % 2 === 0,
+            'bg-success': key % 2 === 1
+          }),
           key: key,
-          infoCardCaption: itemCard.infoCardCaption,
-          infoCardTitle: itemCard.infoCardTitle,
-          infoCardText: itemCard.infoCardText,
+          infoCardCaption: itemCard.created_at,
+          infoCardTitle: itemCard.dev_blog_name,
+          infoCardText: itemCard.dev_blog_desc,
           infoCardMoreButtonCaption: itemCard.infoCardMoreButtonCaption,
-          marginBottom: itemCard.marginBottom,
-          buttonVisible: itemCard.buttonVisible,
-          bgColor: itemCard.bgColor,
-          infoCardMoreText: itemCard.infoCardMoreText
-        }, null, 8 /* PROPS */, ["infoCardCaption", "infoCardTitle", "infoCardText", "infoCardMoreButtonCaption", "marginBottom", "buttonVisible", "bgColor", "infoCardMoreText"]);
+          marginBottom: 2,
+          buttonVisible: itemCard.buttonVisible
+        }, null, 8 /* PROPS */, ["class", "infoCardCaption", "infoCardTitle", "infoCardText", "infoCardMoreButtonCaption", "buttonVisible"]);
       }), 128 /* KEYED_FRAGMENT */))];
     }),
 
@@ -28762,7 +28855,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [_hoisted_6];
     }),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["cardCaption"])])]), _hoisted_7], 64 /* STABLE_FRAGMENT */);
+  }, 8 /* PROPS */, ["cardCaption"])])]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <router-view /> ")], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -28934,6 +29027,12 @@ var apiPreffix = '/api/';
 var APIVersion = 1;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   apiVersion: APIVersion,
+  //DevBlogs CRUD
+  api_dev_blog_create: apiPreffix + 'dev_blog/create/',
+  api_dev_blog_read: apiPreffix + 'dev_blogs/read/',
+  api_dev_blog_read_page: apiPreffix + 'dev_blogs/read/page/',
+  api_dev_blogupdate: apiPreffix + 'dev_blog/update/',
+  api_dev_blogdelete: apiPreffix + 'dev_blog/delete/',
   //Albums CRUD
   api_album_create: apiPreffix + 'album/create/',
   api_albums_read: apiPreffix + 'albums/read/',
@@ -29282,7 +29381,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  HOME: "Welcome",
+  HOME: "Umolab Devices",
   LIBRARY: "Images Library",
   IMAGES: "Images",
   ALBUMS: "Albums",
@@ -29419,34 +29518,58 @@ __webpack_require__.r(__webpack_exports__);
 
 var routes = [{
   path: "/",
-  name: "Welcome",
+  name: "Umolab Devices",
   component: _views_Home_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
   icon: "fas fa-home",
-  ID: "HOME"
+  ID: "HOME",
+  visible: true,
+  children: [{
+    path: "device_types",
+    name: "Device Types",
+    icon: "fas fa-layer-group",
+    component: _components_device_types_DeviceTypes_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ID: "DEVICE_TYPES_1"
+  }, {
+    path: "devices",
+    name: "Devices",
+    icon: "fas fa-sun",
+    component: _components_devices_Devices_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    ID: "DEVICES_1"
+  }, {
+    path: "/user_devices",
+    name: "User Devices",
+    icon: "fas fa-users",
+    component: _components_user_devices_UserDevices_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    ID: "USER_DEVICES"
+  }]
 }, {
   path: "/device_types",
   name: "Device Types",
   icon: "fas fa-layer-group",
   component: _components_device_types_DeviceTypes_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-  ID: "DEVICE_TYPES"
+  ID: "DEVICE_TYPES",
+  visible: false
 }, {
   path: "/devices",
   name: "Devices",
   icon: "fas fa-sun",
   component: _components_devices_Devices_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-  ID: "DEVICES"
+  ID: "DEVICES",
+  visible: false
 }, {
   path: "/user_devices",
   name: "User Devices",
   icon: "fas fa-users",
   component: _components_user_devices_UserDevices_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-  ID: "USER_DEVICES"
+  ID: "USER_DEVICES",
+  visible: false
 }, {
   path: "/imagelib",
   name: "Images Library",
   icon: "fas fa-images",
   component: _components_imagelib_albums_Albums_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-  ID: "LIBRARY"
+  ID: "LIBRARY",
+  visible: true
 }];
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_5__.createRouter)({
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_5__.createWebHistory)(),
