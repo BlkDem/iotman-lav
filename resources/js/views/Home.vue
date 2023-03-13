@@ -78,6 +78,7 @@
 // import InfoCard from '../components/common/InfoCard.vue';
 import APIConstants from "../api/rest_api";
 import MessagesConstants from "../components/strings_constants/strings.js";
+import { marked } from 'marked';
 
 // import ColorPicker from '../components/common/ColorPicker.vue';
 
@@ -109,8 +110,10 @@ export default {
             infoCardData: [
                 {
                     infoCardCaption: "07.03.2023 16:22",
-                    infoCardTitle: "Home page blocks complieted",
-                    infoCardText: "Congradulation! We are did it!",
+                    infoCardTitle: marked.parse("Home **page** blocks complieted"),
+                    infoCardText: marked.parse("[Marked] How To Use The **Marked** Demo\r\n"+
+                                                "\r\n" +
+                                                "[Marked]: https://github.com/markedjs/marked/"),
                     infoCardMoreText: "More text...",
                     marginBottom: 2,
                     //buttonVisible: true,

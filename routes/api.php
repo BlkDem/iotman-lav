@@ -13,6 +13,9 @@ use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ImageStoreController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MicroController;
+use App\Http\Controllers\DevBlogController;
+use App\Http\Controllers\DeviceMicroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +60,7 @@ Route::controller(ImageController::class)->group(function () {
     Route::delete('/image/delete/{id}', 'destroy');
 });
 
-
+//Upload and Save Image to storage.disk 'images'
 Route::post('/image/update_image/{imageId}', [ImageStoreController::class, 'updateImage']);
 
 //CRUD routes for model 'albums'
@@ -70,6 +73,40 @@ Route::controller(AlbumController::class)->group(function () {
     Route::put('/album/update/{updateAlbum}', 'update');
     Route::delete('/album/delete/{id}', 'destroy');
 });
+
+//CRUD routes for model 'micros'
+
+Route::controller(MicroController::class)->group(function () {
+    Route::post(  '/micro/create', 'store');
+    Route::get(   '/micros/read', 'index');
+    Route::get(   '/micros/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get(   '/micro/read/{id}', 'show');
+    Route::put(   '/micro/update/{updateMicro}', 'update');
+    Route::delete('/micro/delete/{id}', 'destroy');
+});
+
+//CRUD routes for model 'device_micros'
+
+Route::controller(DeviceMicroController::class)->group(function () {
+    Route::post(  '/device_micro/create', 'store');
+    Route::get(   '/device_micros/read', 'index');
+    Route::get(   '/device_micros/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get(   '/device_micro/read/{id}', 'show');
+    Route::put(   '/device_micro/update/{updateDeviceMicro}', 'update');
+    Route::delete('/device_micro/delete/{id}', 'destroy');
+});
+
+//CRUD routes for model 'dev_blogs'
+
+Route::controller(DevBlogController::class)->group(function () {
+    Route::post(  '/dev_blog/create', 'store');
+    Route::get(   '/dev_blogs/read', 'index');
+    Route::get(   '/dev_blogs/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get(   '/dev_blog/read/{id}', 'show');
+    Route::put(   '/dev_blog/update/{updateDevBlog}', 'update');
+    Route::delete('/dev_blog/delete/{id}', 'destroy');
+});
+
 
 //CRUD routes for model 'device_types'
 

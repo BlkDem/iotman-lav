@@ -52,7 +52,7 @@
         </div>
 
         <!-- compact view -->
-        <div v-show="compactView" class="my-2">
+        <div v-show="compactView" class="my-2" @click="isEditableId=0">
             <div class="card border-primary mb-1 w-100 fade-in" v-for="(device_type, key) in filteredDeviceTypes"
                 v-bind:key="key" v-bind:id="device_type.id">
                 <div class="mx-2 my-2">
@@ -64,7 +64,7 @@
                             <span class="text-info"> {{ device_type.id }} </span>
                         </div>
                         <div class="col-sm-7 col-xs-7 col-lg-7 align-left flex"
-                            @click="onCellClick(device_type.id, key)">
+                            @click.stop="onCellClick(device_type.id, key)">
                                 <span v-if="isEditableId!==device_type.id">{{ device_type.device_type_name  }} </span>
                                 <div class="flex w-100" v-if="isEditableId===device_type.id">
                                     <input class="form-control w-100"

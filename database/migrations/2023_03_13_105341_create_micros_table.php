@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('micros', function (Blueprint $table) {
             $table->id();
-            $table->string('image_name');
-            $table->string('image_desc')->nullable();
-            $table->bigInteger('album_id')->unsigned();
+            $table->string('micro_name');
+            $table->string('micro_desc')->nullable();
+            $table->json('micro_config')->nullable();
             $table->timestamps();
-
-            $table->foreign('album_id')->references('id')->on('albums')->onDelete('restrict');
-
         });
+
     }
 
     /**
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('mikros');
     }
 };
