@@ -1,9 +1,9 @@
 <template>
-    <div style="margin-top: 5.5rem">
+    <div style="margin-top: 0.5rem">
         <!-- {{ pageCaption }} -->
     </div>
 
-    <common-card :cardCaption="pageCaption" :isCollapseButtonHidden="true">
+    <common-card :cardCaption="pageCaption" :isCollapseButtonHidden="false">
         <AddDeviceType ref="addDeviceType"></AddDeviceType>
 
         <ConfirmDialogue ref="confirmDialogue" />
@@ -58,8 +58,9 @@
                             <span class="text-info"> {{ item.id }} </span>
                         </div> -->
 
-                        <div class="align-left" :class="{'col-sm-1 col-xs-1 col-lg-1': ckey===0, 'col-sm-4 col-xs-4 col-lg-4 ': ckey>0}"
-                            @click.stop="onCellClick(item.id, key)"
+                        <div class="align-left" :class="{'col-sm-1 col-xs-1 col-lg-1': ckey===0, 'col-sm-4 col-xs-4 col-lg- ': ckey>0}"
+                            @click.stop="onCellClick(item.id, ckey, key)"
+
                             v-for="(column, ckey) in Object.keys(item)" v-bind:key="ckey"
                             >
                             <!-- <span v-if="isEditableId!==item.id">
@@ -67,17 +68,16 @@
                                 {{ item[column] }}
                             </span> -->
 
-                            <span >
-                                <!-- {{ column }} -->
+                            <span v-if="activeCol!==key||activeRow!==ckey">
                                 {{ item[column] }}
                             </span>
 
-                            <div class="flex w-100" v-if="isEditableId===item.id">
-                                <input class="form-control w-100" :value="item[1]"
-                                    @keyup.enter="onInputEnter(item.id, key, item[1], $event.target.value)"
+                            <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
+                                <input class="form-control w-100" :value="item[column]"
+                                    @keyup.enter="onInputEnter(item.id, key, item[column], $event.target.value)"
                                     @keyup.esc="onInputEsc(key)" @change="onChange(key)" />
-                                <button class="btn btn-primary mx-1" :id="device_type.id"
-                                    @click.stop="saveRecord(item.id, item[1], item[1])">
+                                <button class="btn btn-primary mx-1" :id="item.id"
+                                    @click.stop="saveRecord(item.id, item[column], item[column])">
                                     <i class="far fa-check-circle fa-2x"></i>
                                 </button>
                                 <button class="btn btn-primary" @click.stop="onInputEsc(key)">
@@ -88,11 +88,11 @@
                         </div>
 
                         <div class="col-sm-3 col-xs-3 col-lg-3  edit-buttons ">
-                            <button class="btn btn-info mx-2" @click="doEditType(key, device_type.id)">
+                            <button class="btn btn-info mx-2" @click="doEditType(key, item.id)">
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
 
-                            <button class="btn btn-secondary" @click="doDeleteType(key, device_type.id)">
+                            <button class="btn btn-secondary" @click="doDeleteType(key, item.id)">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -165,7 +165,9 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
         data() {
             return {
-                isEditableId: 0,
+                isEditableId: [],
+                activeCol: undefined,
+                activeRow: undefined,
                 isEsc: false,
                 storeValue: [], //??
                 Items: [],
@@ -182,7 +184,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 ],
                 sortOrder: MessagesConstants.SORT_ASC,
                 sortDirection: false,
-                sortColumn: '', // to props
+                sortColumn: this.dataFields[0].name, // to props
                 sortRules: [{
                         key: 'name',
                         title: MessagesConstants.SORT_BY_NAME
@@ -196,7 +198,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
         },
 
         created() {
-            console.log(this.dataFields)
+            console.log(this.dataFields[0])
             this.getData();
             // console.log(APIConstants.api_images_read_page)
         },
@@ -255,12 +257,14 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 //  this.storeValue[$key])
 
                 // this.filteredDeviceTypes[$key].device_type_name = this.storeValue[$key]
-                this.isEditableId = 0
+                this.activeCol = undefined
+                this.activeRow = undefined
+                // this.isEditableId[$key] = 0
             },
 
             saveRecord($id, $field, $value) {
                 console.log('saving: ', $field, $value)
-                this.isEditableId = 0
+                // this.isEditableId = 0
 
                 axios.patch(
                     this.patchAPI + $id + '/' + $field + '/' + $value)
@@ -277,10 +281,14 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
             },
 
-            onCellClick($id, $key) {
-                this.isEditableId = $id
-                this.storeValue[$key] = this.Items[$key].name
-                console.log($id, $key, this.storeValue[$key])
+            onCellClick($id, $ckey, $key) {
+                // this.isEditableId[$key] = $id
+                this.activeCol = undefined
+                this.activeRow = undefined
+                this.activeCol = $key
+                this.activeRow = $ckey
+                // this.storeValue[$ckey] = this.Items[$ckey].name
+                console.log($id, $ckey, $key)
             },
 
             setLang(_lang) {
@@ -290,10 +298,12 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
             updateSortedData($column, $direction) {
                 this.sortDirection = $direction
                 this.sortColumn = $column
+                console.log(this.sortColumn, this.sortDirection)
                 Sorting.doSort(this.filteredItems, this.sortColumn, this.sortDirection)
             },
 
             updateFilteredData($filter) {
+
                 this.filteredItems = this.Items;
                 this.filteredItems = Filtering.doFilter(this.filteredItems, this.sortColumn, $filter)
             },
@@ -343,6 +353,11 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                         for (let a=0; a<newList.length; a++) {
                             for (let b=0; b<this.dataFields.length; b++) {
                                 newList[a][this.dataFields[b].name] = this.Items[a][this.dataFields[b].name]
+                                // if (this.dataFields[b].params != null)
+                                    // newList[a][this.dataFields[b].params] = this.dataFields[b].params
+                                //    newList[a][this.dataFields[b].name]["params"] =this.dataFields[b].params
+                                // newList[a][this.dataFields[b].params] = this.dataFields[b].params
+
                             }
                         }
 

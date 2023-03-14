@@ -126,7 +126,9 @@
             :getAPI="imagesAPI"
             :dataFields="imagesFields"
             :foreignKey="album_id"
-            :foreignValue="album_id_value">
+            :foreignValue="album_id_value"
+            :pageCaption="imagesCaption"
+        >
         </data-table>
 
 </template>
@@ -163,16 +165,21 @@ import DataTable from '../../db/DataTable.vue';
                     {
                             name: 'image_name',
                             type: String,
-                            editable: true,
-                            // params: {
-                            //     isImage: true
-                            // }
+
+                            params: {
+                                isImage: true,
+                                editable: false,
+                            }
                     },
 
                     {
                             name: 'image_desc',
                             type: String,
-                            editable: true
+                            params: {
+                                editable: true,
+                                isImage: false
+                            }
+
                     },
                 ],
 
@@ -181,6 +188,7 @@ import DataTable from '../../db/DataTable.vue';
                 // deviceTypesVisible: false,
                 compactView: true,
                 pageCaption: MessagesConstants.ALBUMS ?? 'Albums',
+                imagesCaption: MessagesConstants.IMAGES,
                 filteredAlbums: [], //filtered array of devices
                 dataDescription: "", //table data description label
                 album_filter: "", //filtering string

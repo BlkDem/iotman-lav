@@ -12,10 +12,10 @@
                             <a class="nav-link dropdown-toggle mx-2" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="true" aria-expanded="false">{{ SortName }}</a>
                             <div class="dropdown-menu w-100">
-                                <a class="dropdown-item" href="#" v-for="rule in sortRules" :key="rule.key"
+                                <a class="dropdown-item" v-for="rule in sortRules" :key="rule.key"
                                     :value="rule.key" @click="doSort(rule.key)">{{ rule.title }}</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" @click="
+                                <a class="dropdown-item" @click="
                                                                     sortDirection = !sortDirection;
                                                                     doSort(sortColumn, sortDirection);">
                                     {{ sortDirection ? sortOrderStrings[0] : sortOrderStrings[1] }}

@@ -1,6 +1,6 @@
 export default {
     doFilter($items, $column, $filter) {
-
+        console.log($items, $column, $filter)
         if ($filter === "") return $items;
 
         const res = $items.filter((item) => {
