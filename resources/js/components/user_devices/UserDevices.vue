@@ -12,7 +12,20 @@
         <!-- <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
             {{ pageCaption }}
         </h1> -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+
+
+        <table-nav
+            :compactView="compactView"
+            :sortColumn="sortColumn"
+            :sortRules="sortRules"
+            @setCompactView="setCompactView"
+            @addEvent="setUserDevice"
+            @updateSortedData="updateSortedData"
+            @updateFilteredData="updateFilteredData"
+        ></table-nav>
+
+
+        <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
             <div class="container-fluid">
                 <div class="navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav me-auto  d-flex">
@@ -47,7 +60,7 @@
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav> -->
 
         <div>
             <!-- <h5 class="text-primary my-2 align-center">{{ dataDescription }}</h5> -->
@@ -143,8 +156,10 @@ import Paginator from "../../components/common/Paginator.vue";
 import UserDeviceStringConstants from "../../components/strings_constants/user_devices/index";
 import MessagesConstants from "../strings_constants/strings.js";
 import APIConstants from "../../api/rest_api.js";
-import Sorting from "../common/js/Sorting.js";
-import ParsingErrors from "../common/js/ParsingErrors.js";
+import Sorting from "../../helpers/Sorting.js";
+import Filtering from "../../helpers/Filtering.js";
+import ParsingErrors from "../../helpers/ParsingErrors";
+import TableNav from '../../components/common/TableBar/TableNav.vue';
 
 
 export default {
@@ -152,6 +167,7 @@ export default {
         ConfirmDialogue,
         AddUserDevice,
         Paginator /*MyMqtt*/ ,
+        TableNav
     },
 
     data() {
@@ -200,17 +216,17 @@ export default {
     },
 
     watch: {
-        userDevice_filter: function () {
-            handler: this.doFilter();
-        },
+        // userDevice_filter: function () {
+        //     handler: this.doFilter();
+        // },
 
-        selectSort: function () {
-            handler: this.doSort();
-        },
+        // selectSort: function () {
+        //     handler: this.doSort();
+        // },
 
-        compactView: function () {
-            localStorage.CompactView = this.compactView;
-        },
+        // compactView: function () {
+        //     localStorage.CompactView = this.compactView;
+        // },
     },
 
     computed: {
@@ -220,27 +236,44 @@ export default {
     },
 
     methods: {
-        doSort($column) {
-            Sorting.doSort(this.filteredUserDevices, $column, this.sortDirection)
-            this.sortColumn = $column;
+
+        updateSortedData($column, $direction) {
+            this.sortDirection = $direction
+            this.sortColumn = $column
+            Sorting.doSort(this.filteredUserDevices, this.sortColumn, this.sortDirection)
         },
 
-        doFilter() {
+            updateFilteredData($filter) {
+                this.filteredUserDevices = this.user_devices;
+                this.filteredUserDevices = Filtering.doFilter(this.filteredUserDevices, this.sortColumn, $filter)
+            },
 
-            if (this.filteredUserDevices != this.user_devices) {
-                this.filteredUserDevices = this.user_devices
-            }
+            setCompactView(value) {
+                console.log(value)
+                this.compactView = Boolean(value)
+            },
 
-            const res = this.filteredUserDevices.filter((user_device) => {
-                if (this.userDevice_filter === "") return true;
-                else return (user_device.user_device_name.toLowerCase().indexOf(this.userDevice_filter.toLowerCase()) > -1);
-            })
+        // doSort($column) {
+        //     Sorting.doSort(this.filteredUserDevices, $column, this.sortDirection)
+        //     this.sortColumn = $column;
+        // },
 
-            if (this.user_devices.length > res.length) {
-                this.filteredUserDevices = res;
-                this.doSort();
-            }
-        },
+        // doFilter() {
+
+        //     if (this.filteredUserDevices != this.user_devices) {
+        //         this.filteredUserDevices = this.user_devices
+        //     }
+
+        //     const res = this.filteredUserDevices.filter((user_device) => {
+        //         if (this.userDevice_filter === "") return true;
+        //         else return (user_device.user_device_name.toLowerCase().indexOf(this.userDevice_filter.toLowerCase()) > -1);
+        //     })
+
+        //     if (this.user_devices.length > res.length) {
+        //         this.filteredUserDevices = res;
+        //         this.doSort();
+        //     }
+        // },
         async getData(_currentPage = 1, _itemsPerPage = 5) {
             fetch(APIConstants.api_user_devices_read_page + _currentPage + "/" + _itemsPerPage)
                 .then((response) => response.json())
@@ -260,7 +293,7 @@ export default {
                     })
 
                     this.user_devices = this.filteredUserDevices;
-                    this.doSort(this.sortColumn);
+                    // this.doSort(this.sortColumn);
                 })
                 .catch((err) => console.log(err));
         },

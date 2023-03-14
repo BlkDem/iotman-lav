@@ -69,7 +69,7 @@ export default {
                     MessagesConstants[key] = _langObject[key]
                 }
             }
-            this.$parent.newLang(_langObject)
+            // this.$parent.newLang(_langObject)
             this.emitter.emit("new-lang", _langObject);
         },
 

@@ -104,9 +104,9 @@
     import DeviceStringConstants from "../../components/strings_constants/devices/index";
     import MessagesConstants from "../strings_constants/strings.js";
     import APIConstants from "../../api/rest_api";
-    import Sorting from "../common/js/Sorting.js";
-    import Filtering from "../common/js/Filtering.js";
-    import ParsingErrors from "../common/js/ParsingErrors.js";
+    import Sorting from "../../helpers/Sorting.js";
+    import Filtering from "../../helpers/Filtering.js";
+    import ParsingErrors from "../../helpers/ParsingErrors.js";
 
     import TableNav from '../../components/common/TableBar/TableNav.vue';
     // import MyMqtt from '../components/MyMqtt.vue';
@@ -167,13 +167,6 @@
                 this.setLang(_lang)
             });
 
-        },
-
-
-        watch: {
-            device_filter: function () {
-                handler: this.doFilter();
-            },
         },
 
         computed: {

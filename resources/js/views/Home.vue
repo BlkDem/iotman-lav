@@ -7,7 +7,7 @@
         <!-- page menu -->
         <div class="col-sm-3 col-lg-3 col-md-3">
             <CommonCard ref="menuCard" :cardCaption="menuBlockCaption" :margins="margins">
-                <AppMenu ref="homeAppMenu" :margins="margins"></AppMenu>
+                <AppMenu ref="homeAppMenu" :margins="margins" :isDropdowns="false"></AppMenu>
             </CommonCard>
         </div>
         <!-- page content -->
@@ -66,12 +66,6 @@ import { marked } from 'marked';
 export default {
     name: 'Home',
 
-    // components: {
-    //         CommonCard,
-    //         InfoCard,
-    //         ColorPicker,
-    //     },
-
     data() {
 
         return {
@@ -82,37 +76,11 @@ export default {
             margins: 2,
             deviceTypesApi: '',
             devicesApi: '',
-            // tmpDeviceType: '',
             bgColor: 'bg-success',
-
             device_type_id: undefined,
             device_id: undefined,
 
             devBlogs: [],
-
-            // infoCardData: [
-            //     {
-            //         infoCardCaption: "07.03.2023 16:22",
-            //         infoCardTitle: marked.parse("Home **page** blocks complieted"),
-            //         infoCardText: marked.parse("[Marked] How To Use The **Marked** Demo\r\n"+
-            //                                     "\r\n" +
-            //                                     "[Marked]: https://github.com/markedjs/marked/"),
-            //         infoCardMoreText: "More text...",
-            //         marginBottom: 2,
-            //         //buttonVisible: true,
-            //         bgColor: 'bg-success'
-            //     },
-            //     {
-            //         infoCardCaption: "06.03.2023 10:20",
-            //         infoCardTitle: "Home page blocks starting...",
-            //         infoCardText: "Now we are starting to arrange blocks on the home page.",
-            //         infoCardMoreText: "More text...",
-            //         marginBottom: 2,
-            //         //buttonVisible: false,
-            //         bgColor: 'bg-info'
-            //     },
-            // ]
-
         }
     },
 
@@ -144,7 +112,6 @@ export default {
     methods: {
         async getBlogData() {
             const _data = await axios.get(APIConstants.api_dev_blog_read)
-            // console.log(_data)
             this.devBlogs = _data.data.data
         },
 

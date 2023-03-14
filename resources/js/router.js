@@ -20,14 +20,14 @@ const routes = [
             name: "Device Types",
             icon: "fas fa-layer-group",
             component: DeviceTypes,
-            ID: "DEVICE_TYPES_1"
+            ID: "DEVICE_TYPES"
         },
         {
             path: "devices",
             name: "Devices",
             icon: "fas fa-sun",
             component: Devices,
-            ID: "DEVICES_1"
+            ID: "DEVICES"
           },
           {
             path: "/user_devices",

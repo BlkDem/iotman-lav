@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import Sorting from "../../common/js/Sorting";
-import Filtering from "../../common/js/Filtering";
+import Sorting from "../../../helpers/Sorting";
+import Filtering from "../../../helpers/Filtering";
 import MessagesConstants from '../../strings_constants/strings';
 
 export default {

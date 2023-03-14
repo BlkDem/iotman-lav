@@ -8,23 +8,17 @@
 
         <ConfirmDialogue ref="confirmDialogue" />
 
-        <table-nav
-            :compactView="compactView"
-            :sortColumn="sortColumn"
-            :sortRules="sortRules"
-            @setCompactView="setCompactView"
-            @addEvent="setDeviceType"
-            @updateSortedData="updateSortedData"
-            @updateFilteredData="updateFilteredData"
-        ></table-nav>
+        <table-nav :compactView="compactView" :sortColumn="sortColumn" :sortRules="sortRules"
+            @setCompactView="setCompactView" @addEvent="setItem" @updateSortedData="updateSortedData"
+            @updateFilteredData="updateFilteredData"></table-nav>
 
         <div>
             <!-- <h5 class="text-primary my-2 align-center">{{ dataDescription }}</h5> -->
         </div>
 
-        <div class="row my-2" v-if="!compactView">
-            <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(device_type, key) in filteredDeviceTypes"
-                v-bind:key="key" v-bind:id="device_type.id">
+        <!-- <div class="row my-2" v-if="!compactView">
+            <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(item, key) in filteredItems"
+                v-bind:key="key" v-bind:id="item.id">
                 <div class="card border-light align-center">
                     <h3 class="card-header">
                         {{ device_type.device_type_name }}
@@ -50,42 +44,50 @@
                 </div>
             </div>
         </div>
-
+ -->
         <!-- compact view -->
         <div v-show="compactView" class="my-2" @click="isEditableId=0">
-            <div class="card border-primary mb-1 w-100 fade-in" v-for="(device_type, key) in filteredDeviceTypes"
-                v-bind:key="key" v-bind:id="device_type.id">
+            <div class="card border-primary mb-1 w-100 fade-in" v-for="(item, key) in filteredItems" v-bind:key="key"
+                v-bind:id="item.id">
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
-                        <div class="col-sm-1 col-xs-1 col-lg-1 flex ">
+                        <!-- <div class="col-sm-1 col-xs-1 col-lg-1 flex ">
                             <img v-bind:src="device_type.device_type_image" class="device-image" />
+                        </div> -->
+                        <!-- <div class="col-sm-1 col-xs-1 col-lg-1 align-left flex">
+                            <span class="text-info"> {{ item.id }} </span>
+                        </div> -->
+
+                        <div class="align-left" :class="{'col-sm-1 col-xs-1 col-lg-1': ckey===0, 'col-sm-4 col-xs-4 col-lg-4 ': ckey>0}"
+                            @click.stop="onCellClick(item.id, key)"
+                            v-for="(column, ckey) in Object.keys(item)" v-bind:key="ckey"
+                            >
+                            <!-- <span v-if="isEditableId!==item.id">
+                                {{ column }}
+                                {{ item[column] }}
+                            </span> -->
+
+                            <span >
+                                <!-- {{ column }} -->
+                                {{ item[column] }}
+                            </span>
+
+                            <div class="flex w-100" v-if="isEditableId===item.id">
+                                <input class="form-control w-100" :value="item[1]"
+                                    @keyup.enter="onInputEnter(item.id, key, item[1], $event.target.value)"
+                                    @keyup.esc="onInputEsc(key)" @change="onChange(key)" />
+                                <button class="btn btn-primary mx-1" :id="device_type.id"
+                                    @click.stop="saveRecord(item.id, item[1], item[1])">
+                                    <i class="far fa-check-circle fa-2x"></i>
+                                </button>
+                                <button class="btn btn-primary" @click.stop="onInputEsc(key)">
+                                    <!-- <i class="far fa-window-close fa-2x"></i> -->
+                                    <i class="far fa-times-circle fa-2x"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-sm-1 col-xs-1 col-lg-1 align-left flex">
-                            <span class="text-info"> {{ device_type.id }} </span>
-                        </div>
-                        <div class="col-sm-7 col-xs-7 col-lg-7 align-left flex"
-                            @click.stop="onCellClick(device_type.id, key)">
-                                <span v-if="isEditableId!==device_type.id">{{ device_type.device_type_name  }} </span>
-                                <div class="flex w-100" v-if="isEditableId===device_type.id">
-                                    <input class="form-control w-100"
-                                        :value="device_type.device_type_name"
-                                        @keyup.enter="onInputEnter(device_type.id, key, 'device_type_name', $event.target.value)"
-                                        @keyup.esc="onInputEsc(key)"
-                                        @change="onChange(key)"
-                                    />
-                                    <button class="btn btn-primary mx-1"
-                                        :id="device_type.id"
-                                        @click.stop="saveRecord(device_type.id, 'device_type_name', device_type.device_type_name)">
-                                        <i class="far fa-check-circle fa-2x"></i>
-                                    </button>
-                                    <button class="btn btn-primary"
-                                        @click.stop="onInputEsc(key)">
-                                        <!-- <i class="far fa-window-close fa-2x"></i> -->
-                                        <i class="far fa-times-circle fa-2x"></i>
-                                    </button>
-                                </div>
-                        </div>
-                        <div class="col-sm-3 col-xs-3 col-lg-3  edit-buttons">
+
+                        <div class="col-sm-3 col-xs-3 col-lg-3  edit-buttons ">
                             <button class="btn btn-info mx-2" @click="doEditType(key, device_type.id)">
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
@@ -107,54 +109,82 @@
 
 <script>
 import ConfirmDialogue from '../../components/common/ConfirmDialogue.vue';
-import AddDeviceType from './AddDeviceType.vue';
+// import AddDeviceType from './AddDeviceType.vue';
 import Paginator from '../../components/common/Paginator.vue';
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
-import DeviceTypeStringConstants from '../../components/strings_constants/device_types/index';
-import Sorting from "../../helpers/Sorting.js";
+// import DeviceTypeStringConstants from '../../components/strings_constants/device_types/index';
+import Sorting from "../../helpers/Sorting";
 import Filtering from "../../helpers/Filtering.js";
 import ParsingErrors from "../../helpers/ParsingErrors.js";
 
 // import ParsingErrors from "../common/js/ParsingErrors.js";
 import Imager from '../../components/common/Imager.vue';
 
-import dsDeviceType from "../../api/dsDeviceType";
+// import dsDeviceType from "../../api/dsDeviceType";
 
 import TableNav from '../../components/common/TableBar/TableNav.vue';
 
     export default {
 
+        props: {
+            patchAPI: {
+                type: String
+            },
+
+            getAPI: {
+                type: String
+            },
+
+            pageCaption: {
+                type: String
+            },
+
+            dataFields: {
+                type: Array
+            },
+
+            foreignKey: {
+                type: String
+            },
+
+            foreignValue: {
+                type: Number
+            },
+        },
+
+
         components: {
             ConfirmDialogue,
-            AddDeviceType,
+            // AddDeviceType,
             Paginator,
             Imager,
             TableNav,
-            dsDeviceType
+            // dsDeviceType
         },
 
         data() {
             return {
                 isEditableId: 0,
                 isEsc: false,
-                storeValue: [],
-                deviceTypes: [],
-                deviceTypesVisible: false,
+                storeValue: [], //??
+                Items: [],
+                filteredItems: [], //filtered array of devices
+
+                itemsVisible: false,
                 compactView: true,
-                pageCaption: MessagesConstants.DEVICE_TYPES ?? 'Device Types',
-                filteredDeviceTypes: [], //filtered array of devices
-                dataDescription: "", //table data description label
-                // device_type_filter: "", //filtering string
+
+                // dataDescription: "", //table data description label
+
                 sortOrderStrings: [
                     MessagesConstants.SORT_ASC,
                     MessagesConstants.SORT_DESC,
                 ],
                 sortOrder: MessagesConstants.SORT_ASC,
                 sortDirection: false,
-                sortColumn: "device_type_name",
+                sortColumn: '', // to props
                 sortRules: [{
-                        key: "device_type_name",
+                        key: 'name',
                         title: MessagesConstants.SORT_BY_NAME
                     },
                     {
@@ -165,19 +195,10 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
             };
         },
 
-        newLang(event) {
-            console.log(event)
-        },
-
         created() {
-            this.page_description = DeviceTypeStringConstants.DEVICE_TYPE_PAGE_DESCRIPTION;
-
-            if (localStorage.DeviceTypeCompactView == null) {
-                localStorage.DeviceTypeCompactView = this.compactView;
-            }
-            this.dataDescription = DeviceTypeStringConstants.DEVICE_TYPE_DATA_DESCRIPTION; //device dataset description
-
+            console.log(this.dataFields)
             this.getData();
+            // console.log(APIConstants.api_images_read_page)
         },
 
         mounted() {
@@ -189,7 +210,8 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 this.setLang(_lang)
             });
 
-            dsDeviceType.getItems()
+
+            // dsDeviceType.getItems()
         },
 
         computed: {
@@ -201,27 +223,36 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
         methods: {
 
+            isColumnValid(_column) {
+                // console.log(_column)
+                for (let i=0; i<this.dataFields.length; i++) {
+                    // console.log(this.dataFields[i].name)
+                    if (this.dataFields[i].name === _column) return true
+                }
+                return false
+            },
+
             onChange($key){
                 if (this.isEsc === true) {
                     this.isEsc = false
                     return
                 }
-                this.filteredDeviceTypes[$key].device_type_name = this.storeValue[$key]
+                this.filteredItems[$key].device_type_name = this.storeValue[$key]
             },
 
             onInputEnter($id, $key, $field, $value){
-                this.filteredDeviceTypes[$key].device_type_name = $value
+                this.filteredItems[$key].name = $value
                 this.saveRecord($id, $field, $value)
             },
 
             onInputEsc($key){
                 this.isEsc = true
                 // this.storeValue[$key] = this.filteredDeviceTypes[$key].device_type_name
-                 console.log(
-                    'on esc',
-                 this.filteredDeviceTypes[$key].device_type_name,
-                 this.deviceTypes[$key].device_type_name,
-                 this.storeValue[$key])
+                //  console.log(
+                //     'on esc',
+                //  this.filteredDeviceTypes[$key].device_type_name,
+                //  this.deviceTypes[$key].device_type_name,
+                //  this.storeValue[$key])
 
                 // this.filteredDeviceTypes[$key].device_type_name = this.storeValue[$key]
                 this.isEditableId = 0
@@ -232,7 +263,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 this.isEditableId = 0
 
                 axios.patch(
-                    APIConstants.api_device_type_patch + $id + '/' + $field + '/' + $value)
+                    this.patchAPI + $id + '/' + $field + '/' + $value)
                         .then(resp => {
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.EDITED_MESSAGE,
@@ -248,27 +279,23 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
             onCellClick($id, $key) {
                 this.isEditableId = $id
-                this.storeValue[$key] = this.deviceTypes[$key].device_type_name
+                this.storeValue[$key] = this.Items[$key].name
                 console.log($id, $key, this.storeValue[$key])
             },
 
             setLang(_lang) {
-                this.pageCaption = _lang.DEVICE_TYPES ?? 'Device Types'
-            },
-
-            openImager() {
-                this.$refs.imager.createImager()
+                // this.pageCaption = _lang.DEVICE_TYPES ?? 'Device Types'
             },
 
             updateSortedData($column, $direction) {
                 this.sortDirection = $direction
                 this.sortColumn = $column
-                Sorting.doSort(this.filteredDeviceTypes, this.sortColumn, this.sortDirection)
+                Sorting.doSort(this.filteredItems, this.sortColumn, this.sortDirection)
             },
 
             updateFilteredData($filter) {
-                this.filteredDeviceTypes = this.deviceTypes;
-                this.filteredDeviceTypes = Filtering.doFilter(this.filteredDeviceTypes, this.sortColumn, $filter)
+                this.filteredItems = this.Items;
+                this.filteredItems = Filtering.doFilter(this.filteredItems, this.sortColumn, $filter)
             },
 
             setCompactView(value) {
@@ -276,12 +303,54 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 this.compactView = Boolean(value)
             },
 
+            extractFileds(data) {
+
+                let newData = data
+                let keys = Object.keys(data[0]);
+                for (let k = 0; k < data.length; k++) {
+                    let row = newData[k]
+
+                    for (let i = 0; i < keys.length; i++) {
+                        // console.log(keys[i], this.Items[0][keys[i]]);
+                        for (let j = 0; j < this.dataFields.length; j++) {
+                            if (keys[i] !== this.dataFields[j].name) {
+                                // console.log(keys[i], this.dataFields[j].name)
+                                var _str = '"' + keys[i] + '"';
+                                //console.log(_str)
+                                // delete newData[k].keys[i]
+                                // console.log(row[keys[i]])
+                            }
+                        }
+                    }
+                }
+                console.log(newData)
+                return newData
+            },
+
             async getData(_currentPage=1, _itemsPerPage=5) {
-                fetch(APIConstants.api_devices_types_read_page + _currentPage + "/" + _itemsPerPage)
+                // console.log(this.getAPI + _currentPage + "/" + _itemsPerPage)
+                fetch(this.getAPI + _currentPage + "/" + _itemsPerPage)
                     .then(response => response.json())
                     .then(response => {
-                        this.deviceTypes = response.data;
-                        this.filteredDeviceTypes = response.data;
+                        this.Items = this.extractFileds(response.data);
+
+                        let newList = this.Items.map(item => ({
+                            id: item.id,
+                            // name: item[this.dataFields[0].name],
+                            // desc: item[this.dataFields[1].name]
+                        }));
+
+                        for (let a=0; a<newList.length; a++) {
+                            for (let b=0; b<this.dataFields.length; b++) {
+                                newList[a][this.dataFields[b].name] = this.Items[a][this.dataFields[b].name]
+                            }
+                        }
+
+                        console.log(newList)
+
+                        this.Items = newList;
+                        this.filteredItems = this.Items;
+
 
                         this.$refs.paginatorDeviceTypes.setPaginator(
                             {
@@ -292,8 +361,11 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                             }
                         )
 
-                        this.deviceTypes = this.filteredDeviceTypes;
+                        this.Items = this.filteredItems;
                         this.updateSortedData(this.sortColumn, this.$direction);
+                        // }
+                        // console.log(_a.keys.)
+
                     })
                     .catch(err => console.log(err));
             },
@@ -325,54 +397,56 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                     console.log(MessagesConstants.DELETING_CANCELLED)
                 }
             },
-
-            async setDeviceType() {
-                const _add = await this.$refs.addDeviceType.showDialogue({
-                    edit_mode: false,
-                    title: DeviceTypeStringConstants.DEVICE_TYPE_ADDING_TITLE,
-                    message: DeviceTypeStringConstants.DEVICE_TYPE_ADDING_MESSAGE,
-                    device_type_name: "",
-                    device_type_desc: "",
-                    device_type_image: "",
-                    okButton: DeviceTypeStringConstants.DEVICE_TYPE_ADDBUTTON_CAPTION,
-                })
-
-                if (_add) {
-                    const deviceType = this.$refs.addDeviceType
-                    axios.post(APIConstants.api_device_type_create, {
-                                device_type_name:  deviceType.device_type_name,
-                                device_type_image: deviceType.device_type_image,
-                                device_type_desc:  deviceType.device_type_desc
-                            }
-                        )
-                        .then(resp => {
-                            // console.log(resp['data']);
-                            let newDevice = {
-                                device_type_name: resp['data'].device_type_name,
-                                device_type_desc: resp['data'].device_type_desc,
-                                device_type_image: resp['data'].device_type_image,
-                                id: resp['data'].id
-                            }
-                            this.deviceTypes.push(newDevice);
-                            this.$root.$refs.toaster.showMessage(
-                                MessagesConstants.ADDED_MESSAGE,
-                                MessagesConstants.PROCESS_SUCCESSFULLY
-                            )
-                        })
-                        .catch(error => {
-                            //
-                            //const Toaster = app.component('toaster')
-                            this.$root.$refs.toaster.showMessage(
-                                MessagesConstants.INSERTING_ERROR,
-                                ParsingErrors.getError(error),
-                                ParsingErrors.ERROR_LEVEL_ERROR
-                            )
-                        })
-                } else {
-                    console.log(MessagesConstants.INSERTING_CANCELLED);
-                }
-
+            setItem() {
+                return
             },
+            // async setItem() {
+            //     const _add = await this.$refs.addDeviceType.showDialogue({
+            //         edit_mode: false,
+            //         title: DeviceTypeStringConstants.DEVICE_TYPE_ADDING_TITLE,
+            //         message: DeviceTypeStringConstants.DEVICE_TYPE_ADDING_MESSAGE,
+            //         device_type_name: "",
+            //         device_type_desc: "",
+            //         device_type_image: "",
+            //         okButton: DeviceTypeStringConstants.DEVICE_TYPE_ADDBUTTON_CAPTION,
+            //     })
+
+            //     if (_add) {
+            //         const deviceType = this.$refs.addDeviceType
+            //         axios.post(APIConstants.api_device_type_create, {
+            //                     device_type_name:  deviceType.device_type_name,
+            //                     device_type_image: deviceType.device_type_image,
+            //                     device_type_desc:  deviceType.device_type_desc
+            //                 }
+            //             )
+            //             .then(resp => {
+            //                 // console.log(resp['data']);
+            //                 let newDevice = {
+            //                     device_type_name: resp['data'].device_type_name,
+            //                     device_type_desc: resp['data'].device_type_desc,
+            //                     device_type_image: resp['data'].device_type_image,
+            //                     id: resp['data'].id
+            //                 }
+            //                 this.deviceTypes.push(newDevice);
+            //                 this.$root.$refs.toaster.showMessage(
+            //                     MessagesConstants.ADDED_MESSAGE,
+            //                     MessagesConstants.PROCESS_SUCCESSFULLY
+            //                 )
+            //             })
+            //             .catch(error => {
+            //                 //
+            //                 //const Toaster = app.component('toaster')
+            //                 this.$root.$refs.toaster.showMessage(
+            //                     MessagesConstants.INSERTING_ERROR,
+            //                     ParsingErrors.getError(error),
+            //                     ParsingErrors.ERROR_LEVEL_ERROR
+            //                 )
+            //             })
+            //     } else {
+            //         console.log(MessagesConstants.INSERTING_CANCELLED);
+            //     }
+
+            // },
             async doEditType(key, id) {
                 const _edit = await this.$refs.addDeviceType.showDialogue(
                     {
@@ -419,14 +493,6 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                     console.log(MessagesConstants.EDITING_CANCELLED);
                 }
 
-            },
-
-            ShowHide(isVisible) {
-                this.deviceTypesVisible = isVisible;
-            },
-
-            getVisible() {
-                return this.deviceTypesVisible;
             },
 
         },

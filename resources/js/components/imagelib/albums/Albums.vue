@@ -122,7 +122,12 @@
         <!-- <Imager ref="imager"/> -->
         <!-- <MyMqtt></MyMqtt> -->
     </common-card>
-
+        <data-table
+            :getAPI="imagesAPI"
+            :dataFields="imagesFields"
+            :foreignKey="album_id"
+            :foreignValue="album_id_value">
+        </data-table>
 
 </template>
 
@@ -133,8 +138,9 @@ import Paginator from '../../../components/common/Paginator.vue';
 import MessagesConstants from '../../strings_constants/strings'
 import APIConstants from "../../../api/rest_api";
 import AlbumStringConstants from '../../../components/strings_constants/images/index';
-import Sorting from "../../../components/common/js/Sorting.js";
-import ParsingErrors from "../../common/js/ParsingErrors.js";
+import Sorting from "../../../helpers/Sorting";
+import ParsingErrors from "../../../helpers/ParsingErrors.js";
+import DataTable from '../../db/DataTable.vue';
 // import Imager from '../../components/common/Imager.vue';
 
     export default {
@@ -143,12 +149,35 @@ import ParsingErrors from "../../common/js/ParsingErrors.js";
             ConfirmDialogue,
             AddAlbum,
             Paginator,
+            DataTable
             // Imager
         },
 
         data() {
             return {
                 albums: [],
+
+                imagesAPI: '',
+
+                imagesFields: [
+                    {
+                            name: 'image_name',
+                            type: String,
+                            editable: true,
+                            // params: {
+                            //     isImage: true
+                            // }
+                    },
+
+                    {
+                            name: 'image_desc',
+                            type: String,
+                            editable: true
+                    },
+                ],
+
+                album_id: 'album_id',
+                album_id_value: 1,
                 // deviceTypesVisible: false,
                 compactView: true,
                 pageCaption: MessagesConstants.ALBUMS ?? 'Albums',
@@ -180,6 +209,8 @@ import ParsingErrors from "../../common/js/ParsingErrors.js";
             // if (localStorage.DeviceTypeCompactView == null) {
             //     localStorage.DeviceTypeCompactView = this.compactView;
             // }
+            this.imagesAPI = APIConstants.api_images_read_page
+            // console.log(this.imagesAPI)
             this.dataDescription = AlbumStringConstants.ALBUM_DATA_DESCRIPTION; //device dataset description
 
             this.getData();
