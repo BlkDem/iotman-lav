@@ -24,6 +24,7 @@ export default {
     api_images_read_page: apiPreffix + 'images/read/page/',
     api_image_update: apiPreffix + 'image/update/',
     api_image_delete: apiPreffix + 'image/delete/',
+    api_image_patch: apiPreffix + 'image/patch/',
 
     //Device Types CRUD
     api_device_type_create: apiPreffix + 'device_type/create/',

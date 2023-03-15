@@ -23,7 +23,7 @@
         <div class="px-2">
 
         </div>
-        <ul class="pagination text-center mx-1">
+        <ul class="pagination text-center mx-1" :class="{'hide': pagesCount<2}">
             <li class="page-item" :class="{'disabled': (currentPage==1)}" v-on:click="setPage(1, itemsPerPage)">
                 <button class="page-link" >&laquo;</button>
             </li>
@@ -105,6 +105,10 @@ export default {
 .flex-right {
     display: flex;
     justify-content: flex-end;
+}
+
+.hide {
+    display: none;
 }
 
 </style>

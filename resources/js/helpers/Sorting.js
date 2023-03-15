@@ -5,12 +5,12 @@ export default {
         const order = $direction;
 
         $items.sort(function (a, b) {
-            if (column === "id") {
-                var nameA = a[column];
-                var nameB = b[column];
+            if (column.name === "id") {
+                var nameA = a[column].name;
+                var nameB = b[column].name;
             } else {
-                var nameA = a[column] + "".toUpperCase();
-                var nameB = b[column] + "".toUpperCase();
+                var nameA = a[column].name + "".toUpperCase();
+                var nameB = b[column].name + "".toUpperCase();
             }
 
             if (order && nameA > nameB) {

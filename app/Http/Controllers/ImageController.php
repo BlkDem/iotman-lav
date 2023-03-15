@@ -108,6 +108,20 @@ class ImageController extends BaseController
         }
     }
 
+    public function patch(Request $request, $id, $field, $value){
+        try {
+            $patchImage = Image::whereId($id);
+            $patchImage->update([
+                "$field" => $value
+            ]);
+            $res = Image::find($id);
+            return response()->json($res, 200);
+        }
+        catch (Exception $e) {
+            return response()->json('Patching Record Error: ' . $e, 400);
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *

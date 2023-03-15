@@ -59,6 +59,7 @@ Route::controller(ImageController::class)->group(function () {
     Route::get('/image/read/{id}', 'show');
     Route::put('/image/update/{updateImageId}', 'update');
     Route::delete('/image/delete/{id}', 'destroy');
+    Route::patch('/image/patch/{id}/{field}/{value}', 'patch');
 });
 
 //Upload and Save Image to storage.disk 'images'

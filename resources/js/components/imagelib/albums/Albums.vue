@@ -9,48 +9,18 @@
         <!-- <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
             {{ pageCaption }}
         </h1> -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
-            <div class="container-fluid">
-                <div class="navbar-collapse" id="navbarColor02">
-                    <ul class="navbar-nav me-auto  d-flex">
-                        <li class="nav-item  d-flex py-1">
-                            <input class="form-control me-sm-2" type="text" placeholder="Search"
-                                v-model="album_filter" />
-                        </li>
-                        <li class="nav-item dropdown me-auto vertical-center">
-                            <!-- <button v-on:click="openImager()"></button> -->
-                            <a class="nav-link dropdown-toggle mx-2" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">{{ SortName }}</a>
-                            <div class="dropdown-menu w-100">
-                                <a class="dropdown-item" href="#" v-for="rule in sortRules" :key="rule.key"
-                                    :value="rule.key" @click="doSort(rule.key)">{{ rule.title }}</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" @click="
-                                                                    sortDirection = !sortDirection;
-                                                                    doSort(sortColumn);">
-                                    {{ sortDirection ? sortOrderStrings[0] : sortOrderStrings[1] }}
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="d-flex">
-                        <button class="btn btn-primary  mx-2" :class="{'disabled' : compactView}" @click="compactView = true">
-                            <i class="fas fa-list"></i>
-                        </button>
-                        <button class="btn btn-primary" :class="{'disabled' : !compactView}"
-                            @click="compactView = false">
-                            <i class="fas fa-th-large"></i>
-                        </button>
-                        <button class="btn btn-primary mx-2" @click="setAlbum">
-                            Add Album
-                        </button>
-                        <button class="btn btn-primary" @click="getData">
-                            <i class="fas fa-sync-alt"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </nav>
+
+        <table-nav
+            :compactView="compactView"
+            :sortColumn="sortColumn"
+            :sortRules="sortRules"
+            @setCompactView="setCompactView"
+            @addEvent="setAlbum"
+            @updateSortedData="updateSortedData"
+            @updateFilteredData="updateFilteredData"
+            @getData="getData"
+        ></table-nav>
+
 
         <div>
             <!-- <h5 class="text-primary my-2 align-center">{{ dataDescription }}</h5> -->
@@ -123,7 +93,7 @@
         <!-- <MyMqtt></MyMqtt> -->
     </common-card>
         <data-table
-            :getAPI="images.imagesAPI"
+            :api="images.api"
             :dataFields="images.imagesFields"
             :foreignKey="images.album_id"
             :foreignValue="images.album_id_value"
@@ -141,8 +111,10 @@ import MessagesConstants from '../../strings_constants/strings'
 import APIConstants from "../../../api/rest_api";
 import AlbumStringConstants from '../../../components/strings_constants/images/index';
 import Sorting from "../../../helpers/Sorting";
+import Filtering from "../../../helpers/Filtering";
 import ParsingErrors from "../../../helpers/ParsingErrors.js";
 import DataTable from '../../db/DataTable.vue';
+import TableNav from '../../common/TableBar/TableNav.vue';
 // import Imager from '../../components/common/Imager.vue';
 
     export default {
@@ -151,7 +123,8 @@ import DataTable from '../../db/DataTable.vue';
             ConfirmDialogue,
             AddAlbum,
             Paginator,
-            DataTable
+            DataTable,
+            TableNav
             // Imager
         },
 
@@ -161,9 +134,16 @@ import DataTable from '../../db/DataTable.vue';
 
                 //Images Widget Setup
                 images: {
-
-                    imagesAPI: '',
                     imagesCaption: MessagesConstants.IMAGES,
+
+                    api: {
+                        get: '',
+                        insert: '',
+                        update: '',
+                        delete: '',
+                        patch: ''
+                    },
+
                     imagesFields: [
                         {
                             fieldName: 'image_name',
@@ -226,11 +206,14 @@ import DataTable from '../../db/DataTable.vue';
 
         created() {
             // this.page_description = AlbumStringConstants.DEVICE_TYPE_PAGE_DESCRIPTION;
-
             // if (localStorage.DeviceTypeCompactView == null) {
             //     localStorage.DeviceTypeCompactView = this.compactView;
             // }
-            this.images.imagesAPI = APIConstants.api_images_read_page
+            this.images.api.get = APIConstants.api_images_read_page
+            this.images.api.insert = APIConstants.api_image_create
+            this.images.api.update = APIConstants.api_image_update
+            this.images.api.delete = APIConstants.api_image_delete
+            this.images.api.patch = APIConstants.api_image_patch
             // console.log(this.imagesAPI)
             this.dataDescription = AlbumStringConstants.ALBUM_DATA_DESCRIPTION; //device dataset description
 
@@ -241,20 +224,6 @@ import DataTable from '../../db/DataTable.vue';
             if (localStorage.getItem('CompactView')) {
                 this.compactView = (localStorage.getItem('CompactView') === 'true');
             }
-        },
-
-        watch: {
-            album_filter: function () {
-                handler: this.doFilter();
-            },
-
-            selectSort: function () {
-                handler: this.doSort();
-            },
-
-            compactView: function () {
-                localStorage.CompactView = this.compactView;
-            },
         },
 
         computed: {
@@ -297,6 +266,12 @@ import DataTable from '../../db/DataTable.vue';
                 }
                 // return res;
             },
+
+            setCompactView(value) {
+                console.log(value)
+                this.compactView = Boolean(value)
+            },
+
 
             async getData(_currentPage=1, _itemsPerPage=5) {
                 fetch(APIConstants.api_albums_read_page + _currentPage + "/" + _itemsPerPage)
@@ -349,6 +324,19 @@ import DataTable from '../../db/DataTable.vue';
                 } else {
                     console.log(MessagesConstants.DELETING_CANCELLED)
                 }
+            },
+
+            updateSortedData($column, $direction) {
+                this.sortDirection = $direction
+                this.sortColumn = $column
+                // console.log(this.sortColumn, this.sortDirection)
+                Sorting.doSort(this.filteredItems, this.sortColumn, this.sortDirection)
+            },
+
+            updateFilteredData($filter) {
+
+                this.filteredItems = this.Items;
+                this.filteredItems = Filtering.doFilter(this.filteredItems, this.sortColumn, $filter)
             },
 
             async setAlbum() {

@@ -4,7 +4,7 @@
                 <div class="navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav me-auto  d-flex">
                         <li class="nav-item  d-flex py-1  w-100">
-                            <input class="form-control me-sm-2" type="text" placeholder="Search"
+                            <input class="form-control me-sm-2" type="text" :placeholder="sortColumn"
                                 v-model="dataFilter" />
                         </li>
                         <li class="nav-item dropdown me-auto vertical-center">
@@ -24,16 +24,19 @@
                         </li>
                     </ul>
                     <div class="d-flex">
-                        <button class="btn btn-primary" :class="{'disabled' : compactView}"
+                        <button class="btn btn-primary mx-2" :class="{'disabled' : compactView}"
                             @click="setCompactView(true)">
                             <i class="fas fa-list"></i>
                         </button>
-                        <button class="btn btn-primary mx-2" :class="{'disabled' : !compactView}"
+                        <button class="btn btn-primary" :class="{'disabled' : !compactView}"
                             @click="setCompactView(false)">
                             <i class="fas fa-th-large"></i>
                         </button>
-                        <button class="btn btn-primary" @click="$emit('addEvent')">
+                        <button class="btn btn-primary mx-2" @click="$emit('addEvent')">
                             Add
+                        </button>
+                        <button class="btn btn-primary" @click="getData">
+                            <i class="fas fa-sync-alt"></i>
                         </button>
                     </div>
                 </div>
@@ -42,14 +45,14 @@
 </template>
 
 <script>
-import Sorting from "../../../helpers/Sorting";
-import Filtering from "../../../helpers/Filtering";
+// import Sorting from "../../../helpers/Sorting";
+// import Filtering from "../../../helpers/Filtering";
 import MessagesConstants from '../../strings_constants/strings';
 
 export default {
     components: {
-        Sorting,
-        Filtering
+        // Sorting,
+        // Filtering
     },
 
     emits: [
@@ -58,7 +61,8 @@ export default {
         "doSort",
         "doFilter",
         "updateSortedData",
-        "updateFilteredData"
+        "updateFilteredData",
+        'getData'
     ],
 
     props: {
@@ -101,6 +105,10 @@ export default {
             this.compactView = value
             localStorage.setItem('CompactView', value)
             this.$emit('setCompactView', value)
+        },
+
+        getData() {
+            this.$emit('getData')
         }
     },
 

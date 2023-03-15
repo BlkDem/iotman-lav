@@ -4,18 +4,21 @@ export default {
         if ($filter === "") return $items;
 
         const res = $items.filter((item) => {
+            console.log(item[$column].value.indexOf($filter)>-1)
                 return (
-                    item[$column]
+                    item[$column].value
                     .toLowerCase()
                     .indexOf($filter.toLowerCase()) > -1
                 );
         });
-        if ($items.length > res.length) {
 
-            // console.log(res)
-            return res;
+        return res;
+        // if ($items.length > res.length) {
 
-        }
+        //     console.log(res)
+        //     return res;
+
+        // }
 
     }
 }

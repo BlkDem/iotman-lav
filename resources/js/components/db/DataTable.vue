@@ -12,10 +12,12 @@
             :compactView="compactView"
             :sortColumn="sortColumn"
             :sortRules="sortRules"
+            @getData="getData"
             @setCompactView="setCompactView"
             @addEvent="setItem"
             @updateSortedData="updateSortedData"
-            @updateFilteredData="updateFilteredData">
+            @updateFilteredData="updateFilteredData"
+        >
         </table-nav>
 
         <div>
@@ -131,12 +133,8 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
     export default {
 
         props: {
-            patchAPI: {
-                type: String
-            },
-
-            getAPI: {
-                type: String
+            api: {
+                type: Object
             },
 
             pageCaption: {
@@ -188,6 +186,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 sortOrder: MessagesConstants.SORT_ASC,
                 sortDirection: false,
                 sortColumn: this.dataFields[0].fieldName, // to props
+                filterColumn: 'image_desc',
                 sortRules: [{
                         key: 'name',
                         title: MessagesConstants.SORT_BY_NAME
@@ -249,15 +248,18 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                     this.isEsc = false
                     return
                 }
-                console.log('change', 'isEsc: ', this.isEsc, $item, $key, $dataCol, $value, 'esc: ', $isEsc)
+                console.log('change', $item, $dataCol, $value)
 
                 this.filteredItems[$key][$dataCol].value = $value
+                this.Items[$key][$dataCol].value = $value
+
+                this.saveRecord($item, $dataCol, $value)
                 // console.log(this.filteredItems[$key], $key, $id, $column, $columnName, $value)
                 //this.filteredItems[$key].fieldName = this.storeValue[$key]
             },
 
             inputClick($e) {
-                console.log($e)
+                // console.log($e)
             },
 
             onInputEnter(){
@@ -275,17 +277,17 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
                 // this.isEditableId = 0
                 this.resetEditCell()
-                // axios.patch(
-                //     this.patchAPI + $id + '/' + $field + '/' + $value)
-                //         .then(resp => {
-                //             this.$root.$refs.toaster.showMessage(
-                //                 MessagesConstants.EDITED_MESSAGE,
-                //                 MessagesConstants.PROCESS_SUCCESSFULLY
-                //             );
-                //         })
-                //         .then(resp => {
-                //             // this.$root.$refs.DeviceRef.getData();
-                //         })
+                axios.patch(
+                    this.api.patch + $id + '/' + $field + '/' + $value)
+                        .then(resp => {
+                            this.$root.$refs.toaster.showMessage(
+                                MessagesConstants.EDITED_MESSAGE,
+                                MessagesConstants.PROCESS_SUCCESSFULLY
+                            );
+                        })
+                        .then(resp => {
+                            // this.$root.$refs.DeviceRef.getData();
+                        })
 
 
             },
@@ -320,7 +322,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
             updateFilteredData($filter) {
 
                 this.filteredItems = this.Items;
-                this.filteredItems = Filtering.doFilter(this.filteredItems, this.sortColumn, $filter)
+                this.filteredItems = Filtering.doFilter(this.filteredItems, this.filterColumn, $filter)
             },
 
             setCompactView(value) {
@@ -329,7 +331,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
             },
 
             async getData(_currentPage=1, _itemsPerPage=5) {
-                await axios.get(this.getAPI + _currentPage + "/" + _itemsPerPage)
+                await axios.get(this.api.get + _currentPage + "/" + _itemsPerPage)
                     .then(response => {
                         this.Items = response.data.data;
 
