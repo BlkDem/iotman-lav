@@ -24559,7 +24559,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       sortOrderStrings: [_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].SORT_ASC, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].SORT_DESC],
       sortOrder: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].SORT_ASC,
       sortDirection: false,
-      sortColumn: this.dataFields[0].name,
+      sortColumn: this.dataFields[0].fieldName,
       // to props
       sortRules: [{
         key: 'name',
@@ -24571,9 +24571,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   created: function created() {
-    console.log(this.dataFields[0]);
     this.getData();
-    // console.log(APIConstants.api_images_read_page)
   },
   mounted: function mounted() {
     var _this = this;
@@ -24593,58 +24591,67 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
-    isColumnValid: function isColumnValid(_column) {
-      // console.log(_column)
-      for (var i = 0; i < this.dataFields.length; i++) {
-        // console.log(this.dataFields[i].name)
-        if (this.dataFields[i].name === _column) return true;
-      }
-      return false;
+    // isColumnValid(_column) {
+    //     // console.log(_column)
+    //     for (let i=0; i<this.dataFields.length; i++) {
+    //         // console.log(this.dataFields[i].fieldName)
+    //         if (this.dataFields[i].fieldName === _column) return true
+    //     }
+    //     return false
+    // },
+    setId: function setId($key, $ckey) {
+      return "id" + $key + "_" + $ckey;
     },
-    onChange: function onChange($key) {
-      if (this.isEsc === true) {
+    resetEditCell: function resetEditCell() {
+      this.activeCol = undefined;
+      this.activeRow = undefined;
+    },
+    onChange: function onChange($item, $key, $dataCol, $value, $isEsc) {
+      if ($isEsc) {
         this.isEsc = false;
         return;
       }
-      this.filteredItems[$key].device_type_name = this.storeValue[$key];
+      console.log('change', 'isEsc: ', this.isEsc, $item, $key, $dataCol, $value, 'esc: ', $isEsc);
+      this.filteredItems[$key][$dataCol].value = $value;
+      // console.log(this.filteredItems[$key], $key, $id, $column, $columnName, $value)
+      //this.filteredItems[$key].fieldName = this.storeValue[$key]
     },
-    onInputEnter: function onInputEnter($id, $key, $field, $value) {
-      this.filteredItems[$key].name = $value;
-      this.saveRecord($id, $field, $value);
+    onInputEnter: function onInputEnter() {
+      this.resetEditCell();
     },
-    onInputEsc: function onInputEsc($key) {
+    onInputEsc: function onInputEsc() {
+      // console.log('esc: ', this.isEsc)
       this.isEsc = true;
-      // this.storeValue[$key] = this.filteredDeviceTypes[$key].device_type_name
-      //  console.log(
-      //     'on esc',
-      //  this.filteredDeviceTypes[$key].device_type_name,
-      //  this.deviceTypes[$key].device_type_name,
-      //  this.storeValue[$key])
-
-      // this.filteredDeviceTypes[$key].device_type_name = this.storeValue[$key]
-      this.activeCol = undefined;
-      this.activeRow = undefined;
-      // this.isEditableId[$key] = 0
+      this.resetEditCell();
     },
     saveRecord: function saveRecord($id, $field, $value) {
-      var _this2 = this;
-      console.log('saving: ', $field, $value);
-      // this.isEditableId = 0
+      // console.log('saving: ', $field, $value)
 
-      axios.patch(this.patchAPI + $id + '/' + $field + '/' + $value).then(function (resp) {
-        _this2.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
-      }).then(function (resp) {
-        // this.$root.$refs.DeviceRef.getData();
-      });
+      // this.isEditableId = 0
+      this.resetEditCell();
+      // axios.patch(
+      //     this.patchAPI + $id + '/' + $field + '/' + $value)
+      //         .then(resp => {
+      //             this.$root.$refs.toaster.showMessage(
+      //                 MessagesConstants.EDITED_MESSAGE,
+      //                 MessagesConstants.PROCESS_SUCCESSFULLY
+      //             );
+      //         })
+      //         .then(resp => {
+      //             // this.$root.$refs.DeviceRef.getData();
+      //         })
     },
-    onCellClick: function onCellClick($id, $ckey, $key) {
+    onCellClick: function onCellClick($isEditable) {
+      var $ckey = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+      var $key = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
       // this.isEditableId[$key] = $id
-      this.activeCol = undefined;
-      this.activeRow = undefined;
+      if (!$isEditable) return;
       this.activeCol = $key;
       this.activeRow = $ckey;
-      // this.storeValue[$ckey] = this.Items[$ckey].name
-      console.log($id, $ckey, $key);
+      // console.log("#id" + $key + "_" + $ckey)
+      // document.getElementById("#id" + $key + "_" + $ckey).focus();
+      // this.storeValue[$ckey] = this.Items[$ckey].fieldName
+      // console.log($isEditable, $ckey, $key)
     },
     setLang: function setLang(_lang) {
       // this.pageCaption = _lang.DEVICE_TYPES ?? 'Device Types'
@@ -24652,7 +24659,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     updateSortedData: function updateSortedData($column, $direction) {
       this.sortDirection = $direction;
       this.sortColumn = $column;
-      console.log(this.sortColumn, this.sortDirection);
+      // console.log(this.sortColumn, this.sortDirection)
       _helpers_Sorting__WEBPACK_IMPORTED_MODULE_4__["default"].doSort(this.filteredItems, this.sortColumn, this.sortDirection);
     },
     updateFilteredData: function updateFilteredData($filter) {
@@ -24663,31 +24670,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       console.log(value);
       this.compactView = Boolean(value);
     },
-    extractFileds: function extractFileds(data) {
-      var newData = data;
-      var keys = Object.keys(data[0]);
-      for (var k = 0; k < data.length; k++) {
-        var row = newData[k];
-        for (var i = 0; i < keys.length; i++) {
-          // console.log(keys[i], this.Items[0][keys[i]]);
-          for (var j = 0; j < this.dataFields.length; j++) {
-            if (keys[i] !== this.dataFields[j].name) {
-              // console.log(keys[i], this.dataFields[j].name)
-              var _str = '"' + keys[i] + '"';
-              //console.log(_str)
-              // delete newData[k].keys[i]
-              // console.log(row[keys[i]])
-            }
-          }
-        }
-      }
-
-      console.log(newData);
-      return newData;
-    },
     getData: function getData() {
       var _arguments = arguments,
-        _this3 = this;
+        _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var _currentPage, _itemsPerPage;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -24696,38 +24681,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _currentPage = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
               _itemsPerPage = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : 5;
               _context.next = 4;
-              return axios.get(_this3.getAPI + _currentPage + "/" + _itemsPerPage).then(function (response) {
-                // this.Items = this.extractFileds(response.data);
-                _this3.Items = response.data.data;
-                var newList = _this3.Items.map(function (item) {
+              return axios.get(_this2.getAPI + _currentPage + "/" + _itemsPerPage).then(function (response) {
+                _this2.Items = response.data.data;
+                var newList = _this2.Items.map(function (item) {
                   return {
-                    id: item.id
-                    // name: item[this.dataFields[0].name],
-                    // desc: item[this.dataFields[1].name]
+                    old_id: item.id
                   };
                 });
-
-                for (var a = 0; a < newList.length; a++) {
-                  for (var b = 0; b < _this3.dataFields.length; b++) {
-                    newList[a][_this3.dataFields[b].name] = _this3.Items[a][_this3.dataFields[b].name];
-                    // if (this.dataFields[b].params != null)
-                    // newList[a][this.dataFields[b].params] = this.dataFields[b].params
-                    //    newList[a][this.dataFields[b].name]["params"] =this.dataFields[b].params
-                    // newList[a][this.dataFields[b].params] = this.dataFields[b].params
+                for (var itemRow = 0; itemRow < newList.length; itemRow++) {
+                  for (var field = 0; field < _this2.dataFields.length; field++) {
+                    var _editable = _this2.dataFields[field].isEditable;
+                    var _image = _this2.dataFields[field].isImage;
+                    var _highlight = _this2.dataFields[field].isHighLight;
+                    var _colscount = _this2.dataFields[field].columnsCount;
+                    newList[itemRow][_this2.dataFields[field].fieldName] = {
+                      'value': _this2.Items[itemRow][_this2.dataFields[field].fieldName],
+                      'isEditable': _editable,
+                      'isImage': _image,
+                      'isHighLight': _highlight,
+                      'columnsCount': _colscount,
+                      'class': _colscount === 1 ? "col-sm-" + _colscount + " col-xs-" + _colscount + " col-lg-" + _colscount + " align-center" : "col-sm-" + _colscount + " col-xs-" + _colscount + " col-lg-" + _colscount
+                    };
                   }
                 }
 
-                console.log(newList);
-                _this3.Items = newList;
-                _this3.filteredItems = _this3.Items;
-                _this3.$refs.paginatorDeviceTypes.setPaginator({
+                //console.log(newList)
+
+                _this2.Items = newList;
+                _this2.filteredItems = _this2.Items;
+                _this2.$refs.paginatorDeviceTypes.setPaginator({
                   pagesCount: response.data.paginator.PagesCount,
                   currentPage: response.data.paginator.CurrentPage,
                   itemsPerPage: response.data.paginator.ItemsPerPage,
                   recordsCount: response.data.paginator.RecordsCount
                 });
-                _this3.Items = _this3.filteredItems;
-                _this3.updateSortedData(_this3.sortColumn, _this3.$direction);
+
+                // this.Items = this.filteredItems;
+                _this2.updateSortedData(_this2.sortColumn, _this2.$direction);
                 // }
                 // console.log(_a.keys.)
               })["catch"](function (err) {
@@ -24744,26 +24734,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     doDeleteType: function doDeleteType(key, id) {
-      var _this4 = this;
+      var _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var confirmDelete;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return _this4.$refs.confirmDialogue.showDialogue({
+              return _this3.$refs.confirmDialogue.showDialogue({
                 title: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION,
-                message: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_MESSAGE + '"' + _this4.filteredDeviceTypes[key].device_type_name + '"?',
+                message: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_MESSAGE + '"' + _this3.filteredDeviceTypes[key].device_type_name + '"?',
                 okButton: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION
               });
             case 2:
               confirmDelete = _context2.sent;
               if (confirmDelete) {
                 axios["delete"](_api_rest_api__WEBPACK_IMPORTED_MODULE_3__["default"].api_device_type_delete + id).then(function (resp) {
-                  _this4.filteredDeviceTypes.splice(key, 1);
-                  _this4.deviceTypes = _this4.filteredDeviceTypes;
+                  _this3.filteredDeviceTypes.splice(key, 1);
+                  _this3.deviceTypes = _this3.filteredDeviceTypes;
                   // console.log(key, id, " - deleted");
-                  _this4.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].DELETED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
+                  _this3.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].DELETED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
                 })["catch"](function (error) {
                   console.log(error);
                 });
@@ -24826,40 +24816,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     //     }
     // },
     doEditType: function doEditType(key, id) {
-      var _this5 = this;
+      var _this4 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         var _edit, editDeviceTypePost;
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
               _context3.next = 2;
-              return _this5.$refs.addDeviceType.showDialogue({
+              return _this4.$refs.addDeviceType.showDialogue({
                 edit_mode: true,
                 title: DeviceTypeStringConstants.DEVICE_TYPE_EDITING_TITLE,
                 message: DeviceTypeStringConstants.DEVICE_TYPE_EDITING_MESSAGE,
-                device_type_name: _this5.deviceTypes[key].device_type_name,
-                device_type_desc: _this5.deviceTypes[key].device_type_desc,
-                device_type_image: _this5.deviceTypes[key].device_type_image,
+                device_type_name: _this4.deviceTypes[key].device_type_name,
+                device_type_desc: _this4.deviceTypes[key].device_type_desc,
+                device_type_image: _this4.deviceTypes[key].device_type_image,
                 okButton: DeviceTypeStringConstants.DEVICE_TYPE_EDITBUTTON_CAPTION
               });
             case 2:
               _edit = _context3.sent;
               if (_edit) {
                 editDeviceTypePost = {
-                  device_type_name: _this5.$refs.addDeviceType.device_type_name,
-                  device_type_image: _this5.$refs.addDeviceType.device_type_image,
-                  device_type_desc: _this5.$refs.addDeviceType.device_type_desc
+                  device_type_name: _this4.$refs.addDeviceType.device_type_name,
+                  device_type_image: _this4.$refs.addDeviceType.device_type_image,
+                  device_type_desc: _this4.$refs.addDeviceType.device_type_desc
                 }; //console.log(editDeviceTypePost);
                 axios.put(_api_rest_api__WEBPACK_IMPORTED_MODULE_3__["default"].api_device_type_update + id, editDeviceTypePost).then(function (resp) {
                   // console.log(resp['data']);
-                  _this5.deviceTypes[key].device_type_name = resp['data'].device_type_name;
-                  _this5.deviceTypes[key].device_type_desc = resp['data'].device_type_desc;
-                  _this5.deviceTypes[key].device_type_image = resp['data'].device_type_image;
-                  _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
+                  _this4.deviceTypes[key].device_type_name = resp['data'].device_type_name;
+                  _this4.deviceTypes[key].device_type_desc = resp['data'].device_type_desc;
+                  _this4.deviceTypes[key].device_type_image = resp['data'].device_type_image;
+                  _this4.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
                 }).then(function (resp) {
                   // this.$root.$refs.DeviceRef.getData();
                 })["catch"](function (error) {
-                  _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].getError(error), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].ERROR_LEVEL_ERROR);
+                  _this4.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].getError(error), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].ERROR_LEVEL_ERROR);
                 });
               } else {
                 console.log(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITING_CANCELLED);
@@ -26070,28 +26060,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _MessagesConstants$AL;
     return {
       albums: [],
-      imagesAPI: '',
-      imagesFields: [{
-        name: 'image_name',
-        type: String,
-        params: {
+      //Images Widget Setup
+      images: {
+        imagesAPI: '',
+        imagesCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].IMAGES,
+        imagesFields: [{
+          fieldName: 'image_name',
+          type: String,
           isImage: true,
-          editable: false
-        }
-      }, {
-        name: 'image_desc',
-        type: String,
-        params: {
-          editable: true,
-          isImage: false
-        }
-      }],
-      album_id: 'album_id',
-      album_id_value: 1,
+          isEditable: false,
+          isHighLight: false,
+          columnsCount: 1
+        }, {
+          fieldName: 'id',
+          type: Number,
+          isImage: false,
+          isEditable: false,
+          isHighLight: true,
+          columnsCount: 1
+        }, {
+          fieldName: 'image_desc',
+          type: String,
+          isImage: false,
+          isEditable: true,
+          isHighLight: false,
+          columnsCount: 7
+        }],
+        album_id: 'album_id',
+        album_id_value: 1
+      },
       // deviceTypesVisible: false,
       compactView: true,
       pageCaption: (_MessagesConstants$AL = _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].ALBUMS) !== null && _MessagesConstants$AL !== void 0 ? _MessagesConstants$AL : 'Albums',
-      imagesCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_3__["default"].IMAGES,
       filteredAlbums: [],
       //filtered array of devices
       dataDescription: "",
@@ -26117,7 +26117,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     // if (localStorage.DeviceTypeCompactView == null) {
     //     localStorage.DeviceTypeCompactView = this.compactView;
     // }
-    this.imagesAPI = _api_rest_api__WEBPACK_IMPORTED_MODULE_4__["default"].api_images_read_page;
+    this.images.imagesAPI = _api_rest_api__WEBPACK_IMPORTED_MODULE_4__["default"].api_images_read_page;
     // console.log(this.imagesAPI)
     this.dataDescription = _components_strings_constants_images_index__WEBPACK_IMPORTED_MODULE_5__["default"].ALBUM_DATA_DESCRIPTION; //device dataset description
 
@@ -27793,45 +27793,48 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   }
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ pageCaption }} ")], -1 /* HOISTED */);
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h5 class=\"text-primary my-2 align-center\">{{ dataDescription }}</h5> ")], -1 /* HOISTED */);
-var _hoisted_3 = ["id"];
-var _hoisted_4 = {
+var _hoisted_3 = {
+  "class": "my-2"
+};
+var _hoisted_4 = ["id"];
+var _hoisted_5 = {
   "class": "mx-2 my-2"
 };
-var _hoisted_5 = {
+var _hoisted_6 = {
   "class": "row vertical-center"
 };
-var _hoisted_6 = ["onClick"];
-var _hoisted_7 = {
-  key: 1,
+var _hoisted_7 = ["onClick"];
+var _hoisted_8 = ["src"];
+var _hoisted_9 = {
+  key: 2,
   "class": "flex w-100"
 };
-var _hoisted_8 = ["value", "onKeyup", "onChange"];
-var _hoisted_9 = ["id", "onClick"];
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "far fa-check-circle fa-2x"
+var _hoisted_10 = ["value", "id", "onKeyup", "onChange"];
+var _hoisted_11 = ["id", "onClick"];
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "far fa-check-circle"
 }, null, -1 /* HOISTED */);
-var _hoisted_11 = [_hoisted_10];
-var _hoisted_12 = ["onClick"];
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "far fa-times-circle fa-2x"
+var _hoisted_13 = [_hoisted_12];
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "far fa-times-circle"
 }, null, -1 /* HOISTED */);
-var _hoisted_14 = {
+var _hoisted_15 = {
   "class": "col-sm-3 col-xs-3 col-lg-3 edit-buttons"
 };
-var _hoisted_15 = ["onClick"];
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_16 = ["onClick"];
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-edit",
   "aria-hidden": "true"
 }, null, -1 /* HOISTED */);
-var _hoisted_17 = [_hoisted_16];
-var _hoisted_18 = ["onClick"];
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_18 = [_hoisted_17];
+var _hoisted_19 = ["onClick"];
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fa fa-trash",
   "aria-hidden": "true"
 }, null, -1 /* HOISTED */);
-var _hoisted_20 = [_hoisted_19];
+var _hoisted_21 = [_hoisted_20];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_AddDeviceType = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AddDeviceType");
+  var _this = this;
   var _component_ConfirmDialogue = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ConfirmDialogue");
   var _component_table_nav = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("table-nav");
   var _component_Paginator = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Paginator");
@@ -27842,9 +27845,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     isCollapseButtonHidden: false
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddDeviceType, {
-        ref: "addDeviceType"
-      }, null, 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ConfirmDialogue, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <AddDeviceType ref=\"addDeviceType\"></AddDeviceType> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ConfirmDialogue, {
         ref: "confirmDialogue"
       }, null, 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_table_nav, {
         compactView: $data.compactView,
@@ -27854,62 +27855,63 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onAddEvent: $options.setItem,
         onUpdateSortedData: $options.updateSortedData,
         onUpdateFilteredData: $options.updateFilteredData
-      }, null, 8 /* PROPS */, ["compactView", "sortColumn", "sortRules", "onSetCompactView", "onAddEvent", "onUpdateSortedData", "onUpdateFilteredData"]), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"row my-2\" v-if=\"!compactView\">\n            <div class=\"col-sm-4 col-xs-4 col-lg-4 p-2 fade-in\" v-for=\"(item, key) in filteredItems\"\n                v-bind:key=\"key\" v-bind:id=\"item.id\">\n                <div class=\"card border-light align-center\">\n                    <h3 class=\"card-header\">\n                        {{ device_type.device_type_name }}\n                        <span class=\"text-info\">({{ device_type.id }})</span>\n                    </h3>\n                    <div class=\"card-body\">\n                        <h6 class=\"card-subtitle text-muted\">\n                            {{ device_type.device_type_desc }}\n                        </h6>\n                    </div>\n                    <img v-bind:src=\"device_type.device_type_image\" />\n                    <div class=\"card-body\">\n                        <button class=\"btn btn-info btn-width-40 mx-1\" @click=\"doEditType(key, device_type.id)\">\n                            <i class=\"fas fa-edit\" aria-hidden=\"true\"></i>\n                            Edit\n                        </button>\n\n                        <button class=\"btn btn-warning btn-width-40 mx-1\" @click=\"doDeleteType(key, device_type.id)\">\n                            <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\n                            Delete\n                        </button>\n                    </div>\n                </div>\n            </div>\n        </div>\n "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" compact view "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-        "class": "my-2",
-        onClick: _cache[0] || (_cache[0] = function ($event) {
-          return $data.isEditableId = 0;
-        })
-      }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredItems, function (item, key) {
+      }, null, 8 /* PROPS */, ["compactView", "sortColumn", "sortRules", "onSetCompactView", "onAddEvent", "onUpdateSortedData", "onUpdateFilteredData"]), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"row my-2\" v-if=\"!compactView\">\n            <div class=\"col-sm-4 col-xs-4 col-lg-4 p-2 fade-in\" v-for=\"(item, key) in filteredItems\"\n                v-bind:key=\"key\" v-bind:id=\"item.id\">\n                <div class=\"card border-light align-center\">\n                    <h3 class=\"card-header\">\n                        {{ device_type.device_type_name }}\n                        <span class=\"text-info\">({{ device_type.id }})</span>\n                    </h3>\n                    <div class=\"card-body\">\n                        <h6 class=\"card-subtitle text-muted\">\n                            {{ device_type.device_type_desc }}\n                        </h6>\n                    </div>\n                    <img v-bind:src=\"device_type.device_type_image\" />\n                    <div class=\"card-body\">\n                        <button class=\"btn btn-info btn-width-40 mx-1\" @click=\"doEditType(key, device_type.id)\">\n                            <i class=\"fas fa-edit\" aria-hidden=\"true\"></i>\n                            Edit\n                        </button>\n\n                        <button class=\"btn btn-warning btn-width-40 mx-1\" @click=\"doDeleteType(key, device_type.id)\">\n                            <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\n                            Delete\n                        </button>\n                    </div>\n                </div>\n            </div>\n        </div>\n "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" compact view "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredItems, function (item, key) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           "class": "card border-primary mb-1 w-100 fade-in",
           key: key,
-          id: item.id
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"col-sm-1 col-xs-1 col-lg-1 flex \">\n                            <img v-bind:src=\"device_type.device_type_image\" class=\"device-image\" />\n                        </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"col-sm-1 col-xs-1 col-lg-1 align-left flex\">\n                            <span class=\"text-info\"> {{ item.id }} </span>\n                        </div> "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.keys(item), function (column, ckey) {
+          id: item.id.value
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"col-sm-1 col-xs-1 col-lg-1 flex \">\n                            <img v-bind:src=\"device_type.device_type_image\" class=\"device-image\" />\n                        </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"col-sm-1 col-xs-1 col-lg-1 align-left flex\">\n                            <span class=\"text-info\"> {{ item.id }} </span>\n                        </div> "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.keys(item), function (column, ckey) {
           return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-              'col-sm-1 col-xs-1 col-lg-1 align-center': ckey === 0,
-              'col-sm-4 col-xs-4 col-lg-4 align-left': ckey > 0
-            }),
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([item[column]["class"], "flex"]),
             key: ckey
-          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <span v-if=\"isEditableId!==item.id\">\n                                {{ column }}\n                                {{ item[column] }}\n                            </span> "), $data.activeCol !== key || $data.activeRow !== ckey ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+          }, [($data.activeCol !== key || $data.activeRow !== ckey) && item[column].isImage != true ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
             key: 0,
-            onClick: function onClick($event) {
-              return $options.onCellClick(item.id, ckey, key);
-            }
-          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item[column]), 9 /* TEXT, PROPS */, _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.activeCol === key && $data.activeRow === ckey ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+              'text-info': item[column].isHighLight
+            }),
+            onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+              return $options.onCellClick(item[column].isEditable, ckey, key);
+            }, ["stop"])
+          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item[column].value), 11 /* TEXT, CLASS, PROPS */, _hoisted_7)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), item[column].isImage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
+            key: 1,
+            src: '/storage/images/' + item[column].value,
+            "class": "device-image"
+          }, null, 8 /* PROPS */, _hoisted_8)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.activeCol === key && $data.activeRow === ckey ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
             "class": "form-control w-100",
-            value: item[column],
+            value: item[column].value,
+            id: $options.setId(key, ckey),
             onKeyup: [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
-              return $options.onInputEnter(item.id, key, item[column], $event.target.value);
+              return $options.onInputEnter(item.id.value, key, column, $event.target.value);
             }, ["enter"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
               return $options.onInputEsc(key);
             }, ["esc"])],
             onChange: function onChange($event) {
-              return $options.onChange(key);
+              return $options.onChange(item.id.value, key, column, $event.target.value, $data.isEsc);
             }
-          }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+          }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_10), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
             "class": "btn btn-primary mx-1",
-            id: item.id,
+            id: item.id.value,
             onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-              return $options.saveRecord(item.id, item[column], item[column]);
+              return $options.saveRecord(item.id.value, item[column].value, item[column].value, $event.target.value);
             }, ["stop"])
-          }, _hoisted_11, 8 /* PROPS */, _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+          }, _hoisted_13, 8 /* PROPS */, _hoisted_11), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
             "class": "btn btn-primary",
-            onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-              return $options.onInputEsc(key);
-            }, ["stop"])
-          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <i class=\"far fa-window-close fa-2x\"></i> "), _hoisted_13], 8 /* PROPS */, _hoisted_12)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 2 /* CLASS */);
-        }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+            onMousedown: _cache[0] || (_cache[0] = function ($event) {
+              _this.isEsc = true;
+              _this.resetEditCell();
+            })
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <i class=\"far fa-window-close fa-2x\"></i> "), _hoisted_14], 32 /* HYDRATE_EVENTS */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 2 /* CLASS */);
+        }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
           "class": "btn btn-info mx-2",
           onClick: function onClick($event) {
             return $options.doEditType(key, item.id);
           }
-        }, _hoisted_17, 8 /* PROPS */, _hoisted_15), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        }, _hoisted_18, 8 /* PROPS */, _hoisted_16), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
           "class": "btn btn-secondary",
           onClick: function onClick($event) {
             return $options.doDeleteType(key, item.id);
           }
-        }, _hoisted_20, 8 /* PROPS */, _hoisted_18)])])])], 8 /* PROPS */, _hoisted_3);
+        }, _hoisted_21, 8 /* PROPS */, _hoisted_19)])])])], 8 /* PROPS */, _hoisted_4);
       }), 128 /* KEYED_FRAGMENT */))], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.compactView]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Paginator, {
         ref: "paginatorDeviceTypes"
       }, null, 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Imager, {
@@ -28941,11 +28943,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["cardCaption"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
-    getAPI: $data.imagesAPI,
-    dataFields: $data.imagesFields,
-    foreignKey: $data.album_id,
-    foreignValue: $data.album_id_value,
-    pageCaption: $data.imagesCaption
+    getAPI: $data.images.imagesAPI,
+    dataFields: $data.images.imagesFields,
+    foreignKey: $data.images.album_id,
+    foreignValue: $data.images.album_id_value,
+    pageCaption: $data.images.imagesCaption
   }, null, 8 /* PROPS */, ["getAPI", "dataFields", "foreignKey", "foreignValue", "pageCaption"])], 64 /* STABLE_FRAGMENT */);
 }
 

@@ -1,16 +1,22 @@
-<template>
+<template @keyup.esc="resetEditCell()">
     <div style="margin-top: 0.5rem">
         <!-- {{ pageCaption }} -->
     </div>
 
     <common-card :cardCaption="pageCaption" :isCollapseButtonHidden="false">
-        <AddDeviceType ref="addDeviceType"></AddDeviceType>
+        <!-- <AddDeviceType ref="addDeviceType"></AddDeviceType> -->
 
         <ConfirmDialogue ref="confirmDialogue" />
 
-        <table-nav :compactView="compactView" :sortColumn="sortColumn" :sortRules="sortRules"
-            @setCompactView="setCompactView" @addEvent="setItem" @updateSortedData="updateSortedData"
-            @updateFilteredData="updateFilteredData"></table-nav>
+        <table-nav
+            :compactView="compactView"
+            :sortColumn="sortColumn"
+            :sortRules="sortRules"
+            @setCompactView="setCompactView"
+            @addEvent="setItem"
+            @updateSortedData="updateSortedData"
+            @updateFilteredData="updateFilteredData">
+        </table-nav>
 
         <div>
             <!-- <h5 class="text-primary my-2 align-center">{{ dataDescription }}</h5> -->
@@ -46,9 +52,9 @@
         </div>
  -->
         <!-- compact view -->
-        <div v-show="compactView" class="my-2" @click="isEditableId=0">
+        <div v-show="compactView" class="my-2" >
             <div class="card border-primary mb-1 w-100 fade-in" v-for="(item, key) in filteredItems" v-bind:key="key"
-                v-bind:id="item.id">
+                v-bind:id="item.id.value">
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
                         <!-- <div class="col-sm-1 col-xs-1 col-lg-1 flex ">
@@ -58,33 +64,33 @@
                             <span class="text-info"> {{ item.id }} </span>
                         </div> -->
 
-                        <div :class="{'col-sm-1 col-xs-1 col-lg-1 align-center': ckey===0, 'col-sm-4 col-xs-4 col-lg-4 align-left': ckey>0}"
-
+                        <div :class="item[column].class" class="flex"
 
                             v-for="(column, ckey) in Object.keys(item)" v-bind:key="ckey"
+                        >
+
+                            <span v-if="(activeCol!==key||activeRow!==ckey)&&(item[column].isImage != true)"
+                                :class="{'text-info': item[column].isHighLight}"
+                                @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
-                            <!-- <span v-if="isEditableId!==item.id">
-                                {{ column }}
-                                {{ item[column] }}
-                            </span> -->
-
-                            <span v-if="activeCol!==key||activeRow!==ckey" @click="onCellClick(item.id, ckey, key)">
-                                {{ item[column] }}
+                                {{ item[column].value }}
                             </span>
-
+                            <img v-if="item[column].isImage" :src="'/storage/images/'+item[column].value" class="device-image"/>
                             <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey"
 
                             >
-                                <input class="form-control w-100" :value="item[column]"
-                                    @keyup.enter="onInputEnter(item.id, key, item[column], $event.target.value)"
-                                    @keyup.esc="onInputEsc(key)" @change="onChange(key)" />
-                                <button class="btn btn-primary mx-1" :id="item.id"
-                                    @click.stop="saveRecord(item.id, item[column], item[column])">
-                                    <i class="far fa-check-circle fa-2x"></i>
+                                <input class="form-control w-100" :value="item[column].value" :id="setId(key, ckey)"
+                                    @keyup.enter="onInputEnter(item.id.value, key, column, $event.target.value)"
+                                    @keyup.esc="onInputEsc(key)"
+                                    @change="onChange(item.id.value, key, column, $event.target.value, isEsc)"
+                                />
+                                <button class="btn btn-primary mx-1" :id="item.id.value"
+                                    @click.stop="saveRecord(item.id.value, item[column].value, item[column].value, $event.target.value)">
+                                    <i class="far fa-check-circle"></i>
                                 </button>
-                                <button class="btn btn-primary" @click.stop="onInputEsc(key)">
+                                <button class="btn btn-primary" @mousedown="this.isEsc=true; this.resetEditCell()">
                                     <!-- <i class="far fa-window-close fa-2x"></i> -->
-                                    <i class="far fa-times-circle fa-2x"></i>
+                                    <i class="far fa-times-circle"></i>
                                 </button>
                             </div>
                         </div>
@@ -186,7 +192,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 ],
                 sortOrder: MessagesConstants.SORT_ASC,
                 sortDirection: false,
-                sortColumn: this.dataFields[0].name, // to props
+                sortColumn: this.dataFields[0].fieldName, // to props
                 sortRules: [{
                         key: 'name',
                         title: MessagesConstants.SORT_BY_NAME
@@ -200,9 +206,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
         },
 
         created() {
-            console.log(this.dataFields[0])
             this.getData();
-            // console.log(APIConstants.api_images_read_page)
         },
 
         mounted() {
@@ -227,70 +231,75 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
         methods: {
 
-            isColumnValid(_column) {
-                // console.log(_column)
-                for (let i=0; i<this.dataFields.length; i++) {
-                    // console.log(this.dataFields[i].name)
-                    if (this.dataFields[i].name === _column) return true
-                }
-                return false
+            // isColumnValid(_column) {
+            //     // console.log(_column)
+            //     for (let i=0; i<this.dataFields.length; i++) {
+            //         // console.log(this.dataFields[i].fieldName)
+            //         if (this.dataFields[i].fieldName === _column) return true
+            //     }
+            //     return false
+            // },
+
+            setId($key, $ckey) {
+                return "id" + $key + "_" + $ckey
             },
 
-            onChange($key){
-                if (this.isEsc === true) {
+            resetEditCell() {
+                this.activeCol = undefined
+                this.activeRow = undefined
+            },
+
+            onChange($item, $key, $dataCol, $value, $isEsc){
+                if ($isEsc) {
                     this.isEsc = false
                     return
                 }
-                this.filteredItems[$key].device_type_name = this.storeValue[$key]
+                console.log('change', 'isEsc: ', this.isEsc, $item, $key, $dataCol, $value, 'esc: ', $isEsc)
+
+                this.filteredItems[$key][$dataCol].value = $value
+                // console.log(this.filteredItems[$key], $key, $id, $column, $columnName, $value)
+                //this.filteredItems[$key].fieldName = this.storeValue[$key]
             },
 
-            onInputEnter($id, $key, $field, $value){
-                this.filteredItems[$key].name = $value
-                this.saveRecord($id, $field, $value)
+            onInputEnter(){
+                this.resetEditCell()
             },
 
-            onInputEsc($key){
+            onInputEsc(){
+                // console.log('esc: ', this.isEsc)
                 this.isEsc = true
-                // this.storeValue[$key] = this.filteredDeviceTypes[$key].device_type_name
-                //  console.log(
-                //     'on esc',
-                //  this.filteredDeviceTypes[$key].device_type_name,
-                //  this.deviceTypes[$key].device_type_name,
-                //  this.storeValue[$key])
-
-                // this.filteredDeviceTypes[$key].device_type_name = this.storeValue[$key]
-                this.activeCol = undefined
-                this.activeRow = undefined
-                // this.isEditableId[$key] = 0
+                this.resetEditCell()
             },
 
             saveRecord($id, $field, $value) {
-                console.log('saving: ', $field, $value)
-                // this.isEditableId = 0
+                // console.log('saving: ', $field, $value)
 
-                axios.patch(
-                    this.patchAPI + $id + '/' + $field + '/' + $value)
-                        .then(resp => {
-                            this.$root.$refs.toaster.showMessage(
-                                MessagesConstants.EDITED_MESSAGE,
-                                MessagesConstants.PROCESS_SUCCESSFULLY
-                            );
-                        })
-                        .then(resp => {
-                            // this.$root.$refs.DeviceRef.getData();
-                        })
+                // this.isEditableId = 0
+                this.resetEditCell()
+                // axios.patch(
+                //     this.patchAPI + $id + '/' + $field + '/' + $value)
+                //         .then(resp => {
+                //             this.$root.$refs.toaster.showMessage(
+                //                 MessagesConstants.EDITED_MESSAGE,
+                //                 MessagesConstants.PROCESS_SUCCESSFULLY
+                //             );
+                //         })
+                //         .then(resp => {
+                //             // this.$root.$refs.DeviceRef.getData();
+                //         })
 
 
             },
 
-            onCellClick($id, $ckey, $key) {
+            onCellClick($isEditable, $ckey=undefined, $key=undefined) {
                 // this.isEditableId[$key] = $id
-                this.activeCol = undefined
-                this.activeRow = undefined
+                if (!$isEditable) return
                 this.activeCol = $key
                 this.activeRow = $ckey
-                // this.storeValue[$ckey] = this.Items[$ckey].name
-                console.log($id, $ckey, $key)
+                // console.log("#id" + $key + "_" + $ckey)
+                // document.getElementById("#id" + $key + "_" + $ckey).focus();
+                // this.storeValue[$ckey] = this.Items[$ckey].fieldName
+                // console.log($isEditable, $ckey, $key)
             },
 
             setLang(_lang) {
@@ -300,7 +309,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
             updateSortedData($column, $direction) {
                 this.sortDirection = $direction
                 this.sortColumn = $column
-                console.log(this.sortColumn, this.sortDirection)
+                // console.log(this.sortColumn, this.sortDirection)
                 Sorting.doSort(this.filteredItems, this.sortColumn, this.sortDirection)
             },
 
@@ -315,55 +324,41 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 this.compactView = Boolean(value)
             },
 
-            extractFileds(data) {
-
-                let newData = data
-                let keys = Object.keys(data[0]);
-                for (let k = 0; k < data.length; k++) {
-                    let row = newData[k]
-
-                    for (let i = 0; i < keys.length; i++) {
-                        // console.log(keys[i], this.Items[0][keys[i]]);
-                        for (let j = 0; j < this.dataFields.length; j++) {
-                            if (keys[i] !== this.dataFields[j].name) {
-                                // console.log(keys[i], this.dataFields[j].name)
-                                var _str = '"' + keys[i] + '"';
-                                //console.log(_str)
-                                // delete newData[k].keys[i]
-                                // console.log(row[keys[i]])
-                            }
-                        }
-                    }
-                }
-                console.log(newData)
-                return newData
-            },
-
             async getData(_currentPage=1, _itemsPerPage=5) {
-                // console.log(this.getAPI + _currentPage + "/" + _itemsPerPage)
                 await axios.get(this.getAPI + _currentPage + "/" + _itemsPerPage)
                     .then(response => {
-                        // this.Items = this.extractFileds(response.data);
                         this.Items = response.data.data;
 
                         let newList = this.Items.map(item => ({
-                            id: item.id,
-                            // name: item[this.dataFields[0].name],
-                            // desc: item[this.dataFields[1].name]
+                            old_id: item.id,
                         }));
 
-                        for (let a=0; a<newList.length; a++) {
-                            for (let b=0; b<this.dataFields.length; b++) {
-                                newList[a][this.dataFields[b].name] = this.Items[a][this.dataFields[b].name]
-                                // if (this.dataFields[b].params != null)
-                                    // newList[a][this.dataFields[b].params] = this.dataFields[b].params
-                                //    newList[a][this.dataFields[b].name]["params"] =this.dataFields[b].params
-                                // newList[a][this.dataFields[b].params] = this.dataFields[b].params
-
+                        for (let itemRow=0; itemRow<newList.length; itemRow++) {
+                            for (let field=0; field<this.dataFields.length; field++) {
+                                let _editable = this.dataFields[field].isEditable
+                                let _image = this.dataFields[field].isImage
+                                let _highlight = this.dataFields[field].isHighLight
+                                let _colscount = this.dataFields[field].columnsCount
+                                newList[itemRow][this.dataFields[field].fieldName] = {
+                                    'value': this.Items[itemRow][this.dataFields[field].fieldName],
+                                    'isEditable': _editable,
+                                    'isImage': _image,
+                                    'isHighLight': _highlight,
+                                    'columnsCount': _colscount,
+                                    'class':
+                                        (_colscount===1)?
+                                        "col-sm-" + _colscount +
+                                        " col-xs-" + _colscount +
+                                        " col-lg-" + _colscount + " align-center"
+                                        :
+                                        "col-sm-" + _colscount +
+                                        " col-xs-" + _colscount +
+                                        " col-lg-" + _colscount
+                                }
                             }
                         }
 
-                        console.log(newList)
+                        //console.log(newList)
 
                         this.Items = newList;
                         this.filteredItems = this.Items;
@@ -378,7 +373,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                             }
                         )
 
-                        this.Items = this.filteredItems;
+                        // this.Items = this.filteredItems;
                         this.updateSortedData(this.sortColumn, this.$direction);
                         // }
                         // console.log(_a.keys.)

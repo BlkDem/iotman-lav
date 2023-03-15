@@ -123,11 +123,11 @@
         <!-- <MyMqtt></MyMqtt> -->
     </common-card>
         <data-table
-            :getAPI="imagesAPI"
-            :dataFields="imagesFields"
-            :foreignKey="album_id"
-            :foreignValue="album_id_value"
-            :pageCaption="imagesCaption"
+            :getAPI="images.imagesAPI"
+            :dataFields="images.imagesFields"
+            :foreignKey="images.album_id"
+            :foreignValue="images.album_id_value"
+            :pageCaption="images.imagesCaption"
         >
         </data-table>
 
@@ -159,36 +159,49 @@ import DataTable from '../../db/DataTable.vue';
             return {
                 albums: [],
 
-                imagesAPI: '',
+                //Images Widget Setup
+                images: {
 
-                imagesFields: [
-                    {
-                            name: 'image_name',
+                    imagesAPI: '',
+                    imagesCaption: MessagesConstants.IMAGES,
+                    imagesFields: [
+                        {
+                            fieldName: 'image_name',
                             type: String,
+                            isImage: true,
+                            isEditable: false,
+                            isHighLight: false,
+                            columnsCount: 1
+                        },
 
-                            params: {
-                                isImage: true,
-                                editable: false,
-                            }
-                    },
+                        {
+                            fieldName: 'id',
+                            type: Number,
+                            isImage: false,
+                            isEditable: false,
+                            isHighLight: true,
+                            columnsCount: 1
+                        },
 
-                    {
-                            name: 'image_desc',
+                        {
+                            fieldName: 'image_desc',
                             type: String,
-                            params: {
-                                editable: true,
-                                isImage: false
-                            }
+                            isImage: false,
+                            isEditable: true,
+                            isHighLight: false,
+                            columnsCount: 7
+                        },
+                    ],
 
-                    },
-                ],
+                    album_id: 'album_id',
+                    album_id_value: 1,
 
-                album_id: 'album_id',
-                album_id_value: 1,
+                },
+
+
                 // deviceTypesVisible: false,
                 compactView: true,
                 pageCaption: MessagesConstants.ALBUMS ?? 'Albums',
-                imagesCaption: MessagesConstants.IMAGES,
                 filteredAlbums: [], //filtered array of devices
                 dataDescription: "", //table data description label
                 album_filter: "", //filtering string
@@ -217,7 +230,7 @@ import DataTable from '../../db/DataTable.vue';
             // if (localStorage.DeviceTypeCompactView == null) {
             //     localStorage.DeviceTypeCompactView = this.compactView;
             // }
-            this.imagesAPI = APIConstants.api_images_read_page
+            this.images.imagesAPI = APIConstants.api_images_read_page
             // console.log(this.imagesAPI)
             this.dataDescription = AlbumStringConstants.ALBUM_DATA_DESCRIPTION; //device dataset description
 
