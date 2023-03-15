@@ -57,12 +57,6 @@
                 v-bind:id="item.id.value">
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
-                        <!-- <div class="col-sm-1 col-xs-1 col-lg-1 flex ">
-                            <img v-bind:src="device_type.device_type_image" class="device-image" />
-                        </div> -->
-                        <!-- <div class="col-sm-1 col-xs-1 col-lg-1 align-left flex">
-                            <span class="text-info"> {{ item.id }} </span>
-                        </div> -->
 
                         <div :class="item[column].class" class="flex"
 
@@ -79,7 +73,8 @@
                             <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey"
 
                             >
-                                <input class="form-control w-100" :value="item[column].value" :id="setId(key, ckey)"
+                                <input class="form-control w-100" :value="item[column].value" :id="setId(key, ckey)" :name="setId(key, ckey)"
+                                    @click="inputClick($event)"
                                     @keyup.enter="onInputEnter(item.id.value, key, column, $event.target.value)"
                                     @keyup.esc="onInputEsc(key)"
                                     @change="onChange(item.id.value, key, column, $event.target.value, isEsc)"
@@ -261,6 +256,10 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 //this.filteredItems[$key].fieldName = this.storeValue[$key]
             },
 
+            inputClick($e) {
+                console.log($e)
+            },
+
             onInputEnter(){
                 this.resetEditCell()
             },
@@ -296,8 +295,13 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 if (!$isEditable) return
                 this.activeCol = $key
                 this.activeRow = $ckey
+                const a = setTimeout(() => {
+                    console.log('to')
+                    $("input#id" + $key + "_" + $ckey).focus()
+                }, 200)
+
                 // console.log("#id" + $key + "_" + $ckey)
-                // document.getElementById("#id" + $key + "_" + $ckey).focus();
+                //document.getElementsByName("#id" + $key + "_" + $ckey)[0].focus();
                 // this.storeValue[$ckey] = this.Items[$ckey].fieldName
                 // console.log($isEditable, $ckey, $key)
             },

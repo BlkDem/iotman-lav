@@ -24616,6 +24616,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // console.log(this.filteredItems[$key], $key, $id, $column, $columnName, $value)
       //this.filteredItems[$key].fieldName = this.storeValue[$key]
     },
+    inputClick: function inputClick($e) {
+      console.log($e);
+    },
     onInputEnter: function onInputEnter() {
       this.resetEditCell();
     },
@@ -24648,8 +24651,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (!$isEditable) return;
       this.activeCol = $key;
       this.activeRow = $ckey;
+      var a = setTimeout(function () {
+        console.log('to');
+        $("input#id" + $key + "_" + $ckey).focus();
+      }, 200);
+
       // console.log("#id" + $key + "_" + $ckey)
-      // document.getElementById("#id" + $key + "_" + $ckey).focus();
+      //document.getElementsByName("#id" + $key + "_" + $ckey)[0].focus();
       // this.storeValue[$ckey] = this.Items[$ckey].fieldName
       // console.log($isEditable, $ckey, $key)
     },
@@ -27809,7 +27817,7 @@ var _hoisted_9 = {
   key: 2,
   "class": "flex w-100"
 };
-var _hoisted_10 = ["value", "id", "onKeyup", "onChange"];
+var _hoisted_10 = ["value", "id", "name", "onKeyup", "onChange"];
 var _hoisted_11 = ["id", "onClick"];
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "far fa-check-circle"
@@ -27860,7 +27868,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "class": "card border-primary mb-1 w-100 fade-in",
           key: key,
           id: item.id.value
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"col-sm-1 col-xs-1 col-lg-1 flex \">\n                            <img v-bind:src=\"device_type.device_type_image\" class=\"device-image\" />\n                        </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"col-sm-1 col-xs-1 col-lg-1 align-left flex\">\n                            <span class=\"text-info\"> {{ item.id }} </span>\n                        </div> "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.keys(item), function (column, ckey) {
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.keys(item), function (column, ckey) {
           return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([item[column]["class"], "flex"]),
             key: ckey
@@ -27880,6 +27888,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "form-control w-100",
             value: item[column].value,
             id: $options.setId(key, ckey),
+            name: $options.setId(key, ckey),
+            onClick: _cache[0] || (_cache[0] = function ($event) {
+              return $options.inputClick($event);
+            }),
             onKeyup: [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
               return $options.onInputEnter(item.id.value, key, column, $event.target.value);
             }, ["enter"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
@@ -27896,7 +27908,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             }, ["stop"])
           }, _hoisted_13, 8 /* PROPS */, _hoisted_11), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
             "class": "btn btn-primary",
-            onMousedown: _cache[0] || (_cache[0] = function ($event) {
+            onMousedown: _cache[1] || (_cache[1] = function ($event) {
               _this.isEsc = true;
               _this.resetEditCell();
             })
