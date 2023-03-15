@@ -240,18 +240,20 @@
 
             //loading devices dataset via API
             async getData(_currentPage=1, _itemsPerPage=5) {
-                await fetch(APIConstants.api_devices_read_page + _currentPage + "/" + _itemsPerPage)
-                    .then((response) => response.json())
+                await axios.get(APIConstants.api_devices_read_page + _currentPage + "/" + _itemsPerPage)
                     .then((response) => {
-                        this.filteredDevices = response.data;
+                        // console.log(response)
+                        // let _response = response.json()
+                        // console.log(_response)
+                        this.filteredDevices = response.data.data;
 
                         //Paginator setup
                         this.$refs.paginatorDevices.setPaginator(
                             {
-                                pagesCount: response.paginator.PagesCount,
-                                currentPage: response.paginator.CurrentPage,
-                                itemsPerPage: response.paginator.ItemsPerPage,
-                                recordsCount: response.paginator.RecordsCount
+                                pagesCount:   response.data.paginator.PagesCount,
+                                currentPage:  response.data.paginator.CurrentPage,
+                                itemsPerPage: response.data.paginator.ItemsPerPage,
+                                recordsCount: response.data.paginator.RecordsCount
                             }
                         )
 
@@ -260,7 +262,13 @@
                         this.devices = this.filteredDevices;
                         this.updateSortedData(this.sortColumn);
                     })
-                    .catch((err) => console.log(err));
+                    .catch(err => {
+                        console.log('error: ', err.response.status)
+                        if (err.response.status === 401) {
+                            window.location.href = "/login"
+                        }
+                    });
+
             },
 
             //setting Device Type to Device

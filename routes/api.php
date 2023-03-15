@@ -55,6 +55,7 @@ Route::controller(ImageController::class)->group(function () {
     Route::post('/image/create', 'store');
     Route::get('/images/read', 'index');
     Route::get('/images/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get('/images/read/page/{currentPage}/{itemsPerPage}/{album_id}', 'pageWhereAlbum');
     Route::get('/image/read/{id}', 'show');
     Route::put('/image/update/{updateImageId}', 'update');
     Route::delete('/image/delete/{id}', 'destroy');

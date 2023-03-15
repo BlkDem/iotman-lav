@@ -38,6 +38,19 @@ class ImageController extends BaseController
         return $this->sendResponse($res, "Images List", $paginator);
     }
 
+    public function pageWhereAlbum($currentPage=0, $itemsPerPage=10, $album_id){
+
+        $page = (int)$currentPage;
+
+        $offset = $itemsPerPage*--$page;
+        $res = Image::limit($itemsPerPage)->where('album_id', $album_id)->offset($offset)->orderBy('image_name', 'asc')->get();
+        $total = Image::where('album_id', $album_id)->get();
+
+        $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
+
+        return $this->sendResponse($res, "Images List", $paginator);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

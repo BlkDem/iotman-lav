@@ -277,25 +277,31 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
             },
 
             async getData(_currentPage=1, _itemsPerPage=5) {
-                fetch(APIConstants.api_devices_types_read_page + _currentPage + "/" + _itemsPerPage)
-                    .then(response => response.json())
+                await axios.get(APIConstants.api_devices_types_read_page + _currentPage + "/" + _itemsPerPage)
+                    // .then(response => response.json())
                     .then(response => {
-                        this.deviceTypes = response.data;
-                        this.filteredDeviceTypes = response.data;
+                        // console.log(response.status)
+                        this.deviceTypes = response.data.data;
+                        this.filteredDeviceTypes = this.deviceTypes;
 
                         this.$refs.paginatorDeviceTypes.setPaginator(
                             {
-                                pagesCount: response.paginator.PagesCount,
-                                currentPage: response.paginator.CurrentPage,
-                                itemsPerPage: response.paginator.ItemsPerPage,
-                                recordsCount: response.paginator.RecordsCount
+                                pagesCount:   response.data.paginator.PagesCount,
+                                currentPage:  response.data.paginator.CurrentPage,
+                                itemsPerPage: response.data.paginator.ItemsPerPage,
+                                recordsCount: response.data.paginator.RecordsCount
                             }
                         )
 
                         this.deviceTypes = this.filteredDeviceTypes;
                         this.updateSortedData(this.sortColumn, this.$direction);
                     })
-                    .catch(err => console.log(err));
+                    .catch(err => {
+                        console.log('error: ', err.response.status)
+                        if (err.response.status === 401) {
+                            window.location.href = "/login"
+                        }
+                    });
             },
 
             async doDeleteType(key, id) {
@@ -420,15 +426,6 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 }
 
             },
-
-            ShowHide(isVisible) {
-                this.deviceTypesVisible = isVisible;
-            },
-
-            getVisible() {
-                return this.deviceTypesVisible;
-            },
-
         },
 
     };

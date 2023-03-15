@@ -24695,11 +24695,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _currentPage = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
               _itemsPerPage = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : 5;
-              // console.log(this.getAPI + _currentPage + "/" + _itemsPerPage)
-              fetch(_this3.getAPI + _currentPage + "/" + _itemsPerPage).then(function (response) {
-                return response.json();
-              }).then(function (response) {
-                _this3.Items = _this3.extractFileds(response.data);
+              _context.next = 4;
+              return axios.get(_this3.getAPI + _currentPage + "/" + _itemsPerPage).then(function (response) {
+                // this.Items = this.extractFileds(response.data);
+                _this3.Items = response.data.data;
                 var newList = _this3.Items.map(function (item) {
                   return {
                     id: item.id
@@ -24722,19 +24721,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this3.Items = newList;
                 _this3.filteredItems = _this3.Items;
                 _this3.$refs.paginatorDeviceTypes.setPaginator({
-                  pagesCount: response.paginator.PagesCount,
-                  currentPage: response.paginator.CurrentPage,
-                  itemsPerPage: response.paginator.ItemsPerPage,
-                  recordsCount: response.paginator.RecordsCount
+                  pagesCount: response.data.paginator.PagesCount,
+                  currentPage: response.data.paginator.CurrentPage,
+                  itemsPerPage: response.data.paginator.ItemsPerPage,
+                  recordsCount: response.data.paginator.RecordsCount
                 });
                 _this3.Items = _this3.filteredItems;
                 _this3.updateSortedData(_this3.sortColumn, _this3.$direction);
                 // }
                 // console.log(_a.keys.)
               })["catch"](function (err) {
-                return console.log(err);
+                console.log('error: ', err.response.status);
+                if (err.response.status === 401) {
+                  window.location.href = "/login";
+                }
               });
-            case 3:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -25136,23 +25138,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _currentPage = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
               _itemsPerPage = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : 5;
-              fetch(_api_rest_api__WEBPACK_IMPORTED_MODULE_4__["default"].api_devices_types_read_page + _currentPage + "/" + _itemsPerPage).then(function (response) {
-                return response.json();
-              }).then(function (response) {
-                _this3.deviceTypes = response.data;
-                _this3.filteredDeviceTypes = response.data;
+              _context.next = 4;
+              return axios.get(_api_rest_api__WEBPACK_IMPORTED_MODULE_4__["default"].api_devices_types_read_page + _currentPage + "/" + _itemsPerPage)
+              // .then(response => response.json())
+              .then(function (response) {
+                // console.log(response.status)
+                _this3.deviceTypes = response.data.data;
+                _this3.filteredDeviceTypes = _this3.deviceTypes;
                 _this3.$refs.paginatorDeviceTypes.setPaginator({
-                  pagesCount: response.paginator.PagesCount,
-                  currentPage: response.paginator.CurrentPage,
-                  itemsPerPage: response.paginator.ItemsPerPage,
-                  recordsCount: response.paginator.RecordsCount
+                  pagesCount: response.data.paginator.PagesCount,
+                  currentPage: response.data.paginator.CurrentPage,
+                  itemsPerPage: response.data.paginator.ItemsPerPage,
+                  recordsCount: response.data.paginator.RecordsCount
                 });
                 _this3.deviceTypes = _this3.filteredDeviceTypes;
                 _this3.updateSortedData(_this3.sortColumn, _this3.$direction);
               })["catch"](function (err) {
-                return console.log(err);
+                console.log('error: ', err.response.status);
+                if (err.response.status === 401) {
+                  window.location.href = "/login";
+                }
               });
-            case 3:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -25288,12 +25295,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee4);
       }))();
-    },
-    ShowHide: function ShowHide(isVisible) {
-      this.deviceTypesVisible = isVisible;
-    },
-    getVisible: function getVisible() {
-      return this.deviceTypesVisible;
     }
   }
 });
@@ -25654,24 +25655,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _currentPage = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
               _itemsPerPage = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : 5;
               _context2.next = 4;
-              return fetch(_api_rest_api__WEBPACK_IMPORTED_MODULE_6__["default"].api_devices_read_page + _currentPage + "/" + _itemsPerPage).then(function (response) {
-                return response.json();
-              }).then(function (response) {
-                _this3.filteredDevices = response.data;
+              return axios.get(_api_rest_api__WEBPACK_IMPORTED_MODULE_6__["default"].api_devices_read_page + _currentPage + "/" + _itemsPerPage).then(function (response) {
+                // console.log(response)
+                // let _response = response.json()
+                // console.log(_response)
+                _this3.filteredDevices = response.data.data;
 
                 //Paginator setup
                 _this3.$refs.paginatorDevices.setPaginator({
-                  pagesCount: response.paginator.PagesCount,
-                  currentPage: response.paginator.CurrentPage,
-                  itemsPerPage: response.paginator.ItemsPerPage,
-                  recordsCount: response.paginator.RecordsCount
+                  pagesCount: response.data.paginator.PagesCount,
+                  currentPage: response.data.paginator.CurrentPage,
+                  itemsPerPage: response.data.paginator.ItemsPerPage,
+                  recordsCount: response.data.paginator.RecordsCount
                 });
                 _this3.fillEmptyValues();
                 //store items buffer
                 _this3.devices = _this3.filteredDevices;
                 _this3.updateSortedData(_this3.sortColumn);
               })["catch"](function (err) {
-                return console.log(err);
+                console.log('error: ', err.response.status);
+                if (err.response.status === 401) {
+                  window.location.href = "/login";
+                }
               });
             case 4:
             case "end":
@@ -26566,16 +26571,15 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
             case 0:
               _currentPage = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
               _itemsPerPage = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : 5;
-              fetch(_api_rest_api_js__WEBPACK_IMPORTED_MODULE_5__["default"].api_user_devices_read_page + _currentPage + "/" + _itemsPerPage).then(function (response) {
-                return response.json();
-              }).then(function (response) {
-                _this.filteredUserDevices = response.data;
+              _context.next = 4;
+              return axios.get(_api_rest_api_js__WEBPACK_IMPORTED_MODULE_5__["default"].api_user_devices_read_page + _currentPage + "/" + _itemsPerPage).then(function (response) {
+                _this.filteredUserDevices = response.data.data;
                 //MessagesConstants.processDeviceStrings(this.filteredUserDevices);
                 _this.$refs.paginatorUserDevices.setPaginator({
-                  pagesCount: response.paginator.PagesCount,
-                  currentPage: response.paginator.CurrentPage,
-                  itemsPerPage: response.paginator.ItemsPerPage,
-                  recordsCount: response.paginator.RecordsCount
+                  pagesCount: response.data.paginator.PagesCount,
+                  currentPage: response.data.paginator.CurrentPage,
+                  itemsPerPage: response.data.paginator.ItemsPerPage,
+                  recordsCount: response.data.paginator.RecordsCount
                 });
                 _this.filteredUserDevices = _this.filteredUserDevices.map(function (item) {
                   item.device_desc = item.device_desc == null ? _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_4__["default"].NO_DESCRIPTION : item.device_desc;
@@ -26584,9 +26588,12 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
                 _this.user_devices = _this.filteredUserDevices;
                 // this.doSort(this.sortColumn);
               })["catch"](function (err) {
-                return console.log(err);
+                console.log('error: ', err.response.status);
+                if (err.response.status === 401) {
+                  window.location.href = "/login";
+                }
               });
-            case 3:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -27795,37 +27802,34 @@ var _hoisted_5 = {
 };
 var _hoisted_6 = ["onClick"];
 var _hoisted_7 = {
-  key: 0
-};
-var _hoisted_8 = {
   key: 1,
   "class": "flex w-100"
 };
-var _hoisted_9 = ["value", "onKeyup", "onChange"];
-var _hoisted_10 = ["id", "onClick"];
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_8 = ["value", "onKeyup", "onChange"];
+var _hoisted_9 = ["id", "onClick"];
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "far fa-check-circle fa-2x"
 }, null, -1 /* HOISTED */);
-var _hoisted_12 = [_hoisted_11];
-var _hoisted_13 = ["onClick"];
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_11 = [_hoisted_10];
+var _hoisted_12 = ["onClick"];
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "far fa-times-circle fa-2x"
 }, null, -1 /* HOISTED */);
-var _hoisted_15 = {
+var _hoisted_14 = {
   "class": "col-sm-3 col-xs-3 col-lg-3 edit-buttons"
 };
-var _hoisted_16 = ["onClick"];
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_15 = ["onClick"];
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-edit",
   "aria-hidden": "true"
 }, null, -1 /* HOISTED */);
-var _hoisted_18 = [_hoisted_17];
-var _hoisted_19 = ["onClick"];
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_17 = [_hoisted_16];
+var _hoisted_18 = ["onClick"];
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fa fa-trash",
   "aria-hidden": "true"
 }, null, -1 /* HOISTED */);
-var _hoisted_21 = [_hoisted_20];
+var _hoisted_20 = [_hoisted_19];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_AddDeviceType = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AddDeviceType");
   var _component_ConfirmDialogue = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ConfirmDialogue");
@@ -27862,15 +27866,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           id: item.id
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"col-sm-1 col-xs-1 col-lg-1 flex \">\n                            <img v-bind:src=\"device_type.device_type_image\" class=\"device-image\" />\n                        </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"col-sm-1 col-xs-1 col-lg-1 align-left flex\">\n                            <span class=\"text-info\"> {{ item.id }} </span>\n                        </div> "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.keys(item), function (column, ckey) {
           return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["align-left", {
-              'col-sm-1 col-xs-1 col-lg-1': ckey === 0,
-              'col-sm-4 col-xs-4 col-lg- ': ckey > 0
-            }]),
-            onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-              return $options.onCellClick(item.id, ckey, key);
-            }, ["stop"]),
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+              'col-sm-1 col-xs-1 col-lg-1 align-center': ckey === 0,
+              'col-sm-4 col-xs-4 col-lg-4 align-left': ckey > 0
+            }),
             key: ckey
-          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <span v-if=\"isEditableId!==item.id\">\n                                {{ column }}\n                                {{ item[column] }}\n                            </span> "), $data.activeCol !== key || $data.activeRow !== ckey ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item[column]), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.activeCol === key && $data.activeRow === ckey ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <span v-if=\"isEditableId!==item.id\">\n                                {{ column }}\n                                {{ item[column] }}\n                            </span> "), $data.activeCol !== key || $data.activeRow !== ckey ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+            key: 0,
+            onClick: function onClick($event) {
+              return $options.onCellClick(item.id, ckey, key);
+            }
+          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item[column]), 9 /* TEXT, PROPS */, _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.activeCol === key && $data.activeRow === ckey ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
             "class": "form-control w-100",
             value: item[column],
             onKeyup: [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
@@ -27881,29 +27887,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             onChange: function onChange($event) {
               return $options.onChange(key);
             }
-          }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+          }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
             "class": "btn btn-primary mx-1",
             id: item.id,
             onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
               return $options.saveRecord(item.id, item[column], item[column]);
             }, ["stop"])
-          }, _hoisted_12, 8 /* PROPS */, _hoisted_10), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+          }, _hoisted_11, 8 /* PROPS */, _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
             "class": "btn btn-primary",
             onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
               return $options.onInputEsc(key);
             }, ["stop"])
-          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <i class=\"far fa-window-close fa-2x\"></i> "), _hoisted_14], 8 /* PROPS */, _hoisted_13)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 10 /* CLASS, PROPS */, _hoisted_6);
-        }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <i class=\"far fa-window-close fa-2x\"></i> "), _hoisted_13], 8 /* PROPS */, _hoisted_12)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 2 /* CLASS */);
+        }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
           "class": "btn btn-info mx-2",
           onClick: function onClick($event) {
             return $options.doEditType(key, item.id);
           }
-        }, _hoisted_18, 8 /* PROPS */, _hoisted_16), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        }, _hoisted_17, 8 /* PROPS */, _hoisted_15), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
           "class": "btn btn-secondary",
           onClick: function onClick($event) {
             return $options.doDeleteType(key, item.id);
           }
-        }, _hoisted_21, 8 /* PROPS */, _hoisted_19)])])])], 8 /* PROPS */, _hoisted_3);
+        }, _hoisted_20, 8 /* PROPS */, _hoisted_18)])])])], 8 /* PROPS */, _hoisted_3);
       }), 128 /* KEYED_FRAGMENT */))], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.compactView]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Paginator, {
         ref: "paginatorDeviceTypes"
       }, null, 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Imager, {
@@ -29497,13 +29503,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            _context.t0 = console;
-            _context.next = 3;
+            _context.next = 2;
             return _this.getGeviceTypeData();
-          case 3:
-            _context.t1 = _context.sent;
-            _context.t0.log.call(_context.t0, _context.t1);
-          case 5:
+          case 2:
           case "end":
             return _context.stop();
         }
@@ -29887,7 +29889,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   doFilter: function doFilter($items, $column, $filter) {
-    console.log($items, $column, $filter);
+    // console.log($items, $column, $filter)
     if ($filter === "") return $items;
     var res = $items.filter(function (item) {
       return item[$column].toLowerCase().indexOf($filter.toLowerCase()) > -1;
@@ -29945,7 +29947,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   doSort: function doSort($items, $column, $direction) {
-    console.log($items, $column, $direction);
+    // console.log($items, $column, $direction)
     var column = $column;
     var order = $direction;
     $items.sort(function (a, b) {

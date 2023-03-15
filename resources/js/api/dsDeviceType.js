@@ -10,7 +10,7 @@ export default {
 
 
         async getItems() {
-            console.log(await this.getGeviceTypeData())
+            await this.getGeviceTypeData()
         },
 
 }

@@ -275,16 +275,15 @@ export default {
         //     }
         // },
         async getData(_currentPage = 1, _itemsPerPage = 5) {
-            fetch(APIConstants.api_user_devices_read_page + _currentPage + "/" + _itemsPerPage)
-                .then((response) => response.json())
+            await axios.get(APIConstants.api_user_devices_read_page + _currentPage + "/" + _itemsPerPage)
                 .then((response) => {
-                    this.filteredUserDevices = response.data;
+                    this.filteredUserDevices = response.data.data;
                     //MessagesConstants.processDeviceStrings(this.filteredUserDevices);
                     this.$refs.paginatorUserDevices.setPaginator({
-                        pagesCount: response.paginator.PagesCount,
-                        currentPage: response.paginator.CurrentPage,
-                        itemsPerPage: response.paginator.ItemsPerPage,
-                        recordsCount: response.paginator.RecordsCount
+                        pagesCount: response.data.paginator.PagesCount,
+                        currentPage: response.data.paginator.CurrentPage,
+                        itemsPerPage: response.data.paginator.ItemsPerPage,
+                        recordsCount: response.data.paginator.RecordsCount
                     })
 
                     this.filteredUserDevices = this.filteredUserDevices.map((item) => {
@@ -295,7 +294,12 @@ export default {
                     this.user_devices = this.filteredUserDevices;
                     // this.doSort(this.sortColumn);
                 })
-                .catch((err) => console.log(err));
+                .catch(err => {
+                        console.log('error: ', err.response.status)
+                        if (err.response.status === 401) {
+                            window.location.href = "/login"
+                        }
+                    });
         },
 
 

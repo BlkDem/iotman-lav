@@ -58,8 +58,8 @@
                             <span class="text-info"> {{ item.id }} </span>
                         </div> -->
 
-                        <div class="align-left" :class="{'col-sm-1 col-xs-1 col-lg-1': ckey===0, 'col-sm-4 col-xs-4 col-lg- ': ckey>0}"
-                            @click.stop="onCellClick(item.id, ckey, key)"
+                        <div :class="{'col-sm-1 col-xs-1 col-lg-1 align-center': ckey===0, 'col-sm-4 col-xs-4 col-lg-4 align-left': ckey>0}"
+
 
                             v-for="(column, ckey) in Object.keys(item)" v-bind:key="ckey"
                             >
@@ -68,11 +68,13 @@
                                 {{ item[column] }}
                             </span> -->
 
-                            <span v-if="activeCol!==key||activeRow!==ckey">
+                            <span v-if="activeCol!==key||activeRow!==ckey" @click="onCellClick(item.id, ckey, key)">
                                 {{ item[column] }}
                             </span>
 
-                            <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
+                            <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey"
+
+                            >
                                 <input class="form-control w-100" :value="item[column]"
                                     @keyup.enter="onInputEnter(item.id, key, item[column], $event.target.value)"
                                     @keyup.esc="onInputEsc(key)" @change="onChange(key)" />
@@ -339,10 +341,10 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
             async getData(_currentPage=1, _itemsPerPage=5) {
                 // console.log(this.getAPI + _currentPage + "/" + _itemsPerPage)
-                fetch(this.getAPI + _currentPage + "/" + _itemsPerPage)
-                    .then(response => response.json())
+                await axios.get(this.getAPI + _currentPage + "/" + _itemsPerPage)
                     .then(response => {
-                        this.Items = this.extractFileds(response.data);
+                        // this.Items = this.extractFileds(response.data);
+                        this.Items = response.data.data;
 
                         let newList = this.Items.map(item => ({
                             id: item.id,
@@ -369,10 +371,10 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
                         this.$refs.paginatorDeviceTypes.setPaginator(
                             {
-                                pagesCount: response.paginator.PagesCount,
-                                currentPage: response.paginator.CurrentPage,
-                                itemsPerPage: response.paginator.ItemsPerPage,
-                                recordsCount: response.paginator.RecordsCount
+                                pagesCount: response.data.paginator.PagesCount,
+                                currentPage: response.data.paginator.CurrentPage,
+                                itemsPerPage: response.data.paginator.ItemsPerPage,
+                                recordsCount: response.data.paginator.RecordsCount
                             }
                         )
 
@@ -382,7 +384,12 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                         // console.log(_a.keys.)
 
                     })
-                    .catch(err => console.log(err));
+                    .catch(err => {
+                        console.log('error: ', err.response.status)
+                        if (err.response.status === 401) {
+                            window.location.href = "/login"
+                        }
+                    });
             },
 
             async doDeleteType(key, id) {
