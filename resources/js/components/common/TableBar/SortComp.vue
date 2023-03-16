@@ -34,38 +34,38 @@ export default {
                     MessagesConstants.SORT_ASC,
                     MessagesConstants.SORT_DESC,
                 ],
-                sortOrder: MessagesConstants.SORT_ASC,
-                sortDirection: false,
-                sortColumn: undefined, // to props
-                //sortFields: [],
+            sortOrder: MessagesConstants.SORT_ASC,
+            sortDirection: false,
+            sortColumn: undefined,
         }
     },
 
     computed: {
         SortName() {
+            //combine elements to the caption string
             return MessagesConstants.SortingCaption(this.sortColumn.fieldCaption, this.sortDirection)
         },
     },
 
     created() {
+        //set the default sort field
         this.sortColumn = this.sortDataFields[0]
-        // console.log('fields: ', this.sortDataFields)
     },
 
     methods: {
 
+        //chage sort direction ASC / DESC
         changeDirection() {
             this.sortDirection = !this.sortDirection;
             this.doSort(this.sortColumn, this.sortDirection);
         },
 
+        //send a sort message
         doSort($column, $direction) {
-            console.log('sort from sortcomp', $column, $direction)
             this.sortColumn = $column
             this.sortDirection = $direction
             this.$emit('updateSortedData', $column.fieldName, $direction)
         },
-
     }
 }
 </script>

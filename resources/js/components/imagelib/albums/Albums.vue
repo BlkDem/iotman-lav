@@ -232,9 +232,9 @@ import TableNav from '../../common/TableBar/TableNav.vue';
         },
 
         computed: {
-            SortName() {
-                return MessagesConstants.SortingCaption(this.sortColumn, this.sortDirection)
-            },
+            // SortName() {
+            //     return MessagesConstants.SortingCaption(this.sortColumn, this.sortDirection)
+            // },
 
             // getCompactView() {
             //     return this.compactView;
@@ -248,29 +248,29 @@ import TableNav from '../../common/TableBar/TableNav.vue';
             //     this.$refs.imager.createImager()
             // },
 
-            doSort($column) {
-                Sorting.doSort(this.filteredAlbums, $column, this.sortDirection)
-                this.sortColumn = $column;
-            },
+            // doSort($column) {
+            //     Sorting.doSort(this.filteredAlbums, $column, this.sortDirection)
+            //     this.sortColumn = $column;
+            // },
 
-            doFilter() {
-                this.filteredAlbums = this.albums;
-                const res = this.filteredAlbums.filter((album) => {
+            // doFilter() {
+            //     this.filteredAlbums = this.albums;
+            //     const res = this.filteredAlbums.filter((album) => {
 
-                    if (this.album_filter === "") return true;
-                    else
-                        return (
-                            album.album_name
-                            .toLowerCase()
-                            .indexOf(this.album_filter.toLowerCase()) > -1
-                        );
-                });
-                if (this.albums.length > res.length) {
-                    this.filteredAlbums = res
-                    this.doSort()
-                }
-                // return res;
-            },
+            //         if (this.album_filter === "") return true;
+            //         else
+            //             return (
+            //                 album.album_name
+            //                 .toLowerCase()
+            //                 .indexOf(this.album_filter.toLowerCase()) > -1
+            //             );
+            //     });
+            //     if (this.albums.length > res.length) {
+            //         this.filteredAlbums = res
+            //         this.doSort()
+            //     }
+            //     // return res;
+            // },
 
             setCompactView(value) {
                 console.log(value)
@@ -298,7 +298,7 @@ import TableNav from '../../common/TableBar/TableNav.vue';
                         )
 
                         this.albums = this.filteredAlbums
-                        this.doSort(this.sortColumn)
+                        // this.doSort(this.sortColumn)
                     })
                     .catch(err => console.log(err))
             },

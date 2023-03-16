@@ -23,21 +23,40 @@
             <!-- <h5 class="text-primary my-2 align-center">{{ dataDescription }}</h5> -->
         </div>
 
-        <!-- <div class="row my-2" v-if="!compactView">
+        <div class="row my-2" v-if="!compactView">
             <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(item, key) in filteredItems"
-                v-bind:key="key" v-bind:id="item.id">
-                <div class="card border-light align-center">
-                    <h3 class="card-header">
-                        {{ device_type.device_type_name }}
-                        <span class="text-info">({{ device_type.id }})</span>
-                    </h3>
-                    <div class="card-body">
+                v-bind:key="key" v-bind:id="item.id.value">
+                <div class="card border-light flex py-2">
+                    <!-- <h3 class="card-header">
+                        {{ item.id.key }}
+                        <span class="text-info">({{ item.id.value }})</span>
+                    </h3> -->
+                    <!-- <div class="card-body">
                         <h6 class="card-subtitle text-muted">
                             {{ device_type.device_type_desc }}
                         </h6>
+                    </div> -->
+
+                    <!-- <img v-bind:src="device_type.device_type_image" /> -->
+                    <div class="w-100 flex-center" v-for="(column, ckey) in Object.keys(item)"
+                        v-bind:key="ckey">
+
+                        <span v-if="(activeCol!==key||activeRow!==ckey)&&(item[column].isImage != true)"
+                            :class="{'text-info': item[column].isHighLight}"
+                        >
+                            {{ item[column].value }}
+                        </span>
+
+                        <img v-if="item[column].isImage" class="w-100 p-2" :src="'/storage/images/'+item[column].value"
+                        />
+                        <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
+
+                        </div>
                     </div>
-                    <img v-bind:src="device_type.device_type_image" />
-                    <div class="card-body">
+
+
+                    <div class="card-body w-100">
+                        <div class="flex-center">
                         <button class="btn btn-info btn-width-40 mx-1" @click="doEditType(key, device_type.id)">
                             <i class="fas fa-edit" aria-hidden="true"></i>
                             Edit
@@ -47,11 +66,12 @@
                             <i class="fa fa-trash" aria-hidden="true"></i>
                             Delete
                         </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
- -->
+
         <!-- compact view -->
         <div v-show="compactView" class="my-2" >
             <div class="card border-primary mb-1 w-100 fade-in" v-for="(item, key) in filteredItems" v-bind:key="key"
@@ -76,9 +96,9 @@
                             >
                                 <input class="form-control w-100" :value="item[column].value" :id="setId(key, ckey)" :name="setId(key, ckey)"
                                     @click="inputClick($event)"
-                                    @keyup.enter="onInputEnter(item.id.value, key, column, $event.target.value)"
-                                    @keyup.esc="onInputEsc(key)"
-                                    @change="onChange(item.id.value, key, column, $event.target.value, isEsc)"
+                                    @keyup.enter="onInputEnter()"
+                                    @keyup.esc="onInputEsc()"
+                                    @change="onInputChange(item.id.value, key, column, $event.target.value, isEsc)"
                                 />
                                 <button class="btn btn-primary mx-1" :id="item.id.value"
                                     @click.stop="saveRecord(item.id.value, item[column].value, item[column].value, $event.target.value)">
@@ -169,33 +189,12 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 activeCol: undefined,
                 activeRow: undefined,
                 isEsc: false,
-                storeValue: [], //??
                 Items: [],
                 filteredItems: [], //filtered array of devices
 
                 itemsVisible: false,
                 compactView: true,
 
-                // dataDescription: "", //table data description label
-
-                // sortOrderStrings: [
-                //     MessagesConstants.SORT_ASC,
-                //     MessagesConstants.SORT_DESC,
-                // ],
-                // sortOrder: MessagesConstants.SORT_ASC,
-                // sortDirection: false,
-                // sortColumn: this.dataFields[0].fieldName, // to props
-                // filterColumn: 'image_desc',
-                // sortRules: [
-                //     // {
-                //     //     key: 'name',
-                //     //     title: MessagesConstants.SORT_BY_NAME
-                //     // },
-                //     // {
-                //     //     key: "id",
-                //     //     title: MessagesConstants.SORT_BY_ID
-                //     // },
-                // ],
             };
         },
 
@@ -218,15 +217,6 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
         methods: {
 
-            // isColumnValid(_column) {
-            //     // console.log(_column)
-            //     for (let i=0; i<this.dataFields.length; i++) {
-            //         // console.log(this.dataFields[i].fieldName)
-            //         if (this.dataFields[i].fieldName === _column) return true
-            //     }
-            //     return false
-            // },
-
             setId($key, $ckey) {
                 return "id" + $key + "_" + $ckey
             },
@@ -236,7 +226,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 this.activeRow = undefined
             },
 
-            onChange($item, $key, $dataCol, $value, $isEsc){
+            onInputChange($item, $key, $dataCol, $value, $isEsc){
                 if ($isEsc) {
                     this.isEsc = false
                     return
@@ -247,58 +237,39 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 this.Items[$key][$dataCol].value = $value
 
                 this.saveRecord($item, $dataCol, $value)
-                // console.log(this.filteredItems[$key], $key, $id, $column, $columnName, $value)
-                //this.filteredItems[$key].fieldName = this.storeValue[$key]
             },
 
-            inputClick($e) {
-                // console.log($e)
-            },
-
+            //saving cell data if changed
             onInputEnter(){
                 this.resetEditCell()
             },
 
+            //cancel editing cell data
             onInputEsc(){
-                // console.log('esc: ', this.isEsc)
                 this.isEsc = true
                 this.resetEditCell()
             },
 
+            //save cell data to db
             saveRecord($id, $field, $value) {
-                // console.log('saving: ', $field, $value)
-
-                // this.isEditableId = 0
                 this.resetEditCell()
                 axios.patch(
                     this.api.patch + $id + '/' + $field + '/' + $value)
-                        .then(resp => {
-                            this.$root.$refs.toaster.showMessage(
-                                MessagesConstants.EDITED_MESSAGE,
-                                MessagesConstants.PROCESS_SUCCESSFULLY
-                            );
-                        })
-                        .then(resp => {
-                            // this.$root.$refs.DeviceRef.getData();
-                        })
-
-
+                    .then(resp => {
+                        this.$root.$refs.toaster.showMessage(
+                            MessagesConstants.EDITED_MESSAGE,
+                            MessagesConstants.PROCESS_SUCCESSFULLY
+                        );
+                    })
             },
 
             onCellClick($isEditable, $ckey=undefined, $key=undefined) {
-                // this.isEditableId[$key] = $id
-                if (!$isEditable) return
-                this.activeCol = $key
-                this.activeRow = $ckey
-                const a = setTimeout(() => {
-                    console.log('to')
+                if (!$isEditable) return //check editable cell
+                this.activeCol = $key //set active column
+                this.activeRow = $ckey //set active row
+                const a = setTimeout(() => { //delay for set focus to active input
                     $("input#id" + $key + "_" + $ckey).focus()
                 }, 200)
-
-                // console.log("#id" + $key + "_" + $ckey)
-                //document.getElementsByName("#id" + $key + "_" + $ckey)[0].focus();
-                // this.storeValue[$ckey] = this.Items[$ckey].fieldName
-                // console.log($isEditable, $ckey, $key)
             },
 
             setLang(_lang) {
@@ -306,9 +277,6 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
             },
 
             updateSortedData($column, $direction) {
-                // this.sortDirection = $direction
-                // this.sortColumn = $column
-                console.log('update sort in datatable', $column, $direction)
                 Sorting.doSort(this.filteredItems, $column, $direction)
             },
 
@@ -329,7 +297,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                         this.Items = response.data.data;
 
                         let newList = this.Items.map(item => ({
-                            old_id: item.id,
+                            _id: item.id,
                         }));
 
                         for (let itemRow=0; itemRow<newList.length; itemRow++) {
@@ -375,7 +343,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                         )
 
                         // this.Items = this.filteredItems;
-                        this.updateSortedData(this.sortColumn, this.$direction);
+                        // this.updateSortedData(this.sortColumn, this.$direction);
                         // }
                         // console.log(_a.keys.)
 

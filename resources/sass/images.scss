@@ -3,6 +3,12 @@
     align-items: center;
 }
 
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .flex-right {
     display: flex;
     justify-content: flex-end;
