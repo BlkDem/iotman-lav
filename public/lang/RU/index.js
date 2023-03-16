@@ -25,6 +25,9 @@ export default {
     NO_HWID: " нет адреса устройста",
     NO_PASS: " нет пароля",
 
+    SORT_BY: "По ",
+    SORT_BY_DESCRIPTION: "По описанию ",
+
     SORT_BY_NAME: "По имени",
     SORT_BY_ID: "По ID",
     SORT_NAME: "Сортировка",

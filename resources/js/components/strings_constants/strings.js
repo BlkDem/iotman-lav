@@ -26,6 +26,8 @@ export default {
     NO_PASS: " no password",
 
     SORT_BY_NAME: "By Name",
+    SORT_BY: "By ",
+    SORT_BY_DESCRIPTION: "By Description",
     SORT_BY_ID: "By ID",
     SORT_NAME: "Sort",
     SORT_ASC: "ASC",
@@ -40,10 +42,15 @@ export default {
     //strings processing
 
     SortingCaption($column, $direction) {
-        let res =
-            $column === "id" ?
-            this.SORT_BY_ID :
-            this.SORT_BY_NAME;
+        let res = ""
+        //     $column === "id" ?
+        //     this.SORT_BY_ID : this.SORT_BY + $column;
+        switch ($column) {
+            case 'ID': res = this.SORT_BY_ID; break;
+            case 'Name': res = this.SORT_BY_NAME; break;
+            case 'Description': res = this.SORT_BY_DESCRIPTION; break;
+            default: res = this.SORT_BY + $column; break;
+        }
         res += " (";
         res += !$direction ?
             this.SORT_ASC :

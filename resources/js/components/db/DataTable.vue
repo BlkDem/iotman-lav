@@ -10,8 +10,7 @@
 
         <table-nav
             :compactView="compactView"
-            :sortColumn="sortColumn"
-            :sortRules="sortRules"
+            :dataFields="dataFields"
             @getData="getData"
             @setCompactView="setCompactView"
             @addEvent="setItem"
@@ -179,23 +178,24 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
                 // dataDescription: "", //table data description label
 
-                sortOrderStrings: [
-                    MessagesConstants.SORT_ASC,
-                    MessagesConstants.SORT_DESC,
-                ],
-                sortOrder: MessagesConstants.SORT_ASC,
-                sortDirection: false,
-                sortColumn: this.dataFields[0].fieldName, // to props
-                filterColumn: 'image_desc',
-                sortRules: [{
-                        key: 'name',
-                        title: MessagesConstants.SORT_BY_NAME
-                    },
-                    {
-                        key: "id",
-                        title: MessagesConstants.SORT_BY_ID
-                    },
-                ],
+                // sortOrderStrings: [
+                //     MessagesConstants.SORT_ASC,
+                //     MessagesConstants.SORT_DESC,
+                // ],
+                // sortOrder: MessagesConstants.SORT_ASC,
+                // sortDirection: false,
+                // sortColumn: this.dataFields[0].fieldName, // to props
+                // filterColumn: 'image_desc',
+                // sortRules: [
+                //     // {
+                //     //     key: 'name',
+                //     //     title: MessagesConstants.SORT_BY_NAME
+                //     // },
+                //     // {
+                //     //     key: "id",
+                //     //     title: MessagesConstants.SORT_BY_ID
+                //     // },
+                // ],
             };
         },
 
@@ -215,13 +215,6 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
             // dsDeviceType.getItems()
         },
-
-        computed: {
-            SortName() {
-                return MessagesConstants.SortingCaption(this.sortColumn, this.sortDirection)
-            },
-        },
-
 
         methods: {
 
@@ -313,10 +306,10 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
             },
 
             updateSortedData($column, $direction) {
-                this.sortDirection = $direction
-                this.sortColumn = $column
-                // console.log(this.sortColumn, this.sortDirection)
-                Sorting.doSort(this.filteredItems, this.sortColumn, this.sortDirection)
+                // this.sortDirection = $direction
+                // this.sortColumn = $column
+                console.log('update sort in datatable', $column, $direction)
+                Sorting.doSort(this.filteredItems, $column, $direction)
             },
 
             updateFilteredData($filter) {
@@ -342,12 +335,14 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                         for (let itemRow=0; itemRow<newList.length; itemRow++) {
                             for (let field=0; field<this.dataFields.length; field++) {
                                 let _editable = this.dataFields[field].isEditable
+                                let _sortable = this.dataFields[field].isSortable
                                 let _image = this.dataFields[field].isImage
                                 let _highlight = this.dataFields[field].isHighLight
                                 let _colscount = this.dataFields[field].columnsCount
                                 newList[itemRow][this.dataFields[field].fieldName] = {
                                     'value': this.Items[itemRow][this.dataFields[field].fieldName],
                                     'isEditable': _editable,
+                                    'isSortable': _sortable,
                                     'isImage': _image,
                                     'isHighLight': _highlight,
                                     'columnsCount': _colscount,

@@ -25,6 +25,9 @@ export default {
     NO_HWID: " no device address",
     NO_PASS: " no password",
 
+    SORT_BY: "By ",
+    SORT_BY_DESCRIPTION: "By Description",
+
     SORT_BY_NAME: "By Name",
     SORT_BY_ID: "By ID",
     SORT_NAME: "Sort",

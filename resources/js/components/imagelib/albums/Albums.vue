@@ -12,8 +12,7 @@
 
         <table-nav
             :compactView="compactView"
-            :sortColumn="sortColumn"
-            :sortRules="sortRules"
+            :dataFields="images.imagesFields"
             @setCompactView="setCompactView"
             @addEvent="setAlbum"
             @updateSortedData="updateSortedData"
@@ -147,27 +146,33 @@ import TableNav from '../../common/TableBar/TableNav.vue';
                     imagesFields: [
                         {
                             fieldName: 'image_name',
+                            fieldCaption: 'Name',
                             type: String,
                             isImage: true,
                             isEditable: false,
+                            isSortable: true,
                             isHighLight: false,
                             columnsCount: 1
                         },
 
                         {
                             fieldName: 'id',
+                            fieldCaption: 'ID',
                             type: Number,
                             isImage: false,
                             isEditable: false,
+                            isSortable: true,
                             isHighLight: true,
                             columnsCount: 1
                         },
 
                         {
                             fieldName: 'image_desc',
+                            fieldCaption: 'Description',
                             type: String,
                             isImage: false,
                             isEditable: true,
+                            isSortable: true,
                             isHighLight: false,
                             columnsCount: 7
                         },

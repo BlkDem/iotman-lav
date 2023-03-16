@@ -278,9 +278,8 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
             async getData(_currentPage=1, _itemsPerPage=5) {
                 await axios.get(APIConstants.api_devices_types_read_page + _currentPage + "/" + _itemsPerPage)
-                    // .then(response => response.json())
                     .then(response => {
-                        // console.log(response.status)
+
                         this.deviceTypes = response.data.data;
                         this.filteredDeviceTypes = this.deviceTypes;
 

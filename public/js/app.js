@@ -24145,6 +24145,62 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/SortComp.vue?vue&type=script&lang=js":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/SortComp.vue?vue&type=script&lang=js ***!
+  \******************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../strings_constants/strings */ "./resources/js/components/strings_constants/strings.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    sortDataFields: {
+      type: Array
+    }
+  },
+  emits: ["updateSortedData"],
+  data: function data() {
+    return {
+      sortOrderStrings: [_strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SORT_ASC, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SORT_DESC],
+      sortOrder: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SORT_ASC,
+      sortDirection: false,
+      sortColumn: undefined // to props
+      //sortFields: [],
+    };
+  },
+
+  computed: {
+    SortName: function SortName() {
+      return _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SortingCaption(this.sortColumn.fieldCaption, this.sortDirection);
+    }
+  },
+  created: function created() {
+    this.sortColumn = this.sortDataFields[0];
+    // console.log('fields: ', this.sortDataFields)
+  },
+
+  methods: {
+    changeDirection: function changeDirection() {
+      this.sortDirection = !this.sortDirection;
+      this.doSort(this.sortColumn, this.sortDirection);
+    },
+    doSort: function doSort($column, $direction) {
+      console.log('sort from sortcomp', $column, $direction);
+      this.sortColumn = $column;
+      this.sortDirection = $direction;
+      this.$emit('updateSortedData', $column.fieldName, $direction);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/TableNav.vue?vue&type=script&lang=js":
 /*!******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/TableNav.vue?vue&type=script&lang=js ***!
@@ -24156,27 +24212,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../strings_constants/strings */ "./resources/js/components/strings_constants/strings.js");
+/* harmony import */ var _SortComp_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SortComp.vue */ "./resources/js/components/common/TableBar/SortComp.vue");
+/* harmony import */ var _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../strings_constants/strings */ "./resources/js/components/strings_constants/strings.js");
 // import Sorting from "../../../helpers/Sorting";
 // import Filtering from "../../../helpers/Filtering";
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     // Sorting,
     // Filtering
+    SortComp: _SortComp_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   emits: ["setCompactView", "addEvent", "doSort", "doFilter", "updateSortedData", "updateFilteredData", 'getData'],
   props: {
-    sortColumn: undefined,
-    sortRules: undefined
+    dataFields: {
+      type: Array
+    }
   },
   data: function data() {
     return {
       compactView: true,
       dataFilter: "",
-      sortOrderStrings: [_strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SORT_ASC, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SORT_DESC],
-      sortOrder: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SORT_ASC,
-      sortDirection: false
+      sortDataFields: undefined
     };
   },
   mounted: function mounted() {
@@ -24184,9 +24242,18 @@ __webpack_require__.r(__webpack_exports__);
       this.compactView = localStorage.getItem('CompactView') === 'true';
     }
   },
-  created: function created() {},
+  created: function created() {
+    this.sortDataFields = this.dataFields;
+    // console.log('dataFields in table-nav', this.dataFields)
+  },
+
   methods: {
+    changeDirection: function changeDirection() {
+      this.sortDirection = !this.sortDirection;
+      // this.doSort(this.sortColumn, this.sortDirection);
+    },
     doSort: function doSort($column, $direction) {
+      console.log('sort from tablenav', $column, $direction);
       this.$emit('updateSortedData', $column, $direction);
     },
     updateFilteredData: function updateFilteredData() {
@@ -24208,7 +24275,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     SortName: function SortName() {
-      return _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SortingCaption(this.sortColumn, this.sortDirection);
+      //return MessagesConstants.SortingCaption(this.sortColumn, this.sortDirection)
     }
   }
 });
@@ -24551,22 +24618,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       //filtered array of devices
 
       itemsVisible: false,
-      compactView: true,
+      compactView: true
+
       // dataDescription: "", //table data description label
 
-      sortOrderStrings: [_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].SORT_ASC, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].SORT_DESC],
-      sortOrder: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].SORT_ASC,
-      sortDirection: false,
-      sortColumn: this.dataFields[0].fieldName,
-      // to props
-      filterColumn: 'image_desc',
-      sortRules: [{
-        key: 'name',
-        title: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].SORT_BY_NAME
-      }, {
-        key: "id",
-        title: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].SORT_BY_ID
-      }]
+      // sortOrderStrings: [
+      //     MessagesConstants.SORT_ASC,
+      //     MessagesConstants.SORT_DESC,
+      // ],
+      // sortOrder: MessagesConstants.SORT_ASC,
+      // sortDirection: false,
+      // sortColumn: this.dataFields[0].fieldName, // to props
+      // filterColumn: 'image_desc',
+      // sortRules: [
+      //     // {
+      //     //     key: 'name',
+      //     //     title: MessagesConstants.SORT_BY_NAME
+      //     // },
+      //     // {
+      //     //     key: "id",
+      //     //     title: MessagesConstants.SORT_BY_ID
+      //     // },
+      // ],
     };
   },
   created: function created() {
@@ -24584,11 +24657,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     // dsDeviceType.getItems()
   },
 
-  computed: {
-    SortName: function SortName() {
-      return _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].SortingCaption(this.sortColumn, this.sortDirection);
-    }
-  },
   methods: {
     // isColumnValid(_column) {
     //     // console.log(_column)
@@ -24661,10 +24729,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // this.pageCaption = _lang.DEVICE_TYPES ?? 'Device Types'
     },
     updateSortedData: function updateSortedData($column, $direction) {
-      this.sortDirection = $direction;
-      this.sortColumn = $column;
-      // console.log(this.sortColumn, this.sortDirection)
-      _helpers_Sorting__WEBPACK_IMPORTED_MODULE_4__["default"].doSort(this.filteredItems, this.sortColumn, this.sortDirection);
+      // this.sortDirection = $direction
+      // this.sortColumn = $column
+      console.log('update sort in datatable', $column, $direction);
+      _helpers_Sorting__WEBPACK_IMPORTED_MODULE_4__["default"].doSort(this.filteredItems, $column, $direction);
     },
     updateFilteredData: function updateFilteredData($filter) {
       this.filteredItems = this.Items;
@@ -24695,12 +24763,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 for (var itemRow = 0; itemRow < newList.length; itemRow++) {
                   for (var field = 0; field < _this3.dataFields.length; field++) {
                     var _editable = _this3.dataFields[field].isEditable;
+                    var _sortable = _this3.dataFields[field].isSortable;
                     var _image = _this3.dataFields[field].isImage;
                     var _highlight = _this3.dataFields[field].isHighLight;
                     var _colscount = _this3.dataFields[field].columnsCount;
                     newList[itemRow][_this3.dataFields[field].fieldName] = {
                       'value': _this3.Items[itemRow][_this3.dataFields[field].fieldName],
                       'isEditable': _editable,
+                      'isSortable': _sortable,
                       'isImage': _image,
                       'isHighLight': _highlight,
                       'columnsCount': _colscount,
@@ -25133,10 +25203,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _currentPage = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
               _itemsPerPage = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : 5;
               _context.next = 4;
-              return axios.get(_api_rest_api__WEBPACK_IMPORTED_MODULE_4__["default"].api_devices_types_read_page + _currentPage + "/" + _itemsPerPage)
-              // .then(response => response.json())
-              .then(function (response) {
-                // console.log(response.status)
+              return axios.get(_api_rest_api__WEBPACK_IMPORTED_MODULE_4__["default"].api_devices_types_read_page + _currentPage + "/" + _itemsPerPage).then(function (response) {
                 _this3.deviceTypes = response.data.data;
                 _this3.filteredDeviceTypes = _this3.deviceTypes;
                 _this3.$refs.paginatorDeviceTypes.setPaginator({
@@ -26081,23 +26148,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         },
         imagesFields: [{
           fieldName: 'image_name',
+          fieldCaption: 'Name',
           type: String,
           isImage: true,
           isEditable: false,
+          isSortable: true,
           isHighLight: false,
           columnsCount: 1
         }, {
           fieldName: 'id',
+          fieldCaption: 'ID',
           type: Number,
           isImage: false,
           isEditable: false,
+          isSortable: true,
           isHighLight: true,
           columnsCount: 1
         }, {
           fieldName: 'image_desc',
+          fieldCaption: 'Description',
           type: String,
           isImage: false,
           isEditable: true,
+          isSortable: true,
           isHighLight: false,
           columnsCount: 7
         }],
@@ -27500,6 +27573,58 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/SortComp.vue?vue&type=template&id=11509444":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/SortComp.vue?vue&type=template&id=11509444 ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "nav-item dropdown me-auto vertical-center"
+};
+var _hoisted_2 = {
+  "class": "nav-link dropdown-toggle mx-2",
+  "data-bs-toggle": "dropdown",
+  href: "#",
+  role: "button",
+  "aria-haspopup": "true",
+  "aria-expanded": "false"
+};
+var _hoisted_3 = {
+  "class": "dropdown-menu w-100"
+};
+var _hoisted_4 = ["value", "onClick"];
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "dropdown-divider"
+}, null, -1 /* HOISTED */);
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.SortName), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.sortDataFields, function (sortField) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+      "class": "dropdown-item",
+      key: sortField.fieldName,
+      value: sortField.fieldName,
+      onClick: function onClick($event) {
+        return $options.doSort(sortField, $data.sortDirection);
+      }
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(sortField.fieldCaption), 9 /* TEXT, PROPS */, _hoisted_4);
+  }), 128 /* KEYED_FRAGMENT */)), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    "class": "dropdown-item",
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $options.changeDirection();
+    })
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.sortDirection ? $data.sortOrderStrings[0] : $data.sortOrderStrings[1]), 1 /* TEXT */)])]);
+}
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/TableNav.vue?vue&type=template&id=4c3c7af4":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/TableNav.vue?vue&type=template&id=4c3c7af4 ***!
@@ -27529,88 +27654,57 @@ var _hoisted_4 = {
 var _hoisted_5 = {
   "class": "nav-item d-flex py-1 w-100"
 };
-var _hoisted_6 = ["placeholder"];
-var _hoisted_7 = {
-  "class": "nav-item dropdown me-auto vertical-center"
-};
-var _hoisted_8 = {
-  "class": "nav-link dropdown-toggle mx-2",
-  "data-bs-toggle": "dropdown",
-  href: "#",
-  role: "button",
-  "aria-haspopup": "true",
-  "aria-expanded": "false"
-};
-var _hoisted_9 = {
-  "class": "dropdown-menu w-100"
-};
-var _hoisted_10 = ["value", "onClick"];
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "dropdown-divider"
-}, null, -1 /* HOISTED */);
-var _hoisted_12 = {
+var _hoisted_6 = {
   "class": "d-flex"
 };
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-list"
 }, null, -1 /* HOISTED */);
-var _hoisted_14 = [_hoisted_13];
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_8 = [_hoisted_7];
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-th-large"
 }, null, -1 /* HOISTED */);
-var _hoisted_16 = [_hoisted_15];
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_10 = [_hoisted_9];
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-sync-alt"
 }, null, -1 /* HOISTED */);
-var _hoisted_18 = [_hoisted_17];
+var _hoisted_12 = [_hoisted_11];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_sort_comp = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("sort-comp");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "form-control me-sm-2",
     type: "text",
-    placeholder: $props.sortColumn,
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $data.dataFilter = $event;
     })
-  }, null, 8 /* PROPS */, _hoisted_6), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.dataFilter]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button v-on:click=\"openImager()\"></button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.SortName), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.sortRules, function (rule) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
-      "class": "dropdown-item",
-      key: rule.key,
-      value: rule.key,
-      onClick: function onClick($event) {
-        return $options.doSort(rule.key);
-      }
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(rule.title), 9 /* TEXT, PROPS */, _hoisted_10);
-  }), 128 /* KEYED_FRAGMENT */)), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": "dropdown-item",
-    onClick: _cache[1] || (_cache[1] = function ($event) {
-      $data.sortDirection = !$data.sortDirection;
-      $options.doSort($props.sortColumn, $data.sortDirection);
-    })
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.sortDirection ? $data.sortOrderStrings[0] : $data.sortOrderStrings[1]), 1 /* TEXT */)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.dataFilter]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_sort_comp, {
+    sortDataFields: $data.sortDataFields,
+    onUpdateSortedData: $options.doSort
+  }, null, 8 /* PROPS */, ["sortDataFields", "onUpdateSortedData"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <li class=\"nav-item dropdown me-auto vertical-center\">\n                            <a class=\"nav-link dropdown-toggle mx-2\" data-bs-toggle=\"dropdown\" href=\"#\" role=\"button\"\n                                aria-haspopup=\"true\" aria-expanded=\"false\">{{ SortName }}</a>\n                            <div class=\"dropdown-menu w-100\">\n                                <a class=\"dropdown-item\" v-for=\"rule in sortRules\" :key=\"rule.key\"\n                                    :value=\"rule.key\" @click=\"doSort(rule.key, sortDirection)\">{{ rule.title }}</a>\n                                <div class=\"dropdown-divider\"></div>\n                                <a class=\"dropdown-item\" @click=\"changeDirection()\">\n                                    {{ sortDirection ? sortOrderStrings[0] : sortOrderStrings[1] }}\n                                </a>\n                            </div>\n                        </li> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary mx-2", {
       'disabled': $data.compactView
     }]),
-    onClick: _cache[2] || (_cache[2] = function ($event) {
+    onClick: _cache[1] || (_cache[1] = function ($event) {
       return $options.setCompactView(true);
     })
-  }, _hoisted_14, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, _hoisted_8, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary", {
       'disabled': !$data.compactView
     }]),
-    onClick: _cache[3] || (_cache[3] = function ($event) {
+    onClick: _cache[2] || (_cache[2] = function ($event) {
       return $options.setCompactView(false);
     })
-  }, _hoisted_16, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, _hoisted_10, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary mx-2",
-    onClick: _cache[4] || (_cache[4] = function ($event) {
+    onClick: _cache[3] || (_cache[3] = function ($event) {
       return _ctx.$emit('addEvent');
     })
   }, " Add "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary",
-    onClick: _cache[5] || (_cache[5] = function () {
+    onClick: _cache[4] || (_cache[4] = function () {
       return $options.getData && $options.getData.apply($options, arguments);
     })
-  }, _hoisted_18)])])])]);
+  }, _hoisted_12)])])])]);
 }
 
 /***/ }),
@@ -27881,14 +27975,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         ref: "confirmDialogue"
       }, null, 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_table_nav, {
         compactView: $data.compactView,
-        sortColumn: $data.sortColumn,
-        sortRules: $data.sortRules,
+        dataFields: $props.dataFields,
         onGetData: $options.getData,
         onSetCompactView: $options.setCompactView,
         onAddEvent: $options.setItem,
         onUpdateSortedData: $options.updateSortedData,
         onUpdateFilteredData: $options.updateFilteredData
-      }, null, 8 /* PROPS */, ["compactView", "sortColumn", "sortRules", "onGetData", "onSetCompactView", "onAddEvent", "onUpdateSortedData", "onUpdateFilteredData"]), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"row my-2\" v-if=\"!compactView\">\n            <div class=\"col-sm-4 col-xs-4 col-lg-4 p-2 fade-in\" v-for=\"(item, key) in filteredItems\"\n                v-bind:key=\"key\" v-bind:id=\"item.id\">\n                <div class=\"card border-light align-center\">\n                    <h3 class=\"card-header\">\n                        {{ device_type.device_type_name }}\n                        <span class=\"text-info\">({{ device_type.id }})</span>\n                    </h3>\n                    <div class=\"card-body\">\n                        <h6 class=\"card-subtitle text-muted\">\n                            {{ device_type.device_type_desc }}\n                        </h6>\n                    </div>\n                    <img v-bind:src=\"device_type.device_type_image\" />\n                    <div class=\"card-body\">\n                        <button class=\"btn btn-info btn-width-40 mx-1\" @click=\"doEditType(key, device_type.id)\">\n                            <i class=\"fas fa-edit\" aria-hidden=\"true\"></i>\n                            Edit\n                        </button>\n\n                        <button class=\"btn btn-warning btn-width-40 mx-1\" @click=\"doDeleteType(key, device_type.id)\">\n                            <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\n                            Delete\n                        </button>\n                    </div>\n                </div>\n            </div>\n        </div>\n "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" compact view "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredItems, function (item, key) {
+      }, null, 8 /* PROPS */, ["compactView", "dataFields", "onGetData", "onSetCompactView", "onAddEvent", "onUpdateSortedData", "onUpdateFilteredData"]), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"row my-2\" v-if=\"!compactView\">\n            <div class=\"col-sm-4 col-xs-4 col-lg-4 p-2 fade-in\" v-for=\"(item, key) in filteredItems\"\n                v-bind:key=\"key\" v-bind:id=\"item.id\">\n                <div class=\"card border-light align-center\">\n                    <h3 class=\"card-header\">\n                        {{ device_type.device_type_name }}\n                        <span class=\"text-info\">({{ device_type.id }})</span>\n                    </h3>\n                    <div class=\"card-body\">\n                        <h6 class=\"card-subtitle text-muted\">\n                            {{ device_type.device_type_desc }}\n                        </h6>\n                    </div>\n                    <img v-bind:src=\"device_type.device_type_image\" />\n                    <div class=\"card-body\">\n                        <button class=\"btn btn-info btn-width-40 mx-1\" @click=\"doEditType(key, device_type.id)\">\n                            <i class=\"fas fa-edit\" aria-hidden=\"true\"></i>\n                            Edit\n                        </button>\n\n                        <button class=\"btn btn-warning btn-width-40 mx-1\" @click=\"doDeleteType(key, device_type.id)\">\n                            <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\n                            Delete\n                        </button>\n                    </div>\n                </div>\n            </div>\n        </div>\n "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" compact view "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredItems, function (item, key) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           "class": "card border-primary mb-1 w-100 fade-in",
           key: key,
@@ -28848,14 +28941,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         ref: "confirmDialogue"
       }, null, 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h1 class=\"align-left px-4 pb-3\" style=\"margin-top: 5.5rem\">\n            {{ pageCaption }}\n        </h1> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_table_nav, {
         compactView: $data.compactView,
-        sortColumn: $data.sortColumn,
-        sortRules: $data.sortRules,
+        dataFields: $data.images.imagesFields,
         onSetCompactView: $options.setCompactView,
         onAddEvent: $options.setAlbum,
         onUpdateSortedData: $options.updateSortedData,
         onUpdateFilteredData: $options.updateFilteredData,
         onGetData: $options.getData
-      }, null, 8 /* PROPS */, ["compactView", "sortColumn", "sortRules", "onSetCompactView", "onAddEvent", "onUpdateSortedData", "onUpdateFilteredData", "onGetData"]), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredAlbums, function (album, key) {
+      }, null, 8 /* PROPS */, ["compactView", "dataFields", "onSetCompactView", "onAddEvent", "onUpdateSortedData", "onUpdateFilteredData", "onGetData"]), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredAlbums, function (album, key) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           "class": "col-sm-4 col-xs-4 col-lg-4 p-2 fade-in",
           key: key,
@@ -29353,6 +29445,8 @@ __webpack_require__.r(__webpack_exports__);
   NO_DESCRIPTION: " no description ",
   NO_HWID: " no device address",
   NO_PASS: " no password",
+  SORT_BY: "By ",
+  SORT_BY_DESCRIPTION: "By Description",
   SORT_BY_NAME: "By Name",
   SORT_BY_ID: "By ID",
   SORT_NAME: "Sort",
@@ -29399,6 +29493,8 @@ __webpack_require__.r(__webpack_exports__);
   NO_DESCRIPTION: " нет описания",
   NO_HWID: " нет адреса устройста",
   NO_PASS: " нет пароля",
+  SORT_BY: "По ",
+  SORT_BY_DESCRIPTION: "По описанию ",
   SORT_BY_NAME: "По имени",
   SORT_BY_ID: "По ID",
   SORT_NAME: "Сортировка",
@@ -29760,6 +29856,8 @@ __webpack_require__.r(__webpack_exports__);
   NO_HWID: " no device address",
   NO_PASS: " no password",
   SORT_BY_NAME: "By Name",
+  SORT_BY: "By ",
+  SORT_BY_DESCRIPTION: "By Description",
   SORT_BY_ID: "By ID",
   SORT_NAME: "Sort",
   SORT_ASC: "ASC",
@@ -29770,7 +29868,23 @@ __webpack_require__.r(__webpack_exports__);
   logBlockCaption: 'Log',
   //strings processing
   SortingCaption: function SortingCaption($column, $direction) {
-    var res = $column === "id" ? this.SORT_BY_ID : this.SORT_BY_NAME;
+    var res = "";
+    //     $column === "id" ?
+    //     this.SORT_BY_ID : this.SORT_BY + $column;
+    switch ($column) {
+      case 'ID':
+        res = this.SORT_BY_ID;
+        break;
+      case 'Name':
+        res = this.SORT_BY_NAME;
+        break;
+      case 'Description':
+        res = this.SORT_BY_DESCRIPTION;
+        break;
+      default:
+        res = this.SORT_BY + $column;
+        break;
+    }
     res += " (";
     res += !$direction ? this.SORT_ASC : this.SORT_DESC;
     res += ")";
@@ -29904,16 +30018,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   doSort: function doSort($items, $column, $direction) {
-    // console.log($items, $column, $direction)
+    console.log($items, $column, $direction);
     var column = $column;
     var order = $direction;
     $items.sort(function (a, b) {
       if (column.name === "id") {
-        var nameA = a[column].name;
-        var nameB = b[column].name;
+        var nameA = a[column].value;
+        var nameB = b[column].value;
       } else {
-        var nameA = a[column].name + "".toUpperCase();
-        var nameB = b[column].name + "".toUpperCase();
+        var nameA = a[column].value + "".toUpperCase();
+        var nameB = b[column].value + "".toUpperCase();
       }
       if (order && nameA > nameB) {
         return -1;
@@ -40778,7 +40892,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.flex-right {\n    display: flex;\n    justify-content: flex-end;\n}\n.hide {\n    display: none;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.flex-right {\n    display: flex;\n    justify-content: flex-end;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -40829,7 +40943,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".flex {\n    display: flex;\n    align-items: center;\n}\n\n/*.image-badge {\n    width: 24px;\n    height: 24px;\n    margin-left: -10px;\n}*/\n\n.logo {\n    display: flex;\n    margin-right: 16px;\n    margin-left: 4px;\n    width: 36px;\n}\n\n.device-image {\n    height: 2.6rem;\n    border-radius: 5px;\n}\n\n.card-space {\n    margin-bottom: 00px;\n}\n\na.a_cap:first-letter {\n    text-transform: uppercase;\n}\n\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n    .device-image {\n        width: 100px;\n        height: 100px;\n        /* margin-top: -23px; */\n        margin-bottom: -91px;\n        margin-left: 219px;\n        border-radius: 10px;\n        /*box-shadow: #eee 0px 0px 8px;*/\n    }\n    .card-space {\n        margin-bottom: 20px;\n    }\n    .container {\n        padding: 0;\n        width: 100%;\n    }\n\n    .navbar > .container-fluid {\n        display: flex;\n        flex-wrap: inherit;\n        align-items: center;\n        justify-content: flex-start;\n    }\n\n    .edit-buttons {\n        /* display: flex;*/\n        margin-top: 16px;\n        margin-bottom: 8px;\n        justify-content: flex-start;\n    }\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".flex {\n    display: flex;\n    align-items: center;\n}\n\n.flex-right {\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n\n.flex-left {\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n}\n\n.flex {\n    display: flex;\n    align-items: center;\n}\n\n.hide {\n    display: none;\n}\n\n/*.image-badge {\n    width: 24px;\n    height: 24px;\n    margin-left: -10px;\n}*/\n\n.logo {\n    display: flex;\n    margin-right: 16px;\n    margin-left: 4px;\n    width: 36px;\n}\n\n.device-image {\n    height: 2.6rem;\n    border-radius: 5px;\n}\n\n.card-space {\n    margin-bottom: 00px;\n}\n\na.a_cap:first-letter {\n    text-transform: uppercase;\n}\n\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n    .device-image {\n        width: 100px;\n        height: 100px;\n        /* margin-top: -23px; */\n        margin-bottom: -91px;\n        margin-left: 219px;\n        border-radius: 10px;\n        /*box-shadow: #eee 0px 0px 8px;*/\n    }\n    .card-space {\n        margin-bottom: 20px;\n    }\n    .container {\n        padding: 0;\n        width: 100%;\n    }\n\n    .navbar > .container-fluid {\n        display: flex;\n        flex-wrap: inherit;\n        align-items: center;\n        justify-content: flex-start;\n    }\n\n    .edit-buttons {\n        /* display: flex;*/\n        margin-top: 16px;\n        margin-bottom: 8px;\n        justify-content: flex-start;\n    }\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -59615,6 +59729,34 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/components/common/TableBar/SortComp.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/common/TableBar/SortComp.vue ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SortComp_vue_vue_type_template_id_11509444__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SortComp.vue?vue&type=template&id=11509444 */ "./resources/js/components/common/TableBar/SortComp.vue?vue&type=template&id=11509444");
+/* harmony import */ var _SortComp_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SortComp.vue?vue&type=script&lang=js */ "./resources/js/components/common/TableBar/SortComp.vue?vue&type=script&lang=js");
+/* harmony import */ var C_projects_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,C_projects_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_SortComp_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_SortComp_vue_vue_type_template_id_11509444__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/common/TableBar/SortComp.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/components/common/TableBar/TableNav.vue":
 /*!**************************************************************!*\
   !*** ./resources/js/components/common/TableBar/TableNav.vue ***!
@@ -60306,6 +60448,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/common/TableBar/SortComp.vue?vue&type=script&lang=js":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/common/TableBar/SortComp.vue?vue&type=script&lang=js ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SortComp_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SortComp_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./SortComp.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/SortComp.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/components/common/TableBar/TableNav.vue?vue&type=script&lang=js":
 /*!**************************************************************************************!*\
   !*** ./resources/js/components/common/TableBar/TableNav.vue?vue&type=script&lang=js ***!
@@ -60766,6 +60924,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PopupModal_vue_vue_type_template_id_9cfc8a2c_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PopupModal_vue_vue_type_template_id_9cfc8a2c_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./PopupModal.vue?vue&type=template&id=9cfc8a2c&scoped=true */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/PopupModal.vue?vue&type=template&id=9cfc8a2c&scoped=true");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/common/TableBar/SortComp.vue?vue&type=template&id=11509444":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/common/TableBar/SortComp.vue?vue&type=template&id=11509444 ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SortComp_vue_vue_type_template_id_11509444__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SortComp_vue_vue_type_template_id_11509444__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./SortComp.vue?vue&type=template&id=11509444 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/SortComp.vue?vue&type=template&id=11509444");
 
 
 /***/ }),

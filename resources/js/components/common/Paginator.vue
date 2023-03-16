@@ -107,8 +107,4 @@ export default {
     justify-content: flex-end;
 }
 
-.hide {
-    display: none;
-}
-
 </style>
