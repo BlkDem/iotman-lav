@@ -1,8 +1,9 @@
 <template>
-    <li class="nav-item dropdown me-auto vertical-center">
-        <a class="nav-link dropdown-toggle mx-2" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+    <div class="nav-item dropdown me-auto vertical-center">
+    <div class="flex-center">
+        <a class="nav-link dropdown-toggle mx-2" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
             aria-expanded="false">{{ SortName }}</a>
-        <div class="dropdown-menu w-100">
+        <div class="dropdown-menu">
             <a class="dropdown-item" v-for="sortField in sortDataFields"
                 :key="sortField.fieldName" :value="sortField.fieldName"
                 @click="doSort(sortField, sortDirection)">{{ sortField.fieldCaption }}</a>
@@ -11,7 +12,8 @@
                 {{ sortDirection ? sortOrderStrings[0] : sortOrderStrings[1] }}
             </a>
         </div>
-    </li>
+    </div>
+    </div>
 </template>
 
 <script>

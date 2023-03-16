@@ -84,7 +84,7 @@
                             v-for="(column, ckey) in Object.keys(item)" v-bind:key="ckey"
                         >
 
-                            <span v-if="(activeCol!==key||activeRow!==ckey)&&(item[column].isImage != true)"
+                            <span v-if="(activeCol!==key||activeRow!==ckey)&&(item[column].isImage != true)" class="w-75"
                                 :class="{'text-info': item[column].isHighLight}"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
@@ -165,11 +165,13 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
             },
 
             foreignKey: {
-                type: String
+                type: String,
+                default: ''
             },
 
             foreignValue: {
-                type: Number
+                type: Number,
+                default: 0
             },
         },
 

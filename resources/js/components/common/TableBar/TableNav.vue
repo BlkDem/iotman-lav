@@ -2,13 +2,17 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
         <div class="container-fluid">
             <div class="navbar-collapse" id="navbarColor02">
-                <ul class="navbar-nav me-auto  d-flex">
+                <div class="navbar-nav me-auto  flex-center">
                     <filter-comp :filterDataFields="filterDataFields"></filter-comp>
                     <!-- <li class="nav-item  d-flex py-1  w-100">
                         <input class="form-control me-sm-2" type="text" v-model="dataFilter" />
                     </li> -->
+                </div>
+
+                <div>
                     <sort-comp :sortDataFields="sortDataFields" @updateSortedData="doSort"></sort-comp>
-                </ul>
+                </div>
+
                 <div class="d-flex">
                     <button class="btn btn-primary mx-2" :class="{'disabled' : compactView}"
                         @click="setCompactView(true)">
@@ -18,7 +22,7 @@
                         <i class="fas fa-th-large"></i>
                     </button>
                     <button class="btn btn-primary mx-2" @click="$emit('addEvent')">
-                        Add
+                        <i class="fas fa-plus-circle"></i>
                     </button>
                     <button class="btn btn-primary" @click="getData">
                         <i class="fas fa-sync-alt"></i>

@@ -1,96 +1,18 @@
-<template>
+<template >
         <div style="margin-top: 5.5rem">
         </div>
 
-    <common-card :cardCaption="pageCaption">
-        <AddAlbum ref="addAlbum" />
+        <!-- Album Widget -->
+        <data-table
+            :api="albums.api"
+            :dataFields="albums.albumsFields"
+            :foreignKey="undefined"
+            :foreignValue="undefined"
+            :pageCaption="albums.albumsCaption"
+        >
+        </data-table>
 
-        <ConfirmDialogue ref="confirmDialogue" />
-        <!-- <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
-            {{ pageCaption }}
-        </h1> -->
-
-        <table-nav
-            :compactView="compactView"
-            :dataFields="images.imagesFields"
-            @setCompactView="setCompactView"
-            @addEvent="setAlbum"
-            @updateSortedData="updateSortedData"
-            @updateFilteredData="updateFilteredData"
-            @getData="getData"
-        ></table-nav>
-
-
-        <div>
-            <!-- <h5 class="text-primary my-2 align-center">{{ dataDescription }}</h5> -->
-        </div>
-
-        <div class="row my-2" v-show="!compactView">
-            <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(album, key) in filteredAlbums"
-                v-bind:key="key" v-bind:id="album.id">
-                <div class="card border-light align-center">
-                    <h3 class="card-header">
-                        {{ album.album_name }}
-                        <span class="text-info">({{ album.id }})</span>
-                    </h3>
-                    <div class="card-body">
-                        <h6 class="card-subtitle text-muted">
-                            {{ album.album_desc }}
-                        </h6>
-                    </div>
-                    <div class="card-body">
-                            <i class="fas fa-images fa-8x text-info"></i>
-                    </div>
-
-                    <!-- <img v-bind:src="device_type.device_type_image" /> -->
-                    <div class="card-body">
-                        <button class="btn btn-info btn-width-40 mx-1" @click="doEditAlbum(key, album.id)">
-                            <i class="fas fa-edit" aria-hidden="true"></i>
-                            Edit
-                        </button>
-
-                        <button class="btn btn-warning btn-width-40 mx-1" @click="doDeleteAlbum(key, album.id)">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                            Delete
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- compact view -->
-        <div v-show="compactView" class="my-2">
-            <div class="card border-primary mb-1 w-100 fade-in" v-for="(album, key) in filteredAlbums"
-                v-bind:key="key" v-bind:id="album.id">
-                <div class="mx-2 my-2">
-                    <div class="row vertical-center">
-                        <div class="col-sm-1 col-xs-1 col-lg-1 flex">
-                            <i class="fas fa-images fa-2x text-info"></i>
-                            <!-- <img v-bind:src="album.device_type_image" class="device-image" /> -->
-                        </div>
-                        <div class="col-sm-1 col-xs-1 col-lg-1 align-left">
-                                <span class="text-info"> {{ album.id }} </span>
-                        </div>
-                        <div class="col-sm-7 col-xs-7 col-lg-7 align-left">
-                                {{ album.album_name  }}
-                        </div>
-                        <div class="col-sm-3 col-xs-3 col-lg-3  edit-buttons">
-                            <button class="btn btn-info mx-2" @click="doEditAlbum(key, album.id)">
-                                <i class="fas fa-edit" aria-hidden="true"></i>
-                            </button>
-
-                            <button class="btn btn-secondary" @click="doDeleteAlbum(key, album.id)">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <Paginator ref="paginatorDeviceTypes"></Paginator>
-        <!-- <Imager ref="imager"/> -->
-        <!-- <MyMqtt></MyMqtt> -->
-    </common-card>
+        <!-- Amage Widget -->
         <data-table
             :api="images.api"
             :dataFields="images.imagesFields"
@@ -129,7 +51,6 @@ import TableNav from '../../common/TableBar/TableNav.vue';
 
         data() {
             return {
-                albums: [],
 
                 //Images Widget Setup
                 images: {
@@ -183,30 +104,68 @@ import TableNav from '../../common/TableBar/TableNav.vue';
 
                 },
 
+                //Albums Widget Setup
+                albums: {
+                    albumsCaption: MessagesConstants.ALBUMS,
 
-                // deviceTypesVisible: false,
-                compactView: true,
-                pageCaption: MessagesConstants.ALBUMS ?? 'Albums',
-                filteredAlbums: [], //filtered array of devices
-                dataDescription: "", //table data description label
-                album_filter: "", //filtering string
-                sortOrderStrings: [
-                    MessagesConstants.SORT_ASC,
-                    MessagesConstants.SORT_DESC,
-                ],
-                sortOrder: MessagesConstants.SORT_ASC,
-                sortDirection: false,
-                sortColumn: "album_name",
-                sortRules: [{
-                        key: "album_name",
-                        title: MessagesConstants.SORT_BY_NAME
+                    api: {
+                        get: '',
+                        insert: '',
+                        update: '',
+                        delete: '',
+                        patch: ''
                     },
-                    {
-                        key: "id",
-                        title: MessagesConstants.SORT_BY_ID
-                    },
-                ],
-            };
+
+                    albumsFields: [
+
+                        // {
+                        //     fieldName: 'image',
+                        //     fieldCaption: '',
+                        //     type: String,
+                        //     isImage: true,
+                        //     isVirtualImage: true,
+                        //     VirtualImage: 'picture',
+                        //     isEditable: false,
+                        //     isSortable: false,
+                        //     isHighLight: true,
+                        //     columnsCount: 1
+                        // },
+
+                        {
+                            fieldName: 'id',
+                            fieldCaption: 'ID',
+                            type: Number,
+                            isImage: false,
+                            isEditable: false,
+                            isSortable: true,
+                            isHighLight: true,
+                            columnsCount: 1
+                        },
+
+                        {
+                            fieldName: 'album_name',
+                            fieldCaption: 'Description',
+                            type: String,
+                            isImage: false,
+                            isEditable: true,
+                            isSortable: true,
+                            isHighLight: false,
+                            columnsCount: 4
+                        },
+
+                        {
+                            fieldName: 'album_desc',
+                            fieldCaption: 'Description',
+                            type: String,
+                            isImage: false,
+                            isEditable: true,
+                            isSortable: true,
+                            isHighLight: false,
+                            columnsCount: 4
+                        },
+                    ],
+                }
+            }
         },
 
         created() {
@@ -219,10 +178,16 @@ import TableNav from '../../common/TableBar/TableNav.vue';
             this.images.api.update = APIConstants.api_image_update
             this.images.api.delete = APIConstants.api_image_delete
             this.images.api.patch = APIConstants.api_image_patch
-            // console.log(this.imagesAPI)
-            this.dataDescription = AlbumStringConstants.ALBUM_DATA_DESCRIPTION; //device dataset description
 
-            this.getData();
+            this.albums.api.get =    APIConstants.api_albums_read_page
+            this.albums.api.insert = APIConstants.api_album_create
+            this.albums.api.update = APIConstants.api_album_update
+            this.albums.api.delete = APIConstants.api_album_delete
+            // this.albums.api.patch =  APIConstants.api_album_patch
+            // console.log(this.imagesAPI)
+            // this.dataDescription = AlbumStringConstants.ALBUM_DATA_DESCRIPTION; //device dataset description
+
+            // this.getData();
         },
 
         mounted() {
@@ -231,78 +196,7 @@ import TableNav from '../../common/TableBar/TableNav.vue';
             }
         },
 
-        computed: {
-            // SortName() {
-            //     return MessagesConstants.SortingCaption(this.sortColumn, this.sortDirection)
-            // },
-
-            // getCompactView() {
-            //     return this.compactView;
-            // },
-        },
-
-
         methods: {
-
-            // openImager() {
-            //     this.$refs.imager.createImager()
-            // },
-
-            // doSort($column) {
-            //     Sorting.doSort(this.filteredAlbums, $column, this.sortDirection)
-            //     this.sortColumn = $column;
-            // },
-
-            // doFilter() {
-            //     this.filteredAlbums = this.albums;
-            //     const res = this.filteredAlbums.filter((album) => {
-
-            //         if (this.album_filter === "") return true;
-            //         else
-            //             return (
-            //                 album.album_name
-            //                 .toLowerCase()
-            //                 .indexOf(this.album_filter.toLowerCase()) > -1
-            //             );
-            //     });
-            //     if (this.albums.length > res.length) {
-            //         this.filteredAlbums = res
-            //         this.doSort()
-            //     }
-            //     // return res;
-            // },
-
-            setCompactView(value) {
-                console.log(value)
-                this.compactView = Boolean(value)
-            },
-
-
-            async getData(_currentPage=1, _itemsPerPage=5) {
-                fetch(APIConstants.api_albums_read_page + _currentPage + "/" + _itemsPerPage)
-                    .then(response => response.json())
-                    .then(response => {
-                        this.albums = response.data
-                        this.filteredAlbums = response.data
-                        // this.processStrings();
-                        //MessagesConstants.processDeviceTypeStrings(this.filteredAlbum)
-
-
-                        this.$refs.paginatorDeviceTypes.setPaginator(
-                            {
-                                pagesCount: response.paginator.PagesCount,
-                                currentPage: response.paginator.CurrentPage,
-                                itemsPerPage: response.paginator.ItemsPerPage,
-                                recordsCount: response.paginator.RecordsCount
-                            }
-                        )
-
-                        this.albums = this.filteredAlbums
-                        // this.doSort(this.sortColumn)
-                    })
-                    .catch(err => console.log(err))
-            },
-
             async doDeleteAlbum(key, id) {
 
                 const confirmDelete = await this.$refs.confirmDialogue.showDialogue({

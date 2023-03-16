@@ -7,6 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: row;
 }
 
 .flex-right {
@@ -87,4 +88,10 @@ a.a_cap:first-letter {
         margin-bottom: 8px;
         justify-content: flex-start;
     }
+
+    .flex-right {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
 }
