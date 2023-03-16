@@ -37,8 +37,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-//    @import '../../../sass/app.scss';
-//    @import '../../../sass/aligns.scss';
     @import '../../../sass/dialogs.scss';
 
 </style>

@@ -6,8 +6,6 @@
         <data-table
             :api="albums.api"
             :dataFields="albums.albumsFields"
-            :foreignKey="undefined"
-            :foreignValue="undefined"
             :pageCaption="albums.albumsCaption"
         >
         </data-table>
@@ -118,18 +116,18 @@ import TableNav from '../../common/TableBar/TableNav.vue';
 
                     albumsFields: [
 
-                        // {
-                        //     fieldName: 'image',
-                        //     fieldCaption: '',
-                        //     type: String,
-                        //     isImage: true,
-                        //     isVirtualImage: true,
-                        //     VirtualImage: 'picture',
-                        //     isEditable: false,
-                        //     isSortable: false,
-                        //     isHighLight: true,
-                        //     columnsCount: 1
-                        // },
+                        {
+                            fieldName: 'Image',
+                            fieldCaption: 'Image',
+                            type: String,
+                            isImage: true,
+                            isVirtualImage: true,
+                            VirtualImage: 'picture',
+                            isEditable: false,
+                            isSortable: false,
+                            isHighLight: true,
+                            columnsCount: 1
+                        },
 
                         {
                             fieldName: 'id',
@@ -144,13 +142,13 @@ import TableNav from '../../common/TableBar/TableNav.vue';
 
                         {
                             fieldName: 'album_name',
-                            fieldCaption: 'Description',
+                            fieldCaption: 'Name',
                             type: String,
                             isImage: false,
                             isEditable: true,
                             isSortable: true,
                             isHighLight: false,
-                            columnsCount: 4
+                            columnsCount: 3
                         },
 
                         {
@@ -169,10 +167,6 @@ import TableNav from '../../common/TableBar/TableNav.vue';
         },
 
         created() {
-            // this.page_description = AlbumStringConstants.DEVICE_TYPE_PAGE_DESCRIPTION;
-            // if (localStorage.DeviceTypeCompactView == null) {
-            //     localStorage.DeviceTypeCompactView = this.compactView;
-            // }
             this.images.api.get = APIConstants.api_images_read_page
             this.images.api.insert = APIConstants.api_image_create
             this.images.api.update = APIConstants.api_image_update
@@ -183,17 +177,6 @@ import TableNav from '../../common/TableBar/TableNav.vue';
             this.albums.api.insert = APIConstants.api_album_create
             this.albums.api.update = APIConstants.api_album_update
             this.albums.api.delete = APIConstants.api_album_delete
-            // this.albums.api.patch =  APIConstants.api_album_patch
-            // console.log(this.imagesAPI)
-            // this.dataDescription = AlbumStringConstants.ALBUM_DATA_DESCRIPTION; //device dataset description
-
-            // this.getData();
-        },
-
-        mounted() {
-            if (localStorage.getItem('CompactView')) {
-                this.compactView = (localStorage.getItem('CompactView') === 'true');
-            }
         },
 
         methods: {

@@ -47,7 +47,14 @@
                             {{ item[column].value }}
                         </span>
 
-                        <img v-if="item[column].isImage" class="w-100 p-2" :src="'/storage/images/'+item[column].value"
+                        <!-- <img v-if="item[column].isImage" class="w-100 p-2"
+                            :src="'/storage/images/'+ item[column].value?
+                                '/storage/images/'+ item[column].value :
+                                '/storage/images/blog.jpg'"
+                        /> -->
+                        <img v-if="item[column].isImage" class="w-100 p-2"
+                            :src="(!item[column].isVirtualImage)?imagesPath + item[column].value:imagesPath +'blog.jpg'"
+                            @error="replaceByDefault"
                         />
                         <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
 
@@ -90,7 +97,10 @@
                             >
                                 {{ item[column].value }}
                             </span>
-                            <img v-if="item[column].isImage" :src="'/storage/images/'+item[column].value" class="device-image"/>
+                            <img v-if="item[column].isImage" class="device-image"
+                                :src="(!item[column].isVirtualImage)?imagesPath + item[column].value:imagesPath +'blog.jpg'"
+                                @error="replaceByDefault"
+                            />
                             <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey"
 
                             >
@@ -125,7 +135,6 @@
             </div>
         </div>
         <Paginator ref="paginatorDeviceTypes"></Paginator>
-        <Imager ref="imager" />
         <!-- <MyMqtt></MyMqtt> -->
     </common-card>
 
@@ -137,13 +146,14 @@ import ConfirmDialogue from '../../components/common/ConfirmDialogue.vue';
 import Paginator from '../../components/common/Paginator.vue';
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
+import Pathes from "../../config/pathes";
 // import DeviceTypeStringConstants from '../../components/strings_constants/device_types/index';
 import Sorting from "../../helpers/Sorting";
 import Filtering from "../../helpers/Filtering.js";
 import ParsingErrors from "../../helpers/ParsingErrors.js";
 
 // import ParsingErrors from "../common/js/ParsingErrors.js";
-import Imager from '../../components/common/Imager.vue';
+// import Imager from '../../components/common/Imager.vue';
 
 // import dsDeviceType from "../../api/dsDeviceType";
 
@@ -178,30 +188,33 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
         components: {
             ConfirmDialogue,
-            // AddDeviceType,
             Paginator,
-            Imager,
+            // Imager,
             TableNav,
-            // dsDeviceType
         },
 
         data() {
             return {
-                isEditableId: [],
+                // isEditableId: [],
                 activeCol: undefined,
                 activeRow: undefined,
+
                 isEsc: false,
+
                 Items: [],
                 filteredItems: [], //filtered array of devices
 
                 itemsVisible: false,
                 compactView: true,
 
+                imagesPath: ''
+
             };
         },
 
         created() {
             this.getData();
+            this.imagesPath = Pathes.storageImagesPath;
         },
 
         mounted() {
@@ -213,11 +226,16 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 this.setLang(_lang)
             });
 
+            // console.log(this.imagesPath)
 
             // dsDeviceType.getItems()
         },
 
         methods: {
+
+            replaceByDefault(e) {
+                e.target.src = '/storage/images/blog.jpg'
+            },
 
             setId($key, $ckey) {
                 return "id" + $key + "_" + $ckey
@@ -289,7 +307,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
             },
 
             setCompactView(value) {
-                console.log(value)
+                // console.log(value)
                 this.compactView = Boolean(value)
             },
 
@@ -309,6 +327,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                                 let _image = this.dataFields[field].isImage
                                 let _highlight = this.dataFields[field].isHighLight
                                 let _colscount = this.dataFields[field].columnsCount
+                                let _virtual = this.dataFields[field]?.isVirtualImage
                                 newList[itemRow][this.dataFields[field].fieldName] = {
                                     'value': this.Items[itemRow][this.dataFields[field].fieldName],
                                     'isEditable': _editable,
@@ -316,6 +335,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                                     'isImage': _image,
                                     'isHighLight': _highlight,
                                     'columnsCount': _colscount,
+                                    'isVirtualImage': _virtual,
                                     'class':
                                         (_colscount===1)?
                                         "col-sm-" + _colscount +
