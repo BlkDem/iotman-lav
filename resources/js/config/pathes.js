@@ -1,4 +1,5 @@
 export default {
     storagePath: '/storage/',
-    storageImagesPath: '/storage/images/'
+    storageImagesPath: '/storage/images/',
+    storageImagePlug: '/storage/images/blog.jpg'
 }

@@ -11,7 +11,7 @@ class BaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function sendResponse($result, $message, $paginator="")
+    public function sendResponse($result, $message, $paginator=[])
     {
 
         $_result = (isset($result["data"]))?$result["data"]:$result;
@@ -29,7 +29,7 @@ class BaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function sendSuccess($message)
+    public function sendSuccess($result=[], $message)
     {
 
         $_result = (isset($result["data"]))?$result["data"]:'';

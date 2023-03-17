@@ -39,6 +39,19 @@ export default {
     informationBlockCaption: 'Information',
     logBlockCaption: 'Log',
 
+    DELETE_CONFORMATION: 'Are you sure to delete the item?',
+    DELETE_CAPTION: 'Deleting',
+    DELETE_BUTTON: 'Delete',
+
+    ITEM_ADDING_TITLE: 'Add',
+    ITEM_ADDING_MESSAGE: 'Adding',
+    ITEM_ADDBUTTON_CAPTION: 'Add',
+
+    ITEM_EDITING_TITLE: 'Edit',
+    ITEM_EDITING_MESSAGE: 'Editing',
+    ITEM_EDITBUTTON_CAPTION: 'Edit',
+
+
     //strings processing
 
     SortingCaption($column, $direction) {

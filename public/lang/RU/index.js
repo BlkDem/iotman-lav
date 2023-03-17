@@ -40,6 +40,19 @@ export default {
     informationBlockCaption: 'Информация',
     logBlockCaption: 'Логи',
 
+    DELETE_CONFORMATION: 'Вы уверены, что хотите удалить элемент?',
+    DELETE_CAPTION: 'Удаление',
+    DELETE_BUTTON: 'Удалить',
+
+    ITEM_ADDING_TITLE: 'Добавить',
+    ITEM_ADDING_MESSAGE: 'Добавление',
+    ITEM_ADDBUTTON_CAPTION: 'Добавить',
+
+    ITEM_EDITING_TITLE: 'Изменить',
+    ITEM_EDITING_MESSAGE: 'Изменение',
+    ITEM_EDITBUTTON_CAPTION: 'Изменить',
+
+
     //strings processing
 
     // SortingCaption($column, $direction) {

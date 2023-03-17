@@ -4,7 +4,7 @@
     </div>
 
     <common-card :cardCaption="pageCaption" :isCollapseButtonHidden="false">
-        <!-- <AddDeviceType ref="addDeviceType"></AddDeviceType> -->
+        <AddItem ref="addItem"></AddItem>
 
         <ConfirmDialogue ref="confirmDialogue" />
 
@@ -64,12 +64,12 @@
 
                     <div class="card-body w-100">
                         <div class="flex-center">
-                        <button class="btn btn-info btn-width-40 mx-1" @click="doEditType(key, device_type.id)">
+                        <button class="btn btn-info btn-width-40 mx-1" @click="doEdit(key, item.id.value)">
                             <i class="fas fa-edit" aria-hidden="true"></i>
                             Edit
                         </button>
 
-                        <button class="btn btn-warning btn-width-40 mx-1" @click="doDeleteType(key, device_type.id)">
+                        <button class="btn btn-warning btn-width-40 mx-1" @click="doDelete(key, item.id.value)">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                             Delete
                         </button>
@@ -105,7 +105,6 @@
 
                             >
                                 <input class="form-control w-100" :value="item[column].value" :id="setId(key, ckey)" :name="setId(key, ckey)"
-                                    @click="inputClick($event)"
                                     @keyup.enter="onInputEnter()"
                                     @keyup.esc="onInputEsc()"
                                     @change="onInputChange(item.id.value, key, column, $event.target.value, isEsc)"
@@ -122,11 +121,11 @@
                         </div>
 
                         <div class="col-sm-3 col-xs-3 col-lg-3  edit-buttons ">
-                            <button class="btn btn-info mx-2" @click="doEditType(key, item.id)">
+                            <button class="btn btn-info mx-2" @click="doEdit(key, item.id.value)">
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
 
-                            <button class="btn btn-secondary" @click="doDeleteType(key, item.id)">
+                            <button class="btn btn-secondary" @click="doDelete(key, item.id.value)">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -147,15 +146,12 @@ import Paginator from '../../components/common/Paginator.vue';
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
 import Pathes from "../../config/pathes";
-// import DeviceTypeStringConstants from '../../components/strings_constants/device_types/index';
 import Sorting from "../../helpers/Sorting";
 import Filtering from "../../helpers/Filtering.js";
 import ParsingErrors from "../../helpers/ParsingErrors.js";
+import AddItem from './AddDialog.vue';
 
-// import ParsingErrors from "../common/js/ParsingErrors.js";
-// import Imager from '../../components/common/Imager.vue';
-
-// import dsDeviceType from "../../api/dsDeviceType";
+// import DataField from '../../classes/DataField.ts';
 
 import TableNav from '../../components/common/TableBar/TableNav.vue';
 
@@ -189,7 +185,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
         components: {
             ConfirmDialogue,
             Paginator,
-            // Imager,
+            AddItem,
             TableNav,
         },
 
@@ -215,6 +211,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
         created() {
             this.getData();
             this.imagesPath = Pathes.storageImagesPath;
+
         },
 
         mounted() {
@@ -234,7 +231,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
         methods: {
 
             replaceByDefault(e) {
-                e.target.src = '/storage/images/blog.jpg'
+                e.target.src = Pathes.storageImagePlug
             },
 
             setId($key, $ckey) {
@@ -316,27 +313,35 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                     .then(response => {
                         this.Items = response.data.data;
 
+                        // prepare items to fields transform/extend
                         let newList = this.Items.map(item => ({
                             _id: item.id,
                         }));
 
+                        // transform fields to objects with extended properties
                         for (let itemRow=0; itemRow<newList.length; itemRow++) {
+
+                            // enum fields from dataFields list and add custom properties
                             for (let field=0; field<this.dataFields.length; field++) {
-                                let _editable = this.dataFields[field].isEditable
-                                let _sortable = this.dataFields[field].isSortable
-                                let _image = this.dataFields[field].isImage
-                                let _highlight = this.dataFields[field].isHighLight
-                                let _colscount = this.dataFields[field].columnsCount
-                                let _virtual = this.dataFields[field]?.isVirtualImage
-                                newList[itemRow][this.dataFields[field].fieldName] = {
-                                    'value': this.Items[itemRow][this.dataFields[field].fieldName],
-                                    'isEditable': _editable,
-                                    'isSortable': _sortable,
-                                    'isImage': _image,
-                                    'isHighLight': _highlight,
-                                    'columnsCount': _colscount,
-                                    'isVirtualImage': _virtual,
-                                    'class':
+
+                                const dataField = this.dataFields[field]
+
+                                const _editable = dataField.isEditable //possible to edit cell by text click
+                                const _sortable = dataField.isSortable //field can sorted
+                                const _image = dataField.isImage //image field - binding 'img'
+                                const _highlight = dataField.isHighLight //highlight another color field 'bg-info' class
+                                const _colscount = dataField.columnsCount //col-* col-ls-* ... value
+                                const _virtual = dataField?.isVirtualImage //for abstract images like 'albums'
+
+                                newList[itemRow][dataField.fieldName] = {
+                                    value: this.Items[itemRow][dataField.fieldName],
+                                    isEditable: _editable,
+                                    isSortable: _sortable,
+                                    isImage: _image,
+                                    isHighLight: _highlight,
+                                    columnsCount: _colscount,
+                                    isVirtualImage: _virtual,
+                                    class: //field width (bootstarp)
                                         (_colscount===1)?
                                         "col-sm-" + _colscount +
                                         " col-xs-" + _colscount +
@@ -349,12 +354,10 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                             }
                         }
 
-                        //console.log(newList)
-
                         this.Items = newList;
                         this.filteredItems = this.Items;
 
-
+                        // setup paginator
                         this.$refs.paginatorDeviceTypes.setPaginator(
                             {
                                 pagesCount: response.data.paginator.PagesCount,
@@ -363,36 +366,28 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                                 recordsCount: response.data.paginator.RecordsCount
                             }
                         )
-
-                        // this.Items = this.filteredItems;
-                        // this.updateSortedData(this.sortColumn, this.$direction);
-                        // }
-                        // console.log(_a.keys.)
-
                     })
                     .catch(err => {
                         console.log('error: ', err.response.status)
-                        if (err.response.status === 401) {
+                        if (err.response?.status === 401) {
                             window.location.href = "/login"
                         }
                     });
             },
 
-            async doDeleteType(key, id) {
+            async doDelete(key, id) {
 
                 const confirmDelete = await this.$refs.confirmDialogue.showDialogue({
-                    title: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION,
-                    message: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_MESSAGE + '"' +
-                    this.filteredDeviceTypes[key].device_type_name + '"?',
-                    okButton: DeviceTypeStringConstants.DEVICE_TYPE_DELETING_CAPTION,
+                    title: MessagesConstants.DELETE_CAPTION,
+                    message: MessagesConstants.DELETE_CONFORMATION,
+                    okButton: MessagesConstants.DELETE_BUTTON,
                 })
 
                 if (confirmDelete) {
                     axios.delete(APIConstants.api_device_type_delete + id)
                         .then(resp => {
-                            this.filteredDeviceTypes.splice(key, 1);
-                            this.deviceTypes = this.filteredDeviceTypes
-                            // console.log(key, id, " - deleted");
+                            this.Items.splice(key, 1);
+                            this.Items = this.filteredItems
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.DELETED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
@@ -405,56 +400,50 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                     console.log(MessagesConstants.DELETING_CANCELLED)
                 }
             },
-            setItem() {
-                return
+
+            async setItem() {
+                const _add = await this.$refs.addItem.showDialogue({
+                    edit_mode: false,
+                    title: MessagesConstants.ITEM_ADDING_TITLE,
+                    message: MessagesConstants.ITEM_ADDING_MESSAGE,
+                    okButton: MessagesConstants.ITEM_ADDBUTTON_CAPTION,
+                    dataFields: this.dataFields
+                })
+
+                if (_add) {
+                    const newItem = this.$refs.addItem.postData
+                    axios.post(APIConstants.api_device_type_create, newItem
+                        )
+                        .then(resp => {
+                            console.log(resp['data']);
+                            let newDevice = {
+                                device_type_name: resp['data'].device_type_name,
+                                device_type_desc: resp['data'].device_type_desc,
+                                device_type_image: resp['data'].device_type_image,
+                                id: resp['data'].id
+                            }
+                            this.deviceTypes.push(newDevice);
+                            this.$root.$refs.toaster.showMessage(
+                                MessagesConstants.ADDED_MESSAGE,
+                                MessagesConstants.PROCESS_SUCCESSFULLY
+                            )
+                        })
+                        .catch(error => {
+                            //
+                            //const Toaster = app.component('toaster')
+                            this.$root.$refs.toaster.showMessage(
+                                MessagesConstants.INSERTING_ERROR,
+                                ParsingErrors.getError(error),
+                                ParsingErrors.ERROR_LEVEL_ERROR
+                            )
+                        })
+                } else {
+                    console.log(MessagesConstants.INSERTING_CANCELLED);
+                }
+
             },
-            // async setItem() {
-            //     const _add = await this.$refs.addDeviceType.showDialogue({
-            //         edit_mode: false,
-            //         title: DeviceTypeStringConstants.DEVICE_TYPE_ADDING_TITLE,
-            //         message: DeviceTypeStringConstants.DEVICE_TYPE_ADDING_MESSAGE,
-            //         device_type_name: "",
-            //         device_type_desc: "",
-            //         device_type_image: "",
-            //         okButton: DeviceTypeStringConstants.DEVICE_TYPE_ADDBUTTON_CAPTION,
-            //     })
 
-            //     if (_add) {
-            //         const deviceType = this.$refs.addDeviceType
-            //         axios.post(APIConstants.api_device_type_create, {
-            //                     device_type_name:  deviceType.device_type_name,
-            //                     device_type_image: deviceType.device_type_image,
-            //                     device_type_desc:  deviceType.device_type_desc
-            //                 }
-            //             )
-            //             .then(resp => {
-            //                 // console.log(resp['data']);
-            //                 let newDevice = {
-            //                     device_type_name: resp['data'].device_type_name,
-            //                     device_type_desc: resp['data'].device_type_desc,
-            //                     device_type_image: resp['data'].device_type_image,
-            //                     id: resp['data'].id
-            //                 }
-            //                 this.deviceTypes.push(newDevice);
-            //                 this.$root.$refs.toaster.showMessage(
-            //                     MessagesConstants.ADDED_MESSAGE,
-            //                     MessagesConstants.PROCESS_SUCCESSFULLY
-            //                 )
-            //             })
-            //             .catch(error => {
-            //                 //
-            //                 //const Toaster = app.component('toaster')
-            //                 this.$root.$refs.toaster.showMessage(
-            //                     MessagesConstants.INSERTING_ERROR,
-            //                     ParsingErrors.getError(error),
-            //                     ParsingErrors.ERROR_LEVEL_ERROR
-            //                 )
-            //             })
-            //     } else {
-            //         console.log(MessagesConstants.INSERTING_CANCELLED);
-            //     }
 
-            // },
             async doEditType(key, id) {
                 const _edit = await this.$refs.addDeviceType.showDialogue(
                     {
