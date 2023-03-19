@@ -18,7 +18,7 @@
                 </span> -->
                 <div v-if="field.isImage" class="flex py-4">
                     <img class="device-image mx-2"
-                                :src="imagesPath + field.value"
+                                :src="getImage(field)"
                                 @error="replaceByDefault"
                     />
                     <input class="form-control" type="file" v-if="field.isEditable"/>
@@ -64,7 +64,7 @@ export default {
             message: undefined, // Main text content
 
             dataFields: undefined,
-            postData: undefined,
+            postData: {},
 
             okButton: undefined, // Text for confirm button; leave it empty because we don't know what we're using it for
             cancelButton: MessagesConstants.CANCEL_STRING, // text for cancel button
@@ -73,14 +73,21 @@ export default {
             rejectPromise: undefined,
 
             imagesPath: '',
+            imagePlug: ''
         }
     },
 
     created() {
         this.imagesPath = Pathes.storageImagesPath;
+        this.imagePlug = Pathes.storageImagePlug
     },
 
     methods: {
+
+        getImage(item) {
+            if ((item.value==='') || (item.isVirtualImage)) return this.imagePlug
+            return Pathes.storageImagesPath + item.value
+        },
 
         replaceByDefault(e) {
                 e.target.src = Pathes.storageImagePlug
@@ -98,13 +105,16 @@ export default {
                 this.cancelButton = optsAdd.cancelButton
             }
 
-            this.$refs.popup.open()
-
             for (let field in this.dataFields) {
-                this.dataFields[field].value = ''
+
+                if (this.dataFields[field].isImage) this.dataFields[field].value = Pathes.storageImagePlugName
+                else this.dataFields[field].value = ''
+
             }
 
-            console.log(this.dataFields)
+            this.$refs.popup.open()
+
+            console.log('prepared ', this.dataFields)
 
             return new Promise((resolve, reject) => {
                 this.resolvePromise = resolve
@@ -114,10 +124,12 @@ export default {
 
         confirmDialog() {
             this.$refs.popup.close()
-            this.postData = this.dataFields.map(item => ({
-                fieldName: item.fieldName,
-                value: item.value
-            }))
+
+            this.dataFields.forEach(element => {
+                this.postData[element.fieldName] = element.value;
+                // this.postData[element.fieldName] = element.value
+                // console.log(o)
+            })
             console.log(this.postData)
             this.resolvePromise(true, this)
         },

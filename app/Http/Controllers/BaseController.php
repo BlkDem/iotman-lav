@@ -29,16 +29,16 @@ class BaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function sendSuccess($result=[], $message)
+    public function sendSuccess($result=[], $message, $statusCode=200)
     {
 
-        $_result = (isset($result["data"]))?$result["data"]:'';
+        // $_result = (isset($result["data"]))?$result["data"]:'';
     	$response = [
             'success' => true,
-            'data'    => $_result,
+            'data'    => $result,
             'message' => $message,
         ];
-        return response()->json($response, 200);
+        return response()->json($response, $statusCode);
     }
 
     /**

@@ -50,10 +50,11 @@ class DeviceTypeController extends BaseController
         }
         try {
             $newDeviceType = DeviceType::create($request->all());
-            return response()->json($newDeviceType, 201);
+            return $this->sendSuccess($newDeviceType, "Device Type Created", 201);
+            // return response()->json($newDeviceType, 201);
         }
         catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
+            return response()->json('Creating Record Error: ' . $e, 400);
         }
     }
 

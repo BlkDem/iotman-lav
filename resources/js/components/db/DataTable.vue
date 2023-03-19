@@ -1,17 +1,17 @@
-<template @keyup.esc="resetEditCell()">
+<template>
     <div style="margin-top: 0.5rem">
         <!-- {{ pageCaption }} -->
     </div>
 
     <common-card :cardCaption="pageCaption" :isCollapseButtonHidden="false">
-        <AddItem ref="addItem"></AddItem>
+        <AddItem ref="addItem" />
 
         <ConfirmDialogue ref="confirmDialogue" />
 
         <table-nav
             :compactView="compactView"
             :dataFields="dataFields"
-            @getData="getData"
+            @getTableData="getTableData"
             @setCompactView="setCompactView"
             @addEvent="setItem"
             @updateSortedData="updateSortedData"
@@ -27,17 +27,6 @@
             <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(item, key) in filteredItems"
                 v-bind:key="key" v-bind:id="item.id.value">
                 <div class="card border-light flex py-2">
-                    <!-- <h3 class="card-header">
-                        {{ item.id.key }}
-                        <span class="text-info">({{ item.id.value }})</span>
-                    </h3> -->
-                    <!-- <div class="card-body">
-                        <h6 class="card-subtitle text-muted">
-                            {{ device_type.device_type_desc }}
-                        </h6>
-                    </div> -->
-
-                    <!-- <img v-bind:src="device_type.device_type_image" /> -->
                     <div class="w-100 flex-center" v-for="(column, ckey) in Object.keys(item)"
                         v-bind:key="ckey">
 
@@ -47,11 +36,6 @@
                             {{ item[column].value }}
                         </span>
 
-                        <!-- <img v-if="item[column].isImage" class="w-100 p-2"
-                            :src="'/storage/images/'+ item[column].value?
-                                '/storage/images/'+ item[column].value :
-                                '/storage/images/blog.jpg'"
-                        /> -->
                         <img v-if="item[column].isImage" class="w-100 p-2"
                             :src="(!item[column].isVirtualImage)?imagesPath + item[column].value:imagesPath +'blog.jpg'"
                             @error="replaceByDefault"
@@ -82,7 +66,7 @@
         <!-- compact view -->
         <div v-show="compactView" class="my-2" >
             <div class="card border-primary mb-1 w-100 fade-in" v-for="(item, key) in filteredItems" v-bind:key="key"
-                v-bind:id="item.id.value">
+                v-bind:id="item.id">
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
 
@@ -98,7 +82,7 @@
                                 {{ item[column].value }}
                             </span>
                             <img v-if="item[column].isImage" class="device-image"
-                                :src="(!item[column].isVirtualImage)?imagesPath + item[column].value:imagesPath +'blog.jpg'"
+                                :src="getImage(item[column])"
                                 @error="replaceByDefault"
                             />
                             <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey"
@@ -107,14 +91,13 @@
                                 <input class="form-control w-100" :value="item[column].value" :id="setId(key, ckey)" :name="setId(key, ckey)"
                                     @keyup.enter="onInputEnter()"
                                     @keyup.esc="onInputEsc()"
-                                    @change="onInputChange(item.id.value, key, column, $event.target.value, isEsc)"
+                                    @change="onInputChange(item.id, key, column, $event.target.value, isEsc)"
                                 />
-                                <button class="btn btn-primary mx-1" :id="item.id.value"
-                                    @click.stop="saveRecord(item.id.value, item[column].value, item[column].value, $event.target.value)">
+                                <button class="btn btn-primary mx-1" :id="item.id"
+                                    @click.stop="saveRecord(item.id, item[column].value, item[column].value, $event.target.value)">
                                     <i class="far fa-check-circle"></i>
                                 </button>
                                 <button class="btn btn-primary" @mousedown="this.isEsc=true; this.resetEditCell()">
-                                    <!-- <i class="far fa-window-close fa-2x"></i> -->
                                     <i class="far fa-times-circle"></i>
                                 </button>
                             </div>
@@ -191,7 +174,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
         data() {
             return {
-                // isEditableId: [],
+
                 activeCol: undefined,
                 activeRow: undefined,
 
@@ -203,14 +186,16 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 itemsVisible: false,
                 compactView: true,
 
-                imagesPath: ''
+                imagesPath: '',
+                imagePlug: ''
 
             };
         },
 
         created() {
-            this.getData();
+            this.getTableData();
             this.imagesPath = Pathes.storageImagesPath;
+            this.imagePlug = Pathes.storageImagePlug
 
         },
 
@@ -223,12 +208,14 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 this.setLang(_lang)
             });
 
-            // console.log(this.imagesPath)
-
-            // dsDeviceType.getItems()
         },
 
         methods: {
+
+            getImage(item) {
+                if ((item.value==='') || (item.isVirtualImage)) return this.imagePlug
+                return Pathes.storageImagesPath + item.value
+            },
 
             replaceByDefault(e) {
                 e.target.src = Pathes.storageImagePlug
@@ -308,53 +295,65 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 this.compactView = Boolean(value)
             },
 
-            async getData(_currentPage=1, _itemsPerPage=5) {
-                await axios.get(this.api.get + _currentPage + "/" + _itemsPerPage)
-                    .then(response => {
-                        this.Items = response.data.data;
+            processListItem(_item, _value) {
+
+                let newListItemData = {}
+
+                for (let field in this.dataFields) {
+
+                    const dataField = this.dataFields[field]
+
+                    const _editable = dataField.isEditable //possible edit cell by text click
+                    const _sortable = dataField.isSortable //field can sorted
+                    const _image = dataField.isImage //image field - binding 'img'
+                    const _highlight = dataField.isHighLight //highlight another color field 'bg-info' class
+                    const _colscount = dataField.columnsCount //col-* col-ls-* ... value
+                    const _virtual = dataField?.isVirtualImage //for abstract images like 'albums'
+
+                    const newListItem = _item  //newList[itemRow]
+
+                    newListItemData[dataField.fieldName] = {
+                        value: _value[dataField.fieldName],
+                        isEditable: _editable,
+                        isSortable: _sortable,
+                        isImage: _image,
+                        isHighLight: _highlight,
+                        columnsCount: _colscount,
+                        isVirtualImage: _virtual,
+                        class: //field width (bootstrap)
+                            (_colscount === 1) ?
+                            "col-sm-" + _colscount +
+                            " col-xs-" + _colscount +
+                            " col-lg-" + _colscount + " align-center" :
+                            "col-sm-" + _colscount +
+                            " col-xs-" + _colscount +
+                            " col-lg-" + _colscount
+                    }
+                }
+                return newListItemData
+            },
+
+            populateListItems(items) {
 
                         // prepare items to fields transform/extend
-                        let newList = this.Items.map(item => ({
+                        let newList = items.map(item => ({
                             _id: item.id,
                         }));
 
                         // transform fields to objects with extended properties
-                        for (let itemRow=0; itemRow<newList.length; itemRow++) {
-
-                            // enum fields from dataFields list and add custom properties
-                            for (let field=0; field<this.dataFields.length; field++) {
-
-                                const dataField = this.dataFields[field]
-
-                                const _editable = dataField.isEditable //possible to edit cell by text click
-                                const _sortable = dataField.isSortable //field can sorted
-                                const _image = dataField.isImage //image field - binding 'img'
-                                const _highlight = dataField.isHighLight //highlight another color field 'bg-info' class
-                                const _colscount = dataField.columnsCount //col-* col-ls-* ... value
-                                const _virtual = dataField?.isVirtualImage //for abstract images like 'albums'
-
-                                newList[itemRow][dataField.fieldName] = {
-                                    value: this.Items[itemRow][dataField.fieldName],
-                                    isEditable: _editable,
-                                    isSortable: _sortable,
-                                    isImage: _image,
-                                    isHighLight: _highlight,
-                                    columnsCount: _colscount,
-                                    isVirtualImage: _virtual,
-                                    class: //field width (bootstarp)
-                                        (_colscount===1)?
-                                        "col-sm-" + _colscount +
-                                        " col-xs-" + _colscount +
-                                        " col-lg-" + _colscount + " align-center"
-                                        :
-                                        "col-sm-" + _colscount +
-                                        " col-xs-" + _colscount +
-                                        " col-lg-" + _colscount
-                                }
-                            }
+                        for (let itemRow in newList) {
+                            newList[itemRow] = this.processListItem(newList[itemRow], items[itemRow])
                         }
+                        // console.log(newList)
+                        return newList
 
-                        this.Items = newList;
+            },
+
+            async getTableData(_currentPage=1, _itemsPerPage=5) {
+                await axios.get(this.api.get + _currentPage + "/" + _itemsPerPage)
+                    .then(response => {
+
+                        this.Items = this.populateListItems(response.data.data);
                         this.filteredItems = this.Items;
 
                         // setup paginator
@@ -412,17 +411,21 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
                 if (_add) {
                     const newItem = this.$refs.addItem.postData
-                    axios.post(APIConstants.api_device_type_create, newItem
-                        )
+
+                    axios.post(this.api.insert, newItem)
                         .then(resp => {
-                            console.log(resp['data']);
-                            let newDevice = {
-                                device_type_name: resp['data'].device_type_name,
-                                device_type_desc: resp['data'].device_type_desc,
-                                device_type_image: resp['data'].device_type_image,
-                                id: resp['data'].id
-                            }
-                            this.deviceTypes.push(newDevice);
+
+                            const _res = resp.data.data
+
+                            console.log('res: ', _res);
+
+                            const newItem = this.processListItem({}, _res)
+
+                            console.log(newItem)
+
+                            this.Items.push(newItem);
+                            this.filteredItems = this.Items
+
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.ADDED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY

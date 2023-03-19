@@ -55,7 +55,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .card-caption {
     display: flex;
     flex-direction: row;

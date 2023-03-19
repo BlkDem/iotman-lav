@@ -1,6 +1,6 @@
 <template >
         <div style="margin-top: 5.5rem">
-        </div>
+
 
         <!-- Album Widget -->
         <data-table
@@ -19,31 +19,31 @@
             :pageCaption="images.imagesCaption"
         >
         </data-table>
-
+    </div>
 </template>
 
 <script>
-import ConfirmDialogue from '../../../components/common/ConfirmDialogue.vue';
-import AddAlbum from './AddAlbum.vue';
-import Paginator from '../../../components/common/Paginator.vue';
+// import ConfirmDialogue from '../../../components/common/ConfirmDialogue.vue';
+// import AddAlbum from './AddAlbum.vue';
+// import Paginator from '../../../components/common/Paginator.vue';
 import MessagesConstants from '../../strings_constants/strings'
 import APIConstants from "../../../api/rest_api";
-import AlbumStringConstants from '../../../components/strings_constants/images/index';
-import Sorting from "../../../helpers/Sorting";
-import Filtering from "../../../helpers/Filtering";
+// import AlbumStringConstants from '../../../components/strings_constants/images/index';
+// import Sorting from "../../../helpers/Sorting";
+// import Filtering from "../../../helpers/Filtering";
 import ParsingErrors from "../../../helpers/ParsingErrors.js";
 import DataTable from '../../db/DataTable.vue';
-import TableNav from '../../common/TableBar/TableNav.vue';
+// import TableNavBar from '../../common/TableBar/TableNav.vue';
 // import Imager from '../../components/common/Imager.vue';
 
     export default {
 
         components: {
-            ConfirmDialogue,
-            AddAlbum,
-            Paginator,
+            // ConfirmDialogue,
+            // AddAlbum,
+            // Paginator,
             DataTable,
-            TableNav
+            // TableNav
             // Imager
         },
 
@@ -167,16 +167,22 @@ import TableNav from '../../common/TableBar/TableNav.vue';
         },
 
         created() {
-            this.images.api.get = APIConstants.api_images_read_page
-            this.images.api.insert = APIConstants.api_image_create
-            this.images.api.update = APIConstants.api_image_update
-            this.images.api.delete = APIConstants.api_image_delete
-            this.images.api.patch = APIConstants.api_image_patch
 
-            this.albums.api.get =    APIConstants.api_albums_read_page
-            this.albums.api.insert = APIConstants.api_album_create
-            this.albums.api.update = APIConstants.api_album_update
-            this.albums.api.delete = APIConstants.api_album_delete
+            const apiImages = this.images.api
+
+            apiImages.get = APIConstants.api_images_read_page
+            apiImages.get = APIConstants.api_images_read_page
+            apiImages.insert = APIConstants.api_image_create
+            apiImages.update = APIConstants.api_image_update
+            apiImages.delete = APIConstants.api_image_delete
+            apiImages.patch = APIConstants.api_image_patch
+
+            const apiAlbums = this.albums.api
+
+            apiAlbums.get =    APIConstants.api_albums_read_page
+            apiAlbums.insert = APIConstants.api_album_create
+            apiAlbums.update = APIConstants.api_album_update
+            apiAlbums.delete = APIConstants.api_album_delete
         },
 
         methods: {
