@@ -69,7 +69,7 @@ class DeviceTypeController extends BaseController
             return $this->sendResponse($updateDeviceType, "Device type updated");
         }
         catch (Exception $e) {
-            return $this->sendError('Deleting Record Error: ' . $e, 400);
+            return $this->sendError('Updating Record Error: ' . $e, 400);
             // return response()->json('Deleting Record Error: ' . $e, 400);
         }
     }
@@ -84,7 +84,7 @@ class DeviceTypeController extends BaseController
             return response()->json($res, 200);
         }
         catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
+            return response()->json('Patching Record Error: ' . $e, 400);
         }
     }
 

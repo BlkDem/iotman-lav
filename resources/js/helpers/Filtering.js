@@ -1,12 +1,14 @@
 export default {
-    doFilter($items, $column, $filter) {
-        // console.log($items, $column, $filter)
+    doFilter($items, $fieldName, $filter) {
+        console.log($items, $fieldName, $filter)
         if ($filter === "") return $items;
 
         const res = $items.filter((item) => {
-            console.log(item[$column].value.indexOf($filter)>-1)
+            // console.log(item[$fieldName].value.indexOf($filter)>-1)
+            console.log(item[$fieldName.toLowerCase()], item[$fieldName.toLowerCase()].value, $fieldName.toLowerCase())
                 return (
-                    item[$column].value
+                    item[$fieldName.toLowerCase()].value
+                    .toString()
                     .toLowerCase()
                     .indexOf($filter.toLowerCase()) > -1
                 );

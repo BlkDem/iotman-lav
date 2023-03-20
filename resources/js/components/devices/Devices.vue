@@ -65,27 +65,31 @@ export default {
                             isEditable: true,
                             isSortable: true,
                             isHighLight: false,
-                            columnsCount: 2
+                            columnsCount: 3
                         },
-                        {
-                            fieldName: 'device_hwid',
-                            fieldCaption: 'HWID',
-                            type: String,
-                            isImage: false,
-                            isEditable: true,
-                            isSortable: true,
-                            isHighLight: true,
-                            columnsCount: 2
-                        },
+                        // {
+                        //     fieldName: 'device_hwid',
+                        //     fieldCaption: 'HWID',
+                        //     type: String,
+                        //     isImage: false,
+                        //     isEditable: true,
+                        //     isSortable: true,
+                        //     isHighLight: true,
+                        //     columnsCount: 2
+                        // },
                         {
                             fieldName: 'device_type_id',
+                            displayName: 'device_type_name',
                             fieldCaption: 'Device Type',
-                            type: Number,
+                            type: String,
                             isImage: false,
-                            isEditable: true,
+                            isEditable: false,
                             isSortable: true,
                             isHighLight: false,
-                            columnsCount: 2
+                            columnsCount: 3,
+                            lookupId: 'device_type_id',
+                            lookupApi: APIConstants.api_device_types_read,
+                            isLookup: true,
                         },
                     ],
 
@@ -96,13 +100,13 @@ export default {
     },
 
     created() {
-        const deviceApi = this.devices
+        const deviceApi = this.devices.api
 
-        deviceApi.api.get =    APIConstants.api_devices_read_page
-        deviceApi.api.insert = APIConstants.api_device_create
-        deviceApi.api.update = APIConstants.api_device_update
-        deviceApi.api.patch =  APIConstants.api_device_patch
-        deviceApi.api.delete = APIConstants.api_device_delete
+        deviceApi.get =    APIConstants.api_devices_read_page
+        deviceApi.insert = APIConstants.api_device_create
+        deviceApi.update = APIConstants.api_device_update
+        deviceApi.patch =  APIConstants.api_device_patch
+        deviceApi.delete = APIConstants.api_device_delete
 
     }
 }

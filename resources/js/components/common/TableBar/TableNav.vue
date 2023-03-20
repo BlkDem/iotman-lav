@@ -3,14 +3,20 @@
         <div class="container-fluid">
             <div class="navbar-collapse" id="navbarColor02">
                 <div class="navbar-nav me-auto  flex-center">
-                    <filter-comp :filterDataFields="filterDataFields"></filter-comp>
+                    <filter-comp
+                        :filterDataFields="filterDataFields"
+                        @filterData="updateFilteredData">
+                    </filter-comp>
                     <!-- <li class="nav-item  d-flex py-1  w-100">
                         <input class="form-control me-sm-2" type="text" v-model="dataFilter" />
                     </li> -->
                 </div>
 
                 <div>
-                    <sort-comp :sortDataFields="sortDataFields" @updateSortedData="doSort"></sort-comp>
+                    <sort-comp
+                        :sortDataFields="sortDataFields"
+                        @updateSortedData="doSort">
+                    </sort-comp>
                 </div>
 
                 <div class="d-flex">
@@ -97,8 +103,9 @@ export default {
             this.$emit('updateSortedData', $column, $direction)
         },
 
-        updateFilteredData() {
-            this.$emit('updateFilteredData', this.dataFilter)
+        updateFilteredData(fieldName, filter) {
+            console.log(filter)
+            this.$emit('updateFilteredData', fieldName, filter)
         },
 
         setCompactView(value) {
@@ -113,9 +120,9 @@ export default {
     },
 
     watch: {
-        dataFilter: function () {
-            handler: this.updateFilteredData();
-        },
+        // dataFilter: function () {
+        //     handler: this.updateFilteredData();
+        // },
     },
 }
 </script>

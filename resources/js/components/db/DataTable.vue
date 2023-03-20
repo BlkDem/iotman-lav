@@ -75,12 +75,22 @@
                             v-for="(column, ckey) in Object.keys(item)" v-bind:key="ckey"
                         >
 
-                            <span v-if="(activeCol!==key||activeRow!==ckey)&&(item[column].isImage != true)" class="w-75"
+                            <span v-if="(activeCol!==key||activeRow!==ckey)&&(item[column].isImage != true)&&(!item[column].isLookup)" class="w-75"
                                 :class="{'text-info': item[column].isHighLight}"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
                                 {{ item[column].value }}
                             </span>
+
+                            <span v-if="item[column].isLookup" class="w-75"
+                                :class="{'text-info': item[column].isHighLight}"
+                                @click.stop="onCellClick(item[column].isEditable, ckey, key)"
+                            >
+                                {{ getValue(item[column]) }}
+                            </span>
+
+
+
                             <img v-if="item[column].isImage" class="device-image"
                                 :src="getImage(item[column])"
                                 @error="replaceByDefault"
@@ -212,6 +222,10 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
         methods: {
 
+            getValue(item) {
+                return (item.lookupValue == null)?item.value:item.lookupValue
+            },
+
             getImage(item) {
                 if ((item.value==='') || (item.isVirtualImage)) return this.imagePlug
                 return Pathes.storageImagesPath + item.value
@@ -284,26 +298,26 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 Sorting.doSort(this.filteredItems, $column, $direction)
             },
 
-            updateFilteredData($filter) {
+            updateFilteredData($fieldName, $filter) {
 
                 this.filteredItems = this.Items;
-                this.filteredItems = Filtering.doFilter(this.filteredItems, this.filterColumn, $filter)
+                this.filteredItems = Filtering.doFilter(this.filteredItems, $fieldName, $filter)
             },
 
-            setCompactView(value) {
+            setCompactView($value) {
                 // console.log(value)
-                this.compactView = Boolean(value)
+                this.compactView = $value
             },
 
             processListItem(_value) {
 
                 let newListItemData = {}
 
+                console.log(_value)
+
                 for (let field in this.dataFields) {
 
                     const dataField = this.dataFields[field]
-
-                    // console.log('dataField: ', dataField)
 
                     const _editable = dataField.isEditable //possible edit cell by text click
                     const _sortable = dataField.isSortable //field can sorted
@@ -311,16 +325,26 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                     const _highlight = dataField.isHighLight //highlight another color field 'bg-info' class
                     const _colscount = dataField.columnsCount //col-* col-ls-* ... value
                     const _virtual = dataField?.isVirtualImage //for abstract images like 'albums'
+                    const _isLookup = dataField?.isLookup //field links to another object
+                    const _lookupApi = dataField?.lookupApi //another object get api
+                    const _lookupId = dataField?.lookupId //field link key (FK)
+                    const _displayName = dataField?.displayName //Display Name Field
 
                     // const newListItem = _item  //newList[itemRow]
 
                     newListItemData[dataField.fieldName] = {
                         value: _value[dataField.fieldName],
+                        lookupValue: (dataField.displayName != null)?_value[dataField.displayName]:'',
+                        // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
+                        displayName: _displayName,
                         isEditable: _editable,
                         isSortable: _sortable,
                         isImage: _image,
                         isHighLight: _highlight,
                         columnsCount: _colscount,
+                        isLookup: _isLookup,
+                        lookupId: _lookupId,
+                        lookupApi: _lookupApi,
                         isVirtualImage: _virtual,
                         class: //field width (bootstrap)
                             (_colscount === 1) ?
@@ -386,7 +410,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 })
 
                 if (confirmDelete) {
-                    axios.delete(APIConstants.api_device_type_delete + id)
+                    axios.delete(this.api.delete + id)
                         .then(resp => {
                             this.Items.splice(key, 1);
                             this.Items = this.filteredItems
@@ -420,11 +444,21 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 if (_add) {
                     const newItemData = this.$refs.addItem.postData
 
-                    axios.post(this.api.insert, newItemData)
+                    const _values = {}
+                    for (let field in newItemData) {
+                        _values[newItemData[field].fieldName] = newItemData[field].value
+                    }
+
+                    console.log('values: ', _values, this.api.insert)
+
+                    axios.post(this.api.insert, _values)
                         .then(resp => {
 
                             const _res = resp.data.data
+
+                            console.log('res: ', _res)
                             const transformItem = this.processListItem(_res)
+                            console.log('after transform: ', _res)
 
                             this.Items.push(transformItem);
                             this.filteredItems = this.Items
@@ -476,10 +510,16 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                         _values[editItem[field].fieldName] = editItem[field].value
                     }
 
-                    // console.log(_values)
+                    console.log(_values)
                     axios.put(this.api.update + id, _values)
                         .then(resp => {
-                            console.log(resp.data.data);
+                            // console.log(resp.data);
+
+                            const _res = resp.data.data
+                            this.filteredItems[key] = this.processListItem(_res)
+                            this.Items[key] = this.filteredItems[key]
+                            // this.Items.push(transformItem);
+
                             // this.deviceTypes[key].device_type_name = resp['data'].device_type_name;
                             // this.deviceTypes[key].device_type_desc = resp['data'].device_type_desc;
                             // this.deviceTypes[key].device_type_image = resp['data'].device_type_image;

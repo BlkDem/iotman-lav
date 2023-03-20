@@ -53,7 +53,8 @@ class MicroController extends BaseController
         }
         try {
             $newDeviceType = Micro::create($request->all());
-            return response()->json($newDeviceType, 201);
+            // return response()->json($newDeviceType, 201);
+            return $this->sendResponse($newDeviceType, 'Device created');
         }
         catch (Exception $e) {
             return response()->json('Store Record Error: ' . $e, 400);
@@ -90,7 +91,9 @@ class MicroController extends BaseController
         }
         try {
             $updateMicro->update($request->all());
-            return response()->json($updateMicro, 200);        }
+            // return response()->json($updateMicro, 200);
+            return $this->sendResponse($updateMicro, "Micro updated");
+        }
         catch (Exception $e) {
             return response()->json('Deleting Record Error: ' . $e, 400);
         }

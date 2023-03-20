@@ -9,10 +9,24 @@
 
             <div v-for="(field, key) in dataFields" v-bind:key="key">
 
-                <div v-if="!field.isImage&&field.fieldName!=='id'">
+                <div v-if="!field.isImage&&field.fieldName!=='id'&&!field.isLookup">
                     <label class="px-2">{{ field.fieldCaption }}</label>
                     <input class="form-control p-2 mb-4" :placeholder="'Input ' + field.fieldCaption"  v-model="field.value" />
                 </div>
+
+                <div v-if="field.isLookup">
+                    <label class="px-2">{{ field.fieldCaption }} - {{ field.lookupId }} - {{ field.value }}</label>
+                    <DataSetSelect
+                        :dataTableReadApi="field.lookupApi"
+                        :nameField="field.displayName"
+                        :lookupField="field.lookupId"
+                        :value="field.value"
+                        @onDataSelect="onDataSelect"
+                    >
+                    </DataSetSelect>
+                    <!-- <input class="form-control p-2 mb-4" :placeholder="'Input ' + field.fieldCaption"  v-model="field.value" /> -->
+                </div>
+
 
                 <div v-if="field.isImage" class="flex py-4">
                     <img class="device-image mx-2"
@@ -34,11 +48,12 @@
 import PopupModal from '../common/PopupModal.vue';
 import MessagesConstants from '../strings_constants/strings';
 import Pathes from '../../config/pathes';
+import DataSetSelect from './DataSetSelect.vue';
 
 export default {
     name: 'AddItem',
 
-    components: { PopupModal },
+    components: { PopupModal, DataSetSelect },
 
     data (){
         return {
@@ -66,6 +81,15 @@ export default {
     },
 
     methods: {
+
+        onDataSelect(_value, _fieldName) {
+            for (let item in this.dataFields) {
+                if (this.dataFields[item].fieldName === _fieldName) {
+                    this.dataFields[item].value = _value
+                }
+            }
+            console.log(_value, _fieldName, this.dataFields)
+        },
 
         getImage(item) {
             if ((item.value==='') || (item.isVirtualImage)) return this.imagePlug
@@ -107,15 +131,7 @@ export default {
 
         confirmDialog() {
             this.$refs.popup.close()
-            console.log('before confirm: ', this.dataFields)
-            if (!this.edit_mode) {
-                this.dataFields.forEach(element => {
-                    this.postData[element.fieldName] = element.value;
-                    // this.postData[element.fieldName] = element.value
-                    // console.log(o)
-                })
-            }
-            else this.postData = this.dataFields
+            this.postData = this.dataFields
             console.log('edit Ok: ', this.postData)
             this.resolvePromise(true, this)
         },
