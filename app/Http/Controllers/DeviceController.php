@@ -41,6 +41,20 @@ class DeviceController extends BaseController
         }
     }
 
+    public function patch(Request $request, $id, $field, $value){
+        try {
+            $patchDevice = Device::whereId($id);
+            $patchDevice->update([
+                "$field" => $value
+            ]);
+            $res = Device::find($id);
+            return response()->json($res, 200);
+        }
+        catch (Exception $e) {
+            return response()->json('Patching Record Error: ' . $e, 400);
+        }
+    }
+
     public function destroy($id)
     {
         $deviceItem = Device::find($id);

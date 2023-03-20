@@ -11,8 +11,8 @@
         }
     </script>
     <title>Umolab Devices</title>
-    <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
-
+    <!-- <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
     <!-- * checking and applying Application Theme via asset the specified CSS file
     * All app.css in their folders /css/ThemeFolder/app.css and default theme in /css/app.css

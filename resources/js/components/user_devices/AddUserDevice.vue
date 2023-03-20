@@ -117,6 +117,6 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style>
     @import '../../../sass/aligns.scss';
 </style>

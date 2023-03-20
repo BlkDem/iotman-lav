@@ -5,6 +5,7 @@ export default {
     ALBUMS: "Альбомы",
     DEVICE_TYPES: "Типы устройств",
     DEVICES: "Устройства",
+    MICROS: "Контроллеры",
     USER_DEVICES: "Пользовательские",
     THEME: "Тема",
 

@@ -148,7 +148,7 @@
 
 </template>
 
-<script lang = "js">
+<script>
 
 import ConfirmDialogue from "../../components/common/ConfirmDialogue.vue";
 import AddUserDevice from "./AddUserDevice.vue";
@@ -469,6 +469,6 @@ export default {
 
 </script>
 
-<style lang="scss">
+<style>
 
 </style>

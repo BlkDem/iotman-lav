@@ -96,6 +96,20 @@ class MicroController extends BaseController
         }
     }
 
+    public function patch(Request $request, $id, $field, $value){
+        try {
+            $patchMicro = Micro::whereId($id);
+            $patchMicro->update([
+                "$field" => $value
+            ]);
+            $res = Micro::find($id);
+            return response()->json($res, 200);
+        }
+        catch (Exception $e) {
+            return response()->json('Deleting Record Error: ' . $e, 400);
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *

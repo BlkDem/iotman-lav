@@ -47,6 +47,7 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/user/read/{id}', 'show');
     Route::put('/user/update/{updateUser}', 'update');
     Route::delete('/user/delete/{id}', 'destroy');
+    Route::patch('/user/patch/{id}/{field}/{value}', 'patch');
 });
 
 //CRUD routes for model 'images'
@@ -74,6 +75,7 @@ Route::controller(AlbumController::class)->group(function () {
     Route::get('/album/read/{id}', 'show');
     Route::put('/album/update/{updateAlbum}', 'update');
     Route::delete('/album/delete/{id}', 'destroy');
+    Route::patch('/album/patch/{id}/{field}/{value}', 'patch');
 });
 
 //CRUD routes for model 'micros'
@@ -85,6 +87,7 @@ Route::controller(MicroController::class)->group(function () {
     Route::get(   '/micro/read/{id}', 'show');
     Route::put(   '/micro/update/{updateMicro}', 'update');
     Route::delete('/micro/delete/{id}', 'destroy');
+    Route::patch('/micro/patch/{id}/{field}/{value}', 'patch');
 });
 
 //CRUD routes for model 'device_micros'
@@ -96,6 +99,7 @@ Route::controller(DeviceMicroController::class)->group(function () {
     Route::get(   '/device_micro/read/{id}', 'show');
     Route::put(   '/device_micro/update/{updateDeviceMicro}', 'update');
     Route::delete('/device_micro/delete/{id}', 'destroy');
+    Route::patch('/device_micro/patch/{id}/{field}/{value}', 'patch');
 });
 
 //CRUD routes for model 'dev_blogs'
@@ -107,6 +111,7 @@ Route::controller(DevBlogController::class)->group(function () {
     Route::get(   '/dev_blog/read/{id}', 'show');
     Route::put(   '/dev_blog/update/{updateDevBlog}', 'update');
     Route::delete('/dev_blog/delete/{id}', 'destroy');
+    Route::patch('/dev_blog/patch/{id}/{field}/{value}', 'patch');
 });
 
 
@@ -128,6 +133,7 @@ Route::get('/devices/read/page/{currentPage}/{itemsPerPage}', [DevicesViewContro
 Route::get('/devices/read/{id}', [DevicesViewController::class, 'show']);
 Route::put('/devices/update/{updateDevice}', [DeviceController::class, 'update']);
 Route::delete('/devices/delete/{id}', [DeviceController::class, 'destroy']);
+Route::patch('/device/patch/{id}/{field}/{value}', [DeviceController::class, 'patch']);
 
 //CRUD routes for model 'user_devices'
 
@@ -138,6 +144,8 @@ Route::get('/user_devices/read/{device_user_id}', [DeviceUsersViewController::cl
 Route::put('/user_device/update/{updateDeviceUser}', [DeviceUserController::class, 'update']);
 Route::delete('/user_device/delete/{id}', [DeviceUserController::class, 'destroy']);
 Route::get('/user_devices/show', [DeviceUserController::class, 'UserDevices']);
+Route::patch('/user_device/patch/{id}/{field}/{value}', [DeviceUserController::class, 'patch']);
+
 
 //User Devices Count
 Route::get('/user_device_count/read', [UserDevicesCountController::class, 'index']);

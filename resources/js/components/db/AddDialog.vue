@@ -5,6 +5,7 @@
         </div>
 
         <div class="modal-body align-left py-4">
+            <!-- <div>{{ message }}</div> -->
 
             <div v-for="(field, key) in dataFields" v-bind:key="key">
 
@@ -12,10 +13,7 @@
                     <label class="px-2">{{ field.fieldCaption }}</label>
                     <input class="form-control p-2 mb-4" :placeholder="'Input ' + field.fieldCaption"  v-model="field.value" />
                 </div>
-                <!-- <span v-if="!field.isImage" :class="{'text-info': field.isHighLight}"
-                >
-                    {{ field.fieldCaption }}
-                </span> -->
+
                 <div v-if="field.isImage" class="flex py-4">
                     <img class="device-image mx-2"
                                 :src="getImage(field)"
@@ -23,22 +21,7 @@
                     />
                     <input class="form-control" type="file" v-if="field.isEditable"/>
                 </div>
-
             </div>
-
-
-
-
-
-            <!-- <input v-model="device_type_name" class="form-control p-2 mb-4" placeholder="Input Name"/> -->
-
-            <!-- <label class="px-2">Device Type Desc</label>
-            <textarea v-model="device_type_desc" class="form-control p-2 mb-4" style="min-height: 100px; max-height: 200px;" placeholder="Input Device Type Desc" cols="40" rows="3">
-
-            </textarea> -->
-            <!-- <input v-model="device_type_desc" class="form-control p-2 mb-4" placeholder="Input Device Type Desc"/> -->
-            <!-- <label class="px-2">Device Type Image</label>
-            <input v-model="device_type_image" class="form-control p-2 mb-4" placeholder="Input Device Type Image"/> -->
         </div>
         <div class="align-center">
             <button class="btn btn-danger mx-1 btn-width-40" @click="confirmDialog">{{ okButton }}</button>
@@ -100,6 +83,8 @@ export default {
             this.message = optsAdd.message
             this.dataFields = optsAdd.dataFields
 
+            console.log('on show: ', this.dataFields)
+
             this.okButton = optsAdd.okButton
             if (optsAdd.cancelButton) {
                 this.cancelButton = optsAdd.cancelButton
@@ -107,14 +92,12 @@ export default {
 
             for (let field in this.dataFields) {
 
-                if (this.dataFields[field].isImage) this.dataFields[field].value = Pathes.storageImagePlugName
-                else this.dataFields[field].value = ''
-
+                if (this.dataFields[field].isImage&&this.dataFields[field].value==='') {
+                    this.dataFields[field].value = Pathes.storageImagePlugName
+                }
             }
 
             this.$refs.popup.open()
-
-            console.log('prepared ', this.dataFields)
 
             return new Promise((resolve, reject) => {
                 this.resolvePromise = resolve
@@ -124,13 +107,16 @@ export default {
 
         confirmDialog() {
             this.$refs.popup.close()
-
-            this.dataFields.forEach(element => {
-                this.postData[element.fieldName] = element.value;
-                // this.postData[element.fieldName] = element.value
-                // console.log(o)
-            })
-            console.log(this.postData)
+            console.log('before confirm: ', this.dataFields)
+            if (!this.edit_mode) {
+                this.dataFields.forEach(element => {
+                    this.postData[element.fieldName] = element.value;
+                    // this.postData[element.fieldName] = element.value
+                    // console.log(o)
+                })
+            }
+            else this.postData = this.dataFields
+            console.log('edit Ok: ', this.postData)
             this.resolvePromise(true, this)
         },
 

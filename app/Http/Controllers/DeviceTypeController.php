@@ -65,9 +65,12 @@ class DeviceTypeController extends BaseController
         }
         try {
             $updateDeviceType->update($request->all());
-            return response()->json($updateDeviceType, 200);        }
+            // return response()->json($updateDeviceType, 200);
+            return $this->sendResponse($updateDeviceType, "Device type updated");
+        }
         catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
+            return $this->sendError('Deleting Record Error: ' . $e, 400);
+            // return response()->json('Deleting Record Error: ' . $e, 400);
         }
     }
 

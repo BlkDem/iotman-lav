@@ -66,7 +66,7 @@
         <!-- compact view -->
         <div v-show="compactView" class="my-2" >
             <div class="card border-primary mb-1 w-100 fade-in" v-for="(item, key) in filteredItems" v-bind:key="key"
-                v-bind:id="item.id">
+                v-bind:id="item.id.value">
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
 
@@ -91,10 +91,10 @@
                                 <input class="form-control w-100" :value="item[column].value" :id="setId(key, ckey)" :name="setId(key, ckey)"
                                     @keyup.enter="onInputEnter()"
                                     @keyup.esc="onInputEsc()"
-                                    @change="onInputChange(item.id, key, column, $event.target.value, isEsc)"
+                                    @change="onInputChange(item.id.value, key, column, $event.target.value, isEsc)"
                                 />
-                                <button class="btn btn-primary mx-1" :id="item.id"
-                                    @click.stop="saveRecord(item.id, item[column].value, item[column].value, $event.target.value)">
+                                <button class="btn btn-primary mx-1" :id="item.id.value"
+                                    @click.stop="saveRecord(item.id.value, item[column].value, item[column].value, $event.target.value)">
                                     <i class="far fa-check-circle"></i>
                                 </button>
                                 <button class="btn btn-primary" @mousedown="this.isEsc=true; this.resetEditCell()">
@@ -295,13 +295,15 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 this.compactView = Boolean(value)
             },
 
-            processListItem(_item, _value) {
+            processListItem(_value) {
 
                 let newListItemData = {}
 
                 for (let field in this.dataFields) {
 
                     const dataField = this.dataFields[field]
+
+                    // console.log('dataField: ', dataField)
 
                     const _editable = dataField.isEditable //possible edit cell by text click
                     const _sortable = dataField.isSortable //field can sorted
@@ -310,7 +312,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                     const _colscount = dataField.columnsCount //col-* col-ls-* ... value
                     const _virtual = dataField?.isVirtualImage //for abstract images like 'albums'
 
-                    const newListItem = _item  //newList[itemRow]
+                    // const newListItem = _item  //newList[itemRow]
 
                     newListItemData[dataField.fieldName] = {
                         value: _value[dataField.fieldName],
@@ -330,6 +332,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                             " col-lg-" + _colscount
                     }
                 }
+                // console.log('new list data: ', newListItemData)
                 return newListItemData
             },
 
@@ -342,7 +345,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
                         // transform fields to objects with extended properties
                         for (let itemRow in newList) {
-                            newList[itemRow] = this.processListItem(newList[itemRow], items[itemRow])
+                            newList[itemRow] = this.processListItem(items[itemRow])
                         }
                         // console.log(newList)
                         return newList
@@ -401,6 +404,11 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
             },
 
             async setItem() {
+
+                for (let item in this.dataFields) {
+                    this.dataFields[item].value = ''
+                }
+
                 const _add = await this.$refs.addItem.showDialogue({
                     edit_mode: false,
                     title: MessagesConstants.ITEM_ADDING_TITLE,
@@ -410,20 +418,15 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 })
 
                 if (_add) {
-                    const newItem = this.$refs.addItem.postData
+                    const newItemData = this.$refs.addItem.postData
 
-                    axios.post(this.api.insert, newItem)
+                    axios.post(this.api.insert, newItemData)
                         .then(resp => {
 
                             const _res = resp.data.data
+                            const transformItem = this.processListItem(_res)
 
-                            console.log('res: ', _res);
-
-                            const newItem = this.processListItem({}, _res)
-
-                            console.log(newItem)
-
-                            this.Items.push(newItem);
+                            this.Items.push(transformItem);
                             this.filteredItems = this.Items
 
                             this.$root.$refs.toaster.showMessage(
@@ -432,7 +435,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                             )
                         })
                         .catch(error => {
-                            //
+
                             //const Toaster = app.component('toaster')
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.INSERTING_ERROR,
@@ -447,33 +450,39 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
             },
 
 
-            async doEditType(key, id) {
-                const _edit = await this.$refs.addDeviceType.showDialogue(
+            async doEdit(key, id) {
+
+                let postFields = this.dataFields
+                for (let item in this.dataFields) {
+                    postFields[item].value = this.filteredItems[key][this.dataFields[item].fieldName].value
+                }
+
+                const _edit = await this.$refs.addItem.showDialogue(
                     {
                         edit_mode: true,
-                        title: DeviceTypeStringConstants.DEVICE_TYPE_EDITING_TITLE,
-                        message: DeviceTypeStringConstants.DEVICE_TYPE_EDITING_MESSAGE,
-                        device_type_name: this.deviceTypes[key].device_type_name,
-                        device_type_desc: this.deviceTypes[key].device_type_desc,
-                        device_type_image: this.deviceTypes[key].device_type_image,
-                        okButton: DeviceTypeStringConstants.DEVICE_TYPE_EDITBUTTON_CAPTION,
+                        title: MessagesConstants.ITEM_EDITING_TITLE,
+                        message: MessagesConstants.ITEM_EDITING_MESSAGE,
+                        dataFields: this.dataFields,
+                        okButton: MessagesConstants.ITEM_EDITBUTTON_CAPTION,
                     }
                 )
 
                 if (_edit) {
-                    let editDeviceTypePost = {
-                        device_type_name: this.$refs.addDeviceType.device_type_name,
-                        device_type_image: this.$refs.addDeviceType.device_type_image,
-                        device_type_desc: this.$refs.addDeviceType.device_type_desc
-                    }
-                    //console.log(editDeviceTypePost);
+                    const editItem = this.$refs.addItem.postData
+                    // console.log('edit data: ', editItem);
 
-                    axios.put(APIConstants.api_device_type_update + id, editDeviceTypePost)
+                    const _values = {}
+                    for (let field in editItem) {
+                        _values[editItem[field].fieldName] = editItem[field].value
+                    }
+
+                    // console.log(_values)
+                    axios.put(this.api.update + id, _values)
                         .then(resp => {
-                            // console.log(resp['data']);
-                            this.deviceTypes[key].device_type_name = resp['data'].device_type_name;
-                            this.deviceTypes[key].device_type_desc = resp['data'].device_type_desc;
-                            this.deviceTypes[key].device_type_image = resp['data'].device_type_image;
+                            console.log(resp.data.data);
+                            // this.deviceTypes[key].device_type_name = resp['data'].device_type_name;
+                            // this.deviceTypes[key].device_type_desc = resp['data'].device_type_desc;
+                            // this.deviceTypes[key].device_type_image = resp['data'].device_type_image;
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.EDITED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY

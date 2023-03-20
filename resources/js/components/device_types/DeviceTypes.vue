@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import ConfirmDialogue from '../../components/common/ConfirmDialogue.vue';
-import AddDeviceType from './AddDeviceType.vue';
-import Paginator from '../../components/common/Paginator.vue';
+// import ConfirmDialogue from '../../components/common/ConfirmDialogue.vue';
+// import AddDeviceType from './AddDeviceType.vue';
+// import Paginator from '../../components/common/Paginator.vue';
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
 import DeviceTypeStringConstants from '../../components/strings_constants/device_types/index';
@@ -34,9 +34,9 @@ import DataTable from '../db/DataTable.vue';
     export default {
 
         components: {
-            ConfirmDialogue,
-            AddDeviceType,
-            Paginator,
+            // ConfirmDialogue,
+            // AddDeviceType,
+            // Paginator,
             DataTable
             // Imager,
             // TableNav,

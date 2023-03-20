@@ -5,6 +5,7 @@ import DeviceTypes from "./components/device_types/DeviceTypes.vue"
 import Devices from "./components/devices/Devices.vue"
 import UserDevices from "./components/user_devices/UserDevices.vue"
 import Albums from "./components/imagelib/albums/Albums.vue"
+import Micros from "./components/micros/Micros.vue"
 
 const routes = [
   {
@@ -38,6 +39,23 @@ const routes = [
           },
         ]
   },
+//   {
+//     path: "/micros",
+//     name: "Controllers",
+//     component: Micros,
+//     icon: "fas fa-home",
+//     ID: "MICROS",
+//     visible: true,
+//     children: [
+//         {
+//             path: "/micros",
+//             name: "Controllers",
+//             icon: "fas fa-layer-group",
+//             component: Micros,
+//             ID: "MICROS"
+//         },
+//     ]
+//   },
   {
     path: "/device_types",
     name: "Device Types",
@@ -63,6 +81,14 @@ const routes = [
     visible: false
   },
   {
+    path: "/micros",
+    name: "Controllers",
+    icon: "fas fa-microchip",
+    component: Micros,
+    ID: "MICROS",
+    visible: true
+  },
+  {
     path: "/imagelib",
     name: "Images Library",
     icon: "fas fa-images",
@@ -70,6 +96,7 @@ const routes = [
     ID: "LIBRARY",
     visible: true
   },
+
 ];
 
 const router = createRouter({

@@ -111,7 +111,7 @@ export default {
 
     methods: {
         async getBlogData() {
-            const _data = await axios.get(APIConstants.api_dev_blog_read)
+            const _data = await axios.get(APIConstants.api_dev_blogs_read)
             this.devBlogs = _data.data.data
         },
 
