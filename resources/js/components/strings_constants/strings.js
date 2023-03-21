@@ -52,27 +52,6 @@ export default {
     ITEM_EDITING_MESSAGE: 'Editing',
     ITEM_EDITBUTTON_CAPTION: 'Edit',
 
-
-    //strings processing
-
-    SortingCaption($column, $direction) {
-        let res = ""
-        //     $column === "id" ?
-        //     this.SORT_BY_ID : this.SORT_BY + $column;
-        switch ($column) {
-            case 'ID': res = this.SORT_BY_ID; break;
-            case 'Name': res = this.SORT_BY_NAME; break;
-            case 'Description': res = this.SORT_BY_DESCRIPTION; break;
-            default: res = this.SORT_BY + $column; break;
-        }
-        res += " (";
-        res += !$direction ?
-            this.SORT_ASC :
-            this.SORT_DESC;
-        res += ")";
-        return res;
-    },
-
     // processUserDeviceStrings($items) {
     //     $items.forEach((dev, key)=> {
     //             $items[key].device_desc=dev.device_desc==null ? this.NO_DESCRIPTION : dev.device_desc;

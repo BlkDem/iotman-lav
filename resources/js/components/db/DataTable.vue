@@ -3,7 +3,11 @@
         <!-- {{ pageCaption }} -->
     </div>
 
-    <common-card :cardCaption="pageCaption" :isCollapseButtonHidden="false">
+    <common-card
+        :cardCaption="pageCaption"
+        :isCollapseButtonHidden="false"
+        :cardCaptionAdd="cardCaptionAdd"
+    >
         <AddItem ref="addItem" />
 
         <ConfirmDialogue ref="confirmDialogue" />
@@ -16,6 +20,7 @@
             @addEvent="setItem"
             @updateSortedData="updateSortedData"
             @updateFilteredData="updateFilteredData"
+            @rowClick="rowClick"
         >
         </table-nav>
 
@@ -26,7 +31,8 @@
         <div class="row my-2" v-if="!compactView">
             <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(item, key) in filteredItems"
                 v-bind:key="key" v-bind:id="item.id.value">
-                <div class="card border-light flex py-2">
+                <div class="card flex border-light py-2"
+                >
                     <div class="w-100 flex-center" v-for="(column, ckey) in Object.keys(item)"
                         v-bind:key="ckey">
 
@@ -65,8 +71,12 @@
 
         <!-- compact view -->
         <div v-show="compactView" class="my-2" >
-            <div class="card border-primary mb-1 w-100 fade-in" v-for="(item, key) in filteredItems" v-bind:key="key"
-                v-bind:id="item.id.value">
+            <div class="card mb-1 w-100 fade-in"
+                v-for="(item, key) in filteredItems" v-bind:key="key"
+                v-bind:id="item.id.value"
+                :class="{'border-info': selectedRow[key]===true, 'border-primary': selectedRow[key]===false||selectedRow[key]==null}"
+                @click="rowClick(key)"
+            >
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
 
@@ -98,7 +108,7 @@
                             <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey"
 
                             >
-                                <input class="form-control w-100" :value="item[column].value" :id="setId(key, ckey)" :name="setId(key, ckey)"
+                                <input class="form-control  w-100" :value="item[column].value" :id="setId(key, ckey)" :name="setId(key, ckey)"
                                     @keyup.enter="onInputEnter()"
                                     @keyup.esc="onInputEsc()"
                                     @change="onInputChange(item.id.value, key, column, $event.target.value, isEsc)"
@@ -150,6 +160,8 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
     export default {
 
+        emits: ['onRowClick'],
+
         props: {
             api: {
                 type: Object
@@ -163,6 +175,11 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 type: Array
             },
 
+            selectedName: {
+                type: String,
+                default: ''
+            },
+
             foreignKey: {
                 type: String,
                 default: ''
@@ -171,6 +188,11 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
             foreignValue: {
                 type: Number,
                 default: 0
+            },
+
+            selectableRow: {
+                type: Boolean,
+                default: false
             },
         },
 
@@ -197,7 +219,11 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 compactView: true,
 
                 imagesPath: '',
-                imagePlug: ''
+                imagePlug: '',
+
+                selectedRow: [],
+
+                cardCaptionAdd: ''
 
             };
         },
@@ -221,6 +247,16 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
         },
 
         methods: {
+
+            rowClick(row){
+
+                if (!this.selectableRow) return
+                for (let item in this.filteredItems) { this.selectedRow[item] = false }
+                this.selectedRow[row] = !this.selectedRow[row]
+                // console.log(row, this.selectedName)
+                this.cardCaptionAdd = this.filteredItems[row][this.selectedName].value
+                //this.$emit('onRowClick', this.filteredItems[row])
+            },
 
             getValue(item) {
                 return (item.lookupValue == null)?item.value:item.lookupValue
@@ -518,11 +554,6 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                             const _res = resp.data.data
                             this.filteredItems[key] = this.processListItem(_res)
                             this.Items[key] = this.filteredItems[key]
-                            // this.Items.push(transformItem);
-
-                            // this.deviceTypes[key].device_type_name = resp['data'].device_type_name;
-                            // this.deviceTypes[key].device_type_desc = resp['data'].device_type_desc;
-                            // this.deviceTypes[key].device_type_image = resp['data'].device_type_image;
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.EDITED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
