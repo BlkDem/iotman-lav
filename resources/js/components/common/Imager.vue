@@ -38,7 +38,7 @@ export default {
     },
 
     created() {
-        console.log('loaded')
+        // console.log('loaded')
         //createImager()
     },
 

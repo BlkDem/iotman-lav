@@ -1,0 +1,1383 @@
+{
+	"info": {
+		"_postman_id": "6fd6bf2b-79e4-4337-8a7b-98130eb00383",
+		"name": "iotman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "22748462-6fd6bf2b-79e4-4337-8a7b-98130eb00383"
+	},
+	"item": [
+		{
+			"name": "devices",
+			"item": [
+				{
+					"name": "Get a devices collection",
+					"id": "cf20e61e-15d4-430f-9afd-b7de5dd7fa37",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/read/",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"read",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a device by Id",
+					"id": "1cc21d5e-38e1-47b1-96aa-2779254aeea4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/read/1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"read",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a device",
+					"id": "6b1a4443-6847-49e9-a608-2f510dea75bf",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/create/?device_name=test_ok&device_type_id=2",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"create",
+								""
+							],
+							"query": [
+								{
+									"key": "device_name",
+									"value": "test_ok"
+								},
+								{
+									"key": "device_type_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a device",
+					"id": "50083fe6-0995-4950-95b4-4f495c245421",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/delete/18",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"delete",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a device by ID",
+					"id": "b4fda822-34ec-45ea-a5b5-2e6ae256d756",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/update/70/?device_name=asdfghjk567&device_type_id=2&device_desc=&device_hwid=&device_pass=",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"update",
+								"70",
+								""
+							],
+							"query": [
+								{
+									"key": "device_name",
+									"value": "asdfghjk567"
+								},
+								{
+									"key": "device_type_id",
+									"value": "2"
+								},
+								{
+									"key": "device_desc",
+									"value": ""
+								},
+								{
+									"key": "device_hwid",
+									"value": ""
+								},
+								{
+									"key": "device_pass",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "ae7be6a3-e863-4b58-9717-45f6c9af42be"
+		},
+		{
+			"name": "micros",
+			"item": [
+				{
+					"name": "Get a micros collection",
+					"id": "bc35651d-7fea-43ba-8d9f-84659223bd1c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/micros/read/",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"micros",
+								"read",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a device by Id",
+					"id": "f2cc6d9e-d6b2-40c4-bf94-d9ff5e1249a6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/read/1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"read",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a device",
+					"id": "379d8dd3-05b1-4d34-b3ce-b432975796ce",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/create/?device_name=test_ok&device_type_id=2",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"create",
+								""
+							],
+							"query": [
+								{
+									"key": "device_name",
+									"value": "test_ok"
+								},
+								{
+									"key": "device_type_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a device",
+					"id": "590a0771-d3eb-4e45-8085-30deac23eb6d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/delete/18",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"delete",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a device by ID",
+					"id": "58644625-e374-4242-b3a3-ca6170cc5a5b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/update/1?created_at=2022-08-10T07:27:15.000000Z",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"update",
+								"1"
+							],
+							"query": [
+								{
+									"key": "created_at",
+									"value": "2022-08-10T07:27:15.000000Z"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "9a5e10e7-bde1-4cbc-b3bf-5ed771053cfd"
+		},
+		{
+			"name": "device_types",
+			"item": [
+				{
+					"name": "Get a device types collection",
+					"id": "f0747cbf-35f6-4a00-8d98-811e33504572",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/read/",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"read",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a device types Pager",
+					"id": "0e82758a-6b3c-406c-b4d2-535cdf2a4788",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/read/page/1/10",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"read",
+								"page",
+								"1",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a device type by ID",
+					"id": "81b519f1-3dce-4493-a91e-52a95bb16c02",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new device type",
+					"id": "14b4af3b-7f7c-45df-a1c1-68960ee338b1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_type/create/?device_type_name=new device 1&device_type_desc=new device desc 1&device_type_image=image1.jpg",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_type",
+								"create",
+								""
+							],
+							"query": [
+								{
+									"key": "device_type_name",
+									"value": "new device 1"
+								},
+								{
+									"key": "device_type_desc",
+									"value": "new device desc 1"
+								},
+								{
+									"key": "device_type_image",
+									"value": "image1.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a device type",
+					"id": "7acc963a-a552-4508-bb48-62d320507b4f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/delete/14",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"delete",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a device type by ID",
+					"id": "3ccfc4c2-a2a1-409b-8954-4f1f6c8b3b32",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/update/7?device_type_name=new device 1&device_type_desc=new device desc 1&device_type_image=image1.jpg",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"update",
+								"7"
+							],
+							"query": [
+								{
+									"key": "device_type_name",
+									"value": "new device 1"
+								},
+								{
+									"key": "device_type_desc",
+									"value": "new device desc 1"
+								},
+								{
+									"key": "device_type_image",
+									"value": "image1.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch a device type by ID",
+					"id": "c12c4dff-4d1a-47a3-90c3-2667978524a9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_type/patch/17/device_type_name/new device 1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_type",
+								"patch",
+								"17",
+								"device_type_name",
+								"new device 1"
+							],
+							"query": [
+								{
+									"key": "device_type_desc",
+									"value": "new device desc 1",
+									"disabled": true
+								},
+								{
+									"key": "device_type_image",
+									"value": "image1.jpg",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "c550fa20-4ff9-4f49-85bf-5f53f17c7d75"
+		},
+		{
+			"name": "dev_blogs",
+			"item": [
+				{
+					"name": "Get a dev blogs collection",
+					"id": "f84214d0-38d9-439c-9925-ef6940d8bd2e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/read/",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"read",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a dev blogs Pager",
+					"id": "fbf61da0-7f29-4df4-88f5-c45cfe44c522",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/read/page/1/10",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"read",
+								"page",
+								"1",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a dev blog by ID",
+					"id": "20430b36-58dd-49d8-8500-a3ad40c9bdf1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/dev_blogs/read/1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"dev_blogs",
+								"read",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new dev blog",
+					"id": "ea80f3aa-cbca-4ab2-aca7-9ce0302bc60d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/create/?device_type_name=new device 1&device_type_desc=new device desc 1&device_type_image=image1.jpg",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"create",
+								""
+							],
+							"query": [
+								{
+									"key": "device_type_name",
+									"value": "new device 1"
+								},
+								{
+									"key": "device_type_desc",
+									"value": "new device desc 1"
+								},
+								{
+									"key": "device_type_image",
+									"value": "image1.jpg",
+									"type": "text"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a dev blog",
+					"id": "cda316a5-1528-4481-b80a-61f9a65bffae",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/dev_blog/delete/14",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"dev_blog",
+								"delete",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a dev blog by ID",
+					"id": "a766b5be-b72b-448a-9a08-536cf2f2b8ee",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/dev_blog/update/7?dev_blog_name=new device blog 1&dev_blog_desc=new device blog desc 1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"dev_blog",
+								"update",
+								"7"
+							],
+							"query": [
+								{
+									"key": "dev_blog_name",
+									"value": "new device blog 1"
+								},
+								{
+									"key": "dev_blog_desc",
+									"value": "new device blog desc 1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "1c6162b3-5576-497a-9fbc-42899b9676d4"
+		},
+		{
+			"name": "user_devices",
+			"item": [
+				{
+					"name": "Get a user devices collection",
+					"id": "044ec600-9f24-4b5f-ad6a-24cd73b8aae6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/user_devices/read",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"user_devices",
+								"read"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a user devices count collection",
+					"id": "2edcc674-04fa-43b1-82e3-04a389f4d065",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a User Device by ID",
+					"id": "38fe2a2e-9caa-4214-b229-f244738b80ce",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a User Device",
+					"id": "effc24ee-94b7-47a6-8e27-d9c61c1f3d6a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "r8kwZW4UScLd2vsB5oBVxWG888dcrkuVYCHa2r8p",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/user_devices/create/?user_device_name=test_name&user_device_pass=test_pass&user_id=2&device_id=1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"user_devices",
+								"create",
+								""
+							],
+							"query": [
+								{
+									"key": "user_device_name",
+									"value": "test_name"
+								},
+								{
+									"key": "user_device_pass",
+									"value": "test_pass"
+								},
+								{
+									"key": "user_id",
+									"value": "2"
+								},
+								{
+									"key": "device_id",
+									"value": "1"
+								},
+								{
+									"key": "",
+									"value": null,
+									"type": "text",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a User Device",
+					"id": "43e94801-ba31-4c92-be53-75e37e9a7e5d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/delete/8",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"delete",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a User Device",
+					"id": "957b5332-af45-407e-873b-6561c25c62fa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/update/7?device_type_name=new device 1&device_type_desc=new device desc 1&device_type_image=image1.jpg",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"update",
+								"7"
+							],
+							"query": [
+								{
+									"key": "device_type_name",
+									"value": "new device 1"
+								},
+								{
+									"key": "device_type_desc",
+									"value": "new device desc 1"
+								},
+								{
+									"key": "device_type_image",
+									"value": "image1.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "ced68725-0d51-4afa-9e59-771102d5678f"
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get a users collection",
+					"id": "3ed7eaf0-ed23-42db-acbc-0634473639bc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/read",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"read"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a user by ID",
+					"id": "8a9ea17d-b7a5-4bcf-9e8a-969f5d6e040b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/read",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"read"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "c4d38156-2ef8-43c9-a8bf-8313a79bf813"
+		},
+		{
+			"name": "Auth userinfo",
+			"item": [
+				{
+					"name": "Userinfo",
+					"id": "92b12b57-5fc6-4d28-9267-827a59d41f8a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "HydGStMqt1vsnTFaJ4PTT7n9zO7gmI4QgMFivaYn\n",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/authuser",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"authuser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User sing in",
+					"id": "4e8004d2-c815-46b3-a704-e10f69c7a2a0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/create/?device_type_name=new device 1&device_type_desc=new device desc 1&device_type_image=image1.jpg",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"create",
+								""
+							],
+							"query": [
+								{
+									"key": "device_type_name",
+									"value": "new device 1"
+								},
+								{
+									"key": "device_type_desc",
+									"value": "new device desc 1"
+								},
+								{
+									"key": "device_type_image",
+									"value": "image1.jpg",
+									"type": "text"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "825d08fa-8ead-4cd0-815c-75fd6848dffc"
+		},
+		{
+			"name": "images",
+			"item": [
+				{
+					"name": "Get images collection",
+					"id": "013b9a76-ab4d-4080-9e2f-f0e889ae6cfb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/read/",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"read",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Image Data",
+					"id": "e180a057-b709-4202-ab24-a93c8ecfac9d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/maxim/Pictures/blog.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{local}}/image/update_image/6",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"image",
+								"update_image",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patcher",
+					"id": "1f7d1e50-40de-4373-9958-8bc9b98b5e57",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/maxim/Pictures/blog.jpg",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{local}}/image/patch/6/image_name/123",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"image",
+								"patch",
+								"6",
+								"image_name",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create an image record",
+					"id": "b1a123bb-5254-4234-ac20-13efcdf50a56",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "c0006d5c-fe24-4155-b401-47983aa397b8"
+		},
+		{
+			"name": "albums",
+			"item": [
+				{
+					"name": "Get albums collection",
+					"id": "0fb6030d-e97e-4e19-b678-7f2d3134d037",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/read/",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"read",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an album by ID",
+					"id": "85c79712-ae96-4c5b-9ef7-5871f6b5e547",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/update/7?device_type_name=new device 1&device_type_desc=new device desc 1&device_type_image=image1.jpg",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"update",
+								"7"
+							],
+							"query": [
+								{
+									"key": "device_type_name",
+									"value": "new device 1"
+								},
+								{
+									"key": "device_type_desc",
+									"value": "new device desc 1"
+								},
+								{
+									"key": "device_type_image",
+									"value": "image1.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new album",
+					"id": "cc5a7676-7b38-4fde-9b6c-377b7a5df58d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_type/create/?device_type_name=new device 1&device_type_desc=new device desc 1&device_type_image=image1.jpg",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_type",
+								"create",
+								""
+							],
+							"query": [
+								{
+									"key": "device_type_name",
+									"value": "new device 1"
+								},
+								{
+									"key": "device_type_desc",
+									"value": "new device desc 1"
+								},
+								{
+									"key": "device_type_image",
+									"value": "image1.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "1413378e-4331-43a2-9d3a-2574728d228f"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "41bb75e8-b2d4-44db-8c8d-1d20b9a2b792",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a18262bd-180a-4083-8165-f4ec7ea93b25",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

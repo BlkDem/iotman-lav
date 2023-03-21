@@ -5,7 +5,13 @@
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand logo" href="/">Umolab</a>
+            <!-- <a class="logo" href="/"> -->
+                <!-- <object type="image/svg+xml" data="images/logo/u4.svg" id="object_1" class="icon logo"
+                    >
+                </object> -->
+            <!-- </a> -->
+            <Logo class="logo"/>
+
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
@@ -31,17 +37,26 @@
 
 <script>
 
+import Logo from "./Logo.vue"
+
 export default {
+
+    components: {Logo},
+
+    data() {
+        return {
+            styleCSS: '/css/vapor/app.css',
+        }
+
+    },
 
     emits: ['newLangUp'],
 
     methods: {
         newLang(event)
         {
-            //  console.log('navbar', event)
             if (this.$refs.appMenu != null) this.$refs.appMenu.setLang(event)
             if (this.$refs.userMenu != null) this.$refs.userMenu.setLang(event)
-            //  this.$parent.$emit('newLangUp')
         },
 
     },
@@ -49,5 +64,5 @@ export default {
 </script>
 
 <style>
-    @import "../../../sass/images.scss";
+    /* @import "../../../sass/images.scss"; */
 </style>

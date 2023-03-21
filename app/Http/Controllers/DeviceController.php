@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Device;
+use App\Models\DevicesView;
 use App\Http\Middleware\ValidatorRules;
 use App\Http\Controllers\BaseController as BaseController;
 use Exception;
@@ -18,7 +19,8 @@ class DeviceController extends BaseController
         }
         try {
             $newDevice = Device::create($request->all());
-            return response()->json($newDevice, 201);
+            return $this->sendResponse($newDevice, 'Device created');
+            // return response()->json($newDevice, 201);
         }
         catch (Exception $e) {
             return $this->sendError('Creating Record Error: ' . $e);
@@ -33,11 +35,28 @@ class DeviceController extends BaseController
         }
         try {
             $updateDevice->update($request->all());
-            return response()->json($updateDevice, 200);
-            //return $this->sendResponse($updateDevice, "Device updated");
+            // dd($updateDevice);
+            $updateDeviceView = DevicesView::find($updateDevice->id);
+            // return response()->json($updateDevice, 200);
+            return $this->sendResponse($updateDeviceView, "Device updated");
         }
         catch (Exception $e) {
             return $this->sendError('Updating Record Error: ' . $e);
+        }
+    }
+
+    public function patch(Request $request, $id, $field, $value){
+        try {
+            $patchDevice = Device::whereId($id);
+            $patchDevice->update([
+                "$field" => $value
+            ]);
+            $res = Device::find($id);
+            return $this->sendResponse($res, "Device patched");
+            // return response()->json($res, 200);
+        }
+        catch (Exception $e) {
+            return response()->json('Patching Record Error: ' . $e, 400);
         }
     }
 

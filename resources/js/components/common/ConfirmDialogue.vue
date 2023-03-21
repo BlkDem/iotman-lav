@@ -1,5 +1,5 @@
 <template>
-    <PopupModal ref="popup">
+    <PopupModal ref="popup" class="align-center fade-in">
         <h2 style="margin-top: 0">{{ title }}</h2>
         <p>{{ message }}</p>
         <div class="btns">
@@ -25,14 +25,14 @@ export default {
         message: undefined, // Main text content
         okButton: undefined, // Text for confirm button; leave it empty because we don't know what we're using it for
         cancelButton: 'Cancel', // text for cancel button
-        
+
         // Private variables
         resolvePromise: undefined,
         rejectPromise: undefined,
         }
     },
     setup() {
-        const popup = ref(null); 
+        const popup = ref(null);
         return { popup };
     },
     methods: {
@@ -43,7 +43,7 @@ export default {
             if (opts.cancelButton) {
                 this.cancelButton = opts.cancelButton
             }
-            // Once we set our config, we tell the popup modal to open 
+            // Once we set our config, we tell the popup modal to open
             this.$refs.popup.open()
             // Return promise so the caller can get results
             return new Promise((resolve, reject) => {

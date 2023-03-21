@@ -3,47 +3,30 @@
         {{ pageCaption }}
     </h1>
 
-    <!-- <data-set-select
-        name="deviceTypes"
-        :value="device_type_id"
-        :dataTableReadApi="deviceTypesApi"
-        :nameField="'device_type_name'"
-        @onDataSelect="myDeviceTypeSelect">
-    </data-set-select>
-
-    <data-set-select
-        @onDataSelect="myDeviceSelect"
-        name="devices"
-        :value="device_id"
-        :dataTableReadApi="devicesApi"
-        :nameField="'device_name'">
-    </data-set-select> -->
-
-    <!-- <color-picker :value="color" @newColor="changeColor"></color-picker> -->
-
-
-    <!-- <h1>{{ color }}</h1> -->
-
     <div class="row">
         <!-- page menu -->
         <div class="col-sm-3 col-lg-3 col-md-3">
             <CommonCard ref="menuCard" :cardCaption="menuBlockCaption" :margins="margins">
-                <AppMenu ref="homeAppMenu" :margins="margins"></AppMenu>
+                <AppMenu ref="homeAppMenu" :margins="margins" :isDropdowns="false"></AppMenu>
             </CommonCard>
         </div>
         <!-- page content -->
         <div class="col-sm-6 col-lg-6 col-md-6">
             <CommonCard ref="menuCard" :cardCaption="informationBlockCaption">
-                <InfoCard v-for="(itemCard, key) in infoCardData"
+                <InfoCard v-for="(itemCard, key) in devBlogs"
+                    :class="{
+                                'bg-info': key % 2 === 0,
+                                'bg-success': key % 2 === 1,
+                            }"
                     :key="key"
-                    :infoCardCaption="itemCard.infoCardCaption"
-                    :infoCardTitle="itemCard.infoCardTitle"
-                    :infoCardText="itemCard.infoCardText"
+                    :infoCardCaption="itemCard.created_at"
+                    :infoCardTitle="itemCard.dev_blog_name"
+                    :infoCardText="itemCard.dev_blog_desc"
                     :infoCardMoreButtonCaption="itemCard.infoCardMoreButtonCaption"
-                    :marginBottom="itemCard.marginBottom"
+                    :marginBottom="2"
                     :buttonVisible="itemCard.buttonVisible"
-                    :bgColor="itemCard.bgColor"
-                    :infoCardMoreText="itemCard.infoCardMoreText"
+
+
                 >
 
                 </InfoCard>
@@ -68,24 +51,20 @@
     <div class="w-100 mx-4 my-2 align-left" style="font-size: 1.4rem; font-weight: 400;">
         <!-- <AppMenu ref="homeAppMenu"></AppMenu> -->
     </div>
+<!-- <router-view /> -->
 </template>
 
 <script>
 // import CommonCard from '../components/common/CommonCard.vue';
 // import InfoCard from '../components/common/InfoCard.vue';
-import APIConstants from "../rest_api";
+import APIConstants from "../api/rest_api";
 import MessagesConstants from "../components/strings_constants/strings.js";
+import { marked } from 'marked';
 
 // import ColorPicker from '../components/common/ColorPicker.vue';
 
 export default {
     name: 'Home',
-
-    // components: {
-    //         CommonCard,
-    //         InfoCard,
-    //         ColorPicker,
-    //     },
 
     data() {
 
@@ -97,33 +76,11 @@ export default {
             margins: 2,
             deviceTypesApi: '',
             devicesApi: '',
-            // tmpDeviceType: '',
-            color: '#AA00BB',
-
+            bgColor: 'bg-success',
             device_type_id: undefined,
             device_id: undefined,
 
-            infoCardData: [
-                {
-                    infoCardCaption: "07.03.2023 16:22",
-                    infoCardTitle: "Home page blocks complieted",
-                    infoCardText: "Congradulation! We are did it!",
-                    infoCardMoreText: "More text...",
-                    marginBottom: 2,
-                    //buttonVisible: true,
-                    bgColor: 'bg-success'
-                },
-                {
-                    infoCardCaption: "06.03.2023 10:20",
-                    infoCardTitle: "Home page blocks starting...",
-                    infoCardText: "Now we are starting to arrange blocks on the home page.",
-                    infoCardMoreText: "More text...",
-                    marginBottom: 2,
-                    //buttonVisible: false,
-                    bgColor: 'bg-info'
-                },
-            ]
-
+            devBlogs: [],
         }
     },
 
@@ -132,10 +89,13 @@ export default {
         this.deviceTypesApi = APIConstants.api_device_types_read
         this.devicesApi = APIConstants.api_devices_read
 
-        this.pageCaption = MessagesConstants.HOME ?? 'Welcome'
+        this.pageCaption = MessagesConstants.HOME ?? 'Umolab Devices'
         this.menuBlockCaption = MessagesConstants.menuBlockCaption ?? 'Menu'
         this.informationBlockCaption = MessagesConstants.informationBlockCaption ?? 'Information'
         this.logBlockCaption = MessagesConstants.logBlockCaption ?? 'Log'
+
+        this.getBlogData()
+
     },
 
     mounted() {
@@ -145,7 +105,16 @@ export default {
         });
     },
 
+    watch: {
+
+    },
+
     methods: {
+        async getBlogData() {
+            const _data = await axios.get(APIConstants.api_dev_blogs_read)
+            this.devBlogs = _data.data.data
+        },
+
         setLang(_lang) {
             this.pageCaption = _lang.HOME ?? 'Welcome'
             this.menuBlockCaption = _lang.menuBlockCaption ?? 'Menu'

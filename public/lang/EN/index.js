@@ -2,9 +2,11 @@ export default {
     HOME: "Umolab Devices",
     LIBRARY: "Images Library",
     IMAGES: "Images",
+    USERS: "Users",
     ALBUMS: "Albums",
     DEVICE_TYPES: "Device Types",
     DEVICES: "Devices",
+    MICROS: "Controllers",
     USER_DEVICES: "User`s Devices",
     THEME: "Theme",
 
@@ -19,11 +21,14 @@ export default {
     EDITING_CANCELLED: "Editing Cancelled",
     EDITING_ERROR: "Editing Error",
     DELETING_CANCELLED: "Deleting Cancelled",
-
+    DELETING_ERROR: "Deleting Error",
 
     NO_DESCRIPTION: " no description ",
     NO_HWID: " no device address",
     NO_PASS: " no password",
+
+    SORT_BY: "By ",
+    SORT_BY_DESCRIPTION: "By Description",
 
     SORT_BY_NAME: "By Name",
     SORT_BY_ID: "By ID",
@@ -36,4 +41,19 @@ export default {
     menuBlockCaption: 'Menu',
     informationBlockCaption: 'Information',
     logBlockCaption: 'Log',
+
+    DELETE_CONFORMATION: 'Are you sure to delete the item?',
+    DELETE_CAPTION: 'Deleting',
+    DELETE_BUTTON: 'Delete',
+
+    ITEM_ADDING_TITLE: 'Add',
+    ITEM_ADDING_MESSAGE: 'Adding',
+    ITEM_ADDBUTTON_CAPTION: 'Add',
+
+    ITEM_EDITING_TITLE: 'Edit',
+    ITEM_EDITING_MESSAGE: 'Editing',
+    ITEM_EDITBUTTON_CAPTION: 'Edit',
+
+
+
 }

@@ -49,14 +49,15 @@ class AlbumController extends BaseController
     {
         $validator = ValidatorRules::MakeValidate($request, 'albums');
         if ($validator->fails()) {
+            // return $this->sendError($validator->errors());
             return response()->json($validator->errors(), 400);
         }
         try {
             $newDeviceType = Album::create($request->all());
-            return response()->json($newDeviceType, 201);
+            return $this->sendSuccess($newDeviceType, 'Album created', 201);
         }
         catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
+            return $this->sendError('Error creatig album: ' . $e);
         }
     }
 
@@ -72,7 +73,7 @@ class AlbumController extends BaseController
         if (is_null($res)) {
             return $this->sendError("No Record for id=$id Found");
         }
-        return $this->sendResponse($res, "Device type (id = $id) found");
+        return $this->sendResponse($res, "Album (id = $id) found");
 
     }
 
@@ -86,13 +87,28 @@ class AlbumController extends BaseController
     public function update(Request $request, Album $updateAlbum) {
         $validator = ValidatorRules::MakeValidate($request, 'albums');
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            return $this->sendError($validator->errors());
         }
         try {
             $updateAlbum->update($request->all());
-            return response()->json($updateAlbum, 200);        }
+            return $this->sendResponse($updateAlbum, 'Album created');
+        }
         catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
+            return $this->sendError('Deleting Record Error: ' . $e);
+        }
+    }
+
+    public function patch(Request $request, $id, $field, $value){
+        try {
+            $patchAlbum = Album::whereId($id);
+            $patchAlbum->update([
+                "$field" => $value
+            ]);
+            $res = Album::find($id);
+            return response()->json($res, 200);
+        }
+        catch (Exception $e) {
+            return response()->json('Patching Record Error: ' . $e, 400);
         }
     }
 

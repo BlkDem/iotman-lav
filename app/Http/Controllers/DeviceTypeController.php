@@ -50,10 +50,11 @@ class DeviceTypeController extends BaseController
         }
         try {
             $newDeviceType = DeviceType::create($request->all());
-            return response()->json($newDeviceType, 201);
+            return $this->sendSuccess($newDeviceType, "Device Type Created", 201);
+            // return response()->json($newDeviceType, 201);
         }
         catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
+            return response()->json('Creating Record Error: ' . $e, 400);
         }
     }
 
@@ -64,9 +65,26 @@ class DeviceTypeController extends BaseController
         }
         try {
             $updateDeviceType->update($request->all());
-            return response()->json($updateDeviceType, 200);        }
+            // return response()->json($updateDeviceType, 200);
+            return $this->sendResponse($updateDeviceType, "Device type updated");
+        }
         catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
+            return $this->sendError('Updating Record Error: ' . $e, 400);
+            // return response()->json('Deleting Record Error: ' . $e, 400);
+        }
+    }
+
+    public function patch(Request $request, $id, $field, $value){
+        try {
+            $patchDeviceType = DeviceType::whereId($id);
+            $patchDeviceType->update([
+                "$field" => $value
+            ]);
+            $res = DeviceType::find($id);
+            return response()->json($res, 200);
+        }
+        catch (Exception $e) {
+            return response()->json('Patching Record Error: ' . $e, 400);
         }
     }
 

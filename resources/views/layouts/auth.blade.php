@@ -21,7 +21,7 @@
    -->
 
     <?php
-      $_themeCss = '/css/vapor/app.css';
+      $_themeCss = '/css/slate/app.css';
     ?>
 
     <link rel="stylesheet" href="{{ asset($_themeCss) }}">

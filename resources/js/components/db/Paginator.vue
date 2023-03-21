@@ -1,9 +1,10 @@
 <template>
+    <div class="border-4 border-bottom rounded-bottom border-secondary" style="height: 32px;"></div>
     <div class="mb-4"></div>
     <div class="flex-right rounded-2 pt-2">
         <ul class="pagination text-center">
             <li class="page-item">
-                <button class="page-link" disabled><i class="fa-solid fa-calculator"></i> [ {{ recordsCount }} ] </button>
+                <button class="page-link" disabled><i class="fa-solid fa-calculator"></i> {{ recordsCount }} </button>
             </li>
         </ul>
         <div class="px-2">
@@ -23,7 +24,7 @@
         <div class="px-2">
 
         </div>
-        <ul class="pagination text-center mx-1">
+        <ul class="pagination text-center mx-1" :class="{'hide': pagesCount<2}">
             <li class="page-item" :class="{'disabled': (currentPage==1)}" v-on:click="setPage(1, itemsPerPage)">
                 <button class="page-link" >&laquo;</button>
             </li>
@@ -44,14 +45,6 @@
 export default {
     name: 'Paginator',
 
-    // props: [
-    //     "items",
-    //     "pageCount",
-    //     "currentPage",
-    //     "nextPage",
-    //     "prevPage"
-    // ],
-
     data() {
         return {
             pagesCount: 0,
@@ -68,35 +61,20 @@ export default {
 
     },
 
-    mounted() {
-        //console.log()
-        //this.$parent.$emit('test', [1, '1'])
-        //this.$parent.test(1, 2)
-    },
-
     methods: {
         setPaginator(optsAdd = {}) {
             this.pagesCount = optsAdd.pagesCount
             this.currentPage = optsAdd.currentPage
             this.itemsPerPage = optsAdd.itemsPerPage
             this.recordsCount = optsAdd.recordsCount
-            //console.log(this.pages, this.currentPage)
-            // this.pages = optsAdd.itemsCount
         },
 
         setPage(_currentPage, _itemsPerPage) {
-            this.$parent.getData(_currentPage, _itemsPerPage)
+            this.$parent.$parent.getTableData(_currentPage, _itemsPerPage)
         }
 
     },
 
-    computed: {
-
-    },
-
-    watch: {
-
-    },
 }
 </script>
 

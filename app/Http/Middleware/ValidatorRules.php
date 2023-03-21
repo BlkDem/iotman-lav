@@ -55,6 +55,26 @@ class ValidatorRules extends Validator
                 ];
                 break;
 
+            case 'dev_blogs':
+                $_rulesArray = [
+                    'dev_blog_name' => 'required|min:3',
+                    'dev_blog_desc' => 'required|min:10',
+                ];
+                break;
+
+            case 'micros':
+                    $_rulesArray = [
+                        'micro_name' => 'required|min:3',
+                    ];
+                    break;
+
+            case 'device_micros':
+                    $_rulesArray = [
+                        'device_id' => 'required',
+                        'micro_id' => 'required',
+                    ];
+                    break;
+
             default:
                 $_rulesArray =  [];
                 break;

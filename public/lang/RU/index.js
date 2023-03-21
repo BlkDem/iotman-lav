@@ -2,9 +2,11 @@ export default {
     HOME: "Umolab Devices",
     LIBRARY: "Библиотека",
     IMAGES: "Изображения",
+    USERS: "Пользователи",
     ALBUMS: "Альбомы",
     DEVICE_TYPES: "Типы устройств",
     DEVICES: "Устройства",
+    MICROS: "Контроллеры",
     USER_DEVICES: "Пользовательские",
     THEME: "Тема",
 
@@ -19,11 +21,14 @@ export default {
     EDITING_CANCELLED: "Изменение отменено",
     EDITING_ERROR: "Ошибка изменения",
     DELETING_CANCELLED: "Удаление отменено",
-
+    DELETING_ERROR: "Ошибка удаления",
 
     NO_DESCRIPTION: " нет описания",
     NO_HWID: " нет адреса устройста",
     NO_PASS: " нет пароля",
+
+    SORT_BY: "По ",
+    SORT_BY_DESCRIPTION: "По описанию ",
 
     SORT_BY_NAME: "По имени",
     SORT_BY_ID: "По ID",
@@ -36,6 +41,19 @@ export default {
     menuBlockCaption: 'Меню',
     informationBlockCaption: 'Информация',
     logBlockCaption: 'Логи',
+
+    DELETE_CONFORMATION: 'Вы уверены, что хотите удалить элемент?',
+    DELETE_CAPTION: 'Удаление',
+    DELETE_BUTTON: 'Удалить',
+
+    ITEM_ADDING_TITLE: 'Добавить',
+    ITEM_ADDING_MESSAGE: 'Добавление',
+    ITEM_ADDBUTTON_CAPTION: 'Добавить',
+
+    ITEM_EDITING_TITLE: 'Изменить',
+    ITEM_EDITING_MESSAGE: 'Изменение',
+    ITEM_EDITBUTTON_CAPTION: 'Изменить',
+
 
     //strings processing
 

@@ -17,8 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('image_name');
             $table->string('image_desc')->nullable();
-            $table->integer('album_id');
+            $table->bigInteger('album_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('album_id')->references('id')->on('albums')->onDelete('restrict');
+
         });
     }
 

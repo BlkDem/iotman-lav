@@ -64,10 +64,12 @@ class UserController extends BaseController
         }
         try {
             $newUser = User::create($request->all());
-            return response()->json($newUser, 201);
+            return $this->sendResponse($newUser, "New User Created", 201);
+            // return response()->json($newUser, 201);
         }
         catch (Exception $e) {
-            return response()->json('Creating Record Error: ' . $e, 400);
+            return $this->sendError("Error creating user: " . $e);
+            // return response()->json('Creating Record Error: ' . $e, 400);
         }
     }
 
@@ -79,10 +81,25 @@ class UserController extends BaseController
         }
         try {
             $updateUser->update($request->all());
-            return response()->json($updateUser, 200);
+            return $this->sendResponse($updateUser, "User updated", 200);
+            // return response()->json($updateUser, 200);
         }
         catch (Exception $e) {
             return response()->json('Updating Record Error: ' . $e, 400);
+        }
+    }
+
+    public function patch(Request $request, $id, $field, $value){
+        try {
+            $patchUser = User::whereId($id);
+            $patchUser->update([
+                "$field" => $value
+            ]);
+            $res = User::find($id);
+            return response()->json($res, 200);
+        }
+        catch (Exception $e) {
+            return response()->json('Patching Record Error: ' . $e, 400);
         }
     }
 
