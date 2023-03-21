@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="align-center">
+        <div class="text-center">
             <button class="btn btn-danger mx-1 btn-width-40" @click="confirmDialog">{{ okButton }}</button>
             <button class="btn btn-secondary mx-1 btn-width-40" @click="cancelDialog">{{ cancelButton }}</button>
         </div>

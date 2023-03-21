@@ -52,6 +52,15 @@ a.a_cap:first-letter {
     text-transform: uppercase;
 }
 
+.edit-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-width-40 {
+    width: 40%;
+}
+
 @media only screen and (min-width: 320px) and (max-width: 480px) {
     .device-image {
         width: 100px;

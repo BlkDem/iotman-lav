@@ -156,8 +156,10 @@ import DataTable from '../../db/DataTable.vue';
                     ],
                 },
 
+                //card caption selected album
                 selectedName: 'album_name',
 
+                //selected album id for child table images
                 selectedFkValue: 0,
             }
         },
@@ -179,13 +181,15 @@ import DataTable from '../../db/DataTable.vue';
             apiAlbums.insert = APIConstants.api_album_create
             apiAlbums.update = APIConstants.api_album_update
             apiAlbums.delete = APIConstants.api_album_delete
+            apiAlbums.patch = APIConstants.api_album_patch
         },
 
         methods: {
+
+            //switch FK for filtering images
             onRowClick(dataEvent) {
                 console.log(dataEvent)
                 this.selectedFkValue = dataEvent
-                // this.$emit('setAdditionalCaption', dataEvent)
             }
         },
 

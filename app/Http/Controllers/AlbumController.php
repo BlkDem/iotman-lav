@@ -61,8 +61,6 @@ class AlbumController extends BaseController
         }
     }
 
-
-
     /**
      * Display the specified resource.
      *
@@ -97,6 +95,20 @@ class AlbumController extends BaseController
         }
         catch (Exception $e) {
             return $this->sendError('Deleting Record Error: ' . $e);
+        }
+    }
+
+    public function patch(Request $request, $id, $field, $value){
+        try {
+            $patchAlbum = Album::whereId($id);
+            $patchAlbum->update([
+                "$field" => $value
+            ]);
+            $res = Album::find($id);
+            return response()->json($res, 200);
+        }
+        catch (Exception $e) {
+            return response()->json('Patching Record Error: ' . $e, 400);
         }
     }
 
