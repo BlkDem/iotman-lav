@@ -73,10 +73,15 @@
 
         <!-- compact view -->
         <div v-show="compactView" class="my-2" >
+            <TableHead
+                :fieldsCaptions="dataFields"
+            >
+
+            </TableHead>
             <div class="card mb-1 w-100 fade-in"
                 v-for="(item, key) in filteredItems" v-bind:key="key"
                 v-bind:id="item.id.value"
-                :class="{'border-info': selectedRow[key]===true, 'border-primary': selectedRow[key]===false||selectedRow[key]==null}"
+                :class="{'border-info bg-warning': selectedRow[key]===true, 'border-primary': selectedRow[key]===false||selectedRow[key]==null}"
                 @click="rowClick(key)"
             >
                 <div class="mx-2 my-2">
@@ -137,6 +142,7 @@
                     </div>
                 </div>
             </div>
+            <!-- <div class="my-1 border-4 border-bottom rounded-bottom border-secondary"></div> -->
         </div>
         <Paginator ref="paginatorDeviceTypes"></Paginator>
         <!-- <MyMqtt></MyMqtt> -->
@@ -158,6 +164,7 @@ import AddItem from './AddDialog.vue';
 // import DataField from '../../classes/DataField.ts';
 
 import TableNav from '../../components/common/TableBar/TableNav.vue';
+import TableHead from './TableHead.vue';
 
     export default {
 
@@ -203,6 +210,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
             Paginator,
             AddItem,
             TableNav,
+            TableHead
         },
 
         data() {

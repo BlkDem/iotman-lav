@@ -1,4 +1,6 @@
 <template>
+                <div class="border-4 border-bottom rounded-bottom border-secondary" style="height: 32px;"></div>
+
     <div class="mb-4"></div>
     <div class="flex-right rounded-2 pt-2">
         <ul class="pagination text-center">

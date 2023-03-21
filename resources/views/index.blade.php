@@ -19,20 +19,24 @@
    -->
 
     <?php
-    echo "<script>var _newTheme='Default'</script>";
-    $_themeCss = '/css/slate/app.css';
+    // echo "<script>var _newTheme='Default'</script>";
+    // $_themeCss = '/css/slate/app.css';
 
-    if (isset($_GET["theme"])) {
-        $_themeName = $_GET["theme"];
-        if (file_exists(public_path('/css/' . $_themeName . '/app.css'))) {
-            $_themeCss = '/css/' . $_themeName . '/app.css';
-            // echo("<h1 style='position: absolute; z-index: 1034;'>$_themeCss</h1>");
-            echo "<script>_newTheme='$_themeName'</script>";
-        }
-    }
+    // if (isset($_GET["theme"])) {
+    //     $_themeName = $_GET["theme"];
+    //     if (file_exists(public_path('/css/' . $_themeName . '/app.css'))) {
+    //         $_themeCss = '/css/' . $_themeName . '/app.css';
+    //         // echo("<h1 style='position: absolute; z-index: 1034;'>$_themeCss</h1>");
+    //         echo "<script>_newTheme='$_themeName'</script>";
+    //     }
+    // }
     ?>
 
-    <link rel="stylesheet" href="{{ asset($_themeCss) }}">
+    <?php
+        $_themeCss = '/css/slate/app.css';
+    ?>
+
+    <link rel="stylesheet" id="themeCss" href="{{ asset($_themeCss) }}">
     <style>
         ::-webkit-scrollbar {
             width: 10px;
@@ -91,7 +95,11 @@
         <!-- Copyright -->
     </footer>
     <!-- Footer -->
-
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>

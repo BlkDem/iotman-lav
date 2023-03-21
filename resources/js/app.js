@@ -7,7 +7,7 @@ import LangCombo from './components/header/LangCombo.vue';
 import App from './components/App.vue';
 import Navbar from './components/header/Navbar.vue';
 import AppMenu from './components/common/AppMenu.vue';
-import ThemeCombo from './components/common/ThemeCombo.vue';
+import ThemeCombo from './components/header/ThemeCombo.vue';
 import UserMenu from './components/common/UserMenu.vue';
 import Toaster from './components/common/Toaster.vue'; //resources\js\components\common\Toaster.vue
 import CommonCard from './components/common/CommonCard.vue';

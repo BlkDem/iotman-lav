@@ -45,7 +45,7 @@ export default {
 
     data() {
         return {
-            styleCSS: '/css/app.css',
+            styleCSS: '/css/vapor/app.css',
         }
 
     },
