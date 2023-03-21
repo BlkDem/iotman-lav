@@ -16,5 +16,11 @@ Route::group(['middleware' => ['auth']], function() {
 // Route::get('/{vue?}', [RootController::class, 'index'])->where('vue', '[\/\w\.-]*');
 
 Route::get('/', [RootController::class, 'index']);
+Route::get('/users', [RootController::class, 'index']);
+Route::get('/devices', [RootController::class, 'index']);
+Route::get('/device_types', [RootController::class, 'index']);
+Route::get('/micros', [RootController::class, 'index']);
+Route::get('/user_devices', [RootController::class, 'index']);
+Route::get('/imagelib', [RootController::class, 'index']);
 
 Auth::routes();

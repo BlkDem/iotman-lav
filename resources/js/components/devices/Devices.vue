@@ -34,6 +34,19 @@ export default {
                     },
 
                     devicesFields: [
+                        {
+                            fieldName: 'Image',
+                            fieldCaption: '',
+                            type: String,
+                            isImage: false,
+                            isVirtualImage: true,
+                            VirtualImage: 'fa-solid fa-microchip fa-2x',
+                            isEditable: false,
+                            isSortable: false,
+                            isHighLight: true,
+                            columnsCount: 1
+                        },
+
 
                         {
                             fieldName: 'id',
@@ -87,7 +100,7 @@ export default {
                             isEditable: false,
                             isSortable: true,
                             isHighLight: false,
-                            columnsCount: 3,
+                            columnsCount: 2,
                             lookupId: 'device_type_id',
                             lookupApi: APIConstants.api_device_types_read,
                             isLookup: true,

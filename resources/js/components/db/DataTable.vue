@@ -32,7 +32,10 @@
 
         <div class="row my-2" v-if="!compactView">
             <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(item, key) in filteredItems"
-                v-bind:key="key" v-bind:id="item.id.value">
+                v-bind:key="key" v-bind:id="item.id.value"
+                :class="{'border-info bg-warning': selectedRow[key]===true, 'border-primary': selectedRow[key]===false||selectedRow[key]==null}"
+                @click="rowClick(key)"
+                >
                 <div class="card flex border-light py-2"
                 >
                     <div class="w-100 flex-center" v-for="(column, ckey) in Object.keys(item)"
@@ -48,6 +51,7 @@
                             :src="(!item[column].isVirtualImage)?imagesPath + item[column].value:imagesPath +'blog.jpg'"
                             @error="replaceByDefault"
                         />
+
                         <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
 
                         </div>
@@ -61,7 +65,7 @@
                             Edit
                         </button>
 
-                        <button class="btn btn-warning btn-width-40 mx-1" @click="doDelete(key, item.id.value)">
+                        <button class="btn btn-secondary btn-width-40 mx-1" @click="doDelete(key, item.id.value)">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                             Delete
                         </button>
@@ -107,6 +111,12 @@
                             </span>
 
 
+
+                            <a v-if="item[column].isVirtualImage">
+                                <!-- {{ item[column].VirtualImage }} -->
+                                <i :class="item[column].VirtualImage"></i>
+
+                            </a>
 
                             <img v-if="item[column].isImage" class="device-image"
                                 :src="getImage(item[column])"
@@ -280,7 +290,7 @@ import TableHead from './TableHead.vue';
             },
 
             getImage(item) {
-                if ((item.value==='') || (item.isVirtualImage)) return this.imagePlug
+                if (item.value==='') return this.imagePlug
                 return Pathes.storageImagesPath + item.value
             },
 
@@ -380,6 +390,7 @@ import TableHead from './TableHead.vue';
                     const _highlight = dataField.isHighLight //highlight another color field 'bg-info' class
                     const _colscount = dataField.columnsCount //col-* col-ls-* ... value
                     const _virtual = dataField?.isVirtualImage //for abstract images like 'albums'
+                    const _virtualimage = dataField?.VirtualImage //for abstract images like 'albums'
                     const _isLookup = dataField?.isLookup //field links to another object
                     const _lookupApi = dataField?.lookupApi //another object get api
                     const _lookupId = dataField?.lookupId //field link key (FK)
@@ -393,6 +404,7 @@ import TableHead from './TableHead.vue';
                         lookupValue: (dataField.displayName != null)?_value[dataField.displayName]:'',
                         // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
                         displayName: _displayName,
+                        VirtualImage: _virtualimage,
                         isEditable: _editable,
                         isText: _text,
                         isDateTime: _datetime,

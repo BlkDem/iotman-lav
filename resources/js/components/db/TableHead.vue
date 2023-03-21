@@ -1,28 +1,29 @@
 <template>
-            <div class="border-4 border-top rounded-top border-secondary"
-            >
-                <div class="mx-2 my-2">
-                    <div class="row vertical-center">
+    <div class="border-4 border-top rounded-top border-secondary">
+        <div class="mx-2 my-2">
+            <div class="row vertical-center">
 
-                        <div :class="setClass(field.columnsCount)" class="flex  fw-bold"
+                <div :class="setClass(field.columnsCount)" class="flex  fw-bold" v-for="(field, ckey) in fieldsCaptions"
+                    v-bind:key="ckey">
 
-                            v-for="(field, ckey) in fieldsCaptions" v-bind:key="ckey"
-                        >
+                    <span v-if="field.isSortable" class="cursor-pointer" @click="changeDirection(ckey)">
+                        {{ field.fieldCaption }}
+                    </span>
 
-                            <span >
-                                {{ field.fieldCaption }}
-                            </span>
+                    <span v-if="!field.isSortable">
+                        {{ field.fieldCaption }}
+                    </span>
 
-                            <a class="nav-link mx-1">
-                                <i class="fa-solid" :class="sortArrow[ckey]" @click="changeDirection(ckey)"></i>
-                            </a>
-                        </div>
+                    <a class="nav-link mx-1" v-if="field.isSortable">
+                        <i class="fa-solid" :class="sortArrow[ckey]" @click="changeDirection(ckey)"></i>
+                    </a>
+                </div>
 
-                        <div class="col-sm-3 col-xs-3 col-lg-3  edit-buttons ">
-                        </div>
-                    </div>
+                <div class="col-sm-3 col-xs-3 col-lg-3  edit-buttons ">
                 </div>
             </div>
+        </div>
+    </div>
 
 </template>
 

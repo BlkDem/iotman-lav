@@ -50,14 +50,16 @@ import DataTable from '../db/DataTable.vue';
                     },
 
                     usersFields: [
-                        {
-                            fieldName: 'user_image',
-                            fieldCaption: 'Image',
+                    {
+                            fieldName: 'Image',
+                            fieldCaption: '',
                             type: String,
-                            isImage: true,
+                            isImage: false,
+                            isVirtualImage: true,
+                            VirtualImage: 'fa-solid fa-user-tie fa-2x',
                             isEditable: false,
-                            isSortable: true,
-                            isHighLight: false,
+                            isSortable: false,
+                            isHighLight: true,
                             columnsCount: 1
                         },
 

@@ -34,6 +34,19 @@ export default {
                     },
 
                     microsFields: [
+                    {
+                            fieldName: 'Image',
+                            fieldCaption: '',
+                            type: String,
+                            isImage: false,
+                            isVirtualImage: true,
+                            VirtualImage: 'fa-solid fa-microchip fa-2x',
+                            isEditable: false,
+                            isSortable: false,
+                            isHighLight: true,
+                            columnsCount: 1
+                        },
+
 
                         {
                             fieldName: 'id',
@@ -66,7 +79,7 @@ export default {
                             isEditable: true,
                             isSortable: true,
                             isHighLight: false,
-                            columnsCount: 6
+                            columnsCount: 5
                         },
                         // {
                         //     fieldName: 'micro_config',

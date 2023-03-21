@@ -24038,7 +24038,7 @@ __webpack_require__.r(__webpack_exports__);
           res = _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SORT_BY_DESCRIPTION;
           break;
         default:
-          res = _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SORT_BY + $column;
+          res = _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SORT_BY + column;
           break;
       }
       return res;
@@ -24589,7 +24589,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return item.lookupValue == null ? item.value : item.lookupValue;
     },
     getImage: function getImage(item) {
-      if (item.value === '' || item.isVirtualImage) return this.imagePlug;
+      if (item.value === '') return this.imagePlug;
       return _config_pathes__WEBPACK_IMPORTED_MODULE_3__["default"].storageImagesPath + item.value;
     },
     replaceByDefault: function replaceByDefault(e) {
@@ -24669,6 +24669,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         var _highlight = dataField.isHighLight; //highlight another color field 'bg-info' class
         var _colscount = dataField.columnsCount; //col-* col-ls-* ... value
         var _virtual = dataField === null || dataField === void 0 ? void 0 : dataField.isVirtualImage; //for abstract images like 'albums'
+        var _virtualimage = dataField === null || dataField === void 0 ? void 0 : dataField.VirtualImage; //for abstract images like 'albums'
         var _isLookup = dataField === null || dataField === void 0 ? void 0 : dataField.isLookup; //field links to another object
         var _lookupApi = dataField === null || dataField === void 0 ? void 0 : dataField.lookupApi; //another object get api
         var _lookupId = dataField === null || dataField === void 0 ? void 0 : dataField.lookupId; //field link key (FK)
@@ -24681,6 +24682,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           lookupValue: dataField.displayName != null ? _value[dataField.displayName] : '',
           // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
           displayName: _displayName,
+          VirtualImage: _virtualimage,
           isEditable: _editable,
           isText: _text,
           isDateTime: _datetime,
@@ -25257,6 +25259,17 @@ __webpack_require__.r(__webpack_exports__);
           patch: ''
         },
         devicesFields: [{
+          fieldName: 'Image',
+          fieldCaption: '',
+          type: String,
+          isImage: false,
+          isVirtualImage: true,
+          VirtualImage: 'fa-solid fa-microchip fa-2x',
+          isEditable: false,
+          isSortable: false,
+          isHighLight: true,
+          columnsCount: 1
+        }, {
           fieldName: 'id',
           fieldCaption: 'ID',
           type: Number,
@@ -25304,7 +25317,7 @@ __webpack_require__.r(__webpack_exports__);
           isEditable: false,
           isSortable: true,
           isHighLight: false,
-          columnsCount: 3,
+          columnsCount: 2,
           lookupId: 'device_type_id',
           lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_device_types_read,
           isLookup: true
@@ -25581,11 +25594,10 @@ __webpack_require__.r(__webpack_exports__);
         },
         albumsFields: [{
           fieldName: 'Image',
-          fieldCaption: 'Image',
           type: String,
-          isImage: true,
+          isImage: false,
           isVirtualImage: true,
-          VirtualImage: 'picture',
+          VirtualImage: 'fa-solid fa-images fa-2x',
           isEditable: false,
           isSortable: false,
           isHighLight: true,
@@ -25685,6 +25697,17 @@ __webpack_require__.r(__webpack_exports__);
           patch: ''
         },
         microsFields: [{
+          fieldName: 'Image',
+          fieldCaption: '',
+          type: String,
+          isImage: false,
+          isVirtualImage: true,
+          VirtualImage: 'fa-solid fa-microchip fa-2x',
+          isEditable: false,
+          isSortable: false,
+          isHighLight: true,
+          columnsCount: 1
+        }, {
           fieldName: 'id',
           fieldCaption: 'ID',
           type: Number,
@@ -25711,7 +25734,7 @@ __webpack_require__.r(__webpack_exports__);
           isEditable: true,
           isSortable: true,
           isHighLight: false,
-          columnsCount: 6
+          columnsCount: 5
         }
         // {
         //     fieldName: 'micro_config',
@@ -25834,13 +25857,15 @@ __webpack_require__.r(__webpack_exports__);
           patch: ''
         },
         usersFields: [{
-          fieldName: 'user_image',
-          fieldCaption: 'Image',
+          fieldName: 'Image',
+          fieldCaption: '',
           type: String,
-          isImage: true,
+          isImage: false,
+          isVirtualImage: true,
+          VirtualImage: 'fa-solid fa-user-tie fa-2x',
           isEditable: false,
-          isSortable: true,
-          isHighLight: false,
+          isSortable: false,
+          isHighLight: true,
           columnsCount: 1
         }, {
           fieldName: 'id',
@@ -26783,7 +26808,7 @@ var _hoisted_3 = {
   key: 0,
   "class": "row my-2"
 };
-var _hoisted_4 = ["id"];
+var _hoisted_4 = ["id", "onClick"];
 var _hoisted_5 = {
   "class": "card flex border-light py-2"
 };
@@ -26820,36 +26845,39 @@ var _hoisted_17 = {
 };
 var _hoisted_18 = ["onClick"];
 var _hoisted_19 = ["onClick"];
-var _hoisted_20 = ["src"];
-var _hoisted_21 = {
-  key: 3,
+var _hoisted_20 = {
+  key: 2
+};
+var _hoisted_21 = ["src"];
+var _hoisted_22 = {
+  key: 4,
   "class": "flex w-100"
 };
-var _hoisted_22 = ["value", "id", "name", "onChange"];
-var _hoisted_23 = ["id", "onClick"];
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_23 = ["value", "id", "name", "onChange"];
+var _hoisted_24 = ["id", "onClick"];
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "far fa-check-circle"
 }, null, -1 /* HOISTED */);
-var _hoisted_25 = [_hoisted_24];
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_26 = [_hoisted_25];
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "far fa-times-circle"
 }, null, -1 /* HOISTED */);
-var _hoisted_27 = [_hoisted_26];
-var _hoisted_28 = {
+var _hoisted_28 = [_hoisted_27];
+var _hoisted_29 = {
   "class": "col-sm-3 col-xs-3 col-lg-3 edit-buttons"
 };
-var _hoisted_29 = ["onClick"];
-var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_30 = ["onClick"];
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-edit",
   "aria-hidden": "true"
 }, null, -1 /* HOISTED */);
-var _hoisted_31 = [_hoisted_30];
-var _hoisted_32 = ["onClick"];
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_32 = [_hoisted_31];
+var _hoisted_33 = ["onClick"];
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fa fa-trash",
   "aria-hidden": "true"
 }, null, -1 /* HOISTED */);
-var _hoisted_34 = [_hoisted_33];
+var _hoisted_35 = [_hoisted_34];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
   var _component_AddItem = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AddItem");
@@ -26881,9 +26909,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onRowClick: $options.rowClick
       }, null, 8 /* PROPS */, ["compactView", "dataFields", "foreignKey", "foreignValue", "onGetTableData", "onSetCompactView", "onAddEvent", "onUpdateSortedData", "onUpdateFilteredData", "onRowClick"]), _hoisted_2, !$data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredItems, function (item, key) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-          "class": "col-sm-4 col-xs-4 col-lg-4 p-2 fade-in",
+          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["col-sm-4 col-xs-4 col-lg-4 p-2 fade-in", {
+            'border-info bg-warning': $data.selectedRow[key] === true,
+            'border-primary': $data.selectedRow[key] === false || $data.selectedRow[key] == null
+          }]),
           key: key,
-          id: item.id.value
+          id: item.id.value,
+          onClick: function onClick($event) {
+            return $options.rowClick(key);
+          }
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.keys(item), function (column, ckey) {
           return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
             "class": "w-100 flex-center",
@@ -26907,11 +26941,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             return $options.doEdit(key, item.id.value);
           }
         }, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Edit ")], 8 /* PROPS */, _hoisted_10), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-          "class": "btn btn-warning btn-width-40 mx-1",
+          "class": "btn btn-secondary btn-width-40 mx-1",
           onClick: function onClick($event) {
             return $options.doDelete(key, item.id.value);
           }
-        }, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete ")], 8 /* PROPS */, _hoisted_12)])])])], 8 /* PROPS */, _hoisted_4);
+        }, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete ")], 8 /* PROPS */, _hoisted_12)])])])], 10 /* CLASS, PROPS */, _hoisted_4);
       }), 128 /* KEYED_FRAGMENT */))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" compact view "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TableHead, {
         fieldsCaptions: $props.dataFields
       }, null, 8 /* PROPS */, ["fieldsCaptions"]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredItems, function (item, key) {
@@ -26945,14 +26979,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
               return $options.onCellClick(item[column].isEditable, ckey, key);
             }, ["stop"])
-          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getValue(item[column])), 11 /* TEXT, CLASS, PROPS */, _hoisted_19)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), item[column].isImage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
-            key: 2,
+          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getValue(item[column])), 11 /* TEXT, CLASS, PROPS */, _hoisted_19)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), item[column].isVirtualImage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ item[column].VirtualImage }} "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(item[column].VirtualImage)
+          }, null, 2 /* CLASS */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), item[column].isImage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
+            key: 3,
             "class": "device-image",
             src: $options.getImage(item[column]),
             onError: _cache[1] || (_cache[1] = function () {
               return $options.replaceByDefault && $options.replaceByDefault.apply($options, arguments);
             })
-          }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_20)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.activeCol === key && $data.activeRow === ckey ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+          }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_21)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.activeCol === key && $data.activeRow === ckey ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
             "class": "form-control w-100",
             value: item[column].value,
             id: $options.setId(key, ckey),
@@ -26965,30 +27001,30 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             onChange: function onChange($event) {
               return $options.onInputChange(item.id.value, key, column, $event.target.value, $data.isEsc);
             }
-          }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_22), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+          }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_23), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
             "class": "btn btn-primary mx-1",
             id: item.id.value,
             onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
               return $options.saveRecord(item.id.value, item[column].value, item[column].value, $event.target.value);
             }, ["stop"])
-          }, _hoisted_25, 8 /* PROPS */, _hoisted_23), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+          }, _hoisted_26, 8 /* PROPS */, _hoisted_24), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
             "class": "btn btn-primary",
             onMousedown: _cache[4] || (_cache[4] = function ($event) {
               _this.isEsc = true;
               _this.resetEditCell();
             })
-          }, _hoisted_27, 32 /* HYDRATE_EVENTS */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 2 /* CLASS */);
-        }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+          }, _hoisted_28, 32 /* HYDRATE_EVENTS */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 2 /* CLASS */);
+        }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
           "class": "btn btn-info mx-2",
           onClick: function onClick($event) {
             return $options.doEdit(key, item.id.value);
           }
-        }, _hoisted_31, 8 /* PROPS */, _hoisted_29), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        }, _hoisted_32, 8 /* PROPS */, _hoisted_30), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
           "class": "btn btn-secondary",
           onClick: function onClick($event) {
             return $options.doDelete(key, item.id.value);
           }
-        }, _hoisted_34, 8 /* PROPS */, _hoisted_32)])])])], 10 /* CLASS, PROPS */, _hoisted_15);
+        }, _hoisted_35, 8 /* PROPS */, _hoisted_33)])])])], 10 /* CLASS, PROPS */, _hoisted_15);
       }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"my-1 border-4 border-bottom rounded-bottom border-secondary\"></div> ")], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.compactView]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Paginator, {
         ref: "paginatorDeviceTypes"
       }, null, 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <MyMqtt></MyMqtt> ")];
@@ -27141,11 +27177,16 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "row vertical-center"
 };
-var _hoisted_4 = {
+var _hoisted_4 = ["onClick"];
+var _hoisted_5 = {
+  key: 1
+};
+var _hoisted_6 = {
+  key: 2,
   "class": "nav-link mx-1"
 };
-var _hoisted_5 = ["onClick"];
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_7 = ["onClick"];
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "col-sm-3 col-xs-3 col-lg-3 edit-buttons"
 }, null, -1 /* HOISTED */);
 
@@ -27154,13 +27195,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$options.setClass(field.columnsCount), "flex fw-bold"]),
       key: ckey
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(field.fieldCaption), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    }, [field.isSortable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+      key: 0,
+      "class": "cursor-pointer",
+      onClick: function onClick($event) {
+        return $options.changeDirection(ckey);
+      }
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(field.fieldCaption), 9 /* TEXT, PROPS */, _hoisted_4)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !field.isSortable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(field.fieldCaption), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), field.isSortable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["fa-solid", $data.sortArrow[ckey]]),
       onClick: function onClick($event) {
         return $options.changeDirection(ckey);
       }
-    }, null, 10 /* CLASS, PROPS */, _hoisted_5)])], 2 /* CLASS */);
-  }), 128 /* KEYED_FRAGMENT */)), _hoisted_6])])]);
+    }, null, 10 /* CLASS, PROPS */, _hoisted_7)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 2 /* CLASS */);
+  }), 128 /* KEYED_FRAGMENT */)), _hoisted_8])])]);
 }
 
 /***/ }),
@@ -27603,6 +27650,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_AppMenu = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AppMenu");
   var _component_CommonCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("CommonCard");
   var _component_InfoCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InfoCard");
+  var _component_router_view = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-view");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.pageCaption), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" page menu "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CommonCard, {
     ref: "menuCard",
     cardCaption: $data.menuBlockCaption,
@@ -27647,7 +27695,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [_hoisted_6];
     }),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["cardCaption"])])]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <router-view /> ")], 64 /* STABLE_FRAGMENT */);
+  }, 8 /* PROPS */, ["cardCaption"])])]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view)], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -35843,7 +35891,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".flex {\n    display: flex;\n    align-items: center;\n}\n\n.flex-center {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: row;\n}\n\n.flex-right {\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n\n.flex-left {\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n}\n\n/*.image-badge {\n    width: 24px;\n    height: 24px;\n    margin-left: -10px;\n}\n\n.logo {\n    display: flex;\n    margin-right: 16px;\n    margin-left: 4px;\n    width: 36px;\n}*/\n\n.device-image {\n    height: 2.6rem;\n    border-radius: 5px;\n}\n\n.card-space {\n    margin-bottom: 00px;\n}\n\na.a_cap:first-letter {\n    text-transform: uppercase;\n}\n\n.edit-buttons {\n    display: flex;\n    justify-content: flex-end;\n}\n\n.btn-width-40 {\n    width: 40%;\n}\n\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n    .device-image {\n        width: 100px;\n        height: 100px;\n        /* margin-top: -23px; */\n        margin-bottom: -91px;\n        margin-left: 219px;\n        border-radius: 10px;\n        /*box-shadow: #eee 0px 0px 8px;*/\n    }\n    .card-space {\n        margin-bottom: 20px;\n    }\n    .container {\n        padding: 0;\n        width: 100%;\n    }\n\n    .navbar > .container-fluid {\n        display: flex;\n        flex-wrap: inherit;\n        align-items: center;\n        justify-content: flex-start;\n    }\n\n    .edit-buttons {\n        /* display: flex;*/\n        margin-top: 16px;\n        margin-bottom: 8px;\n        justify-content: flex-start;\n    }\n\n    .flex-right {\n        flex-direction: row;\n        flex-wrap: wrap;\n    }\n\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".flex {\n    display: flex;\n    align-items: center;\n}\n\n.flex-center {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: row;\n}\n\n.flex-right {\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n\n.flex-left {\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n}\n\n/*.image-badge {\n    width: 24px;\n    height: 24px;\n    margin-left: -10px;\n}\n\n.logo {\n    display: flex;\n    margin-right: 16px;\n    margin-left: 4px;\n    width: 36px;\n}*/\n\n.device-image {\n    height: 2.6rem;\n    border-radius: 5px;\n}\n\n.card-space {\n    margin-bottom: 00px;\n}\n\na.a_cap:first-letter {\n    text-transform: uppercase;\n}\n\n.edit-buttons {\n    display: flex;\n    justify-content: flex-end;\n}\n\n.btn-width-40 {\n    width: 40%;\n}\n\n.cursor-pointer {\n    cursor: pointer;\n}\n\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n    .device-image {\n        width: 100px;\n        height: 100px;\n        /* margin-top: -23px; */\n        margin-bottom: -91px;\n        margin-left: 219px;\n        border-radius: 10px;\n        /*box-shadow: #eee 0px 0px 8px;*/\n    }\n    .card-space {\n        margin-bottom: 20px;\n    }\n    .container {\n        padding: 0;\n        width: 100%;\n    }\n\n    .navbar > .container-fluid {\n        display: flex;\n        flex-wrap: inherit;\n        align-items: center;\n        justify-content: flex-start;\n    }\n\n    .edit-buttons {\n        /* display: flex;*/\n        margin-top: 16px;\n        margin-bottom: 8px;\n        justify-content: flex-start;\n    }\n\n    .flex-right {\n        flex-direction: row;\n        flex-wrap: wrap;\n    }\n\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

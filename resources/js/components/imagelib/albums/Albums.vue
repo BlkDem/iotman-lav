@@ -111,11 +111,10 @@ import DataTable from '../../db/DataTable.vue';
 
                         {
                             fieldName: 'Image',
-                            fieldCaption: 'Image',
                             type: String,
-                            isImage: true,
+                            isImage: false,
                             isVirtualImage: true,
-                            VirtualImage: 'picture',
+                            VirtualImage: 'fa-solid fa-images fa-2x',
                             isEditable: false,
                             isSortable: false,
                             isHighLight: true,

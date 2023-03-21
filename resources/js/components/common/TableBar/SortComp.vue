@@ -71,7 +71,7 @@ export default {
                         res = MessagesConstants.SORT_BY_DESCRIPTION;
                         break;
                     default:
-                        res = MessagesConstants.SORT_BY + $column;
+                        res = MessagesConstants.SORT_BY + column;
                         break;
                 }
                 return res;
