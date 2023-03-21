@@ -28,4 +28,6 @@ export default {
 
 <style>
 
+@import "../../sass/images.scss";
+
 </style>

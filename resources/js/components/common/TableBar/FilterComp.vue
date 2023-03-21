@@ -1,10 +1,11 @@
 <template>
     <div class="flex-center mx-2">
-            <a class="nav-link dropdown-toggle" type="button" id="dropdownMenuFilter"
+            <a class="nav-link" type="button" id="dropdownMenuFilter"
                 data-bs-toggle="dropdown" aria-expanded="false">
-                <!-- <i class="fas fa-ellipsis-h"></i> -->
+                <i class="fa-solid fa-caret-down"></i>
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuFilter" style="position: absolute; ">
+
                 <div v-for="(fillterField, key) in filterDataFields" :id="fillterField.fieldName">
                     <a class="dropdown-item"
                         @click="currentField=fillterField.fieldName;currentFieldCaption=fillterField.fieldCaption;"

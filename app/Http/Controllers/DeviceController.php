@@ -35,9 +35,10 @@ class DeviceController extends BaseController
         }
         try {
             $updateDevice->update($request->all());
-            $updateDeviceView = DevicesView::find($updateDevice);
+            // dd($updateDevice);
+            $updateDeviceView = DevicesView::find($updateDevice->id);
             // return response()->json($updateDevice, 200);
-            return $this->sendResponse($updateDeviceView[0], "Device updated");
+            return $this->sendResponse($updateDeviceView, "Device updated");
         }
         catch (Exception $e) {
             return $this->sendError('Updating Record Error: ' . $e);

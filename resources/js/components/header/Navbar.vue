@@ -55,10 +55,8 @@ export default {
     methods: {
         newLang(event)
         {
-            //  console.log('navbar', event)
             if (this.$refs.appMenu != null) this.$refs.appMenu.setLang(event)
             if (this.$refs.userMenu != null) this.$refs.userMenu.setLang(event)
-            //  this.$parent.$emit('newLangUp')
         },
 
     },

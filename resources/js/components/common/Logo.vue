@@ -59,5 +59,12 @@
     fill-rule: nonzero
 }
 
+.logo {
+    display: flex;
+    margin-right: 16px;
+    margin-left: 4px;
+    width: 36px;
+}
+
 /* .fil1 {fill:var(--bs-dark);fill-rule:nonzero} */
 </style>

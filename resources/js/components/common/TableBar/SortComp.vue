@@ -11,10 +11,6 @@
             <a class="dropdown-item" v-for="sortField in sortDataFields"
                 :key="sortField.fieldName" :value="sortField.fieldName"
                 @click="doSort(sortField, sortDirection)">{{ sortField.fieldCaption }}</a>
-            <!-- <div class="dropdown-divider"></div> -->
-            <!-- <a class="dropdown-item" @click="changeDirection()">
-                {{ sortDirection ? sortOrderStrings[0] : sortOrderStrings[1] }}
-            </a> -->
         </div>
     </div>
     </div>
@@ -49,7 +45,7 @@ export default {
     computed: {
         SortName() {
             //combine elements to the caption string
-            return this.SortingCaption(this.sortColumn.fieldCaption, this.sortDirection)
+            return this.sortingCaption(this.sortColumn.fieldCaption)
         },
     },
 
@@ -62,10 +58,8 @@ export default {
 
             //strings processing
 
-            SortingCaption($column, $direction) {
+            sortingCaption($column) {
                 let res = ""
-                //     $column === "id" ?
-                //     this.SORT_BY_ID : this.SORT_BY + $column;
                 switch ($column) {
                     case 'ID':
                         res = MessagesConstants.SORT_BY_ID;
@@ -80,11 +74,6 @@ export default {
                         res = MessagesConstants.SORT_BY + $column;
                         break;
                 }
-                // res += " (";
-                // res += !$direction ?
-                //     '<i class="fa-solid fa-caret-down"></i>' :
-                //     '<i class="fa-solid fa-caret-up"></i>';
-                // res += ")";
                 return res;
             },
 

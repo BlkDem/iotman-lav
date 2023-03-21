@@ -15,15 +15,15 @@
                 </div>
 
                 <div v-if="field.isLookup">
-                    <label class="px-2">{{ field.fieldCaption }} - {{ field.lookupId }} - {{ field.value }}</label>
-                    <DataSetSelect
+                    <label class="px-2">{{ field.fieldCaption }} </label>
+                    <DataSelect
                         :dataTableReadApi="field.lookupApi"
                         :nameField="field.displayName"
                         :lookupField="field.lookupId"
                         :value="field.value"
                         @onDataSelect="onDataSelect"
                     >
-                    </DataSetSelect>
+                    </DataSelect>
                     <!-- <input class="form-control p-2 mb-4" :placeholder="'Input ' + field.fieldCaption"  v-model="field.value" /> -->
                 </div>
 
@@ -48,12 +48,12 @@
 import PopupModal from '../common/PopupModal.vue';
 import MessagesConstants from '../strings_constants/strings';
 import Pathes from '../../config/pathes';
-import DataSetSelect from './DataSetSelect.vue';
+import DataSelect from './DataSelect.vue';
 
 export default {
     name: 'AddItem',
 
-    components: { PopupModal, DataSetSelect },
+    components: { PopupModal, DataSelect },
 
     data (){
         return {

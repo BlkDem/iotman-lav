@@ -3,7 +3,7 @@ import './bootstrap';
 import { createApp } from 'vue';
 import router from './router'
 
-import LangCombo from './components/common/LangCombo.vue';
+import LangCombo from './components/header/LangCombo.vue';
 import App from './components/App.vue';
 import Navbar from './components/header/Navbar.vue';
 import AppMenu from './components/common/AppMenu.vue';

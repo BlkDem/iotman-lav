@@ -6,7 +6,7 @@
         :lookupField="lookupField"
         @change="doChange($event.target.value)"
         class="form-select">
-        <option v-for="(item, key) in dataItems" v-bind:key="key" v-bind:value="item.id">
+        <option v-for="(item, key) in dataItems" v-bind:value="item.id">
             {{ item[nameField] }}
         </option>
     </select>
