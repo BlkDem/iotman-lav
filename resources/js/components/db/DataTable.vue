@@ -15,6 +15,8 @@
         <table-nav
             :compactView="compactView"
             :dataFields="dataFields"
+            :foreignKey="foreignKey"
+            :foreignValue="foreignValue"
             @getTableData="getTableData"
             @setCompactView="setCompactView"
             @addEvent="setItem"
@@ -246,6 +248,13 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
         },
 
+        watch: {
+            foreignValue() {
+                console.log('fk value', this.foreignValue)
+                this.getTableData()
+            }
+        },
+
         methods: {
 
             rowClick(row){
@@ -255,7 +264,8 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                 this.selectedRow[row] = !this.selectedRow[row]
                 // console.log(row, this.selectedName)
                 this.cardCaptionAdd = this.filteredItems[row][this.selectedName].value
-                //this.$emit('onRowClick', this.filteredItems[row])
+                //send FK value to child table
+                this.$emit('onRowClick', this.filteredItems[row].id.value)
             },
 
             getValue(item) {
@@ -413,7 +423,9 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
             },
 
             async getTableData(_currentPage=1, _itemsPerPage=5) {
-                await axios.get(this.api.get + _currentPage + "/" + _itemsPerPage)
+                let fkValue = (this.foreignValue>0)?'/'+this.foreignValue:''
+                console.log('fk: ', fkValue)
+                await axios.get(this.api.get + _currentPage + "/" + _itemsPerPage + fkValue)
                     .then(response => {
 
                         this.Items = this.populateListItems(response.data.data);

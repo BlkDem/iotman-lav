@@ -18,7 +18,7 @@
             :api="images.api"
             :dataFields="images.imagesFields"
             :foreignKey="images.album_id"
-            :foreignValue="images.album_id_value"
+            :foreignValue="selectedFkValue"
             :pageCaption="images.imagesCaption"
         >
         </data-table>
@@ -156,7 +156,9 @@ import DataTable from '../../db/DataTable.vue';
                     ],
                 },
 
-                selectedName: 'album_name'
+                selectedName: 'album_name',
+
+                selectedFkValue: 0,
             }
         },
 
@@ -181,7 +183,8 @@ import DataTable from '../../db/DataTable.vue';
 
         methods: {
             onRowClick(dataEvent) {
-                console.log(dataEvent.album_name.value)
+                console.log(dataEvent)
+                this.selectedFkValue = dataEvent
                 // this.$emit('setAdditionalCaption', dataEvent)
             }
         },

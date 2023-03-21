@@ -24759,6 +24759,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       _this.setLang(_lang);
     });
   },
+  watch: {
+    foreignValue: function foreignValue() {
+      console.log('fk value', this.foreignValue);
+      this.getTableData();
+    }
+  },
   methods: {
     rowClick: function rowClick(row) {
       if (!this.selectableRow) return;
@@ -24768,7 +24774,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.selectedRow[row] = !this.selectedRow[row];
       // console.log(row, this.selectedName)
       this.cardCaptionAdd = this.filteredItems[row][this.selectedName].value;
-      //this.$emit('onRowClick', this.filteredItems[row])
+      //send FK value to child table
+      this.$emit('onRowClick', this.filteredItems[row].id.value);
     },
     getValue: function getValue(item) {
       return item.lookupValue == null ? item.value : item.lookupValue;
@@ -24898,14 +24905,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _arguments = arguments,
         _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var _currentPage, _itemsPerPage;
+        var _currentPage, _itemsPerPage, fkValue;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               _currentPage = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
               _itemsPerPage = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : 5;
-              _context.next = 4;
-              return axios.get(_this3.api.get + _currentPage + "/" + _itemsPerPage).then(function (response) {
+              fkValue = _this3.foreignValue > 0 ? '/' + _this3.foreignValue : '';
+              console.log('fk: ', fkValue);
+              _context.next = 6;
+              return axios.get(_this3.api.get + _currentPage + "/" + _itemsPerPage + fkValue).then(function (response) {
                 _this3.Items = _this3.populateListItems(response.data.data);
                 _this3.filteredItems = _this3.Items;
 
@@ -24923,7 +24932,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   window.location.href = "/login";
                 }
               });
-            case 4:
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -25631,7 +25640,8 @@ __webpack_require__.r(__webpack_exports__);
           columnsCount: 4
         }]
       },
-      selectedName: 'album_name'
+      selectedName: 'album_name',
+      selectedFkValue: 0
     };
   },
   created: function created() {
@@ -25650,7 +25660,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     onRowClick: function onRowClick(dataEvent) {
-      console.log(dataEvent.album_name.value);
+      console.log(dataEvent);
+      this.selectedFkValue = dataEvent;
       // this.$emit('setAdditionalCaption', dataEvent)
     }
   }
@@ -27427,13 +27438,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_table_nav, {
         compactView: $data.compactView,
         dataFields: $props.dataFields,
+        foreignKey: $props.foreignKey,
+        foreignValue: $props.foreignValue,
         onGetTableData: $options.getTableData,
         onSetCompactView: $options.setCompactView,
         onAddEvent: $options.setItem,
         onUpdateSortedData: $options.updateSortedData,
         onUpdateFilteredData: $options.updateFilteredData,
         onRowClick: $options.rowClick
-      }, null, 8 /* PROPS */, ["compactView", "dataFields", "onGetTableData", "onSetCompactView", "onAddEvent", "onUpdateSortedData", "onUpdateFilteredData", "onRowClick"]), _hoisted_2, !$data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredItems, function (item, key) {
+      }, null, 8 /* PROPS */, ["compactView", "dataFields", "foreignKey", "foreignValue", "onGetTableData", "onSetCompactView", "onAddEvent", "onUpdateSortedData", "onUpdateFilteredData", "onRowClick"]), _hoisted_2, !$data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredItems, function (item, key) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           "class": "col-sm-4 col-xs-4 col-lg-4 p-2 fade-in",
           key: key,
@@ -27744,7 +27757,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     api: $data.images.api,
     dataFields: $data.images.imagesFields,
     foreignKey: $data.images.album_id,
-    foreignValue: $data.images.album_id_value,
+    foreignValue: $data.selectedFkValue,
     pageCaption: $data.images.imagesCaption
   }, null, 8 /* PROPS */, ["api", "dataFields", "foreignKey", "foreignValue", "pageCaption"])]);
 }
