@@ -24955,7 +24955,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    for (var item in this.fieldsCaptions) this.sortArrow[item] = 'fa-caret-down';
+    for (var item in this.fieldsCaptions) {
+      this.sortArrow[item] = 'fa-caret-down';
+      this.sortDirection[item] = true;
+    }
   },
   methods: {
     setClass: function setClass(width) {

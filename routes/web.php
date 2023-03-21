@@ -13,8 +13,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/logout', [LoginController::class, 'logout']);
  });
 
-Route::get('/{vue?}', [RootController::class, 'index'])->where('vue', '[\/\w\.-]*');
+// Route::get('/{vue?}', [RootController::class, 'index'])->where('vue', '[\/\w\.-]*');
 
-// Route::get('/', [RootController::class, 'index']);
+Route::get('/', [RootController::class, 'index']);
 
 Auth::routes();
