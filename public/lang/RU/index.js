@@ -2,6 +2,7 @@ export default {
     HOME: "Umolab Devices",
     LIBRARY: "Библиотека",
     IMAGES: "Изображения",
+    USERS: "Пользователи",
     ALBUMS: "Альбомы",
     DEVICE_TYPES: "Типы устройств",
     DEVICES: "Устройства",
@@ -20,7 +21,7 @@ export default {
     EDITING_CANCELLED: "Изменение отменено",
     EDITING_ERROR: "Ошибка изменения",
     DELETING_CANCELLED: "Удаление отменено",
-
+    DELETING_ERROR: "Ошибка удаления",
 
     NO_DESCRIPTION: " нет описания",
     NO_HWID: " нет адреса устройста",

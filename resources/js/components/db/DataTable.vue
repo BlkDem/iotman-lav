@@ -358,7 +358,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
                 let newListItemData = {}
 
-                console.log(_value)
+                // console.log(_value)
 
                 for (let field in this.dataFields) {
 
@@ -367,6 +367,8 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                     const _editable = dataField.isEditable //possible edit cell by text click
                     const _sortable = dataField.isSortable //field can sorted
                     const _image = dataField.isImage //image field - binding 'img'
+                    const _datetime = dataField.isDateTime //image field - binding 'img'
+                    const _text = dataField.isText //Display Name Field
                     const _highlight = dataField.isHighLight //highlight another color field 'bg-info' class
                     const _colscount = dataField.columnsCount //col-* col-ls-* ... value
                     const _virtual = dataField?.isVirtualImage //for abstract images like 'albums'
@@ -374,6 +376,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                     const _lookupApi = dataField?.lookupApi //another object get api
                     const _lookupId = dataField?.lookupId //field link key (FK)
                     const _displayName = dataField?.displayName //Display Name Field
+
 
                     // const newListItem = _item  //newList[itemRow]
 
@@ -383,6 +386,8 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                         // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
                         displayName: _displayName,
                         isEditable: _editable,
+                        isText: _text,
+                        isDateTime: _datetime,
                         isSortable: _sortable,
                         isImage: _image,
                         isHighLight: _highlight,
@@ -423,7 +428,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 
             async getTableData(_currentPage=1, _itemsPerPage=5) {
                 let fkValue = (this.foreignValue>0)?'/'+this.foreignValue:''
-                console.log('fk: ', fkValue)
+                // console.log('fk: ', fkValue)
                 await axios.get(this.api.get + _currentPage + "/" + _itemsPerPage + fkValue)
                     .then(response => {
 
@@ -468,6 +473,11 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
                         })
                         .catch(error => {
                             console.log(error);
+                            this.$root.$refs.toaster.showMessage(
+                                MessagesConstants.DELETING_ERROR,
+                                ParsingErrors.getError(error),
+                                ParsingErrors.ERROR_LEVEL_ERROR
+                            )
                         })
                 } else {
                     console.log(MessagesConstants.DELETING_CANCELLED)

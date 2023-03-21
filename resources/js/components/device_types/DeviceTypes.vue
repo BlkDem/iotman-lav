@@ -95,6 +95,7 @@ import DataTable from '../db/DataTable.vue';
                             fieldCaption: 'Description',
                             type: String,
                             isImage: false,
+                            isText: true,
                             isEditable: true,
                             isSortable: true,
                             isHighLight: false,

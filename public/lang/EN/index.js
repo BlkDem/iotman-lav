@@ -2,6 +2,7 @@ export default {
     HOME: "Umolab Devices",
     LIBRARY: "Images Library",
     IMAGES: "Images",
+    USERS: "Users",
     ALBUMS: "Albums",
     DEVICE_TYPES: "Device Types",
     DEVICES: "Devices",
@@ -20,7 +21,7 @@ export default {
     EDITING_CANCELLED: "Editing Cancelled",
     EDITING_ERROR: "Editing Error",
     DELETING_CANCELLED: "Deleting Cancelled",
-
+    DELETING_ERROR: "Deleting Error",
 
     NO_DESCRIPTION: " no description ",
     NO_HWID: " no device address",

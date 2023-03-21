@@ -62,6 +62,7 @@ export default {
                             fieldCaption: 'Description',
                             type: String,
                             isImage: false,
+                            isText: true,
                             isEditable: true,
                             isSortable: true,
                             isHighLight: false,

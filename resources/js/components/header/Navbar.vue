@@ -37,7 +37,7 @@
 
 <script>
 
-import Logo from "../common/Logo.vue"
+import Logo from "./Logo.vue"
 
 export default {
 
@@ -64,5 +64,5 @@ export default {
 </script>
 
 <style>
-    @import "../../../sass/images.scss";
+    /* @import "../../../sass/images.scss"; */
 </style>

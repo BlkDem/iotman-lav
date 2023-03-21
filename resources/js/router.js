@@ -6,6 +6,7 @@ import Devices from "./components/devices/Devices.vue"
 import UserDevices from "./components/user_devices/UserDevices.vue"
 import Albums from "./components/imagelib/albums/Albums.vue"
 import Micros from "./components/micros/Micros.vue"
+import Users  from "./components/users/Users.vue"
 
 const routes = [
   {
@@ -29,6 +30,14 @@ const routes = [
             icon: "fas fa-sun",
             component: Devices,
             ID: "DEVICES"
+          },
+          {
+            path: "/micros",
+            name: "Controllers",
+            icon: "fas fa-microchip",
+            component: Micros,
+            ID: "MICROS",
+            // visible: true
           },
           {
             path: "/user_devices",
@@ -86,6 +95,14 @@ const routes = [
     icon: "fas fa-microchip",
     component: Micros,
     ID: "MICROS",
+    visible: false
+  },
+  {
+    path: "/users",
+    name: "Users",
+    icon: "fa-solid fa-user",
+    component: Users,
+    ID: "USERS",
     visible: true
   },
   {

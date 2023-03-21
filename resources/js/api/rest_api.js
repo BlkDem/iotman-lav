@@ -61,11 +61,11 @@ export default {
     api_user_device_patch: apiPreffix +      'user_device/patch/',
 
     //Users CRUD
-    api_user_create: apiPreffix + 'users/create/',
+    api_user_create: apiPreffix + 'user/create/',
     api_users_read: apiPreffix + 'users/read/',
     api_users_read_page: apiPreffix + 'users/read/page/',
-    api_user_update: apiPreffix + 'users/update/',
-    api_user_delete: apiPreffix + 'users/delete/',
+    api_user_update: apiPreffix + 'user/update/',
+    api_user_delete: apiPreffix + 'user/delete/',
     api_user_patch: apiPreffix +  'user/patch/',
 
     //User info

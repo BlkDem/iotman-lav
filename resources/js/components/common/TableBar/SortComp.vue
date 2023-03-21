@@ -2,7 +2,7 @@
     <div class="nav-item dropdown me-auto vertical-center">
     <div class="flex-center">
         <a class="nav-link mx-2" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
-            aria-expanded="false">{{ SortName }}
+            aria-expanded="false">{{ sortName }}
         </a>
         <a class="nav-link" @click="changeDirection()">
             <i class="fa-solid" :class="{'fa-caret-up': sortDirection, 'fa-caret-down': !sortDirection}"></i>
@@ -43,7 +43,7 @@ export default {
     },
 
     computed: {
-        SortName() {
+        sortName() {
             //combine elements to the caption string
             return this.sortingCaption(this.sortColumn.fieldCaption)
         },
@@ -58,9 +58,9 @@ export default {
 
             //strings processing
 
-            sortingCaption($column) {
+            sortingCaption(column) {
                 let res = ""
-                switch ($column) {
+                switch (column) {
                     case 'ID':
                         res = MessagesConstants.SORT_BY_ID;
                         break;
@@ -84,10 +84,10 @@ export default {
             },
 
         //send a sort message
-        doSort($column, $direction) {
-            this.sortColumn = $column
-            this.sortDirection = $direction
-            this.$emit('updateSortedData', $column.fieldName, $direction)
+        doSort(column, direction) {
+            this.sortColumn = column
+            this.sortDirection = direction
+            this.$emit('updateSortedData', column.fieldName, direction)
         },
     }
 }

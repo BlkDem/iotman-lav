@@ -62,21 +62,22 @@ export default {
                             fieldCaption: 'Description',
                             type: String,
                             isImage: false,
+                            isText: true,
                             isEditable: true,
                             isSortable: true,
                             isHighLight: false,
-                            columnsCount: 3
+                            columnsCount: 6
                         },
-                        {
-                            fieldName: 'micro_config',
-                            fieldCaption: 'Config',
-                            type: String,
-                            isImage: false,
-                            isEditable: true,
-                            isSortable: true,
-                            isHighLight: false,
-                            columnsCount: 3
-                        },
+                        // {
+                        //     fieldName: 'micro_config',
+                        //     fieldCaption: 'Config',
+                        //     type: String,
+                        //     isImage: false,
+                        //     isEditable: true,
+                        //     isSortable: true,
+                        //     isHighLight: false,
+                        //     columnsCount: 3
+                        // },
                     ],
 
                 },

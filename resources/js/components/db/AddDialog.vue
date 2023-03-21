@@ -11,7 +11,16 @@
 
                 <div v-if="!field.isImage&&field.fieldName!=='id'&&!field.isLookup">
                     <label class="px-2">{{ field.fieldCaption }}</label>
-                    <input class="form-control p-2 mb-4" :placeholder="'Input ' + field.fieldCaption"  v-model="field.value" />
+
+                    <textarea v-if="field.isText" v-model="field.value" class="form-control p-2 mb-4"
+                        style="min-height: 100px; max-height: 200px;"
+                        :placeholder="'Input ' + field.fieldCaption" cols="40" rows="3">
+                    </textarea>
+
+                    <input v-if="field.isDateTime" type="datetime-local" class="form-control p-2 mb-4" v-model="field.value" />
+
+                    <input v-if="!field.isText&&!field.isDateTime" class="form-control p-2 mb-4" :placeholder="'Input ' + field.fieldCaption"  v-model="field.value" />
+
                 </div>
 
                 <div v-if="field.isLookup">
@@ -88,7 +97,7 @@ export default {
                     this.dataFields[item].value = _value
                 }
             }
-            console.log(_value, _fieldName, this.dataFields)
+            // console.log(_value, _fieldName, this.dataFields)
         },
 
         getImage(item) {
@@ -107,7 +116,7 @@ export default {
             this.message = optsAdd.message
             this.dataFields = optsAdd.dataFields
 
-            console.log('on show: ', this.dataFields)
+            // console.log('on show: ', this.dataFields)
 
             this.okButton = optsAdd.okButton
             if (optsAdd.cancelButton) {
@@ -132,7 +141,7 @@ export default {
         confirmDialog() {
             this.$refs.popup.close()
             this.postData = this.dataFields
-            console.log('edit Ok: ', this.postData)
+            // console.log('edit Ok: ', this.postData)
             this.resolvePromise(true, this)
         },
 
