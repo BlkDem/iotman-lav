@@ -1,28 +1,30 @@
 <template>
-            <div class="card card-border my-4">
-                <div class="card-body border-4 border-top border-bottom rounded-bottom rounded-top border-secondary">
-                    <div class="card-caption">
-                        <h3 class="card-title align-left px-2 ">{{ cardCaption }}
-                            <span ref="cardCaptionAdd" class="text-info">{{ cardCaptionAdd }}</span>
-                        </h3>
-                        <div :class="{'hide': isCollapseButtonHidden ?? false}">
-                            <button class="btn btn-primary btn-rounded" :class="{'hide': !isCollapsed}"
-                                @click="isCollapsed=!isCollapsed">
-                                <i class="fas fa-caret-down"></i>
-                            </button>
-                            <button class="btn btn-primary btn-rounded" :class="{'hide': isCollapsed}"
-                                @click="isCollapsed=!isCollapsed">
-                                <i class="fas fa-caret-up"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- <h3 class="card-title align-left px-2 ">{{ cardCaption }}</h3> -->
-                    <!-- <p class="card-text">Paragraph</p> -->
-                    <div class="py-4 align-left" :class="{'mx-2': margins, 'collapse': isCollapsed}">
-                        <slot></slot>
-                    </div>
+    <div class="card card-border my-4">
+        <div class="card-body border-4 border-top border-bottom rounded-bottom rounded-top border-secondary">
+            <div class="card-caption">
+
+                <h3 class="card-title align-left px-2 " :class="{'hide': isAdditionalCaption}">{{ cardCaption }}</h3>
+
+                <h3 ref="cardCaptionAdd" class="text-info" :class="{'hide': !isAdditionalCaption}">{{ cardCaptionAdd }}</h3>
+
+                <div :class="{'hide': isCollapseButtonHidden ?? false}">
+                    <button class="btn btn-primary btn-rounded" :class="{'hide': !isCollapsed}"
+                        @click="isCollapsed=!isCollapsed">
+                        <i class="fas fa-caret-down"></i>
+                    </button>
+                    <button class="btn btn-primary btn-rounded" :class="{'hide': isCollapsed}"
+                        @click="isCollapsed=!isCollapsed">
+                        <i class="fas fa-caret-up"></i>
+                    </button>
                 </div>
             </div>
+            <!-- <h3 class="card-title align-left px-2 ">{{ cardCaption }}</h3> -->
+            <!-- <p class="card-text">Paragraph</p> -->
+            <div class="py-4 align-left" :class="{'mx-2': margins, 'collapse': isCollapsed}">
+                <slot></slot>
+            </div>
+        </div>
+    </div>
 
 </template>
 
@@ -53,6 +55,11 @@ export default {
         isCollapseButtonHidden: {
             type: Boolean,
             default: false
+        },
+
+        isAdditionalCaption: {
+            type: Boolean,
+            default: true
         }
     },
 

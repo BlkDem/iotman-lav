@@ -23772,6 +23772,10 @@ __webpack_require__.r(__webpack_exports__);
     isCollapseButtonHidden: {
       type: Boolean,
       "default": false
+    },
+    isAdditionalCaption: {
+      type: Boolean,
+      "default": true
     }
   }
 });
@@ -24082,6 +24086,10 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     dataFields: {
       type: Array
+    },
+    readOnly: {
+      type: Boolean,
+      "default": false
     }
   },
   data: function data() {
@@ -24526,6 +24534,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     selectableRow: {
       type: Boolean,
       "default": false
+    },
+    readOnly: {
+      type: Boolean,
+      "default": false
     }
   },
   components: {
@@ -24550,6 +24562,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       imagePlug: '',
       selectedRow: [],
       cardCaptionAdd: ''
+
+      // albumsReadOnly: true
     };
   },
   created: function created() {
@@ -24559,12 +24573,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     var _this = this;
-    if (localStorage.getItem('CompactView')) {
-      this.compactView = localStorage.getItem('CompactView') === 'true';
-    }
+    if (!this.readOnly) {
+      if (localStorage.getItem('CompactView')) {
+        this.compactView = localStorage.getItem('CompactView') === 'true';
+      }
+    } else this.compactView = true;
     this.emitter.on("new-lang", function (_lang) {
       _this.setLang(_lang);
     });
+    console.log(this.selectedName);
   },
   watch: {
     foreignValue: function foreignValue() {
@@ -24579,9 +24596,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.selectedRow[item] = false;
       }
       this.selectedRow[row] = !this.selectedRow[row];
-      // console.log(row, this.selectedName)
+
+      // console.log(row, this.selectedName, this.filteredItems[row][this.selectedName])
       this.cardCaptionAdd = this.filteredItems[row][this.selectedName].value;
       //send FK value to child table
+      // console.log(this.filteredItems[row].id)
       this.$emit('onRowClick', this.filteredItems[row].id.value);
     },
     getValue: function getValue(item) {
@@ -24651,7 +24670,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setCompactView: function setCompactView($value) {
       // console.log(value)
-      this.compactView = $value;
+      if (!this.readOnly) {
+        this.compactView = $value;
+      } else this.compactView = true;
     },
     processListItem: function processListItem(_value) {
       var newListItemData = {};
@@ -24713,7 +24734,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       for (var itemRow in newList) {
         newList[itemRow] = this.processListItem(items[itemRow]);
       }
-      console.log(newList);
+      // console.log(newList)
+      // if ((newList.length>0)&&(this.selectableRow)) this.rowClick(0)
       return newList;
     },
     getTableData: function getTableData() {
@@ -24731,6 +24753,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return axios.get(_this3.api.get + _currentPage + "/" + _itemsPerPage + fkValue).then(function (response) {
                 _this3.Items = _this3.populateListItems(response.data.data);
                 _this3.filteredItems = _this3.Items;
+                if (_this3.filteredItems.length > 0 && _this3.selectableRow) _this3.rowClick(0);
 
                 // setup paginator
                 _this3.$refs.paginatorDeviceTypes.setPaginator({
@@ -25640,6 +25663,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      albumsReadOnly: true,
       //Images Widget Setup
       images: {
         imagesCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].IMAGES,
@@ -25686,9 +25710,61 @@ __webpack_require__.r(__webpack_exports__);
           isSortable: true,
           isHighLight: false,
           columnsCount: 3
+        }, {
+          fieldName: 'id',
+          fieldCaption: 'ID',
+          type: Number,
+          isImage: false,
+          isEditable: false,
+          isSortable: true,
+          isHighLight: true,
+          columnsCount: 1
         }],
         album_id: 'album_id',
         album_id_value: 1
+      },
+      albums: {
+        albumsCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].ALBUMS,
+        api: {
+          get: '',
+          insert: '',
+          update: '',
+          "delete": '',
+          patch: ''
+        },
+        albumsFields: [{
+          fieldName: 'Image',
+          type: String,
+          isVirtualImage: true,
+          isHighLight: true,
+          isSortable: false,
+          VirtualImage: 'fa-solid fa-images fa-2x',
+          columnsCount: 2
+        }, {
+          fieldName: 'id',
+          fieldCaption: 'ID',
+          type: Number,
+          isSortable: true,
+          isHighLight: true,
+          columnsCount: 2
+        }, {
+          fieldName: 'album_name',
+          fieldCaption: 'Name',
+          type: String,
+          // isEditable: true,
+          isSortable: true,
+          columnsCount: 6
+        }, {
+          fieldName: 'images_count',
+          fieldCaption: 'Cnt',
+          type: Number,
+          isSortable: true,
+          isHighLight: true,
+          columnsCount: 2
+        }],
+        selectedName: 'album_name',
+        //selected album id for child table images
+        selectedFkValue: 0
       }
     };
   },
@@ -25700,8 +25776,15 @@ __webpack_require__.r(__webpack_exports__);
     apiImages.update = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_image_update;
     apiImages["delete"] = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_image_delete;
     apiImages.patch = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_image_patch;
+    var apiAlbums = this.albums.api;
+    apiAlbums.get = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_albums_lookup;
   },
-  methods: {}
+  methods: {
+    onRowClick: function onRowClick(dataEvent) {
+      console.log(dataEvent);
+      this.images.selectedFkValue = dataEvent;
+    }
+  }
 });
 
 /***/ }),
@@ -26198,23 +26281,26 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "card-caption"
 };
-var _hoisted_4 = {
-  "class": "card-title align-left px-2"
-};
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-caret-down"
 }, null, -1 /* HOISTED */);
-var _hoisted_6 = [_hoisted_5];
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_5 = [_hoisted_4];
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-caret-up"
 }, null, -1 /* HOISTED */);
-var _hoisted_8 = [_hoisted_7];
+var _hoisted_7 = [_hoisted_6];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _$props$isCollapseBut;
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaption) + " ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["card-title align-left px-2", {
+      'hide': $props.isAdditionalCaption
+    }])
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaption), 3 /* TEXT, CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
     ref: "cardCaptionAdd",
-    "class": "text-info"
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaptionAdd), 513 /* TEXT, NEED_PATCH */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-info", {
+      'hide': !$props.isAdditionalCaption
+    }])
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaptionAdd), 3 /* TEXT, CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
       'hide': (_$props$isCollapseBut = $props.isCollapseButtonHidden) !== null && _$props$isCollapseBut !== void 0 ? _$props$isCollapseBut : false
     })
@@ -26225,14 +26311,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $props.isCollapsed = !$props.isCollapsed;
     })
-  }, _hoisted_6, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, _hoisted_5, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-rounded", {
       'hide': $props.isCollapsed
     }]),
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $props.isCollapsed = !$props.isCollapsed;
     })
-  }, _hoisted_8, 2 /* CLASS */)], 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h3 class=\"card-title align-left px-2 \">{{ cardCaption }}</h3> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <p class=\"card-text\">Paragraph</p> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  }, _hoisted_7, 2 /* CLASS */)], 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h3 class=\"card-title align-left px-2 \">{{ cardCaption }}</h3> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <p class=\"card-text\">Paragraph</p> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["py-4 align-left", {
       'mx-2': $props.margins,
       'collapse': $props.isCollapsed
@@ -26541,29 +26627,33 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_filter_comp, {
     filterDataFields: $data.filterDataFields,
     onFilterData: $options.updateFilteredData
-  }, null, 8 /* PROPS */, ["filterDataFields", "onFilterData"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <li class=\"nav-item  d-flex py-1  w-100\">\n                        <input class=\"form-control me-sm-2\" type=\"text\" v-model=\"dataFilter\" />\n                    </li> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_sort_comp, {
+  }, null, 8 /* PROPS */, ["filterDataFields", "onFilterData"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <li class=\"nav-item  d-flex py-1  w-100\">\n                        <input class=\"form-control me-sm-2\" type=\"text\" v-model=\"dataFilter\" />\n                    </li> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [!$props.readOnly ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_sort_comp, {
+    key: 0,
     sortDataFields: $data.sortDataFields,
     onUpdateSortedData: $options.doSort
-  }, null, 8 /* PROPS */, ["sortDataFields", "onUpdateSortedData"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, null, 8 /* PROPS */, ["sortDataFields", "onUpdateSortedData"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [!$props.readOnly ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 0,
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary mx-2", {
       'disabled': $data.compactView
     }]),
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.setCompactView(true);
     })
-  }, _hoisted_7, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, _hoisted_7, 2 /* CLASS */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$props.readOnly ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 1,
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary", {
       'disabled': !$data.compactView
     }]),
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $options.setCompactView(false);
     })
-  }, _hoisted_9, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, _hoisted_9, 2 /* CLASS */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$props.readOnly ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 2,
     "class": "btn btn-primary mx-2",
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return _ctx.$emit('addEvent');
     })
-  }, _hoisted_11), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, _hoisted_11)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary",
     onClick: _cache[3] || (_cache[3] = function () {
       return $options.getTableData && $options.getTableData.apply($options, arguments);
@@ -26904,6 +26994,7 @@ var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 }, null, -1 /* HOISTED */);
 var _hoisted_27 = [_hoisted_26];
 var _hoisted_28 = {
+  key: 0,
   "class": "col-sm-2 col-xs-2 col-lg-2 edit-buttons"
 };
 var _hoisted_29 = ["onClick"];
@@ -26929,7 +27020,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_common_card, {
     cardCaption: $props.pageCaption,
     isCollapseButtonHidden: false,
-    cardCaptionAdd: $data.cardCaptionAdd
+    cardCaptionAdd: $data.cardCaptionAdd,
+    isAdditionalCaption: $props.readOnly
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddItem, {
@@ -26941,13 +27033,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         dataFields: $props.dataFields,
         foreignKey: $props.foreignKey,
         foreignValue: $props.foreignValue,
+        readOnly: $props.readOnly,
         onGetTableData: $options.getTableData,
         onSetCompactView: $options.setCompactView,
         onAddEvent: $options.setItem,
         onUpdateSortedData: $options.updateSortedData,
         onUpdateFilteredData: $options.updateFilteredData,
         onRowClick: $options.rowClick
-      }, null, 8 /* PROPS */, ["compactView", "dataFields", "foreignKey", "foreignValue", "onGetTableData", "onSetCompactView", "onAddEvent", "onUpdateSortedData", "onUpdateFilteredData", "onRowClick"]), _hoisted_2, !$data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredItems, function (item, key) {
+      }, null, 8 /* PROPS */, ["compactView", "dataFields", "foreignKey", "foreignValue", "readOnly", "onGetTableData", "onSetCompactView", "onAddEvent", "onUpdateSortedData", "onUpdateFilteredData", "onRowClick"]), _hoisted_2, !$data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredItems, function (item, key) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["col-sm-4 col-xs-4 col-lg-4 p-2 fade-in", {
             'border-info bg-warning': $data.selectedRow[key] === true,
@@ -27021,17 +27114,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             key: ckey
           }, [($data.activeCol !== key || $data.activeRow !== ckey) && item[column].isImage != true && !item[column].isLookup ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
             key: 0,
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["w-75", {
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
               'text-info': item[column].isHighLight
-            }]),
+            }),
             onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
               return $options.onCellClick(item[column].isEditable, ckey, key);
             }, ["stop"])
           }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item[column].value), 11 /* TEXT, CLASS, PROPS */, _hoisted_18)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), item[column].isLookup ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
             key: 1,
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["w-75", {
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
               'text-info': item[column].isHighLight
-            }]),
+            }),
             onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
               return $options.onCellClick(item[column].isEditable, ckey, key);
             }, ["stop"])
@@ -27075,7 +27168,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               _this.resetEditCell();
             })
           }, _hoisted_27, 32 /* HYDRATE_EVENTS */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 2 /* CLASS */);
-        }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        }), 128 /* KEYED_FRAGMENT */)), !$props.readOnly ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
           "class": "btn btn-info mx-2",
           onClick: function onClick($event) {
             return $options.doEdit(key, item.id.value);
@@ -27085,13 +27178,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           onClick: function onClick($event) {
             return $options.doDelete(key, item.id.value);
           }
-        }, _hoisted_34, 8 /* PROPS */, _hoisted_32)])])])], 10 /* CLASS, PROPS */, _hoisted_15);
+        }, _hoisted_34, 8 /* PROPS */, _hoisted_32)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])], 10 /* CLASS, PROPS */, _hoisted_15);
       }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"my-1 border-4 border-bottom rounded-bottom border-secondary\"></div> ")], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.compactView]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Paginator, {
         ref: "paginatorDeviceTypes"
       }, null, 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <MyMqtt></MyMqtt> ")];
     }),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["cardCaption", "cardCaptionAdd"])], 64 /* STABLE_FRAGMENT */);
+  }, 8 /* PROPS */, ["cardCaption", "cardCaptionAdd", "isAdditionalCaption"])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -27256,13 +27349,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$options.setClass(field.columnsCount), "flex fw-bold"]),
       key: ckey
-    }, [field.isSortable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+    }, [field.isSortable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: 0,
       "class": "cursor-pointer",
       onClick: function onClick($event) {
         return $options.changeDirection(ckey);
       }
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(field.fieldCaption), 9 /* TEXT, PROPS */, _hoisted_4)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !field.isSortable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(field.fieldCaption), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), field.isSortable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(field.fieldCaption), 9 /* TEXT, PROPS */, _hoisted_4)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !field.isSortable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(field.fieldCaption), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), field.isSortable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["fa-solid", $data.sortArrow[ckey]]),
       onClick: function onClick($event) {
         return $options.changeDirection(ckey);
@@ -27592,13 +27685,32 @@ var _hoisted_1 = {
     "margin-top": "5.5rem"
   }
 };
+var _hoisted_2 = {
+  "class": "row"
+};
+var _hoisted_3 = {
+  "class": "col-sm-4 col-xs-4 col-lg-4"
+};
+var _hoisted_4 = {
+  "class": "col-sm-8 col-xs-8 col-lg-8"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_data_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("data-table");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Amage Widget "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
+    api: $data.albums.api,
+    dataFields: $data.albums.albumsFields,
+    pageCaption: $data.albums.albumsCaption,
+    selectableRow: true,
+    selectedName: $data.albums.selectedName,
+    readOnly: $data.albumsReadOnly,
+    onOnRowClick: $options.onRowClick
+  }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "selectedName", "readOnly", "onOnRowClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
     api: $data.images.api,
     dataFields: $data.images.imagesFields,
-    pageCaption: $data.images.imagesCaption
-  }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption"])]);
+    pageCaption: $data.images.imagesCaption,
+    foreignKey: $data.images.album_id,
+    foreignValue: $data.images.selectedFkValue
+  }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignKey", "foreignValue"])])])]);
 }
 
 /***/ }),
@@ -27954,6 +28066,7 @@ var APIVersion = 1;
   //Albums CRUD
   api_album_create: apiPreffix + 'album/create/',
   api_albums_read: apiPreffix + 'albums/read/',
+  api_albums_lookup: apiPreffix + 'albums/lookup/',
   api_albums_read_page: apiPreffix + 'albums/read/page/',
   api_album_update: apiPreffix + 'album/update/',
   api_album_delete: apiPreffix + 'album/delete/',
@@ -28515,7 +28628,7 @@ var routes = [{
   ID: "MICROS",
   visible: false
 }, {
-  path: "/",
+  path: "/albums",
   name: "Images Library",
   icon: "fas fa-images",
   component: _components_imagelib_albums_Albums_vue__WEBPACK_IMPORTED_MODULE_4__["default"],

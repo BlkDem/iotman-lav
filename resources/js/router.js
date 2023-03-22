@@ -99,7 +99,7 @@ const routes = [
     visible: false
   },
   {
-    path: "/",
+    path: "/albums",
     name: "Images Library",
     icon: "fas fa-images",
     component: Albums,

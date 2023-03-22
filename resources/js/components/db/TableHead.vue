@@ -6,13 +6,13 @@
                 <div :class="setClass(field.columnsCount)" class="flex  fw-bold" v-for="(field, ckey) in fieldsCaptions"
                     v-bind:key="ckey">
 
-                    <span v-if="field.isSortable" class="cursor-pointer" @click="changeDirection(ckey)">
+                    <div v-if="field.isSortable" class="cursor-pointer" @click="changeDirection(ckey)">
                         {{ field.fieldCaption }}
-                    </span>
+                    </div>
 
-                    <span v-if="!field.isSortable">
+                    <div v-if="!field.isSortable">
                         {{ field.fieldCaption }}
-                    </span>
+                    </div>
 
                     <a class="nav-link mx-1" v-if="field.isSortable">
                         <i class="fa-solid" :class="sortArrow[ckey]" @click="changeDirection(ckey)"></i>

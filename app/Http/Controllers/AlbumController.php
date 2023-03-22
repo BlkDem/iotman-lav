@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\PaginatorController;
 use App\Http\Middleware\ValidatorRules;
+use Illuminate\Support\Facades\DB;
 use Exception;
 
 class AlbumController extends BaseController
@@ -28,9 +29,18 @@ class AlbumController extends BaseController
 
 
     //only for id and name fields for lookup components
-    public function indexLookup()
+    public function indexLookup($currentPage=0, $itemsPerPage=10)
     {
-        $res = Album::select('id','album_name')->orderBy('album_name', 'asc')->get();
+        // $res = Album::select('id','album_name')->orderBy('id', 'asc')->get();
+
+        $res = DB::table('albums')
+                ->select('albums.id as id' , 'albums.album_name as album_name')
+                ->leftJoin('images', 'albums.id', '=', 'images.album_id')
+                ->selectRaw('count(images.id) as images_count')
+                // ->selectRaw('CONCAT(count(images.id), images.album_id) as name')
+                ->groupBy('id', 'album_name')
+                // ->havingBetween('number_of_orders', [5, 15])
+                ->get();
 
         return $this->sendResponse($res, "Albums lookup List");
 

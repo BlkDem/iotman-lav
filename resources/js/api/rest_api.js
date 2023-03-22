@@ -23,6 +23,7 @@ export default {
     //Albums CRUD
     api_album_create: apiPreffix + 'album/create/',
     api_albums_read: apiPreffix + 'albums/read/',
+    api_albums_lookup: apiPreffix + 'albums/lookup/',
     api_albums_read_page: apiPreffix + 'albums/read/page/',
     api_album_update: apiPreffix + 'album/update/',
     api_album_delete: apiPreffix + 'album/delete/',

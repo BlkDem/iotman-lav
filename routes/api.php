@@ -78,7 +78,7 @@ Route::post('/image/update_image/{imageId}', [ImageStoreController::class, 'upda
 Route::controller(AlbumController::class)->group(function () {
     Route::post('/album/create', 'store');
     Route::get('/albums/read', 'index');
-    Route::get('/albums/lookup', 'indexLookup');
+    Route::get('/albums/lookup/{currentPage}/{itemsPerPage}', 'indexLookup');
     Route::get('/albums/read/page/{currentPage}/{itemsPerPage}', 'page');
     Route::get('/album/read/{id}', 'show');
     Route::put('/album/update/{updateAlbum}', 'update');

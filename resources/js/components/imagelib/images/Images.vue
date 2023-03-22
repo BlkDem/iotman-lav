@@ -1,14 +1,31 @@
-<template >
+<template>
     <div style="margin-top: 5.5rem">
 
-    <!-- Amage Widget -->
-    <data-table
-        :api="images.api"
-        :dataFields="images.imagesFields"
-        :pageCaption="images.imagesCaption"
-    >
-    </data-table>
-</div>
+        <div class="row">
+            <div class="col-sm-4 col-xs-4 col-lg-4">
+                <data-table
+                    :api="albums.api"
+                    :dataFields="albums.albumsFields"
+                    :pageCaption="albums.albumsCaption"
+                    :selectableRow="true"
+                    :selectedName="albums.selectedName"
+                    :readOnly="albumsReadOnly"
+                    @onRowClick="onRowClick">
+                </data-table>
+
+            </div>
+            <div class="col-sm-8 col-xs-8 col-lg-8">
+                <data-table
+                    :api="images.api"
+                    :dataFields="images.imagesFields"
+                    :pageCaption="images.imagesCaption"
+                    :foreignKey="images.album_id"
+                    :foreignValue="images.selectedFkValue"
+                    >
+                </data-table>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -26,6 +43,7 @@ export default {
 
     data() {
         return {
+            albumsReadOnly: true,
 
             //Images Widget Setup
             images: {
@@ -82,12 +100,83 @@ export default {
                         isHighLight: false,
                         columnsCount: 3
                     },
+                                        {
+                        fieldName: 'id',
+                        fieldCaption: 'ID',
+                        type: Number,
+                        isImage: false,
+                        isEditable: false,
+                        isSortable: true,
+                        isHighLight: true,
+                        columnsCount: 1
+                    },
+
                 ],
 
                 album_id: 'album_id',
                 album_id_value: 1,
 
             },
+
+            albums: {
+                albumsCaption: MessagesConstants.ALBUMS,
+
+                api: {
+                    get: '',
+                    insert: '',
+                    update: '',
+                    delete: '',
+                    patch: ''
+                },
+
+                albumsFields: [
+
+                    {
+                        fieldName: 'Image',
+                        type: String,
+                        isVirtualImage: true,
+                        isHighLight: true,
+                        isSortable: false,
+                        VirtualImage: 'fa-solid fa-images fa-2x',
+                        columnsCount: 2
+                    },
+
+                    {
+                        fieldName: 'id',
+                        fieldCaption: 'ID',
+                        type: Number,
+                        isSortable: true,
+                        isHighLight: true,
+                        columnsCount: 2
+                    },
+
+                    {
+                        fieldName: 'album_name',
+                        fieldCaption: 'Name',
+                        type: String,
+                        // isEditable: true,
+                        isSortable: true,
+                        columnsCount: 6
+                    },
+
+                    {
+                        fieldName: 'images_count',
+                        fieldCaption: 'Cnt',
+                        type: Number,
+                        isSortable: true,
+                        isHighLight: true,
+                        columnsCount: 2
+                    },
+
+                ],
+
+                selectedName: 'album_name',
+
+                //selected album id for child table images
+                selectedFkValue: 0,
+
+            },
+
 
         }
     },
@@ -103,10 +192,17 @@ export default {
         apiImages.delete = APIConstants.api_image_delete
         apiImages.patch = APIConstants.api_image_patch
 
+        const apiAlbums = this.albums.api
+
+        apiAlbums.get =    APIConstants.api_albums_lookup
+
     },
 
     methods: {
-
+        onRowClick(dataEvent) {
+            console.log(dataEvent)
+            this.images.selectedFkValue = dataEvent
+        }
     },
 
 };

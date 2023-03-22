@@ -7,6 +7,7 @@
         :cardCaption="pageCaption"
         :isCollapseButtonHidden="false"
         :cardCaptionAdd="cardCaptionAdd"
+        :isAdditionalCaption="readOnly"
     >
         <AddItem ref="addItem" />
 
@@ -17,6 +18,7 @@
             :dataFields="dataFields"
             :foreignKey="foreignKey"
             :foreignValue="foreignValue"
+            :readOnly="readOnly"
             @getTableData="getTableData"
             @setCompactView="setCompactView"
             @addEvent="setItem"
@@ -114,14 +116,14 @@
                             v-for="(column, ckey) in Object.keys(item)" v-bind:key="ckey"
                         >
 
-                            <span v-if="(activeCol!==key||activeRow!==ckey)&&(item[column].isImage != true)&&(!item[column].isLookup)" class="w-75"
+                            <span v-if="(activeCol!==key||activeRow!==ckey)&&(item[column].isImage != true)&&(!item[column].isLookup)"
                                 :class="{'text-info': item[column].isHighLight}"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
                                 {{ item[column].value }}
                             </span>
 
-                            <span v-if="item[column].isLookup" class="w-75"
+                            <span v-if="item[column].isLookup"
                                 :class="{'text-info': item[column].isHighLight}"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
@@ -160,7 +162,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-2 col-xs-2 col-lg-2  edit-buttons ">
+                        <div class="col-sm-2 col-xs-2 col-lg-2  edit-buttons " v-if="!readOnly">
                             <button class="btn btn-info mx-2" @click="doEdit(key, item.id.value)">
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
@@ -232,6 +234,11 @@ import TableHead from './TableHead.vue';
                 type: Boolean,
                 default: false
             },
+
+            readOnly: {
+                type: Boolean,
+                default: false
+            },
         },
 
 
@@ -262,7 +269,9 @@ import TableHead from './TableHead.vue';
 
                 selectedRow: [],
 
-                cardCaptionAdd: ''
+                cardCaptionAdd: '',
+
+                // albumsReadOnly: true
 
             };
         },
@@ -275,13 +284,18 @@ import TableHead from './TableHead.vue';
         },
 
         mounted() {
-            if (localStorage.getItem('CompactView')) {
-                this.compactView = (localStorage.getItem('CompactView') === 'true');
-            }
+
+            if (!this.readOnly) {
+                if (localStorage.getItem('CompactView')) {
+                    this.compactView = (localStorage.getItem('CompactView') === 'true');
+                }
+            } else this.compactView = true
 
             this.emitter.on("new-lang", _lang => {
                 this.setLang(_lang)
             });
+
+            console.log(this.selectedName)
 
         },
 
@@ -298,10 +312,13 @@ import TableHead from './TableHead.vue';
 
                 if (!this.selectableRow) return
                 for (let item in this.filteredItems) { this.selectedRow[item] = false }
+
                 this.selectedRow[row] = !this.selectedRow[row]
-                // console.log(row, this.selectedName)
+
+                // console.log(row, this.selectedName, this.filteredItems[row][this.selectedName])
                 this.cardCaptionAdd = this.filteredItems[row][this.selectedName].value
                 //send FK value to child table
+                // console.log(this.filteredItems[row].id)
                 this.$emit('onRowClick', this.filteredItems[row].id.value)
             },
 
@@ -389,7 +406,10 @@ import TableHead from './TableHead.vue';
 
             setCompactView($value) {
                 // console.log(value)
-                this.compactView = $value
+                if (!this.readOnly) {
+                    this.compactView = $value
+                }
+                else this.compactView = true
             },
 
             processListItem(_value) {
@@ -461,7 +481,8 @@ import TableHead from './TableHead.vue';
                         for (let itemRow in newList) {
                             newList[itemRow] = this.processListItem(items[itemRow])
                         }
-                        console.log(newList)
+                        // console.log(newList)
+                        // if ((newList.length>0)&&(this.selectableRow)) this.rowClick(0)
                         return newList
 
             },
@@ -474,6 +495,7 @@ import TableHead from './TableHead.vue';
 
                         this.Items = this.populateListItems(response.data.data);
                         this.filteredItems = this.Items;
+                        if ((this.filteredItems.length>0)&&(this.selectableRow)) this.rowClick(0)
 
                         // setup paginator
                         this.$refs.paginatorDeviceTypes.setPaginator(
