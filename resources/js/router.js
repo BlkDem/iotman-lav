@@ -143,7 +143,7 @@ const routes = [
   {
     path: "/users",
     name: "Users",
-    icon: "fa-solid fa-user",
+    icon: "fa-solid fa-user-tie",
     component: Users,
     ID: "USERS",
     visible: true

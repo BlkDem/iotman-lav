@@ -25301,7 +25301,7 @@ __webpack_require__.r(__webpack_exports__);
           type: String,
           isImage: false,
           isVirtualImage: true,
-          VirtualImage: 'fa-solid fa-microchip fa-2x',
+          VirtualImage: 'fas fa-sun fa-2x',
           isEditable: false,
           isSortable: false,
           isHighLight: true,
@@ -27074,8 +27074,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.keys(item), function (column, ckey) {
           return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["w-100 flex-center py-2", {
-              'bg-secondary': ckey % 2 === 1 && ckey > 0,
-              'bg-primary': ckey % 2 === 0 && ckey > 0
+              'bg-secondary text-primary': ckey % 2 === 1 && ckey > 0,
+              'bg-primary text-secondary': ckey % 2 === 0 && ckey > 0
             }]),
             key: ckey
           }, [item[column].isLookup ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
@@ -28693,7 +28693,7 @@ var routes = [{
 }, {
   path: "/users",
   name: "Users",
-  icon: "fa-solid fa-user",
+  icon: "fa-solid fa-user-tie",
   component: _components_users_Users_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
   ID: "USERS",
   visible: true

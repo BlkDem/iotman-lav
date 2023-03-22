@@ -40,7 +40,7 @@ export default {
                             type: String,
                             isImage: false,
                             isVirtualImage: true,
-                            VirtualImage: 'fa-solid fa-microchip fa-2x',
+                            VirtualImage: 'fas fa-sun fa-2x',
                             isEditable: false,
                             isSortable: false,
                             isHighLight: true,

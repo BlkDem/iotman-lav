@@ -44,7 +44,7 @@
                 >
                     <div class="w-100 flex-center py-2" v-for="(column, ckey) in Object.keys(item)"
                         v-bind:key="ckey"
-                        :class="{'bg-secondary': ckey%2===1&&ckey>0, 'bg-primary': ckey%2===0&&ckey>0}"
+                        :class="{'bg-secondary text-primary': ckey%2===1&&ckey>0, 'bg-primary text-secondary': ckey%2===0&&ckey>0}"
                     >
 
                         <div class="p-2" v-if="item[column].isLookup"
