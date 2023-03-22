@@ -12,12 +12,12 @@
                     </li> -->
                 </div>
 
-                <div>
+                <!-- <div>
                     <sort-comp v-if="!readOnly"
                         :sortDataFields="sortDataFields"
                         @updateSortedData="doSort">
                     </sort-comp>
-                </div>
+                </div> -->
 
                 <div class="d-flex">
                     <button class="btn btn-primary mx-2"

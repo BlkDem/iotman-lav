@@ -59,7 +59,7 @@ Route::controller(ImageController::class)->group(function () {
     Route::get('/images/read/page/{currentPage}/{itemsPerPage}', 'page');
     Route::get('/images/read/page/{currentPage}/{itemsPerPage}/{album_id}', 'pageWhereAlbum');
     Route::get('/image/read/{id}', 'show');
-    Route::put('/image/update/{updateImageId}', 'update');
+    Route::put('/image/update/{updateImage}', 'update');
     Route::delete('/image/delete/{id}', 'destroy');
     Route::patch('/image/patch/{id}/{field}/{value}', 'patch');
 });

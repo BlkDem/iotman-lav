@@ -1,7 +1,7 @@
 <template>
     <div class="border-4 border-top rounded-top border-secondary">
         <div class="mx-2 my-2">
-            <div class="row vertical-center text-primary">
+            <div class="row vertical-center">
 
                 <div :class="setClass(field.columnsCount)" class="flex  fw-bold" v-for="(field, ckey) in fieldsCaptions"
                     v-bind:key="ckey">
@@ -30,6 +30,9 @@
 <script>
 
 export default {
+
+    emits: ['updateSortedData'],
+
     props: {
         fieldsCaptions: {
             type: Array
@@ -46,7 +49,7 @@ export default {
     created() {
         for (let item in this.fieldsCaptions) {
             this.sortArrow[item] = 'fa-caret-down'
-            this.sortDirection[item] = true
+            this.sortDirection[item] = false
         }
     },
 
@@ -57,8 +60,19 @@ export default {
 
         changeDirection(ckey) {
             this.sortDirection[ckey]=!this.sortDirection[ckey]
-            this.sortArrow[ckey] = (this.sortDirection[ckey])?'fa-caret-down':'fa-caret-up'
-        }
+            this.sortArrow[ckey] = (this.sortDirection[ckey])?'fa-caret-up':'fa-caret-down'
+
+            console.log(ckey, this.sortDirection[ckey], this.fieldsCaptions[ckey])
+
+            this.doSort(this.fieldsCaptions[ckey], this.sortDirection[ckey])
+        },
+
+        doSort(column, direction) {
+            // this.sortColumn = column
+            // this.sortDirection = direction
+            this.$emit('updateSortedData', column.fieldName, direction)
+        },
+
     }
 }
 

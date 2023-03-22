@@ -59,7 +59,14 @@ class ImageController extends BaseController
 
         $res = DB::table('images')
         ->join('albums', 'images.album_id', '=', 'albums.id')
-        ->select('images.*', 'albums.id', 'albums.album_name')
+        ->select(
+            'images.id as id',
+            'images.image_name as image_name',
+            'images.image_desc as image_desc',
+            'images.created_at as created_at',
+            'images.updated_at as updated_at',
+            'albums.id as album_id',
+            'albums.album_name as album_name')
         ->where('album_id', $album_id)
         ->limit($itemsPerPage)->offset($offset)->orderBy('image_name', 'asc')
         ->get();
@@ -87,10 +94,12 @@ class ImageController extends BaseController
         }
         try {
             $newDeviceType = Image::create($request->all());
-            return response()->json($newDeviceType, 201);
+            return $this->sendResponse($newDeviceType, "Image added");
+            // return response()->json($newDeviceType, 201);
         }
         catch (Exception $e) {
-            return response()->json('Store Record Error: ' . $e, 400);
+            return $this->sendError('Store error: ' . $e);
+            // return response()->json('Store Record Error: ' . $e, 400);
         }
     }
 
@@ -102,7 +111,17 @@ class ImageController extends BaseController
      */
     public function show($id)
     {
-        $res = Image::find($id);
+        // $res = Image::find($id);
+
+        $res = DB::table('images')
+        ->join('albums', 'images.album_id', '=', 'albums.id')
+        ->where('images.id', '=', $id)
+        ->select('images.*', 'albums.id', 'albums.album_name')
+        // ->havingRaw('images.id = ?', $id)
+        ->get()
+        // ->where('images.id', '=', $id)
+        ;
+
         if (is_null($res)) {
             return $this->sendError("No Record for id=$id Found");
         }
@@ -117,18 +136,23 @@ class ImageController extends BaseController
      * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, Image $updateImage) {
         $validator = ValidatorRules::MakeValidate($request, 'images');
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            return $this->sendError($validator->errors());
         }
         try {
+            // dd($request);
             $updateImage->update($request->all());
-            return response()->json($updateImage, 200);        }
+
+            return $this->sendResponse($updateImage, 'Image updated');
+        }
         catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
+            return $this->sendError('Updating Record Error: ' . $e);
         }
     }
+
 
     public function patch(Request $request, $id, $field, $value){
         try {

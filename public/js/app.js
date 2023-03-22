@@ -24661,8 +24661,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     setLang: function setLang(_lang) {
       // this.pageCaption = _lang.DEVICE_TYPES ?? 'Device Types'
     },
-    updateSortedData: function updateSortedData($column, $direction) {
-      _helpers_Sorting__WEBPACK_IMPORTED_MODULE_4__["default"].doSort(this.filteredItems, $column, $direction);
+    updateSortedData: function updateSortedData(column, direction) {
+      _helpers_Sorting__WEBPACK_IMPORTED_MODULE_4__["default"].doSort(this.filteredItems, column, direction);
     },
     updateFilteredData: function updateFilteredData($fieldName, $filter) {
       this.filteredItems = this.Items;
@@ -24967,6 +24967,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  emits: ['updateSortedData'],
   props: {
     fieldsCaptions: {
       type: Array
@@ -24981,7 +24982,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     for (var item in this.fieldsCaptions) {
       this.sortArrow[item] = 'fa-caret-down';
-      this.sortDirection[item] = true;
+      this.sortDirection[item] = false;
     }
   },
   methods: {
@@ -24990,7 +24991,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     changeDirection: function changeDirection(ckey) {
       this.sortDirection[ckey] = !this.sortDirection[ckey];
-      this.sortArrow[ckey] = this.sortDirection[ckey] ? 'fa-caret-down' : 'fa-caret-up';
+      this.sortArrow[ckey] = this.sortDirection[ckey] ? 'fa-caret-up' : 'fa-caret-down';
+      console.log(ckey, this.sortDirection[ckey], this.fieldsCaptions[ckey]);
+      this.doSort(this.fieldsCaptions[ckey], this.sortDirection[ckey]);
+    },
+    doSort: function doSort(column, direction) {
+      // this.sortColumn = column
+      // this.sortDirection = direction
+      this.$emit('updateSortedData', column.fieldName, direction);
     }
   }
 });
@@ -25553,7 +25561,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _db_DataTable_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../db/DataTable.vue */ "./resources/js/components/db/DataTable.vue");
 
 
-// import ParsingErrors from "../../../helpers/ParsingErrors.js";
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   emits: ['setAdditionalCaption'],
@@ -25611,15 +25618,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    // const apiImages = this.images.api
-
-    // apiImages.get = APIConstants.api_images_read_page
-    // apiImages.get = APIConstants.api_images_read_page
-    // apiImages.insert = APIConstants.api_image_create
-    // apiImages.update = APIConstants.api_image_update
-    // apiImages.delete = APIConstants.api_image_delete
-    // apiImages.patch = APIConstants.api_image_patch
-
     var apiAlbums = this.albums.api;
     apiAlbums.get = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_albums_read_page;
     apiAlbums.insert = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_album_create;
@@ -25702,23 +25700,39 @@ __webpack_require__.r(__webpack_exports__);
           isSortable: true,
           isHighLight: false,
           columnsCount: 5
-        }, {
-          fieldName: 'album_name',
+        },
+        // {
+        //     fieldName: 'album_name',
+        //     fieldCaption: 'Album',
+        //     type: String,
+        //     isImage: false,
+        //     isSortable: true,
+        //     isHighLight: false,
+        //     columnsCount: 3
+        // },
+        // {
+        //     fieldName: 'id',
+        //     fieldCaption: 'ID',
+        //     type: Number,
+        //     isImage: false,
+        //     isEditable: false,
+        //     isSortable: true,
+        //     isHighLight: true,
+        //     columnsCount: 1
+        // },
+        {
+          fieldName: 'album_id',
+          displayName: 'album_name',
           fieldCaption: 'Album',
           type: String,
           isImage: false,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 3
-        }, {
-          fieldName: 'id',
-          fieldCaption: 'ID',
-          type: Number,
-          isImage: false,
           isEditable: false,
           isSortable: true,
-          isHighLight: true,
-          columnsCount: 1
+          isHighLight: false,
+          columnsCount: 3,
+          lookupId: 'album_id',
+          lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_albums_read,
+          isLookup: true
         }],
         album_id: 'album_id',
         album_id_value: 1
@@ -26297,7 +26311,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }])
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaption), 3 /* TEXT, CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
     ref: "cardCaptionAdd",
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-info", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["card-title align-left px-2", {
       'hide': !$props.isAdditionalCaption
     }])
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaptionAdd), 3 /* TEXT, CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -26318,12 +26332,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $props.isCollapsed = !$props.isCollapsed;
     })
-  }, _hoisted_7, 2 /* CLASS */)], 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h3 class=\"card-title align-left px-2 \">{{ cardCaption }}</h3> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <p class=\"card-text\">Paragraph</p> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  }, _hoisted_7, 2 /* CLASS */)], 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["py-4 align-left", {
       'mx-2': $props.margins,
       'collapse': $props.isCollapsed
     }])
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 2 /* CLASS */)])]);
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {}, function () {
+    return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Loading...")];
+  })], 2 /* CLASS */)])]);
 }
 
 /***/ }),
@@ -26623,15 +26639,10 @@ var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_13 = [_hoisted_12];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_filter_comp = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("filter-comp");
-  var _component_sort_comp = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("sort-comp");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_filter_comp, {
     filterDataFields: $data.filterDataFields,
     onFilterData: $options.updateFilteredData
-  }, null, 8 /* PROPS */, ["filterDataFields", "onFilterData"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <li class=\"nav-item  d-flex py-1  w-100\">\n                        <input class=\"form-control me-sm-2\" type=\"text\" v-model=\"dataFilter\" />\n                    </li> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [!$props.readOnly ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_sort_comp, {
-    key: 0,
-    sortDataFields: $data.sortDataFields,
-    onUpdateSortedData: $options.doSort
-  }, null, 8 /* PROPS */, ["sortDataFields", "onUpdateSortedData"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [!$props.readOnly ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  }, null, 8 /* PROPS */, ["filterDataFields", "onFilterData"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <li class=\"nav-item  d-flex py-1  w-100\">\n                        <input class=\"form-control me-sm-2\" type=\"text\" v-model=\"dataFilter\" />\n                    </li> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div>\n                    <sort-comp v-if=\"!readOnly\"\n                        :sortDataFields=\"sortDataFields\"\n                        @updateSortedData=\"doSort\">\n                    </sort-comp>\n                </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [!$props.readOnly ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary mx-2", {
       'disabled': $data.compactView
@@ -26702,7 +26713,7 @@ var _hoisted_5 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["toast-header text-light bg-info", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["toast-header text-light bg-info flex-center", {
       'bg-danger': $data.isError,
       'br-warning': $data.isWarning
     }])
@@ -27044,7 +27055,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["col-sm-4 col-xs-4 col-lg-4 p-2 fade-in", {
             'border-info bg-warning': $data.selectedRow[key] === true,
-            'border-primary': $data.selectedRow[key] === false || $data.selectedRow[key] == null
+            'border-primary text-secondary': $data.selectedRow[key] === false || $data.selectedRow[key] == null
           }]),
           key: key,
           id: item.id.value,
@@ -27096,8 +27107,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }
         }, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete ")], 8 /* PROPS */, _hoisted_12)])])])], 10 /* CLASS, PROPS */, _hoisted_4);
       }), 128 /* KEYED_FRAGMENT */))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" compact view "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TableHead, {
-        fieldsCaptions: $props.dataFields
-      }, null, 8 /* PROPS */, ["fieldsCaptions"]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredItems, function (item, key) {
+        fieldsCaptions: $props.dataFields,
+        onUpdateSortedData: $options.updateSortedData
+      }, null, 8 /* PROPS */, ["fieldsCaptions", "onUpdateSortedData"]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredItems, function (item, key) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["card mb-1 w-100 fade-in", {
             'border-info bg-warning text-dark': $data.selectedRow[key] === true,
@@ -27329,7 +27341,7 @@ var _hoisted_2 = {
   "class": "mx-2 my-2"
 };
 var _hoisted_3 = {
-  "class": "row vertical-center text-primary"
+  "class": "row vertical-center"
 };
 var _hoisted_4 = ["onClick"];
 var _hoisted_5 = {
@@ -27659,10 +27671,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     api: $data.albums.api,
     dataFields: $data.albums.albumsFields,
     pageCaption: $data.albums.albumsCaption,
-    selectableRow: true,
     selectedName: $data.selectedName,
     onOnRowClick: $options.onRowClick
-  }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "selectedName", "onOnRowClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Amage Widget "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <data-table\n            :api=\"images.api\"\n            :dataFields=\"images.imagesFields\"\n            :foreignKey=\"images.album_id\"\n            :foreignValue=\"selectedFkValue\"\n            :pageCaption=\"images.imagesCaption\"\n        >\n        </data-table> ")]);
+  }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "selectedName", "onOnRowClick"])]);
 }
 
 /***/ }),

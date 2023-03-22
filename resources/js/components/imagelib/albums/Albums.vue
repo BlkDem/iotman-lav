@@ -7,28 +7,17 @@
             :api="albums.api"
             :dataFields="albums.albumsFields"
             :pageCaption="albums.albumsCaption"
-            :selectableRow="true"
             :selectedName="selectedName"
             @onRowClick="onRowClick"
         >
         </data-table>
 
-        <!-- Amage Widget -->
-        <!-- <data-table
-            :api="images.api"
-            :dataFields="images.imagesFields"
-            :foreignKey="images.album_id"
-            :foreignValue="selectedFkValue"
-            :pageCaption="images.imagesCaption"
-        >
-        </data-table> -->
     </div>
 </template>
 
 <script>
 import MessagesConstants from '../../strings_constants/strings'
 import APIConstants from "../../../api/rest_api";
-// import ParsingErrors from "../../../helpers/ParsingErrors.js";
 import DataTable from '../../db/DataTable.vue';
 
     export default {
@@ -105,15 +94,6 @@ import DataTable from '../../db/DataTable.vue';
         },
 
         created() {
-
-            // const apiImages = this.images.api
-
-            // apiImages.get = APIConstants.api_images_read_page
-            // apiImages.get = APIConstants.api_images_read_page
-            // apiImages.insert = APIConstants.api_image_create
-            // apiImages.update = APIConstants.api_image_update
-            // apiImages.delete = APIConstants.api_image_delete
-            // apiImages.patch = APIConstants.api_image_patch
 
             const apiAlbums = this.albums.api
 

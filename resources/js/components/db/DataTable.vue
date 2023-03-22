@@ -35,7 +35,9 @@
         <div class="row my-2" v-if="!compactView">
             <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(item, key) in filteredItems"
                 v-bind:key="key" v-bind:id="item.id.value"
-                :class="{'border-info bg-warning': selectedRow[key]===true, 'border-primary': selectedRow[key]===false||selectedRow[key]==null}"
+                :class="{
+                    'border-info bg-warning': selectedRow[key]===true,
+                    'border-primary text-secondary': selectedRow[key]===false||selectedRow[key]==null}"
                 @click="rowClick(key)"
                 >
                 <div class="card flex border-light py-2"
@@ -98,6 +100,7 @@
         <div v-show="compactView" class="my-2" >
             <TableHead
                 :fieldsCaptions="dataFields"
+                @updateSortedData="updateSortedData"
             >
 
             </TableHead>
@@ -394,8 +397,8 @@ import TableHead from './TableHead.vue';
                 // this.pageCaption = _lang.DEVICE_TYPES ?? 'Device Types'
             },
 
-            updateSortedData($column, $direction) {
-                Sorting.doSort(this.filteredItems, $column, $direction)
+            updateSortedData(column, direction) {
+                Sorting.doSort(this.filteredItems, column, direction)
             },
 
             updateFilteredData($fieldName, $filter) {

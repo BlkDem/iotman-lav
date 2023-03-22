@@ -91,25 +91,39 @@ export default {
                         isHighLight: false,
                         columnsCount: 5
                     },
+                    // {
+                    //     fieldName: 'album_name',
+                    //     fieldCaption: 'Album',
+                    //     type: String,
+                    //     isImage: false,
+                    //     isSortable: true,
+                    //     isHighLight: false,
+                    //     columnsCount: 3
+                    // },
+                    // {
+                    //     fieldName: 'id',
+                    //     fieldCaption: 'ID',
+                    //     type: Number,
+                    //     isImage: false,
+                    //     isEditable: false,
+                    //     isSortable: true,
+                    //     isHighLight: true,
+                    //     columnsCount: 1
+                    // },
                     {
-                        fieldName: 'album_name',
-                        fieldCaption: 'Album',
-                        type: String,
-                        isImage: false,
-                        isSortable: true,
-                        isHighLight: false,
-                        columnsCount: 3
-                    },
-                                        {
-                        fieldName: 'id',
-                        fieldCaption: 'ID',
-                        type: Number,
-                        isImage: false,
-                        isEditable: false,
-                        isSortable: true,
-                        isHighLight: true,
-                        columnsCount: 1
-                    },
+                            fieldName: 'album_id',
+                            displayName: 'album_name',
+                            fieldCaption: 'Album',
+                            type: String,
+                            isImage: false,
+                            isEditable: false,
+                            isSortable: true,
+                            isHighLight: false,
+                            columnsCount: 3,
+                            lookupId: 'album_id',
+                            lookupApi: APIConstants.api_albums_read,
+                            isLookup: true,
+                        },
 
                 ],
 
