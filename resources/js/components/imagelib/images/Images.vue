@@ -64,7 +64,7 @@ export default {
                         type: String,
                         isImage: true,
                         isEditable: false,
-                        isSortable: true,
+                        // isSortable: true,
                         isHighLight: false,
                         columnsCount: 1
                     },
@@ -115,10 +115,8 @@ export default {
                             displayName: 'album_name',
                             fieldCaption: 'Album',
                             type: String,
-                            isImage: false,
-                            isEditable: false,
-                            isSortable: true,
-                            isHighLight: false,
+                            // isHidden: true,
+                            // isSortable: true,
                             columnsCount: 3,
                             lookupId: 'album_id',
                             lookupApi: APIConstants.api_albums_read,
@@ -200,7 +198,7 @@ export default {
         const apiImages = this.images.api
 
         apiImages.get = APIConstants.api_images_read_page
-        apiImages.get = APIConstants.api_images_read_page
+        // apiImages.get = APIConstants.api_images_read_page
         apiImages.insert = APIConstants.api_image_create
         apiImages.update = APIConstants.api_image_update
         apiImages.delete = APIConstants.api_image_delete

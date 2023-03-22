@@ -17,6 +17,11 @@ class AlbumController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
+
+    private function getTotalRecords() {
+        return Album::get()->count();
+    }
+
     public function index()
     {
         $res = Album::orderBy('album_name', 'asc')->get();
@@ -33,16 +38,25 @@ class AlbumController extends BaseController
     {
         // $res = Album::select('id','album_name')->orderBy('id', 'asc')->get();
 
+        $page = (int)$currentPage;
+
+        $offset = $itemsPerPage*--$page;
+
         $res = DB::table('albums')
                 ->select('albums.id as id' , 'albums.album_name as album_name')
                 ->leftJoin('images', 'albums.id', '=', 'images.album_id')
                 ->selectRaw('count(images.id) as images_count')
-                // ->selectRaw('CONCAT(count(images.id), images.album_id) as name')
                 ->groupBy('id', 'album_name')
-                // ->havingBetween('number_of_orders', [5, 15])
+                ->limit($itemsPerPage)
+                ->offset($offset)
                 ->get();
 
-        return $this->sendResponse($res, "Albums lookup List");
+
+        // $total = Album::get();
+
+        $paginator = PaginatorController::Paginate($this->getTotalRecords(), (int)$itemsPerPage, $currentPage);
+
+        return $this->sendResponse($res, "Albums lookup List", $paginator);
 
     }
 
@@ -51,10 +65,11 @@ class AlbumController extends BaseController
         $page = (int)$currentPage;
 
         $offset = $itemsPerPage*--$page;
-        $res = Album::limit($itemsPerPage)->offset($offset)->orderBy('album_name', 'asc')->get();
-        $total = Album::get();
 
-        $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
+        $res = Album::limit($itemsPerPage)->offset($offset)->orderBy('album_name', 'asc')->get();
+        // $total = Album::get();
+
+        $paginator = PaginatorController::Paginate($this->getTotalRecords(), (int)($itemsPerPage), $currentPage);
 
         return $this->sendResponse($res, "Album List", $paginator);
     }

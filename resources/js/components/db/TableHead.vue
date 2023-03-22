@@ -3,7 +3,7 @@
         <div class="mx-2 my-2">
             <div class="row vertical-center">
 
-                <div :class="setClass(field.columnsCount)" class="flex  fw-bold" v-for="(field, ckey) in fieldsCaptions"
+                <div :class="setClass(field.columnsCount, field.isHidden)" class="flex  fw-bold" v-for="(field, ckey) in fieldsCaptions"
                     v-bind:key="ckey">
 
                     <div v-if="field.isSortable" class="cursor-pointer" @click="changeDirection(ckey)">
@@ -54,8 +54,10 @@ export default {
     },
 
     methods: {
-        setClass(width) {
-            return 'col-' + width
+        setClass(width, hidden) {
+            let colClass = 'col-sm-' + width + ' col-xs-' + width + ' col-lg-' + width
+            return (hidden)?'hide':colClass
+            // return colClass
         },
 
         changeDirection(ckey) {

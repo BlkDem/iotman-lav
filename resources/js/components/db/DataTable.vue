@@ -47,30 +47,38 @@
                         :class="{'bg-secondary': ckey%2===1&&ckey>0, 'bg-primary': ckey%2===0&&ckey>0}"
                     >
 
-                        <span v-if="item[column].isLookup"
-                                :class="{'text-info': item[column].isHighLight}"
-                            >
-                                {{ getValue(item[column]) }}
-                            </span>
-
-                        <span v-if="(activeCol!==key||activeRow!==ckey)&&(!item[column].isImage)&&(!item[column].isLookup)"
+                        <div class="p-2" v-if="item[column].isLookup"
                             :class="{'text-info': item[column].isHighLight}"
                         >
+                            {{ getValue(item[column]) }}
+                        </div>
+
+                        <div class="p-2" v-if="(activeCol!==key||activeRow!==ckey)&&(!item[column].isImage)&&(!item[column].isLookup)"
+                            :class="{
+                                        'text-info': item[column].isHighLight,
+                                        'hide': item[column].isHidden,
+                                    }"
+
+                        >
                             {{ item[column].value }}
-                        </span>
+                        </div>
 
                         <img v-if="item[column].isImage" class="w-100 p-2"
                             :src="(!item[column].isVirtualImage)?imagesPath + item[column].value:imagesPath +'blog.jpg'"
                             @error="replaceByDefault"
                         />
 
-                        <span v-if="item[column].isVirtualImage"
-                                :class="{'text-info': item[column].isHighLight, 'cursor-pointer': selectableRow}"
+                        <div class="p-2" v-if="item[column].isVirtualImage"
+                                :class="{
+                                            'text-info': item[column].isHighLight,
+                                            'hide': item[column].isHidden,
+                                            'cursor-pointer': selectableRow
+                                        }"
                             >
                                 <!-- {{ item[column].VirtualImage }} -->
                                 <i :class="item[column].VirtualImage" class="fa-10x my-4"></i>
 
-                            </span>
+                        </div>
 
 
                         <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
@@ -83,12 +91,12 @@
                         <div class="flex-center">
                         <button class="btn btn-info btn-width-40 mx-1" @click="doEdit(key, item.id.value)">
                             <i class="fas fa-edit" aria-hidden="true"></i>
-                            Edit
+                            <!-- Edit -->
                         </button>
 
                         <button class="btn btn-secondary btn-width-40 mx-1" @click="doDelete(key, item.id.value)">
                             <i class="fa fa-trash" aria-hidden="true"></i>
-                            Delete
+                            <!-- Delete -->
                         </button>
                         </div>
                     </div>
@@ -113,21 +121,35 @@
             >
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
-
-                        <div :class="item[column].class" class="flex"
-
-                            v-for="(column, ckey) in Object.keys(item)" v-bind:key="ckey"
+                        <div v-for="(column, ckey) in Object.keys(item)" v-bind:key="ckey"
+                        :class="item[column].class" class="flex"
                         >
 
-                            <span v-if="(activeCol!==key||activeRow!==ckey)&&(item[column].isImage != true)&&(!item[column].isLookup)"
-                                :class="{'text-info': item[column].isHighLight}"
+                        <div
+                            v-if="!item[column].isHidden"
+                        >
+
+
+
+                            <span v-if="
+                                    (activeCol!==key||activeRow!==ckey)&&
+                                    (item[column].isImage != true)&&
+                                    (!item[column].isHidden)&&
+                                    (!item[column].isLookup)"
+                                :class="{
+                                            'text-info': item[column].isHighLight,
+                                            // 'hide': item[column].isHidden,
+                                        }"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
                                 {{ item[column].value }}
                             </span>
 
-                            <span v-if="item[column].isLookup"
-                                :class="{'text-info': item[column].isHighLight}"
+                            <span v-if="item[column].isLookup&&!item[column].isHidden"
+                                :class="{
+                                            'text-info': item[column].isHighLight,
+                                            // 'hide': item[column].isHidden
+                                        }"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
                                 {{ getValue(item[column]) }}
@@ -164,6 +186,7 @@
                                 </button>
                             </div>
                         </div>
+                    </div>
 
                         <div class="col-sm-2 col-xs-2 col-lg-2  edit-buttons " v-if="!readOnly">
                             <button class="btn btn-info mx-2" @click="doEdit(key, item.id.value)">
@@ -431,6 +454,7 @@ import TableHead from './TableHead.vue';
                     const _datetime = dataField.isDateTime //image field - binding 'img'
                     const _text = dataField.isText //Display Name Field
                     const _highlight = dataField.isHighLight //highlight another color field 'bg-info' class
+                    const _hidden = dataField.isHidden //hidden field 'hide' class
                     const _colscount = dataField.columnsCount //col-* col-ls-* ... value
                     const _virtual = dataField?.isVirtualImage //for abstract images like 'albums'
                     const _virtualimage = dataField?.VirtualImage //for abstract images like 'albums'
@@ -454,6 +478,7 @@ import TableHead from './TableHead.vue';
                         isSortable: _sortable,
                         isImage: _image,
                         isHighLight: _highlight,
+                        isHidden: _hidden,
                         columnsCount: _colscount,
                         isLookup: _isLookup,
                         lookupId: _lookupId,
@@ -638,6 +663,7 @@ import TableHead from './TableHead.vue';
                             // console.log(resp.data);
 
                             const _res = resp.data.data
+                            console.log(resp.data.data);
                             this.filteredItems[key] = this.processListItem(_res)
                             this.Items[key] = this.filteredItems[key]
                             this.$root.$refs.toaster.showMessage(

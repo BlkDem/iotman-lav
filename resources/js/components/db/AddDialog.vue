@@ -9,7 +9,13 @@
 
             <div v-for="(field, key) in dataFields" v-bind:key="key">
 
-                <div v-if="!field.isImage&&field.fieldName!=='id'&&!field.isLookup&&!field.isVirtualImage">
+                <div v-if="
+                    !field.isImage&&
+                    field.fieldName!=='id'
+                    &&!field.isLookup&&
+                    !field.isVirtualImage"
+                >
+
                     <label class="px-2">{{ field.fieldCaption }}</label>
 
                     <textarea v-if="field.isText" v-model="field.value" class="form-control p-2 mb-4"
@@ -23,7 +29,7 @@
 
                 </div>
 
-                <div v-if="field.isLookup">
+                <div v-if="field.isLookup" :class="{'hide': field.isHidden}">
                     <label class="px-2">{{ field.fieldCaption }} </label>
                     <DataSelect
                         :dataTableReadApi="field.lookupApi"
@@ -95,6 +101,7 @@ export default {
             for (let item in this.dataFields) {
                 if (this.dataFields[item].fieldName === _fieldName) {
                     this.dataFields[item].value = _value
+                    // this.dataFields[item].lookupValue = _value
                 }
             }
             // console.log(_value, _fieldName, this.dataFields)
@@ -131,6 +138,8 @@ export default {
             }
 
             this.$refs.popup.open()
+
+            console.log(this.dataFields)
 
             return new Promise((resolve, reject) => {
                 this.resolvePromise = resolve

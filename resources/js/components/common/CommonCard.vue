@@ -4,12 +4,12 @@
             <div class="card-caption">
 
                 <h3 class="card-title align-left px-2 "
-                    :class="{'hide': isAdditionalCaption}">
+                >
                     {{ cardCaption }}
                 </h3>
 
                 <h3 ref="cardCaptionAdd" class="card-title align-left px-2"
-                    :class="{'hide': !isAdditionalCaption}">
+                    :class="{'hide': isAdditionalCaption}">
                     {{ cardCaptionAdd }}
                 </h3>
 

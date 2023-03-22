@@ -88,6 +88,7 @@ class ImageController extends BaseController
      */
     public function store(Request $request)
     {
+
         $validator = ValidatorRules::MakeValidate($request, 'images');
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
@@ -95,31 +96,25 @@ class ImageController extends BaseController
         try {
             $newDeviceType = Image::create($request->all());
             return $this->sendResponse($newDeviceType, "Image added");
-            // return response()->json($newDeviceType, 201);
         }
         catch (Exception $e) {
             return $this->sendError('Store error: ' . $e);
-            // return response()->json('Store Record Error: ' . $e, 400);
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Image  $image
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        // $res = Image::find($id);
-
         $res = DB::table('images')
         ->join('albums', 'images.album_id', '=', 'albums.id')
         ->where('images.id', '=', $id)
         ->select('images.*', 'albums.id', 'albums.album_name')
-        // ->havingRaw('images.id = ?', $id)
         ->get()
-        // ->where('images.id', '=', $id)
         ;
 
         if (is_null($res)) {
@@ -138,13 +133,25 @@ class ImageController extends BaseController
      */
 
     public function update(Request $request, Image $updateImage) {
-        $validator = ValidatorRules::MakeValidate($request, 'images');
+
+        $validator = ValidatorRules::MakeValidate($request, $updateImage->getTable());
+
         if ($validator->fails()) {
             return $this->sendError($validator->errors());
         }
         try {
-            // dd($request);
+
             $updateImage->update($request->all());
+
+            $albumId = $updateImage->getAttributes()["album_id"];
+
+            $res = DB::table('albums')
+                ->where('id', '=', $albumId)
+                ->select('albums.id', 'albums.album_name')
+                ->get()
+                ;
+
+            $updateImage = $updateImage->setAttribute("album_name", $res[0]->{'album_name'});
 
             return $this->sendResponse($updateImage, 'Image updated');
         }
@@ -161,10 +168,12 @@ class ImageController extends BaseController
                 "$field" => $value
             ]);
             $res = Image::find($id);
+            // return $this->sendResponse($patchImage, 'Image patched');
             return response()->json($res, 200);
         }
         catch (Exception $e) {
-            return response()->json('Patching Record Error: ' . $e, 400);
+            // return response()->json('Patching Record Error: ' . $e, 400);
+            return $this->sendError('Patching Record Error: ' . $e);
         }
     }
 
