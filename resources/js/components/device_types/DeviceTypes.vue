@@ -99,7 +99,7 @@ import DataTable from '../db/DataTable.vue';
                             isEditable: true,
                             isSortable: true,
                             isHighLight: false,
-                            columnsCount: 4
+                            columnsCount: 5
                         },
                     ],
 

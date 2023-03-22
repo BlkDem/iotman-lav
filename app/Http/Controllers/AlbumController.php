@@ -26,6 +26,16 @@ class AlbumController extends BaseController
 
     }
 
+
+    //only for id and name fields for lookup components
+    public function indexLookup()
+    {
+        $res = Album::select('id','album_name')->orderBy('album_name', 'asc')->get();
+
+        return $this->sendResponse($res, "Albums lookup List");
+
+    }
+
     public function page($currentPage=0, $itemsPerPage=10){
 
         $page = (int)$currentPage;

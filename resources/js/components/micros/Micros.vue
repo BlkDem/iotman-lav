@@ -79,7 +79,7 @@ export default {
                             isEditable: true,
                             isSortable: true,
                             isHighLight: false,
-                            columnsCount: 5
+                            columnsCount: 6
                         },
                         // {
                         //     fieldName: 'micro_config',

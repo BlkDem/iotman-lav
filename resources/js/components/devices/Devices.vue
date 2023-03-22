@@ -100,7 +100,7 @@ export default {
                             isEditable: false,
                             isSortable: true,
                             isHighLight: false,
-                            columnsCount: 2,
+                            columnsCount: 3,
                             lookupId: 'device_type_id',
                             lookupApi: APIConstants.api_device_types_read,
                             isLookup: true,

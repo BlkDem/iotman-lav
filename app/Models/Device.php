@@ -51,13 +51,9 @@ class Device extends Model
         'device_type_image'
     ];
 
-    public function DeviceTypes()
-    {
-        return $this->hasOne(DeviceType::class);
-    }
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+    ];
 
-    // public function DeviceType()
-    // {
-    //   return $this->belongsTo(DeviceType::class);
-    // }
 }

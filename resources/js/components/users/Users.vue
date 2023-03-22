@@ -82,7 +82,7 @@ import DataTable from '../db/DataTable.vue';
                             isEditable: true,
                             isSortable: true,
                             isHighLight: false,
-                            columnsCount: 3
+                            columnsCount: 4
                         },
 
                         {

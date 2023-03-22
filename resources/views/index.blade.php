@@ -60,11 +60,10 @@
 </head>
 
 <body class="container-fluid">
+
+        <!-- vue mount point -->
     <div id="app" class="container">
 
-        <!-- <device-list ref="DeviceRef"></device-list> -->
-        <!-- <device-type-list ref="DeviceTypeRef"></device-type-list>
-        <device-user-list ref="DeviceUserRef"></device-user-list> -->
     </div>
 
     <!-- Footer -->
@@ -81,9 +80,9 @@
 
         <!-- Section: Links  -->
         <section class="mx-4 my-4" style="display: flex; justify-content: center;">
-        <object type="image/svg+xml" data="images/logo/u-logo2.svg" id="object_1" class="icon logo"
+            <object type="image/svg+xml" data="images/logo/u-logo2.svg" id="object_1" class="icon logo"
                             style="width: 120px;">
-                        </object>
+            </object>
         </section>
         <!-- Section: Links  -->
 

@@ -9,7 +9,7 @@
 
             <div v-for="(field, key) in dataFields" v-bind:key="key">
 
-                <div v-if="!field.isImage&&field.fieldName!=='id'&&!field.isLookup">
+                <div v-if="!field.isImage&&field.fieldName!=='id'&&!field.isLookup&&!field.isVirtualImage">
                     <label class="px-2">{{ field.fieldCaption }}</label>
 
                     <textarea v-if="field.isText" v-model="field.value" class="form-control p-2 mb-4"

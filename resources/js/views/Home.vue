@@ -51,7 +51,7 @@
     <div class="w-100 mx-4 my-2 align-left" style="font-size: 1.4rem; font-weight: 400;">
         <!-- <AppMenu ref="homeAppMenu"></AppMenu> -->
     </div>
-<router-view />
+<!-- <router-view /> -->
 </template>
 
 <script>

@@ -38,10 +38,18 @@
                 >
                 <div class="card flex border-light py-2"
                 >
-                    <div class="w-100 flex-center" v-for="(column, ckey) in Object.keys(item)"
-                        v-bind:key="ckey">
+                    <div class="w-100 flex-center py-2" v-for="(column, ckey) in Object.keys(item)"
+                        v-bind:key="ckey"
+                        :class="{'bg-secondary': ckey%2===1&&ckey>0, 'bg-primary': ckey%2===0&&ckey>0}"
+                    >
 
-                        <span v-if="(activeCol!==key||activeRow!==ckey)&&(item[column].isImage != true)"
+                        <span v-if="item[column].isLookup"
+                                :class="{'text-info': item[column].isHighLight}"
+                            >
+                                {{ getValue(item[column]) }}
+                            </span>
+
+                        <span v-if="(activeCol!==key||activeRow!==ckey)&&(!item[column].isImage)&&(!item[column].isLookup)"
                             :class="{'text-info': item[column].isHighLight}"
                         >
                             {{ item[column].value }}
@@ -51,6 +59,15 @@
                             :src="(!item[column].isVirtualImage)?imagesPath + item[column].value:imagesPath +'blog.jpg'"
                             @error="replaceByDefault"
                         />
+
+                        <span v-if="item[column].isVirtualImage"
+                                :class="{'text-info': item[column].isHighLight, 'cursor-pointer': selectableRow}"
+                            >
+                                <!-- {{ item[column].VirtualImage }} -->
+                                <i :class="item[column].VirtualImage" class="fa-10x my-4"></i>
+
+                            </span>
+
 
                         <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
 
@@ -85,7 +102,8 @@
             <div class="card mb-1 w-100 fade-in"
                 v-for="(item, key) in filteredItems" v-bind:key="key"
                 v-bind:id="item.id.value"
-                :class="{'border-info bg-warning': selectedRow[key]===true, 'border-primary': selectedRow[key]===false||selectedRow[key]==null}"
+                :class="{'border-info bg-warning text-dark': selectedRow[key]===true,
+                        'border-primary': selectedRow[key]===false||selectedRow[key]==null}"
                 @click="rowClick(key)"
             >
                 <div class="mx-2 my-2">
@@ -112,11 +130,13 @@
 
 
 
-                            <a v-if="item[column].isVirtualImage">
+                            <span v-if="item[column].isVirtualImage"
+                                :class="{'text-info': item[column].isHighLight}"
+                            >
                                 <!-- {{ item[column].VirtualImage }} -->
                                 <i :class="item[column].VirtualImage"></i>
 
-                            </a>
+                            </span>
 
                             <img v-if="item[column].isImage" class="device-image"
                                 :src="getImage(item[column])"
@@ -140,7 +160,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-3 col-xs-3 col-lg-3  edit-buttons ">
+                        <div class="col-sm-2 col-xs-2 col-lg-2  edit-buttons ">
                             <button class="btn btn-info mx-2" @click="doEdit(key, item.id.value)">
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
@@ -441,7 +461,7 @@ import TableHead from './TableHead.vue';
                         for (let itemRow in newList) {
                             newList[itemRow] = this.processListItem(items[itemRow])
                         }
-                        // console.log(newList)
+                        console.log(newList)
                         return newList
 
             },

@@ -1,7 +1,7 @@
 <template>
     <div class="border-4 border-top rounded-top border-secondary">
         <div class="mx-2 my-2">
-            <div class="row vertical-center">
+            <div class="row vertical-center text-primary">
 
                 <div :class="setClass(field.columnsCount)" class="flex  fw-bold" v-for="(field, ckey) in fieldsCaptions"
                     v-bind:key="ckey">

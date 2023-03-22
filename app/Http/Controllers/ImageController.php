@@ -6,6 +6,7 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use App\Http\Middleware\ValidatorRules;
+use DB;
 use Exception;
 
 class ImageController extends BaseController
@@ -17,7 +18,12 @@ class ImageController extends BaseController
      */
     public function index()
     {
-        $res = Image::orderBy('image_name', 'asc')->get();
+        // $res = Image::orderBy('image_name', 'asc')->get();
+        // $res = Image::with('album')->get();
+        $res = DB::table('images')
+            ->join('albums', 'images.album_id', '=', 'albums.id')
+            ->select('images.*', 'albums.id', 'albums.album_name')
+            ->get();
 
         $paginator = PaginatorController::Paginate($res->count(), 1, 1);
 
@@ -30,7 +36,14 @@ class ImageController extends BaseController
         $page = (int)$currentPage;
 
         $offset = $itemsPerPage*--$page;
-        $res = Image::limit($itemsPerPage)->offset($offset)->orderBy('image_name', 'asc')->get();
+
+        $res = DB::table('images')
+        ->join('albums', 'images.album_id', '=', 'albums.id')
+        ->select('images.*', 'albums.id', 'albums.album_name')
+        ->limit($itemsPerPage)->offset($offset)->orderBy('image_name', 'asc')
+        ->get();
+
+        // $res = Image::limit($itemsPerPage)->offset($offset)->orderBy('image_name', 'asc')->get();
         $total = Image::get();
 
         $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
@@ -43,7 +56,16 @@ class ImageController extends BaseController
         $page = (int)$currentPage;
 
         $offset = $itemsPerPage*--$page;
-        $res = Image::limit($itemsPerPage)->where('album_id', $album_id)->offset($offset)->orderBy('image_name', 'asc')->get();
+
+        $res = DB::table('images')
+        ->join('albums', 'images.album_id', '=', 'albums.id')
+        ->select('images.*', 'albums.id', 'albums.album_name')
+        ->where('album_id', $album_id)
+        ->limit($itemsPerPage)->offset($offset)->orderBy('image_name', 'asc')
+        ->get();
+
+        // $res = Image::limit($itemsPerPage)->where('album_id', $album_id)->offset($offset)->orderBy('image_name', 'asc')->get();
+
         $total = Image::where('album_id', $album_id)->get();
 
         $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
@@ -136,4 +158,5 @@ class ImageController extends BaseController
 
         $imageItem->delete($id);
         return $this->sendResponse($imageItem, "Image $id deleted");
-    }}
+    }
+}

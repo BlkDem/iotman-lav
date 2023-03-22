@@ -14,14 +14,14 @@
         </data-table>
 
         <!-- Amage Widget -->
-        <data-table
+        <!-- <data-table
             :api="images.api"
             :dataFields="images.imagesFields"
             :foreignKey="images.album_id"
             :foreignValue="selectedFkValue"
             :pageCaption="images.imagesCaption"
         >
-        </data-table>
+        </data-table> -->
     </div>
 </template>
 
@@ -42,59 +42,6 @@ import DataTable from '../../db/DataTable.vue';
         data() {
             return {
 
-                //Images Widget Setup
-                images: {
-                    imagesCaption: MessagesConstants.IMAGES,
-
-                    api: {
-                        get: '',
-                        insert: '',
-                        update: '',
-                        delete: '',
-                        patch: ''
-                    },
-
-                    imagesFields: [
-                        {
-                            fieldName: 'image_name',
-                            fieldCaption: 'Name',
-                            type: String,
-                            isImage: true,
-                            isEditable: false,
-                            isSortable: true,
-                            isHighLight: false,
-                            columnsCount: 1
-                        },
-
-                        {
-                            fieldName: 'id',
-                            fieldCaption: 'ID',
-                            type: Number,
-                            isImage: false,
-                            isEditable: false,
-                            isSortable: true,
-                            isHighLight: true,
-                            columnsCount: 1
-                        },
-
-                        {
-                            fieldName: 'image_desc',
-                            fieldCaption: 'Description',
-                            type: String,
-                            isImage: false,
-                            isText: true,
-                            isEditable: true,
-                            isSortable: true,
-                            isHighLight: false,
-                            columnsCount: 7
-                        },
-                    ],
-
-                    album_id: 'album_id',
-                    album_id_value: 1,
-
-                },
-
                 //Albums Widget Setup
                 albums: {
                     albumsCaption: MessagesConstants.ALBUMS,
@@ -112,12 +59,10 @@ import DataTable from '../../db/DataTable.vue';
                         {
                             fieldName: 'Image',
                             type: String,
-                            isImage: false,
                             isVirtualImage: true,
-                            VirtualImage: 'fa-solid fa-images fa-2x',
-                            isEditable: false,
-                            isSortable: false,
                             isHighLight: true,
+                            isSortable: false,
+                            VirtualImage: 'fa-solid fa-images fa-2x',
                             columnsCount: 1
                         },
 
@@ -125,8 +70,6 @@ import DataTable from '../../db/DataTable.vue';
                             fieldName: 'id',
                             fieldCaption: 'ID',
                             type: Number,
-                            isImage: false,
-                            isEditable: false,
                             isSortable: true,
                             isHighLight: true,
                             columnsCount: 1
@@ -136,10 +79,8 @@ import DataTable from '../../db/DataTable.vue';
                             fieldName: 'album_name',
                             fieldCaption: 'Name',
                             type: String,
-                            isImage: false,
                             isEditable: true,
                             isSortable: true,
-                            isHighLight: false,
                             columnsCount: 3
                         },
 
@@ -147,12 +88,10 @@ import DataTable from '../../db/DataTable.vue';
                             fieldName: 'album_desc',
                             fieldCaption: 'Description',
                             type: String,
-                            isImage: false,
                             isText: true,
                             isEditable: true,
                             isSortable: true,
-                            isHighLight: false,
-                            columnsCount: 4
+                            columnsCount: 5
                         },
                     ],
                 },
@@ -167,14 +106,14 @@ import DataTable from '../../db/DataTable.vue';
 
         created() {
 
-            const apiImages = this.images.api
+            // const apiImages = this.images.api
 
-            apiImages.get = APIConstants.api_images_read_page
-            apiImages.get = APIConstants.api_images_read_page
-            apiImages.insert = APIConstants.api_image_create
-            apiImages.update = APIConstants.api_image_update
-            apiImages.delete = APIConstants.api_image_delete
-            apiImages.patch = APIConstants.api_image_patch
+            // apiImages.get = APIConstants.api_images_read_page
+            // apiImages.get = APIConstants.api_images_read_page
+            // apiImages.insert = APIConstants.api_image_create
+            // apiImages.update = APIConstants.api_image_update
+            // apiImages.delete = APIConstants.api_image_delete
+            // apiImages.patch = APIConstants.api_image_patch
 
             const apiAlbums = this.albums.api
 

@@ -7,6 +7,7 @@ import UserDevices from "./components/user_devices/UserDevices.vue"
 import Albums from "./components/imagelib/albums/Albums.vue"
 import Micros from "./components/micros/Micros.vue"
 import Users  from "./components/users/Users.vue"
+import Images from "./components/imagelib/images/Images.vue"
 
 const routes = [
   {
@@ -98,19 +99,53 @@ const routes = [
     visible: false
   },
   {
+    path: "/",
+    name: "Images Library",
+    icon: "fas fa-images",
+    component: Albums,
+    ID: "LIBRARY",
+    visible: true,
+    children: [
+        {
+            path: "/images",
+            name: "Images",
+            icon: "fas fa-images",
+            component: Images,
+            ID: "IMAGES",
+            visible: true
+          },
+          {
+            path: "/albums",
+            name: "Albums",
+            icon: "fas fa-images",
+            component: Albums,
+            ID: "ALBUMS",
+            visible: true
+          },
+    ]
+  },
+  {
+    path: "/images",
+    name: "Images",
+    icon: "fas fa-images",
+    component: Images,
+    ID: "IMAGES",
+    visible: false
+  },
+  {
+    path: "/albums",
+    name: "Albums",
+    icon: "fas fa-images",
+    component: Albums,
+    ID: "ALBUMS",
+    visible: false
+  },
+  {
     path: "/users",
     name: "Users",
     icon: "fa-solid fa-user",
     component: Users,
     ID: "USERS",
-    visible: true
-  },
-  {
-    path: "/imagelib",
-    name: "Images Library",
-    icon: "fas fa-images",
-    component: Albums,
-    ID: "LIBRARY",
     visible: true
   },
 

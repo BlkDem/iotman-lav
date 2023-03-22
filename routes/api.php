@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MicroController;
 use App\Http\Controllers\DevBlogController;
 use App\Http\Controllers\DeviceMicroController;
+use App\Http\Controllers\ImagesAlbumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,12 @@ Route::controller(ImageController::class)->group(function () {
     Route::patch('/image/patch/{id}/{field}/{value}', 'patch');
 });
 
+// Route::controller(ImagesAlbumController::class)->group(function () {
+    // Route::get('/images/read', 'index');
+    // Route::get('/images/read/page/{currentPage}/{itemsPerPage}', 'page');
+    // Route::get('/images/read/page/{currentPage}/{itemsPerPage}/{album_id}', 'pageWhereAlbum');
+// });
+
 //Upload and Save Image to storage.disk 'images'
 Route::post('/image/update_image/{imageId}', [ImageStoreController::class, 'updateImage']);
 
@@ -71,6 +78,7 @@ Route::post('/image/update_image/{imageId}', [ImageStoreController::class, 'upda
 Route::controller(AlbumController::class)->group(function () {
     Route::post('/album/create', 'store');
     Route::get('/albums/read', 'index');
+    Route::get('/albums/lookup', 'indexLookup');
     Route::get('/albums/read/page/{currentPage}/{itemsPerPage}', 'page');
     Route::get('/album/read/{id}', 'show');
     Route::put('/album/update/{updateAlbum}', 'update');
