@@ -657,7 +657,7 @@ import TableHead from './TableHead.vue';
                         _values[editItem[field].fieldName] = editItem[field].value
                     }
 
-                    console.log(_values)
+                    console.log('on axios: ', _values)
                     axios.put(this.api.update + id, _values)
                         .then(resp => {
                             // console.log(resp.data);

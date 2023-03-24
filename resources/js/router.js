@@ -107,27 +107,28 @@ const routes = [
     visible: true,
     children: [
         {
-            path: "/images",
-            name: "Images",
-            icon: "fas fa-images",
-            component: Images,
-            ID: "IMAGES",
-            visible: true
-          },
-          {
             path: "/albums",
             name: "Albums",
             icon: "fas fa-images",
             component: Albums,
             ID: "ALBUMS",
             visible: true
+        },
+        {
+            path: "/images",
+            name: "Images",
+            icon: "fa-regular fa-image",
+            component: Images,
+            ID: "IMAGES",
+            visible: true
           },
+
     ]
   },
   {
     path: "/images",
     name: "Images",
-    icon: "fas fa-images",
+    icon: "fa-regular fa-image",
     component: Images,
     ID: "IMAGES",
     visible: false

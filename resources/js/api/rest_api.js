@@ -80,8 +80,6 @@ export default {
     },
 
 
-    // async getItems() {
-    //     console.log(await this.getData())
-    // },
+    api_image_upload: apiPreffix + 'image/upload_image/',
 
 }

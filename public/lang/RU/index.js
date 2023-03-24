@@ -39,8 +39,8 @@ export default {
     LOGOUT_MENU: "Выход",
 
     menuBlockCaption: 'Меню',
-    informationBlockCaption: 'Информация',
-    logBlockCaption: 'Логи',
+    informationBlockCaption: 'Блог',
+    logBlockCaption: 'Журнал',
 
     DELETE_CONFORMATION: 'Вы уверены, что хотите удалить элемент?',
     DELETE_CAPTION: 'Удаление',
@@ -53,6 +53,8 @@ export default {
     ITEM_EDITING_TITLE: 'Изменить',
     ITEM_EDITING_MESSAGE: 'Изменение',
     ITEM_EDITBUTTON_CAPTION: 'Изменить',
+
+    IMAGE_UPLOADED: "Изображение загружено",
 
 
     //strings processing

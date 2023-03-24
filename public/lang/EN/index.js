@@ -54,6 +54,8 @@ export default {
     ITEM_EDITING_MESSAGE: 'Editing',
     ITEM_EDITBUTTON_CAPTION: 'Edit',
 
+    IMAGE_UPLOADED: "Image uploaded",
+
 
 
 }

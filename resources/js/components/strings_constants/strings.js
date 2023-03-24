@@ -23,6 +23,7 @@ export default {
     DELETING_CANCELLED: "Deleting Cancelled",
     DELETING_ERROR: "Deleting Error",
 
+    IMAGE_UPLOADED: "Image uploaded",
 
     NO_DESCRIPTION: " no description ",
     NO_HWID: " no device address",

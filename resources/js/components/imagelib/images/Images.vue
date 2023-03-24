@@ -63,7 +63,7 @@ export default {
                         fieldCaption: 'Name',
                         type: String,
                         isImage: true,
-                        isEditable: false,
+                        isEditable: true,
                         // isSortable: true,
                         isHighLight: false,
                         columnsCount: 1

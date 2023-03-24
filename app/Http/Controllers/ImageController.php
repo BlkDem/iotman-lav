@@ -6,6 +6,8 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use App\Http\Middleware\ValidatorRules;
+use App\Http\Controllers\ImageRepositoryController;
+use App\Models\Album;
 use DB;
 use Exception;
 
@@ -29,6 +31,28 @@ class ImageController extends BaseController
 
         return $this->sendResponse($res, "Image List", $paginator);
 
+    }
+
+    public static function getImage($id) {
+        return Image::find($id);
+    }
+
+    public static function getAlbum($id) {
+        return Album::find($id);
+    }
+
+    public static function setImage($id, $newImage) {
+
+        $newImage = Self::getImage($id);
+
+        if ($newImage == null)
+            return null;
+                    //apply new file name
+        $newImage->image_name = $newImage;
+                    //save record
+        $newImage->save();
+
+        return $newImage;
     }
 
     public function page($currentPage=0, $itemsPerPage=10){
@@ -90,15 +114,64 @@ class ImageController extends BaseController
     {
 
         $validator = ValidatorRules::MakeValidate($request, 'images');
+
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
+
         try {
-            $newDeviceType = Image::create($request->all());
-            return $this->sendResponse($newDeviceType, "Image added");
+            $newImage = Image::create($request->all());
+
+            $albumId = $newImage["album_id"];
+
+            $albumName = $this->getAlbum($albumId);
+
+            $newImage = $newImage->setAttribute("album_name", $albumName["album_name"]);
+
+            return $this->sendResponse($newImage, "Image added");
         }
         catch (Exception $e) {
             return $this->sendError('Store error: ' . $e);
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Image  $image
+     * @return \Illuminate\Http\Response
+     */
+
+    public function update(Request $request, Image $updateImage) {
+
+        $validator = ValidatorRules::MakeValidate($request, $updateImage->getTable());
+
+        $fileName = $request->query('image_name');
+
+        $_req = $request->all();
+        $_req["image_name"] = $fileName;
+
+        if ($validator->fails()) {
+            return $this->sendError($validator->errors());
+        }
+        try {
+
+            $updateImage->update($request->all());
+
+            $updateImage->save();
+
+            $albumId = $updateImage["album_id"];
+
+            $albumName = $this->getAlbum($albumId);
+
+            //$updateImage =
+            $updateImage["album_name"] = $albumName["album_name"];
+
+            return $this->sendResponse($updateImage, 'Image updated');
+        }
+        catch (Exception $e) {
+            return $this->sendError('Updating Record Error: ' . $e);
         }
     }
 
@@ -121,45 +194,7 @@ class ImageController extends BaseController
             return $this->sendError("No Record for id=$id Found");
         }
         return $this->sendResponse($res, "Image (id = $id) found");
-
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
-     */
-
-    public function update(Request $request, Image $updateImage) {
-
-        $validator = ValidatorRules::MakeValidate($request, $updateImage->getTable());
-
-        if ($validator->fails()) {
-            return $this->sendError($validator->errors());
-        }
-        try {
-
-            $updateImage->update($request->all());
-
-            $albumId = $updateImage->getAttributes()["album_id"];
-
-            $res = DB::table('albums')
-                ->where('id', '=', $albumId)
-                ->select('albums.id', 'albums.album_name')
-                ->get()
-                ;
-
-            $updateImage = $updateImage->setAttribute("album_name", $res[0]->{'album_name'});
-
-            return $this->sendResponse($updateImage, 'Image updated');
-        }
-        catch (Exception $e) {
-            return $this->sendError('Updating Record Error: ' . $e);
-        }
-    }
-
 
     public function patch(Request $request, $id, $field, $value){
         try {

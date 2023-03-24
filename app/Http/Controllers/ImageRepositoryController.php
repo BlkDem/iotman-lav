@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\StorageController;
-use App\Models\Image;
+use Exception;
+// use App\Models\Image;
+// use App\Http\Controllers\ImageController;
 
-class ImageStoreController extends BaseController
+class ImageRepositoryController extends BaseController
 {
 
     private function ValidExtension($_ext) {
@@ -16,32 +18,41 @@ class ImageStoreController extends BaseController
             return true; else return false;
     }
 
-    public function updateImage(Request $request, int $imageId)
+    private function ValidSize($file) {
+        return ((filesize($file) > 1000)&&(filesize($file) < 1000000));
+    }
+
+    public function getStoredFileName(Request $request) {
+
+        $response = [
+            'fileName'    => $this->store($request),
+            'message' => 'Reseived image file name',
+        ];
+        return response()->json($response, 200);
+
+    }
+
+    public function store(Request $request)
     {
         try {
 
-            $_image = 'image';
+            $_image = 'file';
             $_extension = '';
             $_file = '';
-
-            //check record exists
-            $newImage = Image::find($imageId);
-            if ($newImage == null)
-            return $this->sendError("Record not found");
-
-            //check file exists
-            if ($request->files->count() == 0)
-            return $this->sendError("No data for update");
 
             //check valid fieldname
             $_file = $request->file($_image);
             if ($_file == null)
-            return $this->sendError("No valid files for update");
+            return $this->sendError("Invalid file for update");
 
             //check valid file extension
             $_extension = $_file->getClientOriginalExtension();
             if (!$this->ValidExtension($_extension))
             return $this->sendError("Invalid file extension");
+
+            //check valid fieldsize
+            if (!$this->ValidSize($_file))
+            return $this->sendError("File size mismatch!");
 
             //make unic-filename
             $newImageName = Str::random(32).".".$_extension;
@@ -52,18 +63,12 @@ class ImageStoreController extends BaseController
                 return $this->sendError("Error saving to disk");
             }
 
-            //apply new file name
-            $newImage->image_name = $newImageName;
+            // Return a new image name
+            return $newImageName;
 
-            //save record
-            $newImage->save();
-
-            // Return susccess
-            return $this->sendResponse($newImage, "Post successfully updated");
-
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // Return error
-            return $this->sendError("Error updating image: ", $e);
+            return $this->sendError("Error uploading image: ", $e);
         }
-}
+    }
 }

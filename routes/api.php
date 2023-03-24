@@ -11,7 +11,7 @@ use App\Http\Controllers\Auth\UserinfoController;
 use App\Http\Controllers\UserDevicesCountController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ImageController;
-use App\Http\Controllers\ImageStoreController;
+use App\Http\Controllers\ImageRepositoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MicroController;
 use App\Http\Controllers\DevBlogController;
@@ -71,7 +71,9 @@ Route::controller(ImageController::class)->group(function () {
 // });
 
 //Upload and Save Image to storage.disk 'images'
-Route::post('/image/update_image/{imageId}', [ImageStoreController::class, 'updateImage']);
+Route::post('/image/update_image/{imageId}', [ImageRepositoryController::class, 'store']);
+Route::post('/image/upload_image/', [ImageRepositoryController::class, 'getStoredFileName']);
+
 
 //CRUD routes for model 'albums'
 

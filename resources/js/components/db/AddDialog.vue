@@ -44,11 +44,21 @@
 
 
                 <div v-if="field.isImage" class="flex py-4">
-                    <img class="device-image mx-2"
+                    <img class="mx-2"
                                 :src="getImage(field)"
+                                :class="{
+                                        'device-image': !field.isEditable,
+                                        'w-75': field.isEditable,
+                                    }"
                                 @error="replaceByDefault"
                     />
-                    <input class="form-control" type="file" v-if="field.isEditable"/>
+                    <form action="post">
+                        <input class="form-control" type="file"
+                            v-if="field.isEditable"
+                            @change="handleFileUpload( $event, key )"
+                        />
+                        <button type="submit" @click.prevent="submitFile(key)" >Save</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -64,6 +74,8 @@ import PopupModal from '../common/PopupModal.vue';
 import MessagesConstants from '../strings_constants/strings';
 import Pathes from '../../config/pathes';
 import DataSelect from './DataSelect.vue';
+import APIConstants from "../../api/rest_api";
+import ParsingErrors from "../../helpers/ParsingErrors.js";
 
 export default {
     name: 'AddItem',
@@ -86,7 +98,9 @@ export default {
             rejectPromise: undefined,
 
             imagesPath: '',
-            imagePlug: ''
+            imagePlug: '',
+
+            file: ''
         }
     },
 
@@ -96,6 +110,50 @@ export default {
     },
 
     methods: {
+
+        submitFile(key){
+
+        let formData = new FormData();
+
+            /*
+                Add the form data we need to submit
+            */
+            formData.append('file', this.file);
+
+        /*
+          Make the request to the POST /single-file URL
+        */
+            axios.post( APIConstants.api_image_upload,
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+            )
+            .then(resp => {
+                this.setImage(key, resp.data.fileName)
+                // console.log(Pathes.storageImagesPath + resp.data?.fileName)
+            })
+            .then(resp => {
+                this.$root.$refs.toaster.showMessage(
+                    MessagesConstants.IMAGE_UPLOADED,
+                    MessagesConstants.PROCESS_SUCCESSFULLY
+                )
+            })
+            .catch(error => {
+                this.$root.$refs.toaster.showMessage(
+                    MessagesConstants.EDITING_ERROR,
+                    ParsingErrors.getError(error),
+                    ParsingErrors.ERROR_LEVEL_ERROR
+                )
+            })
+      },
+
+        handleFileUpload(event, key){
+            this.file = event.target.files[0]
+            this.submitFile(key)
+        },
 
         onDataSelect(_value, _fieldName) {
             for (let item in this.dataFields) {
@@ -110,6 +168,11 @@ export default {
         getImage(item) {
             if ((item.value==='') || (item.isVirtualImage)) return this.imagePlug
             return Pathes.storageImagesPath + item.value
+        },
+
+        setImage(key, fileName) {
+            this.dataFields[key].value = fileName
+            console.log(this.dataFields)
         },
 
         replaceByDefault(e) {
@@ -150,7 +213,7 @@ export default {
         confirmDialog() {
             this.$refs.popup.close()
             this.postData = this.dataFields
-            // console.log('edit Ok: ', this.postData)
+            console.log('edit Ok: ', this.postData)
             this.resolvePromise(true, this)
         },
 

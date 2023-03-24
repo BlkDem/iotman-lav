@@ -24288,6 +24288,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../strings_constants/strings */ "./resources/js/components/strings_constants/strings.js");
 /* harmony import */ var _config_pathes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../config/pathes */ "./resources/js/config/pathes.js");
 /* harmony import */ var _DataSelect_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DataSelect.vue */ "./resources/js/components/db/DataSelect.vue");
+/* harmony import */ var _api_rest_api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../api/rest_api */ "./resources/js/api/rest_api.js");
+/* harmony import */ var _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helpers/ParsingErrors.js */ "./resources/js/helpers/ParsingErrors.js");
+
+
 
 
 
@@ -24315,7 +24319,8 @@ __webpack_require__.r(__webpack_exports__);
       resolvePromise: undefined,
       rejectPromise: undefined,
       imagesPath: '',
-      imagePlug: ''
+      imagePlug: '',
+      file: ''
     };
   },
   created: function created() {
@@ -24323,6 +24328,35 @@ __webpack_require__.r(__webpack_exports__);
     this.imagePlug = _config_pathes__WEBPACK_IMPORTED_MODULE_2__["default"].storageImagePlug;
   },
   methods: {
+    submitFile: function submitFile(key) {
+      var _this = this;
+      var formData = new FormData();
+
+      /*
+          Add the form data we need to submit
+      */
+      formData.append('file', this.file);
+
+      /*
+        Make the request to the POST /single-file URL
+      */
+      axios.post(_api_rest_api__WEBPACK_IMPORTED_MODULE_4__["default"].api_image_upload, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (resp) {
+        _this.setImage(key, resp.data.fileName);
+        // console.log(Pathes.storageImagesPath + resp.data?.fileName)
+      }).then(function (resp) {
+        _this.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__["default"].IMAGE_UPLOADED, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__["default"].PROCESS_SUCCESSFULLY);
+      })["catch"](function (error) {
+        _this.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__["default"].EDITING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_5__["default"].getError(error), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_5__["default"].ERROR_LEVEL_ERROR);
+      });
+    },
+    handleFileUpload: function handleFileUpload(event, key) {
+      this.file = event.target.files[0];
+      this.submitFile(key);
+    },
     onDataSelect: function onDataSelect(_value, _fieldName) {
       for (var item in this.dataFields) {
         if (this.dataFields[item].fieldName === _fieldName) {
@@ -24336,11 +24370,15 @@ __webpack_require__.r(__webpack_exports__);
       if (item.value === '' || item.isVirtualImage) return this.imagePlug;
       return _config_pathes__WEBPACK_IMPORTED_MODULE_2__["default"].storageImagesPath + item.value;
     },
+    setImage: function setImage(key, fileName) {
+      this.dataFields[key].value = fileName;
+      console.log(this.dataFields);
+    },
     replaceByDefault: function replaceByDefault(e) {
       e.target.src = _config_pathes__WEBPACK_IMPORTED_MODULE_2__["default"].storageImagePlug;
     },
     showDialogue: function showDialogue() {
-      var _this = this;
+      var _this2 = this;
       var optsAdd = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       this.edit_mode = optsAdd.edit_mode;
       this.title = optsAdd.title;
@@ -24361,14 +24399,14 @@ __webpack_require__.r(__webpack_exports__);
       this.$refs.popup.open();
       console.log(this.dataFields);
       return new Promise(function (resolve, reject) {
-        _this.resolvePromise = resolve;
-        _this.rejectPromise = reject;
+        _this2.resolvePromise = resolve;
+        _this2.rejectPromise = reject;
       });
     },
     confirmDialog: function confirmDialog() {
       this.$refs.popup.close();
       this.postData = this.dataFields;
-      // console.log('edit Ok: ', this.postData)
+      console.log('edit Ok: ', this.postData);
       this.resolvePromise(true, this);
     },
     cancelDialog: function cancelDialog() {
@@ -24890,7 +24928,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 for (field in editItem) {
                   _values[editItem[field].fieldName] = editItem[field].value;
                 }
-                console.log(_values);
+                console.log('on axios: ', _values);
                 axios.put(_this6.api.update + id, _values).then(function (resp) {
                   // console.log(resp.data);
 
@@ -25684,7 +25722,7 @@ __webpack_require__.r(__webpack_exports__);
           fieldCaption: 'Name',
           type: String,
           isImage: true,
-          isEditable: false,
+          isEditable: true,
           // isSortable: true,
           isHighLight: false,
           columnsCount: 1
@@ -26817,11 +26855,11 @@ var _hoisted_10 = {
 };
 var _hoisted_11 = ["src"];
 var _hoisted_12 = {
-  key: 0,
-  "class": "form-control",
-  type: "file"
+  action: "post"
 };
-var _hoisted_13 = {
+var _hoisted_13 = ["onChange"];
+var _hoisted_14 = ["onClick"];
+var _hoisted_15 = {
   "class": "text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -26876,13 +26914,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           value: field.value,
           onOnDataSelect: $options.onDataSelect
         }, null, 8 /* PROPS */, ["dataTableReadApi", "nameField", "lookupField", "value", "onOnDataSelect"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <input class=\"form-control p-2 mb-4\" :placeholder=\"'Input ' + field.fieldCaption\"  v-model=\"field.value\" /> ")], 2 /* CLASS */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), field.isImage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-          "class": "device-image mx-2",
+          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["mx-2", {
+            'device-image': !field.isEditable,
+            'w-75': field.isEditable
+          }]),
           src: $options.getImage(field),
           onError: _cache[0] || (_cache[0] = function () {
             return $options.replaceByDefault && $options.replaceByDefault.apply($options, arguments);
           })
-        }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_11), field.isEditable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", _hoisted_12)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
-      }), 128 /* KEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        }, null, 42 /* CLASS, PROPS, HYDRATE_EVENTS */, _hoisted_11), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_12, [field.isEditable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
+          key: 0,
+          "class": "form-control",
+          type: "file",
+          onChange: function onChange($event) {
+            return $options.handleFileUpload($event, key);
+          }
+        }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_13)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+          type: "submit",
+          onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+            return $options.submitFile(key);
+          }, ["prevent"])
+        }, "Save", 8 /* PROPS */, _hoisted_14)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+      }), 128 /* KEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "btn btn-danger mx-1 btn-width-40",
         onClick: _cache[1] || (_cache[1] = function () {
           return $options.confirmDialog && $options.confirmDialog.apply($options, arguments);
@@ -27977,7 +28030,8 @@ __webpack_require__.r(__webpack_exports__);
   ITEM_ADDBUTTON_CAPTION: 'Add',
   ITEM_EDITING_TITLE: 'Edit',
   ITEM_EDITING_MESSAGE: 'Editing',
-  ITEM_EDITBUTTON_CAPTION: 'Edit'
+  ITEM_EDITBUTTON_CAPTION: 'Edit',
+  IMAGE_UPLOADED: "Image uploaded"
 });
 
 /***/ }),
@@ -28027,8 +28081,8 @@ __webpack_require__.r(__webpack_exports__);
   SORT_DESC: "По убыванию",
   LOGOUT_MENU: "Выход",
   menuBlockCaption: 'Меню',
-  informationBlockCaption: 'Информация',
-  logBlockCaption: 'Логи',
+  informationBlockCaption: 'Блог',
+  logBlockCaption: 'Журнал',
   DELETE_CONFORMATION: 'Вы уверены, что хотите удалить элемент?',
   DELETE_CAPTION: 'Удаление',
   DELETE_BUTTON: 'Удалить',
@@ -28037,7 +28091,8 @@ __webpack_require__.r(__webpack_exports__);
   ITEM_ADDBUTTON_CAPTION: 'Добавить',
   ITEM_EDITING_TITLE: 'Изменить',
   ITEM_EDITING_MESSAGE: 'Изменение',
-  ITEM_EDITBUTTON_CAPTION: 'Изменить'
+  ITEM_EDITBUTTON_CAPTION: 'Изменить',
+  IMAGE_UPLOADED: "Изображение загружено"
 
   //strings processing
 
@@ -28151,9 +28206,8 @@ var APIVersion = 1;
         }
       }, _callee);
     }))();
-  } // async getItems() {
-  //     console.log(await this.getData())
-  // },
+  },
+  api_image_upload: apiPreffix + 'image/upload_image/'
 });
 
 /***/ }),
@@ -28319,6 +28373,7 @@ __webpack_require__.r(__webpack_exports__);
   EDITING_ERROR: "Editing Error",
   DELETING_CANCELLED: "Deleting Cancelled",
   DELETING_ERROR: "Deleting Error",
+  IMAGE_UPLOADED: "Image uploaded",
   NO_DESCRIPTION: " no description ",
   NO_HWID: " no device address",
   NO_PASS: " no password",
@@ -28662,24 +28717,24 @@ var routes = [{
   ID: "LIBRARY",
   visible: true,
   children: [{
-    path: "/images",
-    name: "Images",
-    icon: "fas fa-images",
-    component: _components_imagelib_images_Images_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-    ID: "IMAGES",
-    visible: true
-  }, {
     path: "/albums",
     name: "Albums",
     icon: "fas fa-images",
     component: _components_imagelib_albums_Albums_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     ID: "ALBUMS",
     visible: true
+  }, {
+    path: "/images",
+    name: "Images",
+    icon: "fa-regular fa-image",
+    component: _components_imagelib_images_Images_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    ID: "IMAGES",
+    visible: true
   }]
 }, {
   path: "/images",
   name: "Images",
-  icon: "fas fa-images",
+  icon: "fa-regular fa-image",
   component: _components_imagelib_images_Images_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
   ID: "IMAGES",
   visible: false
