@@ -34,9 +34,8 @@ class UserController extends BaseController
 
         return $this->sendResponse($res, "Users List", $paginator);
 
-
-
         $usersDataSet = User::get();
+
         if ($usersDataSet->count() ==0)
         {
             return response()->json(['Error' => 'true', 'Message' => 'No Records Found'], 404);

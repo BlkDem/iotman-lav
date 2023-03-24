@@ -29,13 +29,16 @@ export default {
     api_album_delete: apiPreffix + 'album/delete/',
     api_album_patch: apiPreffix +      'album/patch/',
 
-    //Images CRUD
+    //Images CRUD + management
     api_image_create: apiPreffix + 'image/create/',
     api_images_read: apiPreffix + 'images/read/',
     api_images_read_page: apiPreffix + 'images/read/page/',
     api_image_update: apiPreffix + 'image/update/',
     api_image_delete: apiPreffix + 'image/delete/',
     api_image_patch: apiPreffix + 'image/patch/',
+
+    api_image_upload: apiPreffix + 'image/upload_image/',
+    api_images_from_disk: apiPreffix + 'images/get_images/',
 
     //Device Types CRUD
     api_device_type_create: apiPreffix + 'device_type/create/',
@@ -78,8 +81,5 @@ export default {
         // console.log(_api)
         return await axios.get(_api)
     },
-
-
-    api_image_upload: apiPreffix + 'image/upload_image/',
 
 }

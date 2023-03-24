@@ -9,14 +9,14 @@ use App\Http\Controllers\DeviceUserController;
 use App\Http\Controllers\DeviceUsersViewController;
 use App\Http\Controllers\Auth\UserinfoController;
 use App\Http\Controllers\UserDevicesCountController;
-use App\Http\Controllers\AlbumController;
-use App\Http\Controllers\ImageController;
-use App\Http\Controllers\ImageRepositoryController;
+use App\Http\Controllers\Images\AlbumController;
+use App\Http\Controllers\Images\ImageController;
+use App\Http\Controllers\Images\ImageRepositoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MicroController;
 use App\Http\Controllers\DevBlogController;
 use App\Http\Controllers\DeviceMicroController;
-use App\Http\Controllers\ImagesAlbumController;
+// use App\Http\Controllers\ImagesAlbumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +56,7 @@ Route::controller(UserController::class)->group(function () {
 Route::controller(ImageController::class)->group(function () {
     Route::post('/image/create', 'store');
     Route::get('/images/read', 'index');
+    Route::get('/images/get_images', 'getImages');
     Route::get('/images/read/page/{currentPage}/{itemsPerPage}', 'page');
     Route::get('/images/read/page/{currentPage}/{itemsPerPage}/{album_id}', 'pageWhereAlbum');
     Route::get('/image/read/{id}', 'show');

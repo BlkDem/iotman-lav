@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Images;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -12,7 +12,6 @@ use Exception;
 
 class ImageRepositoryController extends BaseController
 {
-
     private function ValidExtension($_ext) {
         if ((strtoupper($_ext) === 'JPG') || (strtoupper($_ext) === 'PNG'))
             return true; else return false;
@@ -22,14 +21,17 @@ class ImageRepositoryController extends BaseController
         return ((filesize($file) > 1000)&&(filesize($file) < 1000000));
     }
 
+    public function GetImageFiles() {
+        return StorageController::getImagesFromDisk('images');
+    }
+
     public function getStoredFileName(Request $request) {
 
         $response = [
-            'fileName'    => $this->store($request),
-            'message' => 'Reseived image file name',
+            'fileName' => $this->store($request),
+            'message'  => 'Reseived image file name',
         ];
         return response()->json($response, 200);
-
     }
 
     public function store(Request $request)

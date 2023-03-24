@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Images;
 
 use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use App\Http\Middleware\ValidatorRules;
-use App\Http\Controllers\ImageRepositoryController;
 use App\Models\Album;
 use DB;
 use Exception;
+use App\Http\Controllers\PaginatorController;
 
 class ImageController extends BaseController
 {
@@ -126,7 +126,7 @@ class ImageController extends BaseController
 
             $albumName = $this->getAlbum($albumId);
 
-            $newImage = $newImage->setAttribute("album_name", $albumName["album_name"]);
+            $newImage["album_name"] = $albumName["album_name"];
 
             return $this->sendResponse($newImage, "Image added");
         }
@@ -194,6 +194,20 @@ class ImageController extends BaseController
             return $this->sendError("No Record for id=$id Found");
         }
         return $this->sendResponse($res, "Image (id = $id) found");
+    }
+
+    public function getImages()
+    {
+        $imageRepositoryController = new ImageRepositoryController();
+
+        $files = $imageRepositoryController->GetImageFiles();
+
+
+        if (is_null($files)) {
+            return $this->sendError("No files Found");
+        }
+
+        return $this->sendResponse($files, "Images from disk");
     }
 
     public function patch(Request $request, $id, $field, $value){

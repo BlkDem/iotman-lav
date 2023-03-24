@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\images;
 
 use App\Models\ImagesAlbum;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\PaginatorController;
 
 class ImagesAlbumController extends BaseController
 {

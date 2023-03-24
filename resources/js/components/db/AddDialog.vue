@@ -43,8 +43,13 @@
                 </div>
 
 
-                <div v-if="field.isImage" class="flex py-4">
-                    <img class="mx-2"
+                <div v-if="field.isImage" class="flex-center-column py-4">
+                    <ImagesFromDisk
+                        :fileName="field.fileName"
+                        :fieldKey="key"
+                        @changeImage="changeImage"
+                    />
+                    <img class="mx-2" style="max-width: 200px; margin-bottom: 20px;"
                                 :src="getImage(field)"
                                 :class="{
                                         'device-image': !field.isEditable,
@@ -53,11 +58,12 @@
                                 @error="replaceByDefault"
                     />
                     <form action="post">
-                        <input class="form-control" type="file"
+                        <input class="form-control w-100" type="file"
                             v-if="field.isEditable"
                             @change="handleFileUpload( $event, key )"
                         />
-                        <button type="submit" @click.prevent="submitFile(key)" >Save</button>
+
+                        <!-- <button type="submit" @click.prevent="submitFile(key)" >Save</button> -->
                     </form>
                 </div>
             </div>
@@ -76,11 +82,12 @@ import Pathes from '../../config/pathes';
 import DataSelect from './DataSelect.vue';
 import APIConstants from "../../api/rest_api";
 import ParsingErrors from "../../helpers/ParsingErrors.js";
+import ImagesFromDisk from '../imagelib/images/ImagesFromDisk.vue';
 
 export default {
     name: 'AddItem',
 
-    components: { PopupModal, DataSelect },
+    components: { PopupModal, DataSelect, ImagesFromDisk },
 
     data (){
         return {
@@ -110,6 +117,11 @@ export default {
     },
 
     methods: {
+
+        changeImage(image, key) {
+            console.log(image, key)
+            this.setImage(key, image)
+        },
 
         submitFile(key){
 

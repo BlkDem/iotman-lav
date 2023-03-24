@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Images;
 
 use App\Models\Album;
 use Illuminate\Http\Request;
