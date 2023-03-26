@@ -4,6 +4,14 @@ const APIVersion = 1;
 export default {
     apiVersion: APIVersion,
 
+    //Presets CRUD
+    api_preset_create: apiPreffix +     'preset/create/',
+    api_presets_read: apiPreffix +      'presets/read/',
+    api_presets_read_page: apiPreffix + 'presets/read/page/',
+    api_preset_update: apiPreffix +     'preset/update/',
+    api_preset_delete: apiPreffix +     'preset/delete/',
+    api_preset_patch: apiPreffix +      'preset/patch/',
+
     //Micros CRUD
     api_micro_create: apiPreffix +     'micro/create/',
     api_micros_read: apiPreffix +      'micros/read/',

@@ -8,6 +8,7 @@ import Albums from "./components/imagelib/albums/Albums.vue"
 import Micros from "./components/micros/Micros.vue"
 import Users  from "./components/users/Users.vue"
 import Images from "./components/imagelib/images/Images.vue"
+import Presets from "./components/presets/Presets.vue"
 
 const routes = [
   {
@@ -147,6 +148,14 @@ const routes = [
     icon: "fa-solid fa-user-tie",
     component: Users,
     ID: "USERS",
+    visible: true
+  },
+  {
+    path: "/presets",
+    name: "Presets",
+    icon: "fa-solid fa-user-tie",
+    component: Presets,
+    ID: "PRESETS",
     visible: true
   },
 

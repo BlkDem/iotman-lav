@@ -128,7 +128,7 @@ class AlbumController extends BaseController
             return $this->sendResponse($updateAlbum, 'Album created');
         }
         catch (Exception $e) {
-            return $this->sendError('Deleting Record Error: ' . $e);
+            return $this->sendError('Updating Record Error: ' . $e);
         }
     }
 

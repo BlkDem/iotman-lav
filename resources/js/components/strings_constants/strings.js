@@ -7,6 +7,7 @@ export default {
     DEVICE_TYPES: "Device Types",
     DEVICES: "Devices",
     MICROS: "Controllers",
+    PRESETS: "Presets",
     USER_DEVICES: "User`s Devices",
     THEME: "Theme",
 

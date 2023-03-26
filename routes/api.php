@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MicroController;
 use App\Http\Controllers\DevBlogController;
 use App\Http\Controllers\DeviceMicroController;
+use App\Http\Controllers\Helpers\PresetController;
 // use App\Http\Controllers\ImagesAlbumController;
 
 /*
@@ -87,6 +88,18 @@ Route::controller(AlbumController::class)->group(function () {
     Route::put('/album/update/{updateAlbum}', 'update');
     Route::delete('/album/delete/{id}', 'destroy');
     Route::patch('/album/patch/{id}/{field}/{value}', 'patch');
+});
+
+//CRUD routes for model 'presets'
+
+Route::controller(PresetController::class)->group(function () {
+    Route::post(  '/preset/create', 'store');
+    Route::get(   '/presets/read', 'index');
+    Route::get(   '/presets/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get(   '/preset/read/{id}', 'show');
+    Route::put(   '/preset/update/{updatePreset}', 'update');
+    Route::delete('/preset/delete/{id}', 'destroy');
+    Route::patch( '/preset/patch/{id}/{field}/{value}', 'patch');
 });
 
 //CRUD routes for model 'micros'

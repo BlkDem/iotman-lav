@@ -75,6 +75,12 @@ class ValidatorRules extends Validator
                     ];
                     break;
 
+            case 'presets':
+                    $_rulesArray = [
+                        'preset_key' => 'required',
+                    ];
+                    break;
+
             default:
                 $_rulesArray =  [];
                 break;

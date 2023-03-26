@@ -7,6 +7,7 @@ export default {
     DEVICE_TYPES: "Типы устройств",
     DEVICES: "Устройства",
     MICROS: "Контроллеры",
+    PRESETS: "Настройки",
     USER_DEVICES: "Пользовательские",
     THEME: "Тема",
 

@@ -47,7 +47,7 @@
                     <ImagesFromDisk
                         :fileName="field.fileName"
                         :fieldKey="key"
-                        @changeImage="changeImage"
+                        @changeImage="setImage"
                     />
                     <img class="mx-2" style="max-width: 200px; margin-bottom: 20px;"
                                 :src="getImage(field)"
@@ -118,23 +118,11 @@ export default {
 
     methods: {
 
-        changeImage(image, key) {
-            console.log(image, key)
-            this.setImage(key, image)
-        },
-
         submitFile(key){
 
-        let formData = new FormData();
+            let formData = new FormData();
 
-            /*
-                Add the form data we need to submit
-            */
-            formData.append('file', this.file);
-
-        /*
-          Make the request to the POST /single-file URL
-        */
+            formData.append('image_file', this.file);
             axios.post( APIConstants.api_image_upload,
                 formData,
                 {
@@ -144,8 +132,8 @@ export default {
                 }
             )
             .then(resp => {
-                this.setImage(key, resp.data.fileName)
-                // console.log(Pathes.storageImagesPath + resp.data?.fileName)
+                this.setImage(resp.data.fileName, key)
+                // this.changeImage(resp.data.fileName, key)
             })
             .then(resp => {
                 this.$root.$refs.toaster.showMessage(
@@ -182,7 +170,7 @@ export default {
             return Pathes.storageImagesPath + item.value
         },
 
-        setImage(key, fileName) {
+        setImage(fileName, key) {
             this.dataFields[key].value = fileName
             console.log(this.dataFields)
         },
