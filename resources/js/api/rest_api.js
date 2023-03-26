@@ -76,6 +76,7 @@ export default {
     api_user_create: apiPreffix + 'user/create/',
     api_users_read: apiPreffix + 'users/read/',
     api_users_read_page: apiPreffix + 'users/read/page/',
+    api_users_lookup: apiPreffix + 'users/lookup/',
     api_user_update: apiPreffix + 'user/update/',
     api_user_delete: apiPreffix + 'user/delete/',
     api_user_patch: apiPreffix +  'user/patch/',

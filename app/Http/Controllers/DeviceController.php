@@ -19,7 +19,10 @@ class DeviceController extends BaseController
         }
         try {
             $newDevice = Device::create($request->all());
-            return $this->sendResponse($newDevice, 'Device created');
+
+            $newDeviceView = DevicesView::find($newDevice->id);
+
+            return $this->sendResponse($newDeviceView, 'Device created');
             // return response()->json($newDevice, 201);
         }
         catch (Exception $e) {

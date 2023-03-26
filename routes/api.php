@@ -46,6 +46,7 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/user/create', 'store');
     Route::get('/users/read', 'index');
     Route::get('/users/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get('/users/lookup/{currentPage}/{itemsPerPage}', 'indexLookup');
     Route::get('/user/read/{id}', 'show');
     Route::put('/user/update/{updateUser}', 'update');
     Route::delete('/user/delete/{id}', 'destroy');
@@ -164,10 +165,12 @@ Route::patch('/device/patch/{id}/{field}/{value}', [DeviceController::class, 'pa
 Route::post('/user_device/create/', [DeviceUserController::class, 'store']);
 Route::get('/user_devices/read/', [DeviceUsersViewController::class, 'index']);
 Route::get('/user_devices/read/page/{currentPage}/{itemsPerPage}', [DeviceUsersViewController::class, 'page']);
-Route::get('/user_devices/read/{device_user_id}', [DeviceUsersViewController::class, 'show']);
+Route::get('/user_devices/read/page/{currentPage}/{itemsPerPage}/{user_id}', [DeviceUsersViewController::class, 'pageWhereUser']);
+
+Route::get('/user_devices/read/{id}', [DeviceUsersViewController::class, 'show']);
 Route::put('/user_device/update/{updateDeviceUser}', [DeviceUserController::class, 'update']);
 Route::delete('/user_device/delete/{id}', [DeviceUserController::class, 'destroy']);
-Route::get('/user_devices/show', [DeviceUserController::class, 'UserDevices']);
+// Route::get('/user_device/show', [DeviceUsersViewController::class, 'show']);
 Route::patch('/user_device/patch/{id}/{field}/{value}', [DeviceUserController::class, 'patch']);
 
 

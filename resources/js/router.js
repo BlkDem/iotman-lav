@@ -153,7 +153,7 @@ const routes = [
   {
     path: "/presets",
     name: "Presets",
-    icon: "fa-solid fa-user-tie",
+    icon: "fa-solid fa-gear",
     component: Presets,
     ID: "PRESETS",
     visible: true

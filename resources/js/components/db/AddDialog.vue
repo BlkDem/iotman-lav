@@ -29,7 +29,7 @@
 
                 </div>
 
-                <div v-if="field.isLookup" :class="{'hide': field.isHidden}">
+                <div v-if="field.isLookup" :class="{'hide': field.isHidden}" class="mb-4">
                     <label class="px-2">{{ field.fieldCaption }} </label>
                     <DataSelect
                         :dataTableReadApi="field.lookupApi"
@@ -43,7 +43,7 @@
                 </div>
 
 
-                <div v-if="field.isImage" class="flex-center-column py-4">
+                <div v-if="field.isImage&&field.isEditable" class="flex-center-column py-4">
                     <ImagesFromDisk
                         :fileName="field.fileName"
                         :fieldKey="key"
@@ -96,7 +96,7 @@ export default {
             message: undefined, // Main text content
 
             dataFields: undefined,
-            postData: {},
+            postData: [],
 
             okButton: undefined, // Text for confirm button; leave it empty because we don't know what we're using it for
             cancelButton: MessagesConstants.CANCEL_STRING, // text for cancel button
@@ -198,6 +198,7 @@ export default {
                 if (this.dataFields[field].isImage&&this.dataFields[field].value==='') {
                     this.dataFields[field].value = Pathes.storageImagePlugName
                 }
+
             }
 
             this.$refs.popup.open()
@@ -212,7 +213,14 @@ export default {
 
         confirmDialog() {
             this.$refs.popup.close()
-            this.postData = this.dataFields
+            // this.postData = this.dataFields
+
+
+            for (let item in this.dataFields) {
+                if (!this.dataFields[item].isFieldIgnore)
+                this.postData.push(this.dataFields[item])
+            }
+
             console.log('edit Ok: ', this.postData)
             this.resolvePromise(true, this)
         },

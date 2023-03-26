@@ -458,6 +458,7 @@ import TableHead from './TableHead.vue';
                     const _colscount = dataField.columnsCount //col-* col-ls-* ... value
                     const _virtual = dataField?.isVirtualImage //for abstract images like 'albums'
                     const _virtualimage = dataField?.VirtualImage //for abstract images like 'albums'
+                    const _fieldignore = dataField.isFieldIgnore //for abstract images like 'albums'
                     const _isLookup = dataField?.isLookup //field links to another object
                     const _lookupApi = dataField?.lookupApi //another object get api
                     const _lookupId = dataField?.lookupId //field link key (FK)
@@ -472,6 +473,7 @@ import TableHead from './TableHead.vue';
                         // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
                         displayName: _displayName,
                         VirtualImage: _virtualimage,
+                        isFieldIgnore: _fieldignore,
                         isEditable: _editable,
                         isText: _text,
                         isDateTime: _datetime,

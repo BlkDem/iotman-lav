@@ -40,7 +40,7 @@ export default {
                             type: String,
                             isImage: false,
                             isVirtualImage: true,
-                            VirtualImage: 'fa-solid fa-microchip fa-2x',
+                            VirtualImage: 'fa-solid fa-gear fa-2x',
                             isEditable: false,
                             isSortable: false,
                             isHighLight: true,
@@ -66,7 +66,7 @@ export default {
                             isImage: false,
                             isEditable: true,
                             isSortable: true,
-                            isHighLight: true,
+                            isHighLight: false,
                             columnsCount: 2
                         },
 
@@ -77,7 +77,7 @@ export default {
                             isImage: false,
                             isEditable: true,
                             isSortable: true,
-                            isHighLight: false,
+                            isHighLight: true,
                             columnsCount: 2
                         },
 

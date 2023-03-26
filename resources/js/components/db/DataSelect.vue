@@ -57,6 +57,7 @@ export default {
         (async () => {
             const _data = await APIConstants.getData(this.dataTableReadApi)
             this.dataItems = _data.data.data
+            // console.log(this.dataItems)
             // this.retValue = this.modelValue
         })()
     },

@@ -24313,7 +24313,7 @@ __webpack_require__.r(__webpack_exports__);
       // Main text content
 
       dataFields: undefined,
-      postData: {},
+      postData: [],
       okButton: undefined,
       // Text for confirm button; leave it empty because we don't know what we're using it for
       cancelButton: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__["default"].CANCEL_STRING,
@@ -24400,7 +24400,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     confirmDialog: function confirmDialog() {
       this.$refs.popup.close();
-      this.postData = this.dataFields;
+      // this.postData = this.dataFields
+
+      for (var item in this.dataFields) {
+        if (!this.dataFields[item].isFieldIgnore) this.postData.push(this.dataFields[item]);
+      }
       console.log('edit Ok: ', this.postData);
       this.resolvePromise(true, this);
     },
@@ -24478,6 +24482,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           case 2:
             _data = _context.sent;
             _this.dataItems = _data.data.data;
+            // console.log(this.dataItems)
             // this.retValue = this.modelValue
           case 4:
           case "end":
@@ -24726,6 +24731,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         var _colscount = dataField.columnsCount; //col-* col-ls-* ... value
         var _virtual = dataField === null || dataField === void 0 ? void 0 : dataField.isVirtualImage; //for abstract images like 'albums'
         var _virtualimage = dataField === null || dataField === void 0 ? void 0 : dataField.VirtualImage; //for abstract images like 'albums'
+        var _fieldignore = dataField.isFieldIgnore; //for abstract images like 'albums'
         var _isLookup = dataField === null || dataField === void 0 ? void 0 : dataField.isLookup; //field links to another object
         var _lookupApi = dataField === null || dataField === void 0 ? void 0 : dataField.lookupApi; //another object get api
         var _lookupId = dataField === null || dataField === void 0 ? void 0 : dataField.lookupId; //field link key (FK)
@@ -24739,6 +24745,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
           displayName: _displayName,
           VirtualImage: _virtualimage,
+          isFieldIgnore: _fieldignore,
           isEditable: _editable,
           isText: _text,
           isDateTime: _datetime,
@@ -25329,15 +25336,14 @@ __webpack_require__.r(__webpack_exports__);
           patch: ''
         },
         devicesFields: [{
-          fieldName: 'Image',
+          fieldName: 'device_type_image',
           fieldCaption: '',
           type: String,
-          isImage: false,
-          isVirtualImage: true,
-          VirtualImage: 'fas fa-sun fa-2x',
+          isImage: true,
+          isFieldIgnore: true,
           isEditable: false,
           isSortable: false,
-          isHighLight: true,
+          // isHighLight: true,
           columnsCount: 1
         }, {
           fieldName: 'id',
@@ -25740,27 +25746,7 @@ __webpack_require__.r(__webpack_exports__);
           isSortable: true,
           isHighLight: false,
           columnsCount: 5
-        },
-        // {
-        //     fieldName: 'album_name',
-        //     fieldCaption: 'Album',
-        //     type: String,
-        //     isImage: false,
-        //     isSortable: true,
-        //     isHighLight: false,
-        //     columnsCount: 3
-        // },
-        // {
-        //     fieldName: 'id',
-        //     fieldCaption: 'ID',
-        //     type: Number,
-        //     isImage: false,
-        //     isEditable: false,
-        //     isSortable: true,
-        //     isHighLight: true,
-        //     columnsCount: 1
-        // },
-        {
+        }, {
           fieldName: 'album_id',
           displayName: 'album_name',
           fieldCaption: 'Album',
@@ -26050,7 +26036,7 @@ __webpack_require__.r(__webpack_exports__);
           type: String,
           isImage: false,
           isVirtualImage: true,
-          VirtualImage: 'fa-solid fa-microchip fa-2x',
+          VirtualImage: 'fa-solid fa-gear fa-2x',
           isEditable: false,
           isSortable: false,
           isHighLight: true,
@@ -26071,7 +26057,7 @@ __webpack_require__.r(__webpack_exports__);
           isImage: false,
           isEditable: true,
           isSortable: true,
-          isHighLight: true,
+          isHighLight: false,
           columnsCount: 2
         }, {
           fieldName: 'preset_value',
@@ -26080,7 +26066,7 @@ __webpack_require__.r(__webpack_exports__);
           isImage: false,
           isEditable: true,
           isSortable: true,
-          isHighLight: false,
+          isHighLight: true,
           columnsCount: 2
         }, {
           fieldName: 'preset_description',
@@ -26119,37 +26105,162 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _components_common_ConfirmDialogue_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/common/ConfirmDialogue.vue */ "./resources/js/components/common/ConfirmDialogue.vue");
-/* harmony import */ var _components_strings_constants_user_devices_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/strings_constants/user_devices/index */ "./resources/js/components/strings_constants/user_devices/index.js");
-/* harmony import */ var _strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../strings_constants/strings.js */ "./resources/js/components/strings_constants/strings.js");
-/* harmony import */ var _api_rest_api_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../api/rest_api.js */ "./resources/js/api/rest_api.js");
-/* harmony import */ var _helpers_Sorting_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helpers/Sorting.js */ "./resources/js/helpers/Sorting.js");
-/* harmony import */ var _helpers_Filtering_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helpers/Filtering.js */ "./resources/js/helpers/Filtering.js");
-/* harmony import */ var _helpers_ParsingErrors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../helpers/ParsingErrors */ "./resources/js/helpers/ParsingErrors.js");
-/* harmony import */ var _components_common_TableBar_TableNav_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/common/TableBar/TableNav.vue */ "./resources/js/components/common/TableBar/TableNav.vue");
-
-// import AddUserDevice from "./AddUserDevice.vue";
-// import Paginator from "../db/Paginator.vue";
-
-
-
-
+/* harmony import */ var _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../strings_constants/strings */ "./resources/js/components/strings_constants/strings.js");
+/* harmony import */ var _api_rest_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api/rest_api */ "./resources/js/api/rest_api.js");
+/* harmony import */ var _components_db_DataTable_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/db/DataTable.vue */ "./resources/js/components/db/DataTable.vue");
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  // emits: ['setAdditionalCaption'],
+
   components: {
-    // ConfirmDialogue,
-    // AddUserDevice,
-    // Paginator /*MyMqtt*/ ,
-    TableNav: _components_common_TableBar_TableNav_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
+    DataTable: _components_db_DataTable_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
-    return {};
+    return {
+      usersReadOnly: true,
+      //Images Widget Setup
+      userDevices: {
+        userDevicesCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].USER_DEVICES,
+        api: {
+          get: '',
+          insert: '',
+          update: '',
+          "delete": '',
+          patch: ''
+        },
+        userDevicesFields: [{
+          fieldName: 'device_type_image',
+          fieldCaption: '',
+          type: String,
+          isImage: true,
+          isEditable: false,
+          isFieldIgnore: true,
+          // isSortable: true,
+          isHighLight: false,
+          columnsCount: 1
+        }, {
+          fieldName: 'id',
+          fieldCaption: 'ID',
+          type: Number,
+          isImage: false,
+          isEditable: false,
+          isSortable: true,
+          isHighLight: true,
+          columnsCount: 1
+        }, {
+          fieldName: 'user_device_name',
+          fieldCaption: 'Name',
+          type: String,
+          isImage: false,
+          isText: false,
+          isEditable: true,
+          isSortable: true,
+          isHighLight: false,
+          columnsCount: 3
+        }, {
+          fieldName: 'device_id',
+          displayName: 'device_name',
+          fieldCaption: 'Device',
+          type: String,
+          isImage: false,
+          isEditable: false,
+          isSortable: true,
+          isHighLight: false,
+          columnsCount: 3,
+          lookupId: 'device_id',
+          lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_devices_read,
+          isLookup: true
+        },
+        // {
+        //     fieldName: 'device_type_name',
+        //     fieldCaption: 'Device Type',
+        //     type: String,
+        //     isImage: false,
+        //     isText: true,
+        //     isEditable: true,
+        //     isSortable: true,
+        //     isHighLight: false,
+        //     columnsCount: 3
+        // },
+        {
+          fieldName: 'user_id',
+          displayName: 'user_name',
+          fieldCaption: 'User',
+          type: String,
+          isImage: false,
+          isEditable: false,
+          isSortable: true,
+          isHighLight: false,
+          columnsCount: 2,
+          lookupId: 'user_id',
+          lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_users_read,
+          isLookup: true
+        }],
+        user_id: 'user_id',
+        user_id_value: 1
+      },
+      users: {
+        usersCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].USERS,
+        api: {
+          get: '',
+          insert: '',
+          update: '',
+          "delete": '',
+          patch: ''
+        },
+        usersFields: [{
+          fieldName: 'Image',
+          type: String,
+          isVirtualImage: true,
+          isHighLight: true,
+          isSortable: false,
+          VirtualImage: 'fa-solid fa-user-tie fa-2x',
+          columnsCount: 2
+        }, {
+          fieldName: 'id',
+          fieldCaption: 'ID',
+          type: Number,
+          isSortable: true,
+          isHighLight: true,
+          columnsCount: 2
+        }, {
+          fieldName: 'user_name',
+          fieldCaption: 'Name',
+          type: String,
+          // isEditable: true,
+          isSortable: true,
+          columnsCount: 6
+        }, {
+          fieldName: 'devices_count',
+          fieldCaption: 'Cnt',
+          type: Number,
+          isSortable: true,
+          isHighLight: true,
+          columnsCount: 2
+        }],
+        selectedName: 'user_name',
+        //selected album id for child table images
+        selectedFkValue: 0
+      }
+    };
   },
   created: function created() {
-    if (localStorage.UserDeviceCompactView == null) {
-      localStorage.UserDeviceCompactView = this.compactView;
+    var apiUserDevices = this.userDevices.api;
+    apiUserDevices.get = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_user_devices_read_page;
+    // apiImages.get = APIConstants.api_images_read_page
+    apiUserDevices.insert = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_user_device_create;
+    apiUserDevices.update = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_user_device_update;
+    apiUserDevices["delete"] = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_user_device_delete;
+    apiUserDevices.patch = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_user_device_patch;
+    var apiUsers = this.users.api;
+    apiUsers.get = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_users_lookup;
+  },
+  methods: {
+    onRowClick: function onRowClick(dataEvent) {
+      console.log(dataEvent);
+      this.userDevices.selectedFkValue = dataEvent;
     }
   }
 });
@@ -27068,16 +27179,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }
         }, null, 8 /* PROPS */, _hoisted_8)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, field.value]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), field.isLookup ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: 1,
-          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
             'hide': field.isHidden
-          })
+          }, "mb-4"])
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(field.fieldCaption), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DataSelect, {
           dataTableReadApi: field.lookupApi,
           nameField: field.displayName,
           lookupField: field.lookupId,
           value: field.value,
           onOnDataSelect: $options.onDataSelect
-        }, null, 8 /* PROPS */, ["dataTableReadApi", "nameField", "lookupField", "value", "onOnDataSelect"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <input class=\"form-control p-2 mb-4\" :placeholder=\"'Input ' + field.fieldCaption\"  v-model=\"field.value\" /> ")], 2 /* CLASS */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), field.isImage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagesFromDisk, {
+        }, null, 8 /* PROPS */, ["dataTableReadApi", "nameField", "lookupField", "value", "onOnDataSelect"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <input class=\"form-control p-2 mb-4\" :placeholder=\"'Input ' + field.fieldCaption\"  v-model=\"field.value\" /> ")], 2 /* CLASS */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), field.isImage && field.isEditable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ImagesFromDisk, {
           fileName: field.fileName,
           fieldKey: key,
           onChangeImage: $options.setImage
@@ -28085,8 +28196,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "render": () => (/* binding */ render)
 /* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  style: {
+    "margin-top": "5.5rem"
+  }
+};
+var _hoisted_2 = {
+  "class": "row"
+};
+var _hoisted_3 = {
+  "class": "col-sm-4 col-xs-4 col-lg-4"
+};
+var _hoisted_4 = {
+  "class": "col-sm-8 col-xs-8 col-lg-8"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return null;
+  var _component_data_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("data-table");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
+    api: $data.users.api,
+    dataFields: $data.users.usersFields,
+    pageCaption: $data.users.usersCaption,
+    selectableRow: true,
+    selectedName: $data.users.selectedName,
+    readOnly: $data.usersReadOnly,
+    onOnRowClick: $options.onRowClick
+  }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "selectedName", "readOnly", "onOnRowClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
+    api: $data.userDevices.api,
+    dataFields: $data.userDevices.userDevicesFields,
+    pageCaption: $data.userDevices.userDevicesCaption,
+    foreignKey: $data.userDevices.user_id,
+    foreignValue: $data.userDevices.selectedFkValue
+  }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignKey", "foreignValue"])])])]);
 }
 
 /***/ }),
@@ -28308,7 +28450,7 @@ __webpack_require__.r(__webpack_exports__);
   DEVICES: "Устройства",
   MICROS: "Контроллеры",
   PRESETS: "Настройки",
-  USER_DEVICES: "Пользовательские",
+  USER_DEVICES: "Устройства",
   THEME: "Тема",
   CANCEL_STRING: "Отмена",
   EDITED_MESSAGE: "Изменено",
@@ -28446,6 +28588,7 @@ var APIVersion = 1;
   api_user_create: apiPreffix + 'user/create/',
   api_users_read: apiPreffix + 'users/read/',
   api_users_read_page: apiPreffix + 'users/read/page/',
+  api_users_lookup: apiPreffix + 'users/lookup/',
   api_user_update: apiPreffix + 'user/update/',
   api_user_delete: apiPreffix + 'user/delete/',
   api_user_patch: apiPreffix + 'user/patch/',
@@ -28682,36 +28825,6 @@ __webpack_require__.r(__webpack_exports__);
   //         $items[key].device_type_desc = dev.device_type_desc ?? this.NO_DESCRIPTION;
   //     });
   // }
-});
-
-/***/ }),
-
-/***/ "./resources/js/components/strings_constants/user_devices/index.js":
-/*!*************************************************************************!*\
-  !*** ./resources/js/components/strings_constants/user_devices/index.js ***!
-  \*************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  USER_DEVICE_DELETING_CAPTION: "Delete",
-  USER_DEVICE_DELETING_MESSAGE: "Are you sure you want to delete this user device?",
-  USER_DEVICE_DATA_DESCRIPTION: "User devices ready for use",
-  USER_DEVICE_ADDING_TITLE: 'Add User Device',
-  USER_DEVICE_ADDING_MESSAGE: 'Add User Device',
-  USER_DEVICE_EDITING_TITLE: 'Edit User Device',
-  USER_DEVICE_EDITING_MESSAGE: 'Edit User Device',
-  USER_DEVICE_NAME_PLACEHOLDER: 'New User Device',
-  USER_DEVICE_DESC_PLACEHOLDER: 'User Device Desc',
-  USER_DEVICE_IMAGE_PLACEHOLDER: 'Device Type Image',
-  USER_DEVICE_ADDBUTTON_CAPTION: 'Add User Device',
-  USER_DEVICE_EDITBUTTON_CAPTION: 'Edit User Device',
-  NO_HWID: "no hardware address",
-  NO_PASS: "no password"
 });
 
 /***/ }),
@@ -29018,7 +29131,7 @@ var routes = [{
 }, {
   path: "/presets",
   name: "Presets",
-  icon: "fa-solid fa-user-tie",
+  icon: "fa-solid fa-gear",
   component: _components_presets_Presets_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
   ID: "PRESETS",
   visible: true

@@ -35,15 +35,14 @@ export default {
 
                     devicesFields: [
                         {
-                            fieldName: 'Image',
+                            fieldName: 'device_type_image',
                             fieldCaption: '',
                             type: String,
-                            isImage: false,
-                            isVirtualImage: true,
-                            VirtualImage: 'fas fa-sun fa-2x',
+                            isImage: true,
+                            isFieldIgnore: true,
                             isEditable: false,
                             isSortable: false,
-                            isHighLight: true,
+                            // isHighLight: true,
                             columnsCount: 1
                         },
 

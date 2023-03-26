@@ -7,14 +7,24 @@ use App\Models\User;
 use App\Http\Middleware\ValidatorRules;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\PaginatorController;
+use Illuminate\Support\Facades\DB;
 use Exception;
 
 class UserController extends BaseController
 {
+    private function getTotalRecords() {
+        return User::get()->count();
+    }
 
     public function index(){
 
-        $res = User::orderBy('name', 'asc')->get();
+        $res = DB::table('users')
+        ->select('users.id as id', 'users.name as user_name')
+        ->orderBy('user_name', 'asc')
+        ->get()
+        ;
+
+        //User::orderBy('name', 'asc')->get();
 
         $paginator = PaginatorController::Paginate($res->count(), 1, 1);
 
@@ -45,6 +55,32 @@ class UserController extends BaseController
         $_returnData['meta'] = Array('count' => $usersDataSet->count());
 
         return response()->json($_returnData, 200);
+    }
+
+    public function indexLookup($currentPage=0, $itemsPerPage=10)
+    {
+        // $res = Album::select('id','album_name')->orderBy('id', 'asc')->get();
+
+        $page = (int)$currentPage;
+
+        $offset = $itemsPerPage*--$page;
+
+        $res = DB::table('users')
+                ->select('users.id as id' , 'users.name as user_name')
+                ->leftJoin('user_devices', 'users.id', '=', 'user_devices.user_id')
+                ->selectRaw('count(user_devices.id) as devices_count')
+                ->groupBy('id', 'user_name')
+                ->limit($itemsPerPage)
+                ->offset($offset)
+                ->get();
+
+
+        // $total = Album::get();
+
+        $paginator = PaginatorController::Paginate($this->getTotalRecords(), (int)$itemsPerPage, $currentPage);
+
+        return $this->sendResponse($res, "Users (with devices) lookup List", $paginator);
+
     }
 
     public function show($id)
