@@ -203,8 +203,6 @@ export default {
 
             this.$refs.popup.open()
 
-            console.log(this.dataFields)
-
             return new Promise((resolve, reject) => {
                 this.resolvePromise = resolve
                 this.rejectPromise = reject
@@ -213,15 +211,13 @@ export default {
 
         confirmDialog() {
             this.$refs.popup.close()
-            // this.postData = this.dataFields
-
 
             for (let item in this.dataFields) {
                 if (!this.dataFields[item].isFieldIgnore)
                 this.postData.push(this.dataFields[item])
             }
 
-            console.log('edit Ok: ', this.postData)
+            // console.log('edit Ok: ', this.postData)
             this.resolvePromise(true, this)
         },
 

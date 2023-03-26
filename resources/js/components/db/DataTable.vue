@@ -444,6 +444,7 @@ import TableHead from './TableHead.vue';
 
                 // console.log(_value)
 
+                try {
                 for (let field in this.dataFields) {
 
                     const dataField = this.dataFields[field]
@@ -458,17 +459,19 @@ import TableHead from './TableHead.vue';
                     const _colscount = dataField.columnsCount //col-* col-ls-* ... value
                     const _virtual = dataField?.isVirtualImage //for abstract images like 'albums'
                     const _virtualimage = dataField?.VirtualImage //for abstract images like 'albums'
-                    const _fieldignore = dataField.isFieldIgnore //for abstract images like 'albums'
+                    const _fieldignore = dataField?.isFieldIgnore //for abstract images like 'albums'
                     const _isLookup = dataField?.isLookup //field links to another object
                     const _lookupApi = dataField?.lookupApi //another object get api
                     const _lookupId = dataField?.lookupId //field link key (FK)
                     const _displayName = dataField?.displayName //Display Name Field
 
-
+                    // console.log(dataField)
                     // const newListItem = _item  //newList[itemRow]
 
+                    // console.log(this.dataFields, _value[dataField.fieldName])
+
                     newListItemData[dataField.fieldName] = {
-                        value: _value[dataField.fieldName],
+                        value: (dataField.fieldName != null)?_value[dataField.fieldName]:'',
                         lookupValue: (dataField.displayName != null)?_value[dataField.displayName]:'',
                         // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
                         displayName: _displayName,
@@ -496,8 +499,13 @@ import TableHead from './TableHead.vue';
                             " col-lg-" + _colscount
                     }
                 }
-                // console.log('new list data: ', newListItemData)
-                return newListItemData
+
+                    // console.log('new list data: ', newListItemData)
+                    return newListItemData
+                }
+                catch(error) {
+                    console.log(error)
+                }
             },
 
             populateListItems(items) {
@@ -662,11 +670,11 @@ import TableHead from './TableHead.vue';
                     console.log('on axios: ', _values)
                     axios.put(this.api.update + id, _values)
                         .then(resp => {
-                            // console.log(resp.data);
 
                             const _res = resp.data.data
-                            console.log(resp.data.data);
+
                             this.filteredItems[key] = this.processListItem(_res)
+
                             this.Items[key] = this.filteredItems[key]
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.EDITED_MESSAGE,

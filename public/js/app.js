@@ -24392,7 +24392,6 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
       this.$refs.popup.open();
-      console.log(this.dataFields);
       return new Promise(function (resolve, reject) {
         _this2.resolvePromise = resolve;
         _this2.rejectPromise = reject;
@@ -24400,12 +24399,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     confirmDialog: function confirmDialog() {
       this.$refs.popup.close();
-      // this.postData = this.dataFields
-
       for (var item in this.dataFields) {
         if (!this.dataFields[item].isFieldIgnore) this.postData.push(this.dataFields[item]);
       }
-      console.log('edit Ok: ', this.postData);
+
+      // console.log('edit Ok: ', this.postData)
       this.resolvePromise(true, this);
     },
     cancelDialog: function cancelDialog() {
@@ -24719,52 +24717,60 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       // console.log(_value)
 
-      for (var field in this.dataFields) {
-        var dataField = this.dataFields[field];
-        var _editable = dataField.isEditable; //possible edit cell by text click
-        var _sortable = dataField.isSortable; //field can sorted
-        var _image = dataField.isImage; //image field - binding 'img'
-        var _datetime = dataField.isDateTime; //image field - binding 'img'
-        var _text = dataField.isText; //Display Name Field
-        var _highlight = dataField.isHighLight; //highlight another color field 'bg-info' class
-        var _hidden = dataField.isHidden; //hidden field 'hide' class
-        var _colscount = dataField.columnsCount; //col-* col-ls-* ... value
-        var _virtual = dataField === null || dataField === void 0 ? void 0 : dataField.isVirtualImage; //for abstract images like 'albums'
-        var _virtualimage = dataField === null || dataField === void 0 ? void 0 : dataField.VirtualImage; //for abstract images like 'albums'
-        var _fieldignore = dataField.isFieldIgnore; //for abstract images like 'albums'
-        var _isLookup = dataField === null || dataField === void 0 ? void 0 : dataField.isLookup; //field links to another object
-        var _lookupApi = dataField === null || dataField === void 0 ? void 0 : dataField.lookupApi; //another object get api
-        var _lookupId = dataField === null || dataField === void 0 ? void 0 : dataField.lookupId; //field link key (FK)
-        var _displayName = dataField === null || dataField === void 0 ? void 0 : dataField.displayName; //Display Name Field
+      try {
+        for (var field in this.dataFields) {
+          var dataField = this.dataFields[field];
+          var _editable = dataField.isEditable; //possible edit cell by text click
+          var _sortable = dataField.isSortable; //field can sorted
+          var _image = dataField.isImage; //image field - binding 'img'
+          var _datetime = dataField.isDateTime; //image field - binding 'img'
+          var _text = dataField.isText; //Display Name Field
+          var _highlight = dataField.isHighLight; //highlight another color field 'bg-info' class
+          var _hidden = dataField.isHidden; //hidden field 'hide' class
+          var _colscount = dataField.columnsCount; //col-* col-ls-* ... value
+          var _virtual = dataField === null || dataField === void 0 ? void 0 : dataField.isVirtualImage; //for abstract images like 'albums'
+          var _virtualimage = dataField === null || dataField === void 0 ? void 0 : dataField.VirtualImage; //for abstract images like 'albums'
+          var _fieldignore = dataField === null || dataField === void 0 ? void 0 : dataField.isFieldIgnore; //for abstract images like 'albums'
+          var _isLookup = dataField === null || dataField === void 0 ? void 0 : dataField.isLookup; //field links to another object
+          var _lookupApi = dataField === null || dataField === void 0 ? void 0 : dataField.lookupApi; //another object get api
+          var _lookupId = dataField === null || dataField === void 0 ? void 0 : dataField.lookupId; //field link key (FK)
+          var _displayName = dataField === null || dataField === void 0 ? void 0 : dataField.displayName; //Display Name Field
 
-        // const newListItem = _item  //newList[itemRow]
+          // console.log(dataField)
+          // const newListItem = _item  //newList[itemRow]
 
-        newListItemData[dataField.fieldName] = {
-          value: _value[dataField.fieldName],
-          lookupValue: dataField.displayName != null ? _value[dataField.displayName] : '',
-          // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
-          displayName: _displayName,
-          VirtualImage: _virtualimage,
-          isFieldIgnore: _fieldignore,
-          isEditable: _editable,
-          isText: _text,
-          isDateTime: _datetime,
-          isSortable: _sortable,
-          isImage: _image,
-          isHighLight: _highlight,
-          isHidden: _hidden,
-          columnsCount: _colscount,
-          isLookup: _isLookup,
-          lookupId: _lookupId,
-          lookupApi: _lookupApi,
-          isVirtualImage: _virtual,
-          "class":
-          //field width (bootstrap)
-          _colscount === 1 ? "col-sm-" + _colscount + " col-xs-" + _colscount + " col-lg-" + _colscount + " align-center" : "col-sm-" + _colscount + " col-xs-" + _colscount + " col-lg-" + _colscount
-        };
+          // console.log(this.dataFields, _value[dataField.fieldName])
+
+          newListItemData[dataField.fieldName] = {
+            value: dataField.fieldName != null ? _value[dataField.fieldName] : '',
+            lookupValue: dataField.displayName != null ? _value[dataField.displayName] : '',
+            // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
+            displayName: _displayName,
+            VirtualImage: _virtualimage,
+            isFieldIgnore: _fieldignore,
+            isEditable: _editable,
+            isText: _text,
+            isDateTime: _datetime,
+            isSortable: _sortable,
+            isImage: _image,
+            isHighLight: _highlight,
+            isHidden: _hidden,
+            columnsCount: _colscount,
+            isLookup: _isLookup,
+            lookupId: _lookupId,
+            lookupApi: _lookupApi,
+            isVirtualImage: _virtual,
+            "class":
+            //field width (bootstrap)
+            _colscount === 1 ? "col-sm-" + _colscount + " col-xs-" + _colscount + " col-lg-" + _colscount + " align-center" : "col-sm-" + _colscount + " col-xs-" + _colscount + " col-lg-" + _colscount
+          };
+        }
+
+        // console.log('new list data: ', newListItemData)
+        return newListItemData;
+      } catch (error) {
+        console.log(error);
       }
-      // console.log('new list data: ', newListItemData)
-      return newListItemData;
     },
     populateListItems: function populateListItems(items) {
       // prepare items to fields transform/extend
@@ -24932,10 +24938,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }
                 console.log('on axios: ', _values);
                 axios.put(_this6.api.update + id, _values).then(function (resp) {
-                  // console.log(resp.data);
-
                   var _res = resp.data.data;
-                  console.log(resp.data.data);
                   _this6.filteredItems[key] = _this6.processListItem(_res);
                   _this6.Items[key] = _this6.filteredItems[key];
                   _this6.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
