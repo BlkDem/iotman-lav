@@ -8,7 +8,7 @@ export default {
     DEVICES: "Устройства",
     MICROS: "Контроллеры",
     PRESETS: "Настройки",
-    USER_DEVICES: "Устройства",
+    USER_DEVICES: "Пользовательские",
     THEME: "Тема",
 
     CANCEL_STRING: "Отмена",

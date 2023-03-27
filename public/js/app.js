@@ -26061,7 +26061,7 @@ __webpack_require__.r(__webpack_exports__);
           isEditable: true,
           isSortable: true,
           isHighLight: false,
-          columnsCount: 2
+          columnsCount: 3
         }, {
           fieldName: 'preset_value',
           fieldCaption: 'Value',
@@ -26070,7 +26070,7 @@ __webpack_require__.r(__webpack_exports__);
           isEditable: true,
           isSortable: true,
           isHighLight: true,
-          columnsCount: 2
+          columnsCount: 3
         }, {
           fieldName: 'preset_description',
           fieldCaption: 'Description',
@@ -26080,7 +26080,7 @@ __webpack_require__.r(__webpack_exports__);
           isEditable: true,
           isSortable: true,
           isHighLight: false,
-          columnsCount: 4
+          columnsCount: 2
         }]
       }
     };
@@ -28453,7 +28453,7 @@ __webpack_require__.r(__webpack_exports__);
   DEVICES: "Устройства",
   MICROS: "Контроллеры",
   PRESETS: "Настройки",
-  USER_DEVICES: "Устройства",
+  USER_DEVICES: "Пользовательские",
   THEME: "Тема",
   CANCEL_STRING: "Отмена",
   EDITED_MESSAGE: "Изменено",

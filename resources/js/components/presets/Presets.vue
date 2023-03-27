@@ -67,7 +67,7 @@ export default {
                             isEditable: true,
                             isSortable: true,
                             isHighLight: false,
-                            columnsCount: 2
+                            columnsCount: 3
                         },
 
                         {
@@ -78,7 +78,7 @@ export default {
                             isEditable: true,
                             isSortable: true,
                             isHighLight: true,
-                            columnsCount: 2
+                            columnsCount: 3
                         },
 
                         {
@@ -90,7 +90,7 @@ export default {
                             isEditable: true,
                             isSortable: true,
                             isHighLight: false,
-                            columnsCount: 4
+                            columnsCount: 2
                         },
                     ],
 
