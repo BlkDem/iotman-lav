@@ -57,20 +57,4 @@ export default {
 
     IMAGE_UPLOADED: "Изображение загружено",
 
-
-    //strings processing
-
-    // SortingCaption($column, $direction) {
-    //     let res =
-    //         $column === "id" ?
-    //         this.SORT_BY_ID :
-    //         this.SORT_BY_NAME;
-    //     res += " (";
-    //     res += !$direction ?
-    //         this.SORT_ASC :
-    //         this.SORT_DESC;
-    //     res += ")";
-    //     return res;
-    // },
-
 }

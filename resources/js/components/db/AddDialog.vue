@@ -4,32 +4,32 @@
             <h2 class="w-100 text-center">{{ title }}</h2>
         </div>
 
-        <div class="modal-body align-left py-4">
+        <div class="modal-body align-left py-2">
             <!-- <div>{{ message }}</div> -->
 
-            <div v-for="(field, key) in dataFields" v-bind:key="key">
+            <div v-for="(field, key) in dataFields" :key="key">
 
                 <div v-if="
                     !field.isImage&&
-                    field.fieldName!=='id'
-                    &&!field.isLookup&&
+                    field.fieldName!=='id'&&
+                    !field.isLookup&&
                     !field.isVirtualImage"
                 >
 
                     <label class="px-2">{{ field.fieldCaption }}</label>
 
-                    <textarea v-if="field.isText" v-model="field.value" class="form-control p-2 mb-4"
+                    <textarea v-if="field.isText" v-model="field.value" class="form-control p-2 mb-1"
                         style="min-height: 100px; max-height: 200px;"
-                        :placeholder="'Input ' + field.fieldCaption" cols="40" rows="3">
+                        :placeholder="'Input ' + field.fieldCaption" cols="40" rows="2">
                     </textarea>
 
-                    <input v-if="field.isDateTime" type="datetime-local" class="form-control p-2 mb-4" v-model="field.value" />
+                    <input v-if="field.isDateTime" type="datetime-local" class="form-control p-2 mb-1" v-model="field.value" />
 
-                    <input v-if="!field.isText&&!field.isDateTime" class="form-control p-2 mb-4" :placeholder="'Input ' + field.fieldCaption"  v-model="field.value" />
+                    <input v-if="!field.isText&&!field.isDateTime" class="form-control p-2 mb-1" :placeholder="'Input ' + field.fieldCaption"  v-model="field.value" />
 
                 </div>
 
-                <div v-if="field.isLookup" :class="{'hide': field.isHidden}" class="mb-4">
+                <div v-if="field.isLookup" :class="{'hide': field.isHidden}" class="mb-1">
                     <label class="px-2">{{ field.fieldCaption }} </label>
                     <DataSelect
                         :dataTableReadApi="field.lookupApi"
@@ -43,7 +43,7 @@
                 </div>
 
 
-                <div v-if="field.isImage&&field.isEditable" class="flex-center-column py-4">
+                <div v-if="field.isImage&&field.isEditable" class="flex-center-column py-1">
                     <ImagesFromDisk
                         :fileName="field.fileName"
                         :fieldKey="key"
@@ -57,18 +57,17 @@
                                     }"
                                 @error="replaceByDefault"
                     />
-                    <form action="post">
-                        <input class="form-control w-100" type="file"
+                    <form action="post" class="w-100">
+                        <input class="form-control" type="file"
                             v-if="field.isEditable"
                             @change="handleFileUpload( $event, key )"
                         />
-
-                        <!-- <button type="submit" @click.prevent="submitFile(key)" >Save</button> -->
                     </form>
                 </div>
             </div>
         </div>
-        <div class="text-center">
+        <hr>
+        <div class="text-center mt-2">
             <button class="btn btn-danger mx-1 btn-width-40" @click="confirmDialog">{{ okButton }}</button>
             <button class="btn btn-secondary mx-1 btn-width-40" @click="cancelDialog">{{ cancelButton }}</button>
         </div>
@@ -98,7 +97,7 @@ export default {
             dataFields: undefined,
             postData: [],
 
-            okButton: undefined, // Text for confirm button; leave it empty because we don't know what we're using it for
+            okButton: undefined, // Text for confirm button;
             cancelButton: MessagesConstants.CANCEL_STRING, // text for cancel button
 
             resolvePromise: undefined,
@@ -133,7 +132,6 @@ export default {
             )
             .then(resp => {
                 this.setImage(resp.data.fileName, key)
-                // this.changeImage(resp.data.fileName, key)
             })
             .then(resp => {
                 this.$root.$refs.toaster.showMessage(
@@ -159,10 +157,8 @@ export default {
             for (let item in this.dataFields) {
                 if (this.dataFields[item].fieldName === _fieldName) {
                     this.dataFields[item].value = _value
-                    // this.dataFields[item].lookupValue = _value
                 }
             }
-            // console.log(_value, _fieldName, this.dataFields)
         },
 
         getImage(item) {
@@ -185,10 +181,8 @@ export default {
             this.title = optsAdd.title
             this.message = optsAdd.message
             this.dataFields = optsAdd.dataFields
-
-            // console.log('on show: ', this.dataFields)
-
             this.okButton = optsAdd.okButton
+
             if (optsAdd.cancelButton) {
                 this.cancelButton = optsAdd.cancelButton
             }
@@ -198,7 +192,6 @@ export default {
                 if (this.dataFields[field].isImage&&this.dataFields[field].value==='') {
                     this.dataFields[field].value = Pathes.storageImagePlugName
                 }
-
             }
 
             this.$refs.popup.open()
@@ -217,7 +210,6 @@ export default {
                 this.postData.push(this.dataFields[item])
             }
 
-            // console.log('edit Ok: ', this.postData)
             this.resolvePromise(true, this)
         },
 
@@ -232,7 +224,6 @@ export default {
 
         onDialogClick() {
             if (event.target.className === 'popup-modal fade-in') this.cancelDialog()
-            // console.log(event, (event.target.className === 'popup-modal'))
         }
 
     },

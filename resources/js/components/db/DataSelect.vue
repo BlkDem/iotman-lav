@@ -6,7 +6,7 @@
         :lookupField="lookupField"
         @change="doChange($event.target.value)"
         class="form-select">
-        <option v-for="(item, key) in dataItems" v-bind:value="item.id">
+        <option v-for="(item, key) in dataItems" :value="item.id">
             {{ item[nameField] }}
         </option>
     </select>
@@ -19,10 +19,9 @@ import APIConstants from "../../api/rest_api";
 
 export default {
 
-    data (){
+    data() {
         return {
             dataItems: [],
-            // value: undefined,
         }
     },
 
@@ -35,12 +34,10 @@ export default {
 
         nameField: {
             type: String,
-            // default: ''
         },
 
         lookupField: {
             type: String,
-            // default: ''
         },
 
         value: {
@@ -53,20 +50,15 @@ export default {
     },
 
     created() {
-        // console.log(this.value)
         (async () => {
             const _data = await APIConstants.getData(this.dataTableReadApi)
             this.dataItems = _data.data.data
-            // console.log(this.dataItems)
-            // this.retValue = this.modelValue
         })()
     },
 
     methods: {
-        doChange(_value) {
-            // this.lid = _value
-            console.log(event)
-            this.$emit('onDataSelect', _value, this.lookupField)
+        doChange(value) {
+            this.$emit('onDataSelect', value, this.lookupField)
         },
 
         getItems() {

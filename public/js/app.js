@@ -24315,7 +24315,7 @@ __webpack_require__.r(__webpack_exports__);
       dataFields: undefined,
       postData: [],
       okButton: undefined,
-      // Text for confirm button; leave it empty because we don't know what we're using it for
+      // Text for confirm button;
       cancelButton: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__["default"].CANCEL_STRING,
       // text for cancel button
 
@@ -24341,7 +24341,6 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (resp) {
         _this.setImage(resp.data.fileName, key);
-        // this.changeImage(resp.data.fileName, key)
       }).then(function (resp) {
         _this.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__["default"].IMAGE_UPLOADED, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__["default"].PROCESS_SUCCESSFULLY);
       })["catch"](function (error) {
@@ -24356,10 +24355,8 @@ __webpack_require__.r(__webpack_exports__);
       for (var item in this.dataFields) {
         if (this.dataFields[item].fieldName === _fieldName) {
           this.dataFields[item].value = _value;
-          // this.dataFields[item].lookupValue = _value
         }
       }
-      // console.log(_value, _fieldName, this.dataFields)
     },
     getImage: function getImage(item) {
       if (item.value === '' || item.isVirtualImage) return this.imagePlug;
@@ -24379,9 +24376,6 @@ __webpack_require__.r(__webpack_exports__);
       this.title = optsAdd.title;
       this.message = optsAdd.message;
       this.dataFields = optsAdd.dataFields;
-
-      // console.log('on show: ', this.dataFields)
-
       this.okButton = optsAdd.okButton;
       if (optsAdd.cancelButton) {
         this.cancelButton = optsAdd.cancelButton;
@@ -24402,8 +24396,6 @@ __webpack_require__.r(__webpack_exports__);
       for (var item in this.dataFields) {
         if (!this.dataFields[item].isFieldIgnore) this.postData.push(this.dataFields[item]);
       }
-
-      // console.log('edit Ok: ', this.postData)
       this.resolvePromise(true, this);
     },
     cancelDialog: function cancelDialog() {
@@ -24415,7 +24407,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     onDialogClick: function onDialogClick() {
       if (event.target.className === 'popup-modal fade-in') this.cancelDialog();
-      // console.log(event, (event.target.className === 'popup-modal'))
     }
   }
 });
@@ -24443,10 +24434,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       dataItems: []
-      // value: undefined,
     };
   },
-
   emits: ['onDataSelect'],
   props: {
     id: {
@@ -24454,14 +24443,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     nameField: {
       type: String
-      // default: ''
     },
-
     lookupField: {
       type: String
-      // default: ''
     },
-
     value: {},
     dataTableReadApi: {
       type: String
@@ -24469,7 +24454,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function created() {
     var _this = this;
-    // console.log(this.value)
     _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var _data;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -24480,8 +24464,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           case 2:
             _data = _context.sent;
             _this.dataItems = _data.data.data;
-            // console.log(this.dataItems)
-            // this.retValue = this.modelValue
           case 4:
           case "end":
             return _context.stop();
@@ -24490,10 +24472,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
-    doChange: function doChange(_value) {
-      // this.lid = _value
-      console.log(event);
-      this.$emit('onDataSelect', _value, this.lookupField);
+    doChange: function doChange(value) {
+      this.$emit('onDataSelect', value, this.lookupField);
     },
     getItems: function getItems() {
       return this.dataItems;
@@ -24653,6 +24633,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setId: function setId($key, $ckey) {
       return "id" + $key + "_" + $ckey;
+    },
+    setClass: function setClass(classList, keysCount, key) {
+      var combineClassList = classList;
+      var _a = key === keysCount - 1 ? combineClassList + ' flex-right' : combineClassList;
+      console.log("a: ", _a, "classes", classList, " count: ", keysCount, "key: ", key);
+      return _a;
     },
     resetEditCell: function resetEditCell() {
       this.activeCol = undefined;
@@ -25034,9 +25020,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    setClass: function setClass(width, hidden) {
+    setClass: function setClass(width, hidden, key) {
       var colClass = 'col-sm-' + width + ' col-xs-' + width + ' col-lg-' + width;
-      return hidden ? 'hide' : colClass;
+      var rightAlign = key === this.fieldsCaptions.length - 1 ? 'flex-right' : '';
+      var hiddenClass = hidden ? 'hide' : colClass;
+      return rightAlign + ' ' + hiddenClass;
       // return colClass
     },
     changeDirection: function changeDirection(ckey) {
@@ -27113,7 +27101,7 @@ var _hoisted_2 = {
   "class": "w-100 text-center"
 };
 var _hoisted_3 = {
-  "class": "modal-body align-left py-4"
+  "class": "modal-body align-left py-2"
 };
 var _hoisted_4 = {
   key: 0
@@ -27129,15 +27117,17 @@ var _hoisted_9 = {
 };
 var _hoisted_10 = {
   key: 2,
-  "class": "flex-center-column py-4"
+  "class": "flex-center-column py-1"
 };
 var _hoisted_11 = ["src"];
 var _hoisted_12 = {
-  action: "post"
+  action: "post",
+  "class": "w-100"
 };
 var _hoisted_13 = ["onChange"];
-var _hoisted_14 = {
-  "class": "text-center"
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1 /* HOISTED */);
+var _hoisted_15 = {
+  "class": "text-center mt-2"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_DataSelect = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DataSelect");
@@ -27158,24 +27148,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "onUpdate:modelValue": function onUpdateModelValue($event) {
             return field.value = $event;
           },
-          "class": "form-control p-2 mb-4",
+          "class": "form-control p-2 mb-1",
           style: {
             "min-height": "100px",
             "max-height": "200px"
           },
           placeholder: 'Input ' + field.fieldCaption,
           cols: "40",
-          rows: "3"
+          rows: "2"
         }, "\n                    ", 8 /* PROPS */, _hoisted_6)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, field.value]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), field.isDateTime ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
           key: 1,
           type: "datetime-local",
-          "class": "form-control p-2 mb-4",
+          "class": "form-control p-2 mb-1",
           "onUpdate:modelValue": function onUpdateModelValue($event) {
             return field.value = $event;
           }
         }, null, 8 /* PROPS */, _hoisted_7)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, field.value]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !field.isText && !field.isDateTime ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
           key: 2,
-          "class": "form-control p-2 mb-4",
+          "class": "form-control p-2 mb-1",
           placeholder: 'Input ' + field.fieldCaption,
           "onUpdate:modelValue": function onUpdateModelValue($event) {
             return field.value = $event;
@@ -27184,7 +27174,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           key: 1,
           "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
             'hide': field.isHidden
-          }, "mb-4"])
+          }, "mb-1"])
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(field.fieldCaption), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DataSelect, {
           dataTableReadApi: field.lookupApi,
           nameField: field.displayName,
@@ -27210,13 +27200,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           })
         }, null, 42 /* CLASS, PROPS, HYDRATE_EVENTS */, _hoisted_11), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_12, [field.isEditable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
           key: 0,
-          "class": "form-control w-100",
+          "class": "form-control",
           type: "file",
           onChange: function onChange($event) {
             return $options.handleFileUpload($event, key);
           }
-        }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_13)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button type=\"submit\" @click.prevent=\"submitFile(key)\" >Save</button> ")])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
-      }), 128 /* KEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_13)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+      }), 128 /* KEYED_FRAGMENT */))]), _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "btn btn-danger mx-1 btn-width-40",
         onClick: _cache[1] || (_cache[1] = function () {
           return $options.confirmDialog && $options.confirmDialog.apply($options, arguments);
@@ -27426,7 +27416,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item[column].value), 3 /* TEXT, CLASS */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), item[column].isImage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
             key: 2,
             "class": "w-100 p-2",
-            src: !item[column].isVirtualImage ? $data.imagesPath + item[column].value : $data.imagesPath + 'blog.jpg',
+            src: !item[column].isVirtualImage ? $data.imagesPath + item[column].value : $data.imagePlug,
             onError: _cache[0] || (_cache[0] = function () {
               return $options.replaceByDefault && $options.replaceByDefault.apply($options, arguments);
             })
@@ -27467,15 +27457,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.keys(item), function (column, ckey) {
           return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-            key: ckey,
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([item[column]["class"], "flex"])
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["flex", $options.setClass(item[column]["class"], Object.keys(item).length, ckey)]),
+            key: ckey
           }, [!item[column].isHidden ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [($data.activeCol !== key || $data.activeRow !== ckey) && item[column].isImage != true && !item[column].isHidden && !item[column].isLookup ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
             key: 0,
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
               'text-info': item[column].isHighLight
-              // 'hide': item[column].isHidden,
             }),
-
             onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
               return $options.onCellClick(item[column].isEditable, ckey, key);
             }, ["stop"])
@@ -27483,9 +27471,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             key: 1,
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
               'text-info': item[column].isHighLight
-              // 'hide': item[column].isHidden
             }),
-
             onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
               return $options.onCellClick(item[column].isEditable, ckey, key);
             }, ["stop"])
@@ -27494,7 +27480,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
               'text-info': item[column].isHighLight
             })
-          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ item[column].VirtualImage }} "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(item[column].VirtualImage)
           }, null, 2 /* CLASS */)], 2 /* CLASS */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), item[column].isImage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
             key: 3,
@@ -27708,7 +27694,7 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.fieldsCaptions, function (field, ckey) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$options.setClass(field.columnsCount, field.isHidden), "flex fw-bold"]),
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$options.setClass(field.columnsCount, field.isHidden, ckey), "flex fw-bold"]),
       key: ckey
     }, [field.isSortable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: 0,
@@ -28049,10 +28035,10 @@ var _hoisted_2 = {
   "class": "row"
 };
 var _hoisted_3 = {
-  "class": "col-sm-4 col-xs-4 col-lg-4"
+  "class": "col-sm-3 col-xs-3 col-lg-3"
 };
 var _hoisted_4 = {
-  "class": "col-sm-8 col-xs-8 col-lg-8"
+  "class": "col-sm-9 col-xs-9 col-lg-9"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_data_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("data-table");
@@ -28490,21 +28476,6 @@ __webpack_require__.r(__webpack_exports__);
   ITEM_EDITING_MESSAGE: 'Изменение',
   ITEM_EDITBUTTON_CAPTION: 'Изменить',
   IMAGE_UPLOADED: "Изображение загружено"
-
-  //strings processing
-
-  // SortingCaption($column, $direction) {
-  //     let res =
-  //         $column === "id" ?
-  //         this.SORT_BY_ID :
-  //         this.SORT_BY_NAME;
-  //     res += " (";
-  //     res += !$direction ?
-  //         this.SORT_ASC :
-  //         this.SORT_DESC;
-  //     res += ")";
-  //     return res;
-  // },
 });
 
 /***/ }),

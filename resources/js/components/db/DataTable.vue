@@ -40,11 +40,15 @@
                     'border-primary text-secondary': selectedRow[key]===false||selectedRow[key]==null}"
                 @click="rowClick(key)"
                 >
+
                 <div class="card flex border-light py-2"
                 >
                     <div class="w-100 flex-center py-2" v-for="(column, ckey) in Object.keys(item)"
                         v-bind:key="ckey"
-                        :class="{'bg-secondary text-primary': ckey%2===1&&ckey>0, 'bg-primary text-secondary': ckey%2===0&&ckey>0}"
+                        :class="{
+                            'bg-secondary text-primary': ckey%2===1&&ckey>0,
+                            'bg-primary text-secondary': ckey%2===0&&ckey>0
+                        }"
                     >
 
                         <div class="p-2" v-if="item[column].isLookup"
@@ -53,7 +57,11 @@
                             {{ getValue(item[column]) }}
                         </div>
 
-                        <div class="p-2" v-if="(activeCol!==key||activeRow!==ckey)&&(!item[column].isImage)&&(!item[column].isLookup)"
+                        <div class="p-2" v-if="
+                                                (activeCol!==key||activeRow!==ckey)&&
+                                                (!item[column].isImage)&&
+                                                (!item[column].isLookup)
+                                            "
                             :class="{
                                         'text-info': item[column].isHighLight,
                                         'hide': item[column].isHidden,
@@ -64,7 +72,7 @@
                         </div>
 
                         <img v-if="item[column].isImage" class="w-100 p-2"
-                            :src="(!item[column].isVirtualImage)?imagesPath + item[column].value:imagesPath +'blog.jpg'"
+                            :src="(!item[column].isVirtualImage)?imagesPath + item[column].value:imagePlug"
                             @error="replaceByDefault"
                         />
 
@@ -80,12 +88,10 @@
 
                         </div>
 
-
                         <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
 
                         </div>
                     </div>
-
 
                     <div class="card-body w-100">
                         <div class="flex-center">
@@ -121,15 +127,13 @@
             >
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
-                        <div v-for="(column, ckey) in Object.keys(item)" v-bind:key="ckey"
-                        :class="item[column].class" class="flex"
+                        <div class="flex" v-for="(column, ckey) in Object.keys(item)" v-bind:key="ckey"
+                            :class="setClass(item[column].class, Object.keys(item).length, ckey)"
                         >
 
                         <div
                             v-if="!item[column].isHidden"
                         >
-
-
 
                             <span v-if="
                                     (activeCol!==key||activeRow!==ckey)&&
@@ -138,7 +142,6 @@
                                     (!item[column].isLookup)"
                                 :class="{
                                             'text-info': item[column].isHighLight,
-                                            // 'hide': item[column].isHidden,
                                         }"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
@@ -148,40 +151,49 @@
                             <span v-if="item[column].isLookup&&!item[column].isHidden"
                                 :class="{
                                             'text-info': item[column].isHighLight,
-                                            // 'hide': item[column].isHidden
                                         }"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
                                 {{ getValue(item[column]) }}
                             </span>
 
-
-
                             <span v-if="item[column].isVirtualImage"
                                 :class="{'text-info': item[column].isHighLight}"
                             >
-                                <!-- {{ item[column].VirtualImage }} -->
                                 <i :class="item[column].VirtualImage"></i>
-
                             </span>
 
                             <img v-if="item[column].isImage" class="device-image"
                                 :src="getImage(item[column])"
                                 @error="replaceByDefault"
                             />
-                            <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey"
 
-                            >
-                                <input class="form-control  w-100" :value="item[column].value" :id="setId(key, ckey)" :name="setId(key, ckey)"
+                            <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
+                                <input class="form-control  w-100" :value="item[column].value"
+                                    :id="setId(key, ckey)"
+                                    :name="setId(key, ckey)"
                                     @keyup.enter="onInputEnter()"
                                     @keyup.esc="onInputEsc()"
-                                    @change="onInputChange(item.id.value, key, column, $event.target.value, isEsc)"
+                                    @change="onInputChange(
+                                        item.id.value,
+                                        key,
+                                        column,
+                                        $event.target.value,
+                                        isEsc
+                                    )"
                                 />
-                                <button class="btn btn-primary mx-1" :id="item.id.value"
-                                    @click.stop="saveRecord(item.id.value, item[column].value, item[column].value, $event.target.value)">
+                                <button class="btn btn-primary mx-1"
+                                    :id="item.id.value"
+                                    @click.stop="saveRecord(
+                                        item.id.value,
+                                        item[column].value,
+                                        item[column].value,
+                                        $event.target.value
+                                    )">
                                     <i class="far fa-check-circle"></i>
                                 </button>
-                                <button class="btn btn-primary" @mousedown="this.isEsc=true; this.resetEditCell()">
+                                <button class="btn btn-primary"
+                                    @mousedown="this.isEsc=true; this.resetEditCell()">
                                     <i class="far fa-times-circle"></i>
                                 </button>
                             </div>
@@ -306,7 +318,6 @@ import TableHead from './TableHead.vue';
             this.getTableData();
             this.imagesPath = Pathes.storageImagesPath;
             this.imagePlug = Pathes.storageImagePlug
-
         },
 
         mounted() {
@@ -363,6 +374,13 @@ import TableHead from './TableHead.vue';
 
             setId($key, $ckey) {
                 return "id" + $key + "_" + $ckey
+            },
+
+            setClass(classList, keysCount, key) {
+                let combineClassList = classList
+                const _a = (key===keysCount - 1)?combineClassList + ' flex-right':combineClassList
+                console.log("a: ", _a, "classes", classList, " count: ", keysCount, "key: ", key)
+                return _a
             },
 
             resetEditCell() {
