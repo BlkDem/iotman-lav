@@ -24635,7 +24635,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return "id" + $key + "_" + $ckey;
     },
     setLastColumnAlignClass: function setLastColumnAlignClass(classList, keysCount, key) {
-      return key === keysCount - 1 ? classList + ' flex-right' : classList;
+      var alignClass = '';
+      switch (key) {
+        //first column
+        case 0:
+          alignClass = 'flex-center';
+          break;
+
+        //last column
+        case keysCount - 1:
+          alignClass = 'flex-right';
+          break;
+
+        //default column
+        default:
+          alignClass = '';
+          break;
+      }
+      return classList + ' ' + alignClass;
     },
     resetEditCell: function resetEditCell() {
       this.activeCol = undefined;
@@ -24646,7 +24663,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.isEsc = false;
         return;
       }
-      console.log('change', $item, $dataCol, $value);
+      // console.log('change', $item, $dataCol, $value)
+
       this.filteredItems[$key][$dataCol].value = $value;
       this.Items[$key][$dataCol].value = $value;
       this.saveRecord($item, $dataCol, $value);

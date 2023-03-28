@@ -375,7 +375,22 @@ import TableHead from './TableHead.vue';
             },
 
             setLastColumnAlignClass(classList, keysCount, key) {
-                return (key===keysCount - 1)?classList + ' flex-right':classList
+                let alignClass = ''
+                switch (key) {
+
+                    //first column
+                    case 0: alignClass = 'flex-center'
+                    break;
+
+                    //last column
+                    case (keysCount - 1): alignClass = 'flex-right'
+                    break;
+
+                    //default column
+                    default: alignClass = ''
+                    break;
+                }
+                return classList + ' ' + alignClass
             },
 
             resetEditCell() {
@@ -384,11 +399,12 @@ import TableHead from './TableHead.vue';
             },
 
             onInputChange($item, $key, $dataCol, $value, $isEsc){
+
                 if ($isEsc) {
                     this.isEsc = false
                     return
                 }
-                console.log('change', $item, $dataCol, $value)
+                // console.log('change', $item, $dataCol, $value)
 
                 this.filteredItems[$key][$dataCol].value = $value
                 this.Items[$key][$dataCol].value = $value
