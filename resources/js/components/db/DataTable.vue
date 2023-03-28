@@ -83,14 +83,12 @@
                                             'cursor-pointer': selectableRow
                                         }"
                             >
-                                <!-- {{ item[column].VirtualImage }} -->
                                 <i :class="item[column].VirtualImage" class="fa-10x my-4"></i>
-
                         </div>
 
-                        <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
+                        <!-- <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
 
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="card-body w-100">
@@ -128,7 +126,7 @@
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
                         <div class="flex" v-for="(column, ckey) in Object.keys(item)" v-bind:key="ckey"
-                            :class="setClass(item[column].class, Object.keys(item).length, ckey)"
+                            :class="setLastColumnAlignClass(item[column].class, Object.keys(item).length, ckey)"
                         >
 
                         <div
@@ -376,11 +374,8 @@ import TableHead from './TableHead.vue';
                 return "id" + $key + "_" + $ckey
             },
 
-            setClass(classList, keysCount, key) {
-                let combineClassList = classList
-                const _a = (key===keysCount - 1)?combineClassList + ' flex-right':combineClassList
-                console.log("a: ", _a, "classes", classList, " count: ", keysCount, "key: ", key)
-                return _a
+            setLastColumnAlignClass(classList, keysCount, key) {
+                return (key===keysCount - 1)?classList + ' flex-right':classList
             },
 
             resetEditCell() {

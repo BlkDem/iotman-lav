@@ -49,14 +49,16 @@
                         :fieldKey="key"
                         @changeImage="setImage"
                     />
-                    <img class="mx-2" style="max-width: 200px; margin-bottom: 20px;"
+                    <div style="max-height: 200px; margin-bottom: 20px">
+                        <img class="mx-2" style="margin-bottom: 20px; max-height: inherit;"
                                 :src="getImage(field)"
                                 :class="{
                                         'device-image': !field.isEditable,
-                                        'w-75': field.isEditable,
+                                        // 'w-75': field.isEditable,
                                     }"
                                 @error="replaceByDefault"
-                    />
+                        />
+                    </div>
                     <form action="post" class="w-100">
                         <input class="form-control" type="file"
                             v-if="field.isEditable"

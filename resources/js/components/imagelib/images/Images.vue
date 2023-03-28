@@ -2,7 +2,7 @@
     <div style="margin-top: 5.5rem">
 
         <div class="row">
-            <div class="col-sm-3 col-xs-3 col-lg-3">
+            <div class="col-sm-4 col-xs-4 col-lg-4">
                 <data-table
                     :api="albums.api"
                     :dataFields="albums.albumsFields"
@@ -14,7 +14,7 @@
                 </data-table>
 
             </div>
-            <div class="col-sm-9 col-xs-9 col-lg-9">
+            <div class="col-sm-8 col-xs-8 col-lg-8">
                 <data-table
                     :api="images.api"
                     :dataFields="images.imagesFields"
