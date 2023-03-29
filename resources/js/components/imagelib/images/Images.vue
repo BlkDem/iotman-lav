@@ -193,7 +193,6 @@ export default {
 
     methods: {
         onRowClick(dataEvent) {
-            console.log(dataEvent)
             this.images.selectedFkValue = dataEvent
         }
     },

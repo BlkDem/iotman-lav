@@ -62,6 +62,7 @@
 // import InfoCard from '../components/common/InfoCard.vue';
 import APIConstants from "../api/rest_api";
 import MessagesConstants from "../components/strings_constants/strings.js";
+import Field from "../helpers/test";
 import { marked } from 'marked';
 
 // import ColorPicker from '../components/common/ColorPicker.vue';
@@ -98,6 +99,9 @@ export default {
         this.logBlockCaption = MessagesConstants.logBlockCaption ?? 'Log'
 
         this.getBlogData()
+
+        const a = new Field('test name', 'test props')
+        console.log(a.getName(), a.getProperty())
 
     },
 

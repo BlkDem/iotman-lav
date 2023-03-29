@@ -19,7 +19,7 @@
             :foreignKey="foreignKey"
             :foreignValue="foreignValue"
             :readOnly="readOnly"
-            @getTableData="getTableData"
+            @getData="getData"
             @setCompactView="setCompactView"
             @addEvent="setItem"
             @updateSortedData="updateSortedData"
@@ -119,8 +119,11 @@
             <div class="card mb-1 w-100 fade-in"
                 v-for="(item, key) in filteredItems" v-bind:key="key"
                 v-bind:id="item.id.value"
-                :class="{'border-info bg-warning text-dark': selectedRow[key]===true,
-                        'border-primary': selectedRow[key]===false||selectedRow[key]==null}"
+                :class="{
+                            'cursor-pointer': readOnly,
+                            'border-info bg-warning text-dark': selectedRow[key]===true,
+                            'border-primary': selectedRow[key]===false||selectedRow[key]==null
+                        }"
                 @click="rowClick(key)"
             >
                 <div class="mx-2 my-2">
@@ -167,7 +170,7 @@
                             />
 
                             <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
-                                <input class="form-control  w-100" :value="item[column].value"
+                                <input class="form-control-sm w-100" :value="item[column].value"
                                     :id="setId(key, ckey)"
                                     :name="setId(key, ckey)"
                                     @keyup.enter="onInputEnter()"
@@ -180,7 +183,7 @@
                                         isEsc
                                     )"
                                 />
-                                <button class="btn btn-primary mx-1"
+                                <button class="btn btn-primary btn-sm mx-1"
                                     :id="item.id.value"
                                     @click.stop="saveRecord(
                                         item.id.value,
@@ -192,7 +195,7 @@
                                     <i class="far fa-check-circle"></i>
                                 </button>
 
-                                <button class="btn btn-primary"
+                                <button class="btn btn-primary btn-sm"
                                     @mousedown="this.isEsc=true; this.cancelEditCell()">
                                     <i class="far fa-times-circle"></i>
                                 </button>
@@ -238,7 +241,7 @@ import AddItem from './AddDialog.vue';
 import TableNav from '../../components/common/TableBar/TableNav.vue';
 import TableHead from './TableHead.vue';
 
-    export default {
+export default {
 
         emits: ['onRowClick'],
 
@@ -317,7 +320,7 @@ import TableHead from './TableHead.vue';
         },
 
         created() {
-            this.getTableData();
+            this.getData();
             this.imagesPath = Pathes.storageImagesPath;
             this.imagePlug = Pathes.storageImagePlug
         },
@@ -334,14 +337,12 @@ import TableHead from './TableHead.vue';
                 this.setLang(_lang)
             });
 
-            console.log(this.selectedName)
-
         },
 
         watch: {
             foreignValue() {
-                console.log('fk value', this.foreignValue)
-                this.getTableData()
+                // console.log('fk value', this.foreignValue)
+                this.getData()
             }
         },
 
@@ -354,10 +355,9 @@ import TableHead from './TableHead.vue';
 
                 this.selectedRow[row] = !this.selectedRow[row]
 
-                // console.log(row, this.selectedName, this.filteredItems[row][this.selectedName])
                 this.cardCaptionAdd = this.filteredItems[row][this.selectedName].value
+
                 //send FK value to child table
-                // console.log(this.filteredItems[row].id)
                 this.$emit('onRowClick', this.filteredItems[row].id.value)
             },
 
@@ -498,8 +498,14 @@ import TableHead from './TableHead.vue';
                     const _lookupId = dataField?.lookupId //field link key (FK)
                     const _displayName = dataField?.displayName //Display Name Field
 
+                    // console.log(dataField)
+                    // const newListItem = _item  //newList[itemRow]
+
+                    // console.log(this.dataFields, _value[dataField.fieldName])
+                    const _a = (dataField.fieldName != null)?_value[dataField.fieldName]:''
+
                     newListItemData[dataField.fieldName] = {
-                        value: (dataField.fieldName != null&&!dataField.isFieldIgnore)?_value[dataField.fieldName]:'',
+                        value: _a,
                         lookupValue: (dataField.displayName != null)?_value[dataField.displayName]:'',
                         // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
                         displayName: _displayName,
@@ -518,10 +524,7 @@ import TableHead from './TableHead.vue';
                         lookupApi: _lookupApi,
                         isVirtualImage: _virtual,
                         class: //field width (bootstrap)
-                            (_colscount === 1) ?
-                            "col-sm-" + _colscount +
-                            " col-xs-" + _colscount +
-                            " col-lg-" + _colscount + " align-center" :
+
                             "col-sm-" + _colscount +
                             " col-xs-" + _colscount +
                             " col-lg-" + _colscount
@@ -538,22 +541,17 @@ import TableHead from './TableHead.vue';
 
             populateListItems(items) {
 
-                        // prepare items to fields transform/extend
-                        let newList = items.map(item => ({
-                            _id: item.id,
-                        }));
+                    let newList = items
 
-                        // transform fields to objects with extended properties
-                        for (let itemRow in newList) {
-                            newList[itemRow] = this.processListItem(items[itemRow])
-                        }
-                        // console.log(newList)
-                        // if ((newList.length>0)&&(this.selectableRow)) this.rowClick(0)
-                        return newList
+                    // transform fields to objects with extended properties
+                    for (let itemRow in items) {
+                        newList[itemRow] = this.processListItem(items[itemRow])
+                    }
 
+                    return newList
             },
 
-            async getTableData(_currentPage=1, _itemsPerPage=5) {
+            async getData(_currentPage=1, _itemsPerPage=5) {
                 let fkValue = (this.foreignValue>0)?'/'+this.foreignValue:''
                 // console.log('fk: ', fkValue)
                 await axios.get(this.api.get + _currentPage + "/" + _itemsPerPage + fkValue)

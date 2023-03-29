@@ -7,7 +7,7 @@
             :api="presets.api"
             :dataFields="presets.presetsFields"
             :pageCaption="presets.presetsCaption"
-        >
+    >
     </data-table>
 
 </template>
@@ -16,7 +16,6 @@
 import DataTable from '../db/DataTable.vue';
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
-
 
 export default {
     components: {DataTable},
@@ -101,13 +100,13 @@ export default {
     },
 
     created() {
-        const presetApi = this.presets
+        const presetApi = this.presets.api
 
-        presetApi.api.get =    APIConstants.api_presets_read_page
-        presetApi.api.insert = APIConstants.api_preset_create
-        presetApi.api.update = APIConstants.api_preset_update
-        presetApi.api.patch =  APIConstants.api_preset_patch
-        presetApi.api.delete = APIConstants.api_preset_delete
+        presetApi.get =    APIConstants.api_presets_read_page
+        presetApi.insert = APIConstants.api_preset_create
+        presetApi.update = APIConstants.api_preset_update
+        presetApi.patch =  APIConstants.api_preset_patch
+        presetApi.delete = APIConstants.api_preset_delete
 
     }
 }
