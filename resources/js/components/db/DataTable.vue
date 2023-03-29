@@ -498,13 +498,8 @@ import TableHead from './TableHead.vue';
                     const _lookupId = dataField?.lookupId //field link key (FK)
                     const _displayName = dataField?.displayName //Display Name Field
 
-                    // console.log(dataField)
-                    // const newListItem = _item  //newList[itemRow]
-
-                    // console.log(this.dataFields, _value[dataField.fieldName])
-
                     newListItemData[dataField.fieldName] = {
-                        value: (dataField.fieldName != null)?_value[dataField.fieldName]:'',
+                        value: (dataField.fieldName != null&&!dataField.isFieldIgnore)?_value[dataField.fieldName]:'',
                         lookupValue: (dataField.displayName != null)?_value[dataField.displayName]:'',
                         // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
                         displayName: _displayName,
@@ -560,7 +555,7 @@ import TableHead from './TableHead.vue';
 
             async getTableData(_currentPage=1, _itemsPerPage=5) {
                 let fkValue = (this.foreignValue>0)?'/'+this.foreignValue:''
-                console.log('fk: ', fkValue)
+                // console.log('fk: ', fkValue)
                 await axios.get(this.api.get + _currentPage + "/" + _itemsPerPage + fkValue)
                     .then(response => {
 

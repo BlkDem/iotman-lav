@@ -3,24 +3,23 @@
         <!-- {{ pageCaption }} -->
     </div>
 
-                <data-table
-                    :api="devices.api"
-                    :dataFields="devices.devicesFields"
-                    :pageCaption="devices.devicesCaption"
-                    :selectableRow="true"
-                    :selectedName="devices.selectedName"
-                    :readOnly="true"
-                    @onRowClick="onRowClick">
-                </data-table>
-                <data-table
-                    :api="deviceMicros.api"
-                    :dataFields="deviceMicros.deviceMicrosFields"
-                    :pageCaption="deviceMicros.deviceMicrosCaption"
-                    :foreignKey="deviceMicros.device_id"
-                    :foreignValue="devices.selectedFkValue"
+    <data-table
+        :api="devices.api"
+        :dataFields="devices.devicesFields"
+        :pageCaption="devices.devicesCaption"
+        :selectableRow="true"
+        :selectedName="devices.selectedName"
+        :readOnly="true"
+        @onRowClick="onRowClick">
+    </data-table>
 
-                >
-                </data-table>
+    <data-table
+        :api="deviceMicros.api"
+        :dataFields="deviceMicros.deviceMicrosFields"
+        :pageCaption="deviceMicros.deviceMicrosCaption"
+        :foreignKey="deviceMicros.device_id"
+        :foreignValue="devices.selectedFkValue">
+    </data-table>
 
 
 </template>
@@ -33,12 +32,6 @@ import APIConstants from "../../api/rest_api";
 
 export default {
     components: {DataTable},
-
-    props: {
-        device_id: {
-
-        }
-    },
 
     data() {
         return {
@@ -100,9 +93,6 @@ export default {
 
                 selectedFkValue: 0,
 
-                //selected album id for child table images
-
-
             },
 
             deviceMicros: {
@@ -120,11 +110,15 @@ export default {
                     deviceMicrosFields: [
                         {
                             fieldName: 'Image',
+                            fieldCaption: '',
                             type: String,
+                            isImage: false,
                             isVirtualImage: true,
-                            isHighLight: true,
+                            VirtualImage: 'fa-solid fa-microchip fa-2x',
+                            isEditable: false,
+                            isFieldIgnore: true,
                             isSortable: false,
-                            VirtualImage: 'fa-solid fa-images fa-2x',
+                            isHighLight: true,
                             columnsCount: 1
                         },
 
@@ -193,6 +187,7 @@ export default {
                     ],
 
                     device_id: 'device_id',
+                    device_id_value: 1,
                 },
 
 

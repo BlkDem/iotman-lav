@@ -24464,7 +24464,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           case 2:
             _data = _context.sent;
             _this.dataItems = _data.data.data;
-          case 4:
+            console.log(_this.value);
+          case 5:
           case "end":
             return _context.stop();
         }
@@ -24737,13 +24738,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           var _lookupId = dataField === null || dataField === void 0 ? void 0 : dataField.lookupId; //field link key (FK)
           var _displayName = dataField === null || dataField === void 0 ? void 0 : dataField.displayName; //Display Name Field
 
-          // console.log(dataField)
-          // const newListItem = _item  //newList[itemRow]
-
-          // console.log(this.dataFields, _value[dataField.fieldName])
-
           newListItemData[dataField.fieldName] = {
-            value: dataField.fieldName != null ? _value[dataField.fieldName] : '',
+            value: dataField.fieldName != null && !dataField.isFieldIgnore ? _value[dataField.fieldName] : '',
             lookupValue: dataField.displayName != null ? _value[dataField.displayName] : '',
             // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
             displayName: _displayName,
@@ -24799,9 +24795,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _currentPage = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
               _itemsPerPage = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : 5;
-              fkValue = _this3.foreignValue > 0 ? '/' + _this3.foreignValue : '';
-              console.log('fk: ', fkValue);
-              _context.next = 6;
+              fkValue = _this3.foreignValue > 0 ? '/' + _this3.foreignValue : ''; // console.log('fk: ', fkValue)
+              _context.next = 5;
               return axios.get(_this3.api.get + _currentPage + "/" + _itemsPerPage + fkValue).then(function (response) {
                 _this3.Items = _this3.populateListItems(response.data.data);
                 _this3.filteredItems = _this3.Items;
@@ -24821,7 +24816,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   window.location.href = "/login";
                 }
               });
-            case 6:
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -25080,9 +25075,6 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     DataTable: _db_DataTable_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: {
-    device_id: {}
-  },
   data: function data() {
     return {
       devices: {
@@ -25126,10 +25118,7 @@ __webpack_require__.r(__webpack_exports__);
         }],
         selectedName: 'device_name',
         selectedFkValue: 0
-
-        //selected album id for child table images
       },
-
       deviceMicros: {
         deviceMicrosCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__["default"].DEVICE_MICROS,
         api: {
@@ -25141,11 +25130,15 @@ __webpack_require__.r(__webpack_exports__);
         },
         deviceMicrosFields: [{
           fieldName: 'Image',
+          fieldCaption: '',
           type: String,
+          isImage: false,
           isVirtualImage: true,
-          isHighLight: true,
+          VirtualImage: 'fa-solid fa-microchip fa-2x',
+          isEditable: false,
+          isFieldIgnore: true,
           isSortable: false,
-          VirtualImage: 'fa-solid fa-images fa-2x',
+          isHighLight: true,
           columnsCount: 1
         }, {
           fieldName: 'id',
@@ -25202,7 +25195,8 @@ __webpack_require__.r(__webpack_exports__);
           lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_micros_read,
           isLookup: true
         }],
-        device_id: 'device_id'
+        device_id: 'device_id',
+        device_id_value: 1
       }
     };
   },

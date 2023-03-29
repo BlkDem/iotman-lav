@@ -9,10 +9,20 @@ use App\Http\Controllers\BaseController;
 use App\Http\Middleware\ValidatorRules;
 use App\Http\Controllers\PaginatorController;
 use Illuminate\Support\Facades\DB;
+use App\Models\DevicesView;
+use App\Models\Micro;
 
 
 class DeviceMicroController extends BaseController
 {
+    private static function getDevice($device_id) {
+        return DevicesView::find($device_id);
+    }
+
+    private static function getMicro($micro_id) {
+        return Micro::find($micro_id);
+    }
+
  /**
      * Display a listing of the resource.
      *
@@ -45,6 +55,7 @@ class DeviceMicroController extends BaseController
             'device_micros.updated_at as updated_at',
             'micros.id as micro_id',
             'micros.micro_name as micro_name',
+            'devices.id as device_id',
             'devices.device_name as device_name'
         )
         ->where('device_micros.device_id', $device_id)
@@ -67,7 +78,29 @@ class DeviceMicroController extends BaseController
         $page = (int)$currentPage;
 
         $offset = $itemsPerPage*--$page;
-        $res = DeviceMicro::limit($itemsPerPage)->offset($offset)->get();
+
+        // $res = DeviceMicro::limit($itemsPerPage)->offset($offset)->get();
+        $res = DB::table('device_micros')
+        ->join('micros', 'micros.id', '=', 'device_micros.micro_id')
+        ->join('devices', 'devices.id', '=', 'device_micros.device_id')
+        ->select(
+            'device_micros.id as id',
+            'device_micros.device_micro_desc as device_micro_desc',
+            'device_micros.device_micro_idx as device_micro_idx',
+            'device_micros.created_at as created_at',
+            'device_micros.updated_at as updated_at',
+            'micros.id as micro_id',
+            'micros.micro_name as micro_name',
+            'devices.id as device_id',
+            'devices.device_name as device_name'
+        )
+        // ->where('device_micros.device_id', $device_id)
+        ->limit($itemsPerPage)->offset($offset)->orderBy('device_micro_idx', 'asc')
+        ->get();
+
+
+
+
         $total = DeviceMicro::get();
 
         $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
@@ -88,11 +121,19 @@ class DeviceMicroController extends BaseController
             return response()->json($validator->errors(), 400);
         }
         try {
+
             $newDeviceMicro = DeviceMicro::create($request->all());
-            return response()->json($newDeviceMicro, 201);
+
+            $deviceName = $this->getDevice($newDeviceMicro["device_id"]);
+            $updateDeviceMicro["device_name"] = $deviceName["device_name"];
+
+            $microName = $this->getMicro($newDeviceMicro["micro_id"]);
+            $updateDeviceMicro["micro_name"] = $microName["micro_name"];
+
+            return $this->sendResponse($newDeviceMicro, 'Device Micro Inserted');
         }
         catch (Exception $e) {
-            return response()->json('Store Record Error: ' . $e, 400);
+            return $this->sendError('Update error: ' . $e);
         }
     }
 
@@ -125,9 +166,22 @@ class DeviceMicroController extends BaseController
         }
         try {
             $updateDeviceMicro->update($request->all());
-            return response()->json($updateDeviceMicro, 200);        }
+
+            $deviceName = $this->getDevice($updateDeviceMicro["device_id"]);
+
+            $updateDeviceMicro["device_name"] = $deviceName["device_name"];
+
+            $microName = $this->getMicro($updateDeviceMicro["micro_id"]);
+
+            $updateDeviceMicro["micro_name"] = $microName["micro_name"];
+
+
+            return $this->sendResponse($updateDeviceMicro, 'Device Micro Updated');
+        }
+            // return response()->json($updateDeviceMicro, 200);        }
         catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
+            // return response()->json('Deleting Record Error: ' . $e, 400);
+            return $this->sendError('Update error: ' . $e);
         }
     }
 

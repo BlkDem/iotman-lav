@@ -34,14 +34,15 @@ class DevicesViewController extends BaseController
                     ->leftJoin('device_micros', 'devices.id', '=', 'device_micros.device_id')
                     ->selectRaw('count(device_micros.id) as micros_count')
                     ->groupBy('id', 'device_name')
+                    ->orderBy('micros_count', 'desc')
                     ->limit($itemsPerPage)
                     ->offset($offset)
                     ->get();
 
 
-            // $total = Album::get();
+            $total = DevicesView::get();
 
-            $paginator = PaginatorController::Paginate($res->count(), (int)$itemsPerPage, $currentPage);
+            $paginator = PaginatorController::Paginate($total->count(), (int)$itemsPerPage, $currentPage);
 
             return $this->sendResponse($res, "Devices lookup List", $paginator);
 
