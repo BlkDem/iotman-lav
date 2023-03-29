@@ -56,13 +56,17 @@
             /* background: linear-gradient(to right, rgba(var(--bs-light),.25), rgba(var(--bs-light),.25) 1px,
           rgba(var(--bs-light),.25) 1px, rgba(var(--bs-light),.25)); */
         }
+
+        .font-0_9 {
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 
 <body class="container-fluid">
 
         <!-- vue mount point -->
-    <div id="app" class="container">
+    <div id="app" class="container font-0_9" >
 
     </div>
 

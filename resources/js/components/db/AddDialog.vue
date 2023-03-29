@@ -44,13 +44,13 @@
 
 
                 <div v-if="field.isImage&&field.isEditable" class="flex-center-column py-1">
-                    <ImagesFromDisk
+                    <ImagesFromStorage
                         :fileName="field.fileName"
                         :fieldKey="key"
                         @changeImage="setImage"
                     />
-                    <div style="max-height: 200px; margin-bottom: 20px">
-                        <img class="mx-2" style="margin-bottom: 20px; max-height: inherit;"
+                    <div class="image-panel">
+                        <img class="mx-2 editable-image"
                                 :src="getImage(field)"
                                 :class="{
                                         'device-image': !field.isEditable,
@@ -83,12 +83,12 @@ import Pathes from '../../config/pathes';
 import DataSelect from './DataSelect.vue';
 import APIConstants from "../../api/rest_api";
 import ParsingErrors from "../../helpers/ParsingErrors.js";
-import ImagesFromDisk from '../imagelib/images/ImagesFromDisk.vue';
+import ImagesFromStorage from '../imagelib/images/ImagesFromStorage.vue';
 
 export default {
     name: 'AddItem',
 
-    components: { PopupModal, DataSelect, ImagesFromDisk },
+    components: { PopupModal, DataSelect, ImagesFromStorage },
 
     data (){
         return {
@@ -231,3 +231,16 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+.image-panel {
+    max-height: 200px;
+    margin-bottom: 20px;
+}
+
+.editable-image {
+    margin-bottom: 20px;
+    max-height: inherit;
+}
+
+</style>

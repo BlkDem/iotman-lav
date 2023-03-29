@@ -187,26 +187,30 @@
                                         item[column].value,
                                         item[column].value,
                                         $event.target.value
-                                    )">
+                                    )"
+                                >
                                     <i class="far fa-check-circle"></i>
                                 </button>
+
                                 <button class="btn btn-primary"
-                                    @mousedown="this.isEsc=true; this.resetEditCell()">
+                                    @mousedown="this.isEsc=true; this.cancelEditCell()">
                                     <i class="far fa-times-circle"></i>
                                 </button>
+
                             </div>
                         </div>
                     </div>
 
-                        <div class="col-sm-2 col-xs-2 col-lg-2  edit-buttons " v-if="!readOnly">
-                            <button class="btn btn-info mx-2" @click="doEdit(key, item.id.value)">
+                        <div class="col-sm-2 col-xs-2 col-lg-2 edit-buttons" v-if="!readOnly">
+                            <button class="btn btn-info  btn-sm mx-2" @click="doEdit(key, item.id.value)">
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
 
-                            <button class="btn btn-secondary" @click="doDelete(key, item.id.value)">
+                            <button class="btn btn-secondary btn-sm" @click="doDelete(key, item.id.value)">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -393,9 +397,9 @@ import TableHead from './TableHead.vue';
                 return classList + ' ' + alignClass
             },
 
-            resetEditCell() {
-                this.activeCol = undefined
-                this.activeRow = undefined
+            cancelEditCell() {
+                this.activeCol = null
+                this.activeRow = null
             },
 
             onInputChange($item, $key, $dataCol, $value, $isEsc){
@@ -412,20 +416,20 @@ import TableHead from './TableHead.vue';
                 this.saveRecord($item, $dataCol, $value)
             },
 
-            //saving cell data if changed
+            //saving cell data if changed and cancel edit
             onInputEnter(){
-                this.resetEditCell()
+                this.cancelEditCell()
             },
 
             //cancel editing cell data
             onInputEsc(){
                 this.isEsc = true
-                this.resetEditCell()
+                this.cancelEditCell()
             },
 
             //save cell data to db
             saveRecord($id, $field, $value) {
-                this.resetEditCell()
+                this.cancelEditCell()
                 axios.patch(
                     this.api.patch + $id + '/' + $field + '/' + $value)
                     .then(resp => {
@@ -556,7 +560,7 @@ import TableHead from './TableHead.vue';
 
             async getTableData(_currentPage=1, _itemsPerPage=5) {
                 let fkValue = (this.foreignValue>0)?'/'+this.foreignValue:''
-                // console.log('fk: ', fkValue)
+                console.log('fk: ', fkValue)
                 await axios.get(this.api.get + _currentPage + "/" + _itemsPerPage + fkValue)
                     .then(response => {
 

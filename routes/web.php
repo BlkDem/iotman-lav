@@ -20,6 +20,7 @@ Route::get('/users', [RootController::class, 'index']);
 Route::get('/devices', [RootController::class, 'index']);
 Route::get('/device_types', [RootController::class, 'index']);
 Route::get('/micros', [RootController::class, 'index']);
+Route::get('/device_micros', [RootController::class, 'index']);
 Route::get('/user_devices', [RootController::class, 'index']);
 Route::get('/imagelib', [RootController::class, 'index']);
 Route::get('/albums', [RootController::class, 'index']);

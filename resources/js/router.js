@@ -9,6 +9,7 @@ import Micros from "./components/micros/Micros.vue"
 import Users  from "./components/users/Users.vue"
 import Images from "./components/imagelib/images/Images.vue"
 import Presets from "./components/presets/Presets.vue"
+import DeviceMicros from "./components/device_micros/DeviceMicros.vue"
 
 const routes = [
   {
@@ -32,6 +33,13 @@ const routes = [
             icon: "fas fa-sun",
             component: Devices,
             ID: "DEVICES"
+          },
+          {
+            path: "device_micros",
+            name: "Device Micros",
+            icon: "fas fa-sun",
+            component: DeviceMicros,
+            ID: "DEVICE_MICROS"
           },
           {
             path: "/micros",
@@ -82,6 +90,13 @@ const routes = [
     component: Devices,
     ID: "DEVICES",
     visible: false
+  },
+  {
+    path: "/device_micros",
+    name: "Device Micros",
+    icon: "fas fa-sun",
+    component: DeviceMicros,
+    ID: "DEVICE_MICROS"
   },
   {
     path: "/user_devices",

@@ -8,6 +8,7 @@ use App\Models\DeviceMicro;
 use App\Http\Controllers\BaseController;
 use App\Http\Middleware\ValidatorRules;
 use App\Http\Controllers\PaginatorController;
+use Illuminate\Support\Facades\DB;
 
 
 class DeviceMicroController extends BaseController
@@ -25,6 +26,40 @@ class DeviceMicroController extends BaseController
 
         return $this->sendResponse($res, "Devices Micros List", $paginator);
 
+    }
+
+    public function pageWhereDevice($currentPage=0, $itemsPerPage=10, $device_id){
+
+        $page = (int)$currentPage;
+
+        $offset = $itemsPerPage*--$page;
+
+        $res = DB::table('device_micros')
+        ->join('micros', 'micros.id', '=', 'device_micros.micro_id')
+        ->join('devices', 'devices.id', '=', 'device_micros.device_id')
+        ->select(
+            'device_micros.id as id',
+            'device_micros.device_micro_desc as device_micro_desc',
+            'device_micros.device_micro_idx as device_micro_idx',
+            'device_micros.created_at as created_at',
+            'device_micros.updated_at as updated_at',
+            'micros.id as micro_id',
+            'micros.micro_name as micro_name',
+            'devices.device_name as device_name'
+        )
+        ->where('device_micros.device_id', $device_id)
+        ->limit($itemsPerPage)->offset($offset)->orderBy('device_micro_idx', 'asc')
+        ->get();
+
+        // dd($res);
+
+        // $res = Image::limit($itemsPerPage)->where('album_id', $album_id)->offset($offset)->orderBy('image_name', 'asc')->get();
+
+        $total = DeviceMicro::where('device_id', $device_id)->get();
+
+        $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
+
+        return $this->sendResponse($res, "Device Micros List", $paginator);
     }
 
     public function page($currentPage=0, $itemsPerPage=10){

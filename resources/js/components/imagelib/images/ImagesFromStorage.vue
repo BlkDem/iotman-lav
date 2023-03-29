@@ -61,7 +61,7 @@ export default {
         },
 
         async readImages() {
-            await axios.get(APIConstants.api_images_from_disk)
+            await axios.get(APIConstants.api_images_from_storage)
                     .then(response => {
                         console.log(response)
                         this.images = response.data.data

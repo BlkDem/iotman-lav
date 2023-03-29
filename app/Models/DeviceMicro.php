@@ -15,6 +15,8 @@ class DeviceMicro extends Model
         'id',
         'device_id',
         'micro_id',
+        'device_micro_desc',
+        'device_micro_idx',
         'created_at',
         'updated_at'
     ];

@@ -121,6 +121,7 @@ Route::controller(DeviceMicroController::class)->group(function () {
     Route::post(  '/device_micro/create', 'store');
     Route::get(   '/device_micros/read', 'index');
     Route::get(   '/device_micros/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get(   '/device_micros/read/page/{currentPage}/{itemsPerPage}/{device_id}', 'pageWhereDevice');
     Route::get(   '/device_micro/read/{id}', 'show');
     Route::put(   '/device_micro/update/{updateDeviceMicro}', 'update');
     Route::delete('/device_micro/delete/{id}', 'destroy');
@@ -155,6 +156,7 @@ Route::delete('/device_type/delete/{id}', [DeviceTypeController::class, 'destroy
 Route::post('/devices/create', [DeviceController::class, 'store']);
 Route::get('/devices/read', [DevicesViewController::class, 'index']);
 Route::get('/devices/read/page/{currentPage}/{itemsPerPage}', [DevicesViewController::class, 'page']);
+Route::get('/devices/lookup/{currentPage}/{itemsPerPage}', [DevicesViewController::class, 'indexLookup']);
 Route::get('/devices/read/{id}', [DevicesViewController::class, 'show']);
 Route::put('/devices/update/{updateDevice}', [DeviceController::class, 'update']);
 Route::delete('/devices/delete/{id}', [DeviceController::class, 'destroy']);

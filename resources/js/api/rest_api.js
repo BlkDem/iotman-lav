@@ -20,6 +20,14 @@ export default {
     api_micro_delete: apiPreffix +     'micro/delete/',
     api_micro_patch: apiPreffix +      'micro/patch/',
 
+    //Device Micros CRUD
+    api_device_micro_create: apiPreffix +     'device_micro/create/',
+    api_device_micros_read: apiPreffix +      'device_micros/read/',
+    api_device_micros_read_page: apiPreffix + 'device_micros/read/page/',
+    api_device_micro_update: apiPreffix +     'device_micro/update/',
+    api_device_micro_delete: apiPreffix +     'device_micro/delete/',
+    api_device_micro_patch: apiPreffix +      'device_micro/patch/',
+
     //DevBlogs CRUD
     api_dev_blog_create: apiPreffix +    'dev_blog/create/',
     api_dev_blogs_read: apiPreffix +      'dev_blogs/read/',
@@ -45,8 +53,11 @@ export default {
     api_image_delete: apiPreffix + 'image/delete/',
     api_image_patch: apiPreffix + 'image/patch/',
 
+    // Upload Image to Server
     api_image_upload: apiPreffix + 'image/upload_image/',
-    api_images_from_disk: apiPreffix + 'images/get_images/',
+
+    // Get image list from storage
+    api_images_from_storage: apiPreffix + 'images/get_images/',
 
     //Device Types CRUD
     api_device_type_create: apiPreffix + 'device_type/create/',
@@ -60,6 +71,7 @@ export default {
     api_device_create: apiPreffix + 'devices/create/',
     api_devices_read: apiPreffix + 'devices/read/',
     api_devices_read_page: apiPreffix + 'devices/read/page/',
+    api_devices_lookup: apiPreffix + 'devices/lookup/',
     api_device_update: apiPreffix + 'devices/update/',
     api_device_delete: apiPreffix + 'devices/delete/',
     api_device_patch: apiPreffix +      'device/patch/',
