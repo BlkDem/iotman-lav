@@ -1,7 +1,42 @@
 <template>
     <div style="margin-top: 5.5rem">
 
-        <div class="row">
+        <MasterSlave
+            :masterWidthProp="'w-25'"
+            :slaveWidthProp="'w-75'"
+        >
+
+            <template v-slot:master>
+
+                <data-table
+                    :api="users.api"
+                    :dataFields="users.usersFields"
+                    :pageCaption="users.usersCaption"
+                    :selectableRow="true"
+                    :selectedName="users.selectedName"
+                    :readOnly="usersReadOnly"
+                    @onRowClick="onRowClick">
+                </data-table>
+
+            </template>
+
+            <template v-slot:slave>
+
+                <data-table
+                    :api="userDevices.api"
+                    :dataFields="userDevices.userDevicesFields"
+                    :pageCaption="userDevices.userDevicesCaption"
+                    :foreignKey="userDevices.user_id"
+                    :foreignValue="userDevices.selectedFkValue"
+                    >
+                </data-table>
+
+            </template>
+
+
+        </MasterSlave>
+
+        <!-- <div class="row">
             <div class="col-sm-4 col-xs-4 col-lg-4">
                 <data-table
                     :api="users.api"
@@ -24,7 +59,7 @@
                     >
                 </data-table>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -32,13 +67,14 @@
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
 import DataTable from '../../components/db/DataTable.vue';
+import MasterSlave from '../../layouts/MasterSlave.vue';
 
 export default {
 
     // emits: ['setAdditionalCaption'],
 
     components: {
-        DataTable,
+        DataTable, MasterSlave,
     },
 
     data() {

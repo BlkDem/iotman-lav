@@ -1,7 +1,6 @@
 <template>
-    <div style="margin-top: 0.5rem">
-        <!-- {{ pageCaption }} -->
-    </div>
+    <!-- <div style="margin-top: 0.5rem">
+    </div> -->
 
     <common-card
         :cardCaption="pageCaption"
