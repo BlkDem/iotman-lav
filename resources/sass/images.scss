@@ -21,6 +21,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .flex-left {
@@ -43,6 +44,7 @@
 }*/
 
 .device-image {
+    position: relative;
     height: 1.9rem;
     border-radius: 5px;
     border: 0px solid var(--bs-primary);
@@ -51,6 +53,7 @@
 }
 
 .device-image:hover {
+    z-index: 100;
     border: 2px solid var(--bs-secondary);
     -webkit-transform: scale(2);
     transform: scale(2);

@@ -1,8 +1,16 @@
 <template>
     <div style="margin-top: 5.5rem">
+    </div>
 
-        <div class="row">
-            <div class="col-sm-4 col-xs-4 col-lg-4">
+    <!-- <button @click="showDialogue">123</button> -->
+
+    <MasterSlaveLayout
+            :masterWidthProp="'w-25'"
+            :slaveWidthProp="'w-75'"
+        >
+
+            <template v-slot:master>
+
                 <data-table
                     :api="albums.api"
                     :dataFields="albums.albumsFields"
@@ -13,36 +21,50 @@
                     @onRowClick="onRowClick">
                 </data-table>
 
-            </div>
-            <div class="col-sm-8 col-xs-8 col-lg-8">
+            </template>
+
+            <template v-slot:slave>
+
                 <data-table
                     :api="images.api"
                     :dataFields="images.imagesFields"
                     :pageCaption="images.imagesCaption"
                     :foreignKey="images.album_id"
                     :foreignValue="images.selectedFkValue"
+                    :currentImage="currentImage"
                     >
                 </data-table>
-            </div>
-        </div>
-    </div>
+
+            </template>
+
+
+        </MasterSlaveLayout>
+
+
 </template>
 
 <script>
 import MessagesConstants from '../../strings_constants/strings'
 import APIConstants from "../../../api/rest_api";
 import DataTable from '../../db/DataTable.vue';
+import MasterSlaveLayout from '../../../layouts/MasterSlaveLayout.vue';
+// import Viewer from '../Viewer.vue';
+import pathes from '../../../config/pathes';
 
 export default {
 
     // emits: ['setAdditionalCaption'],
 
     components: {
-        DataTable,
+        DataTable, MasterSlaveLayout
     },
 
     data() {
         return {
+
+            imageSrc: pathes.storageImagePlug,
+            currentImage: pathes.storageImagePlug,
+
             albumsReadOnly: true,
 
             //Images Widget Setup
@@ -194,7 +216,19 @@ export default {
     methods: {
         onRowClick(dataEvent) {
             this.images.selectedFkValue = dataEvent
-        }
+        },
+
+        // showDialogue() {
+        //     console.log('click')
+        //     this.$refs.viewer.showImage()
+        // },
+
+        // imageClick(event) {
+        //     console.log(event.target.src)
+
+        //     this.imageSrc = event.target.src
+        //     this.$refs.viewer.showImage()
+        // }
     },
 
 };

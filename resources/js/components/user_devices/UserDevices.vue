@@ -1,7 +1,7 @@
 <template>
     <div style="margin-top: 5.5rem">
 
-        <MasterSlave
+        <MasterSlaveLayout
             :masterWidthProp="'w-25'"
             :slaveWidthProp="'w-75'"
         >
@@ -34,7 +34,7 @@
             </template>
 
 
-        </MasterSlave>
+        </MasterSlaveLayout>
 
         <!-- <div class="row">
             <div class="col-sm-4 col-xs-4 col-lg-4">
@@ -67,14 +67,14 @@
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
 import DataTable from '../../components/db/DataTable.vue';
-import MasterSlave from '../../layouts/MasterSlave.vue';
+import MasterSlaveLayout from '../../layouts/MasterSlaveLayout.vue';
 
 export default {
 
     // emits: ['setAdditionalCaption'],
 
     components: {
-        DataTable, MasterSlave,
+        DataTable, MasterSlaveLayout,
     },
 
     data() {

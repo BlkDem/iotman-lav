@@ -2,6 +2,11 @@
     <!-- <div style="margin-top: 0.5rem">
     </div> -->
 
+    <Viewer ref="viewer" :imageSrc="imageSrc">
+
+    </Viewer>
+
+
     <common-card
         :cardCaption="pageCaption"
         :isCollapseButtonHidden="false"
@@ -70,7 +75,7 @@
                             {{ item[column].value }}
                         </div>
 
-                        <img v-if="item[column].isImage" class="w-100 p-2"
+                        <img v-if="item[column].isImage" class="w-100 p-2" @click="imageClick"
                             :src="(!item[column].isVirtualImage)?imagesPath + item[column].value:imagePlug"
                             @error="replaceByDefault"
                         />
@@ -166,6 +171,7 @@
                             <img v-if="item[column].isImage" class="device-image"
                                 :src="getImage(item[column])"
                                 @error="replaceByDefault"
+                                @click="imageClick"
                             />
 
                             <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
@@ -239,6 +245,8 @@ import AddItem from './AddDialog.vue';
 
 import TableNav from '../../components/common/TableBar/TableNav.vue';
 import TableHead from './TableHead.vue';
+import pathes from '../../config/pathes';
+import Viewer from '../imagelib/Viewer.vue';
 
 export default {
 
@@ -289,11 +297,14 @@ export default {
             Paginator,
             AddItem,
             TableNav,
-            TableHead
+            TableHead,
+            Viewer
         },
 
         data() {
             return {
+
+                currentImage: pathes.storageImagePlug,
 
                 activeCol: undefined,
                 activeRow: undefined,
@@ -308,6 +319,8 @@ export default {
 
                 imagesPath: '',
                 imagePlug: '',
+
+                imageSrc: pathes.storageImagePlug,
 
                 selectedRow: [],
 
@@ -346,6 +359,12 @@ export default {
         },
 
         methods: {
+
+            imageClick() {
+                // this.$emit('imageClick', event)
+                this.imageSrc = event.target.src
+                this.$refs.viewer.showImage()
+            },
 
             rowClick(row){
 

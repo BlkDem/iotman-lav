@@ -7,8 +7,6 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\StorageController;
 use Exception;
-// use App\Models\Image;
-// use App\Http\Controllers\ImageController;
 
 class ImageRepositoryController extends BaseController
 {

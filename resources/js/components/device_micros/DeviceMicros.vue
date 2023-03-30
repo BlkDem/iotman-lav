@@ -3,23 +3,40 @@
         <!-- {{ pageCaption }} -->
     </div>
 
-    <data-table
-        :api="devices.api"
-        :dataFields="devices.devicesFields"
-        :pageCaption="devices.devicesCaption"
-        :selectableRow="true"
-        :selectedName="devices.selectedName"
-        :readOnly="true"
-        @onRowClick="onRowClick">
-    </data-table>
 
-    <data-table
-        :api="deviceMicros.api"
-        :dataFields="deviceMicros.deviceMicrosFields"
-        :pageCaption="deviceMicros.deviceMicrosCaption"
-        :foreignKey="deviceMicros.device_id"
-        :foreignValue="devices.selectedFkValue">
-    </data-table>
+    <MasterSlaveLayout
+            :masterWidthProp="'w-25'"
+            :slaveWidthProp="'w-75'"
+        >
+
+            <template v-slot:master>
+
+                <data-table
+                    :api="devices.api"
+                    :dataFields="devices.devicesFields"
+                    :pageCaption="devices.devicesCaption"
+                    :selectableRow="true"
+                    :selectedName="devices.selectedName"
+                    :readOnly="true"
+                    @onRowClick="onRowClick">
+                </data-table>
+
+            </template>
+
+            <template v-slot:slave>
+
+                <data-table
+                    :api="deviceMicros.api"
+                    :dataFields="deviceMicros.deviceMicrosFields"
+                    :pageCaption="deviceMicros.deviceMicrosCaption"
+                    :foreignKey="deviceMicros.device_id"
+                    :foreignValue="devices.selectedFkValue">
+                </data-table>
+
+            </template>
+
+
+        </MasterSlaveLayout>
 
 
 </template>
@@ -28,10 +45,13 @@
 import DataTable from '../db/DataTable.vue';
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
+import MasterSlaveLayout from '../../layouts/MasterSlaveLayout.vue';
 
 
 export default {
-    components: {DataTable},
+    components: {
+        DataTable, MasterSlaveLayout
+    },
 
     data() {
         return {
