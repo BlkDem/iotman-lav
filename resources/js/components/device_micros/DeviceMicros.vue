@@ -18,6 +18,7 @@
                     :selectableRow="true"
                     :selectedName="devices.selectedName"
                     :readOnly="true"
+                    :isAdditionalCaption="true"
                     @onRowClick="onRowClick">
                 </data-table>
 

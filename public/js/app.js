@@ -23777,6 +23777,28 @@ __webpack_require__.r(__webpack_exports__);
       type: Boolean,
       "default": false
     }
+  },
+  data: function data() {
+    return {
+      cardId: null
+    };
+  },
+  created: function created() {
+    this.cardId = this.makeid(5);
+    console.log(this.cardId);
+  },
+  methods: {
+    makeid: function makeid(length) {
+      var result = '';
+      var characters = 'abcdefghijklmnopqrstuvwxyz';
+      var charactersLength = characters.length;
+      var counter = 0;
+      while (counter < length) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        counter += 1;
+      }
+      return result;
+    }
   }
 });
 
@@ -26959,57 +26981,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "card card-border my-4"
+  "class": "card my-3"
 };
 var _hoisted_2 = {
-  "class": "card-body border-4 border-top border-bottom rounded-bottom rounded-top border-secondary"
+  "class": "card-header"
 };
-var _hoisted_3 = {
+var _hoisted_3 = ["href"];
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fa fa-solid fa-caret-down mx-2"
+}, null, -1 /* HOISTED */);
+var _hoisted_5 = ["id"];
+var _hoisted_6 = {
+  "class": "card-body"
+};
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "card-caption"
-};
-var _hoisted_4 = {
-  "class": "card-title align-left px-2"
-};
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-caret-down"
-}, null, -1 /* HOISTED */);
-var _hoisted_6 = [_hoisted_5];
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-caret-up"
-}, null, -1 /* HOISTED */);
-var _hoisted_8 = [_hoisted_7];
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h5 class=\"card-title align-left px-2 \">\n                        {{ cardCaption }}\n                        <span class=\"text-light\" :class=\"{'hide': !isAdditionalCaption}\">\n                            - {{ cardCaptionAdd }}\n                        </span>\n\n                    </h5> "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div :class=\"{'hide': isCollapseButtonHidden ?? false}\">\n                        <button class=\"btn btn-primary btn-rounded btn-sm\" :class=\"{'hide': !isCollapsed}\"\n                            @click=\"isCollapsed=!isCollapsed\">\n                            <i class=\"fas fa-caret-down\"></i>\n                        </button>\n                        <button class=\"btn btn-primary btn-rounded btn-sm\" :class=\"{'hide': isCollapsed}\"\n                            @click=\"isCollapsed=!isCollapsed\">\n                            <i class=\"fas fa-caret-up\"></i>\n                        </button>\n                    </div> ")], -1 /* HOISTED */);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _$props$isCollapseBut;
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaption) + " ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-light", {
-      'hide': !$props.isAdditionalCaption
-    }])
-  }, " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaptionAdd), 3 /* TEXT, CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h3 ref=\"cardCaptionAdd\" class=\"card-title align-left px-2\"\n                    :class=\"{'hide': isAdditionalCaption}\">\n                    {{ cardCaptionAdd }}\n                </h3> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"card card-border my-4\">\n        <div class=\"card-body border-4 border-top border-bottom rounded-bottom rounded-top border-secondary\">\n            <div class=\"card-caption\">\n\n                <h5 class=\"card-title align-left px-2 \"\n                >\n                    {{ cardCaption }}\n                    <span class=\"text-light\"\n                        :class=\"{'hide': !isAdditionalCaption}\">\n                        - {{ cardCaptionAdd }}\n                    </span>\n\n                </h5>\n\n                <div :class=\"{'hide': isCollapseButtonHidden ?? false}\">\n                    <button class=\"btn btn-primary btn-rounded btn-sm\" :class=\"{'hide': !isCollapsed}\"\n                        @click=\"isCollapsed=!isCollapsed\">\n                        <i class=\"fas fa-caret-down\"></i>\n                    </button>\n                    <button class=\"btn btn-primary btn-rounded btn-sm\" :class=\"{'hide': isCollapsed}\"\n                        @click=\"isCollapsed=!isCollapsed\">\n                        <i class=\"fas fa-caret-up\"></i>\n                    </button>\n                </div>\n            </div>\n\n\n            <div id=\"card-header\" :class=\"{'mx-2': margins, 'collapse': isCollapsed}\">\n                <slot>Loading...</slot>\n            </div>\n        </div>\n    </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    style: {
+      "text-decoration": "none"
+    },
+    "data-toggle": "collapse",
+    href: '#' + $data.cardId,
+    "aria-expanded": "true",
+    "aria-controls": "collapse-example",
+    id: "heading-example",
+    "class": "d-block"
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <i class=\"fa fa-solid fa-caret-right\"></i> "), _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaption) + " ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-      'hide': (_$props$isCollapseBut = $props.isCollapseButtonHidden) !== null && _$props$isCollapseBut !== void 0 ? _$props$isCollapseBut : false
+      'hide': !$props.isAdditionalCaption
     })
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-rounded btn-sm", {
-      'hide': !$props.isCollapsed
-    }]),
-    onClick: _cache[0] || (_cache[0] = function ($event) {
-      return $props.isCollapsed = !$props.isCollapsed;
-    })
-  }, _hoisted_6, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-rounded btn-sm", {
-      'hide': $props.isCollapsed
-    }]),
-    onClick: _cache[1] || (_cache[1] = function ($event) {
-      return $props.isCollapsed = !$props.isCollapsed;
-    })
-  }, _hoisted_8, 2 /* CLASS */)], 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["py-4 align-left", {
+  }, " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaptionAdd), 3 /* TEXT, CLASS */)], 8 /* PROPS */, _hoisted_3)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    id: $data.cardId,
+    "class": "collapse show",
+    "aria-labelledby": "heading-example"
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
       'mx-2': $props.margins,
       'collapse': $props.isCollapsed
-    }])
+    })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {}, function () {
     return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Loading...")];
-  })], 2 /* CLASS */)])]);
+  })], 2 /* CLASS */)])], 8 /* PROPS */, _hoisted_5)])], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */);
 }
 
 /***/ }),
@@ -27666,7 +27681,7 @@ var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "aria-hidden": "true"
 }, null, -1 /* HOISTED */);
 var _hoisted_12 = {
-  "class": "my-2"
+  "class": "my-3"
 };
 var _hoisted_13 = ["id", "onClick"];
 var _hoisted_14 = {
@@ -27749,7 +27764,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onRowClick: $options.rowClick
       }, null, 8 /* PROPS */, ["compactView", "dataFields", "foreignKey", "foreignValue", "readOnly", "onGetData", "onSetCompactView", "onAddEvent", "onUpdateSortedData", "onUpdateFilteredData", "onRowClick"]), _hoisted_1, !$data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredItems, function (item, key) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["col-sm-4 col-xs-4 col-lg-4 p-2 fade-in", {
+          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["col-sm-4 col-xs-4 col-lg-4 p-2", {
             'border-info bg-warning': $data.selectedRow[key] === true,
             'border-primary text-secondary': $data.selectedRow[key] === false || $data.selectedRow[key] == null
           }]),
@@ -27812,7 +27827,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onUpdateSortedData: $options.updateSortedData
       }, null, 8 /* PROPS */, ["fieldsCaptions", "onUpdateSortedData"]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredItems, function (item, key) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["card mb-1 w-100 fade-in", {
+          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["card mb-1 w-100", {
             'cursor-pointer': $props.readOnly,
             'border-info bg-warning text-dark': $data.selectedRow[key] === true,
             'border-primary': $data.selectedRow[key] === false || $data.selectedRow[key] == null
@@ -28117,6 +28132,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         selectableRow: true,
         selectedName: $data.devices.selectedName,
         readOnly: true,
+        isAdditionalCaption: true,
         onOnRowClick: $options.onRowClick
       }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "selectedName", "onOnRowClick"])];
     }),
@@ -37068,7 +37084,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.card-caption {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.hide {\n    display: none;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.card-caption {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.hide {\n    display: none;\n}\n.card-header .fa {\n  transition: .3s transform ease-in-out;\n}\n.card-header .collapsed .fa {\n  transform: rotate(-90deg);\n}\na {\n    text-decoration: none;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

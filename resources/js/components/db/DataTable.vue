@@ -38,7 +38,7 @@
         </div>
 
         <div class="row my-2" v-if="!compactView">
-            <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(item, key) in filteredItems"
+            <div class="col-sm-4 col-xs-4 col-lg-4 p-2" v-for="(item, key) in filteredItems"
                 v-bind:key="key" v-bind:id="item.id.value"
                 :class="{
                     'border-info bg-warning': selectedRow[key]===true,
@@ -114,14 +114,14 @@
         </div>
 
         <!-- compact view -->
-        <div v-show="compactView" class="my-2" >
+        <div v-show="compactView" class="my-3" >
             <TableHead
                 :fieldsCaptions="dataFields"
                 @updateSortedData="updateSortedData"
             >
 
             </TableHead>
-            <div class="card mb-1 w-100 fade-in"
+            <div class="card mb-1 w-100"
                 v-for="(item, key) in filteredItems" v-bind:key="key"
                 v-bind:id="item.id.value"
                 :class="{
