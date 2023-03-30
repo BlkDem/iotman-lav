@@ -57,12 +57,12 @@ export default {
     props: {
         masterWidthProp: {
             type: String,
-            default: 'w-25'
+            default: 'w-33'
         },
 
         slaveWidthProp: {
             type: String,
-            default: 'w-75'
+            default: 'w-67'
         }
     },
 
@@ -76,22 +76,22 @@ export default {
 
             masterWidth: {
                 type: String,
-                default: 'w-25'
+                default: 'w-33'
             },
 
             slaveWidth: {
                 type: String,
-                default: 'w-75'
+                default: 'w-67'
             },
 
             masterWidthStore: {
                 type: String,
-                default: 'w-25'
+                default: 'w-33'
             },
 
             slaveWidthStore: {
                 type: String,
-                default: 'w-75'
+                default: 'w-67'
             },
 
             selected2: {
@@ -101,12 +101,12 @@ export default {
 
             selected3: {
                 type: Boolean,
-                default: false
+                default: true
             },
 
             selected4: {
                 type: Boolean,
-                default: true
+                default: false
             }
 
         }
@@ -158,9 +158,10 @@ export default {
 
         this.masterWidth = this.masterWidthProp
         this.slaveWidth = this.slaveWidthProp
-        this.changeWidth(this.masterWidth, this.slaveWidth)
         this.layoutVertical = false
-        this.selected4 = true
+        this.selected3 = true
+
+        this.changeWidth(this.masterWidth, this.slaveWidth, 3)
 
         // console.log(this.masterWidth, this.slaveWidth)
     }

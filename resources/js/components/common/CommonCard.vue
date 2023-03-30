@@ -3,22 +3,27 @@
         <div class="card-body border-4 border-top border-bottom rounded-bottom rounded-top border-secondary">
             <div class="card-caption">
 
-                <h3 class="card-title align-left px-2 "
+                <h5 class="card-title align-left px-2 "
                 >
                     {{ cardCaption }}
-                </h3>
+                    <span class="text-light"
+                        :class="{'hide': !isAdditionalCaption}">
+                        - {{ cardCaptionAdd }}
+                    </span>
 
-                <h3 ref="cardCaptionAdd" class="card-title align-left px-2"
+                </h5>
+
+                <!-- <h3 ref="cardCaptionAdd" class="card-title align-left px-2"
                     :class="{'hide': isAdditionalCaption}">
                     {{ cardCaptionAdd }}
-                </h3>
+                </h3> -->
 
                 <div :class="{'hide': isCollapseButtonHidden ?? false}">
-                    <button class="btn btn-primary btn-rounded" :class="{'hide': !isCollapsed}"
+                    <button class="btn btn-primary btn-rounded btn-sm" :class="{'hide': !isCollapsed}"
                         @click="isCollapsed=!isCollapsed">
                         <i class="fas fa-caret-down"></i>
                     </button>
-                    <button class="btn btn-primary btn-rounded" :class="{'hide': isCollapsed}"
+                    <button class="btn btn-primary btn-rounded btn-sm" :class="{'hide': isCollapsed}"
                         @click="isCollapsed=!isCollapsed">
                         <i class="fas fa-caret-up"></i>
                     </button>
@@ -64,7 +69,7 @@ export default {
 
         isAdditionalCaption: {
             type: Boolean,
-            default: true
+            default: false
         }
     },
 

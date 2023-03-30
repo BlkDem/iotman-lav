@@ -8,7 +8,6 @@
         <div class="col-sm-3 col-lg-3 col-md-3">
             <CommonCard ref="menuCard"
                 :cardCaption="menuBlockCaption"
-                :isAdditionalCaption="true"
                 :margins="margins">
                 <AppMenu ref="homeAppMenu" :margins="margins" :isDropdowns="false"></AppMenu>
             </CommonCard>

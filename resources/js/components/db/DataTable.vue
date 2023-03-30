@@ -11,7 +11,8 @@
         :cardCaption="pageCaption"
         :isCollapseButtonHidden="false"
         :cardCaptionAdd="cardCaptionAdd"
-        :isAdditionalCaption="readOnly"
+        :isAdditionalCaption="isAdditionalCaption"
+        :isReadOnly="readOnly"
     >
         <AddItem ref="addItem" />
 
@@ -286,6 +287,10 @@ export default {
             },
 
             readOnly: {
+                type: Boolean,
+                default: false
+            },
+            isAdditionalCaption: {
                 type: Boolean,
                 default: false
             },

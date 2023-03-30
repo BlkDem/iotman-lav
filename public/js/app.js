@@ -23775,7 +23775,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     isAdditionalCaption: {
       type: Boolean,
-      "default": true
+      "default": false
     }
   }
 });
@@ -24558,6 +24558,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       "default": false
     },
     readOnly: {
+      type: Boolean,
+      "default": false
+    },
+    isAdditionalCaption: {
       type: Boolean,
       "default": false
     }
@@ -26369,6 +26373,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       usersReadOnly: true,
+      additionalCaption: true,
       //Images Widget Setup
       userDevices: {
         userDevicesCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].USER_DEVICES,
@@ -26508,7 +26513,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     onRowClick: function onRowClick(dataEvent) {
-      console.log(dataEvent);
+      // console.log(dataEvent)
       this.userDevices.selectedFkValue = dataEvent;
     }
   }
@@ -26662,11 +26667,11 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     masterWidthProp: {
       type: String,
-      "default": 'w-25'
+      "default": 'w-33'
     },
     slaveWidthProp: {
       type: String,
-      "default": 'w-75'
+      "default": 'w-67'
     }
   },
   data: function data() {
@@ -26677,19 +26682,19 @@ __webpack_require__.r(__webpack_exports__);
       },
       masterWidth: {
         type: String,
-        "default": 'w-25'
+        "default": 'w-33'
       },
       slaveWidth: {
         type: String,
-        "default": 'w-75'
+        "default": 'w-67'
       },
       masterWidthStore: {
         type: String,
-        "default": 'w-25'
+        "default": 'w-33'
       },
       slaveWidthStore: {
         type: String,
-        "default": 'w-75'
+        "default": 'w-67'
       },
       selected2: {
         type: Boolean,
@@ -26697,11 +26702,11 @@ __webpack_require__.r(__webpack_exports__);
       },
       selected3: {
         type: Boolean,
-        "default": false
+        "default": true
       },
       selected4: {
         type: Boolean,
-        "default": true
+        "default": false
       }
     };
   },
@@ -26746,9 +26751,9 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.masterWidth = this.masterWidthProp;
     this.slaveWidth = this.slaveWidthProp;
-    this.changeWidth(this.masterWidth, this.slaveWidth);
     this.layoutVertical = false;
-    this.selected4 = true;
+    this.selected3 = true;
+    this.changeWidth(this.masterWidth, this.slaveWidth, 3);
 
     // console.log(this.masterWidth, this.slaveWidth)
   }
@@ -26975,24 +26980,23 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_8 = [_hoisted_7];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _$props$isCollapseBut;
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaption), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
-    ref: "cardCaptionAdd",
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["card-title align-left px-2", {
-      'hide': $props.isAdditionalCaption
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaption) + " ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-light", {
+      'hide': !$props.isAdditionalCaption
     }])
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaptionAdd), 3 /* TEXT, CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  }, " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaptionAdd), 3 /* TEXT, CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h3 ref=\"cardCaptionAdd\" class=\"card-title align-left px-2\"\n                    :class=\"{'hide': isAdditionalCaption}\">\n                    {{ cardCaptionAdd }}\n                </h3> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
       'hide': (_$props$isCollapseBut = $props.isCollapseButtonHidden) !== null && _$props$isCollapseBut !== void 0 ? _$props$isCollapseBut : false
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-rounded", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-rounded btn-sm", {
       'hide': !$props.isCollapsed
     }]),
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $props.isCollapsed = !$props.isCollapsed;
     })
   }, _hoisted_6, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-rounded", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-rounded btn-sm", {
       'hide': $props.isCollapsed
     }]),
     onClick: _cache[1] || (_cache[1] = function ($event) {
@@ -27723,7 +27727,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     cardCaption: $props.pageCaption,
     isCollapseButtonHidden: false,
     cardCaptionAdd: $data.cardCaptionAdd,
-    isAdditionalCaption: $props.readOnly
+    isAdditionalCaption: $props.isAdditionalCaption,
+    isReadOnly: $props.readOnly
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddItem, {
@@ -27896,7 +27901,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <MyMqtt></MyMqtt> ")];
     }),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["cardCaption", "cardCaptionAdd", "isAdditionalCaption"])], 64 /* STABLE_FRAGMENT */);
+  }, 8 /* PROPS */, ["cardCaption", "cardCaptionAdd", "isAdditionalCaption", "isReadOnly"])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -28101,8 +28106,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_data_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("data-table");
   var _component_MasterSlaveLayout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("MasterSlaveLayout");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_MasterSlaveLayout, {
-    masterWidthProp: 'w-25',
-    slaveWidthProp: 'w-75'
+    masterWidthProp: 'w-33',
+    slaveWidthProp: 'w-67'
   }, {
     master: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
@@ -28493,8 +28498,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_data_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("data-table");
   var _component_MasterSlaveLayout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("MasterSlaveLayout");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button @click=\"showDialogue\">123</button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_MasterSlaveLayout, {
-    masterWidthProp: 'w-25',
-    slaveWidthProp: 'w-75'
+    masterWidthProp: 'w-33',
+    slaveWidthProp: 'w-67'
   }, {
     master: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
@@ -28504,6 +28509,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         selectableRow: true,
         selectedName: $data.albums.selectedName,
         readOnly: $data.albumsReadOnly,
+        isAdditionalCaption: true,
         onOnRowClick: $options.onRowClick
       }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "selectedName", "readOnly", "onOnRowClick"])];
     }),
@@ -28658,8 +28664,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_data_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("data-table");
   var _component_MasterSlaveLayout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("MasterSlaveLayout");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_MasterSlaveLayout, {
-    masterWidthProp: 'w-25',
-    slaveWidthProp: 'w-75'
+    masterWidthProp: 'w-33',
+    slaveWidthProp: 'w-67'
   }, {
     master: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
@@ -28669,8 +28675,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         selectableRow: true,
         selectedName: $data.users.selectedName,
         readOnly: $data.usersReadOnly,
+        isAdditionalCaption: $data.additionalCaption,
         onOnRowClick: $options.onRowClick
-      }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "selectedName", "readOnly", "onOnRowClick"])];
+      }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "selectedName", "readOnly", "isAdditionalCaption", "onOnRowClick"])];
     }),
     slave: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
@@ -28682,7 +28689,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignKey", "foreignValue"])];
     }),
     _: 1 /* STABLE */
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"row\">\n            <div class=\"col-sm-4 col-xs-4 col-lg-4\">\n                <data-table\n                    :api=\"users.api\"\n                    :dataFields=\"users.usersFields\"\n                    :pageCaption=\"users.usersCaption\"\n                    :selectableRow=\"true\"\n                    :selectedName=\"users.selectedName\"\n                    :readOnly=\"usersReadOnly\"\n                    @onRowClick=\"onRowClick\">\n                </data-table>\n\n            </div>\n            <div class=\"col-sm-8 col-xs-8 col-lg-8\">\n                <data-table\n                    :api=\"userDevices.api\"\n                    :dataFields=\"userDevices.userDevicesFields\"\n                    :pageCaption=\"userDevices.userDevicesCaption\"\n                    :foreignKey=\"userDevices.user_id\"\n                    :foreignValue=\"userDevices.selectedFkValue\"\n                    >\n                </data-table>\n            </div>\n        </div> ")]);
+  })]);
 }
 
 /***/ }),
@@ -28859,7 +28866,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.pageCaption), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" page menu "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CommonCard, {
     ref: "menuCard",
     cardCaption: $data.menuBlockCaption,
-    isAdditionalCaption: true,
     margins: $data.margins
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {

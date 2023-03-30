@@ -5,8 +5,8 @@
     <!-- <button @click="showDialogue">123</button> -->
 
     <MasterSlaveLayout
-            :masterWidthProp="'w-25'"
-            :slaveWidthProp="'w-75'"
+            :masterWidthProp="'w-33'"
+            :slaveWidthProp="'w-67'"
         >
 
             <template v-slot:master>
@@ -18,6 +18,7 @@
                     :selectableRow="true"
                     :selectedName="albums.selectedName"
                     :readOnly="albumsReadOnly"
+                    :isAdditionalCaption="true"
                     @onRowClick="onRowClick">
                 </data-table>
 

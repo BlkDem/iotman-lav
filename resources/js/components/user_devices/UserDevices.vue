@@ -2,8 +2,8 @@
     <div style="margin-top: 5.5rem">
 
         <MasterSlaveLayout
-            :masterWidthProp="'w-25'"
-            :slaveWidthProp="'w-75'"
+            :masterWidthProp="'w-33'"
+            :slaveWidthProp="'w-67'"
         >
 
             <template v-slot:master>
@@ -15,6 +15,7 @@
                     :selectableRow="true"
                     :selectedName="users.selectedName"
                     :readOnly="usersReadOnly"
+                    :isAdditionalCaption="additionalCaption"
                     @onRowClick="onRowClick">
                 </data-table>
 
@@ -28,7 +29,7 @@
                     :pageCaption="userDevices.userDevicesCaption"
                     :foreignKey="userDevices.user_id"
                     :foreignValue="userDevices.selectedFkValue"
-                    >
+                >
                 </data-table>
 
             </template>
@@ -36,30 +37,6 @@
 
         </MasterSlaveLayout>
 
-        <!-- <div class="row">
-            <div class="col-sm-4 col-xs-4 col-lg-4">
-                <data-table
-                    :api="users.api"
-                    :dataFields="users.usersFields"
-                    :pageCaption="users.usersCaption"
-                    :selectableRow="true"
-                    :selectedName="users.selectedName"
-                    :readOnly="usersReadOnly"
-                    @onRowClick="onRowClick">
-                </data-table>
-
-            </div>
-            <div class="col-sm-8 col-xs-8 col-lg-8">
-                <data-table
-                    :api="userDevices.api"
-                    :dataFields="userDevices.userDevicesFields"
-                    :pageCaption="userDevices.userDevicesCaption"
-                    :foreignKey="userDevices.user_id"
-                    :foreignValue="userDevices.selectedFkValue"
-                    >
-                </data-table>
-            </div>
-        </div> -->
     </div>
 </template>
 
@@ -80,6 +57,7 @@ export default {
     data() {
         return {
             usersReadOnly: true,
+            additionalCaption: true,
 
             //Images Widget Setup
             userDevices: {
@@ -258,7 +236,7 @@ export default {
 
     methods: {
         onRowClick(dataEvent) {
-            console.log(dataEvent)
+            // console.log(dataEvent)
             this.userDevices.selectedFkValue = dataEvent
         }
     },

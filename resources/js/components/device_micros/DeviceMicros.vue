@@ -5,8 +5,8 @@
 
 
     <MasterSlaveLayout
-            :masterWidthProp="'w-25'"
-            :slaveWidthProp="'w-75'"
+            :masterWidthProp="'w-33'"
+            :slaveWidthProp="'w-67'"
         >
 
             <template v-slot:master>
