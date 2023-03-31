@@ -27,7 +27,7 @@
                     :api="userDevices.api"
                     :dataFields="userDevices.userDevicesFields"
                     :pageCaption="userDevices.userDevicesCaption"
-                    :foreignKey="userDevices.user_id"
+                    :isSlave="true"
                     :foreignValue="userDevices.selectedFkValue"
                 >
                 </data-table>

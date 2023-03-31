@@ -28,9 +28,9 @@
 
                 <data-table
                     :api="deviceMicros.api"
+                    :isSlave="true"
                     :dataFields="deviceMicros.deviceMicrosFields"
                     :pageCaption="deviceMicros.deviceMicrosCaption"
-                    :foreignKey="deviceMicros.device_id"
                     :foreignValue="devices.selectedFkValue">
                 </data-table>
 
@@ -77,7 +77,8 @@ export default {
                         isVirtualImage: true,
                         isHighLight: true,
                         isSortable: false,
-                        VirtualImage: 'fa-solid fa-images fa-2x',
+                        VirtualImage: 'fas fa-sun fa-2x',
+                        selectedVirtualImage: 'fas fa-sun fa-2x',
                         columnsCount: 2
                     },
 

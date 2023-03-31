@@ -123,13 +123,13 @@ export default {
     },
 
     created() {
-        this.cardId = this.makeid(5)
-        console.log(this.cardId)
+        this.cardId = this.makeId(8)
+        // console.log(this.cardId)
     },
 
     methods: {
 
-        makeid(length) {
+        makeId(length) {
             let result = '';
             const characters = 'abcdefghijklmnopqrstuvwxyz';
             const charactersLength = characters.length;
@@ -138,7 +138,7 @@ export default {
                 result += characters.charAt(Math.floor(Math.random() * charactersLength));
                 counter += 1;
             }
-            return result;
+            return 'id_' + result;
         },
     }
 
@@ -150,17 +150,18 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
 }
+
 .hide {
     display: none;
 }
 
 .card-header .fa {
-  transition: .3s transform ease-in-out;
+    transition: .3s transform ease-in-out;
 }
+
 .card-header .collapsed .fa {
-  transform: rotate(-90deg);
+    transform: rotate(-90deg);
 }
 
 a {

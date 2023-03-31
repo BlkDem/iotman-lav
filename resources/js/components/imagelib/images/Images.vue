@@ -30,7 +30,7 @@
                     :api="images.api"
                     :dataFields="images.imagesFields"
                     :pageCaption="images.imagesCaption"
-                    :foreignKey="images.album_id"
+                    :isSlave="true"
                     :foreignValue="images.selectedFkValue"
                     :currentImage="currentImage"
                     >
@@ -64,7 +64,7 @@ export default {
         return {
 
             imageSrc: pathes.storageImagePlug,
-            currentImage: pathes.storageImagePlug,
+            currentImage: '',
 
             albumsReadOnly: true,
 
@@ -153,7 +153,8 @@ export default {
                         isVirtualImage: true,
                         isHighLight: true,
                         isSortable: false,
-                        VirtualImage: 'fa-solid fa-images fa-2x',
+                        VirtualImage: 'fa-solid fa-folder-closed fa-2x',
+                        selectedVirtualImage: 'fa-solid fa-folder-open fa-2x',
                         columnsCount: 2
                     },
 

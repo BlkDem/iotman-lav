@@ -51,7 +51,7 @@ import DataTable from '../../db/DataTable.vue';
                             isVirtualImage: true,
                             isHighLight: true,
                             isSortable: false,
-                            VirtualImage: 'fa-solid fa-images fa-2x',
+                            VirtualImage: 'fa-solid fa-folder-closed fa-2x',
                             columnsCount: 1
                         },
 

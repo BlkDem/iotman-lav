@@ -23784,11 +23784,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.cardId = this.makeid(5);
-    console.log(this.cardId);
+    this.cardId = this.makeId(8);
+    // console.log(this.cardId)
   },
+
   methods: {
-    makeid: function makeid(length) {
+    makeId: function makeId(length) {
       var result = '';
       var characters = 'abcdefghijklmnopqrstuvwxyz';
       var charactersLength = characters.length;
@@ -23797,7 +23798,7 @@ __webpack_require__.r(__webpack_exports__);
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
         counter += 1;
       }
-      return result;
+      return 'id_' + result;
     }
   }
 });
@@ -24104,7 +24105,7 @@ __webpack_require__.r(__webpack_exports__);
     SortComp: _SortComp_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     FilterComp: _FilterComp_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  emits: ["setCompactView", "addEvent", "doSort", "doFilter", "updateSortedData", "updateFilteredData", 'getTableData'],
+  emits: ["setCompactView", "addEvent", "doSort", "doFilter", "updateSortedData", "updateFilteredData", 'getData'],
   props: {
     dataFields: {
       type: Array
@@ -24157,8 +24158,8 @@ __webpack_require__.r(__webpack_exports__);
       localStorage.setItem('CompactView', value);
       this.$emit('setCompactView', value);
     },
-    getTableData: function getTableData() {
-      this.$emit('getTableData');
+    getData: function getData() {
+      this.$emit('getData');
     }
   },
   watch: {
@@ -24567,13 +24568,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       type: String,
       "default": ''
     },
-    foreignKey: {
+    currentImage: {
       type: String,
       "default": ''
     },
+    // foreignKey: {
+    //     type: String,
+    //     default: ''
+    // },
+
     foreignValue: {
       type: Number,
       "default": 0
+    },
+    isSlave: {
+      type: Boolean,
+      "default": false
     },
     selectableRow: {
       type: Boolean,
@@ -24598,7 +24608,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      currentImage: _config_pathes__WEBPACK_IMPORTED_MODULE_3__["default"].storageImagePlug,
+      // currentImage: pathes.storageImagePlug,
+
       activeCol: undefined,
       activeRow: undefined,
       isEsc: false,
@@ -24640,6 +24651,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    getVirtualImage: function getVirtualImage(selected, item) {
+      // const _a = (selected)?item.selectedVirtualImage:item.VirtualImage
+      // if (item.selectedVirtualImage === undefined) item.selectedVirtualImage =
+      // console.log(selected, _a)
+      return selected ? item.selectedVirtualImage : item.VirtualImage;
+    },
     imageClick: function imageClick() {
       // this.$emit('imageClick', event)
       this.imageSrc = event.target.src;
@@ -24755,6 +24772,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       try {
         for (var field in this.dataFields) {
+          var _dataField$selectedVi;
           var dataField = this.dataFields[field];
           var _editable = dataField.isEditable; //possible edit cell by text click
           var _sortable = dataField.isSortable; //field can sorted
@@ -24764,25 +24782,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           var _highlight = dataField.isHighLight; //highlight another color field 'bg-info' class
           var _hidden = dataField.isHidden; //hidden field 'hide' class
           var _colscount = dataField.columnsCount; //col-* col-ls-* ... value
-          var _virtual = dataField === null || dataField === void 0 ? void 0 : dataField.isVirtualImage; //for abstract images like 'albums'
-          var _virtualimage = dataField === null || dataField === void 0 ? void 0 : dataField.VirtualImage; //for abstract images like 'albums'
-          var _fieldignore = dataField === null || dataField === void 0 ? void 0 : dataField.isFieldIgnore; //for abstract images like 'albums'
-          var _isLookup = dataField === null || dataField === void 0 ? void 0 : dataField.isLookup; //field links to another object
-          var _lookupApi = dataField === null || dataField === void 0 ? void 0 : dataField.lookupApi; //another object get api
-          var _lookupId = dataField === null || dataField === void 0 ? void 0 : dataField.lookupId; //field link key (FK)
-          var _displayName = dataField === null || dataField === void 0 ? void 0 : dataField.displayName; //Display Name Field
+          var _virtual = dataField.isVirtualImage; //for abstract images like 'albums'
+          var _virtualimage = dataField.VirtualImage; //for abstract images like 'albums'
+          var _selectedvirtualimage = (_dataField$selectedVi = dataField.selectedVirtualImage) !== null && _dataField$selectedVi !== void 0 ? _dataField$selectedVi : dataField.VirtualImage; //for abstract images like 'albums' (selected)
+          var _fieldignore = dataField.isFieldIgnore; //for abstract images like 'albums'
+          var _isLookup = dataField.isLookup; //field links to another object
+          var _lookupApi = dataField.lookupApi; //another object get api
+          var _lookupId = dataField.lookupId; //field link key (FK)
+          var _displayName = dataField.displayName; //Display Name Field
 
           // console.log(dataField)
           // const newListItem = _item  //newList[itemRow]
 
           // console.log(this.dataFields, _value[dataField.fieldName])
-          var _a = dataField.fieldName != null ? _value[dataField.fieldName] : '';
+          // const _a = (dataField.fieldName != null)?_value[dataField.fieldName]:''
+
           newListItemData[dataField.fieldName] = {
-            value: _a,
+            value: dataField.fieldName != null ? _value[dataField.fieldName] : '',
             lookupValue: dataField.displayName != null ? _value[dataField.displayName] : '',
             // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
             displayName: _displayName,
             VirtualImage: _virtualimage,
+            selectedVirtualImage: _selectedvirtualimage,
             isFieldIgnore: _fieldignore,
             isEditable: _editable,
             isText: _text,
@@ -24828,8 +24849,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _currentPage = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
               _itemsPerPage = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : 5;
+              if (!(_this3.isSlave && !_this3.foreignValue > 0)) {
+                _context.next = 4;
+                break;
+              }
+              return _context.abrupt("return");
+            case 4:
+              // console.log('slave=', this.isSlave)
               fkValue = _this3.foreignValue > 0 ? '/' + _this3.foreignValue : ''; // console.log('fk: ', fkValue)
-              _context.next = 5;
+              _context.next = 7;
               return axios.get(_this3.api.get + _currentPage + "/" + _itemsPerPage + fkValue).then(function (response) {
                 _this3.Items = _this3.populateListItems(response.data.data);
                 _this3.filteredItems = _this3.Items;
@@ -24849,7 +24877,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   window.location.href = "/login";
                 }
               });
-            case 5:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -25128,7 +25156,8 @@ __webpack_require__.r(__webpack_exports__);
           isVirtualImage: true,
           isHighLight: true,
           isSortable: false,
-          VirtualImage: 'fa-solid fa-images fa-2x',
+          VirtualImage: 'fas fa-sun fa-2x',
+          selectedVirtualImage: 'fas fa-sun fa-2x',
           columnsCount: 2
         }, {
           fieldName: 'id',
@@ -25888,7 +25917,7 @@ __webpack_require__.r(__webpack_exports__);
           isVirtualImage: true,
           isHighLight: true,
           isSortable: false,
-          VirtualImage: 'fa-solid fa-images fa-2x',
+          VirtualImage: 'fa-solid fa-folder-closed fa-2x',
           columnsCount: 1
         }, {
           fieldName: 'id',
@@ -25971,7 +26000,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       imageSrc: _config_pathes__WEBPACK_IMPORTED_MODULE_4__["default"].storageImagePlug,
-      currentImage: _config_pathes__WEBPACK_IMPORTED_MODULE_4__["default"].storageImagePlug,
+      currentImage: '',
       albumsReadOnly: true,
       //Images Widget Setup
       images: {
@@ -26041,7 +26070,8 @@ __webpack_require__.r(__webpack_exports__);
           isVirtualImage: true,
           isHighLight: true,
           isSortable: false,
-          VirtualImage: 'fa-solid fa-images fa-2x',
+          VirtualImage: 'fa-solid fa-folder-closed fa-2x',
+          selectedVirtualImage: 'fa-solid fa-folder-open fa-2x',
           columnsCount: 2
         }, {
           fieldName: 'id',
@@ -27352,7 +27382,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, _hoisted_11)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary btn-sm",
     onClick: _cache[3] || (_cache[3] = function () {
-      return $options.getTableData && $options.getTableData.apply($options, arguments);
+      return $options.getData && $options.getData.apply($options, arguments);
     })
   }, _hoisted_13)])])])]);
 }
@@ -27753,7 +27783,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_table_nav, {
         compactView: $data.compactView,
         dataFields: $props.dataFields,
-        foreignKey: $props.foreignKey,
         foreignValue: $props.foreignValue,
         readOnly: $props.readOnly,
         onGetData: $options.getData,
@@ -27762,7 +27791,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onUpdateSortedData: $options.updateSortedData,
         onUpdateFilteredData: $options.updateFilteredData,
         onRowClick: $options.rowClick
-      }, null, 8 /* PROPS */, ["compactView", "dataFields", "foreignKey", "foreignValue", "readOnly", "onGetData", "onSetCompactView", "onAddEvent", "onUpdateSortedData", "onUpdateFilteredData", "onRowClick"]), _hoisted_1, !$data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredItems, function (item, key) {
+      }, null, 8 /* PROPS */, ["compactView", "dataFields", "foreignValue", "readOnly", "onGetData", "onSetCompactView", "onAddEvent", "onUpdateSortedData", "onUpdateFilteredData", "onRowClick"]), _hoisted_1, !$data.compactView ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filteredItems, function (item, key) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["col-sm-4 col-xs-4 col-lg-4 p-2", {
             'border-info bg-warning': $data.selectedRow[key] === true,
@@ -27863,7 +27892,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               'text-info': item[column].isHighLight
             })
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(item[column].VirtualImage)
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)($options.getVirtualImage($data.selectedRow[key], item[column]))
           }, null, 2 /* CLASS */)], 2 /* CLASS */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), item[column].isImage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
             key: 3,
             "class": "device-image",
@@ -28139,11 +28168,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     slave: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
         api: $data.deviceMicros.api,
+        isSlave: true,
         dataFields: $data.deviceMicros.deviceMicrosFields,
         pageCaption: $data.deviceMicros.deviceMicrosCaption,
-        foreignKey: $data.deviceMicros.device_id,
         foreignValue: $data.devices.selectedFkValue
-      }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignKey", "foreignValue"])];
+      }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignValue"])];
     }),
     _: 1 /* STABLE */
   })], 64 /* STABLE_FRAGMENT */);
@@ -28534,10 +28563,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         api: $data.images.api,
         dataFields: $data.images.imagesFields,
         pageCaption: $data.images.imagesCaption,
-        foreignKey: $data.images.album_id,
+        isSlave: true,
         foreignValue: $data.images.selectedFkValue,
         currentImage: $data.currentImage
-      }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignKey", "foreignValue", "currentImage"])];
+      }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignValue", "currentImage"])];
     }),
     _: 1 /* STABLE */
   })], 64 /* STABLE_FRAGMENT */);
@@ -28700,9 +28729,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         api: $data.userDevices.api,
         dataFields: $data.userDevices.userDevicesFields,
         pageCaption: $data.userDevices.userDevicesCaption,
-        foreignKey: $data.userDevices.user_id,
+        isSlave: true,
         foreignValue: $data.userDevices.selectedFkValue
-      }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignKey", "foreignValue"])];
+      }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignValue"])];
     }),
     _: 1 /* STABLE */
   })]);
@@ -37084,7 +37113,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.card-caption {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.hide {\n    display: none;\n}\n.card-header .fa {\n  transition: .3s transform ease-in-out;\n}\n.card-header .collapsed .fa {\n  transform: rotate(-90deg);\n}\na {\n    text-decoration: none;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.card-caption {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.hide {\n    display: none;\n}\n.card-header .fa {\n    transition: .3s transform ease-in-out;\n}\n.card-header .collapsed .fa {\n    transform: rotate(-90deg);\n}\na {\n    text-decoration: none;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

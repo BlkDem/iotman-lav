@@ -21,7 +21,7 @@
         <table-nav
             :compactView="compactView"
             :dataFields="dataFields"
-            :foreignKey="foreignKey"
+
             :foreignValue="foreignValue"
             :readOnly="readOnly"
             @getData="getData"
@@ -166,7 +166,8 @@
                             <span v-if="item[column].isVirtualImage"
                                 :class="{'text-info': item[column].isHighLight}"
                             >
-                                <i :class="item[column].VirtualImage"></i>
+
+                                <i :class="getVirtualImage(selectedRow[key], item[column])"></i>
                             </span>
 
                             <img v-if="item[column].isImage" class="device-image"
@@ -271,14 +272,24 @@ export default {
                 default: ''
             },
 
-            foreignKey: {
+            currentImage: {
                 type: String,
                 default: ''
             },
 
+            // foreignKey: {
+            //     type: String,
+            //     default: ''
+            // },
+
             foreignValue: {
                 type: Number,
                 default: 0
+            },
+
+            isSlave: {
+                type: Boolean,
+                default: false
             },
 
             selectableRow: {
@@ -309,7 +320,7 @@ export default {
         data() {
             return {
 
-                currentImage: pathes.storageImagePlug,
+                // currentImage: pathes.storageImagePlug,
 
                 activeCol: undefined,
                 activeRow: undefined,
@@ -364,6 +375,13 @@ export default {
         },
 
         methods: {
+
+            getVirtualImage(selected, item) {
+                // const _a = (selected)?item.selectedVirtualImage:item.VirtualImage
+                // if (item.selectedVirtualImage === undefined) item.selectedVirtualImage =
+                // console.log(selected, _a)
+                return (selected)?item.selectedVirtualImage:item.VirtualImage
+            },
 
             imageClick() {
                 // this.$emit('imageClick', event)
@@ -513,26 +531,28 @@ export default {
                     const _highlight = dataField.isHighLight //highlight another color field 'bg-info' class
                     const _hidden = dataField.isHidden //hidden field 'hide' class
                     const _colscount = dataField.columnsCount //col-* col-ls-* ... value
-                    const _virtual = dataField?.isVirtualImage //for abstract images like 'albums'
-                    const _virtualimage = dataField?.VirtualImage //for abstract images like 'albums'
-                    const _fieldignore = dataField?.isFieldIgnore //for abstract images like 'albums'
-                    const _isLookup = dataField?.isLookup //field links to another object
-                    const _lookupApi = dataField?.lookupApi //another object get api
-                    const _lookupId = dataField?.lookupId //field link key (FK)
-                    const _displayName = dataField?.displayName //Display Name Field
+                    const _virtual = dataField.isVirtualImage //for abstract images like 'albums'
+                    const _virtualimage = dataField.VirtualImage //for abstract images like 'albums'
+                    const _selectedvirtualimage = dataField.selectedVirtualImage ?? dataField.VirtualImage  //for abstract images like 'albums' (selected)
+                    const _fieldignore = dataField.isFieldIgnore //for abstract images like 'albums'
+                    const _isLookup = dataField.isLookup //field links to another object
+                    const _lookupApi = dataField.lookupApi //another object get api
+                    const _lookupId = dataField.lookupId //field link key (FK)
+                    const _displayName = dataField.displayName //Display Name Field
 
                     // console.log(dataField)
                     // const newListItem = _item  //newList[itemRow]
 
                     // console.log(this.dataFields, _value[dataField.fieldName])
-                    const _a = (dataField.fieldName != null)?_value[dataField.fieldName]:''
+                    // const _a = (dataField.fieldName != null)?_value[dataField.fieldName]:''
 
                     newListItemData[dataField.fieldName] = {
-                        value: _a,
+                        value: (dataField.fieldName != null)?_value[dataField.fieldName]:'',
                         lookupValue: (dataField.displayName != null)?_value[dataField.displayName]:'',
                         // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
                         displayName: _displayName,
                         VirtualImage: _virtualimage,
+                        selectedVirtualImage: _selectedvirtualimage,
                         isFieldIgnore: _fieldignore,
                         isEditable: _editable,
                         isText: _text,
@@ -575,6 +595,13 @@ export default {
             },
 
             async getData(_currentPage=1, _itemsPerPage=5) {
+
+                //when async loading master/slave datasets
+                //if dataset is slave waiting for foreignkey value
+                if (this.isSlave&&!this.foreignValue>0) return
+
+                // console.log('slave=', this.isSlave)
+
                 let fkValue = (this.foreignValue>0)?'/'+this.foreignValue:''
                 // console.log('fk: ', fkValue)
                 await axios.get(this.api.get + _currentPage + "/" + _itemsPerPage + fkValue)

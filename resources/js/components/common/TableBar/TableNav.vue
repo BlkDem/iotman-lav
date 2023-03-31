@@ -36,7 +36,7 @@
                         @click="$emit('addEvent')">
                         <i class="fas fa-plus-circle"></i>
                     </button>
-                    <button class="btn btn-primary  btn-sm" @click="getTableData">
+                    <button class="btn btn-primary  btn-sm" @click="getData">
                         <i class="fas fa-sync-alt"></i>
                     </button>
                 </div>
@@ -62,7 +62,7 @@ export default {
         "doFilter",
         "updateSortedData",
         "updateFilteredData",
-        'getTableData'
+        'getData'
     ],
 
     props: {
@@ -125,8 +125,8 @@ export default {
             this.$emit('setCompactView', value)
         },
 
-        getTableData() {
-            this.$emit('getTableData')
+        getData() {
+            this.$emit('getData')
         }
     },
 
