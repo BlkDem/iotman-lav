@@ -17,6 +17,7 @@ use App\Http\Controllers\MicroController;
 use App\Http\Controllers\DevBlogController;
 use App\Http\Controllers\DeviceMicroController;
 use App\Http\Controllers\Helpers\PresetController;
+use App\Http\Controllers\LoggerController;
 // use App\Http\Controllers\ImagesAlbumController;
 
 /*
@@ -36,6 +37,8 @@ use App\Http\Controllers\Helpers\PresetController;
 
 //Login
 Route::post('/login', [AuthController::class, 'signin']);
+
+Route::get('/test', [LoggerController::class, 'getLog']);
 
 //CRUD routes for table 'users'
 Route::middleware('auth:sanctum')->group( function () {

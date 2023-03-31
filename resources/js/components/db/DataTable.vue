@@ -596,8 +596,8 @@ export default {
 
             async getData(_currentPage=1, _itemsPerPage=5) {
 
-                //when async loading master/slave datasets
-                //if dataset is slave waiting for foreignkey value
+                //async loading master/slave datasets
+                //if dataset is slave waiting for master keys value
                 if (this.isSlave&&!this.foreignValue>0) return
 
                 // console.log('slave=', this.isSlave)
