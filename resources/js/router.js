@@ -164,7 +164,7 @@ const routes = [
     icon: "fa-solid fa-user-tie",
     component: Users,
     ID: "USERS",
-    visible: true
+    visible: true,
   },
   {
     path: "/users/:id",

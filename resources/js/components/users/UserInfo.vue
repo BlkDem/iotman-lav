@@ -7,7 +7,7 @@
     <CommonCard
         :cardCaption="userInfoCaption"
     >
-        <div class="row">
+        <div class="row my-4">
             <div class="col-sm-3 col-md-3 col-lg-3 flex-center">
                 <i class="fas fa-user fa-10x"></i>
             </div>
