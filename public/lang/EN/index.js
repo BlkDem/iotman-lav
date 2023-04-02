@@ -8,6 +8,7 @@ export default {
     DEVICE_TYPES: "Device Types",
     DEVICES: "Devices",
     DEVICE_MICROS: "Device Micros",
+    MICRO_PARAMS: "Parameters",
     MICROS: "Controllers",
     PRESETS: "Presets",
     USER_DEVICES: "Produced",

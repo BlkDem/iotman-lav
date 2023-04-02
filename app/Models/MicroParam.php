@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MicroParams extends Model
+class MicroParam extends Model
 {
     use HasFactory;
 
-    protected $table = 'microparams';
+    protected $table = 'micro_params';
 
     protected $fillable = [
         'id',
@@ -20,7 +20,7 @@ class MicroParams extends Model
         'param_suff',
         'param_desc',
         'param_in',
-        'micro_id',
+        'device_micro_id',
         'created_at',
         'updated_at'
     ];

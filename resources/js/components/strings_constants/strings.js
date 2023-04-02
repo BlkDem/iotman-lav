@@ -7,6 +7,7 @@ export default {
     ALBUMS: "Albums",
     DEVICE_TYPES: "Device Types",
     DEVICES: "Devices",
+    MICRO_PARAMS: "Parameters",
     DEVICE_MICROS: "Device Micros",
     MICROS: "Controllers",
     PRESETS: "Presets",

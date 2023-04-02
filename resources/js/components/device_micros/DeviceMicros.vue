@@ -31,7 +31,24 @@
                     :isSlave="true"
                     :dataFields="deviceMicros.deviceMicrosFields"
                     :pageCaption="deviceMicros.deviceMicrosCaption"
-                    :foreignValue="devices.selectedFkValue">
+                    :foreignValue="devices.selectedFkValue"
+
+                    :selectableRow="true"
+                    :selectedName="deviceMicros.selectedName"
+                    :readOnly="false"
+                    :isAdditionalCaption="true"
+
+                    @onRowClick="onDeviceRowClick">
+
+                >
+                </data-table>
+
+                <data-table
+                    :api="microParams.api"
+                    :isSlave="true"
+                    :dataFields="microParams.microParamsFields"
+                    :pageCaption="microParams.microParamsCaption"
+                    :foreignValue="deviceMicros.selectedFkValue">
                 </data-table>
 
             </template>
@@ -210,6 +227,120 @@ export default {
 
                     device_id: 'device_id',
                     device_id_value: 1,
+
+                    selectedName: 'device_micro_idx',
+
+                    selectedFkValue: 0,
+                },
+
+            microParams: {
+
+                    microParamsCaption: MessagesConstants.MICRO_PARAMS,
+
+                    api: {
+                        get: '',
+                        insert: '',
+                        update: '',
+                        delete: '',
+                        patch: ''
+                    },
+
+                    microParamsFields: [
+
+                        {
+                            fieldName: 'id',
+                            fieldCaption: 'ID',
+                            type: Number,
+                            isImage: false,
+                            isEditable: false,
+                            isSortable: true,
+                            isHighLight: true,
+                            columnsCount: 1
+                        },
+
+                        {
+                            fieldName: 'device_micro_id',
+                            displayName: 'device_micro_idx',
+                            fieldCaption: 'Idx',
+                            type: String,
+                            isImage: false,
+                            isEditable: false,
+                            isSortable: true,
+                            isHighLight: false,
+                            columnsCount: 2,
+                            lookupId: 'device_micro_id',
+                            lookupApi: APIConstants.api_device_micros_read,
+                            isLookup: true,
+                        },
+
+                        {
+                            fieldName: 'param_name',
+                            fieldCaption: 'Name',
+                            type: String,
+                            isImage: false,
+                            isEditable: true,
+                            isSortable: true,
+                            isHighLight: false,
+                            columnsCount: 2
+                        },
+
+                        {
+                            fieldName: 'param_value',
+                            fieldCaption: 'Value',
+                            type: String,
+                            isImage: false,
+                            isEditable: true,
+                            isSortable: true,
+                            isHighLight: false,
+                            columnsCount: 1
+                        },
+
+                        {
+                            fieldName: 'param_in',
+                            fieldCaption: 'Dir',
+                            type: String,
+                            isImage: false,
+                            isEditable: true,
+                            isSortable: true,
+                            isHighLight: false,
+                            columnsCount: 1
+                        },
+
+                        {
+                            fieldName: 'param_suff',
+                            fieldCaption: 'Suffix',
+                            type: String,
+                            isImage: false,
+                            isEditable: true,
+                            isSortable: true,
+                            isHighLight: false,
+                            columnsCount: 1
+                        },
+                        {
+                            fieldName: 'param_min',
+                            fieldCaption: 'Min',
+                            type: String,
+                            isImage: false,
+                            isEditable: true,
+                            isSortable: true,
+                            isHighLight: false,
+                            columnsCount: 1
+                        },
+                        {
+                            fieldName: 'param_max',
+                            fieldCaption: 'Max',
+                            type: String,
+                            isImage: false,
+                            isEditable: true,
+                            isSortable: true,
+                            isHighLight: false,
+                            columnsCount: 1
+                        },
+
+                    ],
+
+                    device_micro_id: 'device_micro_id',
+                    device_micro_id_value: 1,
                 },
 
 
@@ -225,9 +356,16 @@ export default {
         deviceMicroApi.patch =  APIConstants.api_device_micro_patch
         deviceMicroApi.delete = APIConstants.api_device_micro_delete
 
+        const microParamsApi = this.microParams.api
+
+        microParamsApi.get =    APIConstants.api_micro_params_read_page
+        microParamsApi.insert = APIConstants.api_micro_param_create
+        microParamsApi.update = APIConstants.api_micro_param_update
+        microParamsApi.patch =  APIConstants.api_micro_param_patch
+        microParamsApi.delete = APIConstants.api_micro_param_delete
+
         const apiDevices = this.devices.api
 
-        // apiDevices.get =    APIConstants.api_albums_lookup
         apiDevices.get =    APIConstants.api_devices_lookup
 
 
@@ -237,6 +375,11 @@ export default {
         onRowClick(dataEvent) {
             console.log(dataEvent)
             this.devices.selectedFkValue = dataEvent
+        },
+
+        onDeviceRowClick(dataEvent) {
+            console.log(dataEvent)
+            this.deviceMicros.selectedFkValue = dataEvent
         }
     }
 }

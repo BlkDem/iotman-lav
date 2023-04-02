@@ -8,6 +8,7 @@ export default {
     DEVICE_TYPES: "Каталог",
     DEVICES: "Устройства",
     DEVICE_MICROS: "Контроллеры устройства",
+    MICRO_PARAMS: "Параметры",
     MICROS: "Контроллеры",
     PRESETS: "Настройки",
     USER_DEVICES: "Произведенные",

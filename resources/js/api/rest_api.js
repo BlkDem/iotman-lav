@@ -20,6 +20,14 @@ export default {
     api_micro_delete: apiPreffix +     'micro/delete/',
     api_micro_patch: apiPreffix +      'micro/patch/',
 
+    //Micro Params CRUD
+    api_micro_param_create: apiPreffix +     'micro_param/create/',
+    api_micro_params_read: apiPreffix +      'micro_params/read/',
+    api_micro_params_read_page: apiPreffix + 'micro_params/read/page/',
+    api_micro_param_update: apiPreffix +     'micro_param/update/',
+    api_micro_param_delete: apiPreffix +     'micro_param/delete/',
+    api_micro_param_patch: apiPreffix +      'micro_param/patch/',
+
     //Device Micros CRUD
     api_device_micro_create: apiPreffix +     'device_micro/create/',
     api_device_micros_read: apiPreffix +      'device_micros/read/',

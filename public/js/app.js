@@ -24849,15 +24849,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _currentPage = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
               _itemsPerPage = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : 5;
+              //async loading master/slave datasets
+              //if dataset is slave waiting for master keys value
+
+              console.log(_this3.api.get + _currentPage + "/" + _itemsPerPage + fkValue);
               if (!(_this3.isSlave && !_this3.foreignValue > 0)) {
-                _context.next = 4;
+                _context.next = 5;
                 break;
               }
               return _context.abrupt("return");
-            case 4:
+            case 5:
               // console.log('slave=', this.isSlave)
               fkValue = _this3.foreignValue > 0 ? '/' + _this3.foreignValue : ''; // console.log('fk: ', fkValue)
-              _context.next = 7;
+              _context.next = 8;
               return axios.get(_this3.api.get + _currentPage + "/" + _itemsPerPage + fkValue).then(function (response) {
                 _this3.Items = _this3.populateListItems(response.data.data);
                 _this3.filteredItems = _this3.Items;
@@ -24877,7 +24881,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   window.location.href = "/login";
                 }
               });
-            case 7:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -25261,7 +25265,98 @@ __webpack_require__.r(__webpack_exports__);
           isLookup: true
         }],
         device_id: 'device_id',
-        device_id_value: 1
+        device_id_value: 1,
+        selectedName: 'device_micro_idx',
+        selectedFkValue: 0
+      },
+      microParams: {
+        microParamsCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__["default"].MICRO_PARAMS,
+        api: {
+          get: '',
+          insert: '',
+          update: '',
+          "delete": '',
+          patch: ''
+        },
+        microParamsFields: [{
+          fieldName: 'id',
+          fieldCaption: 'ID',
+          type: Number,
+          isImage: false,
+          isEditable: false,
+          isSortable: true,
+          isHighLight: true,
+          columnsCount: 1
+        }, {
+          fieldName: 'device_micro_id',
+          displayName: 'device_micro_idx',
+          fieldCaption: 'Idx',
+          type: String,
+          isImage: false,
+          isEditable: false,
+          isSortable: true,
+          isHighLight: false,
+          columnsCount: 2,
+          lookupId: 'device_micro_id',
+          lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_device_micros_read,
+          isLookup: true
+        }, {
+          fieldName: 'param_name',
+          fieldCaption: 'Name',
+          type: String,
+          isImage: false,
+          isEditable: true,
+          isSortable: true,
+          isHighLight: false,
+          columnsCount: 2
+        }, {
+          fieldName: 'param_value',
+          fieldCaption: 'Value',
+          type: String,
+          isImage: false,
+          isEditable: true,
+          isSortable: true,
+          isHighLight: false,
+          columnsCount: 1
+        }, {
+          fieldName: 'param_in',
+          fieldCaption: 'Dir',
+          type: String,
+          isImage: false,
+          isEditable: true,
+          isSortable: true,
+          isHighLight: false,
+          columnsCount: 1
+        }, {
+          fieldName: 'param_suff',
+          fieldCaption: 'Suffix',
+          type: String,
+          isImage: false,
+          isEditable: true,
+          isSortable: true,
+          isHighLight: false,
+          columnsCount: 1
+        }, {
+          fieldName: 'param_min',
+          fieldCaption: 'Min',
+          type: String,
+          isImage: false,
+          isEditable: true,
+          isSortable: true,
+          isHighLight: false,
+          columnsCount: 1
+        }, {
+          fieldName: 'param_max',
+          fieldCaption: 'Max',
+          type: String,
+          isImage: false,
+          isEditable: true,
+          isSortable: true,
+          isHighLight: false,
+          columnsCount: 1
+        }],
+        device_micro_id: 'device_micro_id',
+        device_micro_id_value: 1
       }
     };
   },
@@ -25272,15 +25367,23 @@ __webpack_require__.r(__webpack_exports__);
     deviceMicroApi.update = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_device_micro_update;
     deviceMicroApi.patch = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_device_micro_patch;
     deviceMicroApi["delete"] = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_device_micro_delete;
+    var microParamsApi = this.microParams.api;
+    microParamsApi.get = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_micro_params_read_page;
+    microParamsApi.insert = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_micro_param_create;
+    microParamsApi.update = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_micro_param_update;
+    microParamsApi.patch = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_micro_param_patch;
+    microParamsApi["delete"] = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_micro_param_delete;
     var apiDevices = this.devices.api;
-
-    // apiDevices.get =    APIConstants.api_albums_lookup
     apiDevices.get = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_devices_lookup;
   },
   methods: {
     onRowClick: function onRowClick(dataEvent) {
       console.log(dataEvent);
       this.devices.selectedFkValue = dataEvent;
+    },
+    onDeviceRowClick: function onDeviceRowClick(dataEvent) {
+      console.log(dataEvent);
+      this.deviceMicros.selectedFkValue = dataEvent;
     }
   }
 });
@@ -28228,7 +28331,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         isSlave: true,
         dataFields: $data.deviceMicros.deviceMicrosFields,
         pageCaption: $data.deviceMicros.deviceMicrosCaption,
-        foreignValue: $data.devices.selectedFkValue
+        foreignValue: $data.devices.selectedFkValue,
+        selectableRow: true,
+        selectedName: $data.deviceMicros.selectedName,
+        readOnly: false,
+        isAdditionalCaption: true,
+        onOnRowClick: $options.onDeviceRowClick
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" > ")];
+        }),
+        _: 1 /* STABLE */
+      }, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignValue", "selectedName", "onOnRowClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
+        api: $data.microParams.api,
+        isSlave: true,
+        dataFields: $data.microParams.microParamsFields,
+        pageCaption: $data.microParams.microParamsCaption,
+        foreignValue: $data.deviceMicros.selectedFkValue
       }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignValue"])];
     }),
     _: 1 /* STABLE */
@@ -29084,6 +29203,7 @@ __webpack_require__.r(__webpack_exports__);
   DEVICE_TYPES: "Device Types",
   DEVICES: "Devices",
   DEVICE_MICROS: "Device Micros",
+  MICRO_PARAMS: "Parameters",
   MICROS: "Controllers",
   PRESETS: "Presets",
   USER_DEVICES: "Produced",
@@ -29148,6 +29268,7 @@ __webpack_require__.r(__webpack_exports__);
   DEVICE_TYPES: "Каталог",
   DEVICES: "Устройства",
   DEVICE_MICROS: "Контроллеры устройства",
+  MICRO_PARAMS: "Параметры",
   MICROS: "Контроллеры",
   PRESETS: "Настройки",
   USER_DEVICES: "Произведенные",
@@ -29224,6 +29345,13 @@ var APIVersion = 1;
   api_micro_update: apiPreffix + 'micro/update/',
   api_micro_delete: apiPreffix + 'micro/delete/',
   api_micro_patch: apiPreffix + 'micro/patch/',
+  //Micro Params CRUD
+  api_micro_param_create: apiPreffix + 'micro_param/create/',
+  api_micro_params_read: apiPreffix + 'micro_params/read/',
+  api_micro_params_read_page: apiPreffix + 'micro_params/read/page/',
+  api_micro_param_update: apiPreffix + 'micro_param/update/',
+  api_micro_param_delete: apiPreffix + 'micro_param/delete/',
+  api_micro_param_patch: apiPreffix + 'micro_param/patch/',
   //Device Micros CRUD
   api_device_micro_create: apiPreffix + 'device_micro/create/',
   api_device_micros_read: apiPreffix + 'device_micros/read/',
@@ -29430,6 +29558,7 @@ __webpack_require__.r(__webpack_exports__);
   ALBUMS: "Albums",
   DEVICE_TYPES: "Device Types",
   DEVICES: "Devices",
+  MICRO_PARAMS: "Parameters",
   DEVICE_MICROS: "Device Micros",
   MICROS: "Controllers",
   PRESETS: "Presets",

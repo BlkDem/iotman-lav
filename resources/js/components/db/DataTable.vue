@@ -598,6 +598,9 @@ export default {
 
                 //async loading master/slave datasets
                 //if dataset is slave waiting for master keys value
+
+                console.log(this.api.get + _currentPage + "/" + _itemsPerPage + fkValue)
+
                 if (this.isSlave&&!this.foreignValue>0) return
 
                 // console.log('slave=', this.isSlave)
