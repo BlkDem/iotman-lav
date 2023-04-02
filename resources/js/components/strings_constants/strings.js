@@ -6,6 +6,7 @@ export default {
     USERINFO: "User Information",
     ALBUMS: "Albums",
     DEVICE_TYPES: "Device Types",
+    PARAM_TYPES: "Parameter Types",
     DEVICES: "Devices",
     MICRO_PARAMS: "Parameters",
     DEVICE_MICROS: "Device Micros",

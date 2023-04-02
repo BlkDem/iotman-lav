@@ -24,6 +24,11 @@ class ValidatorRules extends Validator
                     'device_type_image' => 'required|min:5'
                 ];
                 break;
+            case 'param_types':
+                $_rulesArray = [
+                    'type_name' => 'required|min:3',
+                ];
+                break;
             case 'user_devices':
                 $_rulesArray = [
                     'user_device_name' => 'required|min:3',

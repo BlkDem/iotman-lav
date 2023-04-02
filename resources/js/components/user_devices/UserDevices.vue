@@ -1,5 +1,5 @@
 <template>
-    <div style="margin-top: 5.5rem">
+    <div style="margin-top: 5.5rem"></div>
 
         <MasterSlaveLayout
             :layoutCaption="layoutCaption"
@@ -36,18 +36,16 @@
 
         </MasterSlaveLayout>
 
-    </div>
 </template>
 
 <script>
+
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
 import DataTable from '../../components/db/DataTable.vue';
 import MasterSlaveLayout from '../../layouts/MasterSlaveLayout.vue';
 
 export default {
-
-    // emits: ['setAdditionalCaption'],
 
     components: {
         DataTable, MasterSlaveLayout,
@@ -60,7 +58,6 @@ export default {
 
             layoutCaption: MessagesConstants.USER_DEVICES,
 
-            //Images Widget Setup
             userDevices: {
                 userDevicesCaption: MessagesConstants.USER_DEVICES,
 

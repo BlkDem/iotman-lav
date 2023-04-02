@@ -53,6 +53,7 @@ class MicroParamController extends BaseController
             'micro_params.param_min as param_min',
             'micro_params.param_max as param_max',
             'micro_params.param_in as param_in',
+            'micro_params.param_type_id as param_type_id',
 
             'micro_params.created_at as created_at',
             'micro_params.updated_at as updated_at',

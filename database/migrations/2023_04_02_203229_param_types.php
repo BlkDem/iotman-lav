@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('micro_params', function (Blueprint $table) {
-            $table->foreign('device_micro_id')->references('id')->on('device_micros')->onDelete('restrict');
-
+        Schema::create('param_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('type_name');
+            $table->string('type_desc')->nullable();
+            $table->timestamps();
         });
+
     }
 
     /**
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('param_types');
     }
 };

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('micro_params', function (Blueprint $table) {
-            $table->foreign('device_micro_id')->references('id')->on('device_micros')->onDelete('restrict');
+            $table->foreign('param_type_id')->references('id')->on('param_types')->onDelete('restrict');
 
         });
     }

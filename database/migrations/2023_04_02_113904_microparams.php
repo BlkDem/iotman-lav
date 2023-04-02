@@ -14,6 +14,7 @@ return new class extends Migration
         'param_value',
         'param_min',
         'param_max',
+        'param_type_id',
         'param_suff',
         'param_desc',
         'param_in',
@@ -34,6 +35,7 @@ return new class extends Migration
             $table->string('param_suff', 255)->nullable();
             $table->boolean('param_in')->nullable();
             $table->bigInteger('device_micro_id')->unsigned();
+            $table->bigInteger('param_type_id')->unsigned();
             $table->string('param_desc', 1024)->nullable();
             $table->timestamps();
         });

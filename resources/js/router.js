@@ -8,9 +8,10 @@ import Albums from "./components/imagelib/albums/Albums.vue"
 import Micros from "./components/micros/Micros.vue"
 import Users  from "./components/users/Users.vue"
 import Images from "./components/imagelib/images/Images.vue"
-import Presets from "./components/presets/Presets.vue"
+// import Presets from "./components/presets/Presets.vue"
 import DeviceMicros from "./components/device_micros/DeviceMicros.vue"
 import UserInfo from "./components/users/UserInfo.vue"
+import ParamTypes from "./components/device_micros/ParamTypes.vue"
 
 const routes = [
   {
@@ -23,9 +24,9 @@ const routes = [
     children: [
         {
             path: "device_types",
-            name: "Device Types",
+            // name: "Device Types",
             icon: "fas fa-layer-group",
-            component: DeviceTypes,
+            // component: DeviceTypes,
             ID: "DEVICE_TYPES"
         },
         {
@@ -41,6 +42,13 @@ const routes = [
             icon: "fas fa-sun",
             component: DeviceMicros,
             ID: "DEVICE_MICROS"
+          },
+          {
+            path: "param_types",
+            name: "Param Types",
+            icon: "fa-solid fa-cubes",
+            component: ParamTypes,
+            ID: "PARAM_TYPES"
           },
           {
             path: "/micros",
@@ -116,6 +124,14 @@ const routes = [
     visible: false
   },
   {
+    path: "/param_types",
+    name: "Param Types",
+    icon: "fa-solid fa-cubes",
+    component: ParamTypes,
+    ID: "PARAM_TYPES",
+    visible: false
+  },
+  {
     path: "/albums",
     name: "Images Library",
     icon: "fas fa-images",
@@ -178,7 +194,8 @@ const routes = [
     path: "/presets",
     name: "Presets",
     icon: "fa-solid fa-gear",
-    component: Presets,
+    // component: Presets,
+    component: () => import('./components/presets/Presets.vue'),
     ID: "PRESETS",
     visible: true
   },

@@ -6,6 +6,7 @@ export default {
     USERINFO: "Информация о пользователе",
     ALBUMS: "Альбомы",
     DEVICE_TYPES: "Каталог",
+    PARAM_TYPES: "Тип параметров",
     DEVICES: "Устройства",
     DEVICE_MICROS: "Контроллеры устройства",
     MICRO_PARAMS: "Параметры",

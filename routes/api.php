@@ -19,6 +19,8 @@ use App\Http\Controllers\Devices\DeviceMicroController;
 use App\Http\Controllers\Helpers\PresetController;
 use App\Http\Controllers\LoggerController;
 use App\Http\Controllers\Devices\MicroParamController;
+use App\Http\Controllers\Devices\ParamTypeController;
+
 // use App\Http\Controllers\ImagesAlbumController;
 
 /*
@@ -156,6 +158,19 @@ Route::controller(DevBlogController::class)->group(function () {
     Route::patch('/dev_blog/patch/{id}/{field}/{value}', 'patch');
 });
 
+
+//CRUD routes for model 'param_types'
+
+Route::controller(ParamTypeController::class)->group(function () {
+    Route::post(  '/param_type/create', 'store');
+    Route::get(   '/param_types/read/', 'index');
+    Route::get(   '/param_types/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get(   '/param_types/read/{id}', 'show');
+    Route::patch( '/param_type/patch/{id}/{field}/{value}', 'patch');
+    Route::put(   '/param_type/update/{updateDeviceType}', 'update');
+    Route::delete('/param_type/delete/{id}', 'destroy');
+
+});
 
 //CRUD routes for model 'device_types'
 

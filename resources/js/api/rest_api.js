@@ -28,6 +28,14 @@ export default {
     api_micro_param_delete: apiPreffix +     'micro_param/delete/',
     api_micro_param_patch: apiPreffix +      'micro_param/patch/',
 
+    //Param Types CRUD
+    api_param_type_create: apiPreffix +     'param_type/create/',
+    api_param_types_read: apiPreffix +      'param_types/read/',
+    api_param_types_read_page: apiPreffix + 'param_types/read/page/',
+    api_param_type_update: apiPreffix +     'param_type/update/',
+    api_param_type_delete: apiPreffix +     'param_type/delete/',
+    api_param_type_patch: apiPreffix +      'param_type/patch/',
+
     //Device Micros CRUD
     api_device_micro_create: apiPreffix +     'device_micro/create/',
     api_device_micros_read: apiPreffix +      'device_micros/read/',
