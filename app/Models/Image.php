@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Album;
 
 class Image extends Model
 {
@@ -19,5 +20,15 @@ class Image extends Model
         'created_at',
         'updated_at'
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+    ];
+
+    public function album()
+    {
+        return $this->belongsTo(Album::class);
+    }
 
 }

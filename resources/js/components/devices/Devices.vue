@@ -34,6 +34,18 @@ export default {
                     },
 
                     devicesFields: [
+                        {
+                            fieldName: 'device_type_image',
+                            fieldCaption: '',
+                            type: String,
+                            isImage: true,
+                            isFieldIgnore: true,
+                            isEditable: false,
+                            isSortable: false,
+                            // isHighLight: true,
+                            columnsCount: 1
+                        },
+
 
                         {
                             fieldName: 'id',
@@ -66,18 +78,18 @@ export default {
                             isEditable: true,
                             isSortable: true,
                             isHighLight: false,
-                            columnsCount: 3
+                            columnsCount: 2
                         },
-                        // {
-                        //     fieldName: 'device_hwid',
-                        //     fieldCaption: 'HWID',
-                        //     type: String,
-                        //     isImage: false,
-                        //     isEditable: true,
-                        //     isSortable: true,
-                        //     isHighLight: true,
-                        //     columnsCount: 2
-                        // },
+                        {
+                            fieldName: 'created_at',
+                            fieldCaption: 'Date',
+                            type: String,
+                            isImage: false,
+                            isEditable: false,
+                            isSortable: true,
+                            isHighLight: true,
+                            columnsCount: 2
+                        },
                         {
                             fieldName: 'device_type_id',
                             displayName: 'device_type_name',
@@ -87,7 +99,7 @@ export default {
                             isEditable: false,
                             isSortable: true,
                             isHighLight: false,
-                            columnsCount: 3,
+                            columnsCount: 2,
                             lookupId: 'device_type_id',
                             lookupApi: APIConstants.api_device_types_read,
                             isLookup: true,

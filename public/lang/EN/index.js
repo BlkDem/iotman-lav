@@ -6,8 +6,10 @@ export default {
     ALBUMS: "Albums",
     DEVICE_TYPES: "Device Types",
     DEVICES: "Devices",
+    DEVICE_MICROS: "Device Micros",
     MICROS: "Controllers",
-    USER_DEVICES: "User`s Devices",
+    PRESETS: "Presets",
+    USER_DEVICES: "Produced",
     THEME: "Theme",
 
     CANCEL_STRING: "Cancel",
@@ -53,6 +55,8 @@ export default {
     ITEM_EDITING_TITLE: 'Edit',
     ITEM_EDITING_MESSAGE: 'Editing',
     ITEM_EDITBUTTON_CAPTION: 'Edit',
+
+    IMAGE_UPLOADED: "Image uploaded",
 
 
 

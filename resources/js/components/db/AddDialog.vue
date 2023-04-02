@@ -4,26 +4,32 @@
             <h2 class="w-100 text-center">{{ title }}</h2>
         </div>
 
-        <div class="modal-body align-left py-4">
+        <div class="modal-body align-left py-2">
             <!-- <div>{{ message }}</div> -->
 
-            <div v-for="(field, key) in dataFields" v-bind:key="key">
+            <div v-for="(field, key) in dataFields" :key="key">
 
-                <div v-if="!field.isImage&&field.fieldName!=='id'&&!field.isLookup">
+                <div v-if="
+                    !field.isImage&&
+                    field.fieldName!=='id'&&
+                    !field.isLookup&&
+                    !field.isVirtualImage"
+                >
+
                     <label class="px-2">{{ field.fieldCaption }}</label>
 
-                    <textarea v-if="field.isText" v-model="field.value" class="form-control p-2 mb-4"
+                    <textarea v-if="field.isText" v-model="field.value" class="form-control p-2 mb-1"
                         style="min-height: 100px; max-height: 200px;"
-                        :placeholder="'Input ' + field.fieldCaption" cols="40" rows="3">
+                        :placeholder="'Input ' + field.fieldCaption" cols="40" rows="2">
                     </textarea>
 
-                    <input v-if="field.isDateTime" type="datetime-local" class="form-control p-2 mb-4" v-model="field.value" />
+                    <input v-if="field.isDateTime" type="datetime-local" class="form-control p-2 mb-1" v-model="field.value" />
 
-                    <input v-if="!field.isText&&!field.isDateTime" class="form-control p-2 mb-4" :placeholder="'Input ' + field.fieldCaption"  v-model="field.value" />
+                    <input v-if="!field.isText&&!field.isDateTime" class="form-control p-2 mb-1" :placeholder="'Input ' + field.fieldCaption"  v-model="field.value" />
 
                 </div>
 
-                <div v-if="field.isLookup">
+                <div v-if="field.isLookup" :class="{'hide': field.isHidden}" class="mb-1">
                     <label class="px-2">{{ field.fieldCaption }} </label>
                     <DataSelect
                         :dataTableReadApi="field.lookupApi"
@@ -37,16 +43,33 @@
                 </div>
 
 
-                <div v-if="field.isImage" class="flex py-4">
-                    <img class="device-image mx-2"
-                                :src="getImage(field)"
-                                @error="replaceByDefault"
+                <div v-if="field.isImage&&field.isEditable" class="flex-center-column py-1">
+                    <ImagesFromStorage
+                        :fileName="field.fileName"
+                        :fieldKey="key"
+                        @changeImage="setImage"
                     />
-                    <input class="form-control" type="file" v-if="field.isEditable"/>
+                    <div class="image-panel">
+                        <img class="mx-2 editable-image"
+                                :src="getImage(field)"
+                                :class="{
+                                        'device-image': !field.isEditable,
+                                        // 'w-75': field.isEditable,
+                                    }"
+                                @error="replaceByDefault"
+                        />
+                    </div>
+                    <form action="post" class="w-100">
+                        <input class="form-control" type="file"
+                            v-if="field.isEditable"
+                            @change="handleFileUpload( $event, key )"
+                        />
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="text-center">
+        <hr>
+        <div class="text-center mt-2">
             <button class="btn btn-danger mx-1 btn-width-40" @click="confirmDialog">{{ okButton }}</button>
             <button class="btn btn-secondary mx-1 btn-width-40" @click="cancelDialog">{{ cancelButton }}</button>
         </div>
@@ -58,11 +81,14 @@ import PopupModal from '../common/PopupModal.vue';
 import MessagesConstants from '../strings_constants/strings';
 import Pathes from '../../config/pathes';
 import DataSelect from './DataSelect.vue';
+import APIConstants from "../../api/rest_api";
+import ParsingErrors from "../../helpers/ParsingErrors.js";
+import ImagesFromStorage from '../imagelib/images/ImagesFromStorage.vue';
 
 export default {
     name: 'AddItem',
 
-    components: { PopupModal, DataSelect },
+    components: { PopupModal, DataSelect, ImagesFromStorage },
 
     data (){
         return {
@@ -71,16 +97,18 @@ export default {
             message: undefined, // Main text content
 
             dataFields: undefined,
-            postData: {},
+            postData: [],
 
-            okButton: undefined, // Text for confirm button; leave it empty because we don't know what we're using it for
+            okButton: undefined, // Text for confirm button;
             cancelButton: MessagesConstants.CANCEL_STRING, // text for cancel button
 
             resolvePromise: undefined,
             rejectPromise: undefined,
 
             imagesPath: '',
-            imagePlug: ''
+            imagePlug: '',
+
+            file: ''
         }
     },
 
@@ -91,18 +119,58 @@ export default {
 
     methods: {
 
+        submitFile(key){
+
+            let formData = new FormData();
+
+            formData.append('image_file', this.file);
+            axios.post( APIConstants.api_image_upload,
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+            )
+            .then(resp => {
+                this.setImage(resp.data.fileName, key)
+            })
+            .then(resp => {
+                this.$root.$refs.toaster.showMessage(
+                    MessagesConstants.IMAGE_UPLOADED,
+                    MessagesConstants.PROCESS_SUCCESSFULLY
+                )
+            })
+            .catch(error => {
+                this.$root.$refs.toaster.showMessage(
+                    MessagesConstants.EDITING_ERROR,
+                    ParsingErrors.getError(error),
+                    ParsingErrors.ERROR_LEVEL_ERROR
+                )
+            })
+      },
+
+        handleFileUpload(event, key){
+            this.file = event.target.files[0]
+            this.submitFile(key)
+        },
+
         onDataSelect(_value, _fieldName) {
             for (let item in this.dataFields) {
                 if (this.dataFields[item].fieldName === _fieldName) {
                     this.dataFields[item].value = _value
                 }
             }
-            // console.log(_value, _fieldName, this.dataFields)
         },
 
         getImage(item) {
             if ((item.value==='') || (item.isVirtualImage)) return this.imagePlug
             return Pathes.storageImagesPath + item.value
+        },
+
+        setImage(fileName, key) {
+            this.dataFields[key].value = fileName
+            console.log(this.dataFields)
         },
 
         replaceByDefault(e) {
@@ -115,10 +183,8 @@ export default {
             this.title = optsAdd.title
             this.message = optsAdd.message
             this.dataFields = optsAdd.dataFields
-
-            // console.log('on show: ', this.dataFields)
-
             this.okButton = optsAdd.okButton
+
             if (optsAdd.cancelButton) {
                 this.cancelButton = optsAdd.cancelButton
             }
@@ -140,8 +206,12 @@ export default {
 
         confirmDialog() {
             this.$refs.popup.close()
-            this.postData = this.dataFields
-            // console.log('edit Ok: ', this.postData)
+
+            for (let item in this.dataFields) {
+                if (!this.dataFields[item].isFieldIgnore)
+                this.postData.push(this.dataFields[item])
+            }
+
             this.resolvePromise(true, this)
         },
 
@@ -156,9 +226,24 @@ export default {
 
         onDialogClick() {
             if (event.target.className === 'popup-modal fade-in') this.cancelDialog()
-            // console.log(event, (event.target.className === 'popup-modal'))
         }
 
     },
 }
 </script>
+
+<style scoped>
+
+@import "../../../sass/animation.scss";
+
+.image-panel {
+    max-height: 200px;
+    margin-bottom: 20px;
+}
+
+.editable-image {
+    margin-bottom: 20px;
+    max-height: inherit;
+}
+
+</style>

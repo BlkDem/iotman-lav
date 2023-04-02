@@ -8,9 +8,11 @@
             <i class="fa-solid" :class="{'fa-caret-up': sortDirection, 'fa-caret-down': !sortDirection}"></i>
         </a>
         <div class="dropdown-menu">
-            <a class="dropdown-item" v-for="sortField in sortDataFields"
+            <div  v-for="sortField in sortDataFields">
+            <a class="dropdown-item" v-if="sortField.isSortable"
                 :key="sortField.fieldName" :value="sortField.fieldName"
                 @click="doSort(sortField, sortDirection)">{{ sortField.fieldCaption }}</a>
+            </div>
         </div>
     </div>
     </div>
@@ -51,7 +53,7 @@ export default {
 
     created() {
         //set the default sort field
-        this.sortColumn = this.sortDataFields[0]
+        this.sortColumn = (this.sortDataFields[0].isSortable)?this.sortDataFields[0]:this.sortDataFields[1]
     },
 
     methods: {
@@ -71,7 +73,7 @@ export default {
                         res = MessagesConstants.SORT_BY_DESCRIPTION;
                         break;
                     default:
-                        res = MessagesConstants.SORT_BY + $column;
+                        res = MessagesConstants.SORT_BY + column;
                         break;
                 }
                 return res;

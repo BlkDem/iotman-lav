@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Devices;
 
 use App\Models\DeviceUser;
 use Illuminate\Http\Request;
 use App\Http\Middleware\ValidatorRules;
 use Exception;
 use App\Http\Controllers\BaseController as BaseController;
+use App\Models\DeviceUsersView;
 // use Illuminate\Database\Eloquent\Model;
 
 class DeviceUserController extends BaseController
@@ -67,7 +68,11 @@ class DeviceUserController extends BaseController
         }
         try {
             $updateDeviceUser->update($request->all());
-            return response()->json($updateDeviceUser, 200);
+
+            $updateDeviceView = DeviceUsersView::find($updateDeviceUser->id);
+
+            return $this->sendResponse($updateDeviceView, "User Device Updated");
+            // return response()->json($updateDeviceView, 200);
         }
         catch (Exception $e) {
             return response()->json('Updating Record Error: ' . $e, 400);

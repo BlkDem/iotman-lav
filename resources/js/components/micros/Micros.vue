@@ -34,6 +34,19 @@ export default {
                     },
 
                     microsFields: [
+                    {
+                            fieldName: 'Image',
+                            fieldCaption: '',
+                            type: String,
+                            isImage: false,
+                            isVirtualImage: true,
+                            VirtualImage: 'fa-solid fa-microchip fa-2x',
+                            isEditable: false,
+                            isSortable: false,
+                            isHighLight: true,
+                            columnsCount: 1
+                        },
+
 
                         {
                             fieldName: 'id',

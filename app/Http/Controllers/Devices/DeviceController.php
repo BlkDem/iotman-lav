@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Devices;
 
 use Illuminate\Http\Request;
 use App\Models\Device;
 use App\Models\DevicesView;
 use App\Http\Middleware\ValidatorRules;
-use App\Http\Controllers\BaseController as BaseController;
+use App\Http\Controllers\BaseController;
 use Exception;
 
 class DeviceController extends BaseController
@@ -19,7 +19,10 @@ class DeviceController extends BaseController
         }
         try {
             $newDevice = Device::create($request->all());
-            return $this->sendResponse($newDevice, 'Device created');
+
+            $newDeviceView = DevicesView::find($newDevice->id);
+
+            return $this->sendResponse($newDeviceView, 'Device created');
             // return response()->json($newDevice, 201);
         }
         catch (Exception $e) {

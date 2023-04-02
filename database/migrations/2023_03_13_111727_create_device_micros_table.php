@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('device_id')->unsigned();
             $table->bigInteger('micro_id')->unsigned();
-            $table->string('device_micro_comment');
+            $table->string('device_micro_idx');
+            $table->string('device_micro_desc')->nullable();
             $table->timestamps();
         });
     }

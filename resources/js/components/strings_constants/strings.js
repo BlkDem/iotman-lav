@@ -6,7 +6,9 @@ export default {
     ALBUMS: "Albums",
     DEVICE_TYPES: "Device Types",
     DEVICES: "Devices",
+    DEVICE_MICROS: "Device Micros",
     MICROS: "Controllers",
+    PRESETS: "Presets",
     USER_DEVICES: "User`s Devices",
     THEME: "Theme",
 
@@ -23,6 +25,7 @@ export default {
     DELETING_CANCELLED: "Deleting Cancelled",
     DELETING_ERROR: "Deleting Error",
 
+    IMAGE_UPLOADED: "Image uploaded",
 
     NO_DESCRIPTION: " no description ",
     NO_HWID: " no device address",

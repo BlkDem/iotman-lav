@@ -1,12 +1,18 @@
 <template>
-    <div style="margin-top: 0.5rem">
-        <!-- {{ pageCaption }} -->
-    </div>
+    <!-- <div style="margin-top: 0.5rem">
+    </div> -->
+
+    <Viewer ref="viewer" :imageSrc="imageSrc">
+
+    </Viewer>
+
 
     <common-card
         :cardCaption="pageCaption"
         :isCollapseButtonHidden="false"
         :cardCaptionAdd="cardCaptionAdd"
+        :isAdditionalCaption="isAdditionalCaption"
+        :isReadOnly="readOnly"
     >
         <AddItem ref="addItem" />
 
@@ -15,9 +21,10 @@
         <table-nav
             :compactView="compactView"
             :dataFields="dataFields"
-            :foreignKey="foreignKey"
+
             :foreignValue="foreignValue"
-            @getTableData="getTableData"
+            :readOnly="readOnly"
+            @getData="getData"
             @setCompactView="setCompactView"
             @addEvent="setItem"
             @updateSortedData="updateSortedData"
@@ -31,39 +38,74 @@
         </div>
 
         <div class="row my-2" v-if="!compactView">
-            <div class="col-sm-4 col-xs-4 col-lg-4 p-2 fade-in" v-for="(item, key) in filteredItems"
-                v-bind:key="key" v-bind:id="item.id.value">
+            <div class="col-sm-4 col-xs-4 col-lg-4 p-2" v-for="(item, key) in filteredItems"
+                v-bind:key="key" v-bind:id="item.id.value"
+                :class="{
+                    'border-info bg-warning': selectedRow[key]===true,
+                    'border-primary text-secondary': selectedRow[key]===false||selectedRow[key]==null}"
+                @click="rowClick(key)"
+                >
+
                 <div class="card flex border-light py-2"
                 >
-                    <div class="w-100 flex-center" v-for="(column, ckey) in Object.keys(item)"
-                        v-bind:key="ckey">
+                    <div class="w-100 flex-center py-2" v-for="(column, ckey) in Object.keys(item)"
+                        v-bind:key="ckey"
+                        :class="{
+                            'bg-secondary text-primary': ckey%2===1&&ckey>0,
+                            'bg-primary text-secondary': ckey%2===0&&ckey>0
+                        }"
+                    >
 
-                        <span v-if="(activeCol!==key||activeRow!==ckey)&&(item[column].isImage != true)"
+                        <div class="p-2" v-if="item[column].isLookup"
                             :class="{'text-info': item[column].isHighLight}"
                         >
-                            {{ item[column].value }}
-                        </span>
+                            {{ getValue(item[column]) }}
+                        </div>
 
-                        <img v-if="item[column].isImage" class="w-100 p-2"
-                            :src="(!item[column].isVirtualImage)?imagesPath + item[column].value:imagesPath +'blog.jpg'"
+                        <div class="p-2" v-if="
+                                                (activeCol!==key||activeRow!==ckey)&&
+                                                (!item[column].isImage)&&
+                                                (!item[column].isLookup)
+                                            "
+                            :class="{
+                                        'text-info': item[column].isHighLight,
+                                        'hide': item[column].isHidden,
+                                    }"
+
+                        >
+                            {{ item[column].value }}
+                        </div>
+
+                        <img v-if="item[column].isImage" class="w-100 p-2" @click="imageClick"
+                            :src="(!item[column].isVirtualImage)?imagesPath + item[column].value:imagePlug"
                             @error="replaceByDefault"
                         />
-                        <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
 
+                        <div class="p-2" v-if="item[column].isVirtualImage"
+                                :class="{
+                                            'text-info': item[column].isHighLight,
+                                            'hide': item[column].isHidden,
+                                            'cursor-pointer': selectableRow
+                                        }"
+                            >
+                                <i :class="item[column].VirtualImage" class="fa-10x my-4"></i>
                         </div>
-                    </div>
 
+                        <!-- <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
+
+                        </div> -->
+                    </div>
 
                     <div class="card-body w-100">
                         <div class="flex-center">
                         <button class="btn btn-info btn-width-40 mx-1" @click="doEdit(key, item.id.value)">
                             <i class="fas fa-edit" aria-hidden="true"></i>
-                            Edit
+                            <!-- Edit -->
                         </button>
 
-                        <button class="btn btn-warning btn-width-40 mx-1" @click="doDelete(key, item.id.value)">
+                        <button class="btn btn-secondary btn-width-40 mx-1" @click="doDelete(key, item.id.value)">
                             <i class="fa fa-trash" aria-hidden="true"></i>
-                            Delete
+                            <!-- Delete -->
                         </button>
                         </div>
                     </div>
@@ -72,73 +114,113 @@
         </div>
 
         <!-- compact view -->
-        <div v-show="compactView" class="my-2" >
+        <div v-show="compactView" class="my-3" >
             <TableHead
                 :fieldsCaptions="dataFields"
+                @updateSortedData="updateSortedData"
             >
 
             </TableHead>
-            <div class="card mb-1 w-100 fade-in"
+            <div class="card mb-1 w-100"
                 v-for="(item, key) in filteredItems" v-bind:key="key"
                 v-bind:id="item.id.value"
-                :class="{'border-info bg-warning': selectedRow[key]===true, 'border-primary': selectedRow[key]===false||selectedRow[key]==null}"
+                :class="{
+                            'cursor-pointer': readOnly,
+                            'border-info bg-warning text-dark': selectedRow[key]===true,
+                            'border-primary': selectedRow[key]===false||selectedRow[key]==null
+                        }"
                 @click="rowClick(key)"
             >
                 <div class="mx-2 my-2">
                     <div class="row vertical-center">
-
-                        <div :class="item[column].class" class="flex"
-
-                            v-for="(column, ckey) in Object.keys(item)" v-bind:key="ckey"
+                        <div class="flex" v-for="(column, ckey) in Object.keys(item)" v-bind:key="ckey"
+                            :class="setLastColumnAlignClass(item[column].class, Object.keys(item).length, ckey)"
                         >
 
-                            <span v-if="(activeCol!==key||activeRow!==ckey)&&(item[column].isImage != true)&&(!item[column].isLookup)" class="w-75"
-                                :class="{'text-info': item[column].isHighLight}"
+                        <div
+                            v-if="!item[column].isHidden"
+                        >
+
+                            <span v-if="
+                                    (activeCol!==key||activeRow!==ckey)&&
+                                    (item[column].isImage != true)&&
+                                    (!item[column].isHidden)&&
+                                    (!item[column].isLookup)"
+                                :class="{
+                                            'text-info': item[column].isHighLight,
+                                        }"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
                                 {{ item[column].value }}
                             </span>
 
-                            <span v-if="item[column].isLookup" class="w-75"
-                                :class="{'text-info': item[column].isHighLight}"
+                            <span v-if="item[column].isLookup&&!item[column].isHidden"
+                                :class="{
+                                            'text-info': item[column].isHighLight,
+                                        }"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
                                 {{ getValue(item[column]) }}
                             </span>
 
+                            <span v-if="item[column].isVirtualImage"
+                                :class="{'text-info': item[column].isHighLight}"
+                            >
 
+                                <i :class="getVirtualImage(selectedRow[key], item[column])"></i>
+                            </span>
 
                             <img v-if="item[column].isImage" class="device-image"
                                 :src="getImage(item[column])"
                                 @error="replaceByDefault"
+                                @click="imageClick"
                             />
-                            <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey"
 
-                            >
-                                <input class="form-control  w-100" :value="item[column].value" :id="setId(key, ckey)" :name="setId(key, ckey)"
+                            <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
+                                <input class="form-control-sm w-100" :value="item[column].value"
+                                    :id="setId(key, ckey)"
+                                    :name="setId(key, ckey)"
                                     @keyup.enter="onInputEnter()"
                                     @keyup.esc="onInputEsc()"
-                                    @change="onInputChange(item.id.value, key, column, $event.target.value, isEsc)"
+                                    @change="onInputChange(
+                                        item.id.value,
+                                        key,
+                                        column,
+                                        $event.target.value,
+                                        isEsc
+                                    )"
                                 />
-                                <button class="btn btn-primary mx-1" :id="item.id.value"
-                                    @click.stop="saveRecord(item.id.value, item[column].value, item[column].value, $event.target.value)">
+                                <button class="btn btn-primary btn-sm mx-1"
+                                    :id="item.id.value"
+                                    @click.stop="saveRecord(
+                                        item.id.value,
+                                        item[column].value,
+                                        item[column].value,
+                                        $event.target.value
+                                    )"
+                                >
                                     <i class="far fa-check-circle"></i>
                                 </button>
-                                <button class="btn btn-primary" @mousedown="this.isEsc=true; this.resetEditCell()">
+
+                                <button class="btn btn-primary btn-sm"
+                                    @mousedown="this.isEsc=true; this.cancelEditCell()">
                                     <i class="far fa-times-circle"></i>
                                 </button>
+
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-sm-3 col-xs-3 col-lg-3  edit-buttons ">
-                            <button class="btn btn-info mx-2" @click="doEdit(key, item.id.value)">
+                        <div class="col-sm-2 col-xs-2 col-lg-2 edit-buttons" v-if="!readOnly">
+                            <button class="btn btn-info  btn-sm mx-2" @click="doEdit(key, item.id.value)">
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
 
-                            <button class="btn btn-secondary" @click="doDelete(key, item.id.value)">
+                            <button class="btn btn-secondary btn-sm" @click="doDelete(key, item.id.value)">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -165,8 +247,10 @@ import AddItem from './AddDialog.vue';
 
 import TableNav from '../../components/common/TableBar/TableNav.vue';
 import TableHead from './TableHead.vue';
+import pathes from '../../config/pathes';
+import Viewer from '../imagelib/Viewer.vue';
 
-    export default {
+export default {
 
         emits: ['onRowClick'],
 
@@ -188,17 +272,36 @@ import TableHead from './TableHead.vue';
                 default: ''
             },
 
-            foreignKey: {
+            currentImage: {
                 type: String,
                 default: ''
             },
+
+            // foreignKey: {
+            //     type: String,
+            //     default: ''
+            // },
 
             foreignValue: {
                 type: Number,
                 default: 0
             },
 
+            isSlave: {
+                type: Boolean,
+                default: false
+            },
+
             selectableRow: {
+                type: Boolean,
+                default: false
+            },
+
+            readOnly: {
+                type: Boolean,
+                default: false
+            },
+            isAdditionalCaption: {
                 type: Boolean,
                 default: false
             },
@@ -210,11 +313,14 @@ import TableHead from './TableHead.vue';
             Paginator,
             AddItem,
             TableNav,
-            TableHead
+            TableHead,
+            Viewer
         },
 
         data() {
             return {
+
+                // currentImage: pathes.storageImagePlug,
 
                 activeCol: undefined,
                 activeRow: undefined,
@@ -230,24 +336,30 @@ import TableHead from './TableHead.vue';
                 imagesPath: '',
                 imagePlug: '',
 
+                imageSrc: pathes.storageImagePlug,
+
                 selectedRow: [],
 
-                cardCaptionAdd: ''
+                cardCaptionAdd: '',
+
+                // albumsReadOnly: true
 
             };
         },
 
         created() {
-            this.getTableData();
+            this.getData();
             this.imagesPath = Pathes.storageImagesPath;
             this.imagePlug = Pathes.storageImagePlug
-
         },
 
         mounted() {
-            if (localStorage.getItem('CompactView')) {
-                this.compactView = (localStorage.getItem('CompactView') === 'true');
-            }
+
+            if (!this.readOnly) {
+                if (localStorage.getItem('CompactView')) {
+                    this.compactView = (localStorage.getItem('CompactView') === 'true');
+                }
+            } else this.compactView = true
 
             this.emitter.on("new-lang", _lang => {
                 this.setLang(_lang)
@@ -257,20 +369,35 @@ import TableHead from './TableHead.vue';
 
         watch: {
             foreignValue() {
-                console.log('fk value', this.foreignValue)
-                this.getTableData()
+                // console.log('fk value', this.foreignValue)
+                this.getData()
             }
         },
 
         methods: {
 
+            getVirtualImage(selected, item) {
+                // const _a = (selected)?item.selectedVirtualImage:item.VirtualImage
+                // if (item.selectedVirtualImage === undefined) item.selectedVirtualImage =
+                // console.log(selected, _a)
+                return (selected)?item.selectedVirtualImage:item.VirtualImage
+            },
+
+            imageClick() {
+                // this.$emit('imageClick', event)
+                this.imageSrc = event.target.src
+                this.$refs.viewer.showImage()
+            },
+
             rowClick(row){
 
                 if (!this.selectableRow) return
                 for (let item in this.filteredItems) { this.selectedRow[item] = false }
+
                 this.selectedRow[row] = !this.selectedRow[row]
-                // console.log(row, this.selectedName)
+
                 this.cardCaptionAdd = this.filteredItems[row][this.selectedName].value
+
                 //send FK value to child table
                 this.$emit('onRowClick', this.filteredItems[row].id.value)
             },
@@ -280,7 +407,7 @@ import TableHead from './TableHead.vue';
             },
 
             getImage(item) {
-                if ((item.value==='') || (item.isVirtualImage)) return this.imagePlug
+                if (item.value==='') return this.imagePlug
                 return Pathes.storageImagesPath + item.value
             },
 
@@ -292,17 +419,37 @@ import TableHead from './TableHead.vue';
                 return "id" + $key + "_" + $ckey
             },
 
-            resetEditCell() {
-                this.activeCol = undefined
-                this.activeRow = undefined
+            setLastColumnAlignClass(classList, keysCount, key) {
+                let alignClass = ''
+                switch (key) {
+
+                    //first column
+                    case 0: alignClass = 'flex-center'
+                    break;
+
+                    //last column
+                    case (keysCount - 1): alignClass = 'flex-right'
+                    break;
+
+                    //default column
+                    default: alignClass = ''
+                    break;
+                }
+                return classList + ' ' + alignClass
+            },
+
+            cancelEditCell() {
+                this.activeCol = null
+                this.activeRow = null
             },
 
             onInputChange($item, $key, $dataCol, $value, $isEsc){
+
                 if ($isEsc) {
                     this.isEsc = false
                     return
                 }
-                console.log('change', $item, $dataCol, $value)
+                // console.log('change', $item, $dataCol, $value)
 
                 this.filteredItems[$key][$dataCol].value = $value
                 this.Items[$key][$dataCol].value = $value
@@ -310,20 +457,20 @@ import TableHead from './TableHead.vue';
                 this.saveRecord($item, $dataCol, $value)
             },
 
-            //saving cell data if changed
+            //saving cell data if changed and cancel edit
             onInputEnter(){
-                this.resetEditCell()
+                this.cancelEditCell()
             },
 
             //cancel editing cell data
             onInputEsc(){
                 this.isEsc = true
-                this.resetEditCell()
+                this.cancelEditCell()
             },
 
             //save cell data to db
             saveRecord($id, $field, $value) {
-                this.resetEditCell()
+                this.cancelEditCell()
                 axios.patch(
                     this.api.patch + $id + '/' + $field + '/' + $value)
                     .then(resp => {
@@ -347,8 +494,8 @@ import TableHead from './TableHead.vue';
                 // this.pageCaption = _lang.DEVICE_TYPES ?? 'Device Types'
             },
 
-            updateSortedData($column, $direction) {
-                Sorting.doSort(this.filteredItems, $column, $direction)
+            updateSortedData(column, direction) {
+                Sorting.doSort(this.filteredItems, column, direction)
             },
 
             updateFilteredData($fieldName, $filter) {
@@ -359,7 +506,10 @@ import TableHead from './TableHead.vue';
 
             setCompactView($value) {
                 // console.log(value)
-                this.compactView = $value
+                if (!this.readOnly) {
+                    this.compactView = $value
+                }
+                else this.compactView = true
             },
 
             processListItem(_value) {
@@ -368,6 +518,7 @@ import TableHead from './TableHead.vue';
 
                 // console.log(_value)
 
+                try {
                 for (let field in this.dataFields) {
 
                     const dataField = this.dataFields[field]
@@ -378,63 +529,79 @@ import TableHead from './TableHead.vue';
                     const _datetime = dataField.isDateTime //image field - binding 'img'
                     const _text = dataField.isText //Display Name Field
                     const _highlight = dataField.isHighLight //highlight another color field 'bg-info' class
+                    const _hidden = dataField.isHidden //hidden field 'hide' class
                     const _colscount = dataField.columnsCount //col-* col-ls-* ... value
-                    const _virtual = dataField?.isVirtualImage //for abstract images like 'albums'
-                    const _isLookup = dataField?.isLookup //field links to another object
-                    const _lookupApi = dataField?.lookupApi //another object get api
-                    const _lookupId = dataField?.lookupId //field link key (FK)
-                    const _displayName = dataField?.displayName //Display Name Field
+                    const _virtual = dataField.isVirtualImage //for abstract images like 'albums'
+                    const _virtualimage = dataField.VirtualImage //for abstract images like 'albums'
+                    const _selectedvirtualimage = dataField.selectedVirtualImage ?? dataField.VirtualImage  //for abstract images like 'albums' (selected)
+                    const _fieldignore = dataField.isFieldIgnore //for abstract images like 'albums'
+                    const _isLookup = dataField.isLookup //field links to another object
+                    const _lookupApi = dataField.lookupApi //another object get api
+                    const _lookupId = dataField.lookupId //field link key (FK)
+                    const _displayName = dataField.displayName //Display Name Field
 
-
+                    // console.log(dataField)
                     // const newListItem = _item  //newList[itemRow]
 
+                    // console.log(this.dataFields, _value[dataField.fieldName])
+                    // const _a = (dataField.fieldName != null)?_value[dataField.fieldName]:''
+
                     newListItemData[dataField.fieldName] = {
-                        value: _value[dataField.fieldName],
+                        value: (dataField.fieldName != null)?_value[dataField.fieldName]:'',
                         lookupValue: (dataField.displayName != null)?_value[dataField.displayName]:'',
                         // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
                         displayName: _displayName,
+                        VirtualImage: _virtualimage,
+                        selectedVirtualImage: _selectedvirtualimage,
+                        isFieldIgnore: _fieldignore,
                         isEditable: _editable,
                         isText: _text,
                         isDateTime: _datetime,
                         isSortable: _sortable,
                         isImage: _image,
                         isHighLight: _highlight,
+                        isHidden: _hidden,
                         columnsCount: _colscount,
                         isLookup: _isLookup,
                         lookupId: _lookupId,
                         lookupApi: _lookupApi,
                         isVirtualImage: _virtual,
                         class: //field width (bootstrap)
-                            (_colscount === 1) ?
-                            "col-sm-" + _colscount +
-                            " col-xs-" + _colscount +
-                            " col-lg-" + _colscount + " align-center" :
+
                             "col-sm-" + _colscount +
                             " col-xs-" + _colscount +
                             " col-lg-" + _colscount
                     }
                 }
-                // console.log('new list data: ', newListItemData)
-                return newListItemData
+
+                    // console.log('new list data: ', newListItemData)
+                    return newListItemData
+                }
+                catch(error) {
+                    console.log(error)
+                }
             },
 
             populateListItems(items) {
 
-                        // prepare items to fields transform/extend
-                        let newList = items.map(item => ({
-                            _id: item.id,
-                        }));
+                    let newList = items
 
-                        // transform fields to objects with extended properties
-                        for (let itemRow in newList) {
-                            newList[itemRow] = this.processListItem(items[itemRow])
-                        }
-                        // console.log(newList)
-                        return newList
+                    // transform fields to objects with extended properties
+                    for (let itemRow in items) {
+                        newList[itemRow] = this.processListItem(items[itemRow])
+                    }
 
+                    return newList
             },
 
-            async getTableData(_currentPage=1, _itemsPerPage=5) {
+            async getData(_currentPage=1, _itemsPerPage=5) {
+
+                //async loading master/slave datasets
+                //if dataset is slave waiting for master keys value
+                if (this.isSlave&&!this.foreignValue>0) return
+
+                // console.log('slave=', this.isSlave)
+
                 let fkValue = (this.foreignValue>0)?'/'+this.foreignValue:''
                 // console.log('fk: ', fkValue)
                 await axios.get(this.api.get + _currentPage + "/" + _itemsPerPage + fkValue)
@@ -442,6 +609,7 @@ import TableHead from './TableHead.vue';
 
                         this.Items = this.populateListItems(response.data.data);
                         this.filteredItems = this.Items;
+                        if ((this.filteredItems.length>0)&&(this.selectableRow)) this.rowClick(0)
 
                         // setup paginator
                         this.$refs.paginatorDeviceTypes.setPaginator(
@@ -575,13 +743,14 @@ import TableHead from './TableHead.vue';
                         _values[editItem[field].fieldName] = editItem[field].value
                     }
 
-                    console.log(_values)
+                    console.log('on axios: ', _values)
                     axios.put(this.api.update + id, _values)
                         .then(resp => {
-                            // console.log(resp.data);
 
                             const _res = resp.data.data
+
                             this.filteredItems[key] = this.processListItem(_res)
+
                             this.Items[key] = this.filteredItems[key]
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.EDITED_MESSAGE,

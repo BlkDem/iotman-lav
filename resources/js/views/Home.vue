@@ -6,7 +6,9 @@
     <div class="row">
         <!-- page menu -->
         <div class="col-sm-3 col-lg-3 col-md-3">
-            <CommonCard ref="menuCard" :cardCaption="menuBlockCaption" :margins="margins">
+            <CommonCard ref="menuCard"
+                :cardCaption="menuBlockCaption"
+                :margins="margins">
                 <AppMenu ref="homeAppMenu" :margins="margins" :isDropdowns="false"></AppMenu>
             </CommonCard>
         </div>
@@ -51,17 +53,14 @@
     <div class="w-100 mx-4 my-2 align-left" style="font-size: 1.4rem; font-weight: 400;">
         <!-- <AppMenu ref="homeAppMenu"></AppMenu> -->
     </div>
-<!-- <router-view /> -->
+
 </template>
 
 <script>
-// import CommonCard from '../components/common/CommonCard.vue';
-// import InfoCard from '../components/common/InfoCard.vue';
 import APIConstants from "../api/rest_api";
 import MessagesConstants from "../components/strings_constants/strings.js";
-import { marked } from 'marked';
-
-// import ColorPicker from '../components/common/ColorPicker.vue';
+// import Field from "../helpers/test";
+// import { marked } from 'marked';
 
 export default {
     name: 'Home',
@@ -69,25 +68,17 @@ export default {
     data() {
 
         return {
-            pageCaption: '',
-            menuBlockCaption: 'Menu',
-            informationBlockCaption: 'Information',
-            logBlockCaption: 'Log',
+            pageCaption: undefined,
+            menuBlockCaption: undefined,
+            informationBlockCaption: undefined,
+            logBlockCaption: undefined,
             margins: 2,
-            deviceTypesApi: '',
-            devicesApi: '',
-            bgColor: 'bg-success',
-            device_type_id: undefined,
-            device_id: undefined,
 
             devBlogs: [],
         }
     },
 
     created() {
-
-        this.deviceTypesApi = APIConstants.api_device_types_read
-        this.devicesApi = APIConstants.api_devices_read
 
         this.pageCaption = MessagesConstants.HOME ?? 'Umolab Devices'
         this.menuBlockCaption = MessagesConstants.menuBlockCaption ?? 'Menu'
@@ -96,6 +87,9 @@ export default {
 
         this.getBlogData()
 
+        // const a = new Field('test name', 'test props')
+        // console.log(a.getName(), a.getProperty())
+
     },
 
     mounted() {
@@ -103,10 +97,6 @@ export default {
         this.emitter.on("new-lang", _lang => {
             this.setLang(_lang)
         });
-    },
-
-    watch: {
-
     },
 
     methods: {
@@ -122,9 +112,6 @@ export default {
             this.logBlockCaption = _lang.logBlockCaption ?? 'Log'
         },
 
-        changeColor(_color){
-            this.color = _color
-        }
     },
 
 }

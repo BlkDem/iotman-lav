@@ -72,6 +72,13 @@ class ValidatorRules extends Validator
                     $_rulesArray = [
                         'device_id' => 'required',
                         'micro_id' => 'required',
+                        'device_micro_idx' => 'required|min:1'
+                    ];
+                    break;
+
+            case 'presets':
+                    $_rulesArray = [
+                        'preset_key' => 'required',
                     ];
                     break;
 

@@ -10,10 +10,18 @@
     flex-direction: row;
 }
 
+.flex-center-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .flex-right {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .flex-left {
@@ -36,8 +44,19 @@
 }*/
 
 .device-image {
-    height: 2.6rem;
+    position: relative;
+    height: 1.9rem;
     border-radius: 5px;
+    border: 0px solid var(--bs-primary);
+    -webkit-transition: width .5s, height .5s, -webkit-transform .5s;
+    transition: width .5s, height .5s, border-color .5s, transform .5s;
+}
+
+.device-image:hover {
+    z-index: 100;
+    border: 2px solid var(--bs-secondary);
+    -webkit-transform: scale(2);
+    transform: scale(2);
 }
 
 .card-space {
@@ -55,6 +74,10 @@ a.a_cap:first-letter {
 
 .btn-width-40 {
     width: 40%;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
 
 @media only screen and (min-width: 320px) and (max-width: 480px) {

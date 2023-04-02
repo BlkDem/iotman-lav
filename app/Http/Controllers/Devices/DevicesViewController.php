@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Devices;
 
 use Illuminate\Http\Request;
 use App\Models\DevicesView;
 use App\Http\Controllers\BaseController as BaseController;
 use App\Http\Controllers\PaginatorController;
+use Illuminate\Support\Facades\DB;
 
 class DevicesViewController extends BaseController
 {
@@ -19,6 +20,33 @@ class DevicesViewController extends BaseController
 
         return $this->sendResponse($res, "Devices List", $paginator);
     }
+
+        //only for id and name fields for lookup components
+        public function indexLookup($currentPage=0, $itemsPerPage=10)
+        {
+
+            $page = (int)$currentPage;
+
+            $offset = $itemsPerPage*--$page;
+
+            $res = DB::table('devices')
+                    ->select('devices.id as id' , 'devices.device_name as device_name')
+                    ->leftJoin('device_micros', 'devices.id', '=', 'device_micros.device_id')
+                    ->selectRaw('count(device_micros.id) as micros_count')
+                    ->groupBy('id', 'device_name')
+                    ->orderBy('micros_count', 'desc')
+                    ->limit($itemsPerPage)
+                    ->offset($offset)
+                    ->get();
+
+
+            $total = DevicesView::get();
+
+            $paginator = PaginatorController::Paginate($total->count(), (int)$itemsPerPage, $currentPage);
+
+            return $this->sendResponse($res, "Devices lookup List", $paginator);
+
+        }
 
     public function page($currentPage=0, $itemsPerPage=5){
 

@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Images;
 
 use App\Models\Album;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\PaginatorController;
 use App\Http\Middleware\ValidatorRules;
+use Illuminate\Support\Facades\DB;
 use Exception;
 
 class AlbumController extends BaseController
@@ -16,6 +17,11 @@ class AlbumController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
+
+    private function getTotalRecords() {
+        return Album::get()->count();
+    }
+
     public function index()
     {
         $res = Album::orderBy('album_name', 'asc')->get();
@@ -26,15 +32,43 @@ class AlbumController extends BaseController
 
     }
 
+
+    //only for id and name fields for lookup components
+    public function indexLookup($currentPage=0, $itemsPerPage=10)
+    {
+        // $res = Album::select('id','album_name')->orderBy('id', 'asc')->get();
+
+        $page = (int)$currentPage;
+
+        $offset = $itemsPerPage*--$page;
+
+        $res = DB::table('albums')
+                ->select('albums.id as id' , 'albums.album_name as album_name')
+                ->leftJoin('images', 'albums.id', '=', 'images.album_id')
+                ->selectRaw('count(images.id) as images_count')
+                ->groupBy('id', 'album_name')
+                ->limit($itemsPerPage)
+                ->offset($offset)
+                ->get();
+
+
+        // $total = Album::get();
+
+        $paginator = PaginatorController::Paginate($this->getTotalRecords(), (int)$itemsPerPage, $currentPage);
+
+        return $this->sendResponse($res, "Albums lookup List", $paginator);
+
+    }
+
     public function page($currentPage=0, $itemsPerPage=10){
 
         $page = (int)$currentPage;
 
         $offset = $itemsPerPage*--$page;
-        $res = Album::limit($itemsPerPage)->offset($offset)->orderBy('album_name', 'asc')->get();
-        $total = Album::get();
 
-        $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
+        $res = Album::limit($itemsPerPage)->offset($offset)->orderBy('album_name', 'asc')->get();
+
+        $paginator = PaginatorController::Paginate($this->getTotalRecords(), (int)($itemsPerPage), $currentPage);
 
         return $this->sendResponse($res, "Album List", $paginator);
     }
@@ -94,7 +128,7 @@ class AlbumController extends BaseController
             return $this->sendResponse($updateAlbum, 'Album created');
         }
         catch (Exception $e) {
-            return $this->sendError('Deleting Record Error: ' . $e);
+            return $this->sendError('Updating Record Error: ' . $e);
         }
     }
 

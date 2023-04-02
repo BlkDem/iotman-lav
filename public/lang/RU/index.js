@@ -4,10 +4,12 @@ export default {
     IMAGES: "Изображения",
     USERS: "Пользователи",
     ALBUMS: "Альбомы",
-    DEVICE_TYPES: "Типы устройств",
+    DEVICE_TYPES: "Каталог",
     DEVICES: "Устройства",
+    DEVICE_MICROS: "Контроллеры устройства",
     MICROS: "Контроллеры",
-    USER_DEVICES: "Пользовательские",
+    PRESETS: "Настройки",
+    USER_DEVICES: "Произведенные",
     THEME: "Тема",
 
     CANCEL_STRING: "Отмена",
@@ -39,8 +41,8 @@ export default {
     LOGOUT_MENU: "Выход",
 
     menuBlockCaption: 'Меню',
-    informationBlockCaption: 'Информация',
-    logBlockCaption: 'Логи',
+    informationBlockCaption: 'Блог',
+    logBlockCaption: 'Журнал',
 
     DELETE_CONFORMATION: 'Вы уверены, что хотите удалить элемент?',
     DELETE_CAPTION: 'Удаление',
@@ -54,20 +56,6 @@ export default {
     ITEM_EDITING_MESSAGE: 'Изменение',
     ITEM_EDITBUTTON_CAPTION: 'Изменить',
 
-
-    //strings processing
-
-    // SortingCaption($column, $direction) {
-    //     let res =
-    //         $column === "id" ?
-    //         this.SORT_BY_ID :
-    //         this.SORT_BY_NAME;
-    //     res += " (";
-    //     res += !$direction ?
-    //         this.SORT_ASC :
-    //         this.SORT_DESC;
-    //     res += ")";
-    //     return res;
-    // },
+    IMAGE_UPLOADED: "Изображение загружено",
 
 }

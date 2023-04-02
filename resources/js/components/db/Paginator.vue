@@ -70,7 +70,7 @@ export default {
         },
 
         setPage(_currentPage, _itemsPerPage) {
-            this.$parent.$parent.getTableData(_currentPage, _itemsPerPage)
+            this.$parent.$parent.getData(_currentPage, _itemsPerPage)
         }
 
     },

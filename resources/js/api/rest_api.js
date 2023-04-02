@@ -4,6 +4,14 @@ const APIVersion = 1;
 export default {
     apiVersion: APIVersion,
 
+    //Presets CRUD
+    api_preset_create: apiPreffix +     'preset/create/',
+    api_presets_read: apiPreffix +      'presets/read/',
+    api_presets_read_page: apiPreffix + 'presets/read/page/',
+    api_preset_update: apiPreffix +     'preset/update/',
+    api_preset_delete: apiPreffix +     'preset/delete/',
+    api_preset_patch: apiPreffix +      'preset/patch/',
+
     //Micros CRUD
     api_micro_create: apiPreffix +     'micro/create/',
     api_micros_read: apiPreffix +      'micros/read/',
@@ -11,6 +19,14 @@ export default {
     api_micro_update: apiPreffix +     'micro/update/',
     api_micro_delete: apiPreffix +     'micro/delete/',
     api_micro_patch: apiPreffix +      'micro/patch/',
+
+    //Device Micros CRUD
+    api_device_micro_create: apiPreffix +     'device_micro/create/',
+    api_device_micros_read: apiPreffix +      'device_micros/read/',
+    api_device_micros_read_page: apiPreffix + 'device_micros/read/page/',
+    api_device_micro_update: apiPreffix +     'device_micro/update/',
+    api_device_micro_delete: apiPreffix +     'device_micro/delete/',
+    api_device_micro_patch: apiPreffix +      'device_micro/patch/',
 
     //DevBlogs CRUD
     api_dev_blog_create: apiPreffix +    'dev_blog/create/',
@@ -23,18 +39,25 @@ export default {
     //Albums CRUD
     api_album_create: apiPreffix + 'album/create/',
     api_albums_read: apiPreffix + 'albums/read/',
+    api_albums_lookup: apiPreffix + 'albums/lookup/',
     api_albums_read_page: apiPreffix + 'albums/read/page/',
     api_album_update: apiPreffix + 'album/update/',
     api_album_delete: apiPreffix + 'album/delete/',
     api_album_patch: apiPreffix +      'album/patch/',
 
-    //Images CRUD
+    //Images CRUD + management
     api_image_create: apiPreffix + 'image/create/',
     api_images_read: apiPreffix + 'images/read/',
     api_images_read_page: apiPreffix + 'images/read/page/',
     api_image_update: apiPreffix + 'image/update/',
     api_image_delete: apiPreffix + 'image/delete/',
     api_image_patch: apiPreffix + 'image/patch/',
+
+    // Upload Image to Server
+    api_image_upload: apiPreffix + 'image/upload_image/',
+
+    // Get image list from storage
+    api_images_from_storage: apiPreffix + 'images/get_images/',
 
     //Device Types CRUD
     api_device_type_create: apiPreffix + 'device_type/create/',
@@ -48,6 +71,7 @@ export default {
     api_device_create: apiPreffix + 'devices/create/',
     api_devices_read: apiPreffix + 'devices/read/',
     api_devices_read_page: apiPreffix + 'devices/read/page/',
+    api_devices_lookup: apiPreffix + 'devices/lookup/',
     api_device_update: apiPreffix + 'devices/update/',
     api_device_delete: apiPreffix + 'devices/delete/',
     api_device_patch: apiPreffix +      'device/patch/',
@@ -64,6 +88,7 @@ export default {
     api_user_create: apiPreffix + 'user/create/',
     api_users_read: apiPreffix + 'users/read/',
     api_users_read_page: apiPreffix + 'users/read/page/',
+    api_users_lookup: apiPreffix + 'users/lookup/',
     api_user_update: apiPreffix + 'user/update/',
     api_user_delete: apiPreffix + 'user/delete/',
     api_user_patch: apiPreffix +  'user/patch/',
@@ -77,10 +102,5 @@ export default {
         // console.log(_api)
         return await axios.get(_api)
     },
-
-
-    // async getItems() {
-    //     console.log(await this.getData())
-    // },
 
 }

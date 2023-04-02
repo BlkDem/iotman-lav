@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Devices;
 
 use Illuminate\Http\Request;
 use App\Models\UserDevicesCount;
-use App\Http\Controllers\BaseController as BaseController;
+use App\Http\Controllers\BaseController;
 
 class UserDevicesCountController extends BaseController
 {

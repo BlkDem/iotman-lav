@@ -9,7 +9,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title"><span v-html="infoCardTitle"></span></h5>
-            <p class="card-text  fade-in my-2" v-if="moreInfoVisible">
+            <p class="card-text fade-in my-2" v-if="moreInfoVisible">
                 <span v-html="infoCardText"></span>
             </p>
             <!-- <p class="card-text fade-in" v-if="moreInfoVisible">

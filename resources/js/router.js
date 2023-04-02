@@ -7,6 +7,9 @@ import UserDevices from "./components/user_devices/UserDevices.vue"
 import Albums from "./components/imagelib/albums/Albums.vue"
 import Micros from "./components/micros/Micros.vue"
 import Users  from "./components/users/Users.vue"
+import Images from "./components/imagelib/images/Images.vue"
+import Presets from "./components/presets/Presets.vue"
+import DeviceMicros from "./components/device_micros/DeviceMicros.vue"
 
 const routes = [
   {
@@ -30,6 +33,13 @@ const routes = [
             icon: "fas fa-sun",
             component: Devices,
             ID: "DEVICES"
+          },
+          {
+            path: "device_micros",
+            name: "Device Micros",
+            icon: "fas fa-sun",
+            component: DeviceMicros,
+            ID: "DEVICE_MICROS"
           },
           {
             path: "/micros",
@@ -82,6 +92,13 @@ const routes = [
     visible: false
   },
   {
+    path: "/device_micros",
+    name: "Device Micros",
+    icon: "fas fa-sun",
+    component: DeviceMicros,
+    ID: "DEVICE_MICROS"
+  },
+  {
     path: "/user_devices",
     name: "User Devices",
     icon: "fas fa-users",
@@ -98,19 +115,62 @@ const routes = [
     visible: false
   },
   {
+    path: "/albums",
+    name: "Images Library",
+    icon: "fas fa-images",
+    component: Albums,
+    ID: "LIBRARY",
+    visible: true,
+    children: [
+        {
+            path: "/albums",
+            name: "Albums",
+            icon: "fas fa-images",
+            component: Albums,
+            ID: "ALBUMS",
+            visible: true
+        },
+        {
+            path: "/images",
+            name: "Images",
+            icon: "fa-regular fa-image",
+            component: Images,
+            ID: "IMAGES",
+            visible: true
+          },
+
+    ]
+  },
+  {
+    path: "/images",
+    name: "Images",
+    icon: "fa-regular fa-image",
+    component: Images,
+    ID: "IMAGES",
+    visible: false
+  },
+  {
+    path: "/albums",
+    name: "Albums",
+    icon: "fas fa-images",
+    component: Albums,
+    ID: "ALBUMS",
+    visible: false
+  },
+  {
     path: "/users",
     name: "Users",
-    icon: "fa-solid fa-user",
+    icon: "fa-solid fa-user-tie",
     component: Users,
     ID: "USERS",
     visible: true
   },
   {
-    path: "/imagelib",
-    name: "Images Library",
-    icon: "fas fa-images",
-    component: Albums,
-    ID: "LIBRARY",
+    path: "/presets",
+    name: "Presets",
+    icon: "fa-solid fa-gear",
+    component: Presets,
+    ID: "PRESETS",
     visible: true
   },
 

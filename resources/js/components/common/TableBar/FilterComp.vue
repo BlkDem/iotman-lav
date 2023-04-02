@@ -7,14 +7,14 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuFilter" style="position: absolute; ">
 
                 <div v-for="(fillterField, key) in filterDataFields" :id="fillterField.fieldName">
-                    <a class="dropdown-item"
+                    <a class="dropdown-item" v-if="fillterField.isSortable"
                         @click="currentField=fillterField.fieldName;currentFieldCaption=fillterField.fieldCaption;"
                     >{{ fillterField.fieldCaption }}</a>
                 </div>
             </div>
         </div>
         <div class="flex-center">
-        <input class="form-control" type="text" :value="dataFilter" :placeholder="'Filter: ' + currentFieldCaption"
+        <input class="form-control-sm w-100" type="text" :value="dataFilter" :placeholder="'Filter: ' + currentFieldCaption"
             @input="onInput" />
     </div>
 </template>
@@ -38,8 +38,10 @@ export default {
     },
 
     created() {
-        this.currentField = this.filterDataFields[0].fieldName
-        this.currentFieldCaption = this.filterDataFields[0].fieldCaption
+        const firstField = this.filterDataFields[0] //possible virtual field
+        const secondField = this.filterDataFields[1]
+        this.currentField = (firstField.isSortable)?firstField.fieldName : secondField.fieldName
+        this.currentFieldCaption = (firstField.isSortable)?firstField.fieldCaption : secondField.fieldCaption
     },
 
     methods: {
