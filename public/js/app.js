@@ -28979,7 +28979,7 @@ __webpack_require__.r(__webpack_exports__);
   DEVICE_MICROS: "Device Micros",
   MICROS: "Controllers",
   PRESETS: "Presets",
-  USER_DEVICES: "User`s Devices",
+  USER_DEVICES: "Produced",
   THEME: "Theme",
   CANCEL_STRING: "Cancel",
   EDITED_MESSAGE: "Edited",
@@ -29042,7 +29042,7 @@ __webpack_require__.r(__webpack_exports__);
   DEVICE_MICROS: "Контроллеры устройства",
   MICROS: "Контроллеры",
   PRESETS: "Настройки",
-  USER_DEVICES: "Пользовательские",
+  USER_DEVICES: "Произведенные",
   THEME: "Тема",
   CANCEL_STRING: "Отмена",
   EDITED_MESSAGE: "Изменено",
@@ -37133,9 +37133,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_sass_animation_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../sass/animation.scss */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./resources/sass/animation.scss");
 // Imports
 
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_sass_animation_scss__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.image-panel[data-v-75fb94a3] {\n    max-height: 200px;\n    margin-bottom: 20px;\n}\n.editable-image[data-v-75fb94a3] {\n    margin-bottom: 20px;\n    max-height: inherit;\n}\n\n", ""]);
 // Exports
@@ -37234,6 +37237,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.flex-top[data-v-0976a4eb] {\n    display: flex;\n    align-items: flex-start;\n}\n.flex-center-space[data-v-0976a4eb] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.w-33[data-v-0976a4eb] {\n    width: 33% !important;\n}\n.w-67[data-v-0976a4eb] {\n    width: 67% !important;\n}\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./resources/sass/animation.scss":
+/*!*****************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./resources/sass/animation.scss ***!
+  \*****************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".fade-in-1s {\n    animation: fadeIn 1s;\n    -webkit-animation: fadeIn 1s;\n    -moz-animation: fadeIn 1s;\n    -o-animation: fadeIn 1s;\n    -ms-animation: fadeIn 1s;\n}\n\n.fade-in {\n    animation: fadeIn 0.5s;\n    -webkit-animation: fadeIn .5s;\n    -moz-animation: fadeIn .5s;\n    -o-animation: fadeIn .5s;\n    -ms-animation: fadeIn .5s;\n  }\n\n  @keyframes fadeIn {\n    0% { opacity: 0; }\n    100% { opacity: 1; }\n  }\n\n  @-moz-keyframes fadeIn {\n    0% { opacity: 0; }\n    100% { opacity: 1; }\n  }\n\n  @-webkit-keyframes fadeIn {\n    0% { opacity: 0; }\n    100% { opacity: 1; }\n  }\n\n  @-o-keyframes fadeIn {\n    0% { opacity: 0; }\n    100% { opacity: 1; }\n  }\n\n  @-ms-keyframes fadeIn {\n    0% { opacity: 0; }\n    100% { opacity: 1; }\n  }\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

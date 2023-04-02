@@ -2,20 +2,20 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\DeviceTypeController;
-use App\Http\Controllers\DeviceController;
-use App\Http\Controllers\DevicesViewController;
-use App\Http\Controllers\DeviceUserController;
-use App\Http\Controllers\DeviceUsersViewController;
+use App\Http\Controllers\Devices\DeviceTypeController;
+use App\Http\Controllers\Devices\DeviceController;
+use App\Http\Controllers\Devices\DevicesViewController;
+use App\Http\Controllers\Devices\DeviceUserController;
+use App\Http\Controllers\Devices\DeviceUsersViewController;
 use App\Http\Controllers\Auth\UserinfoController;
-use App\Http\Controllers\UserDevicesCountController;
+use App\Http\Controllers\Devices\UserDevicesCountController;
 use App\Http\Controllers\Images\AlbumController;
 use App\Http\Controllers\Images\ImageController;
 use App\Http\Controllers\Images\ImageRepositoryController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MicroController;
+use App\Http\Controllers\Devices\MicroController;
 use App\Http\Controllers\DevBlogController;
-use App\Http\Controllers\DeviceMicroController;
+use App\Http\Controllers\Devices\DeviceMicroController;
 use App\Http\Controllers\Helpers\PresetController;
 use App\Http\Controllers\LoggerController;
 // use App\Http\Controllers\ImagesAlbumController;

@@ -9,7 +9,7 @@ export default {
     DEVICE_MICROS: "Контроллеры устройства",
     MICROS: "Контроллеры",
     PRESETS: "Настройки",
-    USER_DEVICES: "Пользовательские",
+    USER_DEVICES: "Произведенные",
     THEME: "Тема",
 
     CANCEL_STRING: "Отмена",

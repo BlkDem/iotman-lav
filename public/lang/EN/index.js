@@ -9,7 +9,7 @@ export default {
     DEVICE_MICROS: "Device Micros",
     MICROS: "Controllers",
     PRESETS: "Presets",
-    USER_DEVICES: "User`s Devices",
+    USER_DEVICES: "Produced",
     THEME: "Theme",
 
     CANCEL_STRING: "Cancel",

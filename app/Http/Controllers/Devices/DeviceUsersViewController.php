@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Devices;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\DeviceUsersView;
 use App\Http\Controllers\BaseController;
 use App\Models\DeviceUser;
+use App\Http\Controllers\PaginatorController;
 
 class DeviceUsersViewController extends BaseController
 {

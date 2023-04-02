@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Devices;
 
 use Illuminate\Http\Request;
 use App\Models\Device;
 use App\Models\DevicesView;
 use App\Http\Middleware\ValidatorRules;
-use App\Http\Controllers\BaseController as BaseController;
+use App\Http\Controllers\BaseController;
 use Exception;
 
 class DeviceController extends BaseController

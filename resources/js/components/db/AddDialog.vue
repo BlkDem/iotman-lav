@@ -233,6 +233,9 @@ export default {
 </script>
 
 <style scoped>
+
+@import "../../../sass/animation.scss";
+
 .image-panel {
     max-height: 200px;
     margin-bottom: 20px;
