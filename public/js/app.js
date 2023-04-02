@@ -25302,9 +25302,22 @@ __webpack_require__.r(__webpack_exports__);
           isEditable: false,
           isSortable: true,
           isHighLight: false,
-          columnsCount: 2,
+          columnsCount: 1,
           lookupId: 'device_micro_id',
           lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_device_micros_read,
+          isLookup: true
+        }, {
+          fieldName: 'param_type_id',
+          displayName: 'type_name',
+          fieldCaption: 'Type',
+          type: String,
+          isImage: false,
+          isEditable: false,
+          isSortable: true,
+          isHighLight: false,
+          columnsCount: 1,
+          lookupId: 'param_type_id',
+          lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_param_types_read,
           isLookup: true
         }, {
           fieldName: 'param_name',

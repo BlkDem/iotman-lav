@@ -7,6 +7,7 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\PaginatorController;
 use App\Models\MicroParam;
 use App\Models\DeviceMicro;
+use App\Models\ParamType;
 use App\Http\Middleware\ValidatorRules;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -44,6 +45,7 @@ class MicroParamController extends BaseController
 
         $res = DB::table('micro_params')
         ->join('device_micros', 'device_micros.id', '=', 'micro_params.device_micro_id')
+        ->join('param_types', 'param_types.id', '=', 'micro_params.param_type_id')
         ->select(
             'micro_params.id as id',
             'micro_params.param_name as param_name',
@@ -61,6 +63,10 @@ class MicroParamController extends BaseController
             'device_micros.id as device_micro_id',
             'device_micros.device_micro_idx as device_micro_idx',
             'device_micros.device_micro_desc as device_micro_desc',
+
+            'param_types.id as param_type_id',
+            'param_types.type_name as type_name',
+
             )
         ->where('device_micro_id', $device_micro_id)
         ->limit($itemsPerPage)->offset($offset)->orderBy('param_name', 'asc')
@@ -89,6 +95,16 @@ class MicroParamController extends BaseController
         }
         try {
             $newMicroParam = MicroParam::create($request->all());
+
+            $deviceMicroId = $newMicroParam["device_micro_id"];
+            $deviceMicroIdx = DeviceMicro::find($deviceMicroId);
+
+            $paramTypeId = $newMicroParam["param_type_id"];
+            $paramTypeName = ParamType::find($paramTypeId);
+
+            $newMicroParam["device_micro_idx"] = $deviceMicroIdx["device_micro_idx"];
+            $newMicroParam["type_name"] = $paramTypeName["type_name"];
+
             // return response()->json($newDeviceType, 201);
             return $this->sendResponse($newMicroParam, 'Param created');
         }
@@ -129,11 +145,13 @@ class MicroParamController extends BaseController
             $updateParam->update($request->all());
 
             $deviceMicroId = $updateParam["device_micro_id"];
-
             $deviceMicroIdx = DeviceMicro::find($deviceMicroId);
-            // $this->getAlbum($deviceMicroId);
+
+            $paramTypeId = $updateParam["param_type_id"];
+            $paramTypeName = ParamType::find($paramTypeId);
 
             $updateParam["device_micro_idx"] = $deviceMicroIdx["device_micro_idx"];
+            $updateParam["type_name"] = $paramTypeName["type_name"];
 
             return $this->sendResponse($updateParam, "Micro param updated");
         }

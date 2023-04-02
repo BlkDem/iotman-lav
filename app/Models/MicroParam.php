@@ -21,6 +21,7 @@ class MicroParam extends Model
         'param_desc',
         'param_in',
         'device_micro_id',
+        'param_type_id',
         'created_at',
         'updated_at'
     ];
