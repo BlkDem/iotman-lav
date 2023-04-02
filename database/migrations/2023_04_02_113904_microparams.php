@@ -28,7 +28,7 @@ return new class extends Migration
     {
         Schema::create('microparams', function (Blueprint $table) {
             $table->id();
-            $table->string('param_name', 255)->unique();
+            $table->string('param_name', 255);
             $table->string('param_value', 255)->nullable();
             $table->string('param_min', 255)->nullable();
             $table->string('param_max', 255)->nullable();

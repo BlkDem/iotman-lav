@@ -72,8 +72,6 @@ class MicroParamController extends BaseController
         ->limit($itemsPerPage)->offset($offset)->orderBy('param_name', 'asc')
         ->get();
 
-        // $res = Image::limit($itemsPerPage)->where('album_id', $album_id)->offset($offset)->orderBy('image_name', 'asc')->get();
-
         $total = MicroParam::where('device_micro_id', $device_micro_id)->get();
 
         $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
@@ -105,11 +103,10 @@ class MicroParamController extends BaseController
             $newMicroParam["device_micro_idx"] = $deviceMicroIdx["device_micro_idx"];
             $newMicroParam["type_name"] = $paramTypeName["type_name"];
 
-            // return response()->json($newDeviceType, 201);
             return $this->sendResponse($newMicroParam, 'Param created');
         }
         catch (Exception $e) {
-            return response()->json('Store Record Error: ' . $e, 400);
+            return $this->sendError('Error creating record: '. $e);
         }
     }
 

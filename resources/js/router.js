@@ -24,9 +24,9 @@ const routes = [
     children: [
         {
             path: "device_types",
-            // name: "Device Types",
+            name: "Device Types",
             icon: "fas fa-layer-group",
-            // component: DeviceTypes,
+            component: DeviceTypes,
             ID: "DEVICE_TYPES"
         },
         {

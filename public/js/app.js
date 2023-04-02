@@ -29852,9 +29852,9 @@ var routes = [{
   visible: true,
   children: [{
     path: "device_types",
-    // name: "Device Types",
+    name: "Device Types",
     icon: "fas fa-layer-group",
-    // component: DeviceTypes,
+    component: _components_device_types_DeviceTypes_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     ID: "DEVICE_TYPES"
   }, {
     path: "devices",
