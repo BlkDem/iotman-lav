@@ -25145,6 +25145,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      layoutCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__["default"].DEVICE_MICROS,
+      //DataSet fields setup
+
+      //Produced devices
       devices: {
         devicesCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__["default"].DEVICES,
         api: {
@@ -25188,6 +25192,7 @@ __webpack_require__.r(__webpack_exports__);
         selectedName: 'device_name',
         selectedFkValue: 0
       },
+      //Device`s Controllers
       deviceMicros: {
         deviceMicrosCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__["default"].DEVICE_MICROS,
         api: {
@@ -25269,6 +25274,7 @@ __webpack_require__.r(__webpack_exports__);
         selectedName: 'device_micro_idx',
         selectedFkValue: 0
       },
+      //Controller`s parameters
       microParams: {
         microParamsCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__["default"].MICRO_PARAMS,
         api: {
@@ -25378,11 +25384,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     onRowClick: function onRowClick(dataEvent) {
-      console.log(dataEvent);
+      // console.log(dataEvent)
       this.devices.selectedFkValue = dataEvent;
     },
-    onDeviceRowClick: function onDeviceRowClick(dataEvent) {
-      console.log(dataEvent);
+    onDeviceMicroRowClick: function onDeviceMicroRowClick(dataEvent) {
+      // console.log(dataEvent)
       this.deviceMicros.selectedFkValue = dataEvent;
     }
   }
@@ -26097,6 +26103,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       imageSrc: _config_pathes__WEBPACK_IMPORTED_MODULE_4__["default"].storageImagePlug,
       currentImage: '',
+      layoutCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].IMAGES,
       albumsReadOnly: true,
       //Images Widget Setup
       images: {
@@ -26522,6 +26529,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       usersReadOnly: true,
       additionalCaption: true,
+      layoutCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].USER_DEVICES,
       //Images Widget Setup
       userDevices: {
         userDevicesCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].USER_DEVICES,
@@ -26877,6 +26885,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
+    layoutCaption: {
+      type: String
+    },
     masterWidthProp: {
       type: String,
       "default": 'w-33'
@@ -28310,8 +28321,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_data_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("data-table");
   var _component_MasterSlaveLayout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("MasterSlaveLayout");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_MasterSlaveLayout, {
-    masterWidthProp: 'w-33',
-    slaveWidthProp: 'w-67'
+    layoutCaption: $data.layoutCaption
   }, {
     master: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
@@ -28336,7 +28346,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         selectedName: $data.deviceMicros.selectedName,
         readOnly: false,
         isAdditionalCaption: true,
-        onOnRowClick: $options.onDeviceRowClick
+        onOnRowClick: $options.onDeviceMicroRowClick
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" > ")];
@@ -28351,7 +28361,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignValue"])];
     }),
     _: 1 /* STABLE */
-  })], 64 /* STABLE_FRAGMENT */);
+  }, 8 /* PROPS */, ["layoutCaption"])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -28719,8 +28729,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_data_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("data-table");
   var _component_MasterSlaveLayout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("MasterSlaveLayout");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button @click=\"showDialogue\">123</button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_MasterSlaveLayout, {
-    masterWidthProp: 'w-33',
-    slaveWidthProp: 'w-67'
+    layoutCaption: $data.layoutCaption
   }, {
     master: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
@@ -28745,7 +28754,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignValue", "currentImage"])];
     }),
     _: 1 /* STABLE */
-  })], 64 /* STABLE_FRAGMENT */);
+  }, 8 /* PROPS */, ["layoutCaption"])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -28885,8 +28894,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_data_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("data-table");
   var _component_MasterSlaveLayout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("MasterSlaveLayout");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_MasterSlaveLayout, {
-    masterWidthProp: 'w-33',
-    slaveWidthProp: 'w-67'
+    layoutCaption: $data.layoutCaption
   }, {
     master: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
@@ -28910,7 +28918,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignValue"])];
     }),
     _: 1 /* STABLE */
-  })]);
+  }, 8 /* PROPS */, ["layoutCaption"])]);
 }
 
 /***/ }),
@@ -29016,26 +29024,28 @@ var _hoisted_1 = {
 var _hoisted_2 = {
   "class": "flex-center-space"
 };
-var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "px-2"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-    "class": "fa-solid fa-layer-group"
-  }), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-    "class": "mx-2"
-  }, "Layout manager")])], -1 /* HOISTED */);
-});
-var _hoisted_4 = {
+var _hoisted_3 = {
   "class": "px-2"
 };
-var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": "fa-solid fa-layer-group"
+  }, null, -1 /* HOISTED */);
+});
+var _hoisted_5 = {
+  "class": "mx-2"
+};
+var _hoisted_6 = {
+  "class": "px-2"
+};
+var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fa-solid fa-table-columns"
   }, null, -1 /* HOISTED */);
 });
-var _hoisted_6 = [_hoisted_5];
+var _hoisted_8 = [_hoisted_7];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.layoutCaption), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm", {
       'btn-secondary': $data.selected4,
       'hide': $data.layoutVertical
@@ -29066,7 +29076,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $options.changeOrientation();
     })
-  }, _hoisted_6, 2 /* CLASS */)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  }, _hoisted_8, 2 /* CLASS */)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
       'flex-top': !$data.layoutVertical
     })

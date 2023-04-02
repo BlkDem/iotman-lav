@@ -2,8 +2,7 @@
     <div style="margin-top: 5.5rem">
 
         <MasterSlaveLayout
-            :masterWidthProp="'w-33'"
-            :slaveWidthProp="'w-67'"
+            :layoutCaption="layoutCaption"
         >
 
             <template v-slot:master>
@@ -58,6 +57,8 @@ export default {
         return {
             usersReadOnly: true,
             additionalCaption: true,
+
+            layoutCaption: MessagesConstants.USER_DEVICES,
 
             //Images Widget Setup
             userDevices: {

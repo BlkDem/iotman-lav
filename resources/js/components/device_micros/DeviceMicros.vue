@@ -5,9 +5,8 @@
 
 
     <MasterSlaveLayout
-            :masterWidthProp="'w-33'"
-            :slaveWidthProp="'w-67'"
-        >
+        :layoutCaption="layoutCaption"
+    >
 
             <template v-slot:master>
 
@@ -38,7 +37,7 @@
                     :readOnly="false"
                     :isAdditionalCaption="true"
 
-                    @onRowClick="onDeviceRowClick">
+                    @onRowClick="onDeviceMicroRowClick">
 
                 >
                 </data-table>
@@ -74,7 +73,11 @@ export default {
     data() {
         return {
 
+            layoutCaption: MessagesConstants.DEVICE_MICROS,
 
+            //DataSet fields setup
+
+            //Produced devices
             devices: {
                 devicesCaption: MessagesConstants.DEVICES,
 
@@ -134,6 +137,7 @@ export default {
 
             },
 
+            //Device`s Controllers
             deviceMicros: {
 
                     deviceMicrosCaption: MessagesConstants.DEVICE_MICROS,
@@ -233,6 +237,7 @@ export default {
                     selectedFkValue: 0,
                 },
 
+            //Controller`s parameters
             microParams: {
 
                     microParamsCaption: MessagesConstants.MICRO_PARAMS,
@@ -373,12 +378,12 @@ export default {
 
     methods: {
         onRowClick(dataEvent) {
-            console.log(dataEvent)
+            // console.log(dataEvent)
             this.devices.selectedFkValue = dataEvent
         },
 
-        onDeviceRowClick(dataEvent) {
-            console.log(dataEvent)
+        onDeviceMicroRowClick(dataEvent) {
+            // console.log(dataEvent)
             this.deviceMicros.selectedFkValue = dataEvent
         }
     }
