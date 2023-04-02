@@ -12,7 +12,7 @@ export default {
     MICRO_PARAMS: "Parameters",
     MICROS: "Controllers",
     PRESETS: "Presets",
-    USER_DEVICES: "Produced",
+    USER_DEVICES: "User Devices",
     THEME: "Theme",
 
     CANCEL_STRING: "Cancel",

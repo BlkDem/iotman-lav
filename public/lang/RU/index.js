@@ -12,7 +12,7 @@ export default {
     MICRO_PARAMS: "Параметры",
     MICROS: "Контроллеры",
     PRESETS: "Настройки",
-    USER_DEVICES: "Произведенные",
+    USER_DEVICES: "Устройства пользователя",
     THEME: "Тема",
 
     CANCEL_STRING: "Отмена",
