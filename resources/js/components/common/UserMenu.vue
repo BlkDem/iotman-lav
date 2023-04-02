@@ -3,7 +3,7 @@
         <a class="nav-link dropdown-toggle active px-2" data-bs-toggle="dropdown" href="#" role="button"
             aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i></a>
         <div class="dropdown-menu" style="margin-left: -106px;">
-            <a class="dropdown-item" href="#">{{ userName }}</a>
+            <a class="dropdown-item" :href="'/users/'+userId">{{ userName }}</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" @click="logout">{{ userLogoutText }}</a>
         </div>

@@ -10,6 +10,7 @@ import Users  from "./components/users/Users.vue"
 import Images from "./components/imagelib/images/Images.vue"
 import Presets from "./components/presets/Presets.vue"
 import DeviceMicros from "./components/device_micros/DeviceMicros.vue"
+import UserInfo from "./components/users/UserInfo.vue"
 
 const routes = [
   {
@@ -164,6 +165,14 @@ const routes = [
     component: Users,
     ID: "USERS",
     visible: true
+  },
+  {
+    path: "/users/:id",
+    name: "UserInfo",
+    icon: "fa-solid fa-user-tie",
+    component: UserInfo,
+    ID: "USERINFO",
+    visible: false
   },
   {
     path: "/presets",

@@ -3,6 +3,7 @@ export default {
     LIBRARY: "Images Library",
     IMAGES: "Images",
     USERS: "Users",
+    USERINFO: "User Information",
     ALBUMS: "Albums",
     DEVICE_TYPES: "Device Types",
     DEVICES: "Devices",
