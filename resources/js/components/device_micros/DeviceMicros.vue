@@ -279,6 +279,17 @@ export default {
                         },
 
                         {
+                            fieldName: 'param_name',
+                            fieldCaption: 'Name',
+                            type: String,
+                            isImage: false,
+                            isEditable: true,
+                            isSortable: true,
+                            isHighLight: false,
+                            columnsCount: 1
+                        },
+
+                        {
                             fieldName: 'param_type_id',
                             displayName: 'type_name',
                             fieldCaption: 'Type',
@@ -291,17 +302,6 @@ export default {
                             lookupId: 'param_type_id',
                             lookupApi: APIConstants.api_param_types_read,
                             isLookup: true,
-                        },
-
-                        {
-                            fieldName: 'param_name',
-                            fieldCaption: 'Name',
-                            type: String,
-                            isImage: false,
-                            isEditable: true,
-                            isSortable: true,
-                            isHighLight: false,
-                            columnsCount: 1
                         },
 
                         {
@@ -321,6 +321,7 @@ export default {
                             isDirectionVirtualImage: true,
                             subscribeVirtualImage: 'fa-solid fa-arrow-left',
                             publishVirtualImage: 'fa-solid fa-arrow-right',
+                            biDirectionalVirtualImage: 'fa-solid fa-arrows-left-right',
                             // type: String,
                             // isImage: false,
                             // isEditable: true,

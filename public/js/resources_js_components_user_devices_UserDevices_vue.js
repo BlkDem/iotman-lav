@@ -667,6 +667,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return selected ? item.selectedVirtualImage : item.VirtualImage;
     },
     getDirectionImage: function getDirectionImage(item) {
+      switch (item.value) {
+        case -1:
+          return item.subscribeVirtualImage;
+          break;
+        case 0:
+          return item.biDirectionalVirtualImage;
+          break;
+        case 1:
+          return item.publishVirtualImage;
+          break;
+        default:
+          return '';
+          break;
+      }
       // console.log(item)
       return !item.value ? item.subscribeVirtualImage : item.publishVirtualImage;
     },
@@ -800,6 +814,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
           var _subscribeimage = dataField.subscribeVirtualImage; //for abstract images like 'albums'
           var _publishimage = dataField.publishVirtualImage; //for abstract images like 'albums'
+          var _biimage = dataField.biDirectionalVirtualImage; //for abstract images like 'albums'
           var _virtualimage = dataField.VirtualImage; //for abstract images like 'albums'
 
           var _selectedvirtualimage = (_dataField$selectedVi = dataField.selectedVirtualImage) !== null && _dataField$selectedVi !== void 0 ? _dataField$selectedVi : dataField.VirtualImage; //for abstract images like 'albums' (selected)
@@ -822,6 +837,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             displayName: _displayName,
             VirtualImage: _virtualimage,
             subscribeVirtualImage: _subscribeimage,
+            biDirectionalVirtualImage: _biimage,
             publishVirtualImage: _publishimage,
             selectedVirtualImage: _selectedvirtualimage,
             isDirectionVirtualImage: _directionvirtual,

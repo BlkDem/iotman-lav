@@ -667,6 +667,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return selected ? item.selectedVirtualImage : item.VirtualImage;
     },
     getDirectionImage: function getDirectionImage(item) {
+      switch (item.value) {
+        case -1:
+          return item.subscribeVirtualImage;
+          break;
+        case 0:
+          return item.biDirectionalVirtualImage;
+          break;
+        case 1:
+          return item.publishVirtualImage;
+          break;
+        default:
+          return '';
+          break;
+      }
       // console.log(item)
       return !item.value ? item.subscribeVirtualImage : item.publishVirtualImage;
     },
@@ -800,6 +814,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
           var _subscribeimage = dataField.subscribeVirtualImage; //for abstract images like 'albums'
           var _publishimage = dataField.publishVirtualImage; //for abstract images like 'albums'
+          var _biimage = dataField.biDirectionalVirtualImage; //for abstract images like 'albums'
           var _virtualimage = dataField.VirtualImage; //for abstract images like 'albums'
 
           var _selectedvirtualimage = (_dataField$selectedVi = dataField.selectedVirtualImage) !== null && _dataField$selectedVi !== void 0 ? _dataField$selectedVi : dataField.VirtualImage; //for abstract images like 'albums' (selected)
@@ -822,6 +837,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             displayName: _displayName,
             VirtualImage: _virtualimage,
             subscribeVirtualImage: _subscribeimage,
+            biDirectionalVirtualImage: _biimage,
             publishVirtualImage: _publishimage,
             selectedVirtualImage: _selectedvirtualimage,
             isDirectionVirtualImage: _directionvirtual,
@@ -1328,6 +1344,15 @@ __webpack_require__.r(__webpack_exports__);
           lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_device_micros_read,
           isLookup: true
         }, {
+          fieldName: 'param_name',
+          fieldCaption: 'Name',
+          type: String,
+          isImage: false,
+          isEditable: true,
+          isSortable: true,
+          isHighLight: false,
+          columnsCount: 1
+        }, {
           fieldName: 'param_type_id',
           displayName: 'type_name',
           fieldCaption: 'Type',
@@ -1340,15 +1365,6 @@ __webpack_require__.r(__webpack_exports__);
           lookupId: 'param_type_id',
           lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_param_types_read,
           isLookup: true
-        }, {
-          fieldName: 'param_name',
-          fieldCaption: 'Name',
-          type: String,
-          isImage: false,
-          isEditable: true,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 1
         }, {
           fieldName: 'param_value',
           fieldCaption: 'Value',
@@ -1364,6 +1380,7 @@ __webpack_require__.r(__webpack_exports__);
           isDirectionVirtualImage: true,
           subscribeVirtualImage: 'fa-solid fa-arrow-left',
           publishVirtualImage: 'fa-solid fa-arrow-right',
+          biDirectionalVirtualImage: 'fa-solid fa-arrows-left-right',
           // type: String,
           // isImage: false,
           // isEditable: true,

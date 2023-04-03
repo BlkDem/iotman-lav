@@ -394,6 +394,12 @@ export default {
 
             getDirectionImage(item) {
 
+                switch(item.value) {
+                    case -1: return item.subscribeVirtualImage; break;
+                    case 0: return item.biDirectionalVirtualImage; break;
+                    case 1: return item.publishVirtualImage; break;
+                    default: return ''; break;
+                }
                 // console.log(item)
                 return (!item.value)?item.subscribeVirtualImage:item.publishVirtualImage
             },
@@ -552,6 +558,7 @@ export default {
 
                     const _subscribeimage = dataField.subscribeVirtualImage //for abstract images like 'albums'
                     const _publishimage = dataField.publishVirtualImage //for abstract images like 'albums'
+                    const _biimage = dataField.biDirectionalVirtualImage //for abstract images like 'albums'
                     const _virtualimage = dataField.VirtualImage //for abstract images like 'albums'
 
                     const _selectedvirtualimage = dataField.selectedVirtualImage ?? dataField.VirtualImage  //for abstract images like 'albums' (selected)
@@ -574,6 +581,7 @@ export default {
                         displayName: _displayName,
                         VirtualImage: _virtualimage,
                         subscribeVirtualImage: _subscribeimage,
+                        biDirectionalVirtualImage: _biimage,
                         publishVirtualImage: _publishimage,
                         selectedVirtualImage: _selectedvirtualimage,
                         isDirectionVirtualImage: _directionvirtual,
