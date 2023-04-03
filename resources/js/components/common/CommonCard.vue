@@ -33,6 +33,9 @@
 </template>
 
 <script>
+
+import MakeID from '../../helpers/MakeID';
+
 export default {
 
     props: {
@@ -74,23 +77,12 @@ export default {
     },
 
     created() {
-        this.cardId = this.makeId(8)
+        this.cardId = MakeID.makeId(8, 'card_')
         // console.log(this.cardId)
     },
 
     methods: {
 
-        makeId(length) {
-            let result = '';
-            const characters = 'abcdefghijklmnopqrstuvwxyz';
-            const charactersLength = characters.length;
-            let counter = 0;
-            while (counter < length) {
-                result += characters.charAt(Math.floor(Math.random() * charactersLength));
-                counter += 1;
-            }
-            return 'id_' + result;
-        },
     }
 
 }
