@@ -1,36 +1,4 @@
 <template>
-    <!-- <div class="card card-border my-4">
-        <div class="card-body border-4 border-top border-bottom rounded-bottom rounded-top border-secondary">
-            <div class="card-caption">
-
-                <h5 class="card-title align-left px-2 "
-                >
-                    {{ cardCaption }}
-                    <span class="text-light"
-                        :class="{'hide': !isAdditionalCaption}">
-                        - {{ cardCaptionAdd }}
-                    </span>
-
-                </h5>
-
-                <div :class="{'hide': isCollapseButtonHidden ?? false}">
-                    <button class="btn btn-primary btn-rounded btn-sm" :class="{'hide': !isCollapsed}"
-                        @click="isCollapsed=!isCollapsed">
-                        <i class="fas fa-caret-down"></i>
-                    </button>
-                    <button class="btn btn-primary btn-rounded btn-sm" :class="{'hide': isCollapsed}"
-                        @click="isCollapsed=!isCollapsed">
-                        <i class="fas fa-caret-up"></i>
-                    </button>
-                </div>
-            </div>
-
-
-            <div id="card-header" :class="{'mx-2': margins, 'collapse': isCollapsed}">
-                <slot>Loading...</slot>
-            </div>
-        </div>
-    </div> -->
 
     <div class="card my-3">
         <h5 class="card-header">
@@ -51,24 +19,7 @@
             <div class="card-body">
                 <div class="card-caption">
 
-                    <!-- <h5 class="card-title align-left px-2 ">
-                        {{ cardCaption }}
-                        <span class="text-light" :class="{'hide': !isAdditionalCaption}">
-                            - {{ cardCaptionAdd }}
-                        </span>
 
-                    </h5> -->
-
-                    <!-- <div :class="{'hide': isCollapseButtonHidden ?? false}">
-                        <button class="btn btn-primary btn-rounded btn-sm" :class="{'hide': !isCollapsed}"
-                            @click="isCollapsed=!isCollapsed">
-                            <i class="fas fa-caret-down"></i>
-                        </button>
-                        <button class="btn btn-primary btn-rounded btn-sm" :class="{'hide': isCollapsed}"
-                            @click="isCollapsed=!isCollapsed">
-                            <i class="fas fa-caret-up"></i>
-                        </button>
-                    </div> -->
                 </div>
 
 

@@ -20,6 +20,22 @@ export default {
     api_micro_delete: apiPreffix +     'micro/delete/',
     api_micro_patch: apiPreffix +      'micro/patch/',
 
+    //Micro Params CRUD
+    api_micro_param_create: apiPreffix +     'micro_param/create/',
+    api_micro_params_read: apiPreffix +      'micro_params/read/',
+    api_micro_params_read_page: apiPreffix + 'micro_params/read/page/',
+    api_micro_param_update: apiPreffix +     'micro_param/update/',
+    api_micro_param_delete: apiPreffix +     'micro_param/delete/',
+    api_micro_param_patch: apiPreffix +      'micro_param/patch/',
+
+    //Param Types CRUD
+    api_param_type_create: apiPreffix +     'param_type/create/',
+    api_param_types_read: apiPreffix +      'param_types/read/',
+    api_param_types_read_page: apiPreffix + 'param_types/read/page/',
+    api_param_type_update: apiPreffix +     'param_type/update/',
+    api_param_type_delete: apiPreffix +     'param_type/delete/',
+    api_param_type_patch: apiPreffix +      'param_type/patch/',
+
     //Device Micros CRUD
     api_device_micro_create: apiPreffix +     'device_micro/create/',
     api_device_micros_read: apiPreffix +      'device_micros/read/',
@@ -87,6 +103,7 @@ export default {
     //Users CRUD
     api_user_create: apiPreffix + 'user/create/',
     api_users_read: apiPreffix + 'users/read/',
+    api_user_getinfo: apiPreffix + 'user/read/',
     api_users_read_page: apiPreffix + 'users/read/page/',
     api_users_lookup: apiPreffix + 'users/lookup/',
     api_user_update: apiPreffix + 'user/update/',

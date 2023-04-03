@@ -1,9 +1,8 @@
 <template>
-    <div style="margin-top: 5.5rem">
+    <div style="margin-top: 5.5rem"></div>
 
         <MasterSlaveLayout
-            :masterWidthProp="'w-33'"
-            :slaveWidthProp="'w-67'"
+            :layoutCaption="layoutCaption"
         >
 
             <template v-slot:master>
@@ -37,18 +36,16 @@
 
         </MasterSlaveLayout>
 
-    </div>
 </template>
 
 <script>
+
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
 import DataTable from '../../components/db/DataTable.vue';
 import MasterSlaveLayout from '../../layouts/MasterSlaveLayout.vue';
 
 export default {
-
-    // emits: ['setAdditionalCaption'],
 
     components: {
         DataTable, MasterSlaveLayout,
@@ -59,7 +56,8 @@ export default {
             usersReadOnly: true,
             additionalCaption: true,
 
-            //Images Widget Setup
+            layoutCaption: MessagesConstants.USER_DEVICES,
+
             userDevices: {
                 userDevicesCaption: MessagesConstants.USER_DEVICES,
 

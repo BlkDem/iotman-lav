@@ -18,6 +18,9 @@ use App\Http\Controllers\DevBlogController;
 use App\Http\Controllers\Devices\DeviceMicroController;
 use App\Http\Controllers\Helpers\PresetController;
 use App\Http\Controllers\LoggerController;
+use App\Http\Controllers\Devices\MicroParamController;
+use App\Http\Controllers\Devices\ParamTypeController;
+
 // use App\Http\Controllers\ImagesAlbumController;
 
 /*
@@ -40,7 +43,6 @@ Route::post('/login', [AuthController::class, 'signin']);
 
 Route::get('/test', [LoggerController::class, 'getLog']);
 
-//CRUD routes for table 'users'
 Route::middleware('auth:sanctum')->group( function () {
 
 //CRUD routes for model 'users'
@@ -118,6 +120,19 @@ Route::controller(MicroController::class)->group(function () {
     Route::patch('/micro/patch/{id}/{field}/{value}', 'patch');
 });
 
+//CRUD routes for model 'micro_params'
+
+Route::controller(MicroParamController::class)->group(function () {
+    Route::post(  '/micro_param/create', 'store');
+    Route::get(   '/micro_params/read', 'index');
+    Route::get(   '/micro_params/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get(   '/micro_params/read/page/{currentPage}/{itemsPerPage}/{device_micro_id}', 'pageWhereMicroDevice');
+    Route::get(   '/micro_param/read/{id}', 'show');
+    Route::put(   '/micro_param/update/{updateParam}', 'update');
+    Route::delete('/micro_param/delete/{id}', 'destroy');
+    Route::patch('/micro_param/patch/{id}/{field}/{value}', 'patch');
+});
+
 //CRUD routes for model 'device_micros'
 
 Route::controller(DeviceMicroController::class)->group(function () {
@@ -143,6 +158,19 @@ Route::controller(DevBlogController::class)->group(function () {
     Route::patch('/dev_blog/patch/{id}/{field}/{value}', 'patch');
 });
 
+
+//CRUD routes for model 'param_types'
+
+Route::controller(ParamTypeController::class)->group(function () {
+    Route::post(  '/param_type/create', 'store');
+    Route::get(   '/param_types/read/', 'index');
+    Route::get(   '/param_types/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get(   '/param_types/read/{id}', 'show');
+    Route::patch( '/param_type/patch/{id}/{field}/{value}', 'patch');
+    Route::put(   '/param_type/update/{updateDeviceType}', 'update');
+    Route::delete('/param_type/delete/{id}', 'destroy');
+
+});
 
 //CRUD routes for model 'device_types'
 

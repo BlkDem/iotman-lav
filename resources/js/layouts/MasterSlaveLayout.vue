@@ -6,7 +6,7 @@
         <div class="flex-center-space">
 
             <div class="px-2">
-                <h5><i class="fa-solid fa-layer-group"></i><span class="mx-2">Layout manager</span></h5>
+                <h5><i class="fa-solid fa-layer-group"></i><span class="mx-2">{{ layoutCaption }}</span></h5>
             </div>
 
             <div class="px-2">
@@ -46,6 +46,7 @@
             </slot>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -55,6 +56,12 @@ import { booleanLiteral } from '@babel/types'
 export default {
 
     props: {
+
+        layoutCaption: {
+                type: String,
+
+        },
+
         masterWidthProp: {
             type: String,
             default: 'w-33'
@@ -69,6 +76,7 @@ export default {
 
     data() {
         return {
+
             layoutVertical: {
                 type: Boolean,
                 default: false

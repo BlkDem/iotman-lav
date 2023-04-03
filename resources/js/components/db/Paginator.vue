@@ -11,14 +11,14 @@
 
         </div>
         <ul class="pagination text-center">
-            <li class="page-item" :class="{'disabled': (itemsPerPage==2)}">
-                <button class="page-link" v-on:click="setPage(1, 2)">2</button>
-            </li>
             <li class="page-item" :class="{'disabled': (itemsPerPage==5)}">
                 <button class="page-link" v-on:click="setPage(1, 5)">5</button>
             </li>
             <li class="page-item" :class="{'disabled': (itemsPerPage==10)}">
                 <button class="page-link" v-on:click="setPage(1, 10)">10</button>
+            </li>
+            <li class="page-item" :class="{'disabled': (itemsPerPage==50)}">
+                <button class="page-link" v-on:click="setPage(1, 50)">50</button>
             </li>
         </ul>
         <div class="px-2">

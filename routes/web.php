@@ -17,8 +17,10 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::get('/', [RootController::class, 'index']);
 Route::get('/users', [RootController::class, 'index']);
+Route::get('/users/{id}', [RootController::class, 'index']);
 Route::get('/devices', [RootController::class, 'index']);
 Route::get('/device_types', [RootController::class, 'index']);
+Route::get('/param_types', [RootController::class, 'index']);
 Route::get('/micros', [RootController::class, 'index']);
 Route::get('/device_micros', [RootController::class, 'index']);
 Route::get('/user_devices', [RootController::class, 'index']);

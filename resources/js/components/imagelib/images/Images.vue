@@ -5,9 +5,8 @@
     <!-- <button @click="showDialogue">123</button> -->
 
     <MasterSlaveLayout
-            :masterWidthProp="'w-33'"
-            :slaveWidthProp="'w-67'"
-        >
+        :layoutCaption="layoutCaption"
+    >
 
             <template v-slot:master>
 
@@ -65,6 +64,8 @@ export default {
 
             imageSrc: pathes.storageImagePlug,
             currentImage: '',
+
+            layoutCaption: MessagesConstants.IMAGES,
 
             albumsReadOnly: true,
 
