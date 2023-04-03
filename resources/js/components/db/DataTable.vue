@@ -143,7 +143,8 @@
 
                             <span v-if="
                                     (activeCol!==key||activeRow!==ckey)&&
-                                    (item[column].isImage != true)&&
+                                    (!item[column].isImage)&&
+                                    (!item[column].isDirectionVirtualImage)&&
                                     (!item[column].isHidden)&&
                                     (!item[column].isLookup)"
                                 :class="{
@@ -168,6 +169,13 @@
                             >
 
                                 <i :class="getVirtualImage(selectedRow[key], item[column])"></i>
+                            </span>
+
+                            <span v-if="item[column].isDirectionVirtualImage"
+                                :class="{'text-info': item[column].isHighLight}"
+                            >
+
+                                <i :class="getDirectionImage(item[column])"></i>
                             </span>
 
                             <img v-if="item[column].isImage" class="device-image"
@@ -380,7 +388,14 @@ export default {
                 // const _a = (selected)?item.selectedVirtualImage:item.VirtualImage
                 // if (item.selectedVirtualImage === undefined) item.selectedVirtualImage =
                 // console.log(selected, _a)
+
                 return (selected)?item.selectedVirtualImage:item.VirtualImage
+            },
+
+            getDirectionImage(item) {
+
+                // console.log(item)
+                return (!item.value)?item.subscribeVirtualImage:item.publishVirtualImage
             },
 
             imageClick() {
@@ -532,7 +547,13 @@ export default {
                     const _hidden = dataField.isHidden //hidden field 'hide' class
                     const _colscount = dataField.columnsCount //col-* col-ls-* ... value
                     const _virtual = dataField.isVirtualImage //for abstract images like 'albums'
+                    const _directionvirtual = dataField.isDirectionVirtualImage //for abstract images like 'albums'
+
+
+                    const _subscribeimage = dataField.subscribeVirtualImage //for abstract images like 'albums'
+                    const _publishimage = dataField.publishVirtualImage //for abstract images like 'albums'
                     const _virtualimage = dataField.VirtualImage //for abstract images like 'albums'
+
                     const _selectedvirtualimage = dataField.selectedVirtualImage ?? dataField.VirtualImage  //for abstract images like 'albums' (selected)
                     const _fieldignore = dataField.isFieldIgnore //for abstract images like 'albums'
                     const _isLookup = dataField.isLookup //field links to another object
@@ -552,7 +573,10 @@ export default {
                         // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
                         displayName: _displayName,
                         VirtualImage: _virtualimage,
+                        subscribeVirtualImage: _subscribeimage,
+                        publishVirtualImage: _publishimage,
                         selectedVirtualImage: _selectedvirtualimage,
+                        isDirectionVirtualImage: _directionvirtual,
                         isFieldIgnore: _fieldignore,
                         isEditable: _editable,
                         isText: _text,
@@ -594,7 +618,7 @@ export default {
                     return newList
             },
 
-            async getData(_currentPage=1, _itemsPerPage=5) {
+            async getData(_currentPage=1, _itemsPerPage=50) {
 
                 //async loading master/slave datasets
                 //if dataset is slave waiting for master keys value

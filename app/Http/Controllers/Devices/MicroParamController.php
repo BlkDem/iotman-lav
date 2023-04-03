@@ -29,7 +29,7 @@ class MicroParamController extends BaseController
         $page = (int)$currentPage;
 
         $offset = $itemsPerPage*--$page;
-        $res = MicroParam::limit($itemsPerPage)->offset($offset)->orderBy('param_name', 'asc')->get();
+        $res = MicroParam::limit($itemsPerPage)->offset($offset)->orderBy('param_in, param_name', 'asc')->get();
         $total = MicroParam::get();
 
         $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
@@ -69,7 +69,9 @@ class MicroParamController extends BaseController
 
             )
         ->where('device_micro_id', $device_micro_id)
-        ->limit($itemsPerPage)->offset($offset)->orderBy('param_name', 'asc')
+        ->limit($itemsPerPage)->offset($offset)
+        ->orderBy('param_in', 'asc')
+        ->orderBy('param_name', 'asc')
         ->get();
 
         $total = MicroParam::where('device_micro_id', $device_micro_id)->get();

@@ -272,7 +272,7 @@ export default {
                             isEditable: false,
                             isSortable: true,
                             isHighLight: false,
-                            columnsCount: 1,
+                            columnsCount: 2,
                             lookupId: 'device_micro_id',
                             lookupApi: APIConstants.api_device_micros_read,
                             isLookup: true,
@@ -301,7 +301,7 @@ export default {
                             isEditable: true,
                             isSortable: true,
                             isHighLight: false,
-                            columnsCount: 2
+                            columnsCount: 1
                         },
 
                         {
@@ -318,17 +318,20 @@ export default {
                         {
                             fieldName: 'param_in',
                             fieldCaption: 'Dir',
-                            type: String,
-                            isImage: false,
-                            isEditable: true,
+                            isDirectionVirtualImage: true,
+                            subscribeVirtualImage: 'fa-solid fa-arrow-left',
+                            publishVirtualImage: 'fa-solid fa-arrow-right',
+                            // type: String,
+                            // isImage: false,
+                            // isEditable: true,
                             isSortable: true,
-                            isHighLight: false,
+                            // isHighLight: false,
                             columnsCount: 1
                         },
 
                         {
                             fieldName: 'param_suff',
-                            fieldCaption: 'Suffix',
+                            fieldCaption: 'Suff',
                             type: String,
                             isImage: false,
                             isEditable: true,
