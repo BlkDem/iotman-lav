@@ -6,7 +6,7 @@
                 <span class="text-info">({{ rangeValue }})</span></label>
         </div>
         <div class="col-sm-9 col-md-9 col-lg-9">
-            <div class="flex-space">
+            <div class="flex-space font-1_5rem">
                 <div class="text-info w-25">{{ rangeMin }}</div>
                 <div class="text-info">{{ rangeValue }}</div>
                 <div class="text-info w-25 align-right">{{ rangeMax }}</div>
@@ -70,6 +70,9 @@ export default {
 
 .font-1_8rem{
     font-size: 1.5rem;
+}
+.font-1_5rem{
+    font-size: 1.2rem;
 }
 .align-right {
     text-align: right;

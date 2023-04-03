@@ -10,6 +10,7 @@
 import MakeID from '../../../helpers/MakeID';
 
 export default {
+
     props: {
         initSwitchState: {
             type: Boolean,
@@ -46,7 +47,6 @@ export default {
 }
 
 .switch-label {
-    /* height: 35px; */
     font-size: 1.5rem;
     margin-left: 8px;
     margin-top: 2px;

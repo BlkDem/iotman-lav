@@ -261,6 +261,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     buttonCaption: 'Strip Off',
     sizeClass: 'w-50',
     onClick: $options.bntClick
+  }, null, 8 /* PROPS */, ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+    buttonCaption: 'Strip On',
+    sizeClass: 'w-50',
+    onClick: $options.bntClick
   }, null, 8 /* PROPS */, ["onClick"])], 64 /* STABLE_FRAGMENT */);
 }
 
@@ -280,15 +284,15 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = ["value", "id"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
     type: "button",
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary m-4", $props.sizeClass]),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary px-4 my-2", $props.sizeClass]),
     value: $props.buttonCaption,
     id: _ctx.newID,
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.onClick && $options.onClick.apply($options, arguments);
     })
-  }, null, 10 /* CLASS, PROPS */, _hoisted_1)]);
+  }, null, 10 /* CLASS, PROPS */, _hoisted_1);
 }
 
 /***/ }),
@@ -365,7 +369,7 @@ var _hoisted_5 = {
   "class": "col-sm-9 col-md-9 col-lg-9"
 };
 var _hoisted_6 = {
-  "class": "flex-space"
+  "class": "flex-space font-1_5rem"
 };
 var _hoisted_7 = {
   "class": "text-info w-25"
@@ -472,7 +476,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.flex-space[data-v-22d340ce] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.font-1_8rem[data-v-22d340ce]{\n    font-size: 1.5rem;\n}\n.align-right[data-v-22d340ce] {\n    text-align: right;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.flex-space[data-v-22d340ce] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.font-1_8rem[data-v-22d340ce]{\n    font-size: 1.5rem;\n}\n.font-1_5rem[data-v-22d340ce]{\n    font-size: 1.2rem;\n}\n.align-right[data-v-22d340ce] {\n    text-align: right;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -495,7 +499,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.switch-big[data-v-3e529e08]\n{\n    width: 4rem;\n    height: 35px;\n}\n.switch-label[data-v-3e529e08] {\n    /* height: 35px; */\n    font-size: 1.5rem;\n    margin-left: 8px;\n    margin-top: 2px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.switch-big[data-v-3e529e08]\n{\n    width: 4rem;\n    height: 35px;\n}\n.switch-label[data-v-3e529e08] {\n    font-size: 1.5rem;\n    margin-left: 8px;\n    margin-top: 2px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -1,12 +1,10 @@
 <template>
-    <div>
-        <input type="button" class="btn btn-primary m-4"
+        <input type="button" class="btn btn-primary px-4 my-2"
             :class="sizeClass"
             :value="buttonCaption"
             :id="newID"
             @click="onClick"
         >
-    </div>
 </template>
 
 <script>

@@ -53,6 +53,12 @@
     @click="bntClick"
 ></Button>
 
+<Button
+    :buttonCaption="'Strip On'"
+    :sizeClass="'w-50'"
+    @click="bntClick"
+></Button>
+
 </template>
 
 <script>
