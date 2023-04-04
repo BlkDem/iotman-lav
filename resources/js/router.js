@@ -202,6 +202,16 @@ const routes = [
     ID: "PRESETS",
     visible: true
   },
+  {
+    path: "/dash",
+    name: "Dash",
+    icon: "fa-solid fa-gear",
+    // component: Presets,
+    component: () => import('./components/device_micros/Dash.vue'),
+
+    ID: "DASH",
+    visible: true
+  },
 
 ];
 

@@ -28,5 +28,6 @@ Route::get('/imagelib', [RootController::class, 'index']);
 Route::get('/albums', [RootController::class, 'index']);
 Route::get('/images', [RootController::class, 'index']);
 Route::get('/presets', [RootController::class, 'index']);
+Route::get('/dash', [RootController::class, 'index']);
 
 Auth::routes();

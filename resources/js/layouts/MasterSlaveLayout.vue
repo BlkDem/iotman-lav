@@ -1,7 +1,9 @@
 <template>
 
 
-    <div class="card-body border-4 border-top border-bottom rounded-bottom rounded-top border-secondary py-2 mx-2">
+    <div class="card-body border-4 border-top border-bottom rounded-bottom rounded-top border-secondary py-2 mx-2"
+        :class="{'w-100': layoutVertical}"
+    >
 
         <div class="flex-center-space">
 
@@ -50,8 +52,6 @@
 </template>
 
 <script>
-import { booleanLiteral } from '@babel/types'
-
 
 export default {
 
@@ -170,8 +170,6 @@ export default {
         this.selected3 = true
 
         this.changeWidth(this.masterWidth, this.slaveWidth, 3)
-
-        // console.log(this.masterWidth, this.slaveWidth)
     }
 }
 
@@ -182,19 +180,16 @@ export default {
     display: flex;
     align-items: flex-start;
 }
-
 .flex-center-space {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-
 .w-33 {
-    width: 33% !important;
+    width: 33%;
 }
-
 .w-67 {
-    width: 67% !important;
+    width: 67%;
 }
 
 </style>

@@ -23751,6 +23751,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _helpers_MakeID__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/MakeID */ "./resources/js/helpers/MakeID.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     cardCaption: {
@@ -23784,23 +23786,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.cardId = this.makeId(8);
+    this.cardId = _helpers_MakeID__WEBPACK_IMPORTED_MODULE_0__["default"].makeId(8, 'card_');
     // console.log(this.cardId)
   },
 
-  methods: {
-    makeId: function makeId(length) {
-      var result = '';
-      var characters = 'abcdefghijklmnopqrstuvwxyz';
-      var charactersLength = characters.length;
-      var counter = 0;
-      while (counter < length) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        counter += 1;
-      }
-      return 'id_' + result;
-    }
-  }
+  methods: {}
 });
 
 /***/ }),
@@ -25329,6 +25319,33 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/helpers/MakeID.js":
+/*!****************************************!*\
+  !*** ./resources/js/helpers/MakeID.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  makeId: function makeId(length, preffix) {
+    var result = '';
+    var characters = 'abcdefghijklmnopqrstuvwxyz';
+    var charactersLength = characters.length;
+    var counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return 'id_' + preffix + result;
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/langs.js":
 /*!*******************************!*\
   !*** ./resources/js/langs.js ***!
@@ -25579,6 +25596,16 @@ var routes = [{
     return __webpack_require__.e(/*! import() */ "resources_js_components_presets_Presets_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/presets/Presets.vue */ "./resources/js/components/presets/Presets.vue"));
   },
   ID: "PRESETS",
+  visible: true
+}, {
+  path: "/dash",
+  name: "Dash",
+  icon: "fa-solid fa-gear",
+  // component: Presets,
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_components_device_micros_Dash_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/device_micros/Dash.vue */ "./resources/js/components/device_micros/Dash.vue"));
+  },
+  ID: "DASH",
   visible: true
 }];
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_1__.createRouter)({
@@ -32980,7 +33007,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".flex {\n    display: flex;\n    align-items: center;\n}\n\n.flex-center {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: row;\n}\n\n.flex-center-column {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: column;\n}\n\n.flex-right {\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n    flex-wrap: wrap;\n}\n\n.flex-left {\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n}\n\n/*.image-badge {\n    width: 24px;\n    height: 24px;\n    margin-left: -10px;\n}\n\n.logo {\n    display: flex;\n    margin-right: 16px;\n    margin-left: 4px;\n    width: 36px;\n}*/\n\n.device-image {\n    position: relative;\n    height: 1.9rem;\n    border-radius: 5px;\n    border: 0px solid var(--bs-primary);\n    -webkit-transition: width .5s, height .5s, -webkit-transform .5s;\n    transition: width .5s, height .5s, border-color .5s, transform .5s;\n}\n\n.device-image:hover {\n    z-index: 100;\n    border: 2px solid var(--bs-secondary);\n    -webkit-transform: scale(2);\n    transform: scale(2);\n}\n\n.card-space {\n    margin-bottom: 00px;\n}\n\na.a_cap:first-letter {\n    text-transform: uppercase;\n}\n\n.edit-buttons {\n    display: flex;\n    justify-content: flex-end;\n}\n\n.btn-width-40 {\n    width: 40%;\n}\n\n.cursor-pointer {\n    cursor: pointer;\n}\n\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n    .device-image {\n        width: 100px;\n        height: 100px;\n        /* margin-top: -23px; */\n        margin-bottom: -91px;\n        margin-left: 219px;\n        border-radius: 10px;\n        /*box-shadow: #eee 0px 0px 8px;*/\n    }\n    .card-space {\n        margin-bottom: 20px;\n    }\n    .container {\n        padding: 0;\n        width: 100%;\n    }\n\n    .navbar > .container-fluid {\n        display: flex;\n        flex-wrap: inherit;\n        align-items: center;\n        justify-content: flex-start;\n    }\n\n    .edit-buttons {\n        /* display: flex;*/\n        margin-top: 16px;\n        margin-bottom: 8px;\n        justify-content: flex-start;\n    }\n\n    .flex-right {\n        flex-direction: row;\n        flex-wrap: wrap;\n    }\n\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".flex {\n    display: flex;\n    align-items: center;\n}\n\n.flex-center {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: row;\n}\n\n.flex-center-column {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: column;\n}\n\n.flex-right {\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n    flex-wrap: wrap;\n}\n\n.flex-left {\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n}\n\n/*.image-badge {\n    width: 24px;\n    height: 24px;\n    margin-left: -10px;\n}\n\n.logo {\n    display: flex;\n    margin-right: 16px;\n    margin-left: 4px;\n    width: 36px;\n}*/\n\n.device-image {\n    position: relative;\n    height: 1.9rem;\n    border-radius: 5px;\n    border: 0px solid var(--bs-primary);\n    -webkit-transition: width .5s, height .5s, -webkit-transform .5s;\n    transition: width .5s, height .5s, border-color .5s, transform .5s;\n}\n\n.device-image:hover {\n    z-index: 100;\n    border: 2px solid var(--bs-secondary);\n    -webkit-transform: scale(2);\n    transform: scale(2);\n}\n\n.card-space {\n    margin-bottom: 00px;\n}\n\na.a_cap:first-letter {\n    text-transform: uppercase;\n}\n\n.edit-buttons {\n    display: flex;\n    justify-content: flex-end;\n}\n\n.btn-width-40 {\n    width: 40%;\n}\n\n.cursor-pointer {\n    cursor: pointer;\n}\n\n.switch-big\n{\n    width: 75px;\n    height: 40px;\n}\n\n.switch-label {\n    height: 40px;\n    font-size: 1.5rem;\n    margin-left: 8px;\n    margin-top: 5px;\n}\n\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n    .device-image {\n        width: 100px;\n        height: 100px;\n        /* margin-top: -23px; */\n        margin-bottom: -91px;\n        margin-left: 219px;\n        border-radius: 10px;\n        /*box-shadow: #eee 0px 0px 8px;*/\n    }\n    .card-space {\n        margin-bottom: 20px;\n    }\n    .container {\n        padding: 0;\n        width: 100%;\n    }\n\n    .navbar > .container-fluid {\n        display: flex;\n        flex-wrap: inherit;\n        align-items: center;\n        justify-content: flex-start;\n    }\n\n    .edit-buttons {\n        /* display: flex;*/\n        margin-top: 16px;\n        margin-bottom: 8px;\n        justify-content: flex-start;\n    }\n\n    .flex-right {\n        flex-direction: row;\n        flex-wrap: wrap;\n    }\n\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -55615,7 +55642,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_device_types_DeviceTypes_vue":1,"resources_js_components_devices_Devices_vue":1,"resources_js_components_device_micros_DeviceMicros_vue":1,"resources_js_components_device_micros_ParamTypes_vue":1,"resources_js_components_micros_Micros_vue":1,"resources_js_components_user_devices_UserDevices_vue":1,"resources_js_components_imagelib_albums_Albums_vue":1,"resources_js_components_imagelib_images_Images_vue":1,"resources_js_components_users_Users_vue":1,"resources_js_components_users_UserInfo_vue":1,"resources_js_components_presets_Presets_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_device_types_DeviceTypes_vue":1,"resources_js_components_devices_Devices_vue":1,"resources_js_components_device_micros_DeviceMicros_vue":1,"resources_js_components_device_micros_ParamTypes_vue":1,"resources_js_components_micros_Micros_vue":1,"resources_js_components_user_devices_UserDevices_vue":1,"resources_js_components_imagelib_albums_Albums_vue":1,"resources_js_components_imagelib_images_Images_vue":1,"resources_js_components_users_Users_vue":1,"resources_js_components_users_UserInfo_vue":1,"resources_js_components_presets_Presets_vue":1,"resources_js_components_device_micros_Dash_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
