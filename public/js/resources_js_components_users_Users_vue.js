@@ -2058,7 +2058,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, [!item[column].isHidden ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [($data.activeCol !== key || $data.activeRow !== ckey) && !item[column].isImage && !item[column].isDirectionVirtualImage && !item[column].isHidden && !item[column].isLookup ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
             key: 0,
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-              'text-info': item[column].isHighLight
+              'text-info': item[column].isHighLight,
+              'elipsis': item[column].isText
             }),
             onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
               return $options.onCellClick(item[column].isEditable, ckey, key);

@@ -18,7 +18,7 @@ class DeviceUsersViewController extends BaseController
      */
     public function index(){
 
-        $res = DB::table('Device_DeviceTypes_UserDevices')->orderBy('user_device_name', 'asc')->get();
+        $res = DB::table('device_devicetypes_userdevices')->orderBy('user_device_name', 'asc')->get();
 
         $paginator = PaginatorController::Paginate($res->count(), 1, 1);
 
@@ -30,19 +30,19 @@ class DeviceUsersViewController extends BaseController
         $page = (int)$currentPage;
 
         $offset = $itemsPerPage*--$page;
-        $res = DB::table('Device_DeviceTypes_UserDevices')
+        $res = DB::table('device_devicetypes_userdevices')
             ->limit($itemsPerPage)
             ->offset($offset)
             ->orderBy('user_device_name', 'asc')
             ->get();
-        $total = DB::table('Device_DeviceTypes_UserDevices')->get();
+        $total = DB::table('device_devicetypes_userdevices')->get();
 
         $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
 
         return $this->sendResponse($res, "User Devices List", $paginator);
 
 
-        $devicesUserDataSet = DB::table('Device_DeviceTypes_UserDevices')->get();
+        $devicesUserDataSet = DB::table('device_devicetypes_userdevices')->get();
         if ($devicesUserDataSet->count() == 0)
         {
             return response()->json(['Error' => 'true', 'Message' => 'No Records Found'], 404);
@@ -56,7 +56,7 @@ class DeviceUsersViewController extends BaseController
 
         $offset = $itemsPerPage*--$page;
 
-        $res = DB::table('Device_DeviceTypes_UserDevices')
+        $res = DB::table('device_devicetypes_userdevices')
         // ->join('users', 'Device_DeviceTypes_UserDevices.user_id', '=', 'users.id')
         // ->select(
         //     'Device_DeviceTypes_UserDevices.id as id',

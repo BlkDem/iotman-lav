@@ -149,6 +149,7 @@
                                     (!item[column].isLookup)"
                                 :class="{
                                             'text-info': item[column].isHighLight,
+                                            'elipsis':  item[column].isText,
                                         }"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
