@@ -261,7 +261,7 @@ import Viewer from '../imagelib/Viewer.vue';
 
 export default {
 
-        emits: ['onRowClick'],
+        emits: ['onRowClick', 'onDataClear'],
 
         props: {
             api: {
@@ -378,7 +378,7 @@ export default {
 
         watch: {
             foreignValue() {
-                // console.log('fk value', this.foreignValue)
+                console.log('fk value', this.foreignValue)
                 this.getData()
             }
         },
@@ -632,20 +632,28 @@ export default {
                 //async loading master/slave datasets
                 //if dataset is slave waiting for master keys value
 
-                console.log(this.api.get + _currentPage + "/" + _itemsPerPage + fkValue)
+                // (foreignValue===0) - clear items signal
+                if (this.foreignValue===0) {
+                    this.filteredItems = []
+                    this.Items = []
+                }
 
+                //slave without FK - nothing to do
                 if (this.isSlave&&!this.foreignValue>0) return
 
-                // console.log('slave=', this.isSlave)
-
+                //prepare request with or w/o FK
                 let fkValue = (this.foreignValue>0)?'/'+this.foreignValue:''
-                // console.log('fk: ', fkValue)
+
                 await axios.get(this.api.get + _currentPage + "/" + _itemsPerPage + fkValue)
                     .then(response => {
 
                         this.Items = this.populateListItems(response.data.data);
                         this.filteredItems = this.Items;
+
+                        if (this.Items.length === 0) this.$emit('onDataClear') //clear child dataset event
+
                         if ((this.filteredItems.length>0)&&(this.selectableRow)) this.rowClick(0)
+
 
                         // setup paginator
                         this.$refs.paginatorDeviceTypes.setPaginator(
@@ -779,7 +787,7 @@ export default {
                         _values[editItem[field].fieldName] = editItem[field].value
                     }
 
-                    console.log('on axios: ', _values)
+                    // console.log('on axios: ', _values)
                     axios.put(this.api.update + id, _values)
                         .then(resp => {
 

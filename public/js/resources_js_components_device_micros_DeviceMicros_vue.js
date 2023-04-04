@@ -554,7 +554,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  emits: ['onRowClick'],
+  emits: ['onRowClick', 'onDataClear'],
   props: {
     api: {
       type: Object
@@ -647,7 +647,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   watch: {
     foreignValue: function foreignValue() {
-      // console.log('fk value', this.foreignValue)
+      console.log('fk value', this.foreignValue);
       this.getData();
     }
   },
@@ -882,19 +882,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               //async loading master/slave datasets
               //if dataset is slave waiting for master keys value
 
-              console.log(_this3.api.get + _currentPage + "/" + _itemsPerPage + fkValue);
+              // (foreignValue===0) - clear items signal
+              if (_this3.foreignValue === 0) {
+                _this3.filteredItems = [];
+                _this3.Items = [];
+              }
+
+              //slave without FK - nothing to do
               if (!(_this3.isSlave && !_this3.foreignValue > 0)) {
                 _context.next = 5;
                 break;
               }
               return _context.abrupt("return");
             case 5:
-              // console.log('slave=', this.isSlave)
-              fkValue = _this3.foreignValue > 0 ? '/' + _this3.foreignValue : ''; // console.log('fk: ', fkValue)
+              //prepare request with or w/o FK
+              fkValue = _this3.foreignValue > 0 ? '/' + _this3.foreignValue : '';
               _context.next = 8;
               return axios.get(_this3.api.get + _currentPage + "/" + _itemsPerPage + fkValue).then(function (response) {
                 _this3.Items = _this3.populateListItems(response.data.data);
                 _this3.filteredItems = _this3.Items;
+                if (_this3.Items.length === 0) _this3.$emit('onDataClear'); //clear child dataset event
+
                 if (_this3.filteredItems.length > 0 && _this3.selectableRow) _this3.rowClick(0);
 
                 // setup paginator
@@ -1028,7 +1036,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 for (field in editItem) {
                   _values[editItem[field].fieldName] = editItem[field].value;
                 }
-                console.log('on axios: ', _values);
+
+                // console.log('on axios: ', _values)
                 axios.put(_this6.api.update + id, _values).then(function (resp) {
                   var _res = resp.data.data;
                   _this6.filteredItems[key] = _this6.processListItem(_res);
@@ -1434,6 +1443,10 @@ __webpack_require__.r(__webpack_exports__);
     onDeviceMicroRowClick: function onDeviceMicroRowClick(dataEvent) {
       // console.log(dataEvent)
       this.deviceMicros.selectedFkValue = dataEvent;
+    },
+    dataCLear: function dataCLear() {
+      console.log('data clear');
+      this.deviceMicros.selectedFkValue = 0;
     }
   }
 });
@@ -2640,13 +2653,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         selectedName: $data.deviceMicros.selectedName,
         readOnly: false,
         isAdditionalCaption: true,
+        onOnDataClear: $options.dataCLear,
         onOnRowClick: $options.onDeviceMicroRowClick
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" > ")];
         }),
         _: 1 /* STABLE */
-      }, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignValue", "selectedName", "onOnRowClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
+      }, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignValue", "selectedName", "onOnDataClear", "onOnRowClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
         api: $data.microParams.api,
         isSlave: true,
         dataFields: $data.microParams.microParamsFields,
