@@ -31,11 +31,6 @@ class DeviceMicroController extends BaseController
         $res["device"] = $resDev;
         $res["params"] = $res->microParams;
 
-        // $param_type_name = ParamType::find($res["params"] =
-        // dd(Array($res->microParams));
-
-        // $res["params"]["param_type_name"] = $param_type_name;
-
         return $this->sendResponse($res, "Dash");
     }
 
