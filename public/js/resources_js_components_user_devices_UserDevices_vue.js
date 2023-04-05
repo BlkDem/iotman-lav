@@ -1527,8 +1527,8 @@ __webpack_require__.r(__webpack_exports__);
       if (this.layoutVertical) {
         this.masterWidthStore = this.masterWidth;
         this.slaveWidthStore = this.slaveWidth;
-        this.masterWidth = 'w-100';
-        this.slaveWidth = 'w-100';
+        this.masterWidth = '';
+        this.slaveWidth = '';
       } else {
         this.masterWidth = this.masterWidthStore;
         this.slaveWidth = this.slaveWidthStore;
@@ -1680,7 +1680,7 @@ var _hoisted_3 = {
 var _hoisted_4 = ["id"];
 var _hoisted_5 = ["onClick"];
 var _hoisted_6 = {
-  "class": "flex-center"
+  "class": "flex-center w-100"
 };
 var _hoisted_7 = ["value", "placeholder"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -1788,7 +1788,7 @@ var _hoisted_4 = {
   "class": "navbar-nav me-auto flex-center"
 };
 var _hoisted_5 = {
-  "class": "d-flex"
+  "class": "flex-center"
 };
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-list"
@@ -1811,7 +1811,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_filter_comp, {
     filterDataFields: $data.filterDataFields,
     onFilterData: $options.updateFilteredData
-  }, null, 8 /* PROPS */, ["filterDataFields", "onFilterData"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <li class=\"nav-item  d-flex py-1  w-100\">\n                        <input class=\"form-control me-sm-2\" type=\"text\" v-model=\"dataFilter\" />\n                    </li> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div>\n                    <sort-comp v-if=\"!readOnly\"\n                        :sortDataFields=\"sortDataFields\"\n                        @updateSortedData=\"doSort\">\n                    </sort-comp>\n                </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [!$props.readOnly ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  }, null, 8 /* PROPS */, ["filterDataFields", "onFilterData"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [!$props.readOnly ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm mx-2", {
       'disabled': $data.compactView
@@ -2643,34 +2643,33 @@ var _withScopeId = function _withScopeId(n) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-0976a4eb"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
 };
 var _hoisted_1 = {
-  "class": "flex-center-space"
+  "class": "card-body border-4 border-top border-bottom rounded-bottom rounded-top border-secondary py-2 mx-2"
 };
 var _hoisted_2 = {
-  "class": "px-2"
+  "class": "flex-center-space"
 };
-var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_3 = {
+  "class": "px-2 elipsis"
+};
+var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fa-solid fa-layer-group"
   }, null, -1 /* HOISTED */);
 });
-var _hoisted_4 = {
+var _hoisted_5 = {
   "class": "mx-2"
 };
-var _hoisted_5 = {
+var _hoisted_6 = {
   "class": "px-2"
 };
-var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fa-solid fa-table-columns"
   }, null, -1 /* HOISTED */);
 });
-var _hoisted_7 = [_hoisted_6];
+var _hoisted_8 = [_hoisted_7];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["card-body border-4 border-top border-bottom rounded-bottom rounded-top border-secondary py-2 mx-2", {
-      'w-100': $data.layoutVertical
-    }])
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.layoutCaption), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.layoutCaption), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm", {
       'btn-secondary': $data.selected4,
       'hide': $data.layoutVertical
@@ -2701,7 +2700,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $options.changeOrientation();
     })
-  }, _hoisted_7, 2 /* CLASS */)])])], 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  }, _hoisted_8, 2 /* CLASS */)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
       'flex-top': !$data.layoutVertical
     })

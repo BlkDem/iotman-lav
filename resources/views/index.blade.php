@@ -63,7 +63,7 @@
     </style>
 </head>
 
-<body class="container-fluid">
+<body class="container-fluid" style="box-sizing: border-box;">
 
         <!-- vue mount point -->
     <div id="app" class="container font-0_9" >

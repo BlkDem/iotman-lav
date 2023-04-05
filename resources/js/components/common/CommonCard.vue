@@ -1,7 +1,10 @@
 <template>
 
-    <div class="card my-3">
-        <h5 class="card-header elipsis">
+    <div
+        :class="{'expanded-fullscreen': isFullScreen, 'card my-3': !isFullScreen}"
+    >
+        <div class="card-header flex-space ">
+            <h5 class=" elipsis">
             <a style="text-decoration: none;" data-toggle="collapse"
                 :href="'#'+cardId" aria-expanded="true" aria-controls="collapse-example"
 
@@ -12,9 +15,16 @@
                 <span  :class="{'hide': !isAdditionalCaption}" style="overflow-wrap: break-word;">
                     - {{ cardCaptionAdd }}
                 </span>
-
             </a>
-        </h5>
+            </h5>
+            <button class="btn btn-primary btn-sm" @click="isFullScreen=!isFullScreen">
+                <!-- <i class="fa fa-solid fa-caret-down mx-2"></i> -->
+                <i
+                    :class="{'fa-solid fa-maximize':!isFullScreen, 'fa-solid fa-compress':isFullScreen}"
+                ></i>
+                <!-- <i class="fa-solid fa-compress"></i> -->
+            </button>
+        </div>
         <div :id="cardId" class="collapse show" aria-labelledby="heading-example">
             <div class="card-body">
                 <div class="card-caption">
@@ -72,7 +82,9 @@ export default {
 
     data() {
         return {
-            cardId: null
+            cardId: null,
+
+            isFullScreen: false
         }
     },
 
@@ -111,6 +123,17 @@ export default {
     text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.expanded-fullscreen {
+    position: absolute;
+    top: 65px;
+    left: 10px;
+    right: 10px;
+    bottom: auto;
+    /* opacity: 1; */
+    /* background-color: var(--bs-white); */
+    z-index: 1050;
 }
 
 a {

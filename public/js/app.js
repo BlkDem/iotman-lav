@@ -23782,7 +23782,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      cardId: null
+      cardId: null,
+      isFullScreen: false
     };
   },
   created: function created() {
@@ -24358,10 +24359,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "card my-3"
+  "class": "card-header flex-space"
 };
 var _hoisted_2 = {
-  "class": "card-header elipsis"
+  "class": "elipsis"
 };
 var _hoisted_3 = ["href"];
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
@@ -24376,7 +24377,12 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 }, null, -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+      'expanded-fullscreen': $data.isFullScreen,
+      'card my-3': !$data.isFullScreen
+    })
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     style: {
       "text-decoration": "none"
     },
@@ -24393,7 +24399,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     style: {
       "overflow-wrap": "break-word"
     }
-  }, " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaptionAdd), 3 /* TEXT, CLASS */)], 8 /* PROPS */, _hoisted_3)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  }, " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaptionAdd), 3 /* TEXT, CLASS */)], 8 /* PROPS */, _hoisted_3)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "btn btn-primary btn-sm",
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $data.isFullScreen = !$data.isFullScreen;
+    })
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <i class=\"fa fa-solid fa-caret-down mx-2\"></i> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+      'fa-solid fa-maximize': !$data.isFullScreen,
+      'fa-solid fa-compress': $data.isFullScreen
+    })
+  }, null, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <i class=\"fa-solid fa-compress\"></i> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     id: $data.cardId,
     "class": "collapse show",
     "aria-labelledby": "heading-example"
@@ -24404,7 +24420,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {}, function () {
     return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Loading...")];
-  })], 2 /* CLASS */)])], 8 /* PROPS */, _hoisted_5)]);
+  })], 2 /* CLASS */)])], 8 /* PROPS */, _hoisted_5)], 2 /* CLASS */);
 }
 
 /***/ }),
@@ -24685,7 +24701,7 @@ var _hoisted_5 = {
   "class": "navbar-nav me-auto"
 };
 var _hoisted_6 = {
-  "class": "d-flex"
+  "class": "flex-center"
 };
 var _hoisted_7 = {
   "class": "navbar-nav me-auto"
@@ -24780,7 +24796,7 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "align-left px-4 pb-1",
   style: {
-    "margin-top": "7.5rem"
+    "margin-top": "5.5rem"
   }
 };
 var _hoisted_2 = {
@@ -32938,7 +32954,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.card-caption {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.hide {\n    display: none;\n}\n.card-header .fa {\n    transition: .3s transform ease-in-out;\n}\n.card-header .collapsed .fa {\n    transform: rotate(-90deg);\n}\n.elipsis {\n    text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\na {\n    text-decoration: none;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.card-caption {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.hide {\n    display: none;\n}\n.card-header .fa {\n    transition: .3s transform ease-in-out;\n}\n.card-header .collapsed .fa {\n    transform: rotate(-90deg);\n}\n.elipsis {\n    text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.expanded-fullscreen {\n    position: absolute;\n    top: 65px;\n    left: 10px;\n    right: 10px;\n    bottom: auto;\n    /* opacity: 1; */\n    /* background-color: var(--bs-white); */\n    z-index: 1050;\n}\na {\n    text-decoration: none;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -33010,7 +33026,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".flex {\n    display: flex;\n    align-items: center;\n}\n\n.flex-center {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: row;\n}\n\n.flex-center-column {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: column;\n}\n\n.flex-right {\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n    flex-wrap: wrap;\n}\n\n.flex-left {\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n}\n\n/*.image-badge {\n    width: 24px;\n    height: 24px;\n    margin-left: -10px;\n}\n\n.logo {\n    display: flex;\n    margin-right: 16px;\n    margin-left: 4px;\n    width: 36px;\n}*/\n\n.device-image {\n    position: relative;\n    height: 1.9rem;\n    border-radius: 5px;\n    border: 0px solid var(--bs-primary);\n    -webkit-transition: width .5s, height .5s, -webkit-transform .5s;\n    transition: width .5s, height .5s, border-color .5s, transform .5s;\n}\n\n.device-image:hover {\n    z-index: 100;\n    border: 2px solid var(--bs-secondary);\n    -webkit-transform: scale(2);\n    transform: scale(2);\n}\n\n.card-space {\n    margin-bottom: 00px;\n}\n\na.a_cap:first-letter {\n    text-transform: uppercase;\n}\n\n.edit-buttons {\n    display: flex;\n    justify-content: flex-end;\n}\n\n.btn-width-40 {\n    width: 40%;\n}\n\n.cursor-pointer {\n    cursor: pointer;\n}\n\n.switch-big\n{\n    width: 75px;\n    height: 40px;\n}\n\n.switch-label {\n    height: 40px;\n    font-size: 1.5rem;\n    margin-left: 8px;\n    margin-top: 5px;\n}\n\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n    .device-image {\n        width: 100px;\n        height: 100px;\n        /* margin-top: -23px; */\n        margin-bottom: -91px;\n        margin-left: 219px;\n        border-radius: 10px;\n        /*box-shadow: #eee 0px 0px 8px;*/\n    }\n    .card-space {\n        margin-bottom: 20px;\n    }\n    .container {\n        padding: 0;\n        width: 100%;\n    }\n\n    .navbar > .container-fluid {\n        display: flex;\n        flex-wrap: inherit;\n        align-items: center;\n        justify-content: flex-start;\n    }\n\n    .edit-buttons {\n        /* display: flex;*/\n        margin-top: 16px;\n        margin-bottom: 8px;\n        justify-content: flex-start;\n    }\n\n    .flex-right {\n        flex-direction: row;\n        flex-wrap: wrap;\n    }\n\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".flex {\n    display: flex;\n    align-items: center;\n}\n\n.flex-space {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n\n.flex-center {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: row;\n}\n\n.flex-center-column {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: column;\n}\n\n.flex-right {\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n    flex-wrap: wrap;\n}\n\n.flex-left {\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n}\n\n/*.image-badge {\n    width: 24px;\n    height: 24px;\n    margin-left: -10px;\n}\n\n.logo {\n    display: flex;\n    margin-right: 16px;\n    margin-left: 4px;\n    width: 36px;\n}*/\n\n.device-image {\n    position: relative;\n    height: 1.9rem;\n    border-radius: 5px;\n    border: 0px solid var(--bs-primary);\n    -webkit-transition: width .5s, height .5s, -webkit-transform .5s;\n    transition: width .5s, height .5s, border-color .5s, transform .5s;\n}\n\n.device-image:hover {\n    z-index: 100;\n    border: 2px solid var(--bs-secondary);\n    -webkit-transform: scale(2);\n    transform: scale(2);\n}\n\n.card-space {\n    margin-bottom: 00px;\n}\n\na.a_cap:first-letter {\n    text-transform: uppercase;\n}\n\n.edit-buttons {\n    display: flex;\n    justify-content: flex-end;\n}\n\n.btn-width-40 {\n    width: 40%;\n}\n\n.cursor-pointer {\n    cursor: pointer;\n}\n\n.switch-big\n{\n    width: 75px;\n    height: 40px;\n}\n\n.switch-label {\n    height: 40px;\n    font-size: 1.5rem;\n    margin-left: 8px;\n    margin-top: 5px;\n}\n\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n    .device-image {\n        width: 100px;\n        height: 100px;\n        /* margin-top: -23px; */\n        margin-bottom: -91px;\n        margin-left: 219px;\n        border-radius: 10px;\n        /*box-shadow: #eee 0px 0px 8px;*/\n    }\n    .card-space {\n        margin-bottom: 20px;\n    }\n    .container {\n        padding: 0;\n        width: 100%;\n    }\n\n    .navbar > .container-fluid {\n        display: flex;\n        flex-wrap: inherit;\n        align-items: center;\n        justify-content: flex-start;\n    }\n\n    .edit-buttons {\n        /* display: flex;*/\n        margin-top: 16px;\n        margin-bottom: 8px;\n        justify-content: flex-start;\n    }\n\n    .flex-right {\n        flex-direction: row;\n        flex-wrap: wrap;\n    }\n\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

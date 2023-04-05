@@ -1495,7 +1495,7 @@ var _hoisted_3 = {
 var _hoisted_4 = ["id"];
 var _hoisted_5 = ["onClick"];
 var _hoisted_6 = {
-  "class": "flex-center"
+  "class": "flex-center w-100"
 };
 var _hoisted_7 = ["value", "placeholder"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -1603,7 +1603,7 @@ var _hoisted_4 = {
   "class": "navbar-nav me-auto flex-center"
 };
 var _hoisted_5 = {
-  "class": "d-flex"
+  "class": "flex-center"
 };
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-list"
@@ -1626,7 +1626,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_filter_comp, {
     filterDataFields: $data.filterDataFields,
     onFilterData: $options.updateFilteredData
-  }, null, 8 /* PROPS */, ["filterDataFields", "onFilterData"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <li class=\"nav-item  d-flex py-1  w-100\">\n                        <input class=\"form-control me-sm-2\" type=\"text\" v-model=\"dataFilter\" />\n                    </li> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div>\n                    <sort-comp v-if=\"!readOnly\"\n                        :sortDataFields=\"sortDataFields\"\n                        @updateSortedData=\"doSort\">\n                    </sort-comp>\n                </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [!$props.readOnly ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  }, null, 8 /* PROPS */, ["filterDataFields", "onFilterData"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [!$props.readOnly ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm mx-2", {
       'disabled': $data.compactView

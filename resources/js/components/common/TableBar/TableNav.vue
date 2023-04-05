@@ -7,19 +7,9 @@
                         :filterDataFields="filterDataFields"
                         @filterData="updateFilteredData">
                     </filter-comp>
-                    <!-- <li class="nav-item  d-flex py-1  w-100">
-                        <input class="form-control me-sm-2" type="text" v-model="dataFilter" />
-                    </li> -->
                 </div>
 
-                <!-- <div>
-                    <sort-comp v-if="!readOnly"
-                        :sortDataFields="sortDataFields"
-                        @updateSortedData="doSort">
-                    </sort-comp>
-                </div> -->
-
-                <div class="d-flex">
+                <div class="flex-center">
                     <button class="btn btn-primary btn-sm mx-2"
                         v-if="!readOnly"
                         :class="{'disabled' : compactView}"

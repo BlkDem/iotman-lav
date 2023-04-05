@@ -1,5 +1,5 @@
 <template>
-    <h1 class="align-left px-4 pb-1" style="margin-top: 7.5rem">
+    <h1 class="align-left px-4 pb-1" style="margin-top: 5.5rem">
         {{ pageCaption }}
     </h1>
 
