@@ -11,6 +11,7 @@ use App\Http\Controllers\PaginatorController;
 use Illuminate\Support\Facades\DB;
 use App\Models\DevicesView;
 use App\Models\Micro;
+use App\Models\ParamType;
 
 
 class DeviceMicroController extends BaseController
@@ -23,7 +24,22 @@ class DeviceMicroController extends BaseController
         return Micro::find($micro_id);
     }
 
- /**
+
+    public function dash($id) {
+        $res = DeviceMicro::find($id);
+        $resDev = $res->device;
+        $res["device"] = $resDev;
+        $res["params"] = $res->microParams;
+
+        // $param_type_name = ParamType::find($res["params"] =
+        // dd(Array($res->microParams));
+
+        // $res["params"]["param_type_name"] = $param_type_name;
+
+        return $this->sendResponse($res, "Dash");
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

@@ -154,7 +154,7 @@
 <script>
 import mqtt from '../vendor/mqtt.min.js';
 import MakeID from '../helpers/MakeID';
-import { makeRe } from 'minimatch';
+// import { makeRe } from 'minimatch';
 
 export default {
   name: 'MQTT',
@@ -320,48 +320,3 @@ export default {
 }
 </script>
 
-<!-- <style lang="scss">
-@import '../../sass/mqtt.scss';
-
-.home-container {
-  max-width: 1100px;
-  margin: 0 auto;
-
-  .conn-btn {
-    divor: #fff;
-    background-divor: #00b173;
-    font-size: 14px;
-  }
-
-  .publish-btn {
-    margin-bottom: 20px;
-    float: right;
-  }
-
-  .button--success {
-    background-divor: #34c388 !important;
-    border-divor: #34c388 !important;
-    font-size: 14px !important;
-  }
-
-  .button--danger {
-    background-divor: #f5222d !important;
-    border-divor: #f5222d !important;
-  }
-
-  .div {
-    &.is-error {
-      .input__inner,
-      .textarea__inner {
-        box-shadow: 0 0 0 2px rgba(245, 34, 45, 0.2);
-      }
-    }
-    &.is-success {
-      .input__inner,
-      .textarea__inner {
-        border-divor: #34c388 !important;
-      }
-    }
-  }
-}
-</style> -->
