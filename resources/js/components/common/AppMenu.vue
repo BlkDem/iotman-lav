@@ -16,7 +16,7 @@
 
         <!-- Children routes -->
         <div :class="{'dropdown-menu': isDropdowns}">
-            <router-link class="dropdown-item py-2" v-for="(child, key) in checkChildren(route.name)" v-bind:key="key"
+            <router-link class="dropdown-item py-1" v-for="(child, key) in checkChildren(route.name)" v-bind:key="key"
                 v-bind:to="child.path">
                 <i v-if="child.icon != ''" :class="child.icon" class="ml-2"></i> {{ child.name }}
             </router-link>
