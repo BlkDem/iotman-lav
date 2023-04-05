@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class DevicesView extends Model
 {
-    protected $table = 'Devices_DeviceTypes';
+    protected $table = 'devices_devicetypes';
 
     protected $casts = [
         'created_at' => 'datetime:Y-m-d',

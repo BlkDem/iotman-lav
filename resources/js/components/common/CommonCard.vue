@@ -1,7 +1,7 @@
 <template>
 
     <div class="card my-3">
-        <h5 class="card-header">
+        <h5 class="card-header elipsis">
             <a style="text-decoration: none;" data-toggle="collapse"
                 :href="'#'+cardId" aria-expanded="true" aria-controls="collapse-example"
 
@@ -9,7 +9,7 @@
                 <!-- <i class="fa fa-solid fa-caret-right"></i> -->
                 <i class="fa fa-solid fa-caret-down mx-2"></i>
                 {{ cardCaption }}
-                <span  :class="{'hide': !isAdditionalCaption}">
+                <span  :class="{'hide': !isAdditionalCaption}" style="overflow-wrap: break-word;">
                     - {{ cardCaptionAdd }}
                 </span>
 
@@ -105,6 +105,12 @@ export default {
 
 .card-header .collapsed .fa {
     transform: rotate(-90deg);
+}
+
+.elipsis {
+    text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 a {

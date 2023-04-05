@@ -540,21 +540,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-// import APIConstants from "../../api/rest_api";
 
 
 
 
-
-
-// import DataField from '../../classes/DataField.ts';
 
 
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  emits: ['onRowClick'],
+  emits: ['onRowClick', 'onDataClear'],
   props: {
     api: {
       type: Object
@@ -573,11 +569,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       type: String,
       "default": ''
     },
-    // foreignKey: {
-    //     type: String,
-    //     default: ''
-    // },
-
     foreignValue: {
       type: Number,
       "default": 0
@@ -609,8 +600,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      // currentImage: pathes.storageImagePlug,
-
       activeCol: undefined,
       activeRow: undefined,
       isEsc: false,
@@ -625,8 +614,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       imageSrc: _config_pathes__WEBPACK_IMPORTED_MODULE_3__["default"].storageImagePlug,
       selectedRow: [],
       cardCaptionAdd: ''
-
-      // albumsReadOnly: true
     };
   },
   created: function created() {
@@ -647,16 +634,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   watch: {
     foreignValue: function foreignValue() {
-      // console.log('fk value', this.foreignValue)
+      console.log('fk value', this.foreignValue);
       this.getData();
     }
   },
   methods: {
     getVirtualImage: function getVirtualImage(selected, item) {
-      // const _a = (selected)?item.selectedVirtualImage:item.VirtualImage
-      // if (item.selectedVirtualImage === undefined) item.selectedVirtualImage =
-      // console.log(selected, _a)
-
       return selected ? item.selectedVirtualImage : item.VirtualImage;
     },
     getDirectionImage: function getDirectionImage(item) {
@@ -674,38 +657,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           return '';
           break;
       }
-      // console.log(item)
-      return !item.value ? item.subscribeVirtualImage : item.publishVirtualImage;
     },
     imageClick: function imageClick() {
-      // this.$emit('imageClick', event)
       this.imageSrc = event.target.src;
       this.$refs.viewer.showImage();
     },
     rowClick: function rowClick(row) {
+      //no selected rows - nothing to do
       if (!this.selectableRow) return;
+
+      //reset selected array
       for (var item in this.filteredItems) {
         this.selectedRow[item] = false;
       }
-      this.selectedRow[row] = !this.selectedRow[row];
+
+      //select item with row index
+      this.selectedRow[row] = true;
+
+      //display selection name in card head
       this.cardCaptionAdd = this.filteredItems[row][this.selectedName].value;
 
       //send FK value to child table
       this.$emit('onRowClick', this.filteredItems[row].id.value);
     },
+    //value or lookup field value
     getValue: function getValue(item) {
       return item.lookupValue == null ? item.value : item.lookupValue;
     },
+    //get image src with full path
     getImage: function getImage(item) {
       if (item.value === '') return this.imagePlug;
       return _config_pathes__WEBPACK_IMPORTED_MODULE_3__["default"].storageImagesPath + item.value;
     },
+    //set the plug
     replaceByDefault: function replaceByDefault(e) {
       e.target.src = _config_pathes__WEBPACK_IMPORTED_MODULE_3__["default"].storageImagePlug;
     },
+    //set the cell uID
     setId: function setId($key, $ckey) {
       return "id" + $key + "_" + $ckey;
     },
+    //columns highlights order rules
     setLastColumnAlignClass: function setLastColumnAlignClass(classList, keysCount, key) {
       var alignClass = '';
       switch (key) {
@@ -726,20 +718,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
       return classList + ' ' + alignClass;
     },
+    //reset edit cell
     cancelEditCell: function cancelEditCell() {
       this.activeCol = null;
       this.activeRow = null;
     },
+    //after cell editing method
     onInputChange: function onInputChange($item, $key, $dataCol, $value, $isEsc) {
       if ($isEsc) {
         this.isEsc = false;
         return;
       }
-      // console.log('change', $item, $dataCol, $value)
+      try {
+        //save new value to dataset (patch route)
+        this.saveRecord($item, $dataCol, $value);
 
-      this.filteredItems[$key][$dataCol].value = $value;
-      this.Items[$key][$dataCol].value = $value;
-      this.saveRecord($item, $dataCol, $value);
+        //update arrays
+        this.filteredItems[$key][$dataCol].value = $value;
+        this.Items[$key][$dataCol].value = $value;
+      } catch (e) {
+        console.log(e);
+      }
     },
     //saving cell data if changed and cancel edit
     onInputEnter: function onInputEnter() {
@@ -750,14 +749,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.isEsc = true;
       this.cancelEditCell();
     },
-    //save cell data to db
+    //save cell data to dataset
     saveRecord: function saveRecord($id, $field, $value) {
       var _this2 = this;
+      //finish editing
       this.cancelEditCell();
+
+      //patch dataset record $id such as 'field -> value'
       axios.patch(this.api.patch + $id + '/' + $field + '/' + $value).then(function (resp) {
         _this2.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
       });
     },
+    //start editing cell
     onCellClick: function onCellClick($isEditable) {
       var $ckey = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
       var $key = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
@@ -772,24 +775,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     setLang: function setLang(_lang) {
       // this.pageCaption = _lang.DEVICE_TYPES ?? 'Device Types'
     },
+    //sorting
     updateSortedData: function updateSortedData(column, direction) {
       _helpers_Sorting__WEBPACK_IMPORTED_MODULE_4__["default"].doSort(this.filteredItems, column, direction);
     },
+    //filtering
     updateFilteredData: function updateFilteredData($fieldName, $filter) {
       this.filteredItems = this.Items;
       this.filteredItems = _helpers_Filtering_js__WEBPACK_IMPORTED_MODULE_5__["default"].doFilter(this.filteredItems, $fieldName, $filter);
     },
+    //switch dataset view
     setCompactView: function setCompactView($value) {
       // console.log(value)
       if (!this.readOnly) {
         this.compactView = $value;
       } else this.compactView = true;
     },
-    processListItem: function processListItem(_value) {
+    //mutating field with extended parameters
+    processListItem: function processListItem(listItem) {
       var newListItemData = {};
-
-      // console.log(_value)
-
       try {
         for (var field in this.dataFields) {
           var _dataField$selectedVi;
@@ -805,14 +809,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           var _virtual = dataField.isVirtualImage; //for abstract images like 'albums'
           var _directionvirtual = dataField.isDirectionVirtualImage; //for abstract images like 'albums'
 
-          var _subscribeimage = dataField.subscribeVirtualImage; //for abstract images like 'albums'
-          var _publishimage = dataField.publishVirtualImage; //for abstract images like 'albums'
-          var _biimage = dataField.biDirectionalVirtualImage; //for abstract images like 'albums'
+          var _subscribeimage = dataField.subscribeVirtualImage; //for abstract 'subscribe' image/icon
+          var _publishimage = dataField.publishVirtualImage; //for abstract 'publish' image/icon
+          var _biimage = dataField.biDirectionalVirtualImage; //for abstract 'publish/subscribe' image/icon
           var _virtualimage = dataField.VirtualImage; //for abstract images like 'albums'
 
-          var _selectedvirtualimage = (_dataField$selectedVi = dataField.selectedVirtualImage) !== null && _dataField$selectedVi !== void 0 ? _dataField$selectedVi : dataField.VirtualImage; //for abstract images like 'albums' (selected)
-          var _fieldignore = dataField.isFieldIgnore; //for abstract images like 'albums'
-          var _isLookup = dataField.isLookup; //field links to another object
+          var _selectedvirtualimage = (_dataField$selectedVi = dataField.selectedVirtualImage) !== null && _dataField$selectedVi !== void 0 ? _dataField$selectedVi : dataField.VirtualImage;
+          var _fieldignore = dataField.isFieldIgnore; //ignore via populate the field
+          var _isLookup = dataField.isLookup; //field links to another object/dataset
           var _lookupApi = dataField.lookupApi; //another object get api
           var _lookupId = dataField.lookupId; //field link key (FK)
           var _displayName = dataField.displayName; //Display Name Field
@@ -820,13 +824,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           // console.log(dataField)
           // const newListItem = _item  //newList[itemRow]
 
-          // console.log(this.dataFields, _value[dataField.fieldName])
-          // const _a = (dataField.fieldName != null)?_value[dataField.fieldName]:''
+          // console.log(this.dataFields, listItem[dataField.fieldName])
+          // const _a = (dataField.fieldName != null)?listItem[dataField.fieldName]:''
 
           newListItemData[dataField.fieldName] = {
-            value: dataField.fieldName != null ? _value[dataField.fieldName] : '',
-            lookupValue: dataField.displayName != null ? _value[dataField.displayName] : '',
-            // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
+            value: dataField.fieldName != null ? listItem[dataField.fieldName] : '',
+            lookupValue: dataField.displayName != null ? listItem[dataField.displayName] : '',
+            // value: (dataField.displayName == null)? listItem[dataField.fieldName]:listItem[dataField.displayName],
             displayName: _displayName,
             VirtualImage: _virtualimage,
             subscribeVirtualImage: _subscribeimage,
@@ -853,8 +857,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             "col-sm-" + _colscount + " col-xs-" + _colscount + " col-lg-" + _colscount
           };
         }
-
-        // console.log('new list data: ', newListItemData)
         return newListItemData;
       } catch (error) {
         console.log(error);
@@ -882,23 +884,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               //async loading master/slave datasets
               //if dataset is slave waiting for master keys value
 
-              console.log(_this3.api.get + _currentPage + "/" + _itemsPerPage + fkValue);
+              // (foreignValue===0) - clear items signal
+              if (_this3.foreignValue === 0) {
+                _this3.filteredItems = [];
+                _this3.Items = [];
+              }
+
+              //slave without FK - nothing to do
               if (!(_this3.isSlave && !_this3.foreignValue > 0)) {
                 _context.next = 5;
                 break;
               }
               return _context.abrupt("return");
             case 5:
-              // console.log('slave=', this.isSlave)
-              fkValue = _this3.foreignValue > 0 ? '/' + _this3.foreignValue : ''; // console.log('fk: ', fkValue)
+              //prepare request with or w/o FK
+              fkValue = _this3.foreignValue > 0 ? '/' + _this3.foreignValue : '';
               _context.next = 8;
               return axios.get(_this3.api.get + _currentPage + "/" + _itemsPerPage + fkValue).then(function (response) {
                 _this3.Items = _this3.populateListItems(response.data.data);
                 _this3.filteredItems = _this3.Items;
+                if (_this3.Items.length === 0) _this3.$emit('onDataClear'); //clear child dataset event
+
                 if (_this3.filteredItems.length > 0 && _this3.selectableRow) _this3.rowClick(0);
 
                 // setup paginator
-                _this3.$refs.paginatorDeviceTypes.setPaginator({
+                _this3.$refs.refPaginator.setPaginator({
                   pagesCount: response.data.paginator.PagesCount,
                   currentPage: response.data.paginator.CurrentPage,
                   itemsPerPage: response.data.paginator.ItemsPerPage,
@@ -1028,7 +1038,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 for (field in editItem) {
                   _values[editItem[field].fieldName] = editItem[field].value;
                 }
-                console.log('on axios: ', _values);
+
+                // console.log('on axios: ', _values)
                 axios.put(_this6.api.update + id, _values).then(function (resp) {
                   var _res = resp.data.data;
                   _this6.filteredItems[key] = _this6.processListItem(_res);
@@ -2029,7 +2040,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, [!item[column].isHidden ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [($data.activeCol !== key || $data.activeRow !== ckey) && !item[column].isImage && !item[column].isDirectionVirtualImage && !item[column].isHidden && !item[column].isLookup ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
             key: 0,
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-              'text-info': item[column].isHighLight
+              'text-info': item[column].isHighLight,
+              'elipsis': item[column].isText
             }),
             onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
               return $options.onCellClick(item[column].isEditable, ckey, key);
@@ -2104,7 +2116,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }
         }, _hoisted_33, 8 /* PROPS */, _hoisted_31)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])], 10 /* CLASS, PROPS */, _hoisted_13);
       }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"my-1 border-4 border-bottom rounded-bottom border-secondary\"></div> ")], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.compactView]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Paginator, {
-        ref: "paginatorDeviceTypes"
+        ref: "refPaginator"
       }, null, 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <MyMqtt></MyMqtt> ")];
     }),
     _: 1 /* STABLE */

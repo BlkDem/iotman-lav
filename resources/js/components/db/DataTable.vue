@@ -149,6 +149,7 @@
                                     (!item[column].isLookup)"
                                 :class="{
                                             'text-info': item[column].isHighLight,
+                                            'elipsis':  item[column].isText,
                                         }"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
@@ -234,7 +235,7 @@
             </div>
             <!-- <div class="my-1 border-4 border-bottom rounded-bottom border-secondary"></div> -->
         </div>
-        <Paginator ref="paginatorDeviceTypes"></Paginator>
+        <Paginator ref="refPaginator"></Paginator>
         <!-- <MyMqtt></MyMqtt> -->
     </common-card>
 
@@ -244,14 +245,11 @@
 import ConfirmDialogue from '../../components/common/ConfirmDialogue.vue';
 import Paginator from './Paginator.vue';
 import MessagesConstants from '../strings_constants/strings'
-// import APIConstants from "../../api/rest_api";
 import Pathes from "../../config/pathes";
 import Sorting from "../../helpers/Sorting";
 import Filtering from "../../helpers/Filtering.js";
 import ParsingErrors from "../../helpers/ParsingErrors.js";
 import AddItem from './AddDialog.vue';
-
-// import DataField from '../../classes/DataField.ts';
 
 import TableNav from '../../components/common/TableBar/TableNav.vue';
 import TableHead from './TableHead.vue';
@@ -260,7 +258,7 @@ import Viewer from '../imagelib/Viewer.vue';
 
 export default {
 
-        emits: ['onRowClick'],
+        emits: ['onRowClick', 'onDataClear'],
 
         props: {
             api: {
@@ -285,11 +283,6 @@ export default {
                 default: ''
             },
 
-            // foreignKey: {
-            //     type: String,
-            //     default: ''
-            // },
-
             foreignValue: {
                 type: Number,
                 default: 0
@@ -309,6 +302,7 @@ export default {
                 type: Boolean,
                 default: false
             },
+
             isAdditionalCaption: {
                 type: Boolean,
                 default: false
@@ -327,8 +321,6 @@ export default {
 
         data() {
             return {
-
-                // currentImage: pathes.storageImagePlug,
 
                 activeCol: undefined,
                 activeRow: undefined,
@@ -349,8 +341,6 @@ export default {
                 selectedRow: [],
 
                 cardCaptionAdd: '',
-
-                // albumsReadOnly: true
 
             };
         },
@@ -377,7 +367,7 @@ export default {
 
         watch: {
             foreignValue() {
-                // console.log('fk value', this.foreignValue)
+                console.log('fk value', this.foreignValue)
                 this.getData()
             }
         },
@@ -385,11 +375,7 @@ export default {
         methods: {
 
             getVirtualImage(selected, item) {
-                // const _a = (selected)?item.selectedVirtualImage:item.VirtualImage
-                // if (item.selectedVirtualImage === undefined) item.selectedVirtualImage =
-                // console.log(selected, _a)
-
-                return (selected)?item.selectedVirtualImage:item.VirtualImage
+                return (selected)?item.selectedVirtualImage : item.VirtualImage
             },
 
             getDirectionImage(item) {
@@ -400,46 +386,55 @@ export default {
                     case 1: return item.publishVirtualImage; break;
                     default: return ''; break;
                 }
-                // console.log(item)
-                return (!item.value)?item.subscribeVirtualImage:item.publishVirtualImage
+
             },
 
             imageClick() {
-                // this.$emit('imageClick', event)
                 this.imageSrc = event.target.src
                 this.$refs.viewer.showImage()
             },
 
             rowClick(row){
 
+                //no selected rows - nothing to do
                 if (!this.selectableRow) return
+
+                //reset selected array
                 for (let item in this.filteredItems) { this.selectedRow[item] = false }
 
-                this.selectedRow[row] = !this.selectedRow[row]
+                //select item with row index
+                this.selectedRow[row] = true
 
+                //display selection name in card head
                 this.cardCaptionAdd = this.filteredItems[row][this.selectedName].value
 
                 //send FK value to child table
                 this.$emit('onRowClick', this.filteredItems[row].id.value)
+
             },
 
+            //value or lookup field value
             getValue(item) {
                 return (item.lookupValue == null)?item.value:item.lookupValue
             },
 
+            //get image src with full path
             getImage(item) {
                 if (item.value==='') return this.imagePlug
                 return Pathes.storageImagesPath + item.value
             },
 
+            //set the plug
             replaceByDefault(e) {
                 e.target.src = Pathes.storageImagePlug
             },
 
+            //set the cell uID
             setId($key, $ckey) {
                 return "id" + $key + "_" + $ckey
             },
 
+            //columns highlights order rules
             setLastColumnAlignClass(classList, keysCount, key) {
                 let alignClass = ''
                 switch (key) {
@@ -459,23 +454,32 @@ export default {
                 return classList + ' ' + alignClass
             },
 
+            //reset edit cell
             cancelEditCell() {
                 this.activeCol = null
                 this.activeRow = null
             },
 
+            //after cell editing method
             onInputChange($item, $key, $dataCol, $value, $isEsc){
 
                 if ($isEsc) {
                     this.isEsc = false
                     return
                 }
-                // console.log('change', $item, $dataCol, $value)
 
-                this.filteredItems[$key][$dataCol].value = $value
-                this.Items[$key][$dataCol].value = $value
+                try {
 
-                this.saveRecord($item, $dataCol, $value)
+                    //save new value to dataset (patch route)
+                    this.saveRecord($item, $dataCol, $value)
+
+                    //update arrays
+                    this.filteredItems[$key][$dataCol].value = $value
+                    this.Items[$key][$dataCol].value = $value
+                }
+                catch(e) {
+                    console.log(e)
+                }
             },
 
             //saving cell data if changed and cancel edit
@@ -489,9 +493,12 @@ export default {
                 this.cancelEditCell()
             },
 
-            //save cell data to db
+            //save cell data to dataset
             saveRecord($id, $field, $value) {
+                //finish editing
                 this.cancelEditCell()
+
+                //patch dataset record $id such as 'field -> value'
                 axios.patch(
                     this.api.patch + $id + '/' + $field + '/' + $value)
                     .then(resp => {
@@ -502,6 +509,7 @@ export default {
                     })
             },
 
+            //start editing cell
             onCellClick($isEditable, $ckey=undefined, $key=undefined) {
                 if (!$isEditable) return //check editable cell
                 this.activeCol = $key //set active column
@@ -511,20 +519,24 @@ export default {
                 }, 200)
             },
 
+
             setLang(_lang) {
                 // this.pageCaption = _lang.DEVICE_TYPES ?? 'Device Types'
             },
 
+            //sorting
             updateSortedData(column, direction) {
                 Sorting.doSort(this.filteredItems, column, direction)
             },
 
+            //filtering
             updateFilteredData($fieldName, $filter) {
 
                 this.filteredItems = this.Items;
                 this.filteredItems = Filtering.doFilter(this.filteredItems, $fieldName, $filter)
             },
 
+            //switch dataset view
             setCompactView($value) {
                 // console.log(value)
                 if (!this.readOnly) {
@@ -533,83 +545,81 @@ export default {
                 else this.compactView = true
             },
 
-            processListItem(_value) {
+            //mutating field with extended parameters
+            processListItem(listItem) {
 
                 let newListItemData = {}
 
-                // console.log(_value)
-
                 try {
-                for (let field in this.dataFields) {
+                    for (let field in this.dataFields) {
 
-                    const dataField = this.dataFields[field]
+                        const dataField = this.dataFields[field]
 
-                    const _editable = dataField.isEditable //possible edit cell by text click
-                    const _sortable = dataField.isSortable //field can sorted
-                    const _image = dataField.isImage //image field - binding 'img'
-                    const _datetime = dataField.isDateTime //image field - binding 'img'
-                    const _text = dataField.isText //Display Name Field
-                    const _highlight = dataField.isHighLight //highlight another color field 'bg-info' class
-                    const _hidden = dataField.isHidden //hidden field 'hide' class
-                    const _colscount = dataField.columnsCount //col-* col-ls-* ... value
-                    const _virtual = dataField.isVirtualImage //for abstract images like 'albums'
-                    const _directionvirtual = dataField.isDirectionVirtualImage //for abstract images like 'albums'
+                        const _editable = dataField.isEditable //possible edit cell by text click
+                        const _sortable = dataField.isSortable //field can sorted
+                        const _image = dataField.isImage //image field - binding 'img'
+                        const _datetime = dataField.isDateTime //image field - binding 'img'
+                        const _text = dataField.isText //Display Name Field
+                        const _highlight = dataField.isHighLight //highlight another color field 'bg-info' class
+                        const _hidden = dataField.isHidden //hidden field 'hide' class
+                        const _colscount = dataField.columnsCount //col-* col-ls-* ... value
+                        const _virtual = dataField.isVirtualImage //for abstract images like 'albums'
+                        const _directionvirtual = dataField.isDirectionVirtualImage //for abstract images like 'albums'
 
 
-                    const _subscribeimage = dataField.subscribeVirtualImage //for abstract images like 'albums'
-                    const _publishimage = dataField.publishVirtualImage //for abstract images like 'albums'
-                    const _biimage = dataField.biDirectionalVirtualImage //for abstract images like 'albums'
-                    const _virtualimage = dataField.VirtualImage //for abstract images like 'albums'
+                        const _subscribeimage = dataField.subscribeVirtualImage //for abstract 'subscribe' image/icon
+                        const _publishimage = dataField.publishVirtualImage //for abstract 'publish' image/icon
+                        const _biimage = dataField.biDirectionalVirtualImage //for abstract 'publish/subscribe' image/icon
+                        const _virtualimage = dataField.VirtualImage //for abstract images like 'albums'
 
-                    const _selectedvirtualimage = dataField.selectedVirtualImage ?? dataField.VirtualImage  //for abstract images like 'albums' (selected)
-                    const _fieldignore = dataField.isFieldIgnore //for abstract images like 'albums'
-                    const _isLookup = dataField.isLookup //field links to another object
-                    const _lookupApi = dataField.lookupApi //another object get api
-                    const _lookupId = dataField.lookupId //field link key (FK)
-                    const _displayName = dataField.displayName //Display Name Field
+                        const _selectedvirtualimage = dataField.selectedVirtualImage ?? dataField.VirtualImage
+                        const _fieldignore = dataField.isFieldIgnore //ignore via populate the field
+                        const _isLookup = dataField.isLookup //field links to another object/dataset
+                        const _lookupApi = dataField.lookupApi //another object get api
+                        const _lookupId = dataField.lookupId //field link key (FK)
+                        const _displayName = dataField.displayName //Display Name Field
 
-                    // console.log(dataField)
-                    // const newListItem = _item  //newList[itemRow]
+                        // console.log(dataField)
+                        // const newListItem = _item  //newList[itemRow]
 
-                    // console.log(this.dataFields, _value[dataField.fieldName])
-                    // const _a = (dataField.fieldName != null)?_value[dataField.fieldName]:''
+                        // console.log(this.dataFields, listItem[dataField.fieldName])
+                        // const _a = (dataField.fieldName != null)?listItem[dataField.fieldName]:''
 
-                    newListItemData[dataField.fieldName] = {
-                        value: (dataField.fieldName != null)?_value[dataField.fieldName]:'',
-                        lookupValue: (dataField.displayName != null)?_value[dataField.displayName]:'',
-                        // value: (dataField.displayName == null)? _value[dataField.fieldName]:_value[dataField.displayName],
-                        displayName: _displayName,
-                        VirtualImage: _virtualimage,
-                        subscribeVirtualImage: _subscribeimage,
-                        biDirectionalVirtualImage: _biimage,
-                        publishVirtualImage: _publishimage,
-                        selectedVirtualImage: _selectedvirtualimage,
-                        isDirectionVirtualImage: _directionvirtual,
-                        isFieldIgnore: _fieldignore,
-                        isEditable: _editable,
-                        isText: _text,
-                        isDateTime: _datetime,
-                        isSortable: _sortable,
-                        isImage: _image,
-                        isHighLight: _highlight,
-                        isHidden: _hidden,
-                        columnsCount: _colscount,
-                        isLookup: _isLookup,
-                        lookupId: _lookupId,
-                        lookupApi: _lookupApi,
-                        isVirtualImage: _virtual,
-                        class: //field width (bootstrap)
+                        newListItemData[dataField.fieldName] = {
+                            value: (dataField.fieldName != null) ? listItem[dataField.fieldName] : '',
+                            lookupValue: (dataField.displayName != null) ? listItem[dataField.displayName] : '',
+                            // value: (dataField.displayName == null)? listItem[dataField.fieldName]:listItem[dataField.displayName],
+                            displayName: _displayName,
+                            VirtualImage: _virtualimage,
+                            subscribeVirtualImage: _subscribeimage,
+                            biDirectionalVirtualImage: _biimage,
+                            publishVirtualImage: _publishimage,
+                            selectedVirtualImage: _selectedvirtualimage,
+                            isDirectionVirtualImage: _directionvirtual,
+                            isFieldIgnore: _fieldignore,
+                            isEditable: _editable,
+                            isText: _text,
+                            isDateTime: _datetime,
+                            isSortable: _sortable,
+                            isImage: _image,
+                            isHighLight: _highlight,
+                            isHidden: _hidden,
+                            columnsCount: _colscount,
+                            isLookup: _isLookup,
+                            lookupId: _lookupId,
+                            lookupApi: _lookupApi,
+                            isVirtualImage: _virtual,
+                            class: //field width (bootstrap)
 
-                            "col-sm-" + _colscount +
-                            " col-xs-" + _colscount +
-                            " col-lg-" + _colscount
+                                "col-sm-" + _colscount +
+                                " col-xs-" + _colscount +
+                                " col-lg-" + _colscount
+                        }
                     }
-                }
 
-                    // console.log('new list data: ', newListItemData)
                     return newListItemData
-                }
-                catch(error) {
+
+                } catch (error) {
                     console.log(error)
                 }
             },
@@ -631,23 +641,31 @@ export default {
                 //async loading master/slave datasets
                 //if dataset is slave waiting for master keys value
 
-                console.log(this.api.get + _currentPage + "/" + _itemsPerPage + fkValue)
+                // (foreignValue===0) - clear items signal
+                if (this.foreignValue===0) {
+                    this.filteredItems = []
+                    this.Items = []
+                }
 
+                //slave without FK - nothing to do
                 if (this.isSlave&&!this.foreignValue>0) return
 
-                // console.log('slave=', this.isSlave)
-
+                //prepare request with or w/o FK
                 let fkValue = (this.foreignValue>0)?'/'+this.foreignValue:''
-                // console.log('fk: ', fkValue)
+
                 await axios.get(this.api.get + _currentPage + "/" + _itemsPerPage + fkValue)
                     .then(response => {
 
                         this.Items = this.populateListItems(response.data.data);
                         this.filteredItems = this.Items;
+
+                        if (this.Items.length === 0) this.$emit('onDataClear') //clear child dataset event
+
                         if ((this.filteredItems.length>0)&&(this.selectableRow)) this.rowClick(0)
 
+
                         // setup paginator
-                        this.$refs.paginatorDeviceTypes.setPaginator(
+                        this.$refs.refPaginator.setPaginator(
                             {
                                 pagesCount: response.data.paginator.PagesCount,
                                 currentPage: response.data.paginator.CurrentPage,
@@ -778,7 +796,7 @@ export default {
                         _values[editItem[field].fieldName] = editItem[field].value
                     }
 
-                    console.log('on axios: ', _values)
+                    // console.log('on axios: ', _values)
                     axios.put(this.api.update + id, _values)
                         .then(resp => {
 

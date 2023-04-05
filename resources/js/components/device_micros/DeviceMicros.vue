@@ -36,7 +36,7 @@
                     :selectedName="deviceMicros.selectedName"
                     :readOnly="false"
                     :isAdditionalCaption="true"
-
+                    @onDataClear="dataCLear"
                     @onRowClick="onDeviceMicroRowClick">
 
                 >
@@ -404,6 +404,11 @@ export default {
         onDeviceMicroRowClick(dataEvent) {
             // console.log(dataEvent)
             this.deviceMicros.selectedFkValue = dataEvent
+        },
+
+        dataCLear() {
+            console.log('data clear')
+            this.deviceMicros.selectedFkValue = 0
         }
     }
 }
