@@ -139,6 +139,8 @@
 
                         <div class="w-100 elipsis"
                             v-if="!item[column].isHidden"
+                            data-bs-toggle="tooltip" data-bs-placement="top"
+                            :title="getTooltip(item[column])"
                         >
 
                             <span v-if="
@@ -255,6 +257,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 import TableHead from './TableHead.vue';
 // import pathes from '../../config/pathes';
 import Viewer from '../imagelib/Viewer.vue';
+import { Tooltip } from 'bootstrap'
 
 export default {
 
@@ -352,6 +355,9 @@ export default {
         },
 
         mounted() {
+            new Tooltip(document.body, {
+                selector: "[data-bs-toggle='tooltip']",
+            })
 
             if (!this.readOnly) {
                 if (localStorage.getItem('CompactView')) {
@@ -361,7 +367,9 @@ export default {
 
             this.emitter.on("new-lang", _lang => {
                 this.setLang(_lang)
-            });
+            })
+
+
 
         },
 
@@ -373,6 +381,12 @@ export default {
         },
 
         methods: {
+
+            getTooltip(item){
+                if (item.lookupValue != '') return item.lookupValue
+                if (item.value != null) return item.value
+                return ''
+            },
 
             getVirtualImage(selected, item) {
                 return (selected)?item.selectedVirtualImage : item.VirtualImage
