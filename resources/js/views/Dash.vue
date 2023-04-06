@@ -38,7 +38,7 @@
                 <CommonCard
                     :cardCaption="parametersCaption"
                 >
-                    <div v-for="(param, key) in params" :key="param.id" :id="param.id">
+                    <div class="m-2" v-for="(param, key) in params" :key="param.id" :id="param.id">
 
                         <div class="row">
                             <div class="w-100">

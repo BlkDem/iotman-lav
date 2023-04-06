@@ -1,5 +1,5 @@
 <template>
-    <div class="row py-2">
+    <div class="row py-1">
         <div class="col-sm-4 col-md-4 col-lg-4">
             <label class="mx-4 font-1_5rem" :for="newID">{{ color }}
             </label>
@@ -53,12 +53,12 @@ export default {
 <style scoped>
 
 input[type=color] {
-    height: 32px;
-    padding: 0.5rem 0.5rem;
+    height: 36px;
+    padding: 0.3rem 0.3rem;
 }
 
 .font-1_5rem {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 </style>

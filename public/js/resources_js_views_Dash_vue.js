@@ -346,7 +346,7 @@ var _withScopeId = function _withScopeId(n) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-dd145a82"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
 };
 var _hoisted_1 = {
-  "class": "row py-2"
+  "class": "row py-1"
 };
 var _hoisted_2 = {
   "class": "col-sm-4 col-md-4 col-lg-4"
@@ -389,7 +389,7 @@ var _withScopeId = function _withScopeId(n) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-22d340ce"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
 };
 var _hoisted_1 = {
-  "class": "p-2 my-2 row"
+  "class": "my-1 row px-2"
 };
 var _hoisted_2 = {
   "class": "col-sm-4 col-md-4 col-lg-4"
@@ -449,7 +449,7 @@ var _withScopeId = function _withScopeId(n) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-049cacf4"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
 };
 var _hoisted_1 = {
-  "class": "row py-2"
+  "class": "row py-1 border rounded m-1"
 };
 var _hoisted_2 = {
   "class": "col-sm-4 col-md-4 col-lg-4"
@@ -459,7 +459,7 @@ var _hoisted_4 = {
   "class": "col-sm-8 col-md-8 col-lg-8"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", {
     "class": "mx-4 font-1_5rem",
     "for": $data.newID
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.param_name), 9 /* TEXT, PROPS */, _hoisted_3)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.param_value), 1 /* TEXT */)]);
@@ -641,6 +641,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.params, function (param, key) {
             var _param$param_min, _param$param_max, _param$param_value;
             return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+              "class": "m-2",
               key: param.id,
               id: param.id
             }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [param.param_type_name === 'COLOR' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_color_control, {
@@ -739,7 +740,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ninput[type=color][data-v-dd145a82] {\n    height: 32px;\n    padding: 0.5rem 0.5rem;\n}\n.font-1_5rem[data-v-dd145a82] {\n    font-size: 1.5rem;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ninput[type=color][data-v-dd145a82] {\n    height: 36px;\n    padding: 0.3rem 0.3rem;\n}\n.font-1_5rem[data-v-dd145a82] {\n    font-size: 1.3rem;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -762,7 +763,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.flex-space[data-v-22d340ce] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.font-1_8rem[data-v-22d340ce]{\n    font-size: 1.5rem;\n}\n.font-1_5rem[data-v-22d340ce]{\n    font-size: 1.2rem;\n}\n.align-right[data-v-22d340ce] {\n    text-align: right;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.flex-space[data-v-22d340ce] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.font-1_8rem[data-v-22d340ce]{\n    font-size: 1.3rem;\n}\n.font-1_5rem[data-v-22d340ce]{\n    font-size: 1.2rem;\n}\n.align-right[data-v-22d340ce] {\n    text-align: right;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -785,7 +786,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ninput[type=color][data-v-049cacf4] {\n    height: 40px;\n    padding: 0.5rem 0.5rem;\n}\n.font-1_5rem[data-v-049cacf4] {\n    font-size: 1.0rem;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ninput[type=color][data-v-049cacf4] {\n    height: 40px;\n    padding: 0.5rem 0.5rem;\n}\n.font-1_5rem[data-v-049cacf4] {\n    font-size: 1.5rem;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

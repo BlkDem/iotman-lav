@@ -1,6 +1,6 @@
 <template>
 
-    <div class="p-2 my-2 row">
+    <div class="my-1 row px-2">
         <div class="col-sm-4 col-md-4 col-lg-4">
             <label :for="newID" class="form-label mx-4 font-1_8rem">{{ rangeCaption }}
                 <span class="text-info">({{ rangeValue }})</span></label>
@@ -69,7 +69,7 @@ export default {
 }
 
 .font-1_8rem{
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 .font-1_5rem{
     font-size: 1.2rem;

@@ -1,8 +1,8 @@
 <template>
-    <div class="row py-2">
+    <div class="row py-1 border rounded m-1">
         <div class="col-sm-4 col-md-4 col-lg-4">
-            <label class="mx-4 font-1_5rem" :for="newID">{{ param_name }}
-            </label>
+            <h6 class="mx-4 font-1_5rem" :for="newID">{{ param_name }}
+            </h6>
         </div>
         <div class="col-sm-8 col-md-8 col-lg-8">
             {{ param_value }}
@@ -55,7 +55,7 @@ input[type=color] {
 }
 
 .font-1_5rem {
-    font-size: 1.0rem;
+    font-size: 1.5rem;
 }
 
 </style>
