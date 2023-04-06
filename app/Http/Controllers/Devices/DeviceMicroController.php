@@ -23,7 +23,32 @@ class DeviceMicroController extends BaseController
         return Micro::find($micro_id);
     }
 
- /**
+
+    //making JSON for the device controller dash panel
+    public function dash($id) {
+
+        $res = DeviceMicro::find($id);
+        if (is_null($res)) {
+            return $this->sendError("No Record for id=$id Found");
+        }
+
+        //microcontroller`s data
+        $microParam = clone $res;
+        $resDash["micro"] = $microParam;
+
+        //get device attributes for dash description panel (including device_types)
+        $resDash["device"] = $res->device;
+
+        //get dash params with param type names
+        $resDash["params"] = $res->microParams;
+
+
+
+        //return dash JSON
+        return $this->sendResponse($resDash, "Dash");
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -62,10 +87,6 @@ class DeviceMicroController extends BaseController
         ->limit($itemsPerPage)->offset($offset)->orderBy('device_micro_idx', 'asc')
         ->get();
 
-        // dd($res);
-
-        // $res = Image::limit($itemsPerPage)->where('album_id', $album_id)->offset($offset)->orderBy('image_name', 'asc')->get();
-
         $total = DeviceMicro::where('device_id', $device_id)->get();
 
         $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
@@ -79,7 +100,6 @@ class DeviceMicroController extends BaseController
 
         $offset = $itemsPerPage*--$page;
 
-        // $res = DeviceMicro::limit($itemsPerPage)->offset($offset)->get();
         $res = DB::table('device_micros')
         ->join('micros', 'micros.id', '=', 'device_micros.micro_id')
         ->join('devices', 'devices.id', '=', 'device_micros.device_id')

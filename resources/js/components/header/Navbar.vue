@@ -18,7 +18,7 @@
                     <AppMenu ref="appMenu"></AppMenu>
                 </ul>
             </div>
-            <div class="d-flex">
+            <div class="flex-center">
                 <ul class="navbar-nav me-auto">
                     <ThemeCombo ref="themeCombo"></ThemeCombo>
                 </ul>

@@ -13,7 +13,7 @@ use App\Http\Controllers\PaginatorController;
 
 class ImageController extends BaseController
 {
- /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -30,42 +30,45 @@ class ImageController extends BaseController
         $paginator = PaginatorController::Paginate($res->count(), 1, 1);
 
         return $this->sendResponse($res, "Image List", $paginator);
-
     }
 
-    public static function getImage($id) {
+    public static function getImage($id)
+    {
         return Image::find($id);
     }
 
-    public static function getAlbum($id) {
+    public static function getAlbum($id)
+    {
         return Album::find($id);
     }
 
-    public static function setImage($id, $newImage) {
+    public static function setImage($id, $newImage)
+    {
 
         $newImage = Self::getImage($id);
 
         if ($newImage == null)
             return null;
-                    //apply new file name
+        //apply new file name
         $newImage->image_name = $newImage;
-                    //save record
+        //save record
         $newImage->save();
 
         return $newImage;
     }
 
-    public function page($currentPage=0, $itemsPerPage=10){
+    public function page($currentPage = 0, $itemsPerPage = 10)
+    {
 
         $page = (int)$currentPage;
 
-        $offset = $itemsPerPage*--$page;
+        $offset = $itemsPerPage * --$page;
 
         $res = DB::table('images')
-        ->join('albums', 'images.album_id', '=', 'albums.id')
-        ->select('images.*', 'albums.id', 'albums.album_name')
-        ->limit($itemsPerPage)->offset($offset)->orderBy('image_name', 'asc')
-        ->get();
+            ->join('albums', 'images.album_id', '=', 'albums.id')
+            ->select('images.*', 'albums.id', 'albums.album_name')
+            ->limit($itemsPerPage)->offset($offset)->orderBy('image_name', 'asc')
+            ->get();
 
         // $res = Image::limit($itemsPerPage)->offset($offset)->orderBy('image_name', 'asc')->get();
         $total = Image::get();
@@ -75,25 +78,27 @@ class ImageController extends BaseController
         return $this->sendResponse($res, "Images List", $paginator);
     }
 
-    public function pageWhereAlbum($currentPage=0, $itemsPerPage=10, $album_id){
+    public function pageWhereAlbum($currentPage = 0, $itemsPerPage = 10, $album_id)
+    {
 
         $page = (int)$currentPage;
 
-        $offset = $itemsPerPage*--$page;
+        $offset = $itemsPerPage * --$page;
 
         $res = DB::table('images')
-        ->join('albums', 'images.album_id', '=', 'albums.id')
-        ->select(
-            'images.id as id',
-            'images.image_name as image_name',
-            'images.image_desc as image_desc',
-            'images.created_at as created_at',
-            'images.updated_at as updated_at',
-            'albums.id as album_id',
-            'albums.album_name as album_name')
-        ->where('album_id', $album_id)
-        ->limit($itemsPerPage)->offset($offset)->orderBy('image_name', 'asc')
-        ->get();
+            ->join('albums', 'images.album_id', '=', 'albums.id')
+            ->select(
+                'images.id as id',
+                'images.image_name as image_name',
+                'images.image_desc as image_desc',
+                'images.created_at as created_at',
+                'images.updated_at as updated_at',
+                'albums.id as album_id',
+                'albums.album_name as album_name'
+            )
+            ->where('album_id', $album_id)
+            ->limit($itemsPerPage)->offset($offset)->orderBy('image_name', 'asc')
+            ->get();
 
         // $res = Image::limit($itemsPerPage)->where('album_id', $album_id)->offset($offset)->orderBy('image_name', 'asc')->get();
 
@@ -129,8 +134,7 @@ class ImageController extends BaseController
             $newImage["album_name"] = $albumName["album_name"];
 
             return $this->sendResponse($newImage, "Image added");
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return $this->sendError('Store error: ' . $e);
         }
     }
@@ -143,7 +147,8 @@ class ImageController extends BaseController
      * @return \Illuminate\Http\Response
      */
 
-    public function update(Request $request, Image $updateImage) {
+    public function update(Request $request, Image $updateImage)
+    {
 
         $validator = ValidatorRules::MakeValidate($request, $updateImage->getTable());
 
@@ -169,8 +174,7 @@ class ImageController extends BaseController
             $updateImage["album_name"] = $albumName["album_name"];
 
             return $this->sendResponse($updateImage, 'Image updated');
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return $this->sendError('Updating Record Error: ' . $e);
         }
     }
@@ -184,11 +188,10 @@ class ImageController extends BaseController
     public function show($id)
     {
         $res = DB::table('images')
-        ->join('albums', 'images.album_id', '=', 'albums.id')
-        ->where('images.id', '=', $id)
-        ->select('images.*', 'albums.id', 'albums.album_name')
-        ->get()
-        ;
+            ->join('albums', 'images.album_id', '=', 'albums.id')
+            ->where('images.id', '=', $id)
+            ->select('images.*', 'albums.id', 'albums.album_name')
+            ->get();
 
         if (is_null($res)) {
             return $this->sendError("No Record for id=$id Found");
@@ -210,7 +213,8 @@ class ImageController extends BaseController
         return $this->sendResponse($files, "Images from disk");
     }
 
-    public function patch(Request $request, $id, $field, $value){
+    public function patch(Request $request, $id, $field, $value)
+    {
         try {
             $patchImage = Image::whereId($id);
             $patchImage->update([
@@ -219,8 +223,7 @@ class ImageController extends BaseController
             $res = Image::find($id);
             // return $this->sendResponse($patchImage, 'Image patched');
             return response()->json($res, 200);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             // return response()->json('Patching Record Error: ' . $e, 400);
             return $this->sendError('Patching Record Error: ' . $e);
         }
@@ -232,7 +235,8 @@ class ImageController extends BaseController
      * @param  \App\Models\Image  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $imageItem = Image::find($id);
         if ($imageItem === null) {
             return $this->sendError("No Record for deleting Found");

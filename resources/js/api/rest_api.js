@@ -43,6 +43,7 @@ export default {
     api_device_micro_update: apiPreffix +     'device_micro/update/',
     api_device_micro_delete: apiPreffix +     'device_micro/delete/',
     api_device_micro_patch: apiPreffix +      'device_micro/patch/',
+    api_device_micro_dash: apiPreffix +       'device_micro/dash/',
 
     //DevBlogs CRUD
     api_dev_blog_create: apiPreffix +    'dev_blog/create/',

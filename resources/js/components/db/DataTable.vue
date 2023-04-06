@@ -137,7 +137,7 @@
                             :class="setLastColumnAlignClass(item[column].class, Object.keys(item).length, ckey)"
                         >
 
-                        <div
+                        <div class="w-100"
                             v-if="!item[column].isHidden"
                         >
 

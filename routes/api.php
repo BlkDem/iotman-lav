@@ -138,6 +138,7 @@ Route::controller(MicroParamController::class)->group(function () {
 Route::controller(DeviceMicroController::class)->group(function () {
     Route::post(  '/device_micro/create', 'store');
     Route::get(   '/device_micros/read', 'index');
+    Route::get(   '/device_micros/dash/{id}', 'dash');
     Route::get(   '/device_micros/read/page/{currentPage}/{itemsPerPage}', 'page');
     Route::get(   '/device_micros/read/page/{currentPage}/{itemsPerPage}/{device_id}', 'pageWhereDevice');
     Route::get(   '/device_micro/read/{id}', 'show');

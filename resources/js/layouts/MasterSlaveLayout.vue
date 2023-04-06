@@ -1,13 +1,16 @@
 <template>
 
 
-    <div class="card-body border-4 border-top border-bottom rounded-bottom rounded-top border-secondary py-2 mx-2"
-        :class="{'w-100': layoutVertical}"
+    <!-- <div class="card-body border-4 border-top border-bottom rounded-bottom rounded-top border-secondary py-2 mx-2" -->
+    <div class=" border-4 border-top border-bottom rounded-bottom rounded-top
+                border-secondary py-2 mx-2
+                window modal-dialog modal-content "
+
     >
 
         <div class="flex-center-space">
 
-            <div class="px-2">
+            <div class="px-2 elipsis">
                 <h5><i class="fa-solid fa-layer-group"></i><span class="mx-2">{{ layoutCaption }}</span></h5>
             </div>
 
@@ -137,8 +140,8 @@ export default {
                 this.masterWidthStore = this.masterWidth
                 this.slaveWidthStore = this.slaveWidth
 
-                this.masterWidth = 'w-100'
-                this.slaveWidth = 'w-100'
+                this.masterWidth = ''
+                this.slaveWidth = ''
             }
             else {
                 this.masterWidth = this.masterWidthStore
