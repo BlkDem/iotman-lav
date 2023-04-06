@@ -1,10 +1,10 @@
 <template>
     <div class="row py-2">
-        <div class="col-sm-3 col-md-3 col-lg-3">
+        <div class="col-sm-4 col-md-4 col-lg-4">
             <label class="mx-4 font-1_5rem" :for="newID">{{ color }}
             </label>
         </div>
-        <div class="col-sm-9 col-md-9 col-lg-9">
+        <div class="col-sm-8 col-md-8 col-lg-8">
             <input type="color" class="form-control"
                 :value="color"
                 :id="newID"
@@ -53,7 +53,7 @@ export default {
 <style scoped>
 
 input[type=color] {
-    height: 40px;
+    height: 32px;
     padding: 0.5rem 0.5rem;
 }
 

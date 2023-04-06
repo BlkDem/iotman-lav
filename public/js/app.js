@@ -23782,17 +23782,18 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       cardId: null,
-      isFullScreen: false
+      isFullScreen: false,
+      isExpanded: true
     };
   },
   created: function created() {
     this.cardId = _helpers_MakeID__WEBPACK_IMPORTED_MODULE_0__["default"].makeId(8, 'card_');
+    this.isExpanded = !this.isCollapsed;
   },
   methods: {
     switchFullscreenMode: function switchFullscreenMode() {
       this.isFullScreen = !this.isFullScreen;
       window.scrollTo(0, 0);
-      // this.
     }
   }
 });
@@ -24412,7 +24413,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <i class=\"fa-solid fa-compress\"></i> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     id: $data.cardId,
-    "class": "collapse show",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["", {
+      'collapse show': $props.isCollapsed
+    }]),
     "aria-labelledby": "heading-example"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"card-caption\">\n\n\n                </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
@@ -24421,7 +24424,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {}, function () {
     return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Loading...")];
-  })], 2 /* CLASS */)])], 8 /* PROPS */, _hoisted_4)], 2 /* CLASS */);
+  })], 2 /* CLASS */)])], 10 /* CLASS, PROPS */, _hoisted_4)], 2 /* CLASS */);
 }
 
 /***/ }),
@@ -25635,7 +25638,7 @@ var routes = [{
     return __webpack_require__.e(/*! import() */ "resources_js_views_Dash_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/Dash.vue */ "./resources/js/views/Dash.vue"));
   },
   ID: "DASH",
-  visible: true
+  visible: false
 }];
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_1__.createRouter)({
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_1__.createWebHistory)(),

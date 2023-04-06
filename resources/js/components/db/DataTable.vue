@@ -253,7 +253,7 @@ import AddItem from './AddDialog.vue';
 
 import TableNav from '../../components/common/TableBar/TableNav.vue';
 import TableHead from './TableHead.vue';
-import pathes from '../../config/pathes';
+// import pathes from '../../config/pathes';
 import Viewer from '../imagelib/Viewer.vue';
 
 export default {
@@ -336,7 +336,7 @@ export default {
                 imagesPath: '',
                 imagePlug: '',
 
-                imageSrc: pathes.storageImagePlug,
+                imageSrc: Pathes.storageImagePlug,
 
                 selectedRow: [],
 

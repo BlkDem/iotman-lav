@@ -210,7 +210,7 @@ const routes = [
     component: () => import('./views/Dash.vue'),
 
     ID: "DASH",
-    visible: true
+    visible: false
   },
 
 ];

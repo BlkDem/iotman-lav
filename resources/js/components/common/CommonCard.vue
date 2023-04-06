@@ -28,7 +28,9 @@
                 <!-- <i class="fa-solid fa-compress"></i> -->
             </button>
         </div>
-        <div :id="cardId" class="collapse show" aria-labelledby="heading-example">
+        <div :id="cardId" class=""
+            :class="{'collapse show': isCollapsed}"
+            aria-labelledby="heading-example">
             <div class="card-body">
                 <!-- <div class="card-caption">
 
@@ -87,12 +89,14 @@ export default {
         return {
             cardId: null,
 
-            isFullScreen: false
+            isFullScreen: false,
+            isExpanded: true
         }
     },
 
     created() {
         this.cardId = MakeID.makeId(8, 'card_')
+        this.isExpanded = !this.isCollapsed
     },
 
     methods: {
@@ -100,7 +104,6 @@ export default {
         switchFullscreenMode(){
             this.isFullScreen=!this.isFullScreen;
             window.scrollTo(0, 0);
-            // this.
         }
 
     }

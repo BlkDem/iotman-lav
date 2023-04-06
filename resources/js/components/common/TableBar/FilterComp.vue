@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="flex-center w-100">
-        <input class="form-control-sm w-100" type="text" :value="dataFilter"
+        <input class="form-control-sm w-100" type="text"
             :placeholder="'&#xF002; ' + currentFieldCaption" style="font-family:Arial, FontAwesome"
 
             v-debounce:300="onInput"
@@ -23,8 +23,6 @@
 </template>
 
 <script>
-
-import debounce from "lodash/debounce"
 
 export default {
 
@@ -36,7 +34,7 @@ export default {
 
     data() {
         return {
-            dataFilter: '',
+            // dataFilter: '',
             currentField: '',
             currentFieldCaption: ''
         }

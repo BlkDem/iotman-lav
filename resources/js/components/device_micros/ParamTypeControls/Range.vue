@@ -1,11 +1,11 @@
 <template>
 
     <div class="p-2 my-2 row">
-        <div class="col-sm-3 col-md-3 col-lg-3">
+        <div class="col-sm-4 col-md-4 col-lg-4">
             <label :for="newID" class="form-label mx-4 font-1_8rem">{{ rangeCaption }}
                 <span class="text-info">({{ rangeValue }})</span></label>
         </div>
-        <div class="col-sm-9 col-md-9 col-lg-9">
+        <div class="col-sm-8 col-md-8 col-lg-8">
             <div class="flex-space font-1_5rem">
                 <div class="text-info w-25">{{ rangeMin }}</div>
                 <div class="text-info">{{ rangeValue }}</div>
@@ -37,7 +37,7 @@ export default {
 
         initValue: {
             type: Number,
-            defaut: 0
+            defaut: 50
         },
 
         rangeCaption: {

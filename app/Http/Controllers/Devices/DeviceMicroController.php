@@ -36,13 +36,20 @@ class DeviceMicroController extends BaseController
         $microParam = clone $res;
         $resDash["micro"] = $microParam;
 
+        // dd($microParam->device_micro_idx);
+
         //get device attributes for dash description panel (including device_types)
         $resDash["device"] = $res->device;
 
         //get dash params with param type names
         $resDash["params"] = $res->microParams;
 
-
+        //prepare fullpath param value like a /00:11:22:33:44:55/zone1
+        for ($i=0; $i<$resDash["params"]->count(); $i++) {
+            $param_fullname =   '/' . $microParam->device_micro_idx .
+                                '/' . $resDash["params"][$i]["param_name"];
+            $resDash["params"][$i]["param_fullname"] = $param_fullname;
+        }
 
         //return dash JSON
         return $this->sendResponse($resDash, "Dash");
