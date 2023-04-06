@@ -1,5 +1,5 @@
 <template>
-  <div class="home-container">
+  <!-- <div class="home-container">
     <div shadow="always" style="margin-bottom:30px;">
       <div class="emq-title">
         Configuration
@@ -148,7 +148,9 @@
         <input type="textarea" :divs="3" style="margin-bottom: 15px" v-model="receiveNews">
       </div>
     </div>
-  </div>
+  </div> -->
+
+
 </template>
 
 <script>

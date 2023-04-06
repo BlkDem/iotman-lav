@@ -14,7 +14,8 @@
             </div>
         </div>
         <div class="flex-center w-100">
-        <input class="form-control-sm w-100" type="text" :value="dataFilter" :placeholder="'Filter: ' + currentFieldCaption"
+        <input class="form-control-sm w-100" type="text" :value="dataFilter"
+            :placeholder="'&#xF002; ' + currentFieldCaption" style="font-family:Arial, FontAwesome"
             @input="onInput" />
     </div>
 </template>

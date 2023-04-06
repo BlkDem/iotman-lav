@@ -30,19 +30,20 @@ class DeviceMicro extends Model
 
     public function device() {
         return $this->belongsTo(Device::class)
-        ->join('device_types', 'device_types.id', '=', 'devices.device_type_id')
+        ->join('device_types',
+                'device_types.id', '=', 'devices.device_type_id')
         ->select(
             'devices.*',
             'device_types.device_type_name',
             'device_types.device_type_desc',
             'device_types.device_type_image'
-            )
-        ;
+            );
     }
 
     public function microParams() {
         return $this->hasMany(MicroParam::class)
-        ->join('param_types', 'param_types.id', '=', 'micro_params.param_type_id')
+        ->join('param_types',
+                'param_types.id', '=', 'micro_params.param_type_id')
         ->select(
             'micro_params.id',
             'micro_params.param_name',

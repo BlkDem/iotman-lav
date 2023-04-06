@@ -7,7 +7,7 @@
         }"
     >
         <div class="card-header flex-space pb-2">
-            <h5 class=" elipsis">
+            <h5 class="w-100 elipsis">
             <a style="text-decoration: none;" data-toggle="collapse"
                 :href="'#'+cardId" aria-expanded="true" aria-controls="collapse-example"
 
