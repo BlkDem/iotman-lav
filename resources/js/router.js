@@ -184,7 +184,7 @@ const routes = [
     visible: true,
   },
   {
-    path: "/users/:id",
+    path: "/users/:user_id",
     name: "UserInfo",
     icon: "fa-solid fa-user-tie",
     // component: UserInfo,
@@ -203,11 +203,11 @@ const routes = [
     visible: true
   },
   {
-    path: "/dash",
+    path: "/dash/:device_micro_id",
     name: "Dash",
     icon: "fa-solid fa-gear",
     // component: Presets,
-    component: () => import('./components/device_micros/Dash.vue'),
+    component: () => import('./views/Dash.vue'),
 
     ID: "DASH",
     visible: true

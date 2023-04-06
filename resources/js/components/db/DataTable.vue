@@ -137,7 +137,7 @@
                             :class="setLastColumnAlignClass(item[column].class, Object.keys(item).length, ckey)"
                         >
 
-                        <div class="w-100"
+                        <div class="w-100 elipsis"
                             v-if="!item[column].isHidden"
                         >
 
@@ -149,7 +149,7 @@
                                     (!item[column].isLookup)"
                                 :class="{
                                             'text-info': item[column].isHighLight,
-                                            'elipsis':  item[column].isText,
+                                            // 'elipsis':  item[column].isText,
                                         }"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >

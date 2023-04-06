@@ -44,7 +44,7 @@ class Device extends Model
         'device_name',
         'device_desc',
         // 'device_pass',
-        'device_hwid',
+        // 'device_hwid',
         'device_type_id',
         'device_type_name',
         'device_type_desc',

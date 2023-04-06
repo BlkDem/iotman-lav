@@ -1,6 +1,7 @@
 
 import './bootstrap';
 import { createApp } from 'vue';
+import { vue3Debounce } from 'vue-debounce'
 import router from './router'
 
 import LangCombo from './components/header/LangCombo.vue';
@@ -36,5 +37,7 @@ app.component('InfoCard', InfoCard);
 
 app.component('AppMenu', AppMenu);
 
-app.use(router).mount('#app');
+app.use(router)
+.directive('debounce', vue3Debounce({ lock: true }))
+.mount('#app');
 
