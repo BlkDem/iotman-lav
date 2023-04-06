@@ -349,7 +349,7 @@ var _hoisted_1 = {
   "class": "row py-1"
 };
 var _hoisted_2 = {
-  "class": "col-sm-4 col-md-4 col-lg-4"
+  "class": "col-sm-4 col-md-4 col-lg-4 flex-center"
 };
 var _hoisted_3 = ["for"];
 var _hoisted_4 = {
@@ -392,7 +392,7 @@ var _hoisted_1 = {
   "class": "my-1 row px-2"
 };
 var _hoisted_2 = {
-  "class": "col-sm-4 col-md-4 col-lg-4"
+  "class": "col-sm-4 col-md-4 col-lg-4 flex-center"
 };
 var _hoisted_3 = ["for"];
 var _hoisted_4 = {
@@ -455,14 +455,19 @@ var _hoisted_2 = {
   "class": "col-sm-4 col-md-4 col-lg-4"
 };
 var _hoisted_3 = ["for"];
-var _hoisted_4 = {
+var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": "fa-solid fa-cubes text-info"
+  }, null, -1 /* HOISTED */);
+});
+var _hoisted_5 = {
   "class": "col-sm-8 col-md-8 col-lg-8"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", {
-    "class": "mx-4 font-1_5rem",
+    "class": "mx-2 font-1_5rem",
     "for": $data.newID
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.param_name), 9 /* TEXT, PROPS */, _hoisted_3)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.param_value), 1 /* TEXT */)]);
+  }, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.param_name), 1 /* TEXT */)], 8 /* PROPS */, _hoisted_3)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.param_value), 1 /* TEXT */)]);
 }
 
 /***/ }),
@@ -578,20 +583,20 @@ var _hoisted_3 = {
 };
 var _hoisted_4 = ["src"];
 var _hoisted_5 = {
-  "class": "w-100 mb-2"
+  "class": "w-100 mb-4"
 };
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, "Description:", -1 /* HOISTED */);
 var _hoisted_7 = {
-  "class": "w-100 mb-2"
+  "class": "w-100 mb-4"
 };
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, "Device Description:", -1 /* HOISTED */);
 var _hoisted_9 = {
   key: 0,
-  "class": "w-100 mb-2"
+  "class": "w-100 mb-4"
 };
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, "Microcontroller:", -1 /* HOISTED */);
 var _hoisted_11 = {
-  "class": "w-100 mb-2"
+  "class": "w-100 mb-4"
 };
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, "Created:", -1 /* HOISTED */);
 var _hoisted_13 = ["id"];

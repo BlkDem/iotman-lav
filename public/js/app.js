@@ -23788,8 +23788,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.cardId = _helpers_MakeID__WEBPACK_IMPORTED_MODULE_0__["default"].makeId(8, 'card_');
-    this.isExpanded = !this.isCollapsed;
+    // this.isExpanded = !this.isCollapsed
   },
+
   methods: {
     switchFullscreenMode: function switchFullscreenMode() {
       this.isFullScreen = !this.isFullScreen;
@@ -24413,9 +24414,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <i class=\"fa-solid fa-compress\"></i> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     id: $data.cardId,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["", {
-      'collapse show': $props.isCollapsed
-    }]),
+    "class": "collapse show",
     "aria-labelledby": "heading-example"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"card-caption\">\n\n\n                </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
@@ -24424,7 +24423,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {}, function () {
     return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Loading...")];
-  })], 2 /* CLASS */)])], 10 /* CLASS, PROPS */, _hoisted_4)], 2 /* CLASS */);
+  })], 2 /* CLASS */)])], 8 /* PROPS */, _hoisted_4)], 2 /* CLASS */);
 }
 
 /***/ }),

@@ -1,6 +1,6 @@
 <template>
     <div class="row py-1">
-        <div class="col-sm-4 col-md-4 col-lg-4">
+        <div class="col-sm-4 col-md-4 col-lg-4 flex-center">
             <label class="mx-4 font-1_5rem" :for="newID">{{ color }}
             </label>
         </div>

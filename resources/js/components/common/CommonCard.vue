@@ -28,8 +28,7 @@
                 <!-- <i class="fa-solid fa-compress"></i> -->
             </button>
         </div>
-        <div :id="cardId" class=""
-            :class="{'collapse show': isCollapsed}"
+        <div :id="cardId" class="collapse show"
             aria-labelledby="heading-example">
             <div class="card-body">
                 <!-- <div class="card-caption">
@@ -96,7 +95,7 @@ export default {
 
     created() {
         this.cardId = MakeID.makeId(8, 'card_')
-        this.isExpanded = !this.isCollapsed
+        // this.isExpanded = !this.isCollapsed
     },
 
     methods: {

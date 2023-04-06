@@ -12,19 +12,19 @@
                     <div class="mx-2">
                         <h5 class="flex-center my-2">{{ device.device_type_name }}</h5>
                         <img :src="getImage(device.device_type_image)" class="w-100 mb-4" />
-                        <div class="w-100 mb-2">
+                        <div class="w-100 mb-4">
                             <h6>Description:</h6>
                             <div>{{ device.device_type_desc }}</div>
                         </div>
-                        <div class="w-100 mb-2">
+                        <div class="w-100 mb-4">
                             <h6>Device Description:</h6>
                             <div>{{ device.device_desc }}</div>
                         </div>
-                        <div class="w-100 mb-2" v-if="micro.device_micro_desc!=null">
+                        <div class="w-100 mb-4" v-if="micro.device_micro_desc!=null">
                             <h6>Microcontroller:</h6>
                             <div>{{ micro.device_micro_desc }}</div>
                         </div>
-                        <div class="w-100 mb-2">
+                        <div class="w-100 mb-4">
                             <h6>Created:</h6>
                             <div>{{ micro.created_at }}</div>
                         </div>
