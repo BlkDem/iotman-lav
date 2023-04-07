@@ -59,13 +59,20 @@ __webpack_require__.r(__webpack_exports__);
         _this.rejectPromise = reject;
       });
     },
-    _confirm: function _confirm() {
+    // _confirm() {
+    //     this.$refs.popup.close()
+    //     this.resolvePromise(true)
+    // },
+    // _cancel() {
+    //     this.$refs.popup.close()
+    //     this.resolvePromise(false)
+    // },
+    confirmDialog: function confirmDialog() {
       this.$refs.popup.close();
       this.resolvePromise(true);
     },
-    _cancel: function _cancel() {
-      this.$refs.popup.close();
-      this.resolvePromise(false);
+    cancelDialog: function cancelDialog() {
+      this._cancel();
     }
   }
 });
@@ -99,6 +106,16 @@ __webpack_require__.r(__webpack_exports__);
     },
     close: function close() {
       this.isVisible = false;
+    },
+    cancelDialog: function cancelDialog() {
+      this.close();
+      // this.resolvePromise(false)
+    },
+    onKeyDown: function onKeyDown() {
+      if (event.key === 'Escape') this.cancelDialog();
+    },
+    onDialogClick: function onDialogClick() {
+      if (event.target.className === 'popup-modal fade-in') this.cancelDialog();
     }
   }
 });
@@ -412,6 +429,11 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
       this.$refs.popup.open();
+      setTimeout(function () {
+        //delay for set focus to active input
+        console.log('focus');
+        $("input#btnOk").focus();
+      }, 200);
       return new Promise(function (resolve, reject) {
         _this2.resolvePromise = resolve;
         _this2.rejectPromise = reject;
@@ -1021,6 +1043,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
+    editBtnKeyDown: function editBtnKeyDown() {
+      if (event.key === 'Escape') this.$refs.addItem.cancelDialog();
+    },
+    deleteBtnKeyDown: function deleteBtnKeyDown() {
+      if (event.key === 'Escape') this.$refs.confirmDialogue.cancelDialog();
+    },
     doEdit: function doEdit(key, id) {
       var _this6 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
@@ -1412,12 +1440,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.title), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.message), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         "class": "btn btn-danger btn-width-40 mx-1",
         onClick: _cache[0] || (_cache[0] = function () {
-          return $options._confirm && $options._confirm.apply($options, arguments);
+          return $options.confirmDialog && $options.confirmDialog.apply($options, arguments);
         })
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.okButton), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "btn btn-primary btn-width-40 mx-1",
         onClick: _cache[1] || (_cache[1] = function () {
-          return $options._cancel && $options._cancel.apply($options, arguments);
+          return $options.cancelDialog && $options.cancelDialog.apply($options, arguments);
         })
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.cancelButton), 1 /* TEXT */)])];
     }),
@@ -1444,10 +1472,6 @@ var _withScopeId = function _withScopeId(n) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-9cfc8a2c"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
 };
 var _hoisted_1 = {
-  key: 0,
-  "class": "popup-modal"
-};
-var _hoisted_2 = {
   "class": "border-4 border-top border-bottom rounded-bottom rounded-top border-secondary py-4 window modal-dialog modal-content"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -1455,7 +1479,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     name: "fade"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [$data.isVisible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {}, undefined, true)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+      return [$data.isVisible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+        key: 0,
+        "class": "popup-modal",
+        onKeydown: _cache[0] || (_cache[0] = function () {
+          return $options.onKeyDown && $options.onKeyDown.apply($options, arguments);
+        }),
+        onClick: _cache[1] || (_cache[1] = function () {
+          return $options.onDialogClick && $options.onDialogClick.apply($options, arguments);
+        })
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {}, undefined, true)])], 32 /* HYDRATE_EVENTS */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 3 /* FORWARDED */
   });
@@ -1791,6 +1824,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_14)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
       }), 128 /* KEYED_FRAGMENT */))]), _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "btn btn-danger mx-1 btn-width-40",
+        id: "btnOk",
         onClick: _cache[1] || (_cache[1] = function () {
           return $options.confirmDialog && $options.confirmDialog.apply($options, arguments);
         })
@@ -2009,15 +2043,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 2 /* CLASS */)], 2 /* CLASS */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"flex w-100\" v-if=\"activeCol===key&&activeRow===ckey\">\n\n                        </div> ")], 2 /* CLASS */);
         }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
           "class": "btn btn-info btn-width-40 mx-1",
+          onKeydown: _cache[2] || (_cache[2] = function () {
+            return $options.editBtnKeyDown && $options.editBtnKeyDown.apply($options, arguments);
+          }),
           onClick: function onClick($event) {
             return $options.doEdit(key, item.id.value);
           }
-        }, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Edit ")], 8 /* PROPS */, _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        }, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Edit ")], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
           "class": "btn btn-secondary btn-width-40 mx-1",
+          onKeydown: _cache[3] || (_cache[3] = function () {
+            return $options.deleteBtnKeyDown && $options.deleteBtnKeyDown.apply($options, arguments);
+          }),
           onClick: function onClick($event) {
             return $options.doDelete(key, item.id.value);
           }
-        }, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Delete ")], 8 /* PROPS */, _hoisted_10)])])])], 10 /* CLASS, PROPS */, _hoisted_3);
+        }, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Delete ")], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_10)])])])], 10 /* CLASS, PROPS */, _hoisted_3);
       }), 128 /* KEYED_FRAGMENT */))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" compact view "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TableHead, {
         fieldsCaptions: $props.dataFields,
         onUpdateSortedData: $options.updateSortedData
@@ -2079,10 +2119,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             key: 4,
             "class": "device-image",
             src: $options.getImage(item[column]),
-            onError: _cache[2] || (_cache[2] = function () {
+            onError: _cache[4] || (_cache[4] = function () {
               return $options.replaceByDefault && $options.replaceByDefault.apply($options, arguments);
             }),
-            onClick: _cache[3] || (_cache[3] = function () {
+            onClick: _cache[5] || (_cache[5] = function () {
               return $options.imageClick && $options.imageClick.apply($options, arguments);
             })
           }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_19)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.activeCol === key && $data.activeRow === ckey ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -2090,9 +2130,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             value: item[column].value,
             id: $options.setId(key, ckey),
             name: $options.setId(key, ckey),
-            onKeyup: [_cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+            onKeyup: [_cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
               return $options.onInputEnter();
-            }, ["enter"])), _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+            }, ["enter"])), _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
               return $options.onInputEsc();
             }, ["esc"]))],
             onChange: function onChange($event) {
@@ -2106,22 +2146,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             }, ["stop"])
           }, _hoisted_24, 8 /* PROPS */, _hoisted_22), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
             "class": "btn btn-primary btn-sm",
-            onMousedown: _cache[6] || (_cache[6] = function ($event) {
+            onMousedown: _cache[8] || (_cache[8] = function ($event) {
               _this.isEsc = true;
               _this.cancelEditCell();
             })
           }, _hoisted_26, 32 /* HYDRATE_EVENTS */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 8 /* PROPS */, _hoisted_16)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 2 /* CLASS */);
         }), 128 /* KEYED_FRAGMENT */)), !$props.readOnly ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
           "class": "btn btn-info btn-sm mx-2",
+          onKeydown: _cache[9] || (_cache[9] = function () {
+            return $options.editBtnKeyDown && $options.editBtnKeyDown.apply($options, arguments);
+          }),
           onClick: function onClick($event) {
             return $options.doEdit(key, item.id.value);
           }
-        }, _hoisted_30, 8 /* PROPS */, _hoisted_28), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        }, _hoisted_30, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_28), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
           "class": "btn btn-secondary btn-sm",
+          onKeydown: _cache[10] || (_cache[10] = function () {
+            return $options.deleteBtnKeyDown && $options.deleteBtnKeyDown.apply($options, arguments);
+          }),
           onClick: function onClick($event) {
             return $options.doDelete(key, item.id.value);
           }
-        }, _hoisted_33, 8 /* PROPS */, _hoisted_31)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])], 10 /* CLASS, PROPS */, _hoisted_13);
+        }, _hoisted_33, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_31)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])], 10 /* CLASS, PROPS */, _hoisted_13);
       }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"my-1 border-4 border-bottom rounded-bottom border-secondary\"></div> ")], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.compactView]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Paginator, {
         ref: "refPaginator"
       }, null, 512 /* NEED_PATCH */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <MyMqtt></MyMqtt> ")];

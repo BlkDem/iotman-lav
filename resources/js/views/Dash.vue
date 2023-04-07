@@ -76,6 +76,10 @@
 
         </MasterSlaveLayout>
 
+        <MyMqtt
+            @on-connect="mqttConnected"
+        />
+
 </template>
 
 <script>
@@ -88,9 +92,10 @@ import Pathes from '../config/pathes';
 import ColorControl from '../components/device_micros/ParamTypeControls/Color'
 import SimpleControl from '../components/device_micros/ParamTypeControls/Simple'
 import RangeControl from '../components/device_micros/ParamTypeControls/Range'
+import MyMqtt from '../components/MyMqtt.vue';
 
 export default {
-    components: {MasterSlaveLayout, CommonCard, ColorControl, SimpleControl, RangeControl},
+    components: {MasterSlaveLayout, CommonCard, ColorControl, SimpleControl, RangeControl, MyMqtt},
 
     data() {
         return {
@@ -108,8 +113,9 @@ export default {
                 type: Number
             },
 
-            deviceMicroInfoCaption: 'device micro caption'
-        };
+            deviceMicroInfoCaption: 'device micro caption',
+
+        }
     },
 
     created() {
@@ -121,6 +127,11 @@ export default {
     },
 
     methods: {
+
+        mqttConnected() {
+            console.log('mqtt connected')
+        },
+
         async getData() {
             await axios.get(APIConstants.api_device_micro_dash + this.deviceMicroId)
                 .then(response => {

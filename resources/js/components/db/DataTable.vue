@@ -98,12 +98,16 @@
 
                     <div class="card-body w-100">
                         <div class="flex-center">
-                        <button class="btn btn-info btn-width-40 mx-1" @click="doEdit(key, item.id.value)">
+                        <button class="btn btn-info btn-width-40 mx-1"
+                            @keydown="editBtnKeyDown"
+                            @click="doEdit(key, item.id.value)">
                             <i class="fas fa-edit" aria-hidden="true"></i>
                             <!-- Edit -->
                         </button>
 
-                        <button class="btn btn-secondary btn-width-40 mx-1" @click="doDelete(key, item.id.value)">
+                        <button class="btn btn-secondary btn-width-40 mx-1"
+                            @keydown="deleteBtnKeyDown"
+                            @click="doDelete(key, item.id.value)">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                             <!-- Delete -->
                         </button>
@@ -223,11 +227,17 @@
                     </div>
 
                         <div class="col-sm-2 col-xs-2 col-lg-2 edit-buttons" v-if="!readOnly">
-                            <button class="btn btn-info  btn-sm mx-2" @click="doEdit(key, item.id.value)">
+                            <button class="btn btn-info  btn-sm mx-2"
+                                @keydown="editBtnKeyDown"
+                                @click="doEdit(key, item.id.value)">
+
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
 
-                            <button class="btn btn-secondary btn-sm" @click="doDelete(key, item.id.value)">
+                            <button class="btn btn-secondary btn-sm"
+                                @keydown="deleteBtnKeyDown"
+                                @click="doDelete(key, item.id.value)">
+
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -783,6 +793,13 @@ export default {
 
             },
 
+            editBtnKeyDown() {
+                if (event.key === 'Escape') this.$refs.addItem.cancelDialog()
+            },
+
+            deleteBtnKeyDown() {
+                if (event.key === 'Escape') this.$refs.confirmDialogue.cancelDialog()
+            },
 
             async doEdit(key, id) {
 

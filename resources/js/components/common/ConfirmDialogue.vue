@@ -3,8 +3,8 @@
         <h2 style="margin-top: 0">{{ title }}</h2>
         <p>{{ message }}</p>
         <div class="flex-center mt-2">
-            <span class="btn btn-danger btn-width-40 mx-1" @click="_confirm">{{ okButton }}</span>
-            <button class="btn btn-primary btn-width-40 mx-1" @click="_cancel">{{ cancelButton }}</button>
+            <span class="btn btn-danger btn-width-40 mx-1" @click="confirmDialog">{{ okButton }}</span>
+            <button class="btn btn-primary btn-width-40 mx-1" @click="cancelDialog">{{ cancelButton }}</button>
         </div>
     </PopupModal>
 </template>
@@ -53,14 +53,24 @@ export default {
             })
         },
 
-        _confirm() {
+        // _confirm() {
+        //     this.$refs.popup.close()
+        //     this.resolvePromise(true)
+        // },
+
+        // _cancel() {
+        //     this.$refs.popup.close()
+        //     this.resolvePromise(false)
+        // },
+
+        confirmDialog() {
             this.$refs.popup.close()
             this.resolvePromise(true)
         },
 
-        _cancel() {
-            this.$refs.popup.close()
-            this.resolvePromise(false)
+
+        cancelDialog() {
+            this._cancel()
         },
     },
 }
