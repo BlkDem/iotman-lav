@@ -15,8 +15,6 @@
 
 <script>
 
-import MakeID from '../../../helpers/MakeID';
-
 export default {
 
     emits: ['onChange'],
@@ -35,14 +33,11 @@ export default {
 
     data() {
         return {
-            // color: '#333333',
-            newID: undefined
         }
     },
 
     created() {
-        // this.color = this.initColor.toUpperCase()
-        this.newID = MakeID.makeId(8, 'color_')
+        // this.newID = MakeID.makeId(8, 'color_')
     },
 
     methods: {
@@ -57,10 +52,6 @@ export default {
                 console.log(a.toString(16))
                 return '#' + a.toString(16).toUpperCase();
         }
-        // selectColor() {
-        //     this.color = event.target.value.toUpperCase()
-        //     this.$emit('new-color', this.color)
-        // }
     }
 
 }

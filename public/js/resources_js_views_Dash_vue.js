@@ -202,13 +202,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _helpers_MakeID__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../helpers/MakeID */ "./resources/js/helpers/MakeID.js");
 var _emits$props$emits$da;
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_emits$props$emits$da = {
   emits: ['onChange'],
   props: {
@@ -219,13 +217,9 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
     param_fullname: ''
   }
 }, _defineProperty(_emits$props$emits$da, "emits", ['onChange']), _defineProperty(_emits$props$emits$da, "data", function data() {
-  return {
-    // color: '#333333',
-    newID: undefined
-  };
+  return {};
 }), _defineProperty(_emits$props$emits$da, "created", function created() {
-  // this.color = this.initColor.toUpperCase()
-  this.newID = _helpers_MakeID__WEBPACK_IMPORTED_MODULE_0__["default"].makeId(8, 'color_');
+  // this.newID = MakeID.makeId(8, 'color_')
 }), _defineProperty(_emits$props$emits$da, "methods", {
   onChange: function onChange(e) {
     console.log('component onChange: ', e);
@@ -235,10 +229,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
     var a = Number.parseInt(value);
     console.log(a.toString(16));
     return '#' + a.toString(16).toUpperCase();
-  } // selectColor() {
-  //     this.color = event.target.value.toUpperCase()
-  //     this.$emit('new-color', this.color)
-  // }
+  }
 }), _emits$props$emits$da);
 
 /***/ }),
@@ -268,21 +259,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     param_fullname: ''
   },
   data: function data() {
-    return {
-      // rangeValue: 0,
-      newID: undefined
-    };
-  },
-  created: function created() {
-    // this.rangeValue = this.initValue
-    // this.newID = MakeID.makeId(8, 'range_')
+    return {};
   },
   methods: {
     getValue: function getValue(value) {
       if (value === null) return;
       var a = Number.parseInt(value);
       if (_typeof(a) === NaN) return;
-      console.log('r-num: ', a);
+      // console.log('r-num: ', a)
       return a;
     },
     onChange: function onChange(e) {
@@ -304,37 +288,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _helpers_MakeID__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../helpers/MakeID */ "./resources/js/helpers/MakeID.js");
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    param_name: {
-      // type: String,
-    },
+    param_name: '',
     param_value: ''
-
-    // init_param_value: {
-    //     type: String,
-    // }
   },
   data: function data() {
-    return {
-      // param_value: undefined,
-      newID: undefined
-    };
-  },
-  created: function created() {
-
-    // this.param_value = this.init_param_value
-    // this.newID = MakeID.makeId(8, 'simple_')
+    return {};
   },
   mounted: function mounted() {
     console.log('simple', this.param_value);
-  },
-  methods: {
-    setValue: function setValue(value) {
-      // this.param_value = value
-    }
   }
 });
 

@@ -42,14 +42,7 @@ export default {
 
     data() {
         return {
-            // rangeValue: 0,
-            newID: undefined
         }
-    },
-
-    created() {
-        // this.rangeValue = this.initValue
-        // this.newID = MakeID.makeId(8, 'range_')
     },
 
     methods: {
@@ -57,7 +50,7 @@ export default {
             if (value === null) return
             const a = Number.parseInt(value)
             if (typeof(a) === NaN) return
-            console.log('r-num: ', a)
+            // console.log('r-num: ', a)
             return a
         },
 

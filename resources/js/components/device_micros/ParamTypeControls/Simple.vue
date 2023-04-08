@@ -13,44 +13,21 @@
 
 <script>
 
-import MakeID from '../../../helpers/MakeID';
-
 export default {
 
     props: {
-        param_name: {
-            // type: String,
-        },
-
+        param_name: '',
         param_value: '',
-
-        // init_param_value: {
-        //     type: String,
-        // }
     },
 
     data() {
         return {
-            // param_value: undefined,
-            newID: undefined
         }
-    },
-
-    created() {
-
-        // this.param_value = this.init_param_value
-        // this.newID = MakeID.makeId(8, 'simple_')
     },
 
     mounted() {
         console.log('simple', this.param_value)
     },
-
-    methods: {
-        setValue(value) {
-            // this.param_value = value
-        }
-    }
 
 }
 </script>
