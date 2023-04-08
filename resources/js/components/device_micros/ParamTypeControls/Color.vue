@@ -1,7 +1,7 @@
 <template v-if="color">
     <div class="row py-1">
         <div class="col-sm-4 col-md-4 col-lg-4 flex-center">
-            <label class="mx-4 font-1_5rem" >{{ getHexColor(color) }}
+            <label class="mx-4 font-1_5rem" >{{ param_name }}  <span :style="getStyle">({{ getHexColor(color) }})</span>
             </label>
         </div>
         <div class="col-sm-8 col-md-8 col-lg-8">
@@ -20,11 +20,9 @@ export default {
     emits: ['onChange'],
 
     props: {
-        initColor: {
-            type: String,
-        },
-
         color: '#333333',
+
+        param_name: '',
 
         param_fullname: ''
     },
@@ -47,9 +45,15 @@ export default {
             this.$emit('onChange', e, this.param_fullname)
         },
 
+        getStyle() {
+            if (this.color == null) return
+            return 'color: ' + this.color + ';'
+        },
+
         getHexColor(value) {
             const a = Number.parseInt(value)
-                console.log(a.toString(16))
+            if (isNaN(a)) return
+                // console.log(a.toString(16))
                 return '#' + a.toString(16).toUpperCase();
         }
     }

@@ -24,12 +24,8 @@ export default {
         return {
         }
     },
-
-    mounted() {
-        console.log('simple', this.param_value)
-    },
-
 }
+
 </script>
 
 <style scoped>

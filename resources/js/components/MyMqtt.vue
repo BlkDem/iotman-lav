@@ -278,10 +278,7 @@ export default {
             this.client.on('connect', () => {
                 console.log('MQTT: Connection succeeded!')
                 this.$emit('onConnect', true)
-                // console.log(this.params)
                 this.processParams()
-
-                // this.doSubscribe('/18:FE:34:FE:B6:90/zone1')
             })
 
             this.client.on('error', error => {
@@ -290,7 +287,6 @@ export default {
             })
 
             this.client.on('message', (topic, message) => {
-                // console.log(message)
                 this.$emit('onMessage', topic, message.toString())
             })
         },
@@ -308,7 +304,7 @@ export default {
                     return
                 }
                 this.subscribeSuccess = true
-                console.log('MQTT: Subscribe to topics res', res)
+                // console.log('MQTT: Subscribe to topics res', res)
             })
         },
         // unsubsribtions
@@ -326,7 +322,9 @@ export default {
         // publish
         doPublish(topic, payload) {
             const {
+                // topic,
                 qos,
+                // payload,
                 retain
             } = this.publish
             this.client.publish(topic, payload, {
