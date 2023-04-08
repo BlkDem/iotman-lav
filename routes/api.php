@@ -101,6 +101,7 @@ Route::controller(AlbumController::class)->group(function () {
 Route::controller(PresetController::class)->group(function () {
     Route::post(  '/preset/create', 'store');
     Route::get(   '/presets/read', 'index');
+    Route::get(   '/presets/group/{group}', 'indexGroup');
     Route::get(   '/presets/read/page/{currentPage}/{itemsPerPage}', 'page');
     Route::get(   '/preset/read/{id}', 'show');
     Route::put(   '/preset/update/{updatePreset}', 'update');

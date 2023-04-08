@@ -156,6 +156,8 @@
 <script>
 import mqtt from '../vendor/mqtt.min.js';
 import MakeID from '../helpers/MakeID';
+import APIConstants from '../api/rest_api';
+import { config } from 'process';
 
 export default {
 
@@ -172,11 +174,16 @@ export default {
     data() {
         return {
 
+            // mqtt_server: '',
+            // mqtt_protocol: '',
+            // mqtt_port: '',
+
             connection: {
                 host: 'ice9.umolab.ru',
                 port: 8000,
                 endpoint: '/',
                 clean: true,
+                // protocol: '',
                 connectTimeout: 4000,
                 reconnectPeriod: 4000,
                 // hwid: '18:FE:34:FE:B6:90',
@@ -228,8 +235,9 @@ export default {
     },
 
     mounted() {
+        this.getMQTTParams()
         // console.log(this.client)
-        this.createConnection()
+        // this.createConnection()
     },
 
     beforeUnmount() {
@@ -241,6 +249,22 @@ export default {
     },
 
     methods: {
+
+        async getMQTTParams() {
+            await axios.get(APIConstants.api_presets_group + 'MQTT')
+                    .then(response => {
+                        const configMQTT = response.data.data
+                        console.log(configMQTT)
+
+                        for (let item in configMQTT) {
+                            if (configMQTT[item].preset_key === 'MQTT_SERVER') this.connection.host = configMQTT[item].preset_value
+                            if (configMQTT[item].preset_key === 'MQTT_PROTOCOL') this.mqtt_protocol = configMQTT[item].preset_value
+                            if (configMQTT[item].preset_key === 'MQTT_PORT') this.connection.port = configMQTT[item].preset_value
+                        }
+                        console.log(this.connection, this.mqtt_protocol)
+                        this.createConnection()
+                    })
+        },
 
         processParams() {
             for (let item in this.paramItems) {
@@ -266,7 +290,9 @@ export default {
                 endpoint,
                 ...options
             } = this.connection
-            const connectUrl = 'ws://ice9.umolab.ru:8000'
+
+            const connectUrl = this.mqtt_protocol + '://' + this.connection.host + ':' + this.connection.port
+                // 'wss://ice9.umolab.ru:9883'
 
             try {
                 console.log(options)
