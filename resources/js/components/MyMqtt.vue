@@ -156,169 +156,204 @@
 <script>
 import mqtt from '../vendor/mqtt.min.js';
 import MakeID from '../helpers/MakeID';
-// import { makeRe } from 'minimatch';
 
 export default {
-  name: 'MQTT',
 
-  data() {
-    return {
+    name: 'MQTT',
 
-      connection: {
-        host: 'ice9.umolab.ru',
-        port: 8000,
-        endpoint: '/',
-        clean: true,
-        connectTimeout: 4000,
-        reconnectPeriod: 4000,
-        // hwid: '18:FE:34:FE:B6:90',
-        clientId: '',
-        username: 'umolab',
-        password: '',
-      },
+    emits: ['onConnect', 'onMessage', 'onError', ],
 
-      subscription: {
-        topic: `/18:FE:34:FE:B6:90/#`,
-        qos: 0,
-      },
-
-      publish: {
-        topic: 'topic/bdivser',
-        qos: 0,
-        payload: '{ "msg": "Hello, I am bdivser." }',
-        retain: true
-      },
-
-      receiveNews: '',
-
-      qosList: [
-        { label: 0, value: 0 },
-        { label: 1, value: 1 },
-        { label: 2, value: 2 },
-      ],
-
-      client: {
-        connected: false,
-      },
-
-      subscribeSuccess: false,
-    }
-  },
-
-  created() {
-
-    this.connection.clientId =  MakeID.makeId(8, 'mqtt_umolab_')
-
-  },
-
-  mounted() {
-    // console.log(this.client)
-    this.createConnection()
-  },
-
-  beforeUnmount() {
-
-    console.log(this.client.connected)
-    this.doUnSubscribe()
-    this.destroyConnection()
-    console.log(this.client.connected)
-  },
-
-  methods: {
-
-
-
-    createConnection() {
-
-        // Connect string, and specify the connection method used through protodiv
-      // ws unencrypted WebSocket connection
-      // wss encrypted WebSocket connection
-      // mqtt unencrypted TCP connection
-      // mqtts encrypted TCP connection
-      // wxs WeChat mini app connection
-      // alis Alipay mini app connection
-
-        // console.log(process.env)
-
-      const { host, port, endpoint, ...options } = this.connection
-      const connectUrl = 'ws://ice9.umolab.ru:8000'
-
-      try {
-        console.log(options)
-        this.client = mqtt.connect(connectUrl, options)
-      } catch (error) {
-        console.log('mqtt.connect error', error)
-      }
-      this.client.on('connect', () => {
-        console.log('Connection succeeded!')
-        this.doSubscribe('/18:FE:34:FE:B6:90/zone1')
-        this.doSubscribe('/18:FE:34:FE:B6:90/zone2')
-        this.doSubscribe('/18:FE:34:FE:B6:90/zone3')
-        this.doSubscribe('/18:FE:34:FE:B6:90/zone4')
-
-        this.doSubscribe('/18:FE:34:FE:B6:90/count1')
-        this.doSubscribe('/18:FE:34:FE:B6:90/count2')
-        this.doSubscribe('/18:FE:34:FE:B6:90/count3')
-        this.doSubscribe('/18:FE:34:FE:B6:90/count4')
-      })
-      this.client.on('error', error => {
-        console.log('Connection failed', error)
-      })
-      this.client.on('message', (topic, message) => {
-        this.receiveNews = this.receiveNews.concat(message)
-        console.log(`Received message ${message} from topic ${topic}`)
-      })
-    },
-
-    // subscribtions
-    doSubscribe(topic) {
-    //   const { topic, qos } = this.subscription
-      const qos = 0
-
-      this.client.subscribe(topic, { qos }, (error, res) => {
-        if (error) {
-          console.log('Subscribe to topics error', error)
-          return
+    props: {
+        paramItems: {
+            type: Array,
         }
-        this.subscribeSuccess = true
-        console.log('Subscribe to topics res', res)
-      })
-    },
-    // unsubsribtions
-    doUnSubscribe() {
-      const { topic } = this.subscription
-      this.client.unsubscribe(topic, error => {
-        if (error) {
-          console.log('Unsubscribe error', error)
-        }
-      })
     },
 
-    // publish
-    doPublish() {
-      const { topic, qos, payload, retain } = this.publish
-      this.client.publish(topic, payload, {'qos': qos, 'retain': retain}, error => {
-        if (error) {
-          console.log('Publish error', error)
+    data() {
+        return {
+
+            connection: {
+                host: 'ice9.umolab.ru',
+                port: 8000,
+                endpoint: '/',
+                clean: true,
+                connectTimeout: 4000,
+                reconnectPeriod: 4000,
+                // hwid: '18:FE:34:FE:B6:90',
+                clientId: '',
+                username: 'umolab',
+                password: '',
+            },
+
+            subscription: {
+                topic: '',
+                qos: 0,
+            },
+
+            publish: {
+                topic: '',
+                qos: 0,
+                payload: '',
+                retain: true
+            },
+
+            receiveNews: '',
+
+            // qosList: [{
+            //         label: 0,
+            //         value: 0
+            //     },
+            //     {
+            //         label: 1,
+            //         value: 1
+            //     },
+            //     {
+            //         label: 2,
+            //         value: 2
+            //     },
+            // ],
+
+            client: {
+                connected: false,
+            },
+
+            subscribeSuccess: false,
         }
-      })
     },
 
-    // disconnect
-    destroyConnection() {
-      if (this.client.connected) {
-        try {
-          this.client.end()
-          this.client = {
-            connected: false,
-          }
-          console.log('Successfully disconnected!')
-        } catch (error) {
-          console.log('Disconnect failed', error.toString())
-        }
-      }
+    created() {
+
+        this.connection.clientId = MakeID.makeId(8, 'mqtt_umolab_')
+
     },
-  },
+
+    mounted() {
+        // console.log(this.client)
+        this.createConnection()
+    },
+
+    beforeUnmount() {
+
+        console.log(this.client.connected)
+        this.doUnSubscribe()
+        this.destroyConnection()
+        console.log(this.client.connected)
+    },
+
+    methods: {
+
+        processParams() {
+            for (let item in this.paramItems) {
+                if(this.paramItems[item]['param_in'] <= 0) {
+                    this.doSubscribe(this.paramItems[item]['param_fullname'])
+                }
+            }
+        },
+
+        createConnection() {
+
+            // Connect string, and specify the connection method used through protodiv
+            // ws unencrypted WebSocket connection
+            // wss encrypted WebSocket connection
+            // mqtt unencrypted TCP connection
+            // mqtts encrypted TCP connection
+            // wxs WeChat mini app connection
+            // alis Alipay mini app connection
+
+            const {
+                host,
+                port,
+                endpoint,
+                ...options
+            } = this.connection
+            const connectUrl = 'ws://ice9.umolab.ru:8000'
+
+            try {
+                console.log(options)
+                this.client = mqtt.connect(connectUrl, options)
+            } catch (error) {
+                console.log('MQTT: connect error', error)
+            }
+
+            this.client.on('connect', () => {
+                console.log('MQTT: Connection succeeded!')
+                this.$emit('onConnect', true)
+                // console.log(this.params)
+                this.processParams()
+
+                // this.doSubscribe('/18:FE:34:FE:B6:90/zone1')
+            })
+
+            this.client.on('error', error => {
+                console.log('MQTT: Connection failed', error)
+                this.$emit('onError', error)
+            })
+
+            this.client.on('message', (topic, message) => {
+                // console.log(message)
+                this.$emit('onMessage', topic, message.toString())
+            })
+        },
+
+        // subscribtions
+        doSubscribe(topic) {
+            //   const { topic, qos } = this.subscription
+            const qos = 0
+
+            this.client.subscribe(topic, {
+                qos
+            }, (error, res) => {
+                if (error) {
+                    console.log('MQTT: Subscribe to topics error', error)
+                    return
+                }
+                this.subscribeSuccess = true
+                console.log('MQTT: Subscribe to topics res', res)
+            })
+        },
+        // unsubsribtions
+        doUnSubscribe() {
+            const {
+                topic
+            } = this.subscription
+            this.client.unsubscribe(topic, error => {
+                if (error) {
+                    console.log('MQTT: Unsubscribe error', error)
+                }
+            })
+        },
+
+        // publish
+        doPublish(topic, payload) {
+            const {
+                qos,
+                retain
+            } = this.publish
+            this.client.publish(topic, payload, {
+                'qos': qos,
+                'retain': retain
+            }, error => {
+                if (error) {
+                    console.log('MQTT: Publish error', error)
+                }
+            })
+        },
+
+        // disconnect
+        destroyConnection() {
+            if (this.client.connected) {
+                try {
+                    this.client.end()
+                    this.client = {
+                        connected: false,
+                    }
+                    console.log('MQTT: Successfully disconnected!')
+                } catch (error) {
+                    console.log('MQTT: Disconnect failed', error.toString())
+                }
+            }
+        },
+    },
 }
 </script>
 

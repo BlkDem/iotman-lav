@@ -1,4 +1,5 @@
 export default {
+    DASH: "Umolab Devices - Dash",
     HOME: "Umolab Devices",
     LIBRARY: "Images Library",
     IMAGES: "Images",

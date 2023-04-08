@@ -98,12 +98,16 @@
 
                     <div class="card-body w-100">
                         <div class="flex-center">
-                        <button class="btn btn-info btn-width-40 mx-1" @click="doEdit(key, item.id.value)">
+                        <button class="btn btn-info btn-width-40 mx-1"
+                            @keydown="editBtnKeyDown"
+                            @click="doEdit(key, item.id.value)">
                             <i class="fas fa-edit" aria-hidden="true"></i>
                             <!-- Edit -->
                         </button>
 
-                        <button class="btn btn-secondary btn-width-40 mx-1" @click="doDelete(key, item.id.value)">
+                        <button class="btn btn-secondary btn-width-40 mx-1"
+                            @keydown="deleteBtnKeyDown"
+                            @click="doDelete(key, item.id.value)">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                             <!-- Delete -->
                         </button>
@@ -137,8 +141,10 @@
                             :class="setLastColumnAlignClass(item[column].class, Object.keys(item).length, ckey)"
                         >
 
-                        <div class="w-100"
+                        <div class="w-100 elipsis"
                             v-if="!item[column].isHidden"
+                            data-bs-toggle="tooltip" data-bs-placement="top"
+                            :title="getTooltip(item[column])"
                         >
 
                             <span v-if="
@@ -149,10 +155,11 @@
                                     (!item[column].isLookup)"
                                 :class="{
                                             'text-info': item[column].isHighLight,
-                                            'elipsis':  item[column].isText,
+                                            // 'elipsis':  item[column].isText,
                                         }"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
+
                                 {{ item[column].value }}
                             </span>
 
@@ -169,7 +176,14 @@
                                 :class="{'text-info': item[column].isHighLight}"
                             >
 
-                                <i :class="getVirtualImage(selectedRow[key], item[column])"></i>
+                                <router-link v-if="item[column].Link != null" :to="item[column].Link+item.id.value">
+                                    <i :class="getVirtualImage(selectedRow[key], item[column])"></i>
+                                </router-link>
+
+
+                                <i v-else :class="getVirtualImage(selectedRow[key], item[column])"></i>
+
+
                             </span>
 
                             <span v-if="item[column].isDirectionVirtualImage"
@@ -221,11 +235,17 @@
                     </div>
 
                         <div class="col-sm-2 col-xs-2 col-lg-2 edit-buttons" v-if="!readOnly">
-                            <button class="btn btn-info  btn-sm mx-2" @click="doEdit(key, item.id.value)">
+                            <button class="btn btn-info  btn-sm mx-2"
+                                @keydown="editBtnKeyDown"
+                                @click="doEdit(key, item.id.value)">
+
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
 
-                            <button class="btn btn-secondary btn-sm" @click="doDelete(key, item.id.value)">
+                            <button class="btn btn-secondary btn-sm"
+                                @keydown="deleteBtnKeyDown"
+                                @click="doDelete(key, item.id.value)">
+
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -253,8 +273,9 @@ import AddItem from './AddDialog.vue';
 
 import TableNav from '../../components/common/TableBar/TableNav.vue';
 import TableHead from './TableHead.vue';
-import pathes from '../../config/pathes';
+// import pathes from '../../config/pathes';
 import Viewer from '../imagelib/Viewer.vue';
+import { Tooltip } from 'bootstrap'
 
 export default {
 
@@ -336,7 +357,7 @@ export default {
                 imagesPath: '',
                 imagePlug: '',
 
-                imageSrc: pathes.storageImagePlug,
+                imageSrc: Pathes.storageImagePlug,
 
                 selectedRow: [],
 
@@ -352,6 +373,9 @@ export default {
         },
 
         mounted() {
+            new Tooltip(document.body, {
+                selector: "[data-bs-toggle='tooltip']",
+            })
 
             if (!this.readOnly) {
                 if (localStorage.getItem('CompactView')) {
@@ -361,7 +385,9 @@ export default {
 
             this.emitter.on("new-lang", _lang => {
                 this.setLang(_lang)
-            });
+            })
+
+
 
         },
 
@@ -373,6 +399,12 @@ export default {
         },
 
         methods: {
+
+            getTooltip(item){
+                if (item.lookupValue != '') return item.lookupValue
+                if (item.value != null) return item.value
+                return ''
+            },
 
             getVirtualImage(selected, item) {
                 return (selected)?item.selectedVirtualImage : item.VirtualImage
@@ -555,6 +587,9 @@ export default {
 
                         const dataField = this.dataFields[field]
 
+                        const _link = dataField.Link //will link to path
+                        const _linkto = dataField.LinkTo //will link to path
+
                         const _editable = dataField.isEditable //possible edit cell by text click
                         const _sortable = dataField.isSortable //field can sorted
                         const _image = dataField.isImage //image field - binding 'img'
@@ -586,6 +621,7 @@ export default {
                         // const _a = (dataField.fieldName != null)?listItem[dataField.fieldName]:''
 
                         newListItemData[dataField.fieldName] = {
+
                             value: (dataField.fieldName != null) ? listItem[dataField.fieldName] : '',
                             lookupValue: (dataField.displayName != null) ? listItem[dataField.displayName] : '',
                             // value: (dataField.displayName == null)? listItem[dataField.fieldName]:listItem[dataField.displayName],
@@ -598,6 +634,8 @@ export default {
                             isDirectionVirtualImage: _directionvirtual,
                             isFieldIgnore: _fieldignore,
                             isEditable: _editable,
+                            Link: _link,
+                            LinkTo: _linkto,
                             isText: _text,
                             isDateTime: _datetime,
                             isSortable: _sortable,
@@ -769,6 +807,13 @@ export default {
 
             },
 
+            editBtnKeyDown() {
+                if (event.key === 'Escape') this.$refs.addItem.cancelDialog()
+            },
+
+            deleteBtnKeyDown() {
+                if (event.key === 'Escape') this.$refs.confirmDialogue.cancelDialog()
+            },
 
             async doEdit(key, id) {
 

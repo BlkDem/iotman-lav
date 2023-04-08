@@ -152,12 +152,15 @@ export default {
 
                     deviceMicrosFields: [
                         {
+                            Link: '/dash/',
+                            LinkTo: 'id',
                             fieldName: 'Image',
                             fieldCaption: '',
                             type: String,
                             isImage: false,
                             isVirtualImage: true,
                             VirtualImage: 'fa-solid fa-microchip fa-2x',
+                            selectedVirtualImage: 'fa-solid fa-microchip fa-2x',
                             isEditable: false,
                             isFieldIgnore: true,
                             isSortable: false,

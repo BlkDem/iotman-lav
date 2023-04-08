@@ -14,9 +14,11 @@
             </div>
         </div>
         <div class="flex-center w-100">
-        <input class="form-control-sm w-100" type="text" :value="dataFilter"
+        <input class="form-control-sm w-100" type="text"
             :placeholder="'&#xF002; ' + currentFieldCaption" style="font-family:Arial, FontAwesome"
-            @input="onInput" />
+
+            v-debounce:300="onInput"
+            />
     </div>
 </template>
 
@@ -32,7 +34,7 @@ export default {
 
     data() {
         return {
-            dataFilter: '',
+            // dataFilter: '',
             currentField: '',
             currentFieldCaption: ''
         }
@@ -46,8 +48,9 @@ export default {
     },
 
     methods: {
-        onInput(){
-            this.$emit('filterData', this.currentField, event.target.value)
+
+        onInput(val, e){
+            this.$emit('filterData', this.currentField, val)
         }
     }
 }

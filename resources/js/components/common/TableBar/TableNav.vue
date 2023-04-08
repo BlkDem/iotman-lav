@@ -9,7 +9,7 @@
                     </filter-comp>
                 </div>
 
-                <div class="flex-center">
+                <div class="flex-center my-2">
                     <button class="btn btn-primary btn-sm mx-2"
                         v-if="!readOnly"
                         :class="{'disabled' : compactView}"

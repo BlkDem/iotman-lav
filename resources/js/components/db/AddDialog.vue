@@ -70,8 +70,12 @@
         </div>
         <hr>
         <div class="text-center mt-2">
-            <button class="btn btn-danger mx-1 btn-width-40" @click="confirmDialog">{{ okButton }}</button>
-            <button class="btn btn-secondary mx-1 btn-width-40" @click="cancelDialog">{{ cancelButton }}</button>
+            <button class="btn btn-danger mx-1 btn-width-40" id="btnOk"
+                @click="confirmDialog">{{ okButton }}
+            </button>
+            <button class="btn btn-secondary mx-1 btn-width-40"
+                @click="cancelDialog">{{ cancelButton }}
+            </button>
         </div>
     </PopupModal>
 </template>
@@ -197,6 +201,12 @@ export default {
             }
 
             this.$refs.popup.open()
+
+            setTimeout(() => { //delay for set focus to active input
+                console.log('focus')
+                $("input#btnOk").focus()
+            }, 200)
+
 
             return new Promise((resolve, reject) => {
                 this.resolvePromise = resolve

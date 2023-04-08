@@ -7,7 +7,7 @@
         }"
     >
         <div class="card-header flex-space pb-2">
-            <h5 class="w-100 elipsis">
+            <h5 class="w-100 elipsis" @dblclick.prevent="switchFullscreenMode">
             <a style="text-decoration: none;" data-toggle="collapse"
                 :href="'#'+cardId" aria-expanded="true" aria-controls="collapse-example"
 
@@ -28,7 +28,8 @@
                 <!-- <i class="fa-solid fa-compress"></i> -->
             </button>
         </div>
-        <div :id="cardId" class="collapse show" aria-labelledby="heading-example">
+        <div :id="cardId" class="collapse show"
+            aria-labelledby="heading-example">
             <div class="card-body">
                 <!-- <div class="card-caption">
 
@@ -87,12 +88,14 @@ export default {
         return {
             cardId: null,
 
-            isFullScreen: false
+            isFullScreen: false,
+            isExpanded: true
         }
     },
 
     created() {
         this.cardId = MakeID.makeId(8, 'card_')
+        // this.isExpanded = !this.isCollapsed
     },
 
     methods: {

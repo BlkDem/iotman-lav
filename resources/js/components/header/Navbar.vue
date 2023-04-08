@@ -10,7 +10,7 @@
                     >
                 </object> -->
             <!-- </a> -->
-            <Logo class="logo"/>
+            <Logo class="logo" v-once/>
 
 
             <div class="collapse navbar-collapse" id="navbarColor01">

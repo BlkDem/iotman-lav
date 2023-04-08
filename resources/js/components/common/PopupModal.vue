@@ -1,7 +1,7 @@
 <template>
     <transition name="fade" >
 
-        <div class="popup-modal " v-if="isVisible">
+        <div class="popup-modal " v-if="isVisible" @keydown="onKeyDown" @click="onDialogClick">
             <div class=" border-4 border-top border-bottom rounded-bottom rounded-top border-secondary py-4 window modal-dialog modal-content "
             >
                 <slot></slot>
@@ -32,6 +32,20 @@ export default {
         close() {
             this.isVisible = false
         },
+
+        cancelDialog() {
+            this.close()
+            // this.resolvePromise(false)
+        },
+
+        onKeyDown(){
+            if (event.key === 'Escape') this.cancelDialog()
+        },
+
+        onDialogClick() {
+            if (event.target.className === 'popup-modal fade-in') this.cancelDialog()
+        }
+
     },
 }
 </script>

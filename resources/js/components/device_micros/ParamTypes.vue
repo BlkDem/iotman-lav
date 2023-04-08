@@ -1,18 +1,17 @@
 <template>
-    <div style="margin-top: 5.5rem">
-        <!-- {{ pageCaption }} -->
-    </div>
+    <div style="margin-top: 5.5rem"></div>
 
     <data-table
-            :api="paramTypes.api"
-            :dataFields="paramTypes.paramTypesFields"
-            :pageCaption="paramTypes.paramTypesCaption"
-        >
+        :api="paramTypes.api"
+        :dataFields="paramTypes.paramTypesFields"
+        :pageCaption="paramTypes.paramTypesCaption"
+    >
     </data-table>
 
 </template>
 
 <script>
+
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
 import DataTable from '../db/DataTable.vue';
@@ -112,7 +111,7 @@ import DataTable from '../db/DataTable.vue';
         methods: {
 
             setLang(_lang) {
-                this.pageCaption = _lang.PARAM_TYPES ?? 'Device Types'
+                this.pageCaption = _lang.PARAM_TYPES ?? 'Param Types'
             },
         },
 

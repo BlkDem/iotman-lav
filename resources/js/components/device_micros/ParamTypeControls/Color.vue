@@ -1,14 +1,13 @@
-<template>
-    <div class="row py-2">
-        <div class="col-sm-3 col-md-3 col-lg-3">
-            <label class="mx-4 font-1_5rem" :for="newID">{{ color }}
+<template v-if="color">
+    <div class="row py-1">
+        <div class="col-sm-4 col-md-4 col-lg-4 flex-center">
+            <label class="mx-4 font-1_5rem" >{{ getHexColor(color) }}
             </label>
         </div>
-        <div class="col-sm-9 col-md-9 col-lg-9">
+        <div class="col-sm-8 col-md-8 col-lg-8">
             <input type="color" class="form-control"
-                :value="color"
-                :id="newID"
-                @input="selectColor($event)"
+                :value="getHexColor(color)"
+                @input="onChange($event.target.value)"
             />
         </div>
     </div>
@@ -20,31 +19,48 @@ import MakeID from '../../../helpers/MakeID';
 
 export default {
 
+    emits: ['onChange'],
+
     props: {
         initColor: {
             type: String,
-        }
+        },
+
+        color: '#333333',
+
+        param_fullname: ''
     },
 
-    emits: ['new-color'],
+    emits: ['onChange'],
 
     data() {
         return {
-            color: undefined,
+            // color: '#333333',
             newID: undefined
         }
     },
 
     created() {
-        this.color = this.initColor.toUpperCase()
+        // this.color = this.initColor.toUpperCase()
         this.newID = MakeID.makeId(8, 'color_')
     },
 
     methods: {
-        selectColor() {
-            this.color = event.target.value.toUpperCase()
-            this.$emit('new-color', this.color)
+
+        onChange(e) {
+            console.log('component onChange: ', e)
+            this.$emit('onChange', e, this.param_fullname)
+        },
+
+        getHexColor(value) {
+            const a = Number.parseInt(value)
+                console.log(a.toString(16))
+                return '#' + a.toString(16).toUpperCase();
         }
+        // selectColor() {
+        //     this.color = event.target.value.toUpperCase()
+        //     this.$emit('new-color', this.color)
+        // }
     }
 
 }
@@ -53,12 +69,12 @@ export default {
 <style scoped>
 
 input[type=color] {
-    height: 40px;
-    padding: 0.5rem 0.5rem;
+    height: 36px;
+    padding: 0.3rem 0.3rem;
 }
 
 .font-1_5rem {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 </style>

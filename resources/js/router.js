@@ -23,7 +23,7 @@ const routes = [
     visible: true,
     children: [
         {
-            path: "device_types",
+            path: "/device_types",
             name: "Device Types",
             icon: "fas fa-layer-group",
             // component: DeviceTypes,
@@ -31,7 +31,7 @@ const routes = [
             ID: "DEVICE_TYPES"
         },
         {
-            path: "devices",
+            path: "/devices",
             name: "Devices",
             icon: "fas fa-sun",
             // component: Devices,
@@ -39,7 +39,7 @@ const routes = [
             ID: "DEVICES"
           },
           {
-            path: "device_micros",
+            path: "/device_micros",
             name: "Device Micros",
             icon: "fas fa-sun",
             // component: DeviceMicros,
@@ -47,7 +47,7 @@ const routes = [
             ID: "DEVICE_MICROS"
           },
           {
-            path: "param_types",
+            path: "/param_types",
             name: "Param Types",
             icon: "fa-solid fa-cubes",
             // component: ParamTypes,
@@ -97,7 +97,8 @@ const routes = [
     icon: "fas fa-sun",
     // component: DeviceMicros,
     component: () => import('./components/device_micros/DeviceMicros.vue'),
-    ID: "DEVICE_MICROS"
+    ID: "DEVICE_MICROS",
+    visible: false
   },
   {
     path: "/user_devices",
@@ -184,7 +185,7 @@ const routes = [
     visible: true,
   },
   {
-    path: "/users/:id",
+    path: "/users/:user_id",
     name: "UserInfo",
     icon: "fa-solid fa-user-tie",
     // component: UserInfo,
@@ -203,14 +204,14 @@ const routes = [
     visible: true
   },
   {
-    path: "/dash",
+    path: "/dash/:device_micro_id",
     name: "Dash",
     icon: "fa-solid fa-gear",
     // component: Presets,
-    component: () => import('./components/device_micros/Dash.vue'),
+    component: () => import('./views/Dash.vue'),
 
     ID: "DASH",
-    visible: true
+    visible: false
   },
 
 ];
