@@ -159,6 +159,7 @@
                                         }"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
+
                                 {{ item[column].value }}
                             </span>
 
@@ -175,7 +176,14 @@
                                 :class="{'text-info': item[column].isHighLight}"
                             >
 
-                                <i :class="getVirtualImage(selectedRow[key], item[column])"></i>
+                                <router-link v-if="item[column].Link != null" :to="item[column].Link+item.id.value">
+                                    <i :class="getVirtualImage(selectedRow[key], item[column])"></i>
+                                </router-link>
+
+
+                                <i v-else :class="getVirtualImage(selectedRow[key], item[column])"></i>
+
+
                             </span>
 
                             <span v-if="item[column].isDirectionVirtualImage"
@@ -579,6 +587,9 @@ export default {
 
                         const dataField = this.dataFields[field]
 
+                        const _link = dataField.Link //will link to path
+                        const _linkto = dataField.LinkTo //will link to path
+
                         const _editable = dataField.isEditable //possible edit cell by text click
                         const _sortable = dataField.isSortable //field can sorted
                         const _image = dataField.isImage //image field - binding 'img'
@@ -610,6 +621,7 @@ export default {
                         // const _a = (dataField.fieldName != null)?listItem[dataField.fieldName]:''
 
                         newListItemData[dataField.fieldName] = {
+
                             value: (dataField.fieldName != null) ? listItem[dataField.fieldName] : '',
                             lookupValue: (dataField.displayName != null) ? listItem[dataField.displayName] : '',
                             // value: (dataField.displayName == null)? listItem[dataField.fieldName]:listItem[dataField.displayName],
@@ -622,6 +634,8 @@ export default {
                             isDirectionVirtualImage: _directionvirtual,
                             isFieldIgnore: _fieldignore,
                             isEditable: _editable,
+                            Link: _link,
+                            LinkTo: _linkto,
                             isText: _text,
                             isDateTime: _datetime,
                             isSortable: _sortable,

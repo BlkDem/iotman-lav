@@ -38,29 +38,33 @@
                 <CommonCard
                     :cardCaption="parametersCaption"
                 >
-                    <div class="m-2" v-for="(param, key) in params" :key="param.id" :id="param.id">
+                    <div class="m-2" v-for="(param, key) in params" :key="key" :id="param.id">
 
                         <div class="row">
                             <div class="w-100">
-                                <div v-if="param.param_type_name==='COLOR'">
+                                <div v-if="param&&param.param_type_name==='COLOR'">
                                     <color-control
-                                        :initColor="'#FF7700'"
+                                        :color="param.param_value"
+                                        :param_fullname="param.param_fullname"
+                                        @onChange="onColorChange"
                                     >
                                     </color-control>
                                 </div>
-                                <div v-if="param.param_type_name==='SIMPLE'">
+                                <div v-if="param&&param.param_type_name==='SIMPLE'">
                                     <simple-control
                                         :param_name="param.param_name"
                                         :param_value="param.param_value"
                                     >
                                     </simple-control>
                                 </div>
-                                <div v-if="param.param_type_name==='RANGE'">
+                                <div v-if="param&&param.param_type_name==='RANGE'">
                                     <range-control
                                         :rangeCaption="param.param_name"
-                                        :rangeMin="Number.parseInt(param.param_min ?? 0)"
-                                        :rangeMax="Number.parseInt(param.param_max ?? 100)"
-                                        :initValue="Number.parseInt(param.param_value ?? 50)"
+                                        :rangeMin="Number.parseInt(param.param_min)"
+                                        :rangeMax="Number.parseInt(param.param_max)"
+                                        :rangeValue="setValue(param.param_value)"
+                                        :param_fullname="param.param_fullname"
+                                        @onChange="onRangeChange"
                                     >
                                     </range-control>
                                 </div>
@@ -76,8 +80,10 @@
 
         </MasterSlaveLayout>
 
-        <MyMqtt
+        <MyMqtt ref="mqttRef"
+            :paramItems="params"
             @on-connect="mqttConnected"
+            @on-message="onMessage"
         />
 
 </template>
@@ -128,8 +134,45 @@ export default {
 
     methods: {
 
+        onRangeChange(value, param_fullname) {
+            console.log(value, param_fullname)
+            this.$refs.mqttRef.doPublish(param_fullname, value)
+        },
+
+        onColorChange(value, param_fullname) {
+            // console.log(value, param_fullname)
+            if (value === null) return
+            let a = ''
+            if (value[0] === '#') {
+                a = value.replace('#','')
+            }
+            // console.log(parseInt(a, 16))
+            const newValue = parseInt(a, 16);
+            // console.log(newValue)
+            this.$refs.mqttRef.doPublish(param_fullname, newValue.toString())
+        },
+
+        setValue(value) {
+            if (value === null) return 0
+            const a = Number.parseInt(value)
+            if (typeof(a) === NaN) return 0
+            return a
+        },
+
+        onMessage(topic, message) {
+            for (let item in this.params) {
+                if (this.params[item]['param_fullname'] === topic) {
+
+                    this.params[item].param_value = message
+                    // console.log(this.params[item].param_type_name, this.params[item].param_value)
+                    // console.log(this.dataItems)
+                }
+            }
+        },
+
         mqttConnected() {
             console.log('mqtt connected')
+
         },
 
         async getData() {
@@ -140,7 +183,7 @@ export default {
                 this.micro = this.dataItems.micro
                 this.params = this.dataItems.params
 
-                console.log(this.params, this.device, this.micro);
+                // console.log(this.params);
             })
 
             .catch (error => {

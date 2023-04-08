@@ -25433,7 +25433,7 @@ var routes = [{
   ID: "HOME",
   visible: true,
   children: [{
-    path: "device_types",
+    path: "/device_types",
     name: "Device Types",
     icon: "fas fa-layer-group",
     // component: DeviceTypes,
@@ -25442,7 +25442,7 @@ var routes = [{
     },
     ID: "DEVICE_TYPES"
   }, {
-    path: "devices",
+    path: "/devices",
     name: "Devices",
     icon: "fas fa-sun",
     // component: Devices,
@@ -25451,7 +25451,7 @@ var routes = [{
     },
     ID: "DEVICES"
   }, {
-    path: "device_micros",
+    path: "/device_micros",
     name: "Device Micros",
     icon: "fas fa-sun",
     // component: DeviceMicros,
@@ -25460,7 +25460,7 @@ var routes = [{
     },
     ID: "DEVICE_MICROS"
   }, {
-    path: "param_types",
+    path: "/param_types",
     name: "Param Types",
     icon: "fa-solid fa-cubes",
     // component: ParamTypes,
@@ -25516,7 +25516,8 @@ var routes = [{
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_device_micros_DeviceMicros_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/device_micros/DeviceMicros.vue */ "./resources/js/components/device_micros/DeviceMicros.vue"));
   },
-  ID: "DEVICE_MICROS"
+  ID: "DEVICE_MICROS",
+  visible: false
 }, {
   path: "/user_devices",
   name: "User Devices",

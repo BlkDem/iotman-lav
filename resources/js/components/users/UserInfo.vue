@@ -48,7 +48,7 @@ export default {
     },
 
     created() {
-        this.userId = this.$route.params.id;
+        this.userId = this.$route.params.user_id;
         console.log("id: ", this.userId);
         this.userInfoCaption = MessagesConstants.USERINFO
         this.getData(this.userId);

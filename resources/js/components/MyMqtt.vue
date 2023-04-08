@@ -163,6 +163,12 @@ export default {
 
     emits: ['onConnect', 'onMessage', 'onError', ],
 
+    props: {
+        paramItems: {
+            type: Array,
+        }
+    },
+
     data() {
         return {
 
@@ -180,7 +186,7 @@ export default {
             },
 
             subscription: {
-                topic: `/18:FE:34:FE:B6:90/#`,
+                topic: '',
                 qos: 0,
             },
 
@@ -236,6 +242,14 @@ export default {
 
     methods: {
 
+        processParams() {
+            for (let item in this.paramItems) {
+                if(this.paramItems[item]['param_in'] <= 0) {
+                    this.doSubscribe(this.paramItems[item]['param_fullname'])
+                }
+            }
+        },
+
         createConnection() {
 
             // Connect string, and specify the connection method used through protodiv
@@ -245,8 +259,6 @@ export default {
             // mqtts encrypted TCP connection
             // wxs WeChat mini app connection
             // alis Alipay mini app connection
-
-            // console.log(process.env)
 
             const {
                 host,
@@ -266,6 +278,9 @@ export default {
             this.client.on('connect', () => {
                 console.log('MQTT: Connection succeeded!')
                 this.$emit('onConnect', true)
+                // console.log(this.params)
+                this.processParams()
+
                 // this.doSubscribe('/18:FE:34:FE:B6:90/zone1')
             })
 
@@ -275,8 +290,8 @@ export default {
             })
 
             this.client.on('message', (topic, message) => {
-                console.log(`MQTT: Received message ${message} from topic ${topic}`)
-                this.$emit('onMessage', topic, message)
+                // console.log(message)
+                this.$emit('onMessage', topic, message.toString())
             })
         },
 
@@ -289,11 +304,11 @@ export default {
                 qos
             }, (error, res) => {
                 if (error) {
-                    console.log('Subscribe to topics error', error)
+                    console.log('MQTT: Subscribe to topics error', error)
                     return
                 }
                 this.subscribeSuccess = true
-                console.log('Subscribe to topics res', res)
+                console.log('MQTT: Subscribe to topics res', res)
             })
         },
         // unsubsribtions
@@ -303,17 +318,15 @@ export default {
             } = this.subscription
             this.client.unsubscribe(topic, error => {
                 if (error) {
-                    console.log('Unsubscribe error', error)
+                    console.log('MQTT: Unsubscribe error', error)
                 }
             })
         },
 
         // publish
-        doPublish() {
+        doPublish(topic, payload) {
             const {
-                topic,
                 qos,
-                payload,
                 retain
             } = this.publish
             this.client.publish(topic, payload, {
@@ -321,7 +334,7 @@ export default {
                 'retain': retain
             }, error => {
                 if (error) {
-                    console.log('Publish error', error)
+                    console.log('MQTT: Publish error', error)
                 }
             })
         },
@@ -334,9 +347,9 @@ export default {
                     this.client = {
                         connected: false,
                     }
-                    console.log('Successfully disconnected!')
+                    console.log('MQTT: Successfully disconnected!')
                 } catch (error) {
-                    console.log('Disconnect failed', error.toString())
+                    console.log('MQTT: Disconnect failed', error.toString())
                 }
             }
         },

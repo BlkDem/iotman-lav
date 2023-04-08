@@ -35,7 +35,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   created: function created() {
-    this.userId = this.$route.params.id;
+    this.userId = this.$route.params.user_id;
     console.log("id: ", this.userId);
     this.userInfoCaption = _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].USERINFO;
     this.getData(this.userId);

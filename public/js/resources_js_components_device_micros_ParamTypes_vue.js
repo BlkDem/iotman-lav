@@ -830,6 +830,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         for (var field in this.dataFields) {
           var _dataField$selectedVi;
           var dataField = this.dataFields[field];
+          var _link = dataField.Link; //will link to path
+          var _linkto = dataField.LinkTo; //will link to path
+
           var _editable = dataField.isEditable; //possible edit cell by text click
           var _sortable = dataField.isSortable; //field can sorted
           var _image = dataField.isImage; //image field - binding 'img'
@@ -872,6 +875,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             isDirectionVirtualImage: _directionvirtual,
             isFieldIgnore: _fieldignore,
             isEditable: _editable,
+            Link: _link,
+            LinkTo: _linkto,
             isText: _text,
             isDateTime: _datetime,
             isSortable: _sortable,
@@ -1972,6 +1977,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ConfirmDialogue = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ConfirmDialogue");
   var _component_table_nav = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("table-nav");
   var _component_TableHead = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("TableHead");
+  var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
   var _component_Paginator = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Paginator");
   var _component_common_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("common-card");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div style=\"margin-top: 0.5rem\">\n    </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Viewer, {
@@ -2114,9 +2120,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
               'text-info': item[column].isHighLight
             })
-          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+          }, [item[column].Link != null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+            key: 0,
+            to: item[column].Link + item.id.value
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+                "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)($options.getVirtualImage($data.selectedRow[key], item[column]))
+              }, null, 2 /* CLASS */)];
+            }),
+
+            _: 2 /* DYNAMIC */
+          }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["to"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", {
+            key: 1,
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)($options.getVirtualImage($data.selectedRow[key], item[column]))
-          }, null, 2 /* CLASS */)], 2 /* CLASS */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), item[column].isDirectionVirtualImage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+          }, null, 2 /* CLASS */))], 2 /* CLASS */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), item[column].isDirectionVirtualImage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
             key: 3,
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
               'text-info': item[column].isHighLight
