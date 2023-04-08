@@ -26,6 +26,15 @@ class PresetController extends BaseController
 
     }
 
+    public function indexGroup($group)
+    {
+        // $term = 'France';
+        $groupData = Preset::where('preset_key', 'LIKE', $group . '%')
+                      ->get();
+        return $this->sendResponse($groupData, "Presets");
+        // print_r($filterData);
+    }
+
     public function page($currentPage=0, $itemsPerPage=10){
 
         $page = (int)$currentPage;

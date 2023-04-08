@@ -25042,6 +25042,7 @@ var APIVersion = 1;
   //Presets CRUD
   api_preset_create: apiPreffix + 'preset/create/',
   api_presets_read: apiPreffix + 'presets/read/',
+  api_presets_group: apiPreffix + 'presets/group/',
   api_presets_read_page: apiPreffix + 'presets/read/page/',
   api_preset_update: apiPreffix + 'preset/update/',
   api_preset_delete: apiPreffix + 'preset/delete/',
