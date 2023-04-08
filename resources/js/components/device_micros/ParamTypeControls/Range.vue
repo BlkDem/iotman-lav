@@ -1,4 +1,4 @@
-<template v-if="rangeValue">
+<template>
     <div class="my-1 row px-2">
         <div class="col-sm-4 col-md-4 col-lg-4  flex-center">
             <label class="form-label mx-4 font-1_8rem">{{ rangeCaption }}
@@ -42,14 +42,7 @@ export default {
 
     data() {
         return {
-            // rangeValue: 0,
-            newID: undefined
         }
-    },
-
-    created() {
-        // this.rangeValue = this.initValue
-        // this.newID = MakeID.makeId(8, 'range_')
     },
 
     methods: {
@@ -57,7 +50,7 @@ export default {
             if (value === null) return
             const a = Number.parseInt(value)
             if (typeof(a) === NaN) return
-            console.log('r-num: ', a)
+            // console.log('r-num: ', a)
             return a
         },
 

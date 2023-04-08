@@ -44,6 +44,7 @@
                             <div class="w-100">
                                 <div v-if="param&&param.param_type_name==='COLOR'">
                                     <color-control
+                                        :param_name="param.param_name"
                                         :color="param.param_value"
                                         :param_fullname="param.param_fullname"
                                         @onChange="onColorChange"
@@ -146,9 +147,7 @@ export default {
             if (value[0] === '#') {
                 a = value.replace('#','')
             }
-            // console.log(parseInt(a, 16))
             const newValue = parseInt(a, 16);
-            // console.log(newValue)
             this.$refs.mqttRef.doPublish(param_fullname, newValue.toString())
         },
 
@@ -162,16 +161,13 @@ export default {
         onMessage(topic, message) {
             for (let item in this.params) {
                 if (this.params[item]['param_fullname'] === topic) {
-
                     this.params[item].param_value = message
-                    // console.log(this.params[item].param_type_name, this.params[item].param_value)
-                    // console.log(this.dataItems)
                 }
             }
         },
 
         mqttConnected() {
-            console.log('mqtt connected')
+            // console.log('mqtt connected')
 
         },
 

@@ -118,18 +118,13 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
       this.client.on('connect', function () {
         console.log('MQTT: Connection succeeded!');
         _this.$emit('onConnect', true);
-        // console.log(this.params)
         _this.processParams();
-
-        // this.doSubscribe('/18:FE:34:FE:B6:90/zone1')
       });
-
       this.client.on('error', function (error) {
         console.log('MQTT: Connection failed', error);
         _this.$emit('onError', error);
       });
       this.client.on('message', function (topic, message) {
-        // console.log(message)
         _this.$emit('onMessage', topic, message.toString());
       });
     },
@@ -146,7 +141,7 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
           return;
         }
         _this2.subscribeSuccess = true;
-        console.log('MQTT: Subscribe to topics res', res);
+        // console.log('MQTT: Subscribe to topics res', res)
       });
     },
     // unsubsribtions
@@ -202,43 +197,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _helpers_MakeID__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../helpers/MakeID */ "./resources/js/helpers/MakeID.js");
 var _emits$props$emits$da;
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_emits$props$emits$da = {
   emits: ['onChange'],
   props: {
-    initColor: {
-      type: String
-    },
     color: '#333333',
+    param_name: '',
     param_fullname: ''
   }
 }, _defineProperty(_emits$props$emits$da, "emits", ['onChange']), _defineProperty(_emits$props$emits$da, "data", function data() {
-  return {
-    // color: '#333333',
-    newID: undefined
-  };
+  return {};
 }), _defineProperty(_emits$props$emits$da, "created", function created() {
-  // this.color = this.initColor.toUpperCase()
-  this.newID = _helpers_MakeID__WEBPACK_IMPORTED_MODULE_0__["default"].makeId(8, 'color_');
+  // this.newID = MakeID.makeId(8, 'color_')
 }), _defineProperty(_emits$props$emits$da, "methods", {
   onChange: function onChange(e) {
     console.log('component onChange: ', e);
     this.$emit('onChange', e, this.param_fullname);
   },
+  getStyle: function getStyle() {
+    if (this.color == null) return;
+    return 'color: ' + this.color + ';';
+  },
   getHexColor: function getHexColor(value) {
     var a = Number.parseInt(value);
-    console.log(a.toString(16));
+    if (isNaN(a)) return;
+    // console.log(a.toString(16))
     return '#' + a.toString(16).toUpperCase();
-  } // selectColor() {
-  //     this.color = event.target.value.toUpperCase()
-  //     this.$emit('new-color', this.color)
-  // }
+  }
 }), _emits$props$emits$da);
 
 /***/ }),
@@ -268,21 +257,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     param_fullname: ''
   },
   data: function data() {
-    return {
-      // rangeValue: 0,
-      newID: undefined
-    };
-  },
-  created: function created() {
-    // this.rangeValue = this.initValue
-    // this.newID = MakeID.makeId(8, 'range_')
+    return {};
   },
   methods: {
     getValue: function getValue(value) {
       if (value === null) return;
       var a = Number.parseInt(value);
       if (_typeof(a) === NaN) return;
-      console.log('r-num: ', a);
+      // console.log('r-num: ', a)
       return a;
     },
     onChange: function onChange(e) {
@@ -304,37 +286,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _helpers_MakeID__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../helpers/MakeID */ "./resources/js/helpers/MakeID.js");
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    param_name: {
-      // type: String,
-    },
+    param_name: '',
     param_value: ''
-
-    // init_param_value: {
-    //     type: String,
-    // }
   },
   data: function data() {
-    return {
-      // param_value: undefined,
-      newID: undefined
-    };
-  },
-  created: function created() {
-
-    // this.param_value = this.init_param_value
-    // this.newID = MakeID.makeId(8, 'simple_')
-  },
-  mounted: function mounted() {
-    console.log('simple', this.param_value);
-  },
-  methods: {
-    setValue: function setValue(value) {
-      // this.param_value = value
-    }
+    return {};
   }
 });
 
@@ -528,9 +486,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       if (value[0] === '#') {
         a = value.replace('#', '');
       }
-      // console.log(parseInt(a, 16))
       var newValue = parseInt(a, 16);
-      // console.log(newValue)
       this.$refs.mqttRef.doPublish(param_fullname, newValue.toString());
     },
     setValue: function setValue(value) {
@@ -543,13 +499,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       for (var item in this.params) {
         if (this.params[item]['param_fullname'] === topic) {
           this.params[item].param_value = message;
-          // console.log(this.params[item].param_type_name, this.params[item].param_value)
-          // console.log(this.dataItems)
         }
       }
     },
     mqttConnected: function mqttConnected() {
-      console.log('mqtt connected');
+      // console.log('mqtt connected')
     },
     getData: function getData() {
       var _this = this;
@@ -633,7 +587,9 @@ var _hoisted_4 = {
 };
 var _hoisted_5 = ["value"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getHexColor($props.color)), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.param_name) + " ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)($options.getStyle)
+  }, "(" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getHexColor($props.color)) + ")", 5 /* TEXT, STYLE */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "color",
     "class": "form-control",
     value: $options.getHexColor($props.color),
@@ -931,10 +887,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               key: key,
               id: param.id
             }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [param && param.param_type_name === 'COLOR' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_color_control, {
+              param_name: param.param_name,
               color: param.param_value,
               param_fullname: param.param_fullname,
               onOnChange: $options.onColorChange
-            }, null, 8 /* PROPS */, ["color", "param_fullname", "onOnChange"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), param && param.param_type_name === 'SIMPLE' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_simple_control, {
+            }, null, 8 /* PROPS */, ["param_name", "color", "param_fullname", "onOnChange"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), param && param.param_type_name === 'SIMPLE' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_simple_control, {
               param_name: param.param_name,
               param_value: param.param_value
             }, null, 8 /* PROPS */, ["param_name", "param_value"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), param && param.param_type_name === 'RANGE' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_range_control, {
