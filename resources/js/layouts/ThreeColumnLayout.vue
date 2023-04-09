@@ -125,10 +125,16 @@ export default {
 
     methods: {
 
+
+        test(val)
+        {
+            return false
+        },
+
         clearButtonSelectedStyle(){
-            this.selected[this.layoutModes.first] = false
-            this.selected[this.layoutModes.last] = false
-            this.selected[this.layoutModes.middle] = false
+
+            this.selected = []
+
         },
 
         changeOrientation(){

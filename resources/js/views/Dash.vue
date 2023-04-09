@@ -59,6 +59,7 @@
 
                                     </info-card>
                                 </div>
+
                                 <div v-if="param&&param.param_type_name==='SIMPLE'">
 
                                     <info-card
@@ -66,14 +67,35 @@
                                         :info-card-title="param.param_desc"
                                     >
 
-                                    <simple-control
-                                        :param_value="param.param_value"
-                                    >
-                                    </simple-control>
+                                        <simple-control
+                                            :param_value="param.param_value"
+                                        >
+                                        </simple-control>
 
                                     </info-card>
 
                                 </div>
+
+                                <div v-if="param&&param.param_type_name==='BUTTON'">
+
+                                    <info-card
+                                        :info-card-caption="param.param_name"
+
+                                    >
+
+                                        <button-control
+                                            :param_value="param.param_value"
+                                            :param_fullname="param.param_fullname"
+                                            :param_desc="param.param_desc"
+                                            :class="'w-100'"
+                                            @onClick="onButtonClick"
+                                        >
+                                        </button-control>
+
+                                    </info-card>
+
+                                </div>
+
                                 <div v-if="param&&param.param_type_name==='RANGE'">
                                     <info-card
                                         :info-card-caption="param.param_name"
@@ -122,6 +144,7 @@ import Pathes from '../config/pathes';
 import ColorControl from '../components/device_micros/ParamTypeControls/Color'
 import SimpleControl from '../components/device_micros/ParamTypeControls/Simple'
 import RangeControl from '../components/device_micros/ParamTypeControls/Range'
+import ButtonControl from '../components/device_micros/ParamTypeControls/Button.vue';
 import MyMqtt from '../components/MyMqtt.vue';
 import InfoCard from '../components/common/InfoCard.vue';
 
@@ -131,6 +154,7 @@ export default {
                 ColorControl,
                 SimpleControl,
                 RangeControl,
+                ButtonControl,
                 InfoCard,
                 MyMqtt,
             },
@@ -165,6 +189,11 @@ export default {
     },
 
     methods: {
+
+        onButtonClick(value, param_fullname, cmd) {
+            this.$refs.mqttRef.doPublish(param_fullname, cmd)
+            // console.log(value, param_fullname, cmd)
+        },
 
         onRangeChange(value, param_fullname) {
             console.log(value, param_fullname)

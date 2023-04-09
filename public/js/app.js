@@ -24225,10 +24225,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    test: function test(val) {
+      return false;
+    },
     clearButtonSelectedStyle: function clearButtonSelectedStyle() {
-      this.selected[this.layoutModes.first] = false;
-      this.selected[this.layoutModes.last] = false;
-      this.selected[this.layoutModes.middle] = false;
+      this.selected = [];
     },
     changeOrientation: function changeOrientation() {
       this.layoutVertical = !this.layoutVertical;
