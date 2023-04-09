@@ -243,11 +243,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _helpers_MakeID__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../helpers/MakeID */ "./resources/js/helpers/MakeID.js");
 var _emits$props$emits$da;
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_emits$props$emits$da = {
   emits: ['onChange'],
   props: {
@@ -269,7 +271,11 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
     }
   }
 }, _defineProperty(_emits$props$emits$da, "emits", ['onChange']), _defineProperty(_emits$props$emits$da, "data", function data() {
-  return {};
+  return {
+    newID: ''
+  };
+}), _defineProperty(_emits$props$emits$da, "created", function created() {
+  this.newID = _helpers_MakeID__WEBPACK_IMPORTED_MODULE_0__["default"].makeId(8, 'mqtt_color_');
 }), _defineProperty(_emits$props$emits$da, "methods", {
   onChange: function onChange(e) {
     console.log('component onChange: ', e);
@@ -302,7 +308,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _common_InfoCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../common/InfoCard.vue */ "./resources/js/components/common/InfoCard.vue");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -310,11 +315,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   },
   emits: ['onChange'],
   props: {
-    // rangeMin: 0,
-    // rangeMax: 0,
-
-    // rangeValue: 0,
-
     rangeMin: {
       type: Number,
       defaut: 0
@@ -335,8 +335,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       type: String,
       defaut: ''
     }
-
-    // param_fullname: ''
   },
   data: function data() {
     return {};
@@ -344,10 +342,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   methods: {
     getValue: function getValue(value) {
       if (value === null) return;
-      var a = Number.parseInt(value);
-      if (_typeof(a) === NaN) return;
-      // console.log('r-num: ', a)
-      return a;
+      var a_value = Number.parseInt(value);
+      if (isNaN(a_value)) return;
+      return a_value;
     },
     onChange: function onChange(e) {
       this.$emit('onChange', e, this.param_fullname);
@@ -657,30 +654,23 @@ var _withScopeId = function _withScopeId(n) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-dd145a82"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
 };
 var _hoisted_1 = {
-  "class": "row"
+  "class": ""
 };
-var _hoisted_2 = {
-  "class": "col-sm-4 col-md-4 col-lg-4 flex-center"
-};
-var _hoisted_3 = {
-  "class": "mx-4 font-1_5rem"
-};
-var _hoisted_4 = {
-  "class": "col-sm-8 col-md-8 col-lg-8"
-};
-var _hoisted_5 = ["value"];
+var _hoisted_2 = ["for"];
+var _hoisted_3 = ["id", "value"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-    "class": "text-info",
-    style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)($options.getStyle)
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getHexColor($props.color)), 5 /* TEXT, STYLE */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": $data.newID,
+    "class": "font-1_5rem w-100 text-info text-center color-label"
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getHexColor($props.color)), 9 /* TEXT, PROPS */, _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "color",
+    id: $data.newID,
     "class": "form-control",
     value: $options.getHexColor($props.color),
     onInput: _cache[0] || (_cache[0] = function ($event) {
       return $options.onChange($event.target.value);
     })
-  }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_5)])]);
+  }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_3)]);
 }
 
 /***/ }),
@@ -705,23 +695,20 @@ var _hoisted_1 = {
   "class": "px-2 w-100"
 };
 var _hoisted_2 = {
-  "class": ""
-};
-var _hoisted_3 = {
   "class": "flex-space font-1_5rem"
 };
-var _hoisted_4 = {
+var _hoisted_3 = {
   "class": "text-info w-25"
 };
-var _hoisted_5 = {
+var _hoisted_4 = {
   "class": "text-info"
 };
-var _hoisted_6 = {
+var _hoisted_5 = {
   "class": "text-info w-25 align-right"
 };
-var _hoisted_7 = ["min", "max", "value"];
+var _hoisted_6 = ["min", "max", "value"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.rangeMin), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getValue($props.rangeValue)), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.rangeMax), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.rangeMin), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getValue($props.rangeValue)), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.rangeMax), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "range",
     "class": "form-range",
     step: "1",
@@ -731,7 +718,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onChange: _cache[0] || (_cache[0] = function ($event) {
       return $options.onChange($event.target.value);
     })
-  }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_7)])]);
+  }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_6)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" </div> ")], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */);
 }
 
 /***/ }),
@@ -753,28 +740,13 @@ var _withScopeId = function _withScopeId(n) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-049cacf4"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
 };
 var _hoisted_1 = {
-  "class": "row py-1 border rounded m-1"
+  "class": "flex-center"
 };
 var _hoisted_2 = {
-  "class": "col-sm-4 col-md-4 col-lg-4"
-};
-var _hoisted_3 = {
-  "class": "mx-2 font-1_5rem",
-  "for": "newID"
-};
-var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-    "class": "fa-solid fa-cubes text-info"
-  }, null, -1 /* HOISTED */);
-});
-var _hoisted_5 = {
-  "class": "col-sm-8 col-md-8 col-lg-8 flex-left"
-};
-var _hoisted_6 = {
   "class": "font-1_5rem text-info"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.param_name), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.param_value), 1 /* TEXT */)])]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.param_value), 1 /* TEXT */)]);
 }
 
 /***/ }),
@@ -977,10 +949,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 }, null, 8 /* PROPS */, ["param_name", "param_desc", "color", "param_fullname", "onOnChange"])];
               }),
               _: 2 /* DYNAMIC */
-            }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["info-card-caption", "info-card-title"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), param && param.param_type_name === 'SIMPLE' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_simple_control, {
-              param_name: param.param_name,
-              param_value: param.param_value
-            }, null, 8 /* PROPS */, ["param_name", "param_value"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), param && param.param_type_name === 'RANGE' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_info_card, {
+            }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["info-card-caption", "info-card-title"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), param && param.param_type_name === 'SIMPLE' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_info_card, {
+              "info-card-caption": param.param_name,
+              "info-card-title": param.param_desc
+            }, {
+              "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_simple_control, {
+                  param_value: param.param_value
+                }, null, 8 /* PROPS */, ["param_value"])];
+              }),
+              _: 2 /* DYNAMIC */
+            }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["info-card-caption", "info-card-title"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), param && param.param_type_name === 'RANGE' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_info_card, {
               "info-card-caption": param.param_name,
               "info-card-text": ''
             }, {
@@ -9850,7 +9829,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ninput[type=color][data-v-dd145a82] {\n    height: 36px;\n    padding: 0.3rem 0.3rem;\n}\n.font-1_5rem[data-v-dd145a82] {\n    font-size: 1.3rem;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.color-label[data-v-dd145a82]{\n    position: relative;\n    display: block;\n    text-shadow: 1px 1px 1px #333;\n    margin-bottom: -33px;\n}\ninput[type=color][data-v-dd145a82] {\n    height: 36px;\n    padding: 0.3rem 0.3rem;\n}\n.font-1_5rem[data-v-dd145a82] {\n    font-size: 1.3rem;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -60,11 +60,19 @@
                                     </info-card>
                                 </div>
                                 <div v-if="param&&param.param_type_name==='SIMPLE'">
+
+                                    <info-card
+                                        :info-card-caption="param.param_name"
+                                        :info-card-title="param.param_desc"
+                                    >
+
                                     <simple-control
-                                        :param_name="param.param_name"
                                         :param_value="param.param_value"
                                     >
                                     </simple-control>
+
+                                    </info-card>
+
                                 </div>
                                 <div v-if="param&&param.param_type_name==='RANGE'">
                                     <info-card

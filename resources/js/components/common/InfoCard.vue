@@ -1,11 +1,11 @@
 <template>
-    <div class="card text-white"
+    <div class="card"
             :class="{
                 'mb-4': marginBottom,
             }"
         >
         <div class="card-header">
-            {{ infoCardCaption }}
+            <h5>{{ infoCardCaption }} </h5>
         </div>
         <div class="card-body">
             <h6 class="card-title"><span v-html="infoCardTitle"></span></h6>

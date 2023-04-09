@@ -1,18 +1,16 @@
 <template v-if="color">
-        <div class="row">
-            <div class="col-sm-4 col-md-4 col-lg-4 flex-center">
-                <label class="mx-4 font-1_5rem"><span class="text-info"
-                        :style="getStyle">{{ getHexColor(color) }}</span>
+    <div  class="">
+                <label :for="newID" class="font-1_5rem w-100 text-info text-center color-label">
+                        {{ getHexColor(color) }}
                 </label>
-            </div>
-            <div class="col-sm-8 col-md-8 col-lg-8">
-                <input type="color" class="form-control" :value="getHexColor(color)"
+                <input type="color" :id="newID" class="form-control" :value="getHexColor(color)"
                     @input="onChange($event.target.value)" />
-            </div>
-        </div>
+    </div>
 </template>
 
 <script>
+
+import MakeID from '../../../helpers/MakeID'
 
 export default {
 
@@ -44,7 +42,12 @@ export default {
 
     data() {
         return {
+            newID: ''
         }
+    },
+
+    created() {
+        this.newID = MakeID.makeId(8, 'mqtt_color_')
     },
 
     methods: {
@@ -72,6 +75,13 @@ export default {
 </script>
 
 <style scoped>
+
+.color-label{
+    position: relative;
+    display: block;
+    text-shadow: 1px 1px 1px #333;
+    margin-bottom: -33px;
+}
 
 input[type=color] {
     height: 36px;
