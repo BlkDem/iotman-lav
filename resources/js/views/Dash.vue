@@ -45,6 +45,7 @@
                                 <div v-if="param&&param.param_type_name==='COLOR'">
                                     <color-control
                                         :param_name="param.param_name"
+                                        :param_desc="param.param_desc ?? ''"
                                         :color="param.param_value"
                                         :param_fullname="param.param_fullname"
                                         @onChange="onColorChange"
@@ -100,9 +101,17 @@ import ColorControl from '../components/device_micros/ParamTypeControls/Color'
 import SimpleControl from '../components/device_micros/ParamTypeControls/Simple'
 import RangeControl from '../components/device_micros/ParamTypeControls/Range'
 import MyMqtt from '../components/MyMqtt.vue';
+import InfoCard from '../components/common/InfoCard.vue';
 
 export default {
-    components: {MasterSlaveLayout, CommonCard, ColorControl, SimpleControl, RangeControl, MyMqtt},
+    components: {MasterSlaveLayout,
+                CommonCard,
+                ColorControl,
+                SimpleControl,
+                RangeControl,
+                InfoCard,
+                MyMqtt,
+            },
 
     data() {
         return {
@@ -154,7 +163,7 @@ export default {
         setValue(value) {
             if (value === null) return 0
             const a = Number.parseInt(value)
-            if (typeof(a) === NaN) return 0
+            if (isNaN(a)) return 0
             return a
         },
 
