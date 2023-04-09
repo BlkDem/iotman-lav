@@ -1,155 +1,4 @@
 <template>
-  <!-- <div class="home-container">
-    <div shadow="always" style="margin-bottom:30px;">
-      <div class="emq-title">
-        Configuration
-      </div>
-      <form ref="configForm" hide-required-asterisk size="" labposition="top" :model="connection">
-        <div :gutter="20">
-          <div :span="8">
-            <div prop="host" label="Host">
-              <input v-model="connection.host">
-            </div>
-          </div>
-          <div :span="8">
-            <div prop="port" label="Port">
-              <input v-model.number="connection.port" type="number" placeholder="8083/8084">
-            </div>
-          </div>
-          <div :span="8">
-            <div prop="endpoint" label="Mountpoint">
-              <input v-model="connection.endpoint" placeholder="/mqtt">
-            </div>
-          </div>
-          <div :span="8">
-            <div prop="clientId" label="Client ID">
-              <input v-model="connection.clientId">
-            </div>
-          </div>
-          <div :span="8">
-            <div prop="username" label="Username">
-              <input v-model="connection.username">
-            </div>
-          </div>
-          <div :span="8">
-            <div prop="password" label="Password">
-              <input v-model="connection.password">
-            </div>
-          </div>
-
-          <div :span="24">
-            <button
-              type="success"
-              size=""
-              class="conn-btn"
-              style="margin-right: 20px;"
-              :disabled="client.connected"
-              @click.prevent="createConnection"
-            >
-              {{ client.connected ? 'Connected' : 'Connect' }}
-            </button>
-
-            <button v-if="client.connected" type="danger" size="" class="conn-btn" @click="destroyConnection">
-              Disconnect
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div shadow="always" style="margin-bottom:30px;">
-      <div class="emq-title">
-        Subscribe
-      </div>
-      <form ref="subscription" hide-required-asterisk size="" labposition="top" :model="subscription">
-        <div :gutter="20">
-          <div :span="8">
-            <div prop="topic" label="Topic">
-              <input v-model="subscription.topic">
-            </div>
-          </div>
-          <div :span="8">
-            <div prop="qos" label="QoS">
-              <select v-model="subscription.qos">
-                <option
-                  v-for="(item, index) in qosList"
-                  :key="index"
-                  :label="item.label"
-                  :value="item.value"
-                ></option>
-              </select>
-            </div>
-          </div>
-          <div :span="8">
-            <button
-              :disabled="!client.connected"
-              type="success"
-              size=""
-              class="subscribe-btn"
-              @click.prevent="doSubscribe"
-            >
-              {{ subscribeSuccess ? 'Subscribed' : 'Subscribe' }}
-            </button>
-            <button
-              :disabled="!client.connected"
-              type="success"
-              size=""
-              class="subscribe-btn"
-              style="margin-left:20px"
-              @click.prevent="doUnSubscribe"
-              v-if="subscribeSuccess"
-            >
-              Unsubscribe
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div shadow="always" style="margin-bottom:30px;">
-      <div class="emq-title">
-        Publish
-      </div>
-      <form ref="publish" hide-required-asterisk size="" labposition="top" :model="publish">
-        <div :gutter="20">
-          <div :span="8">
-            <div prop="topic" label="Topic">
-              <input v-model="publish.topic">
-            </div>
-          </div>
-          <div :span="8">
-            <div prop="payload" label="Payload">
-              <input v-model="publish.payload" size="">
-            </div>
-          </div>
-          <div :span="8">
-            <div prop="qos" label="QoS">
-              <select v-model="publish.qos">
-                <option
-                  v-for="(item, index) in qosList"
-                  :key="index"
-                  :label="item.label"
-                  :value="item.value"
-                ></option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </form>
-      <div :span="24">
-        <button :disabled="!client.connected" type="success" size="" class="publish-btn" @click="doPublish">
-          Publish
-        </button>
-      </div>
-    </div>
-    <div shadow="always" style="margin-bottom:30px;">
-      <div class="emq-title">
-        Receive
-      </div>
-      <div :span="24">
-        <input type="textarea" :divs="3" style="margin-bottom: 15px" v-model="receiveNews">
-      </div>
-    </div>
-  </div> -->
-
 
 </template>
 
@@ -157,13 +6,13 @@
 import mqtt from '../vendor/mqtt.min.js';
 import MakeID from '../helpers/MakeID';
 import APIConstants from '../api/rest_api';
-import { config } from 'process';
+import ParsingErrors from '../helpers/ParsingErrors';
 
 export default {
 
     name: 'MQTT',
 
-    emits: ['onConnect', 'onMessage', 'onError', ],
+    emits: ['onConnect', 'onMessage', 'onError' ],
 
     props: {
         paramItems: {
@@ -183,10 +32,10 @@ export default {
                 port: 8000,
                 endpoint: '/',
                 clean: true,
-                // protocol: '',
+
                 connectTimeout: 4000,
                 reconnectPeriod: 4000,
-                // hwid: '18:FE:34:FE:B6:90',
+                protocol: '',
                 clientId: '',
                 username: 'umolab',
                 password: '',
@@ -242,8 +91,7 @@ export default {
 
     beforeUnmount() {
 
-        console.log(this.client.connected)
-        this.doUnSubscribe()
+        // this.doUnSubscribe()
         this.destroyConnection()
         console.log(this.client.connected)
     },
@@ -251,19 +99,27 @@ export default {
     methods: {
 
         async getMQTTParams() {
-            await axios.get(APIConstants.api_presets_group + 'MQTT')
+            try {
+
+                await axios.get(APIConstants.api_presets_group + 'MQTT')
                     .then(response => {
                         const configMQTT = response.data.data
-                        console.log(configMQTT)
 
                         for (let item in configMQTT) {
                             if (configMQTT[item].preset_key === 'MQTT_SERVER') this.connection.host = configMQTT[item].preset_value
-                            if (configMQTT[item].preset_key === 'MQTT_PROTOCOL') this.mqtt_protocol = configMQTT[item].preset_value
+                            if (configMQTT[item].preset_key === 'MQTT_PROTOCOL') this.connection.protocol = configMQTT[item].preset_value
                             if (configMQTT[item].preset_key === 'MQTT_PORT') this.connection.port = configMQTT[item].preset_value
                         }
-                        console.log(this.connection, this.mqtt_protocol)
                         this.createConnection()
                     })
+            } catch (error) {
+                console.log(error);
+                    this.$root.$refs.toaster.showMessage(
+                            MessagesConstants.DELETING_ERROR,
+                            ParsingErrors.getError(error),
+                            ParsingErrors.ERROR_LEVEL_ERROR
+                    )
+            }
         },
 
         processParams() {
@@ -291,7 +147,7 @@ export default {
                 ...options
             } = this.connection
 
-            const connectUrl = this.mqtt_protocol + '://' + this.connection.host + ':' + this.connection.port
+            const connectUrl = this.connection.protocol + '://' + this.connection.host + ':' + this.connection.port
                 // 'wss://ice9.umolab.ru:9883'
 
             try {

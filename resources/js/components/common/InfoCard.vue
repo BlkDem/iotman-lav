@@ -8,13 +8,14 @@
             {{ infoCardCaption }}
         </div>
         <div class="card-body">
-            <h5 class="card-title"><span v-html="infoCardTitle"></span></h5>
+            <h6 class="card-title"><span v-html="infoCardTitle"></span></h6>
+
+            <slot></slot>
+
             <p class="card-text fade-in my-2" v-if="moreInfoVisible">
                 <span v-html="infoCardText"></span>
             </p>
-            <!-- <p class="card-text fade-in" v-if="moreInfoVisible">
-                {{ infoCardMoreText }}
-            </p> -->
+
             <button class="btn btn-primary"
                 @click="showMoreClick"
                 v-show="infoCardText.length>0" >

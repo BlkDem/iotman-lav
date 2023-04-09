@@ -1,10 +1,6 @@
 <template>
-    <div class="my-1 row px-2">
-        <div class="col-sm-4 col-md-4 col-lg-4  flex-center">
-            <label class="form-label mx-4 font-1_8rem">{{ rangeCaption }}
-                <span class="text-info">({{ getValue(rangeValue) }})</span></label>
-        </div>
-        <div class="col-sm-8 col-md-8 col-lg-8">
+    <div class="px-2 w-100">
+        <div class="">
             <div class="flex-space font-1_5rem">
                 <div class="text-info w-25">{{ rangeMin }}</div>
                 <div class="text-info">{{ getValue(rangeValue) }}</div>
@@ -17,27 +13,50 @@
         </div>
 
     </div>
-
 </template>
 
 <script>
 
+import InfoCard from '../../common/InfoCard.vue'
+
 export default {
 
-    emits: ['rangeChange'],
+    components: {InfoCard},
+
+    emits: ['onChange'],
 
     props: {
-        rangeMin: 0,
-        rangeMax: 0,
+        // rangeMin: 0,
+        // rangeMax: 0,
 
-        rangeValue: 0,
+        // rangeValue: 0,
+
+        rangeMin: {
+            type: Number,
+            defaut: 0
+        },
+
+        rangeMax: {
+            type: Number,
+            defaut: 0
+        },
+
+        rangeValue: {
+            type: Number,
+            defaut: 0
+        },
 
         rangeCaption: {
             type: String,
             defaut: 'Caption'
         },
 
-        param_fullname: ''
+        param_fullname: {
+            type: String,
+            defaut: ''
+        },
+
+        // param_fullname: ''
     },
 
     data() {
