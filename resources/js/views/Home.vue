@@ -1,19 +1,26 @@
 <template>
     <h1 class="align-left px-4 pb-1" style="margin-top: 5.5rem">
-        {{ pageCaption }}
+        <!-- {{ pageCaption }} -->
     </h1>
 
-    <div class="row">
-        <!-- page menu -->
-        <div class="col-sm-3 col-lg-3 col-md-3">
-            <CommonCard ref="menuCard"
+
+    <ThreeColumnLayout
+        :layoutCaption="pageCaption"
+    >
+
+            <template v-slot:first>
+
+                <CommonCard ref="menuCard"
                 :cardCaption="menuBlockCaption"
                 :margins="margins">
                 <AppMenu ref="homeAppMenu" :margins="margins" :isDropdowns="false"></AppMenu>
-            </CommonCard>
-        </div>
-        <!-- page content -->
-        <div class="col-sm-6 col-lg-6 col-md-6">
+                </CommonCard>
+
+
+            </template>
+
+            <template v-slot:middle>
+
             <CommonCard ref="menuCard" :cardCaption="informationBlockCaption">
                 <InfoCard v-for="(itemCard, key) in devBlogs"
                     :class="{
@@ -33,9 +40,12 @@
 
                 </InfoCard>
             </CommonCard>
-        </div>
+
+            </template>
+
+            <template v-slot:last>
+
         <!-- messages -->
-        <div class="col-sm-3 col-lg-3 col-md-3">
             <CommonCard ref="logCard" :cardCaption="logBlockCaption">
                         <div class="card text-white bg-success mb-3">
                             <div class="card-header">Header</div>
@@ -46,24 +56,26 @@
                             </div>
                         </div>
             </CommonCard>
-        </div>
 
-    </div>
 
-    <div class="w-100 mx-4 my-2 align-left" style="font-size: 1.4rem; font-weight: 400;">
-        <!-- <AppMenu ref="homeAppMenu"></AppMenu> -->
-    </div>
+            </template>
+
+
+    </ThreeColumnLayout>
 
 </template>
 
 <script>
 import APIConstants from "../api/rest_api";
 import MessagesConstants from "../components/strings_constants/strings.js";
+import ThreeColumnLayout from "../layouts/ThreeColumnLayout.vue";
 // import Field from "../helpers/test";
 // import { marked } from 'marked';
 
 export default {
     name: 'Home',
+
+    components: {ThreeColumnLayout},
 
     data() {
 

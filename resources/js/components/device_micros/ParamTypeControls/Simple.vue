@@ -13,10 +13,6 @@ export default {
         param_value: '',
     },
 
-    data() {
-        return {
-        }
-    },
 }
 
 </script>
@@ -24,7 +20,7 @@ export default {
 <style scoped>
 
 input[type=color] {
-    height: 40px;
+    height: 32px;
     padding: 0.5rem 0.5rem;
 }
 

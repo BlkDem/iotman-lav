@@ -369,9 +369,6 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     param_name: '',
     param_value: ''
-  },
-  data: function data() {
-    return {};
   }
 });
 
@@ -9877,7 +9874,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ninput[type=color][data-v-049cacf4] {\n    height: 40px;\n    padding: 0.5rem 0.5rem;\n}\n.font-1_5rem[data-v-049cacf4] {\n    font-size: 1.5rem;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ninput[type=color][data-v-049cacf4] {\n    height: 32px;\n    padding: 0.5rem 0.5rem;\n}\n.font-1_5rem[data-v-049cacf4] {\n    font-size: 1.5rem;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

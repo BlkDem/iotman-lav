@@ -1272,11 +1272,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// import Viewer from '../Viewer.vue';
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  // emits: ['setAdditionalCaption'],
-
   components: {
     DataTable: _db_DataTable_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     MasterSlaveLayout: _layouts_MasterSlaveLayout_vue__WEBPACK_IMPORTED_MODULE_3__["default"]

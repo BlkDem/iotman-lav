@@ -48,12 +48,9 @@ import MessagesConstants from '../../strings_constants/strings'
 import APIConstants from "../../../api/rest_api";
 import DataTable from '../../db/DataTable.vue';
 import MasterSlaveLayout from '../../../layouts/MasterSlaveLayout.vue';
-// import Viewer from '../Viewer.vue';
 import pathes from '../../../config/pathes';
 
 export default {
-
-    // emits: ['setAdditionalCaption'],
 
     components: {
         DataTable, MasterSlaveLayout
