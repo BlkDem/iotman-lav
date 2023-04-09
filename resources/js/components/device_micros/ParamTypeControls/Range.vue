@@ -1,8 +1,4 @@
 <template>
-       <InfoCard
-            :info-card-caption="rangeCaption + ' (' + getValue(rangeValue) + ')'"
-            :info-card-text="''"
-        >
     <div class="px-2 w-100">
         <div class="">
             <div class="flex-space font-1_5rem">
@@ -17,7 +13,6 @@
         </div>
 
     </div>
-       </InfoCard>
 </template>
 
 <script>
@@ -28,20 +23,40 @@ export default {
 
     components: {InfoCard},
 
-    emits: ['rangeChange'],
+    emits: ['onChange'],
 
     props: {
-        rangeMin: 0,
-        rangeMax: 0,
+        // rangeMin: 0,
+        // rangeMax: 0,
 
-        rangeValue: 0,
+        // rangeValue: 0,
+
+        rangeMin: {
+            type: Number,
+            defaut: 0
+        },
+
+        rangeMax: {
+            type: Number,
+            defaut: 0
+        },
+
+        rangeValue: {
+            type: Number,
+            defaut: 0
+        },
 
         rangeCaption: {
             type: String,
             defaut: 'Caption'
         },
 
-        param_fullname: ''
+        param_fullname: {
+            type: String,
+            defaut: ''
+        },
+
+        // param_fullname: ''
     },
 
     data() {

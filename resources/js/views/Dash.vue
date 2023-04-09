@@ -43,14 +43,21 @@
                         <div class="row">
                             <div class="w-100">
                                 <div v-if="param&&param.param_type_name==='COLOR'">
-                                    <color-control
-                                        :param_name="param.param_name"
-                                        :param_desc="param.param_desc ?? ''"
-                                        :color="param.param_value"
-                                        :param_fullname="param.param_fullname"
-                                        @onChange="onColorChange"
+                                    <info-card
+                                        :info-card-caption="param.param_name"
+                                        :info-card-title="param.param_desc"
                                     >
-                                    </color-control>
+
+                                        <color-control
+                                            :param_name="param.param_name"
+                                            :param_desc="param.param_desc ?? ''"
+                                            :color="param.param_value"
+                                            :param_fullname="param.param_fullname"
+                                            @onChange="onColorChange"
+                                        >
+                                        </color-control>
+
+                                    </info-card>
                                 </div>
                                 <div v-if="param&&param.param_type_name==='SIMPLE'">
                                     <simple-control
@@ -60,15 +67,22 @@
                                     </simple-control>
                                 </div>
                                 <div v-if="param&&param.param_type_name==='RANGE'">
-                                    <range-control
-                                        :rangeCaption="param.param_name"
-                                        :rangeMin="Number.parseInt(param.param_min)"
-                                        :rangeMax="Number.parseInt(param.param_max)"
-                                        :rangeValue="setValue(param.param_value)"
-                                        :param_fullname="param.param_fullname"
-                                        @onChange="onRangeChange"
+                                    <info-card
+                                        :info-card-caption="param.param_name"
+                                        :info-card-text="''"
                                     >
-                                    </range-control>
+
+                                        <range-control
+                                            :rangeCaption="param.param_name"
+                                            :rangeMin="Number.parseInt(param.param_min)"
+                                            :rangeMax="Number.parseInt(param.param_max)"
+                                            :rangeValue="setValue(param.param_value)"
+                                            :param_fullname="param.param_fullname"
+                                            @onChange="onRangeChange"
+                                        >
+                                        </range-control>
+
+                                    </info-card>
                                 </div>
                             </div>
                         </div>

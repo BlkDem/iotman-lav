@@ -243,29 +243,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _common_InfoCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../common/InfoCard.vue */ "./resources/js/components/common/InfoCard.vue");
-var _components$emits$pro;
+var _emits$props$emits$da;
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_components$emits$pro = {
-  components: {
-    InfoCard: _common_InfoCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_emits$props$emits$da = {
   emits: ['onChange'],
   props: {
-    color: '#333333',
-    param_name: '',
-    param_desc: '',
-    param_fullname: ''
+    color: {
+      type: String,
+      "default": '#333333'
+    },
+    param_name: {
+      type: String,
+      "default": ''
+    },
+    param_desc: {
+      type: String,
+      "default": ''
+    },
+    param_fullname: {
+      type: String,
+      "default": ''
+    }
   }
-}, _defineProperty(_components$emits$pro, "emits", ['onChange']), _defineProperty(_components$emits$pro, "data", function data() {
+}, _defineProperty(_emits$props$emits$da, "emits", ['onChange']), _defineProperty(_emits$props$emits$da, "data", function data() {
   return {};
-}), _defineProperty(_components$emits$pro, "created", function created() {
-  // this.newID = MakeID.makeId(8, 'color_')
-}), _defineProperty(_components$emits$pro, "methods", {
+}), _defineProperty(_emits$props$emits$da, "methods", {
   onChange: function onChange(e) {
     console.log('component onChange: ', e);
     this.$emit('onChange', e, this.param_fullname);
@@ -277,10 +282,11 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
   getHexColor: function getHexColor(value) {
     var a = Number.parseInt(value);
     if (isNaN(a)) return;
-    // console.log(a.toString(16))
+
+    // return HEX color like #AABBCC
     return '#' + a.toString(16).toUpperCase();
   }
-}), _components$emits$pro);
+}), _emits$props$emits$da);
 
 /***/ }),
 
@@ -302,16 +308,35 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   components: {
     InfoCard: _common_InfoCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  emits: ['rangeChange'],
+  emits: ['onChange'],
   props: {
-    rangeMin: 0,
-    rangeMax: 0,
-    rangeValue: 0,
+    // rangeMin: 0,
+    // rangeMax: 0,
+
+    // rangeValue: 0,
+
+    rangeMin: {
+      type: Number,
+      defaut: 0
+    },
+    rangeMax: {
+      type: Number,
+      defaut: 0
+    },
+    rangeValue: {
+      type: Number,
+      defaut: 0
+    },
     rangeCaption: {
       type: String,
       defaut: 'Caption'
     },
-    param_fullname: ''
+    param_fullname: {
+      type: String,
+      defaut: ''
+    }
+
+    // param_fullname: ''
   },
   data: function data() {
     return {};
@@ -645,26 +670,17 @@ var _hoisted_4 = {
 };
 var _hoisted_5 = ["value"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_InfoCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InfoCard");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_InfoCard, {
-    "info-card-caption": $props.param_name,
-    "info-card-title": $props.param_desc
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-        "class": "text-info",
-        style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)($options.getStyle)
-      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getHexColor($props.color)), 5 /* TEXT, STYLE */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        type: "color",
-        "class": "form-control",
-        value: $options.getHexColor($props.color),
-        onInput: _cache[0] || (_cache[0] = function ($event) {
-          return $options.onChange($event.target.value);
-        })
-      }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_5)])])];
-    }),
-    _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["info-card-caption", "info-card-title"]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": "text-info",
+    style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)($options.getStyle)
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getHexColor($props.color)), 5 /* TEXT, STYLE */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "color",
+    "class": "form-control",
+    value: $options.getHexColor($props.color),
+    onInput: _cache[0] || (_cache[0] = function ($event) {
+      return $options.onChange($event.target.value);
+    })
+  }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_5)])]);
 }
 
 /***/ }),
@@ -705,26 +721,17 @@ var _hoisted_6 = {
 };
 var _hoisted_7 = ["min", "max", "value"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_InfoCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InfoCard");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_InfoCard, {
-    "info-card-caption": $props.rangeCaption + ' (' + $options.getValue($props.rangeValue) + ')',
-    "info-card-text": ''
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.rangeMin), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getValue($props.rangeValue)), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.rangeMax), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        type: "range",
-        "class": "form-range",
-        step: "1",
-        min: $props.rangeMin,
-        max: $props.rangeMax,
-        value: $options.getValue($props.rangeValue),
-        onChange: _cache[0] || (_cache[0] = function ($event) {
-          return $options.onChange($event.target.value);
-        })
-      }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_7)])])];
-    }),
-    _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["info-card-caption"]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.rangeMin), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getValue($props.rangeValue)), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.rangeMax), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "range",
+    "class": "form-range",
+    step: "1",
+    min: $props.rangeMin,
+    max: $props.rangeMax,
+    value: $options.getValue($props.rangeValue),
+    onChange: _cache[0] || (_cache[0] = function ($event) {
+      return $options.onChange($event.target.value);
+    })
+  }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_7)])]);
 }
 
 /***/ }),
@@ -923,6 +930,7 @@ var _hoisted_18 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_CommonCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("CommonCard");
   var _component_color_control = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("color-control");
+  var _component_info_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("info-card");
   var _component_simple_control = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("simple-control");
   var _component_range_control = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("range-control");
   var _component_MasterSlaveLayout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("MasterSlaveLayout");
@@ -950,28 +958,44 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.params, function (param, key) {
-            var _param$param_desc;
             return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
               "class": "m-2",
               key: key,
               id: param.id
-            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [param && param.param_type_name === 'COLOR' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_color_control, {
-              param_name: param.param_name,
-              param_desc: (_param$param_desc = param.param_desc) !== null && _param$param_desc !== void 0 ? _param$param_desc : '',
-              color: param.param_value,
-              param_fullname: param.param_fullname,
-              onOnChange: $options.onColorChange
-            }, null, 8 /* PROPS */, ["param_name", "param_desc", "color", "param_fullname", "onOnChange"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), param && param.param_type_name === 'SIMPLE' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_simple_control, {
+            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [param && param.param_type_name === 'COLOR' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_info_card, {
+              "info-card-caption": param.param_name,
+              "info-card-title": param.param_desc
+            }, {
+              "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                var _param$param_desc;
+                return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_color_control, {
+                  param_name: param.param_name,
+                  param_desc: (_param$param_desc = param.param_desc) !== null && _param$param_desc !== void 0 ? _param$param_desc : '',
+                  color: param.param_value,
+                  param_fullname: param.param_fullname,
+                  onOnChange: $options.onColorChange
+                }, null, 8 /* PROPS */, ["param_name", "param_desc", "color", "param_fullname", "onOnChange"])];
+              }),
+              _: 2 /* DYNAMIC */
+            }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["info-card-caption", "info-card-title"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), param && param.param_type_name === 'SIMPLE' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_simple_control, {
               param_name: param.param_name,
               param_value: param.param_value
-            }, null, 8 /* PROPS */, ["param_name", "param_value"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), param && param.param_type_name === 'RANGE' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_range_control, {
-              rangeCaption: param.param_name,
-              rangeMin: Number.parseInt(param.param_min),
-              rangeMax: Number.parseInt(param.param_max),
-              rangeValue: $options.setValue(param.param_value),
-              param_fullname: param.param_fullname,
-              onOnChange: $options.onRangeChange
-            }, null, 8 /* PROPS */, ["rangeCaption", "rangeMin", "rangeMax", "rangeValue", "param_fullname", "onOnChange"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])], 8 /* PROPS */, _hoisted_13);
+            }, null, 8 /* PROPS */, ["param_name", "param_value"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), param && param.param_type_name === 'RANGE' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_info_card, {
+              "info-card-caption": param.param_name,
+              "info-card-text": ''
+            }, {
+              "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_range_control, {
+                  rangeCaption: param.param_name,
+                  rangeMin: Number.parseInt(param.param_min),
+                  rangeMax: Number.parseInt(param.param_max),
+                  rangeValue: $options.setValue(param.param_value),
+                  param_fullname: param.param_fullname,
+                  onOnChange: $options.onRangeChange
+                }, null, 8 /* PROPS */, ["rangeCaption", "rangeMin", "rangeMax", "rangeValue", "param_fullname", "onOnChange"])];
+              }),
+              _: 2 /* DYNAMIC */
+            }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["info-card-caption"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])], 8 /* PROPS */, _hoisted_13);
           }), 128 /* KEYED_FRAGMENT */))];
         }),
 
