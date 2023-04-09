@@ -24197,6 +24197,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      layoutModes: {
+        first: 0,
+        middle: 1,
+        last: 2
+      },
       layoutVertical: {
         type: Boolean,
         "default": false
@@ -24213,35 +24218,17 @@ __webpack_require__.r(__webpack_exports__);
         type: String,
         "default": 'w-50'
       },
-      // masterWidthStore: {
-      //     type: String,
-      //     default: 'w-33'
-      // },
-
-      // slaveWidthStore: {
-      //     type: String,
-      //     default: 'w-67'
-      // },
-
-      selected2: {
-        type: Boolean,
-        "default": false
-      },
-      selected3: {
-        type: Boolean,
-        "default": true
-      },
-      selected4: {
-        type: Boolean,
-        "default": false
+      selected: {
+        type: Array,
+        "default": []
       }
     };
   },
   methods: {
     clearButtonSelectedStyle: function clearButtonSelectedStyle() {
-      this.selected2 = false;
-      this.selected3 = false;
-      this.selected4 = false;
+      this.selected[this.layoutModes.first] = false;
+      this.selected[this.layoutModes.last] = false;
+      this.selected[this.layoutModes.middle] = false;
     },
     changeOrientation: function changeOrientation() {
       this.layoutVertical = !this.layoutVertical;
@@ -24265,14 +24252,14 @@ __webpack_require__.r(__webpack_exports__);
       this.middleWidth = middle;
       this.clearButtonSelectedStyle();
       switch (btn) {
-        case 2:
-          this.selected2 = true;
+        case this.layoutModes.first:
+          this.selected[this.layoutModes.first] = true;
           break;
-        case 3:
-          this.selected3 = true;
+        case this.layoutModes.last:
+          this.selected[this.layoutModes.last] = true;
           break;
-        case 4:
-          this.selected4 = true;
+        case this.layoutModes.middle:
+          this.selected[this.layoutModes.middle] = true;
           break;
         default:
           break;
@@ -24283,9 +24270,11 @@ __webpack_require__.r(__webpack_exports__);
     this.firstWidth = this.firstWidthProp;
     this.lastWidth = this.lastWidthProp;
     this.middleWidth = this.middleWidthProp;
-    this.layoutVertical = false;
-    this.selected3 = true;
-    this.changeWidth(this.firstWidth, this.lastWidth, this.middleWidth, 3);
+    this.layoutVertical = false; //verticat layout (default)
+
+    this.selected[this.layoutModes.first] = true; //first layout mode active
+
+    this.changeWidth(this.firstWidth, this.lastWidth, this.middleWidth, this.layoutModes.first); //apply mode
   }
 });
 
@@ -24961,29 +24950,29 @@ var _hoisted_9 = [_hoisted_8];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.layoutCaption), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm", {
-      'btn-secondary': $data.selected4,
+      'btn-secondary': $data.selected[$data.layoutModes.first],
       'hide': $data.layoutVertical
     }]),
     onClick: _cache[0] || (_cache[0] = function ($event) {
-      return $options.changeWidth('w-25', 'w-25', 'w-50', 4);
+      return $options.changeWidth('w-25', 'w-25', 'w-50', $data.layoutModes.first);
     })
-  }, " 1/1/2 ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " ¼ ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm mx-1", {
-      'btn-secondary': $data.selected3,
+      'btn-secondary': $data.selected[$data.layoutModes.middle],
       'hide': $data.layoutVertical
     }]),
     onClick: _cache[1] || (_cache[1] = function ($event) {
-      return $options.changeWidth('w-33', 'w-33', 'w-33', 3);
+      return $options.changeWidth('w-33', 'w-33', 'w-33', $data.layoutModes.middle);
     })
-  }, " 1/1/1 ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " ½ ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm", {
-      'btn-secondary': $data.selected2,
+      'btn-secondary': $data.selected[$data.layoutModes.last],
       'hide': $data.layoutVertical
     }]),
     onClick: _cache[2] || (_cache[2] = function ($event) {
-      return $options.changeWidth('w-25', 'w-50', 'w-25', 2);
+      return $options.changeWidth('w-25', 'w-50', 'w-25', $data.layoutModes.last);
     })
-  }, " 1/2/1 ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " ¾ ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm mx-1", {
       'btn-secondary': !$data.layoutVertical
     }]),

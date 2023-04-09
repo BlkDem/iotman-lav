@@ -85,7 +85,6 @@ export default {
                         type: String,
                         isImage: true,
                         isEditable: true,
-                        // isSortable: true,
                         isHighLight: false,
                         columnsCount: 1
                     },

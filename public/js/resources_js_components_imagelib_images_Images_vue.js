@@ -1300,7 +1300,6 @@ __webpack_require__.r(__webpack_exports__);
           type: String,
           isImage: true,
           isEditable: true,
-          // isSortable: true,
           isHighLight: false,
           columnsCount: 1
         }, {

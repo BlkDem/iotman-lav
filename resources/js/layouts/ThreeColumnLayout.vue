@@ -12,17 +12,17 @@
             </div>
 
             <div class="px-2">
-                <button class="btn btn-primary btn-sm" :class="{'btn-secondary': selected4, 'hide': layoutVertical}"
-                    @click="changeWidth('w-25', 'w-25', 'w-50', 4)">
-                    1/1/2
+                <button class="btn btn-primary btn-sm" :class="{'btn-secondary': selected[layoutModes.first], 'hide': layoutVertical}"
+                    @click="changeWidth('w-25', 'w-25', 'w-50', layoutModes.first)">
+                    &frac14;
                 </button>
-                <button class="btn btn-primary btn-sm mx-1" :class="{'btn-secondary': selected3, 'hide': layoutVertical}"
-                    @click="changeWidth('w-33', 'w-33', 'w-33', 3)">
-                    1/1/1
+                <button class="btn btn-primary btn-sm mx-1" :class="{'btn-secondary': selected[layoutModes.middle], 'hide': layoutVertical}"
+                    @click="changeWidth('w-33', 'w-33', 'w-33', layoutModes.middle)">
+                    &frac12;
                 </button>
-                <button class="btn btn-primary btn-sm" :class="{'btn-secondary': selected2, 'hide': layoutVertical}"
-                    @click="changeWidth('w-25', 'w-50', 'w-25', 2)">
-                    1/2/1
+                <button class="btn btn-primary btn-sm" :class="{'btn-secondary': selected[layoutModes.last], 'hide': layoutVertical}"
+                    @click="changeWidth('w-25', 'w-50', 'w-25', layoutModes.last)">
+                    &frac34;
                 </button>
                 <button class="btn btn-primary btn-sm mx-1" :class="{'btn-secondary': !layoutVertical}"
                     @click="changeOrientation()">
@@ -65,7 +65,7 @@ export default {
     props: {
 
         layoutCaption: {
-                type: String,
+            type: String,
 
         },
 
@@ -89,6 +89,12 @@ export default {
     data() {
         return {
 
+            layoutModes: {
+                first: 0,
+                middle: 1,
+                last: 2,
+            },
+
             layoutVertical: {
                 type: Boolean,
                 default: false
@@ -109,30 +115,10 @@ export default {
                 default: 'w-50'
             },
 
-            // masterWidthStore: {
-            //     type: String,
-            //     default: 'w-33'
-            // },
-
-            // slaveWidthStore: {
-            //     type: String,
-            //     default: 'w-67'
-            // },
-
-            selected2: {
-                type: Boolean,
-                default: false
+            selected: {
+                type: Array,
+                default: []
             },
-
-            selected3: {
-                type: Boolean,
-                default: true
-            },
-
-            selected4: {
-                type: Boolean,
-                default: false
-            }
 
         }
     },
@@ -140,9 +126,9 @@ export default {
     methods: {
 
         clearButtonSelectedStyle(){
-            this.selected2 = false
-            this.selected3 = false
-            this.selected4 = false
+            this.selected[this.layoutModes.first] = false
+            this.selected[this.layoutModes.last] = false
+            this.selected[this.layoutModes.middle] = false
         },
 
         changeOrientation(){
@@ -173,10 +159,11 @@ export default {
             this.middleWidth = middle
 
             this.clearButtonSelectedStyle()
+
             switch (btn) {
-                case 2: this.selected2 = true; break;
-                case 3: this.selected3 = true; break;
-                case 4: this.selected4 = true; break;
+                case this.layoutModes.first: this.selected[this.layoutModes.first] = true; break;
+                case this.layoutModes.last: this.selected[this.layoutModes.last] = true; break;
+                case this.layoutModes.middle: this.selected[this.layoutModes.middle] = true; break;
                 default: break;
             }
 
@@ -188,10 +175,12 @@ export default {
         this.firstWidth = this.firstWidthProp
         this.lastWidth = this.lastWidthProp
         this.middleWidth = this.middleWidthProp
-        this.layoutVertical = false
-        this.selected3 = true
 
-        this.changeWidth(this.firstWidth, this.lastWidth, this.middleWidth, 3)
+        this.layoutVertical = false //verticat layout (default)
+
+        this.selected[this.layoutModes.first] = true //first layout mode active
+
+        this.changeWidth(this.firstWidth, this.lastWidth, this.middleWidth, this.layoutModes.first) //apply mode
     }
 }
 
