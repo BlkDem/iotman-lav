@@ -23753,6 +23753,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_MakeID__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/MakeID */ "./resources/js/helpers/MakeID.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  emits: ['onAdvancedControlClick'],
   props: {
     cardCaption: {
       type: String,
@@ -23766,6 +23767,10 @@ __webpack_require__.r(__webpack_exports__);
       type: Number,
       "default": 0
     },
+    cardWidth: {
+      type: String,
+      "default": ''
+    },
     isCollapsed: {
       type: Boolean,
       "default": false
@@ -23777,6 +23782,9 @@ __webpack_require__.r(__webpack_exports__);
     isAdditionalCaption: {
       type: Boolean,
       "default": false
+    },
+    advancedControls: {
+      type: Object
     }
   },
   data: function data() {
@@ -23788,10 +23796,27 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.cardId = _helpers_MakeID__WEBPACK_IMPORTED_MODULE_0__["default"].makeId(8, 'card_');
-    // this.isExpanded = !this.isCollapsed
+    this.enumAdvancedControls();
   },
-
   methods: {
+    advancedControlsClick: function advancedControlsClick(control) {
+      this.$emit('onAdvancedControlClick', control);
+    },
+    enumAdvancedControls: function enumAdvancedControls() {
+      for (var key in this.advancedControls) {
+        // skip loop if the property is from prototype
+        if (!this.advancedControls.hasOwnProperty(key)) continue;
+        var obj = this.advancedControls[key];
+        console.log(obj);
+        for (var prop in obj) {
+          // skip loop if the property is from prototype
+          if (!obj.hasOwnProperty(prop)) continue;
+          // your code
+          console.log(prop, obj[prop]);
+          // alert(prop + " = " + obj[prop]);
+        }
+      }
+    },
     switchFullscreenMode: function switchFullscreenMode() {
       this.isFullScreen = !this.isFullScreen;
       window.scrollTo(0, 0);
@@ -23826,6 +23851,11 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       "default": ''
     },
+    // cardWidth: {
+    //     type: String,
+    //     default: ''
+    // },
+
     // infoCardMoreButtonCaption: {
     //     type: String,
     //     default: 'More'
@@ -24490,8 +24520,9 @@ var _hoisted_2 = ["href"];
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fa fa-solid fa-caret-down mx-2"
 }, null, -1 /* HOISTED */);
-var _hoisted_4 = ["id"];
-var _hoisted_5 = {
+var _hoisted_4 = ["id", "onClick"];
+var _hoisted_5 = ["id"];
+var _hoisted_6 = {
   "class": "card-body"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -24522,7 +24553,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     style: {
       "overflow-wrap": "break-word"
     }
-  }, " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaptionAdd), 3 /* TEXT, CLASS */)], 8 /* PROPS */, _hoisted_2)], 32 /* HYDRATE_EVENTS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaptionAdd), 3 /* TEXT, CLASS */)], 8 /* PROPS */, _hoisted_2)], 32 /* HYDRATE_EVENTS */), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.advancedControls, function (button, key) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm mr-1", button.controlActive]),
+      id: key,
+      onClick: function onClick($event) {
+        return $options.advancedControlsClick(button);
+      }
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(button.controlCaption), 11 /* TEXT, CLASS, PROPS */, _hoisted_4);
+  }), 256 /* UNKEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary btn-sm",
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.switchFullscreenMode && $options.switchFullscreenMode.apply($options, arguments);
@@ -24536,14 +24575,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: $data.cardId,
     "class": "collapse show",
     "aria-labelledby": "heading-example"
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"card-caption\">\n\n\n                </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"card-caption\">\n\n\n                </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
       'mx-2': $props.margins,
       'collapse': $props.isCollapsed
     })
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {}, function () {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {
+    cardWidth: $props.cardWidth
+  }, function () {
     return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Loading...")];
-  })], 2 /* CLASS */)])], 8 /* PROPS */, _hoisted_4)], 2 /* CLASS */);
+  })], 2 /* CLASS */)])], 8 /* PROPS */, _hoisted_5)], 2 /* CLASS */);
 }
 
 /***/ }),
@@ -33175,7 +33216,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.card-caption {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.hide {\n    display: none;\n}\n.card-header .fa {\n    transition: .3s transform ease-in-out;\n}\n.card-header .collapsed .fa {\n    transform: rotate(-90deg);\n}\n.elipsis {\n    text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.expanded-fullscreen {\n    position: absolute;\n    top: 65px;\n    left: 10px;\n    right: 10px;\n    bottom: auto;\n    /* opacity: 1; */\n    background-color: var(--bs-primary);\n    z-index: 1000;\n}\na {\n    text-decoration: none;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.card-caption {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.hide {\n    display: none;\n}\n.card-header .fa {\n    transition: .3s transform ease-in-out;\n}\n.card-header .collapsed .fa {\n    transform: rotate(-90deg);\n}\n.elipsis {\n    text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.expanded-fullscreen {\n    position: absolute;\n    top: 65px;\n    left: 10px;\n    right: 10px;\n    bottom: auto;\n    /* opacity: 1; */\n    background-color: var(--bs-primary);\n    z-index: 1000;\n}\na {\n    text-decoration: none;\n}\n.mr-1 {\n    margin-right: 4px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -29,6 +29,7 @@
 
 export default {
     props: {
+
         infoCardCaption: {
             type: String,
             default: 'Caption'
@@ -43,6 +44,11 @@ export default {
             type: String,
             default: ''
         },
+
+        // cardWidth: {
+        //     type: String,
+        //     default: ''
+        // },
 
         // infoCardMoreButtonCaption: {
         //     type: String,

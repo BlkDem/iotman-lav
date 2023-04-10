@@ -3,6 +3,8 @@
 
         <MasterSlaveLayout
             :layoutCaption="layoutCaption"
+            :master-width-prop="'w-25'"
+            :slave-width-prop="'w-75'"
         >
 
             <template v-slot:master>
@@ -36,12 +38,20 @@
             <template v-slot:slave>
 
                 <CommonCard
-                    :cardCaption="parametersCaption"
+                    :card-caption="parametersCaption"
+
+                    :advanced-controls="advancedControls"
+
+                    @on-advanced-control-click="onAdvancedControlClick"
                 >
+                <div class="flex-controls">
                     <div class="m-2" v-for="(param, key) in params" :key="key" :id="param.id">
 
-                        <div class="row">
-                            <div class="w-100">
+                        <!-- <div class=""> -->
+                            <div
+                                :class="cardWidth"
+
+                            >
                                 <div v-if="param&&param.param_type_name==='COLOR'">
                                     <info-card
                                         :info-card-caption="param.param_name"
@@ -115,9 +125,10 @@
                                     </info-card>
                                 </div>
                             </div>
-                        </div>
+                        <!-- </div> -->
 
                     </div>
+                </div>
 
                 </CommonCard>
 
@@ -177,18 +188,54 @@ export default {
 
             deviceMicroInfoCaption: 'device micro caption',
 
+            advancedControls: {
+                w100p: {
+                    controlType: 'button',
+                    controlActive: '',
+                    controlCaption: 'Auto',
+                    controlMessage: 'w-100p'
+                },
+                small: {
+                    controlType: 'button',
+                    controlActive: 'btn-secondary',
+                    controlCaption: 'Sm',
+                    controlMessage: 'w-285px'
+                },
+                medium: {
+                    controlType: 'button',
+                    controlActive: '',
+                    controlCaption: 'Md',
+                    controlMessage: 'w-350px'
+                },
+                large: {
+                    controlType: 'button',
+                    controlActive: '',
+                    controlCaption: 'Lg',
+                    controlMessage: 'w-640px'
+                }
+            },
+
+            cardWidth: 'w-285px'
+
         }
     },
 
     created() {
         this.deviceMicroId = this.$route.params.device_micro_id;
         this.device.device_type_image = Pathes.storageImagePlugName
-        console.log("device_micro_id: ", this.deviceMicroId);
+        // console.log("device_micro_id: ", this.deviceMicroId);
         this.layoutCaption = MessagesConstants.DASH
         this.getData(this.deviceMicroId);
     },
 
     methods: {
+
+        onAdvancedControlClick(control) {
+            console.log(control)
+            this.cardWidth = control.controlMessage
+            for (let item in this.advancedControls) this.advancedControls[item].controlActive = ''
+            control.controlActive = 'btn-secondary'
+        },
 
         onButtonClick(value, param_fullname, cmd) {
             this.$refs.mqttRef.doPublish(param_fullname, cmd)
@@ -260,5 +307,27 @@ export default {
     },
 }
 
-
 </script>
+
+<style scoped>
+.flex-controls {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.w-100p {
+    width: 100%;
+}
+.w-285px{
+    width: 280px;
+}
+.w-350px{
+    width: 350px;
+}
+.w-640px{
+    width: 640px;
+}
+</style>

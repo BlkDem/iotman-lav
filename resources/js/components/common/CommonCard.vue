@@ -20,7 +20,14 @@
                 </span>
             </a>
             </h5>
-            <button class="btn btn-primary btn-sm" @click="switchFullscreenMode">
+
+            <button class="btn btn-primary btn-sm mr-1"
+                v-for="(button, key) in advancedControls" :id="key"
+                :class="button.controlActive"
+                @click="advancedControlsClick(button)"
+            > {{ button.controlCaption }}</button>
+
+            <button class="btn btn-primary btn-sm " @click="switchFullscreenMode">
                 <!-- <i class="fa fa-solid fa-caret-down mx-2"></i> -->
                 <i
                     :class="{'fa-solid fa-maximize':!isFullScreen, 'fa-solid fa-compress':isFullScreen}"
@@ -38,7 +45,7 @@
 
 
                 <div :class="{'mx-2': margins, 'collapse': isCollapsed}">
-                    <slot>Loading...</slot>
+                    <slot :card-width="cardWidth">Loading...</slot>
                 </div>
             </div>
         </div>
@@ -51,6 +58,8 @@
 import MakeID from '../../helpers/MakeID';
 
 export default {
+
+    emits: ['onAdvancedControlClick'],
 
     props: {
         cardCaption: {
@@ -68,6 +77,11 @@ export default {
             default: 0
         },
 
+        cardWidth: {
+            type: String,
+            default: ''
+        },
+
         isCollapsed: {
             type: Boolean,
             default: false
@@ -81,6 +95,10 @@ export default {
         isAdditionalCaption: {
             type: Boolean,
             default: false
+        },
+
+        advancedControls: {
+            type: Object
         }
     },
 
@@ -95,10 +113,33 @@ export default {
 
     created() {
         this.cardId = MakeID.makeId(8, 'card_')
-        // this.isExpanded = !this.isCollapsed
+        this.enumAdvancedControls()
     },
 
     methods: {
+
+        advancedControlsClick(control) {
+            this.$emit('onAdvancedControlClick', control)
+        },
+
+        enumAdvancedControls() {
+            for (var key in this.advancedControls) {
+               // skip loop if the property is from prototype
+            if (!this.advancedControls.hasOwnProperty(key)) continue;
+
+            var obj = this.advancedControls[key];
+
+            console.log(obj)
+
+            for (var prop in obj) {
+                // skip loop if the property is from prototype
+                if (!obj.hasOwnProperty(prop)) continue;
+                // your code
+                console.log(prop, obj[prop])
+                // alert(prop + " = " + obj[prop]);
+            }
+}
+        },
 
         switchFullscreenMode(){
             this.isFullScreen=!this.isFullScreen;
@@ -148,6 +189,10 @@ export default {
 
 a {
     text-decoration: none;
+}
+
+.mr-1 {
+    margin-right: 4px;
 }
 
 </style>
