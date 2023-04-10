@@ -1,17 +1,19 @@
 <template>
-        <input type="button" class="btn btn-primary px-4 my-2"
+        <input type="button" class="btn btn-primary btn-sm px-4 my-2"
             :class="sizeClass"
-            :value="buttonCaption"
-            :id="newID"
-            @click="onClick"
+            :value="param_desc"
+            @click="onClick($event.target.value)"
         >
 </template>
 
 <script>
 
-import MakeID from '../../../helpers/MakeID';
+// import MakeID from '../../../helpers/MakeID';
 
 export default {
+
+    emits: ['onClick'],
+
     props: {
         buttonCaption: {
             type: String,
@@ -21,7 +23,14 @@ export default {
         sizeClass: {
             type: String,
             default: 'w-25'
-        }
+        },
+
+        param_name: '',
+        param_value: '',
+        param_desc: '',
+        param_fullname: '',
+
+
     },
 
     data(){
@@ -31,12 +40,13 @@ export default {
     },
 
     created() {
-        this.newID = MakeID.makeId(8, 'button_')
+        // this.newID = MakeID.makeId(8, 'button_')
     },
 
     methods: {
-        onClick() {
-            console.log(event.target.value)
+        onClick(e) {
+            console.log(this.param_fullname, this.param_value)
+            this.$emit('onClick', e, this.param_fullname, this.param_value)
         }
     }
 }

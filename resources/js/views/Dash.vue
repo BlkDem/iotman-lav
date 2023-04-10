@@ -3,11 +3,13 @@
 
         <MasterSlaveLayout
             :layoutCaption="layoutCaption"
+            :master-width-prop="'w-25'"
+            :slave-width-prop="'w-75'"
         >
 
             <template v-slot:master>
 
-                <CommonCard :cardCaption="device.device_name">
+                <common-card :cardCaption="device.device_name">
 
                     <div class="mx-2">
                         <h5 class="flex-center my-2">{{ device.device_type_name }}</h5>
@@ -29,19 +31,28 @@
                             <div>{{ micro.created_at }}</div>
                         </div>
                     </div>
-                </CommonCard>
+
+                </common-card>
 
             </template>
 
             <template v-slot:slave>
 
-                <CommonCard
-                    :cardCaption="parametersCaption"
+                <common-card
+                    :card-caption="parametersCaption"
+
+                    :advanced-controls="advancedControls"
+
+                    @on-advanced-control-click="onAdvancedControlClick"
                 >
+                <div class="flex-controls">
                     <div class="m-2" v-for="(param, key) in params" :key="key" :id="param.id">
 
-                        <div class="row">
-                            <div class="w-100">
+                        <!-- <div class=""> -->
+                            <div
+                                :class="cardWidth"
+
+                            >
                                 <div v-if="param&&param.param_type_name==='COLOR'">
                                     <info-card
                                         :info-card-caption="param.param_name"
@@ -59,13 +70,43 @@
 
                                     </info-card>
                                 </div>
+
                                 <div v-if="param&&param.param_type_name==='SIMPLE'">
-                                    <simple-control
-                                        :param_name="param.param_name"
-                                        :param_value="param.param_value"
+
+                                    <info-card
+                                        :info-card-caption="param.param_name"
+                                        :info-card-title="param.param_desc"
                                     >
-                                    </simple-control>
+
+                                        <simple-control
+                                            :param_value="param.param_value"
+                                        >
+                                        </simple-control>
+
+                                    </info-card>
+
                                 </div>
+
+                                <div v-if="param&&param.param_type_name==='BUTTON'">
+
+                                    <info-card
+                                        :info-card-caption="param.param_name"
+
+                                    >
+
+                                        <button-control
+                                            :param_value="param.param_value"
+                                            :param_fullname="param.param_fullname"
+                                            :param_desc="param.param_desc"
+                                            :class="'w-100'"
+                                            @onClick="onButtonClick"
+                                        >
+                                        </button-control>
+
+                                    </info-card>
+
+                                </div>
+
                                 <div v-if="param&&param.param_type_name==='RANGE'">
                                     <info-card
                                         :info-card-caption="param.param_name"
@@ -85,11 +126,12 @@
                                     </info-card>
                                 </div>
                             </div>
-                        </div>
+                        <!-- </div> -->
 
                     </div>
+                </div>
 
-                </CommonCard>
+                </common-card>
 
             </template>
 
@@ -114,6 +156,7 @@ import Pathes from '../config/pathes';
 import ColorControl from '../components/device_micros/ParamTypeControls/Color'
 import SimpleControl from '../components/device_micros/ParamTypeControls/Simple'
 import RangeControl from '../components/device_micros/ParamTypeControls/Range'
+import ButtonControl from '../components/device_micros/ParamTypeControls/Button.vue';
 import MyMqtt from '../components/MyMqtt.vue';
 import InfoCard from '../components/common/InfoCard.vue';
 
@@ -123,27 +166,64 @@ export default {
                 ColorControl,
                 SimpleControl,
                 RangeControl,
+                ButtonControl,
                 InfoCard,
                 MyMqtt,
             },
 
     data() {
         return {
+
+            //Device, controllers and params
             dataItems: "",
 
-            device: Object,
-            micro: Object,
-            params: [],
+            device: Object, //dataItems.device
+            micro: Object, //dataItems.micro
+            params: [], //dataItems.params
 
             layoutCaption: 'Device Micro Parameters',
             deviceCaption: 'Device',
             parametersCaption: 'Micro Parameters',
 
+            //Current controller ID
             deviceMicroId: {
                 type: Number
             },
 
             deviceMicroInfoCaption: 'device micro caption',
+
+            //buttons for arrange the param cards size
+            advancedControls: {
+                w100p: {
+                    controlType: 'button',
+                    controlActive: '',
+                    controlCaption: 'Auto',
+                    controlMessage: 'w-100p'
+                },
+                small: {
+                    controlType: 'button',
+                    controlActive: 'btn-secondary',
+                    controlCaption: '',
+                    controlAwesomeIcon: 'fa-solid fa-ellipsis',
+                    controlMessage: 'w-285px'
+                },
+                medium: {
+                    controlType: 'button',
+                    controlActive: '',
+                    controlAwesomeIcon: 'fa-solid fa-table-cells-large',
+                    controlCaption: '',
+                    controlMessage: 'w-350px'
+                },
+                large: {
+                    controlType: 'button',
+                    controlActive: '',
+                    controlAwesomeIcon: 'fa-solid fa-list-ul',
+                    controlCaption: '',
+                    controlMessage: 'w-640px'
+                }
+            },
+
+            cardWidth: 'w-285px'
 
         }
     },
@@ -151,12 +231,24 @@ export default {
     created() {
         this.deviceMicroId = this.$route.params.device_micro_id;
         this.device.device_type_image = Pathes.storageImagePlugName
-        console.log("device_micro_id: ", this.deviceMicroId);
+        // console.log("device_micro_id: ", this.deviceMicroId);
         this.layoutCaption = MessagesConstants.DASH
         this.getData(this.deviceMicroId);
     },
 
     methods: {
+
+        onAdvancedControlClick(control) {
+            // console.log(control)
+            this.cardWidth = control.controlMessage ?? ''
+            for (let item in this.advancedControls) this.advancedControls[item].controlActive = ''
+            control.controlActive = 'btn-secondary'
+        },
+
+        onButtonClick(value, param_fullname, cmd) {
+            this.$refs.mqttRef.doPublish(param_fullname, cmd)
+            // console.log(value, param_fullname, cmd)
+        },
 
         onRangeChange(value, param_fullname) {
             console.log(value, param_fullname)
@@ -223,5 +315,27 @@ export default {
     },
 }
 
-
 </script>
+
+<style scoped>
+.flex-controls {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.w-100p {
+    width: 100%;
+}
+.w-285px{
+    width: 280px;
+}
+.w-350px{
+    width: 350px;
+}
+.w-640px{
+    width: 640px;
+}
+</style>

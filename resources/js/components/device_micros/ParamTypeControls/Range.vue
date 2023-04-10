@@ -1,6 +1,6 @@
 <template>
     <div class="px-2 w-100">
-        <div class="">
+        <!-- <div class=""> -->
             <div class="flex-space font-1_5rem">
                 <div class="text-info w-25">{{ rangeMin }}</div>
                 <div class="text-info">{{ getValue(rangeValue) }}</div>
@@ -12,7 +12,7 @@
                 >
         </div>
 
-    </div>
+    <!-- </div> -->
 </template>
 
 <script>
@@ -26,10 +26,6 @@ export default {
     emits: ['onChange'],
 
     props: {
-        // rangeMin: 0,
-        // rangeMax: 0,
-
-        // rangeValue: 0,
 
         rangeMin: {
             type: Number,
@@ -56,7 +52,6 @@ export default {
             defaut: ''
         },
 
-        // param_fullname: ''
     },
 
     data() {
@@ -67,10 +62,9 @@ export default {
     methods: {
         getValue(value){
             if (value === null) return
-            const a = Number.parseInt(value)
-            if (typeof(a) === NaN) return
-            // console.log('r-num: ', a)
-            return a
+            const a_value = Number.parseInt(value)
+            if (isNaN(a_value)) return
+            return a_value
         },
 
         onChange(e) {
