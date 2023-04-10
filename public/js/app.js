@@ -23803,19 +23803,22 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('onAdvancedControlClick', control);
     },
     enumAdvancedControls: function enumAdvancedControls() {
-      for (var key in this.advancedControls) {
-        // skip loop if the property is from prototype
-        if (!this.advancedControls.hasOwnProperty(key)) continue;
-        var obj = this.advancedControls[key];
-        console.log(obj);
-        for (var prop in obj) {
-          // skip loop if the property is from prototype
-          if (!obj.hasOwnProperty(prop)) continue;
-          // your code
-          console.log(prop, obj[prop]);
-          // alert(prop + " = " + obj[prop]);
-        }
-      }
+      // for (var key in this.advancedControls) {
+      //    // skip loop if the property is from prototype
+      // if (!this.advancedControls.hasOwnProperty(key)) continue;
+
+      // var obj = this.advancedControls[key];
+
+      // console.log(obj)
+
+      //     for (var prop in obj) {
+      //         // skip loop if the property is from prototype
+      //         if (!obj.hasOwnProperty(prop)) continue;
+      //         // your code
+      //         console.log(prop, obj[prop])
+      //         // alert(prop + " = " + obj[prop]);
+      //     }
+      // }
     },
     switchFullscreenMode: function switchFullscreenMode() {
       this.isFullScreen = !this.isFullScreen;
@@ -23851,11 +23854,6 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       "default": ''
     },
-    // cardWidth: {
-    //     type: String,
-    //     default: ''
-    // },
-
     // infoCardMoreButtonCaption: {
     //     type: String,
     //     default: 'More'
@@ -23884,7 +23882,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     showMoreClick: function showMoreClick() {
-      // console.log(this.moreInfoVisible)
       this.moreInfoVisible = !this.moreInfoVisible;
       this.infoCardMoreButtonCaption = this.moreInfoVisible ? 'Less' : 'More';
     }
@@ -24553,16 +24550,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     style: {
       "overflow-wrap": "break-word"
     }
-  }, " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaptionAdd), 3 /* TEXT, CLASS */)], 8 /* PROPS */, _hoisted_2)], 32 /* HYDRATE_EVENTS */), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.advancedControls, function (button, key) {
+  }, " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.cardCaptionAdd), 3 /* TEXT, CLASS */)], 8 /* PROPS */, _hoisted_2)], 32 /* HYDRATE_EVENTS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" advanced controls buttons "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.advancedControls, function (button, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm mr-1", button.controlActive]),
       id: key,
       onClick: function onClick($event) {
         return $options.advancedControlsClick(button);
       }
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(button.controlCaption), 11 /* TEXT, CLASS, PROPS */, _hoisted_4);
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(button.controlCaption) + " ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(button.controlAwesomeIcon)
+    }, null, 2 /* CLASS */)], 10 /* CLASS, PROPS */, _hoisted_4);
   }), 256 /* UNKEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn btn-primary btn-sm",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm", {
+      'btn-secondary': $data.isFullScreen
+    }]),
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.switchFullscreenMode && $options.switchFullscreenMode.apply($options, arguments);
     })
@@ -24571,7 +24572,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       'fa-solid fa-maximize': !$data.isFullScreen,
       'fa-solid fa-compress': $data.isFullScreen
     })
-  }, null, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <i class=\"fa-solid fa-compress\"></i> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  }, null, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <i class=\"fa-solid fa-compress\"></i> ")], 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     id: $data.cardId,
     "class": "collapse show",
     "aria-labelledby": "heading-example"

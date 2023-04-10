@@ -1,5 +1,5 @@
 <template>
-        <input type="button" class="btn btn-primary px-4 my-2"
+        <input type="button" class="btn btn-primary btn-sm px-4 my-2"
             :class="sizeClass"
             :value="param_desc"
             @click="onClick($event.target.value)"

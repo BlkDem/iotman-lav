@@ -80,16 +80,17 @@ export default {
     position: relative;
     display: block;
     text-shadow: 1px 1px 1px #333;
-    margin-bottom: -33px;
+    margin-bottom: -30px;
 }
 
 input[type=color] {
     height: 36px;
     padding: 0.3rem 0.3rem;
+    min-width: 150px;
 }
 
 .font-1_5rem {
-    font-size: 1.3rem;
+    font-size: 1.0rem;
 }
 
 </style>

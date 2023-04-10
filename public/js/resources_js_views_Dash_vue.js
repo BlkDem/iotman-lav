@@ -472,7 +472,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       selected3: {
         type: Boolean,
-        "default": true
+        "default": false
       },
       selected4: {
         type: Boolean,
@@ -498,32 +498,36 @@ __webpack_require__.r(__webpack_exports__);
         this.slaveWidth = this.slaveWidthStore;
       }
     },
-    changeWidth: function changeWidth(master, slave, btn) {
-      this.layoutVertical = false;
-      this.masterWidth = master;
-      this.slaveWidth = slave;
+    selectButton: function selectButton(master) {
       this.clearButtonSelectedStyle();
-      switch (btn) {
-        case 2:
-          this.selected2 = true;
+      switch (master) {
+        case 'w-25':
+          this.selected4 = true;
           break;
-        case 3:
+        case 'w-33':
           this.selected3 = true;
           break;
-        case 4:
-          this.selected4 = true;
+        case 'w-50':
+          this.selected2 = true;
           break;
         default:
           break;
       }
+    },
+    changeWidth: function changeWidth(master, slave) {
+      this.layoutVertical = false;
+      this.masterWidth = master;
+      this.slaveWidth = slave;
+      this.selectButton(master);
     }
   },
   created: function created() {
     this.masterWidth = this.masterWidthProp;
     this.slaveWidth = this.slaveWidthProp;
     this.layoutVertical = false;
-    this.selected3 = true;
-    this.changeWidth(this.masterWidth, this.slaveWidth, 3);
+    // this.selected3 = true
+
+    this.changeWidth(this.masterWidthProp, this.slaveWidthProp);
   }
 });
 
@@ -581,17 +585,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      //Device, controllers and params
       dataItems: "",
       device: Object,
+      //dataItems.device
       micro: Object,
+      //dataItems.micro
       params: [],
+      //dataItems.params
+
       layoutCaption: 'Device Micro Parameters',
       deviceCaption: 'Device',
       parametersCaption: 'Micro Parameters',
+      //Current controller ID
       deviceMicroId: {
         type: Number
       },
       deviceMicroInfoCaption: 'device micro caption',
+      //buttons for arrange the param cards size
       advancedControls: {
         w100p: {
           controlType: 'button',
@@ -602,19 +613,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         small: {
           controlType: 'button',
           controlActive: 'btn-secondary',
-          controlCaption: 'Sm',
+          controlCaption: '',
+          controlAwesomeIcon: 'fa-solid fa-ellipsis',
           controlMessage: 'w-285px'
         },
         medium: {
           controlType: 'button',
           controlActive: '',
-          controlCaption: 'Md',
+          controlAwesomeIcon: 'fa-solid fa-table-cells-large',
+          controlCaption: '',
           controlMessage: 'w-350px'
         },
         large: {
           controlType: 'button',
           controlActive: '',
-          controlCaption: 'Lg',
+          controlAwesomeIcon: 'fa-solid fa-list-ul',
+          controlCaption: '',
           controlMessage: 'w-640px'
         }
       },
@@ -630,8 +644,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     onAdvancedControlClick: function onAdvancedControlClick(control) {
-      console.log(control);
-      this.cardWidth = control.controlMessage;
+      var _control$controlMessa;
+      // console.log(control)
+      this.cardWidth = (_control$controlMessa = control.controlMessage) !== null && _control$controlMessa !== void 0 ? _control$controlMessa : '';
       for (var item in this.advancedControls) this.advancedControls[item].controlActive = '';
       control.controlActive = 'btn-secondary';
     },
@@ -736,7 +751,7 @@ var _hoisted_1 = ["value"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
     type: "button",
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary px-4 my-2", $props.sizeClass]),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm px-4 my-2", $props.sizeClass]),
     value: $props.param_desc,
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.onClick($event.target.value);
@@ -852,7 +867,7 @@ var _hoisted_1 = {
   "class": "flex-center"
 };
 var _hoisted_2 = {
-  "class": "font-1_5rem text-info"
+  "class": "font-1_5rem text-info min-width-150px"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.param_value), 1 /* TEXT */)]);
@@ -912,7 +927,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       'hide': $data.layoutVertical
     }]),
     onClick: _cache[0] || (_cache[0] = function ($event) {
-      return $options.changeWidth('w-25', 'w-75', 4);
+      return $options.changeWidth('w-25', 'w-75');
     })
   }, " 1/4 ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm mx-1", {
@@ -920,7 +935,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       'hide': $data.layoutVertical
     }]),
     onClick: _cache[1] || (_cache[1] = function ($event) {
-      return $options.changeWidth('w-33', 'w-67', 3);
+      return $options.changeWidth('w-33', 'w-67');
     })
   }, " 1/3 ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm", {
@@ -928,7 +943,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       'hide': $data.layoutVertical
     }]),
     onClick: _cache[2] || (_cache[2] = function ($event) {
-      return $options.changeWidth('w-50', 'w-50', 2);
+      return $options.changeWidth('w-50', 'w-50');
     })
   }, " 1/2 ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm mx-1", {
@@ -1022,7 +1037,7 @@ var _hoisted_18 = {
   key: 3
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_CommonCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("CommonCard");
+  var _component_common_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("common-card");
   var _component_color_control = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("color-control");
   var _component_info_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("info-card");
   var _component_simple_control = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("simple-control");
@@ -1036,7 +1051,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "slave-width-prop": 'w-75'
   }, {
     master: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CommonCard, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_common_card, {
         cardCaption: $data.device.device_name
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -1050,7 +1065,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, 8 /* PROPS */, ["cardCaption"])];
     }),
     slave: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CommonCard, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_common_card, {
         "card-caption": $data.parametersCaption,
         "advanced-controls": $data.advancedControls,
         onOnAdvancedControlClick: $options.onAdvancedControlClick
@@ -9971,7 +9986,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.color-label[data-v-dd145a82]{\n    position: relative;\n    display: block;\n    text-shadow: 1px 1px 1px #333;\n    margin-bottom: -33px;\n}\ninput[type=color][data-v-dd145a82] {\n    height: 36px;\n    padding: 0.3rem 0.3rem;\n}\n.font-1_5rem[data-v-dd145a82] {\n    font-size: 1.3rem;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.color-label[data-v-dd145a82]{\n    position: relative;\n    display: block;\n    text-shadow: 1px 1px 1px #333;\n    margin-bottom: -30px;\n}\ninput[type=color][data-v-dd145a82] {\n    height: 36px;\n    padding: 0.3rem 0.3rem;\n    min-width: 150px;\n}\n.font-1_5rem[data-v-dd145a82] {\n    font-size: 1.0rem;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10019,7 +10034,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ninput[type=color][data-v-049cacf4] {\n    height: 32px;\n    padding: 0.5rem 0.5rem;\n}\n.font-1_5rem[data-v-049cacf4] {\n    font-size: 1.5rem;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.font-1_5rem[data-v-049cacf4] {\n    font-size: 1.5rem;\n}\n.min-width-150px[data-v-049cacf4] {\n    min-width: 150px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

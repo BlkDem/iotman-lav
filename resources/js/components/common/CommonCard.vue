@@ -21,13 +21,20 @@
             </a>
             </h5>
 
+            <!-- advanced controls buttons -->
             <button class="btn btn-primary btn-sm mr-1"
                 v-for="(button, key) in advancedControls" :id="key"
                 :class="button.controlActive"
                 @click="advancedControlsClick(button)"
-            > {{ button.controlCaption }}</button>
+            > {{ button.controlCaption }}
+                <i :class="button.controlAwesomeIcon">
 
-            <button class="btn btn-primary btn-sm " @click="switchFullscreenMode">
+                </i>
+            </button>
+
+            <button class="btn btn-primary btn-sm "
+                :class="{'btn-secondary': isFullScreen}"
+                @click="switchFullscreenMode">
                 <!-- <i class="fa fa-solid fa-caret-down mx-2"></i> -->
                 <i
                     :class="{'fa-solid fa-maximize':!isFullScreen, 'fa-solid fa-compress':isFullScreen}"
@@ -123,22 +130,22 @@ export default {
         },
 
         enumAdvancedControls() {
-            for (var key in this.advancedControls) {
-               // skip loop if the property is from prototype
-            if (!this.advancedControls.hasOwnProperty(key)) continue;
+            // for (var key in this.advancedControls) {
+            //    // skip loop if the property is from prototype
+            // if (!this.advancedControls.hasOwnProperty(key)) continue;
 
-            var obj = this.advancedControls[key];
+            // var obj = this.advancedControls[key];
 
-            console.log(obj)
+            // console.log(obj)
 
-            for (var prop in obj) {
-                // skip loop if the property is from prototype
-                if (!obj.hasOwnProperty(prop)) continue;
-                // your code
-                console.log(prop, obj[prop])
-                // alert(prop + " = " + obj[prop]);
-            }
-}
+            //     for (var prop in obj) {
+            //         // skip loop if the property is from prototype
+            //         if (!obj.hasOwnProperty(prop)) continue;
+            //         // your code
+            //         console.log(prop, obj[prop])
+            //         // alert(prop + " = " + obj[prop]);
+            //     }
+            // }
         },
 
         switchFullscreenMode(){

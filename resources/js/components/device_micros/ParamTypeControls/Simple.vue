@@ -1,6 +1,6 @@
 <template>
         <div class="flex-center">
-            <span class="font-1_5rem text-info"> {{ param_value }}</span>
+            <span class="font-1_5rem text-info min-width-150px"> {{ param_value }}</span>
         </div>
 </template>
 
@@ -19,13 +19,12 @@ export default {
 
 <style scoped>
 
-input[type=color] {
-    height: 32px;
-    padding: 0.5rem 0.5rem;
-}
-
 .font-1_5rem {
     font-size: 1.5rem;
+}
+
+.min-width-150px {
+    min-width: 150px;
 }
 
 </style>

@@ -1551,7 +1551,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       selected3: {
         type: Boolean,
-        "default": true
+        "default": false
       },
       selected4: {
         type: Boolean,
@@ -1577,32 +1577,36 @@ __webpack_require__.r(__webpack_exports__);
         this.slaveWidth = this.slaveWidthStore;
       }
     },
-    changeWidth: function changeWidth(master, slave, btn) {
-      this.layoutVertical = false;
-      this.masterWidth = master;
-      this.slaveWidth = slave;
+    selectButton: function selectButton(master) {
       this.clearButtonSelectedStyle();
-      switch (btn) {
-        case 2:
-          this.selected2 = true;
+      switch (master) {
+        case 'w-25':
+          this.selected4 = true;
           break;
-        case 3:
+        case 'w-33':
           this.selected3 = true;
           break;
-        case 4:
-          this.selected4 = true;
+        case 'w-50':
+          this.selected2 = true;
           break;
         default:
           break;
       }
+    },
+    changeWidth: function changeWidth(master, slave) {
+      this.layoutVertical = false;
+      this.masterWidth = master;
+      this.slaveWidth = slave;
+      this.selectButton(master);
     }
   },
   created: function created() {
     this.masterWidth = this.masterWidthProp;
     this.slaveWidth = this.slaveWidthProp;
     this.layoutVertical = false;
-    this.selected3 = true;
-    this.changeWidth(this.masterWidth, this.slaveWidth, 3);
+    // this.selected3 = true
+
+    this.changeWidth(this.masterWidthProp, this.slaveWidthProp);
   }
 });
 
@@ -2757,7 +2761,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       'hide': $data.layoutVertical
     }]),
     onClick: _cache[0] || (_cache[0] = function ($event) {
-      return $options.changeWidth('w-25', 'w-75', 4);
+      return $options.changeWidth('w-25', 'w-75');
     })
   }, " 1/4 ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm mx-1", {
@@ -2765,7 +2769,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       'hide': $data.layoutVertical
     }]),
     onClick: _cache[1] || (_cache[1] = function ($event) {
-      return $options.changeWidth('w-33', 'w-67', 3);
+      return $options.changeWidth('w-33', 'w-67');
     })
   }, " 1/3 ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm", {
@@ -2773,7 +2777,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       'hide': $data.layoutVertical
     }]),
     onClick: _cache[2] || (_cache[2] = function ($event) {
-      return $options.changeWidth('w-50', 'w-50', 2);
+      return $options.changeWidth('w-50', 'w-50');
     })
   }, " 1/2 ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary btn-sm mx-1", {

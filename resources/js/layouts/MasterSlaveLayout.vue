@@ -13,15 +13,15 @@
 
             <div class="px-2">
                 <button class="btn btn-primary btn-sm" :class="{'btn-secondary': selected4, 'hide': layoutVertical}"
-                    @click="changeWidth('w-25', 'w-75', 4)">
+                    @click="changeWidth('w-25', 'w-75')">
                     1/4
                 </button>
                 <button class="btn btn-primary btn-sm mx-1" :class="{'btn-secondary': selected3, 'hide': layoutVertical}"
-                    @click="changeWidth('w-33', 'w-67', 3)">
+                    @click="changeWidth('w-33', 'w-67')">
                     1/3
                 </button>
                 <button class="btn btn-primary btn-sm" :class="{'btn-secondary': selected2, 'hide': layoutVertical}"
-                    @click="changeWidth('w-50', 'w-50', 2)">
+                    @click="changeWidth('w-50', 'w-50')">
                     1/2
                 </button>
                 <button class="btn btn-primary btn-sm mx-1" :class="{'btn-secondary': !layoutVertical}"
@@ -109,7 +109,7 @@ export default {
 
             selected3: {
                 type: Boolean,
-                default: true
+                default: false
             },
 
             selected4: {
@@ -146,18 +146,26 @@ export default {
             }
         },
 
-        changeWidth(master, slave, btn) {
+        selectButton(master) {
+
+            this.clearButtonSelectedStyle()
+
+            switch (master) {
+                case 'w-25': this.selected4 = true; break;
+                case 'w-33': this.selected3 = true; break;
+                case 'w-50': this.selected2 = true; break;
+            default: break;
+        }
+
+        },
+
+        changeWidth(master, slave) {
+
             this.layoutVertical = false
             this.masterWidth = master
             this.slaveWidth = slave
 
-            this.clearButtonSelectedStyle()
-            switch (btn) {
-                case 2: this.selected2 = true; break;
-                case 3: this.selected3 = true; break;
-                case 4: this.selected4 = true; break;
-                default: break;
-            }
+            this.selectButton(master)
 
         }
     },
@@ -167,9 +175,9 @@ export default {
         this.masterWidth = this.masterWidthProp
         this.slaveWidth = this.slaveWidthProp
         this.layoutVertical = false
-        this.selected3 = true
+        // this.selected3 = true
 
-        this.changeWidth(this.masterWidth, this.slaveWidth, 3)
+        this.changeWidth(this.masterWidthProp, this.slaveWidthProp)
     }
 }
 

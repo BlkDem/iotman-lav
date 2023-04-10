@@ -45,11 +45,6 @@ export default {
             default: ''
         },
 
-        // cardWidth: {
-        //     type: String,
-        //     default: ''
-        // },
-
         // infoCardMoreButtonCaption: {
         //     type: String,
         //     default: 'More'
@@ -81,7 +76,6 @@ export default {
 
         methods: {
             showMoreClick() {
-                // console.log(this.moreInfoVisible)
                 this.moreInfoVisible = !this.moreInfoVisible
                 this.infoCardMoreButtonCaption = (this.moreInfoVisible) ? 'Less' : 'More'
             }

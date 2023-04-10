@@ -9,7 +9,7 @@
 
             <template v-slot:master>
 
-                <CommonCard :cardCaption="device.device_name">
+                <common-card :cardCaption="device.device_name">
 
                     <div class="mx-2">
                         <h5 class="flex-center my-2">{{ device.device_type_name }}</h5>
@@ -31,13 +31,14 @@
                             <div>{{ micro.created_at }}</div>
                         </div>
                     </div>
-                </CommonCard>
+
+                </common-card>
 
             </template>
 
             <template v-slot:slave>
 
-                <CommonCard
+                <common-card
                     :card-caption="parametersCaption"
 
                     :advanced-controls="advancedControls"
@@ -130,7 +131,7 @@
                     </div>
                 </div>
 
-                </CommonCard>
+                </common-card>
 
             </template>
 
@@ -172,22 +173,26 @@ export default {
 
     data() {
         return {
+
+            //Device, controllers and params
             dataItems: "",
 
-            device: Object,
-            micro: Object,
-            params: [],
+            device: Object, //dataItems.device
+            micro: Object, //dataItems.micro
+            params: [], //dataItems.params
 
             layoutCaption: 'Device Micro Parameters',
             deviceCaption: 'Device',
             parametersCaption: 'Micro Parameters',
 
+            //Current controller ID
             deviceMicroId: {
                 type: Number
             },
 
             deviceMicroInfoCaption: 'device micro caption',
 
+            //buttons for arrange the param cards size
             advancedControls: {
                 w100p: {
                     controlType: 'button',
@@ -198,19 +203,22 @@ export default {
                 small: {
                     controlType: 'button',
                     controlActive: 'btn-secondary',
-                    controlCaption: 'Sm',
+                    controlCaption: '',
+                    controlAwesomeIcon: 'fa-solid fa-ellipsis',
                     controlMessage: 'w-285px'
                 },
                 medium: {
                     controlType: 'button',
                     controlActive: '',
-                    controlCaption: 'Md',
+                    controlAwesomeIcon: 'fa-solid fa-table-cells-large',
+                    controlCaption: '',
                     controlMessage: 'w-350px'
                 },
                 large: {
                     controlType: 'button',
                     controlActive: '',
-                    controlCaption: 'Lg',
+                    controlAwesomeIcon: 'fa-solid fa-list-ul',
+                    controlCaption: '',
                     controlMessage: 'w-640px'
                 }
             },
@@ -231,8 +239,8 @@ export default {
     methods: {
 
         onAdvancedControlClick(control) {
-            console.log(control)
-            this.cardWidth = control.controlMessage
+            // console.log(control)
+            this.cardWidth = control.controlMessage ?? ''
             for (let item in this.advancedControls) this.advancedControls[item].controlActive = ''
             control.controlActive = 'btn-secondary'
         },
