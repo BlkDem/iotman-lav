@@ -53,22 +53,6 @@ export default {
                 retain: true
             },
 
-            receiveNews: '',
-
-            // qosList: [{
-            //         label: 0,
-            //         value: 0
-            //     },
-            //     {
-            //         label: 1,
-            //         value: 1
-            //     },
-            //     {
-            //         label: 2,
-            //         value: 2
-            //     },
-            // ],
-
             client: {
                 connected: false,
             },
@@ -85,13 +69,10 @@ export default {
 
     mounted() {
         this.getMQTTParams()
-        // console.log(this.client)
-        // this.createConnection()
     },
 
     beforeUnmount() {
 
-        // this.doUnSubscribe()
         this.destroyConnection()
         console.log(this.client.connected)
     },
@@ -114,11 +95,16 @@ export default {
                     })
             } catch (error) {
                 console.log(error);
-                    this.$root.$refs.toaster.showMessage(
-                            MessagesConstants.DELETING_ERROR,
-                            ParsingErrors.getError(error),
-                            ParsingErrors.ERROR_LEVEL_ERROR
-                    )
+
+                if (error.response.status === 401) {
+                    window.location.href = "/login"
+                }
+
+                this.$root.$refs.toaster.showMessage(
+                    MessagesConstants.DELETING_ERROR,
+                    ParsingErrors.getError(error),
+                    ParsingErrors.ERROR_LEVEL_ERROR
+                )
             }
         },
 

@@ -1,4 +1,6 @@
 <template>
+    <!-- <div class="card" -->
+    <!-- <div class="card border-2 border-top border-bottom rounded-bottom rounded-top border-secondary" -->
     <div class="card"
             :class="{
                 'mb-4': marginBottom,

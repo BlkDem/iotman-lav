@@ -1,5 +1,5 @@
 <template>
-    <div class="px-2 w-100">
+    <div class="px-2 min-width-150px">
         <!-- <div class=""> -->
             <div class="flex-space font-1_5rem">
                 <div class="text-info w-25">{{ rangeMin }}</div>
@@ -91,5 +91,9 @@ export default {
 }
 .align-right {
     text-align: right;
+}
+
+.min-width-150px {
+    min-width: 200px;
 }
 </style>

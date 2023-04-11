@@ -16,7 +16,6 @@
                 <AppMenu ref="homeAppMenu" :margins="margins" :isDropdowns="false"></AppMenu>
                 </CommonCard>
 
-
             </template>
 
             <template v-slot:middle>
