@@ -18,7 +18,7 @@
                 <span v-html="infoCardText"></span>
             </p>
 
-            <button class="btn btn-primary"
+            <button class="btn btn-primary btn-sm"
                 @click="showMoreClick"
                 v-show="infoCardText.length>0" >
                 {{ infoCardMoreButtonCaption }}

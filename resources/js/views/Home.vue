@@ -46,12 +46,16 @@
 
         <!-- messages -->
             <CommonCard ref="logCard" :cardCaption="logBlockCaption">
-                        <div class="card text-white bg-success mb-3">
-                            <div class="card-header">Header</div>
+                        <div class="card text-white mb-3"
+                            :class="{
+                                'bg-alert': logRecord.log_level=='1',
+                                'bg-error': logRecord.log_level=='2',
+                            }"
+                            v-for="(logRecord, key) in logRecords" :key="key" :id="key">
+                            <div class="card-header"> {{ logRecord.created_at }}</div>
                             <div class="card-body">
-                                <h5 class="card-title">Success card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
+                                <h5 class="card-title">{{ logRecord.log_category }}</h5>
+                                <p class="card-text">{{ getLogPretty(logRecord.log_data) }}</p>
                             </div>
                         </div>
             </CommonCard>
@@ -86,41 +90,63 @@ export default {
             margins: 2,
 
             devBlogs: [],
+
+            logRecords: [],
         }
     },
 
     created() {
 
-        this.pageCaption = MessagesConstants.HOME ?? 'Umolab Devices'
-        this.menuBlockCaption = MessagesConstants.menuBlockCaption ?? 'Menu'
-        this.informationBlockCaption = MessagesConstants.informationBlockCaption ?? 'Information'
-        this.logBlockCaption = MessagesConstants.logBlockCaption ?? 'Log'
+        this.pageCaption = MessagesConstants.HOME ?? 'Umolab Devices';
+        this.menuBlockCaption = MessagesConstants.menuBlockCaption ?? 'Menu';
+        this.informationBlockCaption = MessagesConstants.informationBlockCaption ?? 'Information';
+        this.logBlockCaption = MessagesConstants.logBlockCaption ?? 'Log';
 
-        this.getBlogData()
+        this.getBlogData();
 
-        // const a = new Field('test name', 'test props')
-        // console.log(a.getName(), a.getProperty())
+        setInterval(() => {
+            this.getLogData();
+        }, 5000)
+
+        this.getLogData();
 
     },
 
     mounted() {
 
         this.emitter.on("new-lang", _lang => {
-            this.setLang(_lang)
+            this.setLang(_lang);
         });
     },
 
     methods: {
+
+        getLogPretty(data) {
+
+            const jsonObj = JSON.parse(data);
+            if (typeof jsonObj === 'object') {
+                const {idx, fieldExt, payload} = jsonObj;
+                return '/' + idx + '/' + fieldExt + ' => ' + payload;
+            }
+            return 'Undefined Data';
+
+        },
+
         async getBlogData() {
-            const _data = await axios.get(APIConstants.api_dev_blogs_read)
-            this.devBlogs = _data.data.data
+            const _data = await axios.get(APIConstants.api_dev_blogs_read);
+            this.devBlogs = _data.data.data;
+        },
+
+        async getLogData() {
+            const _data = await axios.get(APIConstants.api_logs_read_page + '1/3');
+            this.logRecords = _data.data.data
         },
 
         setLang(_lang) {
-            this.pageCaption = _lang.HOME ?? 'Welcome'
-            this.menuBlockCaption = _lang.menuBlockCaption ?? 'Menu'
-            this.informationBlockCaption = _lang.informationBlockCaption ?? 'Information'
-            this.logBlockCaption = _lang.logBlockCaption ?? 'Log'
+            this.pageCaption = _lang.HOME ?? 'Welcome';
+            this.menuBlockCaption = _lang.menuBlockCaption ?? 'Menu';
+            this.informationBlockCaption = _lang.informationBlockCaption ?? 'Information';
+            this.logBlockCaption = _lang.logBlockCaption ?? 'Log';
         },
 
     },

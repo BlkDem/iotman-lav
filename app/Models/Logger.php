@@ -9,7 +9,7 @@ class Logger extends Model
 {
     use HasFactory;
 
-    protected $table = "logs";
+    protected $table = "loggers";
 
     protected $fillable = [
         'id',
