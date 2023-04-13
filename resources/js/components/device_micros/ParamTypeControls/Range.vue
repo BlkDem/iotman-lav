@@ -1,7 +1,7 @@
 <template>
     <div class="px-2 min-width-150px">
         <!-- <div class=""> -->
-            <div class="flex-space font-1_5rem">
+            <div class="flex-space font-1_2rem">
                 <div class="text-info w-25">{{ rangeMin }}</div>
                 <div class="text-info">{{ getValue(rangeValue) }}</div>
                 <div class="text-info w-25 align-right">{{ rangeMax }}</div>
@@ -17,11 +17,7 @@
 
 <script>
 
-import InfoCard from '../../common/InfoCard.vue'
-
 export default {
-
-    components: {InfoCard},
 
     emits: ['onChange'],
 
@@ -62,9 +58,9 @@ export default {
     methods: {
         getValue(value){
             if (value === null) return
-            const a_value = Number.parseInt(value)
-            if (isNaN(a_value)) return
-            return a_value
+            const n_value = Number.parseInt(value)
+            if (isNaN(n_value)) return
+            return n_value
         },
 
         onChange(e) {
@@ -83,10 +79,7 @@ export default {
     justify-content: space-between;
 }
 
-.font-1_8rem{
-    font-size: 1.3rem;
-}
-.font-1_5rem{
+.font-1_2rem{
     font-size: 1.2rem;
 }
 .align-right {

@@ -165,6 +165,7 @@ Route::controller(LoggerController::class)->group(function () {
     Route::get(   '/logs/read', 'index');
     Route::get(   '/logs/read/page/{currentPage}/{itemsPerPage}', 'page');
     Route::get(   '/log/read/{id}', 'show');
+    Route::get(   '/logs/daysofthemonth/{date}', 'daysofthemonth');
     // Route::put(   '/log/update/{updateLog}', 'update');
     // Route::delete('/log/delete/{id}', 'destroy');
     // Route::patch( '/log/patch/{id}/{field}/{value}', 'patch');

@@ -337,12 +337,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _common_InfoCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../common/InfoCard.vue */ "./resources/js/components/common/InfoCard.vue");
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {
-    InfoCard: _common_InfoCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
   emits: ['onChange'],
   props: {
     rangeMin: {
@@ -372,9 +367,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getValue: function getValue(value) {
       if (value === null) return;
-      var a_value = Number.parseInt(value);
-      if (isNaN(a_value)) return;
-      return a_value;
+      var n_value = Number.parseInt(value);
+      if (isNaN(n_value)) return;
+      return n_value;
     },
     onChange: function onChange(e) {
       this.$emit('onChange', e, this.param_fullname);
@@ -811,7 +806,7 @@ var _hoisted_1 = {
   "class": "px-2 min-width-150px"
 };
 var _hoisted_2 = {
-  "class": "flex-space font-1_5rem"
+  "class": "flex-space font-1_2rem"
 };
 var _hoisted_3 = {
   "class": "text-info w-25"
@@ -10026,7 +10021,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.flex-space[data-v-22d340ce] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.font-1_8rem[data-v-22d340ce]{\n    font-size: 1.3rem;\n}\n.font-1_5rem[data-v-22d340ce]{\n    font-size: 1.2rem;\n}\n.align-right[data-v-22d340ce] {\n    text-align: right;\n}\n.min-width-150px[data-v-22d340ce] {\n    min-width: 200px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.flex-space[data-v-22d340ce] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.font-1_2rem[data-v-22d340ce]{\n    font-size: 1.2rem;\n}\n.align-right[data-v-22d340ce] {\n    text-align: right;\n}\n.min-width-150px[data-v-22d340ce] {\n    min-width: 200px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
