@@ -192,8 +192,9 @@ export default {
 
             deviceMicroInfoCaption: 'device micro caption',
 
-            //buttons for arrange the param cards size
             advancedControls: {
+
+                //buttons for arrange the param cards size
                 w100p: {
                     controlType: 'button',
                     controlActive: '',

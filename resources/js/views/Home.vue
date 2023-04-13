@@ -23,8 +23,8 @@
             <CommonCard ref="menuCard" :cardCaption="informationBlockCaption">
                 <InfoCard v-for="(itemCard, key) in devBlogs"
                     :class="{
-                                'bg-info': key % 2 === 0,
-                                'bg-success': key % 2 === 1,
+                                'text-bg-info': key % 2 === 0,
+                                'text-bg-success': key % 2 === 1,
                             }"
                     :key="key"
                     :infoCardCaption="itemCard.created_at"
@@ -46,15 +46,15 @@
 
         <!-- messages -->
             <CommonCard ref="logCard" :cardCaption="logBlockCaption">
-                        <div class="card text-white mb-3"
+                        <div class="card text-bg-primary mb-3"
                             :class="{
-                                'bg-alert': logRecord.log_level=='1',
-                                'bg-error': logRecord.log_level=='2',
+                                'text-bg-warning': logRecord.log_level=='1',
+                                'text-bg-danger': logRecord.log_level=='2',
                             }"
                             v-for="(logRecord, key) in logRecords" :key="key" :id="key">
-                            <div class="card-header"> {{ logRecord.created_at }}</div>
+                            <div class="card-header"> {{ logRecord.created_at }} - {{ logRecord.log_category }}</div>
                             <div class="card-body">
-                                <h5 class="card-title">{{ logRecord.log_category }}</h5>
+                                <!-- <p class="card-title text-info">{{ logRecord.log_category }}</p> -->
                                 <p class="card-text">{{ getLogPretty(logRecord.log_data) }}</p>
                             </div>
                         </div>
@@ -126,20 +126,32 @@ export default {
             const jsonObj = JSON.parse(data);
             if (typeof jsonObj === 'object') {
                 const {idx, fieldExt, payload} = jsonObj;
-                return '/' + idx + '/' + fieldExt + ' => ' + payload;
+                return '/' + idx + fieldExt + ' => ' + payload;
             }
             return 'Undefined Data';
 
         },
 
         async getBlogData() {
-            const _data = await axios.get(APIConstants.api_dev_blogs_read);
-            this.devBlogs = _data.data.data;
+            try {
+                const _data = await axios.get(APIConstants.api_dev_blogs_read);
+                this.devBlogs = _data.data.data;
+            } catch (error) {
+                if (err.response?.status === 401) {
+                    window.location.href = "/login"
+                }
+            }
         },
 
         async getLogData() {
-            const _data = await axios.get(APIConstants.api_logs_read_page + '1/3');
-            this.logRecords = _data.data.data
+            try {
+                const _data = await axios.get(APIConstants.api_logs_read_page + '1/5');
+                this.logRecords = _data.data.data
+            } catch (error) {
+                if (err.response?.status === 401) {
+                            window.location.href = "/login"
+                }
+            }
         },
 
         setLang(_lang) {

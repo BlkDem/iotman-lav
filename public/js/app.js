@@ -24377,46 +24377,64 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         var idx = jsonObj.idx,
           fieldExt = jsonObj.fieldExt,
           payload = jsonObj.payload;
-        return '/' + idx + '/' + fieldExt + ' => ' + payload;
+        return '/' + idx + fieldExt + ' => ' + payload;
       }
       return 'Undefined Data';
     },
     getBlogData: function getBlogData() {
       var _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var _data;
+        var _data, _err$response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              _context.prev = 0;
+              _context.next = 3;
               return axios.get(_api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].api_dev_blogs_read);
-            case 2:
+            case 3:
               _data = _context.sent;
               _this3.devBlogs = _data.data.data;
-            case 4:
+              _context.next = 10;
+              break;
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context["catch"](0);
+              if (((_err$response = err.response) === null || _err$response === void 0 ? void 0 : _err$response.status) === 401) {
+                window.location.href = "/login";
+              }
+            case 10:
             case "end":
               return _context.stop();
           }
-        }, _callee);
+        }, _callee, null, [[0, 7]]);
       }))();
     },
     getLogData: function getLogData() {
       var _this4 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var _data;
+        var _data, _err$response2;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
-              _context2.next = 2;
-              return axios.get(_api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].api_logs_read_page + '1/3');
-            case 2:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return axios.get(_api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].api_logs_read_page + '1/5');
+            case 3:
               _data = _context2.sent;
               _this4.logRecords = _data.data.data;
-            case 4:
+              _context2.next = 10;
+              break;
+            case 7:
+              _context2.prev = 7;
+              _context2.t0 = _context2["catch"](0);
+              if (((_err$response2 = err.response) === null || _err$response2 === void 0 ? void 0 : _err$response2.status) === 401) {
+                window.location.href = "/login";
+              }
+            case 10:
             case "end":
               return _context2.stop();
           }
-        }, _callee2);
+        }, _callee2, null, [[0, 7]]);
       }))();
     },
     setLang: function setLang(_lang) {
@@ -24654,7 +24672,7 @@ var _hoisted_5 = {
 };
 var _hoisted_6 = ["innerHTML"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"card\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"card border-2 border-top border-bottom rounded-bottom rounded-top border-secondary\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["card", {
       'mb-4': $props.marginBottom
     }])
@@ -24663,11 +24681,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8 /* PROPS */, _hoisted_4)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default"), $data.moreInfoVisible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     innerHTML: $props.infoCardText
   }, null, 8 /* PROPS */, _hoisted_6)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn btn-primary btn-sm",
+    "class": "btn btn-light btn-sm",
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.showMoreClick && $options.showMoreClick.apply($options, arguments);
     })
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.infoCardMoreButtonCaption), 513 /* TEXT, NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $props.infoCardText.length > 0]])])], 2 /* CLASS */)], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */);
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.infoCardMoreButtonCaption), 513 /* TEXT, NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $props.infoCardText.length > 0]])])], 2 /* CLASS */);
 }
 
 /***/ }),
@@ -25099,9 +25117,6 @@ var _hoisted_4 = {
   "class": "card-body"
 };
 var _hoisted_5 = {
-  "class": "card-title"
-};
-var _hoisted_6 = {
   "class": "card-text"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -25137,8 +25152,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.devBlogs, function (itemCard, key) {
             return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_InfoCard, {
               "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-                'bg-info': key % 2 === 0,
-                'bg-success': key % 2 === 1
+                'text-bg-info': key % 2 === 0,
+                'text-bg-success': key % 2 === 1
               }),
               key: key,
               infoCardCaption: itemCard.created_at,
@@ -25162,13 +25177,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.logRecords, function (logRecord, key) {
             return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-              "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["card text-white mb-3", {
-                'bg-alert': logRecord.log_level == '1',
-                'bg-error': logRecord.log_level == '2'
+              "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["card text-bg-primary mb-3", {
+                'text-bg-warning': logRecord.log_level == '1',
+                'text-bg-danger': logRecord.log_level == '2'
               }]),
               key: key,
               id: key
-            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(logRecord.created_at), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(logRecord.log_category), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getLogPretty(logRecord.log_data)), 1 /* TEXT */)])], 10 /* CLASS, PROPS */, _hoisted_2);
+            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(logRecord.created_at) + " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(logRecord.log_category), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <p class=\"card-title text-info\">{{ logRecord.log_category }}</p> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getLogPretty(logRecord.log_data)), 1 /* TEXT */)])], 10 /* CLASS, PROPS */, _hoisted_2);
           }), 128 /* KEYED_FRAGMENT */))];
         }),
 

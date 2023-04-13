@@ -1,6 +1,4 @@
 <template>
-    <!-- <div class="card" -->
-    <!-- <div class="card border-2 border-top border-bottom rounded-bottom rounded-top border-secondary" -->
     <div class="card"
             :class="{
                 'mb-4': marginBottom,
@@ -18,7 +16,7 @@
                 <span v-html="infoCardText"></span>
             </p>
 
-            <button class="btn btn-primary btn-sm"
+            <button class="btn btn-light btn-sm"
                 @click="showMoreClick"
                 v-show="infoCardText.length>0" >
                 {{ infoCardMoreButtonCaption }}
