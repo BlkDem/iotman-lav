@@ -6,6 +6,7 @@ use App\Models\Logger;
 use App\Http\Middleware\ValidatorRules;
 use App\Http\Controllers\PaginatorController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Exception;
 
 use App\Facades\LOG;
@@ -26,6 +27,15 @@ class LoggerController extends BaseController
         $paginator = PaginatorController::Paginate($res->count(), 1, 1);
 
         return $this->sendResponse($res, "Logs List", $paginator);
+    }
+
+    public function daysOfTheMonth($date)
+    {
+        $res = Logger::getDaysOfTheMonth($date);
+
+        $paginator = PaginatorController::Paginate($res->count(), 1, 1);
+
+        return $this->sendResponse($res, "Log Dates in the Month", $paginator);
     }
 
     public function page($currentPage=0, $itemsPerPage=10){
