@@ -95,6 +95,12 @@ class ValidatorRules extends Validator
                     ];
                     break;
 
+            case 'loggers':
+                    $_rulesArray = [
+                        'log_category' => 'required',
+                    ];
+                    break;
+
             default:
                 $_rulesArray =  [];
                 break;

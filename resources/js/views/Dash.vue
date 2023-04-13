@@ -117,7 +117,7 @@
                                             :rangeCaption="param.param_name"
                                             :rangeMin="Number.parseInt(param.param_min)"
                                             :rangeMax="Number.parseInt(param.param_max)"
-                                            :rangeValue="setValue(param.param_value)"
+                                            :rangeValue="setRangeValue(param.param_value)"
                                             :param_fullname="param.param_fullname"
                                             @onChange="onRangeChange"
                                         >
@@ -192,34 +192,35 @@ export default {
 
             deviceMicroInfoCaption: 'device micro caption',
 
-            //buttons for arrange the param cards size
             advancedControls: {
+
+                //buttons for arrange the param cards size
                 w100p: {
                     controlType: 'button',
                     controlActive: '',
                     controlCaption: 'Auto',
-                    controlMessage: 'w-100p'
+                    controlClass: 'w-100p'
                 },
                 small: {
                     controlType: 'button',
                     controlActive: 'btn-secondary',
                     controlCaption: '',
-                    controlAwesomeIcon: 'fa-solid fa-ellipsis',
-                    controlMessage: 'w-285px'
+                    controlAwesomeIcon: 'fa-solid fa-table-cells',
+                    controlClass: 'w-285px'
                 },
                 medium: {
                     controlType: 'button',
                     controlActive: '',
                     controlAwesomeIcon: 'fa-solid fa-table-cells-large',
                     controlCaption: '',
-                    controlMessage: 'w-350px'
+                    controlClass: 'w-350px'
                 },
                 large: {
                     controlType: 'button',
                     controlActive: '',
                     controlAwesomeIcon: 'fa-solid fa-list-ul',
                     controlCaption: '',
-                    controlMessage: 'w-640px'
+                    controlClass: 'w-640px'
                 }
             },
 
@@ -230,7 +231,7 @@ export default {
 
     created() {
         this.deviceMicroId = this.$route.params.device_micro_id;
-        this.device.device_type_image = Pathes.storageImagePlugName
+        this.device.device_type_image = Pathes.storageImagePlugName;
         // console.log("device_micro_id: ", this.deviceMicroId);
         this.layoutCaption = MessagesConstants.DASH
         this.getData(this.deviceMicroId);
@@ -238,45 +239,48 @@ export default {
 
     methods: {
 
+        /* MQTT Controls Events */
         onAdvancedControlClick(control) {
             // console.log(control)
-            this.cardWidth = control.controlMessage ?? ''
-            for (let item in this.advancedControls) this.advancedControls[item].controlActive = ''
-            control.controlActive = 'btn-secondary'
+            this.cardWidth = control.controlClass ?? '';
+            for (let item in this.advancedControls) this.advancedControls[item].controlActive = '';
+            control.controlActive = 'btn-secondary';
         },
 
         onButtonClick(value, param_fullname, cmd) {
-            this.$refs.mqttRef.doPublish(param_fullname, cmd)
+            this.$refs.mqttRef.doPublish(param_fullname, cmd);
             // console.log(value, param_fullname, cmd)
         },
 
         onRangeChange(value, param_fullname) {
-            console.log(value, param_fullname)
-            this.$refs.mqttRef.doPublish(param_fullname, value)
+            // console.log(value, param_fullname)
+            this.$refs.mqttRef.doPublish(param_fullname, value);
         },
 
         onColorChange(value, param_fullname) {
             // console.log(value, param_fullname)
-            if (value === null) return
-            let a = ''
+            if (value === null) return;
+            let a = '';
             if (value[0] === '#') {
-                a = value.replace('#','')
+                a = value.replace('#','');
             }
             const newValue = parseInt(a, 16);
-            this.$refs.mqttRef.doPublish(param_fullname, newValue.toString())
+            this.$refs.mqttRef.doPublish(param_fullname, newValue.toString());
         },
 
-        setValue(value) {
-            if (value === null) return 0
-            const a = Number.parseInt(value)
-            if (isNaN(a)) return 0
-            return a
+
+        setRangeValue(value) {
+            if (value == null) return 0;
+
+            const a = Number.parseInt(value);
+            if (isNaN(a)) return 0;
+            return a;
         },
 
         onMessage(topic, message) {
             for (let item in this.params) {
                 if (this.params[item]['param_fullname'] === topic) {
-                    this.params[item].param_value = message
+                    this.params[item].param_value = message;
                 }
             }
         },
@@ -290,16 +294,21 @@ export default {
             await axios.get(APIConstants.api_device_micro_dash + this.deviceMicroId)
                 .then(response => {
                 this.dataItems = response.data.data;
-                this.device = this.dataItems.device
-                this.micro = this.dataItems.micro
-                this.params = this.dataItems.params
 
-                // console.log(this.params);
+                this.device = this.dataItems.device;
+                this.micro = this.dataItems.micro;
+                this.params = this.dataItems.params;
+
             })
 
             .catch (error => {
 
                     console.log(error);
+
+                    if (error.response.status === 401) {
+                            window.location.href = "/login"
+                    }
+
                     this.$root.$refs.toaster.showMessage(
                             MessagesConstants.DELETING_ERROR,
                             ParsingErrors.getError(error),
@@ -310,7 +319,7 @@ export default {
         },
 
         getImage(imageName) {
-            return Pathes.storageImagesPath + imageName
+            return Pathes.storageImagesPath + imageName;
         }
     },
 }

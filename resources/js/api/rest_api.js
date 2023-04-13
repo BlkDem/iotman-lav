@@ -54,6 +54,14 @@ export default {
     api_dev_blog_delete: apiPreffix +     'dev_blog/delete/',
     api_dev_blog_patch: apiPreffix +      'dev_blog/patch/',
 
+    //Logs CRUD
+    api_log_create: apiPreffix +     'log/create/',
+    api_logs_read: apiPreffix +      'logs/read/',
+    api_logs_read_page: apiPreffix + 'logs/read/page/',
+    api_log_update: apiPreffix +     'log/update/',
+    api_log_delete: apiPreffix +     'log/delete/',
+    api_log_patch: apiPreffix +      'log/patch/',
+
     //Albums CRUD
     api_album_create: apiPreffix + 'album/create/',
     api_albums_read: apiPreffix + 'albums/read/',

@@ -1,6 +1,6 @@
 <template>
         <div class="flex-center">
-            <span class="font-1_5rem text-info min-width-150px"> {{ param_value }}</span>
+            <span class="font-1_5rem text-info text-center min-width-150px"> {{ param_value }}</span>
         </div>
 </template>
 

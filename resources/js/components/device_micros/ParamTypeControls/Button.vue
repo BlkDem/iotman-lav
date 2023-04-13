@@ -1,9 +1,11 @@
 <template>
+    <div class="min-width-150px">
         <input type="button" class="btn btn-primary btn-sm px-4 my-2"
             :class="sizeClass"
             :value="param_desc"
             @click="onClick($event.target.value)"
         >
+    </div>
 </template>
 
 <script>
@@ -22,7 +24,7 @@ export default {
 
         sizeClass: {
             type: String,
-            default: 'w-25'
+            default: 'w-100'
         },
 
         param_name: '',
@@ -52,3 +54,10 @@ export default {
 }
 
 </script>
+
+<style scoped>
+
+.min-width-150px {
+    min-width: 150px;
+}
+</style>

@@ -41,7 +41,7 @@ use App\Http\Controllers\Devices\ParamTypeController;
 //Login
 Route::post('/login', [AuthController::class, 'signin']);
 
-Route::get('/test', [LoggerController::class, 'getLog']);
+// Route::get('/test', [LoggerController::class, 'getLog']);
 
 Route::middleware('auth:sanctum')->group( function () {
 
@@ -158,6 +158,16 @@ Route::controller(DevBlogController::class)->group(function () {
     Route::put(   '/dev_blog/update/{updateDevBlog}', 'update');
     Route::delete('/dev_blog/delete/{id}', 'destroy');
     Route::patch('/dev_blog/patch/{id}/{field}/{value}', 'patch');
+});
+
+Route::controller(LoggerController::class)->group(function () {
+    // Route::post(  '/log/create', 'store');
+    Route::get(   '/logs/read', 'index');
+    Route::get(   '/logs/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get(   '/log/read/{id}', 'show');
+    // Route::put(   '/log/update/{updateLog}', 'update');
+    // Route::delete('/log/delete/{id}', 'destroy');
+    // Route::patch( '/log/patch/{id}/{field}/{value}', 'patch');
 });
 
 
