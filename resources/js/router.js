@@ -1,17 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 
 import Home from "./views/Home.vue"
-// import DeviceTypes from "./components/device_types/DeviceTypes.vue"
-// import Devices from "./components/devices/Devices.vue"
-// import UserDevices from "./components/user_devices/UserDevices.vue"
-// import Albums from "./components/imagelib/albums/Albums.vue"
-// import Micros from "./components/micros/Micros.vue"
-// import Users  from "./components/users/Users.vue"
-// import Images from "./components/imagelib/images/Images.vue"
-// import Presets from "./components/presets/Presets.vue"
-// import DeviceMicros from "./components/device_micros/DeviceMicros.vue"
-// import UserInfo from "./components/users/UserInfo.vue"
-// import ParamTypes from "./components/device_micros/ParamTypes.vue"
 
 const routes = [
   {
