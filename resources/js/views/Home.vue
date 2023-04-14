@@ -76,7 +76,6 @@ import ThreeColumnLayout from "../layouts/ThreeColumnLayout.vue";
 // import { marked } from 'marked';
 
 export default {
-    name: 'Home',
 
     components: {ThreeColumnLayout},
 
@@ -137,7 +136,7 @@ export default {
                 const _data = await axios.get(APIConstants.api_dev_blogs_read);
                 this.devBlogs = _data.data.data;
             } catch (error) {
-                if (err.response?.status === 401) {
+                if (error.response?.status === 401) {
                     window.location.href = "/login"
                 }
             }
@@ -148,7 +147,7 @@ export default {
                 const _data = await axios.get(APIConstants.api_logs_read_page + '1/5');
                 this.logRecords = _data.data.data
             } catch (error) {
-                if (err.response?.status === 401) {
+                if (error.response?.status === 401) {
                             window.location.href = "/login"
                 }
             }
