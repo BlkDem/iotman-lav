@@ -24333,7 +24333,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 // import { marked } from 'marked';
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'Home',
   components: {
     ThreeColumnLayout: _layouts_ThreeColumnLayout_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
@@ -24384,7 +24383,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     getBlogData: function getBlogData() {
       var _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var _data, _err$response;
+        var _data, _error$response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
@@ -24399,7 +24398,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
             case 7:
               _context.prev = 7;
               _context.t0 = _context["catch"](0);
-              if (((_err$response = err.response) === null || _err$response === void 0 ? void 0 : _err$response.status) === 401) {
+              if (((_error$response = _context.t0.response) === null || _error$response === void 0 ? void 0 : _error$response.status) === 401) {
                 window.location.href = "/login";
               }
             case 10:
@@ -24412,7 +24411,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     getLogData: function getLogData() {
       var _this4 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var _data, _err$response2;
+        var _data, _error$response2;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
@@ -24427,7 +24426,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
             case 7:
               _context2.prev = 7;
               _context2.t0 = _context2["catch"](0);
-              if (((_err$response2 = err.response) === null || _err$response2 === void 0 ? void 0 : _err$response2.status) === 401) {
+              if (((_error$response2 = _context2.t0.response) === null || _error$response2 === void 0 ? void 0 : _error$response2.status) === 401) {
                 window.location.href = "/login";
               }
             case 10:
