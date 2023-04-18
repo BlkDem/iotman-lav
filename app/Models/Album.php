@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Image;
+use Illuminate\Support\Facades\DB;
 
 class Album extends Model
 {
@@ -28,5 +29,14 @@ class Album extends Model
     public function images()
     {
         return $this->hasMany(Image::class, 'album_id', 'id');
+    }
+
+    public static function albumImagesCount()
+    {
+        return DB::table('albums')
+            ->select('albums.id as id' , 'albums.album_name as album_name')
+            ->leftJoin('images', 'albums.id', '=', 'images.album_id')
+            ->selectRaw('count(images.id) as images_count')
+            ->groupBy('id', 'album_name');
     }
 }

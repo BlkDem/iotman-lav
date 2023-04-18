@@ -81,22 +81,11 @@ class DeviceUsersViewController extends BaseController
 
     public function show($id)
     {
-        // $devicesUserDataSet = DB::table('Device_DeviceTypes_UserDevices')->find($id);
-
         $res = DeviceUsersView::find($id);
         if (is_null($res)) {
             return $this->sendError("No Record for id=$id Found");
         }
         return $this->sendResponse($res, "Album (id = $id) found");
 
-        // dd($devicesUserDataSet);
-
-        // $paginator = PaginatorController::Paginate($devicesUserDataSet->count(), 1, 1);
-
-       // return (is_null($devicesUserDataSet))?
-         //   response()->json(['Error' => 'true', 'Message' => 'Record ' . $id . ' Not Found'], 404)
-           // :
-            // return $this->sendResponse($devicesUserDataSet, "User Device Type");
-            // response()->json(['data' => $devicesUserDataSet], 200);
     }
 }

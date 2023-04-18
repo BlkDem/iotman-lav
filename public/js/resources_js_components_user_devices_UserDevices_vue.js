@@ -2580,7 +2580,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = ["src"];
+var _hoisted_1 = {
+  "class": "flex-center"
+};
+var _hoisted_2 = ["src"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_PopupModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("PopupModal");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_PopupModal, {
@@ -2590,16 +2593,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: $options.onDialogClick
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
         src: $props.imageSrc,
-        style: {
-          "width": "100%",
-          "height": "auto"
-        },
+        "class": "img-fluid rounded",
         onClick: _cache[0] || (_cache[0] = function () {
           return $options.cancelDialog && $options.cancelDialog.apply($options, arguments);
         })
-      }, null, 8 /* PROPS */, _hoisted_1)])];
+      }, null, 8 /* PROPS */, _hoisted_2)])];
     }),
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["onKeydown", "onClick"]);

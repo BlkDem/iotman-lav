@@ -15,8 +15,6 @@ class FileSystemImagesController extends Controller
             if ($dh = opendir($dir)) {
                 while (($file = readdir($dh)) !== false) {
                     array_push($files, $file);
-                    // $files
-                    // echo "filename: .".$file."<br />";
                 }
                 closedir($dh);
             }

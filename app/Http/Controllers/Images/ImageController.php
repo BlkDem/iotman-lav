@@ -20,12 +20,7 @@ class ImageController extends BaseController
      */
     public function index()
     {
-        // $res = Image::orderBy('image_name', 'asc')->get();
-        // $res = Image::with('album')->get();
-        $res = DB::table('images')
-            ->join('albums', 'images.album_id', '=', 'albums.id')
-            ->select('images.*', 'albums.id', 'albums.album_name')
-            ->get();
+        $res = Image::albumImages()->get();
 
         $paginator = PaginatorController::Paginate($res->count(), 1, 1);
 
@@ -64,9 +59,10 @@ class ImageController extends BaseController
 
         $offset = $itemsPerPage * --$page;
 
-        $res = DB::table('images')
-            ->join('albums', 'images.album_id', '=', 'albums.id')
-            ->select('images.*', 'albums.id', 'albums.album_name')
+        $res = Image::albumImages()
+            // DB::table('images')
+            // ->join('albums', 'images.album_id', '=', 'albums.id')
+            // ->select('images.*', 'albums.id', 'albums.album_name')
             ->limit($itemsPerPage)->offset($offset)->orderBy('image_name', 'asc')
             ->get();
 
@@ -85,22 +81,9 @@ class ImageController extends BaseController
 
         $offset = $itemsPerPage * --$page;
 
-        $res = DB::table('images')
-            ->join('albums', 'images.album_id', '=', 'albums.id')
-            ->select(
-                'images.id as id',
-                'images.image_name as image_name',
-                'images.image_desc as image_desc',
-                'images.created_at as created_at',
-                'images.updated_at as updated_at',
-                'albums.id as album_id',
-                'albums.album_name as album_name'
-            )
-            ->where('album_id', $album_id)
+        $res = Image::imagesWhereAlbumID($album_id)
             ->limit($itemsPerPage)->offset($offset)->orderBy('image_name', 'asc')
             ->get();
-
-        // $res = Image::limit($itemsPerPage)->where('album_id', $album_id)->offset($offset)->orderBy('image_name', 'asc')->get();
 
         $total = Image::where('album_id', $album_id)->get();
 
@@ -164,16 +147,18 @@ class ImageController extends BaseController
 
             $updateImage->update($request->all());
 
-            $updateImage->save();
+            // $updateImage->save();
 
             $albumId = $updateImage["album_id"];
 
             $albumName = $this->getAlbum($albumId);
 
-            //$updateImage =
             $updateImage["album_name"] = $albumName["album_name"];
 
+            $updateImage->save();
+
             return $this->sendResponse($updateImage, 'Image updated');
+
         } catch (Exception $e) {
             return $this->sendError('Updating Record Error: ' . $e);
         }
@@ -187,11 +172,7 @@ class ImageController extends BaseController
      */
     public function show($id)
     {
-        $res = DB::table('images')
-            ->join('albums', 'images.album_id', '=', 'albums.id')
-            ->where('images.id', '=', $id)
-            ->select('images.*', 'albums.id', 'albums.album_name')
-            ->get();
+        $res = Image::imageWithAlbum($id)->get();
 
         if (is_null($res)) {
             return $this->sendError("No Record for id=$id Found");

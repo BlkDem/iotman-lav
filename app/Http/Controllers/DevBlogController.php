@@ -54,10 +54,12 @@ class DevBlogController extends BaseController
         }
         try {
             $newDevBlog = DevBlog::create($request->all());
-            return response()->json($newDevBlog, 201);
+            return $this->sendSuccess($newDevBlog, 'Record added', 201);
+            // return response()->json($newDevBlog, 201);
         }
         catch (Exception $e) {
-            return response()->json('Store Record Error: ' . $e, 400);
+            return $this->sendError('Store Record Error: ' . $e);
+            // return response()->json('Store Record Error: ' . $e, 400);
         }
     }
 
@@ -111,7 +113,13 @@ class DevBlogController extends BaseController
             return $this->sendError("No Record for deleting Found");
         }
 
-        $blogItem->delete($id);
-        return $this->sendResponse($blogItem, "DevBlog $id deleted");
+        try {
+            $blogItem->delete($id);
+            return $this->sendResponse($blogItem, "DevBlog $id deleted");
+
+        } catch (Exception $e) {
+            return $this->sendError("Deleting error: ". $e);
+        }
+
     }
 }

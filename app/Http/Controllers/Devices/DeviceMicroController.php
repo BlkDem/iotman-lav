@@ -76,23 +76,9 @@ class DeviceMicroController extends BaseController
 
         $offset = $itemsPerPage*--$page;
 
-        $res = DB::table('device_micros')
-        ->join('micros', 'micros.id', '=', 'device_micros.micro_id')
-        ->join('devices', 'devices.id', '=', 'device_micros.device_id')
-        ->select(
-            'device_micros.id as id',
-            'device_micros.device_micro_desc as device_micro_desc',
-            'device_micros.device_micro_idx as device_micro_idx',
-            'device_micros.created_at as created_at',
-            'device_micros.updated_at as updated_at',
-            'micros.id as micro_id',
-            'micros.micro_name as micro_name',
-            'devices.id as device_id',
-            'devices.device_name as device_name'
-        )
-        ->where('device_micros.device_id', $device_id)
-        ->limit($itemsPerPage)->offset($offset)->orderBy('device_micro_idx', 'asc')
-        ->get();
+        $res = DeviceMicro::pageWhereDevice($device_id)
+            ->limit($itemsPerPage)->offset($offset)->orderBy('device_micro_idx', 'asc')->get();
+
 
         $total = DeviceMicro::where('device_id', $device_id)->get();
 
@@ -107,26 +93,10 @@ class DeviceMicroController extends BaseController
 
         $offset = $itemsPerPage*--$page;
 
-        $res = DB::table('device_micros')
-        ->join('micros', 'micros.id', '=', 'device_micros.micro_id')
-        ->join('devices', 'devices.id', '=', 'device_micros.device_id')
-        ->select(
-            'device_micros.id as id',
-            'device_micros.device_micro_desc as device_micro_desc',
-            'device_micros.device_micro_idx as device_micro_idx',
-            'device_micros.created_at as created_at',
-            'device_micros.updated_at as updated_at',
-            'micros.id as micro_id',
-            'micros.micro_name as micro_name',
-            'devices.id as device_id',
-            'devices.device_name as device_name'
-        )
-        // ->where('device_micros.device_id', $device_id)
+        $res = DeviceMicro::joinMicrosDevices()
+
         ->limit($itemsPerPage)->offset($offset)->orderBy('device_micro_idx', 'asc')
         ->get();
-
-
-
 
         $total = DeviceMicro::get();
 

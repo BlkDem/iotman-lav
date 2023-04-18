@@ -72,10 +72,24 @@ class DeviceUserController extends BaseController
             $updateDeviceView = DeviceUsersView::find($updateDeviceUser->id);
 
             return $this->sendResponse($updateDeviceView, "User Device Updated");
-            // return response()->json($updateDeviceView, 200);
         }
         catch (Exception $e) {
             return response()->json('Updating Record Error: ' . $e, 400);
+        }
+    }
+
+    public function patch(Request $request, $id, $field, $value)
+    {
+        try {
+            $patchDeviceUser = DeviceUser::whereId($id);
+            $patchDeviceUser->update([
+                "$field" => $value
+            ]);
+            $res = DeviceUser::find($id);
+            return response()->json($res, 200);
+        }
+        catch (Exception $e) {
+            return response()->json('Patching Record Error: ' . $e, 400);
         }
     }
 

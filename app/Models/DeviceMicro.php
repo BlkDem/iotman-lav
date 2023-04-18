@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Device;
 use App\Models\MicroParam;
+use Illuminate\Support\Facades\DB;
 
 class DeviceMicro extends Model
 {
@@ -57,5 +58,39 @@ class DeviceMicro extends Model
             'param_types.type_name as param_type_name'
             )
         ->orderBy('param_type_id', 'asc');
+    }
+
+    public static function pageWhereDevice($device_id) {
+        return DB::table('device_micros')
+        ->join('micros', 'micros.id', '=', 'device_micros.micro_id')
+        ->join('devices', 'devices.id', '=', 'device_micros.device_id')
+        ->select(
+            'device_micros.id as id',
+            'device_micros.device_micro_desc as device_micro_desc',
+            'device_micros.device_micro_idx as device_micro_idx',
+            'device_micros.created_at as created_at',
+            'device_micros.updated_at as updated_at',
+            'micros.id as micro_id',
+            'micros.micro_name as micro_name',
+            'devices.id as device_id',
+            'devices.device_name as device_name'
+        )->where('device_micros.device_id', $device_id);
+    }
+
+    public static function joinMicrosDevices() {
+        return DB::table('device_micros')
+        ->join('micros', 'micros.id', '=', 'device_micros.micro_id')
+        ->join('devices', 'devices.id', '=', 'device_micros.device_id')
+        ->select(
+            'device_micros.id as id',
+            'device_micros.device_micro_desc as device_micro_desc',
+            'device_micros.device_micro_idx as device_micro_idx',
+            'device_micros.created_at as created_at',
+            'device_micros.updated_at as updated_at',
+            'micros.id as micro_id',
+            'micros.micro_name as micro_name',
+            'devices.id as device_id',
+            'devices.device_name as device_name'
+        );
     }
 }
