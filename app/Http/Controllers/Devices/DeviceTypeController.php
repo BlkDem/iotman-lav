@@ -71,7 +71,8 @@ class DeviceTypeController extends BaseController
         }
     }
 
-    public function patch(Request $request, $id, $field, $value){
+    public function patch(Request $request, $id, $field, $value)
+    {
         try {
             $patchDeviceType = DeviceType::whereId($id);
             $patchDeviceType->update([

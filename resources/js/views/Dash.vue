@@ -87,6 +87,25 @@
 
                                 </div>
 
+                                <div v-if="param&&param.param_type_name==='SWITCH'">
+
+                                    <info-card
+                                        :info-card-caption="param.param_name"
+                                        :info-card-title="param.param_desc"
+                                    >
+
+                                        <switch-control
+                                            :initSwitchCaption="param.param_name"
+                                            :initSwitchState="(param.param_value === '1')?true:false"
+                                            :param_fullname="param.param_fullname"
+                                            @onChange="onSwitchChange"
+                                        >
+                                        </switch-control>
+
+                                    </info-card>
+
+                                </div>
+
                                 <div v-if="param&&param.param_type_name==='BUTTON'">
 
                                     <info-card
@@ -156,6 +175,7 @@ import Pathes from '../config/pathes';
 import ColorControl from '../components/device_micros/ParamTypeControls/Color'
 import SimpleControl from '../components/device_micros/ParamTypeControls/Simple'
 import RangeControl from '../components/device_micros/ParamTypeControls/Range'
+import SwitchControl from '../components/device_micros/ParamTypeControls/Switch'
 import ButtonControl from '../components/device_micros/ParamTypeControls/Button.vue';
 import MyMqtt from '../components/MyMqtt.vue';
 import InfoCard from '../components/common/InfoCard.vue';
@@ -165,6 +185,7 @@ export default {
                 CommonCard,
                 ColorControl,
                 SimpleControl,
+                SwitchControl,
                 RangeControl,
                 ButtonControl,
                 InfoCard,
@@ -254,6 +275,11 @@ export default {
 
         onRangeChange(value, param_fullname) {
             // console.log(value, param_fullname)
+            this.$refs.mqttRef.doPublish(param_fullname, value);
+        },
+
+        onSwitchChange(value, param_fullname) {
+            console.log(value, param_fullname)
             this.$refs.mqttRef.doPublish(param_fullname, value);
         },
 
