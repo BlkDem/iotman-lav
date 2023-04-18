@@ -53,7 +53,6 @@ class MicroController extends BaseController
         }
         try {
             $newDeviceType = Micro::create($request->all());
-            // return response()->json($newDeviceType, 201);
             return $this->sendResponse($newDeviceType, 'Device created');
         }
         catch (Exception $e) {
@@ -91,7 +90,6 @@ class MicroController extends BaseController
         }
         try {
             $updateMicro->update($request->all());
-            // return response()->json($updateMicro, 200);
             return $this->sendResponse($updateMicro, "Micro updated");
         }
         catch (Exception $e) {

@@ -26,6 +26,7 @@ class ParamTypeController extends BaseController
         $page = (int)$currentPage;
 
         $offset = $itemsPerPage*--$page;
+
         $res = ParamType::limit($itemsPerPage)->offset($offset)->orderBy('type_name', 'asc')->get();
         $total = ParamType::get();
 
@@ -50,10 +51,9 @@ class ParamTypeController extends BaseController
         try {
             $newDeviceType = ParamType::create($request->all());
             return $this->sendSuccess($newDeviceType, "Device Type Created", 201);
-            // return response()->json($newDeviceType, 201);
         }
         catch (Exception $e) {
-            return response()->json('Creating Record Error: ' . $e, 400);
+            return $this->sendError('Creating Record Error: ' . $e);
         }
     }
 
@@ -64,12 +64,10 @@ class ParamTypeController extends BaseController
         }
         try {
             $updateParamType->update($request->all());
-            // return response()->json($updateDeviceType, 200);
             return $this->sendResponse($updateParamType, "Device type updated");
         }
         catch (Exception $e) {
             return $this->sendError('Updating Record Error: ' . $e, 400);
-            // return response()->json('Deleting Record Error: ' . $e, 400);
         }
     }
 
@@ -83,17 +81,25 @@ class ParamTypeController extends BaseController
             return response()->json($res, 200);
         }
         catch (Exception $e) {
-            return response()->json('Patching Record Error: ' . $e, 400);
+            return $this->sendError('Patching Record Error: ' . $e);
         }
     }
 
     public function destroy($id) {
+
         $paramTypeItem = ParamType::find($id);
+
         if ($paramTypeItem === null) {
             return $this->sendError("No Record for deleting Found");
         }
 
-        $paramTypeItem->delete($id);
-        return $this->sendResponse($paramTypeItem, "Device Type $id deleted");
+        try {
+            $paramTypeItem->delete($id);
+            return $this->sendResponse($paramTypeItem, "Device Type $id deleted");
+        }
+        catch (Exception $e) {
+            return $this->sendError('Deleting Record Error: ' . $e);
+        }
+
     }
 }

@@ -28,11 +28,9 @@ class PresetController extends BaseController
 
     public function indexGroup($group)
     {
-        // $term = 'France';
-        $groupData = Preset::where('preset_key', 'LIKE', $group . '%')
-                      ->get();
+        $groupData = Preset::where('preset_key', 'LIKE', $group . '%')->get();
+
         return $this->sendResponse($groupData, "Presets");
-        // print_r($filterData);
     }
 
     public function page($currentPage=0, $itemsPerPage=10){
@@ -107,8 +105,14 @@ class PresetController extends BaseController
             return $this->sendError("No Record for deleting Found");
         }
 
-        $presetItem->delete($id);
-        return $this->sendResponse($presetItem, "Preset $id deleted");
+        try {
+            $presetItem->delete($id);
+            return $this->sendResponse($presetItem, "Preset $id deleted");
+
+        } catch (Exception $e) {
+            return $this->sendError('Deleting error: ' . $e);
+        }
+
     }
 
 }

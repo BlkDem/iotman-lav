@@ -51,7 +51,6 @@ class DeviceTypeController extends BaseController
         try {
             $newDeviceType = DeviceType::create($request->all());
             return $this->sendSuccess($newDeviceType, "Device Type Created", 201);
-            // return response()->json($newDeviceType, 201);
         }
         catch (Exception $e) {
             return response()->json('Creating Record Error: ' . $e, 400);
@@ -65,12 +64,10 @@ class DeviceTypeController extends BaseController
         }
         try {
             $updateDeviceType->update($request->all());
-            // return response()->json($updateDeviceType, 200);
             return $this->sendResponse($updateDeviceType, "Device type updated");
         }
         catch (Exception $e) {
             return $this->sendError('Updating Record Error: ' . $e, 400);
-            // return response()->json('Deleting Record Error: ' . $e, 400);
         }
     }
 

@@ -12,7 +12,7 @@ class DevBlog extends Model
     protected $table = 'dev_blogs';
 
     protected $casts = [
-        'created_at' => 'datetime:Y-m-d H:i:s',
+        'created_at' => 'datetime:d.m.Y',
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
@@ -20,8 +20,8 @@ class DevBlog extends Model
         'id',
         'dev_blog_name',
         'dev_blog_desc',
-        // 'created_at',
-        // 'updated_at'
+        'created_at',
+        'updated_at'
     ];
 
 }

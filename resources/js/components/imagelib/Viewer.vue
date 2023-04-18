@@ -2,8 +2,8 @@
 
     <PopupModal ref="popup" class="fade-in"  @keydown="onKeyDown" @click="onDialogClick"
     >
-        <div>
-            <img :src="imageSrc" style="width: 100%; height: auto;" @click="cancelDialog">
+        <div class="flex-center">
+            <img :src="imageSrc" class="img-fluid rounded" @click="cancelDialog">
         </div>
 
     </PopupModal>

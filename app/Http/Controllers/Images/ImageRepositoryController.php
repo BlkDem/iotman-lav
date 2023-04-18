@@ -10,12 +10,12 @@ use Exception;
 
 class ImageRepositoryController extends BaseController
 {
-    private function ValidExtension($_ext) {
+    private function isValidExtension($_ext) {
         if ((strtoupper($_ext) === 'JPG') || (strtoupper($_ext) === 'PNG'))
             return true; else return false;
     }
 
-    private function ValidSize($file) {
+    private function isValidSize($file) {
         return ((filesize($file) > 1000)&&(filesize($file) < 1000000));
     }
 
@@ -47,11 +47,11 @@ class ImageRepositoryController extends BaseController
 
             //check valid file extension
             $_extension = $_file->getClientOriginalExtension();
-            if (!$this->ValidExtension($_extension))
+            if (!$this->isValidExtension($_extension))
             return $this->sendError("Invalid file extension");
 
             //check valid fieldsize
-            if (!$this->ValidSize($_file))
+            if (!$this->isValidSize($_file))
             return $this->sendError("File size mismatch!");
 
             //make unic-filename

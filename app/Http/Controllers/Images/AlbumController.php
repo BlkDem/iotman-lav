@@ -42,17 +42,10 @@ class AlbumController extends BaseController
 
         $offset = $itemsPerPage*--$page;
 
-        $res = DB::table('albums')
-                ->select('albums.id as id' , 'albums.album_name as album_name')
-                ->leftJoin('images', 'albums.id', '=', 'images.album_id')
-                ->selectRaw('count(images.id) as images_count')
-                ->groupBy('id', 'album_name')
+        $res = Album::albumImagesCount()
                 ->limit($itemsPerPage)
                 ->offset($offset)
                 ->get();
-
-
-        // $total = Album::get();
 
         $paginator = PaginatorController::Paginate($this->getTotalRecords(), (int)$itemsPerPage, $currentPage);
 
@@ -153,12 +146,23 @@ class AlbumController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
+
+        //check exists
         $albumItem = Album::find($id);
+
         if ($albumItem === null) {
             return $this->sendError("No Record for deleting Found");
         }
 
-        $albumItem->delete($id);
-        return $this->sendResponse($albumItem, "Album $id deleted");
+        //deleting
+        try {
+
+            $albumItem->delete($id);
+            return $this->sendResponse($albumItem, "Album $id deleted");
+
+        } catch (Exception $e) {
+            $this->sendError('Deleting error: ' . $e);
+        }
+
     }
 }

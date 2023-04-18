@@ -72,7 +72,6 @@ class DeviceUserController extends BaseController
             $updateDeviceView = DeviceUsersView::find($updateDeviceUser->id);
 
             return $this->sendResponse($updateDeviceView, "User Device Updated");
-            // return response()->json($updateDeviceView, 200);
         }
         catch (Exception $e) {
             return response()->json('Updating Record Error: ' . $e, 400);
