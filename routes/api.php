@@ -221,8 +221,8 @@ Route::patch('/user_device/patch/{id}/{field}/{value}', [DeviceUserController::c
 
 
 //User Devices Count
-Route::get('/user_device_count/read', [UserDevicesCountController::class, 'index']);
-Route::get('/user_device_count/read/{id}', [UserDevicesCountController::class, 'show']);
+// Route::get('/user_device_count/read', [UserDevicesCountController::class, 'index']);
+// Route::get('/user_device_count/read/{id}', [UserDevicesCountController::class, 'show']);
 
 //Auth Userinfo
 Route::get('/authuser', [UserinfoController::class, 'show']);

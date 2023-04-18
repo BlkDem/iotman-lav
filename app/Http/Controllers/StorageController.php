@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use stdClass;
+// use stdClass;
 use Storage;
+use Exception;
 
 
 class StorageController extends Controller
@@ -19,7 +20,7 @@ class StorageController extends Controller
                     'message' => 'file saved to storage'
                 ];
         }
-        catch (\Exception $e) {
+        catch (Exception $e) {
             return
                 [
                     'success' => false,
@@ -28,10 +29,11 @@ class StorageController extends Controller
         }
     }
 
-    public static function getImagesFromDisk($_storage, $_files='') {
+    public static function getImagesFromDisk($_storage, $_files='')
+    {
         $files = Storage::disk($_storage)->files($_files);
 
-        $filesObj = json_decode(json_encode($files), FALSE);
+        $filesObj = json_decode(json_encode($files), false);
 
         for ($i=0; $i<count($files); $i++) {
                 $filesObj[$i] = ["id" => $i, "name" => $files[$i]];

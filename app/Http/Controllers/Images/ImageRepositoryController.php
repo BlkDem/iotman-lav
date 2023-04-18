@@ -36,12 +36,12 @@ class ImageRepositoryController extends BaseController
     {
         try {
 
-            $_imageName = 'image_file';
+            $_imageParamName = 'image_file';
             $_extension = '';
             $_file = '';
 
             //check valid fieldname
-            $_file = $request->file($_imageName);
+            $_file = $request->file($_imageParamName);
             if ($_file == null)
             return $this->sendError("Invalid file for update");
 
