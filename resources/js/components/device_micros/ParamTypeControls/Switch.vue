@@ -46,7 +46,7 @@ export default {
     },
 
     mounted() {
-        console.log('checked', this.initSwitchState)
+        // console.log('checked', this.initSwitchState)
         setInterval(()=> {
             this.switchState = this.initSwitchState
         }, 50)

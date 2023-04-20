@@ -1,7 +1,7 @@
 <template>
 
 
-    <div class="card-body border-4 border-top border-bottom rounded-bottom rounded-top border-secondary py-2 mx-2"
+    <div class="card-body border-2 border-top border-bottom rounded-bottom rounded-top border-secondary py-2 mx-2"
 
     >
 

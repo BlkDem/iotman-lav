@@ -438,7 +438,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     var _this = this;
-    console.log('checked', this.initSwitchState);
+    // console.log('checked', this.initSwitchState)
     setInterval(function () {
       _this.switchState = _this.initSwitchState;
     }, 50);
@@ -992,7 +992,7 @@ var _withScopeId = function _withScopeId(n) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-0976a4eb"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
 };
 var _hoisted_1 = {
-  "class": "card-body border-4 border-top border-bottom rounded-bottom rounded-top border-secondary py-2 mx-2"
+  "class": "card-body border-2 border-top border-bottom rounded-bottom rounded-top border-secondary py-2 mx-2"
 };
 var _hoisted_2 = {
   "class": "flex-center-space"

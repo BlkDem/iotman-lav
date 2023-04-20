@@ -53,24 +53,16 @@ export default {
             })
         },
 
-        // _confirm() {
-        //     this.$refs.popup.close()
-        //     this.resolvePromise(true)
-        // },
-
-        // _cancel() {
-        //     this.$refs.popup.close()
-        //     this.resolvePromise(false)
-        // },
-
         confirmDialog() {
+            console.log('confirm')
             this.$refs.popup.close()
             this.resolvePromise(true)
         },
 
 
         cancelDialog() {
-            this._cancel()
+            this.$refs.popup.close()
+            this.resolvePromise(false)
         },
     },
 }

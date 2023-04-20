@@ -1,5 +1,5 @@
 <template>
-    <PopupModal ref="popup" class="fade-in" @keydown="onKeyDown" @click="onDialogClick">
+    <PopupModal ref="popup" class="fade-in" @click="onDialogClick">
         <div class="modal-header">
             <h2 class="w-100 text-center">{{ title }}</h2>
         </div>
@@ -25,7 +25,11 @@
 
                     <input v-if="field.isDateTime" type="datetime-local" class="form-control p-2 mb-1" v-model="field.value" />
 
-                    <input v-if="!field.isText&&!field.isDateTime" class="form-control p-2 mb-1" :placeholder="'Input ' + field.fieldCaption"  v-model="field.value" />
+                    <input v-if="!field.isText&&!field.isDateTime" type="text" class="form-control p-2 mb-1"
+                        :placeholder="'Input ' + field.fieldCaption"
+                        v-model="field.value"
+                        @keyup="onKeyUp($event.key)"
+                    />
 
                 </div>
 
@@ -138,8 +142,6 @@ export default {
             )
             .then(resp => {
                 this.setImage(resp.data.fileName, key)
-            })
-            .then(resp => {
                 this.$root.$refs.toaster.showMessage(
                     MessagesConstants.IMAGE_UPLOADED,
                     MessagesConstants.PROCESS_SUCCESSFULLY
@@ -203,7 +205,7 @@ export default {
             this.$refs.popup.open()
 
             setTimeout(() => { //delay for set focus to active input
-                console.log('focus')
+                // console.log('focus')
                 $("input#btnOk").focus()
             }, 200)
 
@@ -230,8 +232,14 @@ export default {
             this.resolvePromise(false)
         },
 
-        onKeyDown(){
-            if (event.key === 'Escape') this.cancelDialog()
+        // onKeyDown(){
+        //     if (event.key === 'Escape') this.cancelDialog()
+        // },
+
+        onKeyUp(event_key){
+            console.log('key up')
+            if (event_key === 'Escape') this.cancelDialog()
+            if (event_key === 'Enter') this.confirmDialog()
         },
 
         onDialogClick() {

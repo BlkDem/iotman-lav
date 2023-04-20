@@ -6,17 +6,37 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\StorageController;
+use App\Models\Helpers\Preset;
 use Exception;
 
 class ImageRepositoryController extends BaseController
 {
+
+    //default preset min and max filesize
+    private static $max_file_size = 1000000;
+    private static $min_file_size = 1000;
+
     private function isValidExtension($_ext) {
         if ((strtoupper($_ext) === 'JPG') || (strtoupper($_ext) === 'PNG'))
             return true; else return false;
     }
 
     private function isValidSize($file) {
-        return ((filesize($file) > 1000)&&(filesize($file) < 1000000));
+
+        $preset_max_file_size = Preset::where('preset_key', 'max_file_size')->first()["preset_value"];
+        $preset_min_file_size = Preset::where('preset_key', 'min_file_size')->first()["preset_value"];
+
+        if ($preset_max_file_size != null)
+        {
+            self::$max_file_size = $preset_max_file_size;
+        }
+
+        if ($preset_min_file_size != null)
+        {
+            self::$min_file_size = $preset_min_file_size;
+        }
+
+        return ((filesize($file) >= self::$min_file_size)&&(filesize($file) <= self::$max_file_size));
     }
 
     public function GetImageFiles() {
