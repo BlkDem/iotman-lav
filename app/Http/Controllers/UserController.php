@@ -28,7 +28,7 @@ class UserController extends BaseController
 
         $paginator = PaginatorController::Paginate($res->count(), 1, 1);
 
-        return $this->sendResponse($res, "Device Types List", $paginator);
+        return $this->sendResponse($res, "Users List", $paginator);
     }
 
     public function page($currentPage=0, $itemsPerPage=10)

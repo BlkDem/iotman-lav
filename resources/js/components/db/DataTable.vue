@@ -26,7 +26,7 @@
             :readOnly="readOnly"
             @getData="getData"
             @setCompactView="setCompactView"
-            @addEvent="setItem"
+            @addEvent="addItem"
             @updateSortedData="updateSortedData"
             @updateFilteredData="updateFilteredData"
             @rowClick="rowClick"
@@ -99,14 +99,14 @@
                     <div class="card-body w-100">
                         <div class="flex-center">
                         <button class="btn btn-info btn-width-40 mx-1"
-                            @keydown="editBtnKeyDown"
+                            @keyup="editBtnKeyUp($event.key, key, item.id.value)"
                             @click="doEdit(key, item.id.value)">
                             <i class="fas fa-edit" aria-hidden="true"></i>
                             <!-- Edit -->
                         </button>
 
                         <button class="btn btn-secondary btn-width-40 mx-1"
-                            @keydown="deleteBtnKeyDown"
+                            @keyup="deleteBtnKeyUp($event.key, key, item.id.value)"
                             @click="doDelete(key, item.id.value)">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                             <!-- Delete -->
@@ -236,14 +236,14 @@
 
                         <div class="col-sm-2 col-xs-2 col-lg-2 edit-buttons" v-if="!readOnly">
                             <button class="btn btn-info  btn-sm mx-2"
-                                @keydown="editBtnKeyDown"
+                                @keyup="editBtnKeyUp($event.key, key, item.id.value)"
                                 @click="doEdit(key, item.id.value)">
 
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                             </button>
 
                             <button class="btn btn-secondary btn-sm"
-                                @keydown="deleteBtnKeyDown"
+                                @keyup="deleteBtnKeyUp($event.key, key, item.id.value)"
                                 @click="doDelete(key, item.id.value)">
 
                                 <i class="fa fa-trash" aria-hidden="true"></i>
@@ -751,7 +751,7 @@ export default {
                 }
             },
 
-            async setItem() {
+            async addItem() {
 
                 for (let item in this.dataFields) {
                     this.dataFields[item].value = ''
@@ -780,9 +780,9 @@ export default {
 
                             const _res = resp.data.data
 
-                            console.log('res: ', _res)
+                            // console.log('res: ', _res)
                             const transformItem = this.processListItem(_res)
-                            console.log('after transform: ', _res)
+                            // console.log('after transform: ', _res)
 
                             this.Items.push(transformItem);
                             this.filteredItems = this.Items
@@ -807,19 +807,23 @@ export default {
 
             },
 
-            editBtnKeyDown() {
-                if (event.key === 'Escape') this.$refs.addItem.cancelDialog()
+            editBtnKeyUp(event_key, key, id) {
+                console.log('edit', event_key);
+                if (event_key === 'Escape') this.$refs.addItem.cancelDialog();
+                if (event_key === 'Enter') this.$refs.addItem.confirmDialog();
             },
 
-            deleteBtnKeyDown() {
-                if (event.key === 'Escape') this.$refs.confirmDialogue.cancelDialog()
+            deleteBtnKeyUp(event_key, key, id) {
+                console.log('delete', event_key);
+                if (event_key === 'Escape') this.$refs.confirmDialogue.cancelDialog();
+                if (event_key === 'Enter') this.$refs.confirmDialogue.confirmDialog();
             },
 
             async doEdit(key, id) {
 
                 let postFields = this.dataFields
                 for (let item in this.dataFields) {
-                    postFields[item].value = this.filteredItems[key][this.dataFields[item].fieldName].value
+                    postFields[item].value = this.filteredItems[key][this.dataFields[item].fieldName].value;
                 }
 
                 const _edit = await this.$refs.addItem.showDialogue(
@@ -833,12 +837,12 @@ export default {
                 )
 
                 if (_edit) {
-                    const editItem = this.$refs.addItem.postData
+                    const editItem = this.$refs.addItem.postData;
                     // console.log('edit data: ', editItem);
 
                     const _values = {}
                     for (let field in editItem) {
-                        _values[editItem[field].fieldName] = editItem[field].value
+                        _values[editItem[field].fieldName] = editItem[field].value;
                     }
 
                     // console.log('on axios: ', _values)
