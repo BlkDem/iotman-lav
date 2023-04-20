@@ -27,31 +27,57 @@ class ImageController extends BaseController
         return $this->sendResponse($res, "Image List", $paginator);
     }
 
+    /**
+     * getImage - getting Image by ID
+     *
+     * @param  mixed $id - Image ID
+     * @return Object
+     */
     public static function getImage($id)
     {
         return Image::find($id);
     }
 
+    /**
+     * getAlbum - getting Album by ID
+     *
+     * @param  mixed $id - Album ID
+     * @return Object
+     */
     public static function getAlbum($id)
     {
         return Album::find($id);
     }
 
+    /**
+     * setImage - set image name by Image ID
+     *
+     * @param  mixed $id - selected Image ID
+     * @param  mixed $newImage - a new filename
+     * @return Object
+     */
     public static function setImage($id, $newImage)
     {
 
-        $newImage = Self::getImage($id);
+        $image = Self::getImage($id);
 
-        if ($newImage == null)
+        if ($image == null)
             return null;
         //apply new file name
-        $newImage->image_name = $newImage;
+        $image->image_name = $newImage;
         //save record
-        $newImage->save();
+        $image->save();
 
-        return $newImage;
+        return $image;
     }
 
+    /**
+     * page - Get Images on a page
+     *
+     * @param  mixed $currentPage - selected page
+     * @param  mixed $itemsPerPage - items per page
+     * @return \Illuminate\Http\Response
+     */
     public function page($currentPage = 0, $itemsPerPage = 10)
     {
 
@@ -60,13 +86,9 @@ class ImageController extends BaseController
         $offset = $itemsPerPage * --$page;
 
         $res = Image::albumImages()
-            // DB::table('images')
-            // ->join('albums', 'images.album_id', '=', 'albums.id')
-            // ->select('images.*', 'albums.id', 'albums.album_name')
             ->limit($itemsPerPage)->offset($offset)->orderBy('image_name', 'asc')
             ->get();
 
-        // $res = Image::limit($itemsPerPage)->offset($offset)->orderBy('image_name', 'asc')->get();
         $total = Image::get();
 
         $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
@@ -74,6 +96,14 @@ class ImageController extends BaseController
         return $this->sendResponse($res, "Images List", $paginator);
     }
 
+    /**
+     * pageWhereAlbum Get Images on a selected page where Album ID
+     *
+     * @param  mixed $currentPage - selected page
+     * @param  mixed $itemsPerPage - items per page
+     * @param  mixed $album_id - Album ID
+     * @return \Illuminate\Http\Response
+     */
     public function pageWhereAlbum($currentPage = 0, $itemsPerPage = 10, $album_id)
     {
 
@@ -126,7 +156,7 @@ class ImageController extends BaseController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Image  $image
+     * @param  \App\Models\Image  $image - updating Image
      * @return \Illuminate\Http\Response
      */
 
@@ -180,6 +210,11 @@ class ImageController extends BaseController
         return $this->sendResponse($res, "Image (id = $id) found");
     }
 
+    /**
+     * getImages - getting images from repository (storage files)
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function getImages()
     {
         $imageRepositoryController = new ImageRepositoryController();
@@ -194,6 +229,15 @@ class ImageController extends BaseController
         return $this->sendResponse($files, "Images from disk");
     }
 
+    /**
+     * patch - editing Image record fields. Set the field value via key.
+     *
+     * @param  mixed $request
+     * @param  mixed $id - selected Image ID
+     * @param  mixed $field - editing field
+     * @param  mixed $value - setting value
+     * @return \Illuminate\Http\Response
+     */
     public function patch(Request $request, $id, $field, $value)
     {
         try {

@@ -8,7 +8,6 @@ class LoggerService
 {
     public function logger()
     {
-        // dd('logger');
         $res = Micro::all();
         return $res;
     }
