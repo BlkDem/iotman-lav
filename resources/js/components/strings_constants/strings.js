@@ -1,6 +1,7 @@
 export default {
     DASH: "Umolab Devices - Dash",
     HOME: "Umolab Devices",
+    BLOG: "Blog",
     LIBRARY: "Images Library",
     IMAGES: "Images",
     USERS: "Users",

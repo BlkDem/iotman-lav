@@ -2,6 +2,7 @@
 import './bootstrap';
 import { createApp } from 'vue';
 import { vue3Debounce } from 'vue-debounce'
+import { SetupCalendar, Calendar, DatePicker } from 'v-calendar';
 import router from './router'
 
 import LangCombo from './components/header/LangCombo.vue';
@@ -38,6 +39,10 @@ app.component('InfoCard', InfoCard);
 app.component('AppMenu', AppMenu);
 
 app.use(router)
-.directive('debounce', vue3Debounce({ lock: true }))
-.mount('#app');
+    .use(SetupCalendar, {})
+  // Use the components
+    .component('Calendar', Calendar)
+    .component('DatePicker', DatePicker)
+    .directive('debounce', vue3Debounce({ lock: true }))
+    .mount('#app');
 

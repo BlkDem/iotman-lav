@@ -193,6 +193,15 @@ const routes = [
     visible: true
   },
   {
+    path: "/blog",
+    name: "Blog",
+    icon: "fa-brands fa-microblog",
+    component: () => import('./components/blog/Blog.vue'),
+
+    ID: "BLOG",
+    visible: true
+  },
+  {
     path: "/dash/:device_micro_id",
     name: "Dash",
     icon: "fa-solid fa-gear",
