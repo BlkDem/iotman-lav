@@ -18,9 +18,18 @@ import InfoCard from './components/common/InfoCard.vue';
 import mitt from 'mitt';
 const emitter = mitt();
 
+import axios from 'axios';
+window.axios = axios;
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 const app = createApp(App);
 
 app.config.globalProperties.emitter = emitter;
+
+app.component('Calendar', Calendar)
+
+app.component('DatePicker', DatePicker)
 
 app.component('LangCombo', LangCombo);
 
@@ -40,9 +49,6 @@ app.component('AppMenu', AppMenu);
 
 app.use(router)
     .use(SetupCalendar, {})
-  // Use the components
-    .component('Calendar', Calendar)
-    .component('DatePicker', DatePicker)
     .directive('debounce', vue3Debounce({ lock: true }))
     .mount('#app');
 

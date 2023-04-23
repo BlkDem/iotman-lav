@@ -27,6 +27,26 @@ class DevBlogController extends BaseController
 
     }
 
+    /**
+     * daysOfTheMonth
+     *
+     * @param  mixed $date
+     * @return void
+     */
+    public function daysOfTheMonth($date)
+    {
+        if ($date != 0) {
+            $res = DevBlog::getDaysOfTheMonth($date);
+        }
+        else {
+            $res = DevBlog::getLastDays();
+        }
+
+        $paginator = PaginatorController::Paginate($res->count(), 1, 1);
+
+        return $this->sendResponse($res, "Blog Dates in the Month", $paginator);
+    }
+
     public function page($currentPage=0, $itemsPerPage=10){
 
         $page = (int)$currentPage;

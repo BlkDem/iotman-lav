@@ -8,11 +8,16 @@
     >
 
             <template v-slot:master>
+
                 <CommonCard ref="calendarCard" :cardCaption="calendarBlockCaption">
                     <div class="w-100 text-center overlay-x-auto">
-                        <DatePicker v-model="date" />
+                        <DatePicker
+                            v-model="calendarDate"
+                            :attributes="calendarAttributes"
+                        />
                     </div>
                 </CommonCard>
+
             </template>
 
 
@@ -21,8 +26,8 @@
                 <CommonCard ref="blogCard" :cardCaption="informationBlockCaption">
                 <InfoCard v-for="(itemCard, key) in devBlogs"
                     :class="{
-                                'text-bg-info': key % 2 === 0,
-                                'text-bg-success': key % 2 === 1,
+                                'text-bg-info': (key % 2),
+                                'text-bg-success': !(key % 2),
                             }"
                     :key="key"
                     :infoCardCaption="itemCard.created_at"
@@ -66,7 +71,18 @@ export default {
             informationBlockCaption: 'Blog list',
             calendarBlockCaption: 'Date',
             devBlogs: [],
-            date: '',
+            calendarDate: new Date(),
+
+            calendarAttributes:
+                [
+                    {
+                        highlight: true,
+                        dates: [
+                            new Date().setDate(new Date().getDate() - 1),
+                            new Date()
+                        ],
+                    },
+                ],
         }
     },
 
@@ -77,6 +93,12 @@ export default {
 
     mounted() {
         this.getBlogData();
+    },
+
+    watch: {
+        calendarDate() {
+            this.onDateChange(this.calendarDate);
+        }
     },
 
     methods: {
@@ -90,6 +112,10 @@ export default {
                 }
             }
         },
+
+        onDateChange(e) {
+            console.log(e.toLocaleDateString(e))
+        }
     }
 }
 

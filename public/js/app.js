@@ -25498,6 +25498,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_common_CommonCard_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/common/CommonCard.vue */ "./resources/js/components/common/CommonCard.vue");
 /* harmony import */ var _components_common_InfoCard_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/common/InfoCard.vue */ "./resources/js/components/common/InfoCard.vue");
 /* harmony import */ var mitt__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! mitt */ "./node_modules/mitt/dist/mitt.mjs");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_15__);
 
 
 
@@ -25514,8 +25516,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var emitter = (0,mitt__WEBPACK_IMPORTED_MODULE_14__["default"])();
+
+window.axios = (axios__WEBPACK_IMPORTED_MODULE_15___default());
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)(_components_App_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
 app.config.globalProperties.emitter = emitter;
+app.component('Calendar', v_calendar__WEBPACK_IMPORTED_MODULE_3__.Calendar);
+app.component('DatePicker', v_calendar__WEBPACK_IMPORTED_MODULE_3__.DatePicker);
 app.component('LangCombo', _components_header_LangCombo_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
 app.component('Navbar', _components_header_Navbar_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
 app.component('UserMenu', _components_common_UserMenu_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
@@ -25524,9 +25531,7 @@ app.component('Toaster', _components_common_Toaster_vue__WEBPACK_IMPORTED_MODULE
 app.component('CommonCard', _components_common_CommonCard_vue__WEBPACK_IMPORTED_MODULE_12__["default"]);
 app.component('InfoCard', _components_common_InfoCard_vue__WEBPACK_IMPORTED_MODULE_13__["default"]);
 app.component('AppMenu', _components_common_AppMenu_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
-app.use(_router__WEBPACK_IMPORTED_MODULE_4__["default"]).use(v_calendar__WEBPACK_IMPORTED_MODULE_3__.SetupCalendar, {})
-// Use the components
-.component('Calendar', v_calendar__WEBPACK_IMPORTED_MODULE_3__.Calendar).component('DatePicker', v_calendar__WEBPACK_IMPORTED_MODULE_3__.DatePicker).directive('debounce', (0,vue_debounce__WEBPACK_IMPORTED_MODULE_2__.vue3Debounce)({
+app.use(_router__WEBPACK_IMPORTED_MODULE_4__["default"]).use(v_calendar__WEBPACK_IMPORTED_MODULE_3__.SetupCalendar, {}).directive('debounce', (0,vue_debounce__WEBPACK_IMPORTED_MODULE_2__.vue3Debounce)({
   lock: true
 })).mount('#app');
 
@@ -25543,42 +25548,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 
 window._ = (lodash__WEBPACK_IMPORTED_MODULE_0___default());
 
-
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
-
-
-window.axios = (axios__WEBPACK_IMPORTED_MODULE_2___default());
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-
-// import Echo from 'laravel-echo';
-
-// import Pusher from 'pusher-js';
-// window.Pusher = Pusher;
-
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: import.meta.env.VITE_PUSHER_APP_KEY,
-//     wsHost: import.meta.env.VITE_PUSHER_HOST ?? `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
-//     wsPort: import.meta.env.VITE_PUSHER_PORT ?? 80,
-//     wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
-//     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
-//     enabledTransports: ['ws', 'wss'],
-// });
 
 /***/ }),
 
@@ -25748,7 +25720,6 @@ var routes = [{
     path: "/device_types",
     name: "Device Types",
     icon: "fas fa-layer-group",
-    // component: DeviceTypes,
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_device_types_DeviceTypes_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/device_types/DeviceTypes.vue */ "./resources/js/components/device_types/DeviceTypes.vue"));
     },
@@ -25757,7 +25728,6 @@ var routes = [{
     path: "/devices",
     name: "Devices",
     icon: "fas fa-sun",
-    // component: Devices,
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_devices_Devices_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/devices/Devices.vue */ "./resources/js/components/devices/Devices.vue"));
     },
@@ -25766,7 +25736,6 @@ var routes = [{
     path: "/device_micros",
     name: "Device Micros",
     icon: "fas fa-sun",
-    // component: DeviceMicros,
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_device_micros_DeviceMicros_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/device_micros/DeviceMicros.vue */ "./resources/js/components/device_micros/DeviceMicros.vue"));
     },
@@ -25775,7 +25744,6 @@ var routes = [{
     path: "/param_types",
     name: "Param Types",
     icon: "fa-solid fa-cubes",
-    // component: ParamTypes,
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_device_micros_ParamTypes_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/device_micros/ParamTypes.vue */ "./resources/js/components/device_micros/ParamTypes.vue"));
     },
@@ -25784,17 +25752,14 @@ var routes = [{
     path: "/micros",
     name: "Controllers",
     icon: "fas fa-microchip",
-    // component: Micros,
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_micros_Micros_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/micros/Micros.vue */ "./resources/js/components/micros/Micros.vue"));
     },
     ID: "MICROS"
-    // visible: true
   }, {
     path: "/user_devices",
     name: "User Devices",
     icon: "fas fa-users",
-    // component: UserDevices,
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_user_devices_UserDevices_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/user_devices/UserDevices.vue */ "./resources/js/components/user_devices/UserDevices.vue"));
     },
@@ -25804,7 +25769,6 @@ var routes = [{
   path: "/device_types",
   name: "Device Types",
   icon: "fas fa-layer-group",
-  // component: DeviceTypes,
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_device_types_DeviceTypes_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/device_types/DeviceTypes.vue */ "./resources/js/components/device_types/DeviceTypes.vue"));
   },
@@ -25814,7 +25778,6 @@ var routes = [{
   path: "/devices",
   name: "Devices",
   icon: "fas fa-sun",
-  // component: Devices,
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_devices_Devices_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/devices/Devices.vue */ "./resources/js/components/devices/Devices.vue"));
   },
@@ -25824,7 +25787,6 @@ var routes = [{
   path: "/device_micros",
   name: "Device Micros",
   icon: "fas fa-sun",
-  // component: DeviceMicros,
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_device_micros_DeviceMicros_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/device_micros/DeviceMicros.vue */ "./resources/js/components/device_micros/DeviceMicros.vue"));
   },
@@ -25834,7 +25796,6 @@ var routes = [{
   path: "/user_devices",
   name: "User Devices",
   icon: "fas fa-users",
-  // component: UserDevices,
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_user_devices_UserDevices_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/user_devices/UserDevices.vue */ "./resources/js/components/user_devices/UserDevices.vue"));
   },
@@ -25844,7 +25805,6 @@ var routes = [{
   path: "/micros",
   name: "Controllers",
   icon: "fas fa-microchip",
-  // component: Micros,
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_micros_Micros_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/micros/Micros.vue */ "./resources/js/components/micros/Micros.vue"));
   },
@@ -25854,7 +25814,6 @@ var routes = [{
   path: "/param_types",
   name: "Param Types",
   icon: "fa-solid fa-cubes",
-  // component: ParamTypes,
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_device_micros_ParamTypes_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/device_micros/ParamTypes.vue */ "./resources/js/components/device_micros/ParamTypes.vue"));
   },
@@ -25864,7 +25823,6 @@ var routes = [{
   path: "/albums",
   name: "Images Library",
   icon: "fas fa-images",
-  // component: Albums,
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_imagelib_albums_Albums_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/imagelib/albums/Albums.vue */ "./resources/js/components/imagelib/albums/Albums.vue"));
   },
@@ -25874,7 +25832,6 @@ var routes = [{
     path: "/albums",
     name: "Albums",
     icon: "fas fa-images",
-    // component: Albums,
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_imagelib_albums_Albums_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/imagelib/albums/Albums.vue */ "./resources/js/components/imagelib/albums/Albums.vue"));
     },
@@ -25884,7 +25841,6 @@ var routes = [{
     path: "/images",
     name: "Images",
     icon: "fa-regular fa-image",
-    // component: Images,
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_imagelib_images_Images_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/imagelib/images/Images.vue */ "./resources/js/components/imagelib/images/Images.vue"));
     },
@@ -25895,7 +25851,6 @@ var routes = [{
   path: "/images",
   name: "Images",
   icon: "fa-regular fa-image",
-  // component: Images,
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_imagelib_images_Images_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/imagelib/images/Images.vue */ "./resources/js/components/imagelib/images/Images.vue"));
   },
@@ -25905,7 +25860,6 @@ var routes = [{
   path: "/albums",
   name: "Albums",
   icon: "fas fa-images",
-  // component: Albums,
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_imagelib_albums_Albums_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/imagelib/albums/Albums.vue */ "./resources/js/components/imagelib/albums/Albums.vue"));
   },
@@ -25915,7 +25869,6 @@ var routes = [{
   path: "/users",
   name: "Users",
   icon: "fa-solid fa-user-tie",
-  // component: Users,
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_users_Users_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/users/Users.vue */ "./resources/js/components/users/Users.vue"));
   },
@@ -25925,7 +25878,6 @@ var routes = [{
   path: "/users/:user_id",
   name: "UserInfo",
   icon: "fa-solid fa-user-tie",
-  // component: UserInfo,
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_users_UserInfo_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/users/UserInfo.vue */ "./resources/js/components/users/UserInfo.vue"));
   },
@@ -25935,7 +25887,6 @@ var routes = [{
   path: "/presets",
   name: "Presets",
   icon: "fa-solid fa-gear",
-  // component: Presets,
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_presets_Presets_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/presets/Presets.vue */ "./resources/js/components/presets/Presets.vue"));
   },
@@ -25954,7 +25905,6 @@ var routes = [{
   path: "/dash/:device_micro_id",
   name: "Dash",
   icon: "fa-solid fa-gear",
-  // component: Presets,
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_Dash_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/Dash.vue */ "./resources/js/views/Dash.vue"));
   },
@@ -33384,7 +33334,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".flex {\n    display: flex;\n    align-items: center;\n}\n\n.flex-space {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n\n.flex-center {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: row;\n}\n\n.flex-center-column {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: column;\n}\n\n.flex-right {\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n    flex-wrap: wrap;\n}\n\n.flex-left {\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n}\n\n/*.image-badge {\n    width: 24px;\n    height: 24px;\n    margin-left: -10px;\n}\n\n.logo {\n    display: flex;\n    margin-right: 16px;\n    margin-left: 4px;\n    width: 36px;\n}*/\n\n.device-image {\n    position: relative;\n    height: 1.9rem;\n    border-radius: 5px;\n    border: 0px solid var(--bs-primary);\n    -webkit-transition: width .5s, height .5s, -webkit-transform .5s;\n    transition: width .5s, height .5s, border-color .5s, transform .5s;\n}\n\n.device-image:hover {\n    border: 2px solid var(--bs-secondary);\n    -webkit-transform: scale(2);\n    transform: scale(2);\n}\n\n.card-space {\n    margin-bottom: 00px;\n}\n\na.a_cap:first-letter {\n    text-transform: uppercase;\n}\n\n.edit-buttons {\n    display: flex;\n    justify-content: flex-end;\n}\n\n.btn-width-40 {\n    width: 40%;\n}\n\n.cursor-pointer {\n    cursor: pointer;\n}\n\n.switch-big\n{\n    width: 75px;\n    height: 40px;\n}\n\n.switch-label {\n    height: 40px;\n    font-size: 1.5rem;\n    margin-left: 8px;\n    margin-top: 5px;\n}\n\n.shadow-1 {\n    text-shadow: 1px 1px 1px #333;\n}\n\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n    .device-image {\n        /*width: 100px;\n        height: 100px;\n         margin-top: -23px;\n        margin-bottom: -32px;*/\n        margin-left: 219px;\n        border-radius: 10px;\n        /*box-shadow: #eee 0px 0px 8px;*/\n    }\n    .card-space {\n        margin-bottom: 20px;\n    }\n    .container {\n        padding: 0;\n        width: 100%;\n    }\n\n    .navbar > .container-fluid {\n        display: flex;\n        flex-wrap: inherit;\n        align-items: center;\n        justify-content: flex-start;\n    }\n\n    .edit-buttons {\n        /* display: flex;*/\n        margin-top: 16px;\n        margin-bottom: 8px;\n        justify-content: flex-start;\n    }\n\n    .flex-right {\n        flex-direction: row;\n        flex-wrap: wrap;\n    }\n\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".flex {\n    display: flex;\n    align-items: center;\n}\n\n.flex-space {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n\n.flex-center {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: row;\n}\n\n.flex-center-column {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: column;\n}\n\n.flex-right {\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n    flex-wrap: wrap;\n}\n\n.flex-left {\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n}\n\n/*.image-badge {\n    width: 24px;\n    height: 24px;\n    margin-left: -10px;\n}\n\n.logo {\n    display: flex;\n    margin-right: 16px;\n    margin-left: 4px;\n    width: 36px;\n}*/\n\n.device-image {\n    position: relative;\n    height: 1.9rem;\n    border-radius: 5px;\n    border: 0px solid var(--bs-primary);\n    -webkit-transition: width .5s, height .5s, -webkit-transform .5s;\n    transition: width .5s, height .5s, border-color .5s, transform .5s;\n}\n\n.device-image:hover {\n    border: 2px solid var(--bs-secondary);\n    -webkit-transform: scale(2);\n    transform: scale(2);\n}\n\n.card-space {\n    margin-bottom: 00px;\n}\n\na.a_cap:first-letter {\n    text-transform: uppercase;\n}\n\n.edit-buttons {\n    display: flex;\n    justify-content: flex-end;\n}\n\n.btn-width-40 {\n    width: 40%;\n}\n\n.cursor-pointer {\n    cursor: pointer;\n}\n\n.switch-big\n{\n    width: 75px;\n    height: 40px;\n}\n\n.switch-label {\n    height: 40px;\n    font-size: 1.5rem;\n    margin-left: 8px;\n    margin-top: 5px;\n}\n\n.shadow-1 {\n    text-shadow: 1px 1px 1px #333;\n}\n\n\n.vc-title {\n    color: var(--bs-body-color);\n}\n\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n    .device-image {\n        /*width: 100px;\n        height: 100px;\n         margin-top: -23px;\n        margin-bottom: -32px;*/\n        margin-left: 219px;\n        border-radius: 10px;\n        /*box-shadow: #eee 0px 0px 8px;*/\n    }\n    .card-space {\n        margin-bottom: 20px;\n    }\n    .container {\n        padding: 0;\n        width: 100%;\n    }\n\n    .navbar > .container-fluid {\n        display: flex;\n        flex-wrap: inherit;\n        align-items: center;\n        justify-content: flex-start;\n    }\n\n    .edit-buttons {\n        /* display: flex;*/\n        margin-top: 16px;\n        margin-bottom: 8px;\n        justify-content: flex-start;\n    }\n\n    .flex-right {\n        flex-direction: row;\n        flex-wrap: wrap;\n    }\n\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

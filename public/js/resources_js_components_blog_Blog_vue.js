@@ -31,7 +31,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       informationBlockCaption: 'Blog list',
       calendarBlockCaption: 'Date',
       devBlogs: [],
-      date: ''
+      calendarDate: new Date(),
+      calendarAttributes: [{
+        highlight: true,
+        dates: [new Date().setDate(new Date().getDate() - 1), new Date()]
+      }]
     };
   },
   created: function created() {
@@ -41,6 +45,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     this.getBlogData();
+  },
+  watch: {
+    calendarDate: function calendarDate() {
+      this.onDateChange(this.calendarDate);
+    }
   },
   methods: {
     getBlogData: function getBlogData() {
@@ -70,6 +79,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee, null, [[0, 7]]);
       }))();
+    },
+    onDateChange: function onDateChange(e) {
+      console.log(e.toLocaleDateString(e));
     }
   }
 });
@@ -231,11 +243,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DatePicker, {
-            modelValue: $data.date,
+            modelValue: $data.calendarDate,
             "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-              return $data.date = $event;
-            })
-          }, null, 8 /* PROPS */, ["modelValue"])])];
+              return $data.calendarDate = $event;
+            }),
+            attributes: $data.calendarAttributes
+          }, null, 8 /* PROPS */, ["modelValue", "attributes"])])];
         }),
         _: 1 /* STABLE */
       }, 8 /* PROPS */, ["cardCaption"])];
@@ -249,8 +262,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.devBlogs, function (itemCard, key) {
             return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_InfoCard, {
               "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-                'text-bg-info': key % 2 === 0,
-                'text-bg-success': key % 2 === 1
+                'text-bg-info': key % 2,
+                'text-bg-success': !(key % 2)
               }),
               key: key,
               infoCardCaption: itemCard.created_at,
@@ -377,7 +390,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".vc-title[data-v-78e814d4] {\n  color: inherit;\n}\n.vc-container[data-v-78e814d4] {\n  background-color: var(--bs-body-bg);\n  border-color: var(--bs-border-color);\n  color: var(--bs-body-color);\n}\n.overlay-x-auto[data-v-78e814d4] {\n  overflow-x: auto;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".vc-container[data-v-78e814d4] {\n  background-color: var(--bs-body-bg);\n  border-color: var(--bs-secondary);\n  color: var(--bs-body-color);\n}\n.overlay-x-auto[data-v-78e814d4] {\n  overflow-x: auto;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

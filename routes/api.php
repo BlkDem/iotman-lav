@@ -157,7 +157,8 @@ Route::controller(DevBlogController::class)->group(function () {
     Route::get(   '/dev_blog/read/{id}', 'show');
     Route::put(   '/dev_blog/update/{updateDevBlog}', 'update');
     Route::delete('/dev_blog/delete/{id}', 'destroy');
-    Route::patch('/dev_blog/patch/{id}/{field}/{value}', 'patch');
+    Route::patch( '/dev_blog/patch/{id}/{field}/{value}', 'patch');
+    Route::get(   '/dev_blog/daysofthemonth/{date}', 'daysofthemonth');
 });
 
 Route::controller(LoggerController::class)->group(function () {
