@@ -28,7 +28,7 @@ class DevBlog extends Model
     public static function getDaysOfTheMonth($date)
     {
 
-        $res = DevBlog::select( [DB::raw('DISTINCT(DAY(created_at)) as day_of_month') ])
+        $res = DevBlog::select( [DB::raw('DISTINCT(DAY(created_at)) as days') ])
             ->whereMonth('created_at', $date)
             ->orderBy('created_at', 'desc')
             ->get();
@@ -39,7 +39,7 @@ class DevBlog extends Model
     public static function getLastDays()
     {
 
-        $res = DevBlog::select( [DB::raw('DISTINCT(DAY(created_at)) as last_days') ])
+        $res = DevBlog::select( [DB::raw('DISTINCT(DAY(created_at)) as days') ])
             // ->whereMonth('created_at', $date)
             ->orderBy('created_at', 'desc')
             // ->limit()

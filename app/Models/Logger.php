@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use LengthException;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class Logger extends Model
 {
@@ -27,15 +29,31 @@ class Logger extends Model
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
+
+    public static function getValue($value) {
+        return $value["day_of_month"];
+    }
+
     public static function getDaysOfTheMonth($date)
     {
 
-        $res = Logger::select( [DB::raw('DISTINCT(DAY(created_at)) as day_of_month') ])
+        $res = Logger::select( [DB::raw('DAY(created_at) as day_of_month') ])
             ->whereMonth('created_at', $date)
+            ->groupBy('day_of_month')
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->get()->toArray();
 
-        return $res;
+        $daysCollection = collect($res);
+
+        $extracted = $daysCollection->map(function ($item, $key) {
+            return $item["day_of_month"];
+        });
+
+        $extracted->all();
+
+        $days["days"] = $extracted;
+
+        return $days;
     }
 
 }
