@@ -13,6 +13,7 @@
                     <div class="w-100 text-center overlay-x-auto">
                         <DatePicker
                             v-model="calendarDate"
+                            @update:fromPage="onPageChange($event)"
                             :attributes="calendarAttributes"
                         />
                     </div>
@@ -73,6 +74,9 @@ export default {
             devBlogs: [],
             calendarDate: new Date(),
 
+            currentMonth: '',
+            currentYear: '',
+
             calendarAttributes:
                 [
                     {
@@ -92,6 +96,8 @@ export default {
     },
 
     mounted() {
+
+        this.getBlogDays();
         this.getBlogData();
     },
 
@@ -102,6 +108,19 @@ export default {
     },
 
     methods: {
+
+        async getBlogDays(month) {
+            try {
+                const _data = await axios.get(APIConstants.api_dev_blog_days + month);
+                console.log(_data.data)
+                this.calendarAttributes[0].dates = _data.data.data;
+            } catch (error) {
+                if (error.response?.status === 401) {
+                    window.location.href = "/login"
+                }
+            }
+        },
+
         async getBlogData() {
             try {
                 const _data = await axios.get(APIConstants.api_dev_blogs_read);
@@ -115,6 +134,13 @@ export default {
 
         onDateChange(e) {
             console.log(e.toLocaleDateString(e))
+        },
+
+        onPageChange(e) {
+            console.log(e.month, e.year)
+            this.currentMonth = e.month;
+            this.currentYear = e.year;
+            this.getBlogDays(e.month)
         }
     }
 }

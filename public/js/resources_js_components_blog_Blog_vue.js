@@ -32,6 +32,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       calendarBlockCaption: 'Date',
       devBlogs: [],
       calendarDate: new Date(),
+      currentMonth: '',
+      currentYear: '',
       calendarAttributes: [{
         highlight: true,
         dates: [new Date().setDate(new Date().getDate() - 1), new Date()]
@@ -44,6 +46,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.date = Date.now();
   },
   mounted: function mounted() {
+    this.getBlogDays();
     this.getBlogData();
   },
   watch: {
@@ -52,7 +55,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
-    getBlogData: function getBlogData() {
+    getBlogDays: function getBlogDays(month) {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var _data, _error$response;
@@ -61,27 +64,62 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return axios.get(_api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_dev_blogs_read);
+              return axios.get(_api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_dev_blog_days + month);
             case 3:
               _data = _context.sent;
-              _this.devBlogs = _data.data.data;
-              _context.next = 10;
+              console.log(_data.data);
+              _this.calendarAttributes[0].dates = _data.data.data;
+              _context.next = 11;
               break;
-            case 7:
-              _context.prev = 7;
+            case 8:
+              _context.prev = 8;
               _context.t0 = _context["catch"](0);
               if (((_error$response = _context.t0.response) === null || _error$response === void 0 ? void 0 : _error$response.status) === 401) {
                 window.location.href = "/login";
               }
-            case 10:
+            case 11:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[0, 8]]);
+      }))();
+    },
+    getBlogData: function getBlogData() {
+      var _this2 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var _data, _error$response2;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return axios.get(_api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_dev_blogs_read);
+            case 3:
+              _data = _context2.sent;
+              _this2.devBlogs = _data.data.data;
+              _context2.next = 10;
+              break;
+            case 7:
+              _context2.prev = 7;
+              _context2.t0 = _context2["catch"](0);
+              if (((_error$response2 = _context2.t0.response) === null || _error$response2 === void 0 ? void 0 : _error$response2.status) === 401) {
+                window.location.href = "/login";
+              }
+            case 10:
+            case "end":
+              return _context2.stop();
+          }
+        }, _callee2, null, [[0, 7]]);
       }))();
     },
     onDateChange: function onDateChange(e) {
       console.log(e.toLocaleDateString(e));
+    },
+    onPageChange: function onPageChange(e) {
+      console.log(e.month, e.year);
+      this.currentMonth = e.month;
+      this.currentYear = e.year;
+      this.getBlogDays(e.month);
     }
   }
 });
@@ -246,6 +284,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             modelValue: $data.calendarDate,
             "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
               return $data.calendarDate = $event;
+            }),
+            "onUpdate:fromPage": _cache[1] || (_cache[1] = function ($event) {
+              return $options.onPageChange($event);
             }),
             attributes: $data.calendarAttributes
           }, null, 8 /* PROPS */, ["modelValue", "attributes"])])];

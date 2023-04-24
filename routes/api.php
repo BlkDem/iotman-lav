@@ -20,6 +20,7 @@ use App\Http\Controllers\Helpers\PresetController;
 use App\Http\Controllers\LoggerController;
 use App\Http\Controllers\Devices\MicroParamController;
 use App\Http\Controllers\Devices\ParamTypeController;
+use App\Http\Controllers\Helpers\ServerStatusController;
 
 // use App\Http\Controllers\ImagesAlbumController;
 
@@ -229,5 +230,7 @@ Route::patch('/user_device/patch/{id}/{field}/{value}', [DeviceUserController::c
 Route::get('/authuser', [UserinfoController::class, 'show']);
 Route::get('/user', [AuthController::class, 'UserInfo']);
 Route::get('/username', [AuthController::class, 'GetUserName']);
+
+Route::get('/sysinfo', [ServerStatusController::class, 'getServerLoad']);
 
 });
