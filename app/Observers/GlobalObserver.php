@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Facades\LOG;
+use Illuminate\Support\Facades\Auth;
 
 class GlobalObserver
 {
