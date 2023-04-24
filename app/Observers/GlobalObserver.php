@@ -10,21 +10,21 @@ class GlobalObserver
 {
     public function updated(Model $model)
     {
-        LOG::setLog('update: ' . $model->getTable(), $model);
+        LOG::setLog('Model updated', $model);
     }
 
     public function created(Model $model)
     {
-        LOG::setLog('created: ' . $model->getTable(), $model);
+        LOG::setLog('Model created', $model);
     }
 
     public function deleted(Model $model)
     {
-        LOG::setLog('deleted: ' . $model->getTable(), $model);
+        LOG::setLog('Model deleted', $model);
     }
 
     public function forceDeleted(Model $model)
     {
-        LOG::setLog('forceDeleted: ' . $model->getTable(), $model);
+        LOG::setLog('Model forceDeleted', $model);
     }
 }

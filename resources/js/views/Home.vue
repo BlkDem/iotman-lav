@@ -52,9 +52,9 @@
                                 'text-bg-danger': logRecord.log_level=='2',
                             }"
                             v-for="(logRecord, key) in logRecords" :key="key" :id="key">
-                            <div class="card-header"> {{ logRecord.created_at }} - {{ logRecord.log_category }}</div>
+                            <div class="card-header"> {{ logRecord.created_at }} - {{ logRecord.log_instance }}</div>
                             <div class="card-body">
-                                <!-- <p class="card-title text-info">{{ logRecord.log_category }}</p> -->
+                                <p class="card-title text-info">{{ logRecord.log_category }}</p>
                                 <p class="card-text">{{ getLogPretty(logRecord.log_data) }}</p>
                             </div>
                         </div>

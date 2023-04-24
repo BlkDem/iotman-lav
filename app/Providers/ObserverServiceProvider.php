@@ -12,6 +12,7 @@ use App\Models\Image;
 use App\Models\Micro;
 use App\Models\MicroParam;
 use App\Models\ParamType;
+use App\Models\User;
 use App\Observers\GlobalObserver;
 use Illuminate\Support\ServiceProvider;
 
@@ -41,6 +42,7 @@ class ObserverServiceProvider extends ServiceProvider
             Micro::class,
             MicroParam::class,
             ParamType::class,
+            User::class,
         ];
 
         foreach ($MODELS as $MODEL) {

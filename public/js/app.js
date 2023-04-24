@@ -25117,6 +25117,9 @@ var _hoisted_4 = {
   "class": "card-body"
 };
 var _hoisted_5 = {
+  "class": "card-title text-info"
+};
+var _hoisted_6 = {
   "class": "card-text"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -25183,7 +25186,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               }]),
               key: key,
               id: key
-            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(logRecord.created_at) + " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(logRecord.log_category), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <p class=\"card-title text-info\">{{ logRecord.log_category }}</p> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getLogPretty(logRecord.log_data)), 1 /* TEXT */)])], 10 /* CLASS, PROPS */, _hoisted_2);
+            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(logRecord.created_at) + " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(logRecord.log_instance), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(logRecord.log_category), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getLogPretty(logRecord.log_data)), 1 /* TEXT */)])], 10 /* CLASS, PROPS */, _hoisted_2);
           }), 128 /* KEYED_FRAGMENT */))];
         }),
 
