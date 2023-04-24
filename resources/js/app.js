@@ -2,6 +2,7 @@
 import './bootstrap';
 import { createApp } from 'vue';
 import { vue3Debounce } from 'vue-debounce'
+import { SetupCalendar, Calendar, DatePicker } from 'v-calendar';
 import router from './router'
 
 import LangCombo from './components/header/LangCombo.vue';
@@ -17,9 +18,18 @@ import InfoCard from './components/common/InfoCard.vue';
 import mitt from 'mitt';
 const emitter = mitt();
 
+import axios from 'axios';
+window.axios = axios;
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 const app = createApp(App);
 
 app.config.globalProperties.emitter = emitter;
+
+app.component('Calendar', Calendar)
+
+app.component('DatePicker', DatePicker)
 
 app.component('LangCombo', LangCombo);
 
@@ -38,6 +48,7 @@ app.component('InfoCard', InfoCard);
 app.component('AppMenu', AppMenu);
 
 app.use(router)
-.directive('debounce', vue3Debounce({ lock: true }))
-.mount('#app');
+    .use(SetupCalendar, {})
+    .directive('debounce', vue3Debounce({ lock: true }))
+    .mount('#app');
 

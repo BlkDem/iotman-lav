@@ -27,15 +27,19 @@ class Logger extends Model
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
+
     public static function getDaysOfTheMonth($date)
     {
 
-        $res = Logger::select( [DB::raw('DISTINCT(DAY(created_at)) as day_of_month') ])
+        $res = Logger::select( [DB::raw('DAY(created_at) as day_of_month') ])
             ->whereMonth('created_at', $date)
+            ->groupBy('day_of_month')
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return $res;
+        $days["days"] = collect($res)->pluck('day_of_month');
+
+        return $days;
     }
 
 }

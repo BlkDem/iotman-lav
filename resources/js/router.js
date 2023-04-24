@@ -15,7 +15,6 @@ const routes = [
             path: "/device_types",
             name: "Device Types",
             icon: "fas fa-layer-group",
-            // component: DeviceTypes,
             component: () => import('./components/device_types/DeviceTypes.vue'),
             ID: "DEVICE_TYPES"
         },
@@ -23,7 +22,6 @@ const routes = [
             path: "/devices",
             name: "Devices",
             icon: "fas fa-sun",
-            // component: Devices,
             component: () => import('./components/devices/Devices.vue'),
             ID: "DEVICES"
           },
@@ -31,7 +29,6 @@ const routes = [
             path: "/device_micros",
             name: "Device Micros",
             icon: "fas fa-sun",
-            // component: DeviceMicros,
             component: () => import('./components/device_micros/DeviceMicros.vue'),
             ID: "DEVICE_MICROS"
           },
@@ -39,7 +36,6 @@ const routes = [
             path: "/param_types",
             name: "Param Types",
             icon: "fa-solid fa-cubes",
-            // component: ParamTypes,
             component: () => import('./components/device_micros/ParamTypes.vue'),
             ID: "PARAM_TYPES"
           },
@@ -47,16 +43,13 @@ const routes = [
             path: "/micros",
             name: "Controllers",
             icon: "fas fa-microchip",
-            // component: Micros,
             component: () => import('./components/micros/Micros.vue'),
             ID: "MICROS",
-            // visible: true
           },
           {
             path: "/user_devices",
             name: "User Devices",
             icon: "fas fa-users",
-            // component: UserDevices,
             component: () => import('./components/user_devices/UserDevices.vue'),
             ID: "USER_DEVICES"
           },
@@ -66,7 +59,6 @@ const routes = [
     path: "/device_types",
     name: "Device Types",
     icon: "fas fa-layer-group",
-    // component: DeviceTypes,
     component: () => import('./components/device_types/DeviceTypes.vue'),
     ID: "DEVICE_TYPES",
     visible: false
@@ -75,7 +67,6 @@ const routes = [
     path: "/devices",
     name: "Devices",
     icon: "fas fa-sun",
-    // component: Devices,
     component: () => import('./components/devices/Devices.vue'),
     ID: "DEVICES",
     visible: false
@@ -84,7 +75,6 @@ const routes = [
     path: "/device_micros",
     name: "Device Micros",
     icon: "fas fa-sun",
-    // component: DeviceMicros,
     component: () => import('./components/device_micros/DeviceMicros.vue'),
     ID: "DEVICE_MICROS",
     visible: false
@@ -93,7 +83,6 @@ const routes = [
     path: "/user_devices",
     name: "User Devices",
     icon: "fas fa-users",
-    // component: UserDevices,
     component: () => import('./components/user_devices/UserDevices.vue'),
     ID: "USER_DEVICES",
     visible: false
@@ -102,7 +91,6 @@ const routes = [
     path: "/micros",
     name: "Controllers",
     icon: "fas fa-microchip",
-    // component: Micros,
     component: () => import('./components/micros/Micros.vue'),
     ID: "MICROS",
     visible: false
@@ -111,7 +99,6 @@ const routes = [
     path: "/param_types",
     name: "Param Types",
     icon: "fa-solid fa-cubes",
-    // component: ParamTypes,
     component: () => import('./components/device_micros/ParamTypes.vue'),
     ID: "PARAM_TYPES",
     visible: false
@@ -120,7 +107,6 @@ const routes = [
     path: "/albums",
     name: "Images Library",
     icon: "fas fa-images",
-    // component: Albums,
     component: () => import('./components/imagelib/albums/Albums.vue'),
     ID: "LIBRARY",
     visible: true,
@@ -129,7 +115,6 @@ const routes = [
             path: "/albums",
             name: "Albums",
             icon: "fas fa-images",
-            // component: Albums,
             component: () => import('./components/imagelib/albums/Albums.vue'),
             ID: "ALBUMS",
             visible: true
@@ -138,7 +123,6 @@ const routes = [
             path: "/images",
             name: "Images",
             icon: "fa-regular fa-image",
-            // component: Images,
             component: () => import('./components/imagelib/images/Images.vue'),
             ID: "IMAGES",
             visible: true
@@ -150,7 +134,6 @@ const routes = [
     path: "/images",
     name: "Images",
     icon: "fa-regular fa-image",
-    // component: Images,
     component: () => import('./components/imagelib/images/Images.vue'),
     ID: "IMAGES",
     visible: false
@@ -159,7 +142,6 @@ const routes = [
     path: "/albums",
     name: "Albums",
     icon: "fas fa-images",
-    // component: Albums,
     component: () => import('./components/imagelib/albums/Albums.vue'),
     ID: "ALBUMS",
     visible: false
@@ -168,7 +150,6 @@ const routes = [
     path: "/users",
     name: "Users",
     icon: "fa-solid fa-user-tie",
-    // component: Users,
     component: () => import('./components/users/Users.vue'),
     ID: "USERS",
     visible: true,
@@ -177,7 +158,6 @@ const routes = [
     path: "/users/:user_id",
     name: "UserInfo",
     icon: "fa-solid fa-user-tie",
-    // component: UserInfo,
     component: () => import('./components/users/UserInfo.vue'),
     ID: "USERINFO",
     visible: false
@@ -186,17 +166,24 @@ const routes = [
     path: "/presets",
     name: "Presets",
     icon: "fa-solid fa-gear",
-    // component: Presets,
     component: () => import('./components/presets/Presets.vue'),
 
     ID: "PRESETS",
     visible: true
   },
   {
+    path: "/blog",
+    name: "Blog",
+    icon: "fa-brands fa-microblog",
+    component: () => import('./components/blog/Blog.vue'),
+
+    ID: "BLOG",
+    visible: true
+  },
+  {
     path: "/dash/:device_micro_id",
     name: "Dash",
     icon: "fa-solid fa-gear",
-    // component: Presets,
     component: () => import('./views/Dash.vue'),
 
     ID: "DASH",

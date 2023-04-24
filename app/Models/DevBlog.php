@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class DevBlog extends Model
 {
@@ -23,5 +24,29 @@ class DevBlog extends Model
         'created_at',
         'updated_at'
     ];
+
+    public static function getDaysOfTheMonth($date)
+    {
+
+        $res = DevBlog::select( [DB::raw('DISTINCT(DAY(created_at)) as days') ])
+            ->whereMonth('created_at', $date)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return $res;
+    }
+
+    public static function getLastDays()
+    {
+
+        $res = DevBlog::select( [DB::raw('DISTINCT(DAY(created_at)) as days') ])
+            // ->whereMonth('created_at', $date)
+            ->orderBy('created_at', 'desc')
+            // ->limit()
+            ->get();
+
+        return $res;
+    }
+
 
 }

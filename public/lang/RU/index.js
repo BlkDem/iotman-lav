@@ -1,6 +1,7 @@
 export default {
     DASH: "Umolab Devices - Панель Управления",
     HOME: "Umolab Devices",
+    BLOG: "Блог",
     LIBRARY: "Библиотека",
     IMAGES: "Изображения",
     USERS: "Пользователи",

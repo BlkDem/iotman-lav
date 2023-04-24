@@ -20,6 +20,13 @@ class LoggerController extends BaseController
         // return response()->json(LOG::logger(), 200);
     }
 
+    public function WriteLog() {
+        // dd(Logger::logger());
+
+        return response()->json(LOG::setLog(), 200);
+        // return response()->json(LOG::logger(), 200);
+    }
+
     public function index(){
 
         $res = Logger::orderBy('created_at', 'desc')->get();
@@ -33,9 +40,9 @@ class LoggerController extends BaseController
     {
         $res = Logger::getDaysOfTheMonth($date);
 
-        $paginator = PaginatorController::Paginate($res->count(), 1, 1);
+        $paginator = PaginatorController::Paginate(count($res), 1, 1);
 
-        return $this->sendResponse($res, "Log Dates in the Month", $paginator);
+        return $this->sendResponse($res, "Days exist log in the Month", $paginator);
     }
 
     public function page($currentPage=0, $itemsPerPage=10){
