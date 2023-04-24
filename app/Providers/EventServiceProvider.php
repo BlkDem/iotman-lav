@@ -33,9 +33,6 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        // DeviceType::observe(DeviceTypeObserver::class);
-        // DeviceType::observe(LogObserver::class);
-        User::observe(UserObserver::class);
     }
 
     /**

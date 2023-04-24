@@ -27,17 +27,29 @@ class Logger extends Model
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
-
+    /**
+     * getDaysOfTheMonth - select days with log records in requested month and year
+     *
+     * @param  mixed $date
+     * @return Object with days collection
+     */
     public static function getDaysOfTheMonth($date)
     {
 
+        $time=strtotime($date);
+        $month=date("m", $time);
+        $year=date("Y", $time);
+
         $res = Logger::select( [DB::raw('DAY(created_at) as day_of_month') ])
-            ->whereMonth('created_at', $date)
+            ->whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
             ->groupBy('day_of_month')
             ->orderBy('created_at', 'desc')
             ->get();
 
         $days["days"] = collect($res)->pluck('day_of_month');
+        $days["month"] = $month;
+        $days["year"] = $year;
 
         return $days;
     }
