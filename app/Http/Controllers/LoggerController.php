@@ -20,6 +20,13 @@ class LoggerController extends BaseController
         // return response()->json(LOG::logger(), 200);
     }
 
+    public function WriteLog() {
+        // dd(Logger::logger());
+
+        return response()->json(LOG::setLog(), 200);
+        // return response()->json(LOG::logger(), 200);
+    }
+
     public function index(){
 
         $res = Logger::orderBy('created_at', 'desc')->get();

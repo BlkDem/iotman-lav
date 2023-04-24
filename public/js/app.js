@@ -24371,12 +24371,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   },
   methods: {
     getLogPretty: function getLogPretty(data) {
-      var jsonObj = JSON.parse(data);
-      if (_typeof(jsonObj) === 'object') {
-        var idx = jsonObj.idx,
-          fieldExt = jsonObj.fieldExt,
-          payload = jsonObj.payload;
-        return '/' + idx + fieldExt + ' => ' + payload;
+      // console.log(data);
+      // const jsonObj = JSON.parse(data);
+      return data;
+      if ((typeof jsonObj === "undefined" ? "undefined" : _typeof(jsonObj)) === 'object') {
+        var _jsonObj, _jsonObj2, _jsonObj3;
+        // const {idx, fieldExt, payload} = jsonObj;
+        return '/' + ((_jsonObj = jsonObj) === null || _jsonObj === void 0 ? void 0 : _jsonObj.idx) + ((_jsonObj2 = jsonObj) === null || _jsonObj2 === void 0 ? void 0 : _jsonObj2.fieldExt) + ' => ' + ((_jsonObj3 = jsonObj) === null || _jsonObj3 === void 0 ? void 0 : _jsonObj3.payload);
       }
       return 'Undefined Data';
     },

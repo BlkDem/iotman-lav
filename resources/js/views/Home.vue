@@ -122,10 +122,12 @@ export default {
 
         getLogPretty(data) {
 
-            const jsonObj = JSON.parse(data);
+            // console.log(data);
+            // const jsonObj = JSON.parse(data);
+            return data;
             if (typeof jsonObj === 'object') {
-                const {idx, fieldExt, payload} = jsonObj;
-                return '/' + idx + fieldExt + ' => ' + payload;
+                // const {idx, fieldExt, payload} = jsonObj;
+                return '/' + jsonObj?.idx + jsonObj?.fieldExt + ' => ' + jsonObj?.payload;
             }
             return 'Undefined Data';
 

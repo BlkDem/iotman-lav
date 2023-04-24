@@ -41,7 +41,7 @@ use App\Http\Controllers\Devices\ParamTypeController;
 //Login
 Route::post('/login', [AuthController::class, 'signin']);
 
-// Route::get('/test', [LoggerController::class, 'getLog']);
+Route::get('/test', [LoggerController::class, 'getLog']);
 
 Route::middleware('auth:sanctum')->group( function () {
 
