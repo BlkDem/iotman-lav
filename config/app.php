@@ -197,6 +197,8 @@ return [
 
         App\Providers\FacadeServiceProvider::class,
 
+        App\Providers\ObserverServiceProvider::class,
+
     ],
 
     /*
