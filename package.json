@@ -17,7 +17,7 @@
     "cropperjs": "^1.5.13",
     "debouncer": "^1.1.2",
     "fs": "^0.0.1-security",
-    "fs-extra": "^10.1.0",
+    "fs-extra": "^11.1.1",
     "marked": "^4.2.12",
     "mitt": "^3.0.0",
     "moment": "^2.29.4",
