@@ -27,8 +27,8 @@
                 <CommonCard ref="blogCard" :cardCaption="informationBlockCaption">
                 <InfoCard v-for="(itemCard, key) in devBlogs"
                     :class="{
-                                'text-bg-info': (key % 2),
-                                'text-bg-success': !(key % 2),
+                                // 'text-bg-info': (key % 2),
+                                // 'text-bg-success': !(key % 2),
                             }"
                     :key="key"
                     :infoCardCaption="itemCard.created_at"

@@ -23896,7 +23896,7 @@ __webpack_require__.r(__webpack_exports__);
       this.infoCardMoreButtonCaption = this.moreInfoVisible ? 'Less' : 'More';
     },
     markedParse: function markedParse(text) {
-      return marked__WEBPACK_IMPORTED_MODULE_0__.marked.parse(text);
+      return marked__WEBPACK_IMPORTED_MODULE_0__.marked.parse(text ? text : '');
     }
   }
 });
@@ -24690,6 +24690,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       'mb-4': $props.marginBottom
     }])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.infoCardCaption), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": "text-info",
     innerHTML: $options.markedParse($props.infoCardTitle)
   }, null, 8 /* PROPS */, _hoisted_4)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default"), $data.moreInfoVisible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     innerHTML: $options.markedParse($props.infoCardText)
@@ -25132,7 +25133,7 @@ var _hoisted_3 = {
   "class": "card-header"
 };
 var _hoisted_4 = {
-  "class": "card-body"
+  "class": "card-body fix-height-200px"
 };
 var _hoisted_5 = {
   "class": "card-title text-info"
@@ -25213,7 +25214,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.logRecords, function (logRecord, key) {
                 return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-                  "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["card text-bg-primary mb-3", {
+                  "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["card mb-3", {
                     'text-bg-warning': logRecord.log_level == '1',
                     'text-bg-danger': logRecord.log_level == '2'
                   }]),
@@ -33376,7 +33377,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.list-move[data-v-63cd6604], \n.list-enter-active[data-v-63cd6604],\n.list-leave-active[data-v-63cd6604] {\n  transition: all 0.5s ease;\n}\n.list-enter-from[data-v-63cd6604],\n.list-leave-to[data-v-63cd6604] {\n  opacity: 0;\n  transform: translateX(30px);\n}\n\n/* ensure leaving items are taken out of layout flow so that moving\n   animations can be calculated correctly. */\n.list-leave-active[data-v-63cd6604] {\n  position: absolute;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.list-move[data-v-63cd6604], \n.list-enter-active[data-v-63cd6604],\n.list-leave-active[data-v-63cd6604] {\n  transition: all 0.5s ease;\n}\n.list-enter-from[data-v-63cd6604],\n.list-leave-to[data-v-63cd6604] {\n  opacity: 0;\n  transform: translateX(30px);\n}\n\n/* ensure leaving items are taken out of layout flow so that moving\n   animations can be calculated correctly. */\n.list-leave-active[data-v-63cd6604] {\n  position: absolute;\n}\n.fix-height-200px[data-v-63cd6604] {\n    max-height: 200px;\n    overflow-y: auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
