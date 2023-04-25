@@ -21,23 +21,21 @@
             <template v-slot:middle>
 
             <CommonCard ref="menuCard" :cardCaption="informationBlockCaption">
-                <InfoCard v-for="(itemCard, key) in devBlogs"
-                    :class="{
+                <TransitionGroup name="list" tag="div">
+                    <InfoCard v-for="(itemCard, key) in devBlogs" :class="{
                                 'text-bg-info': key % 2 === 0,
                                 'text-bg-success': key % 2 === 1,
                             }"
-                    :key="key"
-                    :infoCardCaption="itemCard.created_at"
-                    :infoCardTitle="itemCard.dev_blog_name"
-                    :infoCardText="itemCard.dev_blog_desc"
-                    :infoCardMoreButtonCaption="itemCard.infoCardMoreButtonCaption"
-                    :marginBottom="2"
-                    :buttonVisible="itemCard.buttonVisible"
+                        :key="key"
+                        :infoCardCaption="itemCard.created_at"
+                        :infoCardTitle="itemCard.dev_blog_name"
+                        :infoCardText="itemCard.dev_blog_desc"
+                        :infoCardMoreButtonCaption="itemCard.infoCardMoreButtonCaption"
+                        :marginBottom="2"
+                        :buttonVisible="itemCard.buttonVisible">
 
-
-                >
-
-                </InfoCard>
+                    </InfoCard>
+                </TransitionGroup>
             </CommonCard>
 
             </template>
@@ -46,6 +44,7 @@
 
         <!-- messages -->
             <CommonCard ref="logCard" :cardCaption="logBlockCaption">
+                    <TransitionGroup name="list" tag="div">
                         <div class="card text-bg-primary mb-3"
                             :class="{
                                 'text-bg-warning': logRecord.log_level=='1',
@@ -58,6 +57,7 @@
                                 <p class="card-text">{{ getLogPretty(logRecord.log_data) }}</p>
                             </div>
                         </div>
+                    </TransitionGroup>
             </CommonCard>
 
 
@@ -166,3 +166,23 @@ export default {
 
 }
 </script>
+
+<style scoped>
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
+}
+</style>

@@ -123,8 +123,8 @@
                 :fieldsCaptions="dataFields"
                 @updateSortedData="updateSortedData"
             >
-
             </TableHead>
+            <TransitionGroup name="list" tag="div">
             <div class="card mb-1 w-100"
                 v-for="(item, key) in filteredItems" v-bind:key="key"
                 v-bind:id="item.id.value"
@@ -155,7 +155,6 @@
                                     (!item[column].isLookup)"
                                 :class="{
                                             'text-info': item[column].isHighLight,
-                                            // 'elipsis':  item[column].isText,
                                         }"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
@@ -176,7 +175,7 @@
                                 :class="{'text-info': item[column].isHighLight}"
                             >
 
-                                <router-link v-if="item[column].Link != null" :to="item[column].Link+item.id.value">
+                                <router-link v-if="item[column].Link != null" :to="item[column].Link + item.id.value">
                                     <i :class="getVirtualImage(selectedRow[key], item[column])"></i>
                                 </router-link>
 
@@ -253,10 +252,9 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="my-1 border-4 border-bottom rounded-bottom border-secondary"></div> -->
+        </TransitionGroup>
         </div>
         <Paginator ref="refPaginator"></Paginator>
-        <!-- <MyMqtt></MyMqtt> -->
     </common-card>
 
 </template>
@@ -270,10 +268,8 @@ import Sorting from "../../helpers/Sorting";
 import Filtering from "../../helpers/Filtering.js";
 import ParsingErrors from "../../helpers/ParsingErrors.js";
 import AddItem from './AddDialog.vue';
-
 import TableNav from '../../components/common/TableBar/TableNav.vue';
 import TableHead from './TableHead.vue';
-// import pathes from '../../config/pathes';
 import Viewer from '../imagelib/Viewer.vue';
 import { Tooltip } from 'bootstrap'
 
@@ -614,17 +610,10 @@ export default {
                         const _lookupId = dataField.lookupId //field link key (FK)
                         const _displayName = dataField.displayName //Display Name Field
 
-                        // console.log(dataField)
-                        // const newListItem = _item  //newList[itemRow]
-
-                        // console.log(this.dataFields, listItem[dataField.fieldName])
-                        // const _a = (dataField.fieldName != null)?listItem[dataField.fieldName]:''
-
                         newListItemData[dataField.fieldName] = {
 
                             value: (dataField.fieldName != null) ? listItem[dataField.fieldName] : '',
                             lookupValue: (dataField.displayName != null) ? listItem[dataField.displayName] : '',
-                            // value: (dataField.displayName == null)? listItem[dataField.fieldName]:listItem[dataField.displayName],
                             displayName: _displayName,
                             VirtualImage: _virtualimage,
                             subscribeVirtualImage: _subscribeimage,
@@ -708,7 +697,8 @@ export default {
                                 pagesCount: response.data.paginator.PagesCount,
                                 currentPage: response.data.paginator.CurrentPage,
                                 itemsPerPage: response.data.paginator.ItemsPerPage,
-                                recordsCount: response.data.paginator.RecordsCount
+                                recordsCount: response.data.paginator.RecordsCount,
+                                objectRef: this
                             }
                         )
                     })
@@ -880,7 +870,23 @@ export default {
     };
 </script>
 
-<style>
+<style scoped>.list-move,
+/* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+    transition: all 0.5s ease;
+}
 
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+    position: absolute;
+}
 
 </style>

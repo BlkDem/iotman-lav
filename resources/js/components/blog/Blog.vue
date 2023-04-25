@@ -41,6 +41,7 @@
                 >
 
                 </InfoCard>
+                <Paginator ref="refBlogPaginator"></Paginator>
             </CommonCard>
 
 
@@ -59,11 +60,13 @@
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
 import MasterSlaveLayout from "../../layouts/MasterSlaveLayout.vue";
+import Paginator from '../db/Paginator.vue';
 
 export default {
 
     components: {
         MasterSlaveLayout,
+        Paginator
     },
 
     data() {
@@ -98,7 +101,7 @@ export default {
     mounted() {
 
         this.getBlogDays();
-        this.getBlogData();
+        this.getData();
     },
 
     watch: {
@@ -112,7 +115,7 @@ export default {
         async getBlogDays(month) {
             try {
                 const _data = await axios.get(APIConstants.api_dev_blog_days + month);
-                console.log(_data.data)
+                // console.log(_data.data)
                 this.calendarAttributes[0].dates = _data.data.data;
             } catch (error) {
                 if (error.response?.status === 401) {
@@ -121,10 +124,24 @@ export default {
             }
         },
 
-        async getBlogData() {
+        async getData(_currentPage=1, _itemsPerPage=50) {
             try {
-                const _data = await axios.get(APIConstants.api_dev_blogs_read);
+                const _data = await axios.get(`${APIConstants.api_dev_blogs_read_page}${_currentPage}/${_itemsPerPage}`);
+
+                // console.log(_data)
                 this.devBlogs = _data.data.data;
+
+                this.$refs.refBlogPaginator.setPaginator(
+                            {
+                                pagesCount: _data.data.paginator.PagesCount,
+                                currentPage: _data.data.paginator.CurrentPage,
+                                itemsPerPage: _data.data.paginator.ItemsPerPage,
+                                recordsCount: _data.data.paginator.RecordsCount,
+                                objectRef: this
+                            }
+                        )
+
+
             } catch (error) {
                 if (error.response?.status === 401) {
                     window.location.href = "/login"
