@@ -53,6 +53,7 @@ export default {
     api_dev_blog_update: apiPreffix +     'dev_blog/update/',
     api_dev_blog_delete: apiPreffix +     'dev_blog/delete/',
     api_dev_blog_patch: apiPreffix +      'dev_blog/patch/',
+    api_dev_blog_days: apiPreffix +      'dev_blog/daysofthemonth/',
 
     //Logs CRUD
     api_log_create: apiPreffix +     'log/create/',
