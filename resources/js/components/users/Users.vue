@@ -1,13 +1,11 @@
 <template>
-    <div style="margin-top: 5.5rem">
-        <!-- {{ pageCaption }} -->
-    </div>
+    <div class="mt-55"></div>
 
     <data-table
             :api="users.api"
             :dataFields="users.usersFields"
             :pageCaption="users.usersCaption"
-        >
+    >
     </data-table>
 
 </template>
@@ -16,24 +14,13 @@
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
 import DataTable from '../db/DataTable.vue';
-
-// import ParsingErrors from "../common/js/ParsingErrors.js";
-// import Imager from '../../components/common/Imager.vue';
-
-// import dsDeviceType from "../../api/dsDeviceType";
-
-// import TableNav from '../../components/common/TableBar/TableNav.vue';
+import Api from '../../api/ApiStruct';
+import FieldStruct from '../users/FieldStruct';
 
     export default {
 
         components: {
-            // ConfirmDialogue,
-            // AddDeviceType,
-            // Paginator,
             DataTable
-            // Imager,
-            // TableNav,
-            // dsDeviceType
         },
 
         data() {
@@ -41,73 +28,10 @@ import DataTable from '../db/DataTable.vue';
                 users: {
                     usersCaption: MessagesConstants.USERS,
 
-                    api: {
-                        get: '',
-                        insert: '',
-                        update: '',
-                        delete: '',
-                        patch: ''
-                    },
+                    api: { Api },
 
                     usersFields: [
-                    {
-                            fieldName: 'Image',
-                            fieldCaption: '',
-                            type: String,
-                            isImage: false,
-                            isVirtualImage: true,
-                            VirtualImage: 'fa-solid fa-user-tie fa-2x',
-                            isEditable: false,
-                            isSortable: false,
-                            isHighLight: true,
-                            columnsCount: 1
-                        },
-
-                        {
-                            fieldName: 'id',
-                            fieldCaption: 'ID',
-                            type: Number,
-                            isImage: false,
-                            isEditable: false,
-                            isSortable: true,
-                            isHighLight: true,
-                            columnsCount: 1
-                        },
-
-                        {
-                            fieldName: 'name',
-                            fieldCaption: 'Name',
-                            type: String,
-                            isImage: false,
-                            isEditable: true,
-                            isSortable: true,
-                            isHighLight: false,
-                            columnsCount: 4
-                        },
-
-                        {
-                            fieldName: 'email',
-                            fieldCaption: 'Email',
-                            type: String,
-                            isImage: false,
-                            isEditable: true,
-                            isSortable: true,
-                            isHighLight: true,
-                            columnsCount: 4
-                        },
-
-                        // {
-                        //     fieldName: 'email_verified_at',
-                        //     fieldCaption: 'Verified Email',
-                        //     type: String,
-                        //     isImage: false,
-                        //     isDateTime: true,
-                        //     isEditable: false,
-                        //     isSortable: true,
-                        //     isHighLight: false,
-                        //     columnsCount: 2
-                        // },
-
+                        ...FieldStruct.UserFieldStruct
                     ],
 
                 },
@@ -121,13 +45,13 @@ import DataTable from '../db/DataTable.vue';
 
         created() {
 
-            const userApi = this.users
+            const userApi = this.users.api
 
-            userApi.api.get =    APIConstants.api_users_read_page
-            userApi.api.insert = APIConstants.api_user_create
-            userApi.api.update = APIConstants.api_user_update
-            userApi.api.patch =  APIConstants.api_user_patch
-            userApi.api.delete = APIConstants.api_user_delete
+            userApi.get =    APIConstants.api_users_read_page
+            userApi.insert = APIConstants.api_user_create
+            userApi.update = APIConstants.api_user_update
+            userApi.patch =  APIConstants.api_user_patch
+            userApi.delete = APIConstants.api_user_delete
         },
 
         mounted() {
@@ -140,7 +64,7 @@ import DataTable from '../db/DataTable.vue';
         methods: {
 
             setLang(_lang) {
-                this.pageCaption = _lang.DEVICE_TYPES ?? 'Device Types'
+                this.pageCaption = _lang.DEVICE_TYPES || 'Device Types'
             },
         },
 

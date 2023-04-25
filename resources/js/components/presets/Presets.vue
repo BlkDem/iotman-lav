@@ -1,7 +1,5 @@
 <template>
-    <div style="margin-top: 5.5rem">
-        <!-- {{ pageCaption }} -->
-    </div>
+    <div class="mt-55"></div>
 
     <data-table
             :api="presets.api"
@@ -16,86 +14,23 @@
 import DataTable from '../db/DataTable.vue';
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
+import Api from '../../api/ApiStruct';
+import FieldStruct from '../presets/FieldStruct';
 
 export default {
     components: {DataTable},
     data() {
         return {
             presets: {
-                    presetsCaption: MessagesConstants.PRESETS,
+                presetsCaption: MessagesConstants.PRESETS,
 
-                    api: {
-                        get: '',
-                        insert: '',
-                        update: '',
-                        delete: '',
-                        patch: ''
-                    },
+                api: { Api },
 
-                    presetsFields: [
-                    {
-                            fieldName: 'Image',
-                            fieldCaption: '',
-                            type: String,
-                            isImage: false,
-                            isVirtualImage: true,
-                            VirtualImage: 'fa-solid fa-gear fa-2x',
-                            isEditable: false,
-                            isSortable: false,
-                            isHighLight: true,
-                            columnsCount: 1
-                        },
+                presetsFields: [
+                    ...FieldStruct.PresetFieldStruct
+                ],
 
-
-                        {
-                            fieldName: 'id',
-                            fieldCaption: 'ID',
-                            type: Number,
-                            isImage: false,
-                            isEditable: false,
-                            isSortable: true,
-                            isHighLight: true,
-                            columnsCount: 1
-                        },
-
-                        {
-                            fieldName: 'preset_key',
-                            fieldCaption: 'Key',
-                            type: String,
-                            isImage: false,
-                            isEditable: true,
-                            isSortable: true,
-                            isHighLight: false,
-                            columnsCount: 3
-                        },
-
-                        {
-                            fieldName: 'preset_value',
-                            fieldCaption: 'Value',
-                            type: String,
-                            isImage: false,
-                            isEditable: true,
-                            isSortable: true,
-                            isHighLight: true,
-                            columnsCount: 3
-                        },
-
-                        {
-                            fieldName: 'preset_description',
-                            fieldCaption: 'Description',
-                            type: String,
-                            isImage: false,
-                            isText: true,
-                            isEditable: true,
-                            isSortable: true,
-                            isHighLight: false,
-                            columnsCount: 2
-                        },
-                    ],
-
-                },
-
-
+            },
         }
     },
 

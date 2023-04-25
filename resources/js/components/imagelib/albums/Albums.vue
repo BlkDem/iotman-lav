@@ -19,6 +19,8 @@
 import MessagesConstants from '../../strings_constants/strings'
 import APIConstants from "../../../api/rest_api";
 import DataTable from '../../db/DataTable.vue';
+import Api from '../../../api/ApiStruct';
+import FieldStruct from './FieldStruct';
 
     export default {
 
@@ -35,53 +37,10 @@ import DataTable from '../../db/DataTable.vue';
                 albums: {
                     albumsCaption: MessagesConstants.ALBUMS,
 
-                    api: {
-                        get: '',
-                        insert: '',
-                        update: '',
-                        delete: '',
-                        patch: ''
-                    },
+                    api: { Api },
 
                     albumsFields: [
-
-                        {
-                            fieldName: 'Image',
-                            type: String,
-                            isVirtualImage: true,
-                            isHighLight: true,
-                            isSortable: false,
-                            VirtualImage: 'fa-solid fa-folder-closed fa-2x',
-                            columnsCount: 1
-                        },
-
-                        {
-                            fieldName: 'id',
-                            fieldCaption: 'ID',
-                            type: Number,
-                            isSortable: true,
-                            isHighLight: true,
-                            columnsCount: 1
-                        },
-
-                        {
-                            fieldName: 'album_name',
-                            fieldCaption: 'Name',
-                            type: String,
-                            isEditable: true,
-                            isSortable: true,
-                            columnsCount: 3
-                        },
-
-                        {
-                            fieldName: 'album_desc',
-                            fieldCaption: 'Description',
-                            type: String,
-                            isText: true,
-                            isEditable: true,
-                            isSortable: true,
-                            columnsCount: 5
-                        },
+                        ...FieldStruct.AlbumFieldStruct
                     ],
                 },
 

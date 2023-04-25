@@ -1278,15 +1278,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       images: [],
-      //themes list
-      currentImage: '' //binded current theme combo caption
-      // themeCaption: 'Theme' //binded theme caption preffix
+      currentImage: ''
     };
   },
   created: function created() {
-    this.readImages(); //loading themes list from file themes.js
+    this.readImages();
   },
-
   methods: {
     getImage: function getImage(image) {
       return _config_pathes__WEBPACK_IMPORTED_MODULE_1__["default"].storageImagesPath + image;
@@ -1310,7 +1307,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     changeImage: function changeImage(new_image) {
-      // changing theme
       this.currentImage = new_image;
       this.$emit('changeImage', new_image, this.fieldKey);
     }
@@ -1333,6 +1329,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_rest_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api/rest_api */ "./resources/js/api/rest_api.js");
 /* harmony import */ var _components_db_DataTable_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/db/DataTable.vue */ "./resources/js/components/db/DataTable.vue");
 /* harmony import */ var _layouts_MasterSlaveLayout_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../layouts/MasterSlaveLayout.vue */ "./resources/js/layouts/MasterSlaveLayout.vue");
+/* harmony import */ var _FieldStruct__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FieldStruct */ "./resources/js/components/user_devices/FieldStruct.js");
+/* harmony import */ var _api_ApiStruct__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../api/ApiStruct */ "./resources/js/api/ApiStruct.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+
+
 
 
 
@@ -1344,128 +1350,31 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      //DataSet is readonly
       usersReadOnly: true,
+      //Additional Card Caption
       additionalCaption: true,
+      //Page Caption
       layoutCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].USER_DEVICES,
+      //User`s Devices model
       userDevices: {
         userDevicesCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].USER_DEVICES,
         api: {
-          get: '',
-          insert: '',
-          update: '',
-          "delete": '',
-          patch: ''
+          Api: _api_ApiStruct__WEBPACK_IMPORTED_MODULE_5__["default"]
         },
-        userDevicesFields: [{
-          fieldName: 'device_type_image',
-          fieldCaption: '',
-          type: String,
-          isImage: true,
-          isEditable: false,
-          isFieldIgnore: true,
-          // isSortable: true,
-          isHighLight: false,
-          columnsCount: 1
-        }, {
-          fieldName: 'id',
-          fieldCaption: 'ID',
-          type: Number,
-          isImage: false,
-          isEditable: false,
-          isSortable: true,
-          isHighLight: true,
-          columnsCount: 1
-        }, {
-          fieldName: 'user_device_name',
-          fieldCaption: 'Name',
-          type: String,
-          isImage: false,
-          isText: false,
-          isEditable: true,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 3
-        }, {
-          fieldName: 'device_id',
-          displayName: 'device_name',
-          fieldCaption: 'Device',
-          type: String,
-          isImage: false,
-          isEditable: false,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 3,
-          lookupId: 'device_id',
-          lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_devices_read,
-          isLookup: true
-        },
-        // {
-        //     fieldName: 'device_type_name',
-        //     fieldCaption: 'Device Type',
-        //     type: String,
-        //     isImage: false,
-        //     isText: true,
-        //     isEditable: true,
-        //     isSortable: true,
-        //     isHighLight: false,
-        //     columnsCount: 3
-        // },
-        {
-          fieldName: 'user_id',
-          displayName: 'user_name',
-          fieldCaption: 'User',
-          type: String,
-          isImage: false,
-          isEditable: false,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 2,
-          lookupId: 'user_id',
-          lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_users_read,
-          isLookup: true
-        }],
-        user_id: 'user_id',
-        user_id_value: 1
+        userDevicesFields: _toConsumableArray(_FieldStruct__WEBPACK_IMPORTED_MODULE_4__["default"].UserDeviceFieldStruct)
+
+        // user_id: 'user_id',
+        // user_id_value: 1,
       },
+
+      //User`s model
       users: {
         usersCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].USERS,
         api: {
-          get: '',
-          insert: '',
-          update: '',
-          "delete": '',
-          patch: ''
+          Api: _api_ApiStruct__WEBPACK_IMPORTED_MODULE_5__["default"]
         },
-        usersFields: [{
-          fieldName: 'Image',
-          type: String,
-          isVirtualImage: true,
-          isHighLight: true,
-          isSortable: false,
-          VirtualImage: 'fa-solid fa-user-tie fa-2x',
-          columnsCount: 2
-        }, {
-          fieldName: 'id',
-          fieldCaption: 'ID',
-          type: Number,
-          isSortable: true,
-          isHighLight: true,
-          columnsCount: 2
-        }, {
-          fieldName: 'user_name',
-          fieldCaption: 'Name',
-          type: String,
-          // isEditable: true,
-          isSortable: true,
-          columnsCount: 6
-        }, {
-          fieldName: 'devices_count',
-          fieldCaption: 'Cnt',
-          type: Number,
-          isSortable: true,
-          isHighLight: true,
-          columnsCount: 2
-        }],
+        usersFields: _toConsumableArray(_FieldStruct__WEBPACK_IMPORTED_MODULE_4__["default"].UserFieldStruct),
         selectedName: 'user_name',
         //selected album id for child table images
         selectedFkValue: 0
@@ -1475,7 +1384,6 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var apiUserDevices = this.userDevices.api;
     apiUserDevices.get = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_user_devices_read_page;
-    // apiImages.get = APIConstants.api_images_read_page
     apiUserDevices.insert = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_user_device_create;
     apiUserDevices.update = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_user_device_update;
     apiUserDevices["delete"] = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_user_device_delete;
@@ -1485,7 +1393,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     onRowClick: function onRowClick(dataEvent) {
-      // console.log(dataEvent)
       this.userDevices.selectedFkValue = dataEvent;
     }
   }
@@ -2666,7 +2573,7 @@ var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
     role: "button",
     "aria-haspopup": "true",
     "aria-expanded": "false"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ themeCaption }}  "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ currentImage }} ")], -1 /* HOISTED */);
+  }, null, -1 /* HOISTED */);
 });
 var _hoisted_3 = {
   "class": "dropdown-menu theme-dropdown"
@@ -2682,13 +2589,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         $data.currentImage = image;
         $options.changeImage(image.name);
       }
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ theme }} "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: $options.getImage(image.name),
       style: {
         "width": "330px"
       }
     }, null, 8 /* PROPS */, _hoisted_5)], 8 /* PROPS */, _hoisted_4);
-  }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dropdown-divider\"></div>\n            <a class=\"dropdown-item\" href=\"#\" @click=\"changeTheme('slate')\">slate</a> ")])]);
+  }), 128 /* KEYED_FRAGMENT */))])]);
 }
 
 /***/ }),
@@ -2830,6 +2737,129 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["mx-2", $data.slaveWidth])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "slave", {}, undefined, true)], 2 /* CLASS */)], 2 /* CLASS */)], 64 /* STABLE_FRAGMENT */);
 }
+
+/***/ }),
+
+/***/ "./resources/js/api/ApiStruct.js":
+/*!***************************************!*\
+  !*** ./resources/js/api/ApiStruct.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  ApiStruct: {
+    get: '',
+    insert: '',
+    update: '',
+    "delete": '',
+    patch: ''
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/components/user_devices/FieldStruct.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/user_devices/FieldStruct.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _api_rest_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api/rest_api */ "./resources/js/api/rest_api.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  UserDeviceFieldStruct: [{
+    fieldName: 'device_type_image',
+    fieldCaption: '',
+    type: String,
+    isImage: true,
+    isEditable: false,
+    isFieldIgnore: true,
+    isHighLight: false,
+    columnsCount: 1
+  }, {
+    fieldName: 'id',
+    fieldCaption: 'ID',
+    type: Number,
+    isImage: false,
+    isEditable: false,
+    isSortable: true,
+    isHighLight: true,
+    columnsCount: 1
+  }, {
+    fieldName: 'user_device_name',
+    fieldCaption: 'Name',
+    type: String,
+    isImage: false,
+    isText: false,
+    isEditable: true,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 3
+  }, {
+    fieldName: 'device_id',
+    displayName: 'device_name',
+    fieldCaption: 'Device',
+    type: String,
+    isImage: false,
+    isEditable: false,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 3,
+    lookupId: 'device_id',
+    lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].api_devices_read,
+    isLookup: true
+  }, {
+    fieldName: 'user_id',
+    displayName: 'user_name',
+    fieldCaption: 'User',
+    type: String,
+    isImage: false,
+    isEditable: false,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 2,
+    lookupId: 'user_id',
+    lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].api_users_read,
+    isLookup: true
+  }],
+  UserFieldStruct: [{
+    fieldName: 'Image',
+    type: String,
+    isVirtualImage: true,
+    isHighLight: true,
+    isSortable: false,
+    VirtualImage: 'fa-solid fa-user-tie fa-2x',
+    columnsCount: 2
+  }, {
+    fieldName: 'id',
+    fieldCaption: 'ID',
+    type: Number,
+    isSortable: true,
+    isHighLight: true,
+    columnsCount: 2
+  }, {
+    fieldName: 'user_name',
+    fieldCaption: 'Name',
+    type: String,
+    isSortable: true,
+    columnsCount: 6
+  }, {
+    fieldName: 'devices_count',
+    fieldCaption: 'Cnt',
+    type: Number,
+    isSortable: true,
+    isHighLight: true,
+    columnsCount: 2
+  }]
+});
 
 /***/ }),
 

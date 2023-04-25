@@ -1,5 +1,5 @@
 <template>
-    <div style="margin-top: 5.5rem"></div>
+    <div class="mt-55"></div>
 
     <data-table
         :api="paramTypes.api"
@@ -15,6 +15,8 @@
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
 import DataTable from '../db/DataTable.vue';
+import Api from '../../api/ApiStruct';
+import FieldStruct from './FieldStruct';
 
     export default {
 
@@ -24,62 +26,14 @@ import DataTable from '../db/DataTable.vue';
 
         data() {
             return {
+
+                //ParamType model
                 paramTypes: {
                     paramTypesCaption: MessagesConstants.PARAM_TYPES,
 
-                    api: {
-                        get: '',
-                        insert: '',
-                        update: '',
-                        delete: '',
-                        patch: ''
-                    },
+                    api: { Api },
 
-                    paramTypesFields: [
-                        {
-                            fieldName: 'Image',
-                            type: String,
-                            isVirtualImage: true,
-                            isHighLight: true,
-                            isSortable: false,
-                            VirtualImage: 'fa-solid fa-cubes fa-2x',
-                            columnsCount: 1
-                        },
-
-                        {
-                            fieldName: 'id',
-                            fieldCaption: 'ID',
-                            type: Number,
-                            isImage: false,
-                            isEditable: false,
-                            isSortable: true,
-                            isHighLight: true,
-                            columnsCount: 1
-                        },
-
-                        {
-                            fieldName: 'type_name',
-                            fieldCaption: 'Name',
-                            type: String,
-                            isImage: false,
-                            isEditable: true,
-                            isSortable: true,
-                            isHighLight: false,
-                            columnsCount: 3
-                        },
-
-                        {
-                            fieldName: 'type_desc',
-                            fieldCaption: 'Description',
-                            type: String,
-                            isImage: false,
-                            isText: true,
-                            isEditable: true,
-                            isSortable: true,
-                            isHighLight: false,
-                            columnsCount: 5
-                        },
-                    ],
+                    paramTypesFields: [ ...FieldStruct.ParamTypeFieldStruct ],
 
                 },
 
@@ -92,13 +46,13 @@ import DataTable from '../db/DataTable.vue';
 
         created() {
 
-            const paramTypeApi = this.paramTypes
+            const paramTypeApi = this.paramTypes.api
 
-            paramTypeApi.api.get =    APIConstants.api_param_types_read_page
-            paramTypeApi.api.insert = APIConstants.api_param_type_create
-            paramTypeApi.api.update = APIConstants.api_param_type_update
-            paramTypeApi.api.patch =  APIConstants.api_param_type_patch
-            paramTypeApi.api.delete = APIConstants.api_param_type_delete
+            paramTypeApi.get =    APIConstants.api_param_types_read_page
+            paramTypeApi.insert = APIConstants.api_param_type_create
+            paramTypeApi.update = APIConstants.api_param_type_update
+            paramTypeApi.patch =  APIConstants.api_param_type_patch
+            paramTypeApi.delete = APIConstants.api_param_type_delete
         },
 
         mounted() {

@@ -1,8 +1,5 @@
 <template>
-    <div style="margin-top: 5.5rem">
-    </div>
-
-    <!-- <button @click="showDialogue">123</button> -->
+    <div class="mt-55"></div>
 
     <MasterSlaveLayout
         :layoutCaption="layoutCaption"
@@ -18,7 +15,8 @@
                     :selectedName="albums.selectedName"
                     :readOnly="albumsReadOnly"
                     :isAdditionalCaption="true"
-                    @onRowClick="onRowClick">
+                    @onRowClick="onRowClick"
+                >
                 </data-table>
 
             </template>
@@ -32,7 +30,7 @@
                     :isSlave="true"
                     :foreignValue="images.selectedFkValue"
                     :currentImage="currentImage"
-                    >
+                >
                 </data-table>
 
             </template>
@@ -49,6 +47,8 @@ import APIConstants from "../../../api/rest_api";
 import DataTable from '../../db/DataTable.vue';
 import MasterSlaveLayout from '../../../layouts/MasterSlaveLayout.vue';
 import pathes from '../../../config/pathes';
+import Api from '../../../api/ApiStruct';
+import FieldStruct from './FieldStruct';
 
 export default {
 
@@ -66,64 +66,14 @@ export default {
 
             albumsReadOnly: true,
 
-            //Images Widget Setup
+            //Image model
             images: {
                 imagesCaption: MessagesConstants.IMAGES,
 
-                api: {
-                    get: '',
-                    insert: '',
-                    update: '',
-                    delete: '',
-                    patch: ''
-                },
+                api: { Api },
 
                 imagesFields: [
-                    {
-                        fieldName: 'image_name',
-                        fieldCaption: 'Name',
-                        type: String,
-                        isImage: true,
-                        isEditable: true,
-                        isHighLight: false,
-                        columnsCount: 1
-                    },
-
-                    {
-                        fieldName: 'id',
-                        fieldCaption: 'ID',
-                        type: Number,
-                        isImage: false,
-                        isEditable: false,
-                        isSortable: true,
-                        isHighLight: true,
-                        columnsCount: 1
-                    },
-
-                    {
-                        fieldName: 'image_desc',
-                        fieldCaption: 'Description',
-                        type: String,
-                        isImage: false,
-                        isText: true,
-                        isEditable: true,
-                        isSortable: true,
-                        isHighLight: false,
-                        columnsCount: 5
-                    },
-                    {
-                            fieldName: 'album_id',
-                            displayName: 'album_name',
-                            fieldCaption: 'Album',
-                            type: String,
-                            // isHidden: true,
-                            // isSortable: true,
-                            columnsCount: 3,
-                            lookupId: 'album_id',
-                            lookupApi: APIConstants.api_albums_read,
-                            isLookup: true,
-                        },
-
+                    ...FieldStruct.ImageFieldStruct
                 ],
 
                 album_id: 'album_id',
@@ -131,57 +81,14 @@ export default {
 
             },
 
+            //Album model
             albums: {
                 albumsCaption: MessagesConstants.ALBUMS,
 
-                api: {
-                    get: '',
-                    insert: '',
-                    update: '',
-                    delete: '',
-                    patch: ''
-                },
+                api: { Api },
 
                 albumsFields: [
-
-                    {
-                        fieldName: 'Image',
-                        type: String,
-                        isVirtualImage: true,
-                        isHighLight: true,
-                        isSortable: false,
-                        VirtualImage: 'fa-solid fa-folder-closed fa-2x',
-                        selectedVirtualImage: 'fa-solid fa-folder-open fa-2x',
-                        columnsCount: 2
-                    },
-
-                    {
-                        fieldName: 'id',
-                        fieldCaption: 'ID',
-                        type: Number,
-                        isSortable: true,
-                        isHighLight: true,
-                        columnsCount: 2
-                    },
-
-                    {
-                        fieldName: 'album_name',
-                        fieldCaption: 'Name',
-                        type: String,
-                        // isEditable: true,
-                        isSortable: true,
-                        columnsCount: 6
-                    },
-
-                    {
-                        fieldName: 'images_count',
-                        fieldCaption: 'Cnt',
-                        type: Number,
-                        isSortable: true,
-                        isHighLight: true,
-                        columnsCount: 2
-                    },
-
+                    ...FieldStruct.AlbumFieldStruct
                 ],
 
                 selectedName: 'album_name',
@@ -200,7 +107,6 @@ export default {
         const apiImages = this.images.api
 
         apiImages.get = APIConstants.api_images_read_page
-        // apiImages.get = APIConstants.api_images_read_page
         apiImages.insert = APIConstants.api_image_create
         apiImages.update = APIConstants.api_image_update
         apiImages.delete = APIConstants.api_image_delete
@@ -216,18 +122,6 @@ export default {
         onRowClick(dataEvent) {
             this.images.selectedFkValue = dataEvent
         },
-
-        // showDialogue() {
-        //     console.log('click')
-        //     this.$refs.viewer.showImage()
-        // },
-
-        // imageClick(event) {
-        //     console.log(event.target.src)
-
-        //     this.imageSrc = event.target.src
-        //     this.$refs.viewer.showImage()
-        // }
     },
 
 };

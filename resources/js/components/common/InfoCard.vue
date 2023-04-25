@@ -8,7 +8,7 @@
             <h5>{{ infoCardCaption }} </h5>
         </div>
         <div class="card-body">
-            <h6 class="card-title"><span class="text-info" v-html="markedParse(infoCardTitle)"></span></h6>
+            <h6 class="card-title"><span v-html="markedParse(infoCardTitle)"></span></h6>
 
             <slot></slot>
 
@@ -47,20 +47,10 @@ export default {
             default: ''
         },
 
-        // infoCardMoreButtonCaption: {
-        //     type: String,
-        //     default: 'More'
-        // },
-
         marginBottom: {
             type: Number,
             default: 0
         },
-
-        // bgColor: {
-        //     type: String,
-        //     default: ''
-        // },
 
         infoCardMoreText: {
             type: String,

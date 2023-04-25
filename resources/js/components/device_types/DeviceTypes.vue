@@ -15,7 +15,7 @@ import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
 import DataTable from '../db/DataTable.vue';
 import DeviceTypeFieldStruct from './FieldStruct';
-import Api  from './ApiStruct';
+import Api from '../../api/ApiStruct';
 
     export default {
 

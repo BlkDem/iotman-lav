@@ -5,8 +5,6 @@
             role="button"
             aria-haspopup="true"
             aria-expanded="false">
-                <!-- {{ themeCaption }}  -->
-                <!-- {{ currentImage }} -->
         </a>
         <div class="dropdown-menu theme-dropdown ">
             <a class="dropdown-item a_cap"
@@ -14,11 +12,8 @@
                 :key="image.id"
                 @click='currentImage=image; changeImage(image.name)'
                 >
-                <!-- {{ theme }} -->
                 <img :src="getImage(image.name)" style="width: 330px;"/>
             </a>
-            <!-- <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" @click="changeTheme('slate')">slate</a> -->
         </div>
     </button>
 </template>
@@ -44,31 +39,30 @@ export default {
 
     data() {
         return {
-            images: [], //themes list
-            currentImage: '', //binded current theme combo caption
-            // themeCaption: 'Theme' //binded theme caption preffix
+            images: [],
+            currentImage: '',
         }
     },
 
     created() {
-        this.readImages() //loading themes list from file themes.js
+        this.readImages();
     },
 
     methods: {
 
         getImage(image) {
-            return Pathes.storageImagesPath + image
+            return Pathes.storageImagesPath + image;
         },
 
         async readImages() {
             await axios.get(APIConstants.api_images_from_storage)
                     .then(response => {
-                        console.log(response)
-                        this.images = response.data.data
+                        console.log(response);
+                        this.images = response.data.data;
                     })
         },
 
-        changeImage(new_image) { // changing theme
+        changeImage(new_image) {
             this.currentImage = new_image
             this.$emit('changeImage', new_image, this.fieldKey)
         },

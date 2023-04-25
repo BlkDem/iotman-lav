@@ -1,13 +1,11 @@
 <template>
-    <div style="margin-top: 5.5rem">
-        <!-- {{ pageCaption }} -->
-    </div>
+    <div class="mt-55"></div>
 
     <data-table
             :api="micros.api"
             :dataFields="micros.microsFields"
             :pageCaption="micros.microsCaption"
-        >
+    >
     </data-table>
 
 </template>
@@ -16,6 +14,8 @@
 import DataTable from '../db/DataTable.vue';
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
+import Api from '../../api/ApiStruct';
+import FieldStruct from './FieldStruct';
 
 
 export default {
@@ -25,72 +25,10 @@ export default {
             micros: {
                     microsCaption: MessagesConstants.MICROS,
 
-                    api: {
-                        get: '',
-                        insert: '',
-                        update: '',
-                        delete: '',
-                        patch: ''
-                    },
+                    api: { Api },
 
                     microsFields: [
-                    {
-                            fieldName: 'Image',
-                            fieldCaption: '',
-                            type: String,
-                            isImage: false,
-                            isVirtualImage: true,
-                            VirtualImage: 'fa-solid fa-microchip fa-2x',
-                            isEditable: false,
-                            isSortable: false,
-                            isHighLight: true,
-                            columnsCount: 1
-                        },
-
-
-                        {
-                            fieldName: 'id',
-                            fieldCaption: 'ID',
-                            type: Number,
-                            isImage: false,
-                            isEditable: false,
-                            isSortable: true,
-                            isHighLight: true,
-                            columnsCount: 1
-                        },
-
-                        {
-                            fieldName: 'micro_name',
-                            fieldCaption: 'Name',
-                            type: String,
-                            isImage: false,
-                            isEditable: true,
-                            isSortable: true,
-                            isHighLight: false,
-                            columnsCount: 2
-                        },
-
-                        {
-                            fieldName: 'micro_desc',
-                            fieldCaption: 'Description',
-                            type: String,
-                            isImage: false,
-                            isText: true,
-                            isEditable: true,
-                            isSortable: true,
-                            isHighLight: false,
-                            columnsCount: 6
-                        },
-                        // {
-                        //     fieldName: 'micro_config',
-                        //     fieldCaption: 'Config',
-                        //     type: String,
-                        //     isImage: false,
-                        //     isEditable: true,
-                        //     isSortable: true,
-                        //     isHighLight: false,
-                        //     columnsCount: 3
-                        // },
+                        ...FieldStruct.MicroFieldStruct
                     ],
 
                 },
@@ -100,13 +38,13 @@ export default {
     },
 
     created() {
-        const microApi = this.micros
+        const microApi = this.micros.api
 
-        microApi.api.get =    APIConstants.api_micros_read_page
-        microApi.api.insert = APIConstants.api_micro_create
-        microApi.api.update = APIConstants.api_micro_update
-        microApi.api.patch =  APIConstants.api_micro_patch
-        microApi.api.delete = APIConstants.api_micro_delete
+        microApi.get =    APIConstants.api_micros_read_page
+        microApi.insert = APIConstants.api_micro_create
+        microApi.update = APIConstants.api_micro_update
+        microApi.patch =  APIConstants.api_micro_patch
+        microApi.delete = APIConstants.api_micro_delete
 
     }
 }
