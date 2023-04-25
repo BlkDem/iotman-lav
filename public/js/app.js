@@ -23856,20 +23856,10 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       "default": ''
     },
-    // infoCardMoreButtonCaption: {
-    //     type: String,
-    //     default: 'More'
-    // },
-
     marginBottom: {
       type: Number,
       "default": 0
     },
-    // bgColor: {
-    //     type: String,
-    //     default: ''
-    // },
-
     infoCardMoreText: {
       type: String,
       "default": ''
@@ -24342,9 +24332,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 
 
 
-// import Field from "../helpers/test";
-// import { marked } from 'marked';
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     ThreeColumnLayout: _layouts_ThreeColumnLayout_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -24401,25 +24388,26 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              _context.next = 3;
+              console.log('blog');
+              _context.prev = 1;
+              _context.next = 4;
               return axios.get(_api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].api_dev_blogs_read);
-            case 3:
+            case 4:
               _data = _context.sent;
               _this3.devBlogs = _data.data.data;
-              _context.next = 10;
+              _context.next = 11;
               break;
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](0);
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](1);
               if (((_error$response = _context.t0.response) === null || _error$response === void 0 ? void 0 : _error$response.status) === 401) {
                 window.location.href = "/login";
               }
-            case 10:
+            case 11:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[1, 8]]);
       }))();
     },
     getLogData: function getLogData() {
@@ -24429,25 +24417,26 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
-              _context2.prev = 0;
-              _context2.next = 3;
+              console.log('log');
+              _context2.prev = 1;
+              _context2.next = 4;
               return axios.get(_api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].api_logs_read_page + '1/5');
-            case 3:
+            case 4:
               _data = _context2.sent;
               _this4.logRecords = _data.data.data;
-              _context2.next = 10;
+              _context2.next = 11;
               break;
-            case 7:
-              _context2.prev = 7;
-              _context2.t0 = _context2["catch"](0);
+            case 8:
+              _context2.prev = 8;
+              _context2.t0 = _context2["catch"](1);
               if (((_error$response2 = _context2.t0.response) === null || _error$response2 === void 0 ? void 0 : _error$response2.status) === 401) {
                 window.location.href = "/login";
               }
-            case 10:
+            case 11:
             case "end":
               return _context2.stop();
           }
-        }, _callee2, null, [[0, 7]]);
+        }, _callee2, null, [[1, 8]]);
       }))();
     },
     setLang: function setLang(_lang) {
@@ -24690,7 +24679,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       'mb-4': $props.marginBottom
     }])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.infoCardCaption), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-    "class": "text-info",
     innerHTML: $options.markedParse($props.infoCardTitle)
   }, null, 8 /* PROPS */, _hoisted_4)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default"), $data.moreInfoVisible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     innerHTML: $options.markedParse($props.infoCardText)
@@ -25176,21 +25164,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             tag: "div"
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.devBlogs, function (itemCard, key) {
+              return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.devBlogs, function (itemCard, index) {
                 return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_InfoCard, {
                   "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-                    // 'text-bg-info': key % 2 === 0,
-                    // 'text-bg-success': key % 2 === 1,
+                    'text-bg-info': index % 2 === 0,
+                    'text-bg-success': index % 2 === 1
                   }),
-                  key: key,
+                  key: itemCard.id,
                   infoCardCaption: itemCard.created_at,
                   infoCardTitle: itemCard.dev_blog_name,
                   infoCardText: itemCard.dev_blog_desc,
                   infoCardMoreButtonCaption: itemCard.infoCardMoreButtonCaption,
                   marginBottom: 2,
                   buttonVisible: itemCard.buttonVisible,
-                  moreVisible: key < 3
-                }, null, 8 /* PROPS */, ["infoCardCaption", "infoCardTitle", "infoCardText", "infoCardMoreButtonCaption", "buttonVisible", "moreVisible"]);
+                  moreVisible: index < 3 ? true : false
+                }, null, 8 /* PROPS */, ["class", "infoCardCaption", "infoCardTitle", "infoCardText", "infoCardMoreButtonCaption", "buttonVisible", "moreVisible"]);
               }), 128 /* KEYED_FRAGMENT */))];
             }),
 
@@ -25212,14 +25200,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             tag: "div"
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.logRecords, function (logRecord, key) {
+              return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.logRecords, function (logRecord, index) {
                 return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
                   "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["card mb-3", {
                     'text-bg-warning': logRecord.log_level == '1',
                     'text-bg-danger': logRecord.log_level == '2'
                   }]),
-                  key: key,
-                  id: key
+                  key: logRecord.id,
+                  id: logRecord.id
                 }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(logRecord.created_at) + " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(logRecord.log_instance), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(logRecord.log_category), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getLogPretty(logRecord.log_data)), 1 /* TEXT */)])], 10 /* CLASS, PROPS */, _hoisted_2);
               }), 128 /* KEYED_FRAGMENT */))];
             }),
@@ -33377,7 +33365,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.list-move[data-v-63cd6604], \n.list-enter-active[data-v-63cd6604],\n.list-leave-active[data-v-63cd6604] {\n  transition: all 0.5s ease;\n}\n.list-enter-from[data-v-63cd6604],\n.list-leave-to[data-v-63cd6604] {\n  opacity: 0;\n  transform: translateX(30px);\n}\n\n/* ensure leaving items are taken out of layout flow so that moving\n   animations can be calculated correctly. */\n.list-leave-active[data-v-63cd6604] {\n  position: absolute;\n}\n.fix-height-200px[data-v-63cd6604] {\n    max-height: 200px;\n    overflow-y: auto;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.list-move[data-v-63cd6604],\n.list-enter-active[data-v-63cd6604],\n.list-leave-active[data-v-63cd6604] {\n  transition: all 0.5s ease;\n}\n.list-enter-from[data-v-63cd6604],\n.list-leave-to[data-v-63cd6604] {\n  opacity: 0;\n  transform: translateX(30px);\n}\n.list-leave-active[data-v-63cd6604] {\n  position: absolute;\n}\n.fix-height-200px[data-v-63cd6604] {\n    max-height: 120px;\n    overflow-y: auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

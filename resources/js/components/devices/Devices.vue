@@ -1,13 +1,11 @@
 <template>
-    <div style="margin-top: 5.5rem">
-        <!-- {{ pageCaption }} -->
-    </div>
+    <div class="mt-55"></div>
 
     <data-table
             :api="devices.api"
             :dataFields="devices.devicesFields"
             :pageCaption="devices.devicesCaption"
-        >
+    >
     </data-table>
 
 </template>
@@ -16,99 +14,20 @@
 import DataTable from '../db/DataTable.vue';
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
-
+import Api from '../../api/ApiStruct';
+import FieldStruct from './FieldStruct';
 
 export default {
     components: {DataTable},
     data() {
         return {
             devices: {
-                    devicesCaption: MessagesConstants.DEVICES,
+                devicesCaption: MessagesConstants.DEVICES,
 
-                    api: {
-                        get: '',
-                        insert: '',
-                        update: '',
-                        delete: '',
-                        patch: ''
-                    },
+                api: { Api },
 
-                    devicesFields: [
-                        {
-                            fieldName: 'device_type_image',
-                            fieldCaption: '',
-                            type: String,
-                            isImage: true,
-                            isFieldIgnore: true,
-                            isEditable: false,
-                            isSortable: false,
-                            // isHighLight: true,
-                            columnsCount: 1
-                        },
-
-
-                        {
-                            fieldName: 'id',
-                            fieldCaption: 'ID',
-                            type: Number,
-                            isImage: false,
-                            isEditable: false,
-                            isSortable: true,
-                            isHighLight: true,
-                            columnsCount: 1
-                        },
-
-                        {
-                            fieldName: 'device_name',
-                            fieldCaption: 'Name',
-                            type: String,
-                            isImage: false,
-                            isEditable: true,
-                            isSortable: true,
-                            isHighLight: false,
-                            columnsCount: 2
-                        },
-
-                        {
-                            fieldName: 'device_desc',
-                            fieldCaption: 'Description',
-                            type: String,
-                            isImage: false,
-                            isText: true,
-                            isEditable: true,
-                            isSortable: true,
-                            isHighLight: false,
-                            columnsCount: 2
-                        },
-                        {
-                            fieldName: 'created_at',
-                            fieldCaption: 'Date',
-                            type: String,
-                            isImage: false,
-                            isEditable: false,
-                            isSortable: true,
-                            isHighLight: true,
-                            columnsCount: 2
-                        },
-                        {
-                            fieldName: 'device_type_id',
-                            displayName: 'device_type_name',
-                            fieldCaption: 'Device Type',
-                            type: String,
-                            isImage: false,
-                            isEditable: false,
-                            isSortable: true,
-                            isHighLight: false,
-                            columnsCount: 2,
-                            lookupId: 'device_type_id',
-                            lookupApi: APIConstants.api_device_types_read,
-                            isLookup: true,
-                        },
-                    ],
-
-                },
-
-
+                devicesFields: [ ...FieldStruct.DeviceFieldStruct ],
+            },
         }
     },
 

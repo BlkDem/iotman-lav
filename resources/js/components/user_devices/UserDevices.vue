@@ -44,6 +44,8 @@ import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
 import DataTable from '../../components/db/DataTable.vue';
 import MasterSlaveLayout from '../../layouts/MasterSlaveLayout.vue';
+import FieldStruct from './FieldStruct';
+import Api from '../../api/ApiStruct';
 
 export default {
 
@@ -53,154 +55,39 @@ export default {
 
     data() {
         return {
+
+            //DataSet is readonly
             usersReadOnly: true,
+
+            //Additional Card Caption
             additionalCaption: true,
 
+            //Page Caption
             layoutCaption: MessagesConstants.USER_DEVICES,
 
+            //User`s Devices model
             userDevices: {
                 userDevicesCaption: MessagesConstants.USER_DEVICES,
 
-                api: {
-                    get: '',
-                    insert: '',
-                    update: '',
-                    delete: '',
-                    patch: ''
-                },
+                api: { Api },
 
                 userDevicesFields: [
-                    {
-                        fieldName: 'device_type_image',
-                        fieldCaption: '',
-                        type: String,
-                        isImage: true,
-                        isEditable: false,
-                        isFieldIgnore: true,
-                        // isSortable: true,
-                        isHighLight: false,
-                        columnsCount: 1
-                    },
-
-                    {
-                        fieldName: 'id',
-                        fieldCaption: 'ID',
-                        type: Number,
-                        isImage: false,
-                        isEditable: false,
-                        isSortable: true,
-                        isHighLight: true,
-                        columnsCount: 1
-                    },
-                    {
-                        fieldName: 'user_device_name',
-                        fieldCaption: 'Name',
-                        type: String,
-                        isImage: false,
-                        isText: false,
-                        isEditable: true,
-                        isSortable: true,
-                        isHighLight: false,
-                        columnsCount: 3
-                    },
-
-                    {
-                            fieldName: 'device_id',
-                            displayName: 'device_name',
-                            fieldCaption: 'Device',
-                            type: String,
-                            isImage: false,
-                            isEditable: false,
-                            isSortable: true,
-                            isHighLight: false,
-                            columnsCount: 3,
-                            lookupId: 'device_id',
-                            lookupApi: APIConstants.api_devices_read,
-                            isLookup: true,
-                        },
-
-                    // {
-                    //     fieldName: 'device_type_name',
-                    //     fieldCaption: 'Device Type',
-                    //     type: String,
-                    //     isImage: false,
-                    //     isText: true,
-                    //     isEditable: true,
-                    //     isSortable: true,
-                    //     isHighLight: false,
-                    //     columnsCount: 3
-                    // },
-                    {
-                            fieldName: 'user_id',
-                            displayName: 'user_name',
-                            fieldCaption: 'User',
-                            type: String,
-                            isImage: false,
-                            isEditable: false,
-                            isSortable: true,
-                            isHighLight: false,
-                            columnsCount: 2,
-                            lookupId: 'user_id',
-                            lookupApi: APIConstants.api_users_read,
-                            isLookup: true,
-                        },
-
+                    ...FieldStruct.UserDeviceFieldStruct
                 ],
 
-                user_id: 'user_id',
-                user_id_value: 1,
+                // user_id: 'user_id',
+                // user_id_value: 1,
 
             },
 
+            //User`s model
             users: {
                 usersCaption: MessagesConstants.USERS,
 
-                api: {
-                    get: '',
-                    insert: '',
-                    update: '',
-                    delete: '',
-                    patch: ''
-                },
+                api: { Api },
 
                 usersFields: [
-
-                    {
-                        fieldName: 'Image',
-                        type: String,
-                        isVirtualImage: true,
-                        isHighLight: true,
-                        isSortable: false,
-                        VirtualImage: 'fa-solid fa-user-tie fa-2x',
-                        columnsCount: 2
-                    },
-
-                    {
-                        fieldName: 'id',
-                        fieldCaption: 'ID',
-                        type: Number,
-                        isSortable: true,
-                        isHighLight: true,
-                        columnsCount: 2
-                    },
-
-                    {
-                        fieldName: 'user_name',
-                        fieldCaption: 'Name',
-                        type: String,
-                        // isEditable: true,
-                        isSortable: true,
-                        columnsCount: 6
-                    },
-
-                    {
-                        fieldName: 'devices_count',
-                        fieldCaption: 'Cnt',
-                        type: Number,
-                        isSortable: true,
-                        isHighLight: true,
-                        columnsCount: 2
-                    },
+                    ...FieldStruct.UserFieldStruct
 
                 ],
 
@@ -220,7 +107,6 @@ export default {
         const apiUserDevices = this.userDevices.api
 
         apiUserDevices.get = APIConstants.api_user_devices_read_page
-        // apiImages.get = APIConstants.api_images_read_page
         apiUserDevices.insert = APIConstants.api_user_device_create
         apiUserDevices.update = APIConstants.api_user_device_update
         apiUserDevices.delete = APIConstants.api_user_device_delete
@@ -228,13 +114,12 @@ export default {
 
         const apiUsers = this.users.api
 
-        apiUsers.get =    APIConstants.api_users_lookup
+        apiUsers.get = APIConstants.api_users_lookup
 
     },
 
     methods: {
         onRowClick(dataEvent) {
-            // console.log(dataEvent)
             this.userDevices.selectedFkValue = dataEvent
         }
     },

@@ -1209,6 +1209,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../strings_constants/strings */ "./resources/js/components/strings_constants/strings.js");
 /* harmony import */ var _api_rest_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../api/rest_api */ "./resources/js/api/rest_api.js");
 /* harmony import */ var _layouts_MasterSlaveLayout_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../layouts/MasterSlaveLayout.vue */ "./resources/js/layouts/MasterSlaveLayout.vue");
+/* harmony import */ var _api_ApiStruct__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../api/ApiStruct */ "./resources/js/api/ApiStruct.js");
+/* harmony import */ var _FieldStruct__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FieldStruct */ "./resources/js/components/device_micros/FieldStruct.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+
+
 
 
 
@@ -1227,43 +1237,9 @@ __webpack_require__.r(__webpack_exports__);
       devices: {
         devicesCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__["default"].DEVICES,
         api: {
-          get: '',
-          insert: '',
-          update: '',
-          "delete": '',
-          patch: ''
+          Api: _api_ApiStruct__WEBPACK_IMPORTED_MODULE_4__["default"]
         },
-        devicesFields: [{
-          fieldName: 'device_type_image',
-          fieldCaption: 'Image',
-          type: String,
-          isImage: true,
-          // isEditable: true,
-          // isSortable: true,
-          isHighLight: false,
-          columnsCount: 2
-        }, {
-          fieldName: 'id',
-          fieldCaption: 'ID',
-          type: Number,
-          isSortable: true,
-          isHighLight: true,
-          columnsCount: 2
-        }, {
-          fieldName: 'device_name',
-          fieldCaption: 'Name',
-          type: String,
-          // isEditable: true,
-          isSortable: true,
-          columnsCount: 6
-        }, {
-          fieldName: 'micros_count',
-          fieldCaption: 'Cnt',
-          type: Number,
-          isSortable: true,
-          isHighLight: true,
-          columnsCount: 2
-        }],
+        devicesFields: _toConsumableArray(_FieldStruct__WEBPACK_IMPORTED_MODULE_5__["default"].DeviceFieldStruct),
         selectedName: 'device_name',
         selectedFkValue: 0
       },
@@ -1271,82 +1247,9 @@ __webpack_require__.r(__webpack_exports__);
       deviceMicros: {
         deviceMicrosCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__["default"].DEVICE_MICROS,
         api: {
-          get: '',
-          insert: '',
-          update: '',
-          "delete": '',
-          patch: ''
+          Api: _api_ApiStruct__WEBPACK_IMPORTED_MODULE_4__["default"]
         },
-        deviceMicrosFields: [{
-          Link: '/dash/',
-          LinkTo: 'id',
-          fieldName: 'Image',
-          fieldCaption: '',
-          type: String,
-          isImage: false,
-          isVirtualImage: true,
-          VirtualImage: 'fa-solid fa-microchip fa-2x',
-          selectedVirtualImage: 'fa-solid fa-microchip fa-2x',
-          isEditable: false,
-          isFieldIgnore: true,
-          isSortable: false,
-          isHighLight: true,
-          columnsCount: 1
-        }, {
-          fieldName: 'id',
-          fieldCaption: 'ID',
-          type: Number,
-          isImage: false,
-          isEditable: false,
-          isSortable: true,
-          isHighLight: true,
-          columnsCount: 1
-        }, {
-          fieldName: 'device_micro_idx',
-          fieldCaption: 'Idx',
-          type: String,
-          isImage: false,
-          isEditable: true,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 2
-        }, {
-          fieldName: 'device_micro_desc',
-          fieldCaption: 'Description',
-          type: String,
-          isImage: false,
-          isText: true,
-          isEditable: true,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 2
-        }, {
-          fieldName: 'device_id',
-          displayName: 'device_name',
-          fieldCaption: 'Device',
-          type: String,
-          isImage: false,
-          isEditable: false,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 2,
-          lookupId: 'device_id',
-          lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_devices_read,
-          isLookup: true
-        }, {
-          fieldName: 'micro_id',
-          displayName: 'micro_name',
-          fieldCaption: 'Micro',
-          type: String,
-          isImage: false,
-          isEditable: false,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 2,
-          lookupId: 'micro_id',
-          lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_micros_read,
-          isLookup: true
-        }],
+        deviceMicrosFields: _toConsumableArray(_FieldStruct__WEBPACK_IMPORTED_MODULE_5__["default"].DeviceMicroFieldStruct),
         device_id: 'device_id',
         device_id_value: 1,
         selectedName: 'device_micro_idx',
@@ -1356,106 +1259,9 @@ __webpack_require__.r(__webpack_exports__);
       microParams: {
         microParamsCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__["default"].MICRO_PARAMS,
         api: {
-          get: '',
-          insert: '',
-          update: '',
-          "delete": '',
-          patch: ''
+          Api: _api_ApiStruct__WEBPACK_IMPORTED_MODULE_4__["default"]
         },
-        microParamsFields: [{
-          fieldName: 'id',
-          fieldCaption: 'ID',
-          type: Number,
-          isImage: false,
-          isEditable: false,
-          isSortable: true,
-          isHighLight: true,
-          columnsCount: 1
-        }, {
-          fieldName: 'device_micro_id',
-          displayName: 'device_micro_idx',
-          fieldCaption: 'Idx',
-          type: String,
-          isImage: false,
-          isEditable: false,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 2,
-          lookupId: 'device_micro_id',
-          lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_device_micros_read,
-          isLookup: true
-        }, {
-          fieldName: 'param_name',
-          fieldCaption: 'Name',
-          type: String,
-          isImage: false,
-          isEditable: true,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 1
-        }, {
-          fieldName: 'param_type_id',
-          displayName: 'type_name',
-          fieldCaption: 'Type',
-          type: String,
-          isImage: false,
-          isEditable: false,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 1,
-          lookupId: 'param_type_id',
-          lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_param_types_read,
-          isLookup: true
-        }, {
-          fieldName: 'param_value',
-          fieldCaption: 'Value',
-          type: String,
-          isImage: false,
-          isEditable: true,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 1
-        }, {
-          fieldName: 'param_in',
-          fieldCaption: 'Dir',
-          isDirectionVirtualImage: true,
-          subscribeVirtualImage: 'fa-solid fa-arrow-left',
-          publishVirtualImage: 'fa-solid fa-arrow-right',
-          biDirectionalVirtualImage: 'fa-solid fa-arrows-left-right',
-          // type: String,
-          // isImage: false,
-          // isEditable: true,
-          isSortable: true,
-          // isHighLight: false,
-          columnsCount: 1
-        }, {
-          fieldName: 'param_suff',
-          fieldCaption: 'Suff',
-          type: String,
-          isImage: false,
-          isEditable: true,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 1
-        }, {
-          fieldName: 'param_min',
-          fieldCaption: 'Min',
-          type: String,
-          isImage: false,
-          isEditable: true,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 1
-        }, {
-          fieldName: 'param_max',
-          fieldCaption: 'Max',
-          type: String,
-          isImage: false,
-          isEditable: true,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 1
-        }],
+        microParamsFields: _toConsumableArray(_FieldStruct__WEBPACK_IMPORTED_MODULE_5__["default"].MicroParamFieldStruct),
         device_micro_id: 'device_micro_id',
         device_micro_id_value: 1
       }
@@ -1479,15 +1285,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     onRowClick: function onRowClick(dataEvent) {
-      // console.log(dataEvent)
       this.devices.selectedFkValue = dataEvent;
     },
     onDeviceMicroRowClick: function onDeviceMicroRowClick(dataEvent) {
-      // console.log(dataEvent)
       this.deviceMicros.selectedFkValue = dataEvent;
     },
     dataCLear: function dataCLear() {
-      console.log('data clear');
+      // console.log('data clear')
       this.deviceMicros.selectedFkValue = 0;
     }
   }
@@ -1578,15 +1382,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       images: [],
-      //themes list
-      currentImage: '' //binded current theme combo caption
-      // themeCaption: 'Theme' //binded theme caption preffix
+      currentImage: ''
     };
   },
   created: function created() {
-    this.readImages(); //loading themes list from file themes.js
+    this.readImages();
   },
-
   methods: {
     getImage: function getImage(image) {
       return _config_pathes__WEBPACK_IMPORTED_MODULE_1__["default"].storageImagesPath + image;
@@ -1610,7 +1411,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     changeImage: function changeImage(new_image) {
-      // changing theme
       this.currentImage = new_image;
       this.$emit('changeImage', new_image, this.fieldKey);
     }
@@ -2741,10 +2541,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  style: {
-    "margin-top": "5.5rem"
-  }
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ pageCaption }} ")], -1 /* HOISTED */);
+  "class": "mt-55"
+}, null, -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_data_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("data-table");
@@ -2860,7 +2658,7 @@ var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
     role: "button",
     "aria-haspopup": "true",
     "aria-expanded": "false"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ themeCaption }}  "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ currentImage }} ")], -1 /* HOISTED */);
+  }, null, -1 /* HOISTED */);
 });
 var _hoisted_3 = {
   "class": "dropdown-menu theme-dropdown"
@@ -2876,13 +2674,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         $data.currentImage = image;
         $options.changeImage(image.name);
       }
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ theme }} "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: $options.getImage(image.name),
       style: {
         "width": "330px"
       }
     }, null, 8 /* PROPS */, _hoisted_5)], 8 /* PROPS */, _hoisted_4);
-  }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dropdown-divider\"></div>\n            <a class=\"dropdown-item\" href=\"#\" @click=\"changeTheme('slate')\">slate</a> ")])]);
+  }), 128 /* KEYED_FRAGMENT */))])]);
 }
 
 /***/ }),
@@ -2973,6 +2771,273 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["mx-2", $data.slaveWidth])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "slave", {}, undefined, true)], 2 /* CLASS */)], 2 /* CLASS */)], 64 /* STABLE_FRAGMENT */);
 }
+
+/***/ }),
+
+/***/ "./resources/js/api/ApiStruct.js":
+/*!***************************************!*\
+  !*** ./resources/js/api/ApiStruct.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  ApiStruct: {
+    get: '',
+    insert: '',
+    update: '',
+    "delete": '',
+    patch: ''
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/components/device_micros/FieldStruct.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/device_micros/FieldStruct.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _api_rest_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api/rest_api */ "./resources/js/api/rest_api.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  DeviceMicroFieldStruct: [{
+    Link: '/dash/',
+    LinkTo: 'id',
+    fieldName: 'Image',
+    fieldCaption: '',
+    type: String,
+    isImage: false,
+    isVirtualImage: true,
+    VirtualImage: 'fa-solid fa-microchip fa-2x',
+    selectedVirtualImage: 'fa-solid fa-microchip fa-2x',
+    isEditable: false,
+    isFieldIgnore: true,
+    isSortable: false,
+    isHighLight: true,
+    columnsCount: 1
+  }, {
+    fieldName: 'id',
+    fieldCaption: 'ID',
+    type: Number,
+    isImage: false,
+    isEditable: false,
+    isSortable: true,
+    isHighLight: true,
+    columnsCount: 1
+  }, {
+    fieldName: 'device_micro_idx',
+    fieldCaption: 'Idx',
+    type: String,
+    isImage: false,
+    isEditable: true,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 2
+  }, {
+    fieldName: 'device_micro_desc',
+    fieldCaption: 'Description',
+    type: String,
+    isImage: false,
+    isText: true,
+    isEditable: true,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 2
+  }, {
+    fieldName: 'device_id',
+    displayName: 'device_name',
+    fieldCaption: 'Device',
+    type: String,
+    isImage: false,
+    isEditable: false,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 2,
+    lookupId: 'device_id',
+    lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].api_devices_read,
+    isLookup: true
+  }, {
+    fieldName: 'micro_id',
+    displayName: 'micro_name',
+    fieldCaption: 'Micro',
+    type: String,
+    isImage: false,
+    isEditable: false,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 2,
+    lookupId: 'micro_id',
+    lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].api_micros_read,
+    isLookup: true
+  }],
+  DeviceFieldStruct: [{
+    fieldName: 'device_type_image',
+    fieldCaption: 'Image',
+    type: String,
+    isImage: true,
+    // isEditable: true,
+    // isSortable: true,
+    isHighLight: false,
+    columnsCount: 2
+  }, {
+    fieldName: 'id',
+    fieldCaption: 'ID',
+    type: Number,
+    isSortable: true,
+    isHighLight: true,
+    columnsCount: 2
+  }, {
+    fieldName: 'device_name',
+    fieldCaption: 'Name',
+    type: String,
+    // isEditable: true,
+    isSortable: true,
+    columnsCount: 6
+  }, {
+    fieldName: 'micros_count',
+    fieldCaption: 'Cnt',
+    type: Number,
+    isSortable: true,
+    isHighLight: true,
+    columnsCount: 2
+  }],
+  MicroParamFieldStruct: [{
+    fieldName: 'id',
+    fieldCaption: 'ID',
+    type: Number,
+    isImage: false,
+    isEditable: false,
+    isSortable: true,
+    isHighLight: true,
+    columnsCount: 1
+  }, {
+    fieldName: 'device_micro_id',
+    displayName: 'device_micro_idx',
+    fieldCaption: 'Idx',
+    type: String,
+    isImage: false,
+    isEditable: false,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 2,
+    lookupId: 'device_micro_id',
+    lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].api_device_micros_read,
+    isLookup: true
+  }, {
+    fieldName: 'param_name',
+    fieldCaption: 'Name',
+    type: String,
+    isImage: false,
+    isEditable: true,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 1
+  }, {
+    fieldName: 'param_type_id',
+    displayName: 'type_name',
+    fieldCaption: 'Type',
+    type: String,
+    isImage: false,
+    isEditable: false,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 1,
+    lookupId: 'param_type_id',
+    lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].api_param_types_read,
+    isLookup: true
+  }, {
+    fieldName: 'param_value',
+    fieldCaption: 'Value',
+    type: String,
+    isImage: false,
+    isEditable: true,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 1
+  }, {
+    fieldName: 'param_in',
+    fieldCaption: 'Dir',
+    isDirectionVirtualImage: true,
+    subscribeVirtualImage: 'fa-solid fa-arrow-left',
+    publishVirtualImage: 'fa-solid fa-arrow-right',
+    biDirectionalVirtualImage: 'fa-solid fa-arrows-left-right',
+    isSortable: true,
+    columnsCount: 1
+  }, {
+    fieldName: 'param_suff',
+    fieldCaption: 'Suff',
+    type: String,
+    isImage: false,
+    isEditable: true,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 1
+  }, {
+    fieldName: 'param_min',
+    fieldCaption: 'Min',
+    type: String,
+    isImage: false,
+    isEditable: true,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 1
+  }, {
+    fieldName: 'param_max',
+    fieldCaption: 'Max',
+    type: String,
+    isImage: false,
+    isEditable: true,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 1
+  }],
+  ParamTypeFieldStruct: [{
+    fieldName: 'Image',
+    type: String,
+    isVirtualImage: true,
+    isHighLight: true,
+    isSortable: false,
+    VirtualImage: 'fa-solid fa-cubes fa-2x',
+    columnsCount: 1
+  }, {
+    fieldName: 'id',
+    fieldCaption: 'ID',
+    type: Number,
+    isImage: false,
+    isEditable: false,
+    isSortable: true,
+    isHighLight: true,
+    columnsCount: 1
+  }, {
+    fieldName: 'type_name',
+    fieldCaption: 'Name',
+    type: String,
+    isImage: false,
+    isEditable: true,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 3
+  }, {
+    fieldName: 'type_desc',
+    fieldCaption: 'Description',
+    type: String,
+    isImage: false,
+    isText: true,
+    isEditable: true,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 5
+  }]
+});
 
 /***/ }),
 

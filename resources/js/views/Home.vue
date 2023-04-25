@@ -22,18 +22,19 @@
 
             <CommonCard ref="menuCard" :cardCaption="informationBlockCaption">
                 <TransitionGroup name="list" tag="div">
-                    <InfoCard v-for="(itemCard, key) in devBlogs" :class="{
-                                // 'text-bg-info': key % 2 === 0,
-                                // 'text-bg-success': key % 2 === 1,
-                            }"
-                        :key="key"
+                    <InfoCard v-for="(itemCard, index) in devBlogs"
+                        :class="{
+                            'text-bg-info': index % 2 === 0,
+                            'text-bg-success': index % 2 === 1,
+                        }"
+                        :key="itemCard.id"
                         :infoCardCaption="itemCard.created_at"
                         :infoCardTitle="itemCard.dev_blog_name"
                         :infoCardText="itemCard.dev_blog_desc"
                         :infoCardMoreButtonCaption="itemCard.infoCardMoreButtonCaption"
                         :marginBottom="2"
                         :buttonVisible="itemCard.buttonVisible"
-                        :moreVisible="(key < 3)"
+                        :moreVisible="(index < 3)?true:false"
                         >
 
                     </InfoCard>
@@ -46,20 +47,20 @@
 
         <!-- messages -->
             <CommonCard ref="logCard" :cardCaption="logBlockCaption">
-                    <TransitionGroup name="list" tag="div">
-                        <div class="card mb-3"
-                            :class="{
-                                'text-bg-warning': logRecord.log_level=='1',
-                                'text-bg-danger': logRecord.log_level=='2',
-                            }"
-                            v-for="(logRecord, key) in logRecords" :key="key" :id="key">
-                            <div class="card-header"> {{ logRecord.created_at }} - {{ logRecord.log_instance }}</div>
-                            <div class="card-body fix-height-200px">
-                                <p class="card-title text-info">{{ logRecord.log_category }}</p>
-                                <p class="card-text">{{ getLogPretty(logRecord.log_data) }}</p>
-                            </div>
+                <TransitionGroup name="list" tag="div">
+                    <div class="card mb-3"
+                        :class="{
+                                    'text-bg-warning': logRecord.log_level=='1',
+                                    'text-bg-danger': logRecord.log_level=='2',
+                                }"
+                        v-for="(logRecord, index) in logRecords" :key="logRecord.id" :id="logRecord.id">
+                        <div class="card-header"> {{ logRecord.created_at }} - {{ logRecord.log_instance }}</div>
+                        <div class="card-body fix-height-200px">
+                            <p class="card-title text-info">{{ logRecord.log_category }}</p>
+                            <p class="card-text">{{ getLogPretty(logRecord.log_data) }}</p>
                         </div>
-                    </TransitionGroup>
+                    </div>
+                </TransitionGroup>
             </CommonCard>
 
 
@@ -74,8 +75,6 @@
 import APIConstants from "../api/rest_api";
 import MessagesConstants from "../components/strings_constants/strings.js";
 import ThreeColumnLayout from "../layouts/ThreeColumnLayout.vue";
-// import Field from "../helpers/test";
-// import { marked } from 'marked';
 
 export default {
 
@@ -136,6 +135,7 @@ export default {
         },
 
         async getBlogData() {
+            console.log('blog')
             try {
                 const _data = await axios.get(APIConstants.api_dev_blogs_read);
                 this.devBlogs = _data.data.data;
@@ -147,6 +147,7 @@ export default {
         },
 
         async getLogData() {
+            console.log('log')
             try {
                 const _data = await axios.get(APIConstants.api_logs_read_page + '1/5');
                 this.logRecords = _data.data.data
@@ -170,7 +171,7 @@ export default {
 </script>
 
 <style scoped>
-.list-move, /* apply transition to moving elements */
+.list-move,
 .list-enter-active,
 .list-leave-active {
   transition: all 0.5s ease;
@@ -182,14 +183,12 @@ export default {
   transform: translateX(30px);
 }
 
-/* ensure leaving items are taken out of layout flow so that moving
-   animations can be calculated correctly. */
 .list-leave-active {
   position: absolute;
 }
 
 .fix-height-200px {
-    max-height: 200px;
+    max-height: 120px;
     overflow-y: auto;
 }
 </style>

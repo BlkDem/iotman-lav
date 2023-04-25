@@ -1278,15 +1278,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       images: [],
-      //themes list
-      currentImage: '' //binded current theme combo caption
-      // themeCaption: 'Theme' //binded theme caption preffix
+      currentImage: ''
     };
   },
   created: function created() {
-    this.readImages(); //loading themes list from file themes.js
+    this.readImages();
   },
-
   methods: {
     getImage: function getImage(image) {
       return _config_pathes__WEBPACK_IMPORTED_MODULE_1__["default"].storageImagesPath + image;
@@ -1310,7 +1307,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     changeImage: function changeImage(new_image) {
-      // changing theme
       this.currentImage = new_image;
       this.$emit('changeImage', new_image, this.fieldKey);
     }
@@ -1332,6 +1328,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _db_DataTable_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../db/DataTable.vue */ "./resources/js/components/db/DataTable.vue");
 /* harmony import */ var _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../strings_constants/strings */ "./resources/js/components/strings_constants/strings.js");
 /* harmony import */ var _api_rest_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../api/rest_api */ "./resources/js/api/rest_api.js");
+/* harmony import */ var _api_ApiStruct__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../api/ApiStruct */ "./resources/js/api/ApiStruct.js");
+/* harmony import */ var _FieldStruct__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FieldStruct */ "./resources/js/components/micros/FieldStruct.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+
+
 
 
 
@@ -1344,73 +1350,19 @@ __webpack_require__.r(__webpack_exports__);
       micros: {
         microsCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_1__["default"].MICROS,
         api: {
-          get: '',
-          insert: '',
-          update: '',
-          "delete": '',
-          patch: ''
+          Api: _api_ApiStruct__WEBPACK_IMPORTED_MODULE_3__["default"]
         },
-        microsFields: [{
-          fieldName: 'Image',
-          fieldCaption: '',
-          type: String,
-          isImage: false,
-          isVirtualImage: true,
-          VirtualImage: 'fa-solid fa-microchip fa-2x',
-          isEditable: false,
-          isSortable: false,
-          isHighLight: true,
-          columnsCount: 1
-        }, {
-          fieldName: 'id',
-          fieldCaption: 'ID',
-          type: Number,
-          isImage: false,
-          isEditable: false,
-          isSortable: true,
-          isHighLight: true,
-          columnsCount: 1
-        }, {
-          fieldName: 'micro_name',
-          fieldCaption: 'Name',
-          type: String,
-          isImage: false,
-          isEditable: true,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 2
-        }, {
-          fieldName: 'micro_desc',
-          fieldCaption: 'Description',
-          type: String,
-          isImage: false,
-          isText: true,
-          isEditable: true,
-          isSortable: true,
-          isHighLight: false,
-          columnsCount: 6
-        }
-        // {
-        //     fieldName: 'micro_config',
-        //     fieldCaption: 'Config',
-        //     type: String,
-        //     isImage: false,
-        //     isEditable: true,
-        //     isSortable: true,
-        //     isHighLight: false,
-        //     columnsCount: 3
-        // },
-        ]
+        microsFields: _toConsumableArray(_FieldStruct__WEBPACK_IMPORTED_MODULE_4__["default"].MicroFieldStruct)
       }
     };
   },
   created: function created() {
-    var microApi = this.micros;
-    microApi.api.get = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_micros_read_page;
-    microApi.api.insert = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_micro_create;
-    microApi.api.update = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_micro_update;
-    microApi.api.patch = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_micro_patch;
-    microApi.api["delete"] = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_micro_delete;
+    var microApi = this.micros.api;
+    microApi.get = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_micros_read_page;
+    microApi.insert = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_micro_create;
+    microApi.update = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_micro_update;
+    microApi.patch = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_micro_patch;
+    microApi["delete"] = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_micro_delete;
   }
 });
 
@@ -2476,7 +2428,7 @@ var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
     role: "button",
     "aria-haspopup": "true",
     "aria-expanded": "false"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ themeCaption }}  "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ currentImage }} ")], -1 /* HOISTED */);
+  }, null, -1 /* HOISTED */);
 });
 var _hoisted_3 = {
   "class": "dropdown-menu theme-dropdown"
@@ -2492,13 +2444,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         $data.currentImage = image;
         $options.changeImage(image.name);
       }
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ theme }} "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: $options.getImage(image.name),
       style: {
         "width": "330px"
       }
     }, null, 8 /* PROPS */, _hoisted_5)], 8 /* PROPS */, _hoisted_4);
-  }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dropdown-divider\"></div>\n            <a class=\"dropdown-item\" href=\"#\" @click=\"changeTheme('slate')\">slate</a> ")])]);
+  }), 128 /* KEYED_FRAGMENT */))])]);
 }
 
 /***/ }),
@@ -2516,10 +2468,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  style: {
-    "margin-top": "5.5rem"
-  }
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ pageCaption }} ")], -1 /* HOISTED */);
+  "class": "mt-55"
+}, null, -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_data_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("data-table");
@@ -2529,6 +2479,83 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     pageCaption: $data.micros.microsCaption
   }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption"])], 64 /* STABLE_FRAGMENT */);
 }
+
+/***/ }),
+
+/***/ "./resources/js/api/ApiStruct.js":
+/*!***************************************!*\
+  !*** ./resources/js/api/ApiStruct.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  ApiStruct: {
+    get: '',
+    insert: '',
+    update: '',
+    "delete": '',
+    patch: ''
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/components/micros/FieldStruct.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/micros/FieldStruct.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  MicroFieldStruct: [{
+    fieldName: 'Image',
+    fieldCaption: '',
+    type: String,
+    isImage: false,
+    isVirtualImage: true,
+    VirtualImage: 'fa-solid fa-microchip fa-2x',
+    isEditable: false,
+    isSortable: false,
+    isHighLight: true,
+    columnsCount: 1
+  }, {
+    fieldName: 'id',
+    fieldCaption: 'ID',
+    type: Number,
+    isImage: false,
+    isEditable: false,
+    isSortable: true,
+    isHighLight: true,
+    columnsCount: 1
+  }, {
+    fieldName: 'micro_name',
+    fieldCaption: 'Name',
+    type: String,
+    isImage: false,
+    isEditable: true,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 2
+  }, {
+    fieldName: 'micro_desc',
+    fieldCaption: 'Description',
+    type: String,
+    isImage: false,
+    isText: true,
+    isEditable: true,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 6
+  }]
+});
 
 /***/ }),
 
