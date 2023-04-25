@@ -231,6 +231,6 @@ Route::get('/authuser', [UserinfoController::class, 'show']);
 Route::get('/user', [AuthController::class, 'UserInfo']);
 Route::get('/username', [AuthController::class, 'GetUserName']);
 
-Route::get('/sysinfo', [ServerStatusController::class, 'getServerLoad']);
+Route::get('/sysinfo/{cmd}', [ServerStatusController::class, 'getServerLoad']);
 
 });

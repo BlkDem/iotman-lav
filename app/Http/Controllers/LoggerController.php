@@ -13,20 +13,25 @@ use App\Facades\LOG;
 
 class LoggerController extends BaseController
 {
-    public function getLog() {
-        // dd(Logger::logger());
+    // public function getLog() {
+    //     // dd(Logger::logger());
 
-        return response()->json(LOG::setLog(), 200);
-        // return response()->json(LOG::logger(), 200);
-    }
+    //     return response()->json(LOG::setLog(), 200);
+    //     // return response()->json(LOG::logger(), 200);
+    // }
 
-    public function WriteLog() {
-        // dd(Logger::logger());
+    // public function WriteLog() {
+    //     // dd(Logger::logger());
 
-        return response()->json(LOG::setLog(), 200);
-        // return response()->json(LOG::logger(), 200);
-    }
+    //     return response()->json(LOG::setLog(), 200);
+    //     // return response()->json(LOG::logger(), 200);
+    // }
 
+    /**
+     * index
+     *
+     * @return void
+     */
     public function index(){
 
         $res = Logger::orderBy('created_at', 'desc')->get();
@@ -36,6 +41,12 @@ class LoggerController extends BaseController
         return $this->sendResponse($res, "Logs List", $paginator);
     }
 
+    /**
+     * daysOfTheMonth - Days with log records
+     *
+     * @param  mixed $date
+     * @return Response
+     */
     public function daysOfTheMonth($date)
     {
         $res = Logger::getDaysOfTheMonth($date);
@@ -45,12 +56,22 @@ class LoggerController extends BaseController
         return $this->sendResponse($res, "Days exist log in the Month", $paginator);
     }
 
+    /**
+     * page
+     *
+     * @param  int $currentPage - requested page
+     * @param  int $itemsPerPage - items per page
+     * @return Response
+     */
     public function page($currentPage=0, $itemsPerPage=10){
 
         $page = (int)$currentPage;
 
         $offset = $itemsPerPage*--$page;
-        $res = Logger::limit($itemsPerPage)->offset($offset)->orderBy('created_at', 'desc')->get();
+        $res = Logger::limit($itemsPerPage)
+            ->offset($offset)
+            ->orderBy('created_at', 'desc')
+            ->get();
         $total = Logger::get();
 
         $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
@@ -58,6 +79,12 @@ class LoggerController extends BaseController
         return $this->sendResponse($res, "Logs List", $paginator);
     }
 
+    /**
+     * show - Show the requested log record
+     *
+     * @param  int $id
+     * @return Response
+     */
     public function show($id) {
         $res = Logger::find($id);
         if (is_null($res)) {
@@ -66,6 +93,12 @@ class LoggerController extends BaseController
         return $this->sendResponse($res, "Log (id = $id) found");
     }
 
+    /**
+     * store - create a new log record
+     *
+     * @param  Request $request
+     * @return Response
+     */
     public function store(Request $request){
         $validator = ValidatorRules::MakeValidate($request, 'loggers');
         if ($validator->fails()) {
@@ -81,6 +114,13 @@ class LoggerController extends BaseController
         }
     }
 
+    /**
+     * update - Update requested record
+     *
+     * @param  Request $request
+     * @param  Logger $updateLog
+     * @return Response
+     */
     public function update(Request $request, Logger $updateLog){
         $validator = ValidatorRules::MakeValidate($request, 'loggers');
         if ($validator->fails()) {
@@ -95,6 +135,15 @@ class LoggerController extends BaseController
         }
     }
 
+    /**
+     * patch - Patching record via key => value
+     *
+     * @param  Request $request
+     * @param  int $id - record ID
+     * @param  string $field - patching field name
+     * @param  mixed $value - applying value
+     * @return Response
+     */
     public function patch(Request $request, $id, $field, $value){
         try {
             $patchLog = Logger::whereId($id);

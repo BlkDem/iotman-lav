@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class FileSystemImagesController extends Controller
 {
+    /**
+     * getImagesFromPath - Getting images list from requested directory
+     *
+     * @param  string $dir
+     * @return array
+     */
     public function getImagesFromPath($dir) {
 
         $files = [];
