@@ -355,8 +355,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.devBlogs, function (itemCard, key) {
             return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_InfoCard, {
               "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-                'text-bg-info': key % 2,
-                'text-bg-success': !(key % 2)
+                // 'text-bg-info': (key % 2),
+                // 'text-bg-success': !(key % 2),
               }),
               key: key,
               infoCardCaption: itemCard.created_at,

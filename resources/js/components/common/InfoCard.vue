@@ -8,7 +8,7 @@
             <h5>{{ infoCardCaption }} </h5>
         </div>
         <div class="card-body">
-            <h6 class="card-title"><span v-html="markedParse(infoCardTitle)"></span></h6>
+            <h6 class="card-title"><span class="text-info" v-html="markedParse(infoCardTitle)"></span></h6>
 
             <slot></slot>
 
@@ -93,7 +93,7 @@ export default {
             },
 
             markedParse(text) {
-                return marked.parse(text)
+                return marked.parse((text)?text:'');
             }
         }
 

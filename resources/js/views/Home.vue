@@ -47,14 +47,14 @@
         <!-- messages -->
             <CommonCard ref="logCard" :cardCaption="logBlockCaption">
                     <TransitionGroup name="list" tag="div">
-                        <div class="card text-bg-primary mb-3"
+                        <div class="card mb-3"
                             :class="{
                                 'text-bg-warning': logRecord.log_level=='1',
                                 'text-bg-danger': logRecord.log_level=='2',
                             }"
                             v-for="(logRecord, key) in logRecords" :key="key" :id="key">
                             <div class="card-header"> {{ logRecord.created_at }} - {{ logRecord.log_instance }}</div>
-                            <div class="card-body">
+                            <div class="card-body fix-height-200px">
                                 <p class="card-title text-info">{{ logRecord.log_category }}</p>
                                 <p class="card-text">{{ getLogPretty(logRecord.log_data) }}</p>
                             </div>
@@ -186,5 +186,10 @@ export default {
    animations can be calculated correctly. */
 .list-leave-active {
   position: absolute;
+}
+
+.fix-height-200px {
+    max-height: 200px;
+    overflow-y: auto;
 }
 </style>
