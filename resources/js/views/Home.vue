@@ -23,8 +23,8 @@
             <CommonCard ref="menuCard" :cardCaption="informationBlockCaption">
                 <TransitionGroup name="list" tag="div">
                     <InfoCard v-for="(itemCard, key) in devBlogs" :class="{
-                                'text-bg-info': key % 2 === 0,
-                                'text-bg-success': key % 2 === 1,
+                                // 'text-bg-info': key % 2 === 0,
+                                // 'text-bg-success': key % 2 === 1,
                             }"
                         :key="key"
                         :infoCardCaption="itemCard.created_at"
@@ -32,7 +32,9 @@
                         :infoCardText="itemCard.dev_blog_desc"
                         :infoCardMoreButtonCaption="itemCard.infoCardMoreButtonCaption"
                         :marginBottom="2"
-                        :buttonVisible="itemCard.buttonVisible">
+                        :buttonVisible="itemCard.buttonVisible"
+                        :moreVisible="(key < 3)"
+                        >
 
                     </InfoCard>
                 </TransitionGroup>

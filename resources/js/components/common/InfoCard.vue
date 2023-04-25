@@ -8,12 +8,12 @@
             <h5>{{ infoCardCaption }} </h5>
         </div>
         <div class="card-body">
-            <h6 class="card-title"><span v-html="infoCardTitle"></span></h6>
+            <h6 class="card-title"><span v-html="markedParse(infoCardTitle)"></span></h6>
 
             <slot></slot>
 
             <p class="card-text fade-in my-2" v-if="moreInfoVisible">
-                <span v-html="infoCardText"></span>
+                <span v-html="markedParse(infoCardText)"></span>
             </p>
 
             <button class="btn btn-light btn-sm"
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+
+import { marked } from 'marked';
 
 export default {
     props: {
@@ -63,6 +65,11 @@ export default {
         infoCardMoreText: {
             type: String,
             default: ''
+        },
+
+        moreVisible: {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -74,10 +81,19 @@ export default {
             }
         },
 
+        mounted() {
+            this.moreInfoVisible = this.moreVisible
+            this.infoCardMoreButtonCaption = (this.moreInfoVisible) ? 'Less' : 'More'
+        },
+
         methods: {
             showMoreClick() {
                 this.moreInfoVisible = !this.moreInfoVisible
                 this.infoCardMoreButtonCaption = (this.moreInfoVisible) ? 'Less' : 'More'
+            },
+
+            markedParse(text) {
+                return marked.parse(text)
             }
         }
 
