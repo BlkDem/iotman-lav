@@ -5,67 +5,40 @@ namespace App\Http\Controllers\Helpers;
 // use App\Http\Controllers\Controller;
 // use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+// use App\Exceptions\Sh
 
 class ServerStatusController extends BaseController
 {
-    public function getServerLoad(){
-
-        $serverload = array();
-
-        // DIRECTORY_SEPARATOR checks if running windows
-        if(DIRECTORY_SEPARATOR != '\\')
+    public static function shellCmd($cmd)
+    {
         {
-            if(function_exists("sys_getloadavg"))
-            {
-                // sys_getloadavg() will return an array with [0] being load within the last minute.
-                $serverload = sys_getloadavg();
-                $serverload[0] = round($serverload[0], 4);
-            }
-            else if(@file_exists("/proc/loadavg") && $load = @file_get_contents("/proc/loadavg"))
-            {
-                $serverload = explode(" ", $load);
-                $serverload[0] = round($serverload[0], 4);
-            }
-            if(!is_numeric($serverload[0]))
-            {
-                if(@ini_get('safe_mode') == 'On')
-                {
-                    // return "Unknown";
-                }
+            $process = Process::fromShellCommandline($cmd);
 
-                // Suhosin likes to throw a warning if exec is disabled then die - weird
-                if($func_blacklist = @ini_get('suhosin.executor.func.blacklist'))
-                {
-                    if(strpos(",".$func_blacklist.",", 'exec') !== false)
-                    {
-                        return "Unknown";
-                    }
-                }
-                // PHP disabled functions?
-                if($func_blacklist = @ini_get('disable_functions'))
-                {
-                    if(strpos(",".$func_blacklist.",", 'exec') !== false)
-                    {
-                        return "Unknown";
-                    }
-                }
+            $processOutput = '';
 
-                $load = @exec("uptime");
-                $load = explode("load average: ", $load);
-                $serverload = explode(",", $load[1]);
-                if(!is_array($serverload))
-                {
-                    return "Unknown";
-                }
+            $captureOutput = function ($type, $line) use (&$processOutput) {
+                $processOutput .= $line;
+            };
+
+            $process->setTimeout(null)
+                ->run($captureOutput);
+
+            // dd($captureOutput);
+
+            if ($process->getExitCode()) {
+                // $exception = new ShellCommandFailedException($cmd . " - " . $processOutput);
+                // report($exception);
+                return "error";
+                // throw $exception;
             }
+
+            return $processOutput;
         }
-        else
-        {
-            return "Unknown";
-        }
+    }
 
-        $returnload = trim($serverload[0]);
-
-        return $returnload;
+    public function getServerLoad($cmd){
+        return self::shellCmd($cmd);
     }
 }

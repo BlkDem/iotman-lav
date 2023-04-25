@@ -12,10 +12,20 @@ use Exception;
 
 class UserController extends BaseController
 {
+    /**
+     * getTotalRecords - get records count
+     *
+     * @return int
+     */
     private function getTotalRecords() {
         return User::get()->count();
     }
 
+    /**
+     * index - get all users
+     *
+     * @return Response
+     */
     public function index(){
 
         $res = DB::table('users')
@@ -31,6 +41,13 @@ class UserController extends BaseController
         return $this->sendResponse($res, "Users List", $paginator);
     }
 
+    /**
+     * page - Getting scoped recordset
+     *
+     * @param  int $currentPage
+     * @param  int $itemsPerPage
+     * @return Response
+     */
     public function page($currentPage=0, $itemsPerPage=10)
     {
 
@@ -57,10 +74,15 @@ class UserController extends BaseController
         return response()->json($_returnData, 200);
     }
 
+    /**
+     * indexLookup - Getting users with their devices
+     *
+     * @param  int $currentPage
+     * @param  int $itemsPerPage
+     * @return Response
+     */
     public function indexLookup($currentPage=0, $itemsPerPage=10)
     {
-        // $res = Album::select('id','album_name')->orderBy('id', 'asc')->get();
-
         $page = (int)$currentPage;
 
         $offset = $itemsPerPage*--$page;
@@ -75,14 +97,18 @@ class UserController extends BaseController
                 ->get();
 
 
-        // $total = Album::get();
-
         $paginator = PaginatorController::Paginate($this->getTotalRecords(), (int)$itemsPerPage, $currentPage);
 
         return $this->sendResponse($res, "Users (with devices) lookup List", $paginator);
 
     }
 
+    /**
+     * show - Getting requested record
+     *
+     * @param  int $id
+     * @return Response
+     */
     public function show($id)
     {
         return (is_null(User::findOrFail($id)))?
@@ -91,6 +117,12 @@ class UserController extends BaseController
             response()->json(User::find($id), 200);
     }
 
+    /**
+     * store - Creating a new user
+     *
+     * @param  Request $request
+     * @return Response
+     */
     public function store(Request $request)
     {
         $validator = ValidatorRules::MakeValidate($request, 'users');
@@ -100,14 +132,19 @@ class UserController extends BaseController
         try {
             $newUser = User::create($request->all());
             return $this->sendResponse($newUser, "New User Created", 201);
-            // return response()->json($newUser, 201);
         }
         catch (Exception $e) {
             return $this->sendError("Error creating user: " . $e);
-            // return response()->json('Creating Record Error: ' . $e, 400);
         }
     }
 
+    /**
+     * update Updating requested record
+     *
+     * @param  Request $request
+     * @param  User $updateUser
+     * @return Response
+     */
     public function update(Request $request, User $updateUser)
     {
         $validator = ValidatorRules::MakeValidate($request, 'user');
@@ -117,13 +154,21 @@ class UserController extends BaseController
         try {
             $updateUser->update($request->all());
             return $this->sendResponse($updateUser, "User updated", 200);
-            // return response()->json($updateUser, 200);
         }
         catch (Exception $e) {
             return response()->json('Updating Record Error: ' . $e, 400);
         }
     }
 
+    /**
+     * patch - Patching requested record via key => value
+     *
+     * @param  Request $request
+     * @param  int $id
+     * @param  string $field
+     * @param  mixed $value
+     * @return Response
+     */
     public function patch(Request $request, $id, $field, $value){
         try {
             $patchUser = User::whereId($id);
@@ -138,6 +183,13 @@ class UserController extends BaseController
         }
     }
 
+    /**
+     * destroy - Deleting requested record
+     *
+     * @param  Request $request
+     * @param  User $deleteUser
+     * @return Response
+     */
     public function destroy(Request $request, User $deleteUser)
     {
         try {

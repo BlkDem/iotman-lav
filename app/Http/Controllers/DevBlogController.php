@@ -47,6 +47,13 @@ class DevBlogController extends BaseController
         return $this->sendResponse($res, "Blog Dates in the Month", $paginator);
     }
 
+    /**
+     * page - get a page recordset
+     *
+     * @param  int $currentPage
+     * @param  int $itemsPerPage
+     * @return Response
+     */
     public function page($currentPage=0, $itemsPerPage=10){
 
         $page = (int)$currentPage;

@@ -12,16 +12,21 @@ use Exception;
 
 class AlbumController extends BaseController
 {
+
+    /**
+     * getTotalRecords - Getting records count
+     *
+     * @return Integer
+     */
+    private function getTotalRecords() {
+        return Album::get()->count();
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    private function getTotalRecords() {
-        return Album::get()->count();
-    }
-
     public function index()
     {
         $res = Album::orderBy('album_name', 'asc')->get();
@@ -32,8 +37,13 @@ class AlbumController extends BaseController
 
     }
 
-
-    //only for id and name fields for lookup components
+    /**
+     * indexLookup - Getting only id and name fields for lookup components
+     *
+     * @param  int $currentPage
+     * @param  int $itemsPerPage
+     * @return Response
+     */
     public function indexLookup($currentPage=0, $itemsPerPage=10)
     {
         // $res = Album::select('id','album_name')->orderBy('id', 'asc')->get();
@@ -53,6 +63,13 @@ class AlbumController extends BaseController
 
     }
 
+    /**
+     * page - Getting scoped recordset
+     *
+     * @param  int $currentPage
+     * @param  int $itemsPerPage
+     * @return Response
+     */
     public function page($currentPage=0, $itemsPerPage=10){
 
         $page = (int)$currentPage;
@@ -76,7 +93,6 @@ class AlbumController extends BaseController
     {
         $validator = ValidatorRules::MakeValidate($request, 'albums');
         if ($validator->fails()) {
-            // return $this->sendError($validator->errors());
             return response()->json($validator->errors(), 400);
         }
         try {
@@ -125,6 +141,15 @@ class AlbumController extends BaseController
         }
     }
 
+    /**
+     * patch - Ptching requested record via key => value
+     *
+     * @param  Request $request
+     * @param  int $id
+     * @param  string $field
+     * @param  mixed $value
+     * @return Response
+     */
     public function patch(Request $request, $id, $field, $value){
         try {
             $patchAlbum = Album::whereId($id);

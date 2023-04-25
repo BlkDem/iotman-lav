@@ -30,7 +30,7 @@ class ImageController extends BaseController
     /**
      * getImage - getting Image by ID
      *
-     * @param  mixed $id - Image ID
+     * @param  int $id - Image ID
      * @return Object
      */
     public static function getImage($id)
@@ -41,7 +41,7 @@ class ImageController extends BaseController
     /**
      * getAlbum - getting Album by ID
      *
-     * @param  mixed $id - Album ID
+     * @param  int $id - Album ID
      * @return Object
      */
     public static function getAlbum($id)
@@ -50,9 +50,9 @@ class ImageController extends BaseController
     }
 
     /**
-     * setImage - set image name by Image ID
+     * setImage - set image name for record with requested ID
      *
-     * @param  mixed $id - selected Image ID
+     * @param  int $id - selected Image ID
      * @param  mixed $newImage - a new filename
      * @return Object
      */
@@ -74,8 +74,8 @@ class ImageController extends BaseController
     /**
      * page - Get Images on a page
      *
-     * @param  mixed $currentPage - selected page
-     * @param  mixed $itemsPerPage - items per page
+     * @param  int $currentPage - selected page
+     * @param  int $itemsPerPage - items per page
      * @return \Illuminate\Http\Response
      */
     public function page($currentPage = 0, $itemsPerPage = 10)
@@ -99,9 +99,9 @@ class ImageController extends BaseController
     /**
      * pageWhereAlbum Get Images on a selected page where Album ID
      *
-     * @param  mixed $currentPage - selected page
-     * @param  mixed $itemsPerPage - items per page
-     * @param  mixed $album_id - Album ID
+     * @param  int $currentPage - selected page
+     * @param  int $itemsPerPage - items per page
+     * @param  int $album_id - Album ID
      * @return \Illuminate\Http\Response
      */
     public function pageWhereAlbum($currentPage = 0, $itemsPerPage = 10, $album_id)
@@ -232,10 +232,10 @@ class ImageController extends BaseController
     /**
      * patch - editing Image record fields. Set the field value via key.
      *
-     * @param  mixed $request
-     * @param  mixed $id - selected Image ID
-     * @param  mixed $field - editing field
-     * @param  mixed $value - setting value
+     * @param  Request $request
+     * @param  int $id - selected Image ID
+     * @param  int $field - editing field
+     * @param  int $value - setting value
      * @return \Illuminate\Http\Response
      */
     public function patch(Request $request, $id, $field, $value)
