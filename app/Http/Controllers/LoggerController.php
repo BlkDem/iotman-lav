@@ -30,7 +30,7 @@ class LoggerController extends BaseController
     /**
      * index
      *
-     * @return void
+     * @return Response
      */
     public function index(){
 
