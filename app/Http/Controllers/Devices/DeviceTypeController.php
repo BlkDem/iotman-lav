@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\DeviceType;
 use App\Http\Middleware\ValidatorRules;
 use Exception;
-use App\Http\Controllers\BaseController as BaseController;
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\PaginatorController;
+use App\Facades\LOG;
 
 class DeviceTypeController extends BaseController
 {
@@ -71,14 +72,37 @@ class DeviceTypeController extends BaseController
         }
     }
 
+    /**
+     * patch record via key => value
+     *
+     * @param  Request $request
+     * @param  int $id
+     * @param  string $field
+     * @param  mixed $value
+     * @return Response
+     */
     public function patch(Request $request, $id, $field, $value)
     {
         try {
             $patchDeviceType = DeviceType::whereId($id);
+
+            if ($patchDeviceType === null)
+            {
+                return response()->json('Patching Record Error - not found', 400);
+            }
+
+            $oldValue = $patchDeviceType->value($field);
+
             $patchDeviceType->update([
                 "$field" => $value
             ]);
             $res = DeviceType::find($id);
+
+            $res["old_field"] = $field;
+            $res["old_value"] = $oldValue;
+
+            LOG::setLog('PatchEvent', $res);
+
             return response()->json($res, 200);
         }
         catch (Exception $e) {
