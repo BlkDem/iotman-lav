@@ -124,10 +124,9 @@ export default {
     //User info
     api_user_info: apiPreffix + 'user',
 
-    dataItems: [],
+    // dataItems: [],
 
     async getData(_api) {
-        // console.log(_api)
         return await axios.get(_api)
     },
 

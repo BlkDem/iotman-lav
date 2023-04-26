@@ -179,6 +179,7 @@ import SwitchControl from '../components/device_micros/ParamTypeControls/Switch'
 import ButtonControl from '../components/device_micros/ParamTypeControls/Button.vue';
 import MyMqtt from '../components/MyMqtt.vue';
 import InfoCard from '../components/common/InfoCard.vue';
+import { errorEvent } from '../api/errors';
 
 export default {
     components: {MasterSlaveLayout,
@@ -317,23 +318,23 @@ export default {
         },
 
         async getData() {
-            await axios.get(APIConstants.api_device_micro_dash + this.deviceMicroId)
-                .then(response => {
+            try {
+
+                const response = await axios.get(APIConstants.api_device_micro_dash + this.deviceMicroId)
+                // .then(response => {
                 this.dataItems = response.data.data;
 
                 this.device = this.dataItems.device;
                 this.micro = this.dataItems.micro;
                 this.params = this.dataItems.params;
 
-            })
+            }
 
-            .catch (error => {
+            catch (error) {
 
-                    console.log(error);
+                    // console.log(error);
 
-                    if (error.response.status === 401) {
-                            window.location.href = "/login"
-                    }
+                    errorEvent(error);
 
                     this.$root.$refs.toaster.showMessage(
                             MessagesConstants.DELETING_ERROR,
@@ -341,7 +342,7 @@ export default {
                             ParsingErrors.ERROR_LEVEL_ERROR
                     )
 
-            })
+            }
         },
 
         getImage(imageName) {

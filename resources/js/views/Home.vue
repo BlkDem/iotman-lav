@@ -75,6 +75,7 @@
 import APIConstants from "../api/rest_api";
 import MessagesConstants from "../components/strings_constants/strings.js";
 import ThreeColumnLayout from "../layouts/ThreeColumnLayout.vue";
+import Errors from "../api/errors";
 
 export default {
 
@@ -140,21 +141,17 @@ export default {
                 const _data = await axios.get(APIConstants.api_dev_blogs_read);
                 this.devBlogs = _data.data.data;
             } catch (error) {
-                if (error.response?.status === 401) {
-                    window.location.href = "/login"
-                }
+                Errors.errorEvent(error);
             }
         },
 
         async getLogData() {
-            console.log('log')
+            // console.log('log')
             try {
                 const _data = await axios.get(APIConstants.api_logs_read_page + '1/5');
                 this.logRecords = _data.data.data
             } catch (error) {
-                if (error.response?.status === 401) {
-                            window.location.href = "/login"
-                }
+                Errors.errorEvent(error);
             }
         },
 
@@ -188,7 +185,7 @@ export default {
 }
 
 .fix-height-200px {
-    max-height: 120px;
+    max-height: 128px;
     overflow-y: auto;
 }
 </style>
