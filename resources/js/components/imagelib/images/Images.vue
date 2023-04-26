@@ -119,8 +119,8 @@ export default {
     },
 
     methods: {
-        onRowClick(dataEvent) {
-            this.images.selectedFkValue = dataEvent
+        onRowClick(fkKey) {
+            this.images.selectedFkValue = fkKey
         },
     },
 

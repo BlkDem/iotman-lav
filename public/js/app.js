@@ -24402,7 +24402,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
             case 8:
               _context.prev = 8;
               _context.t0 = _context["catch"](1);
-              _api_errors__WEBPACK_IMPORTED_MODULE_3__["default"].errorEvent(_context.t0);
+              _api_errors__WEBPACK_IMPORTED_MODULE_3__.errorEvent.errorEvent(_context.t0);
             case 11:
             case "end":
               return _context.stop();
@@ -24428,7 +24428,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
             case 7:
               _context2.prev = 7;
               _context2.t0 = _context2["catch"](0);
-              _api_errors__WEBPACK_IMPORTED_MODULE_3__["default"].errorEvent(_context2.t0);
+              _api_errors__WEBPACK_IMPORTED_MODULE_3__.errorEvent.errorEvent(_context2.t0);
             case 10:
             case "end":
               return _context2.stop();

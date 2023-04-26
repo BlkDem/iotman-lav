@@ -75,7 +75,7 @@
 import APIConstants from "../api/rest_api";
 import MessagesConstants from "../components/strings_constants/strings.js";
 import ThreeColumnLayout from "../layouts/ThreeColumnLayout.vue";
-import Errors from "../api/errors";
+import { errorEvent } from "../api/errors";
 
 export default {
 
@@ -141,7 +141,7 @@ export default {
                 const _data = await axios.get(APIConstants.api_dev_blogs_read);
                 this.devBlogs = _data.data.data;
             } catch (error) {
-                Errors.errorEvent(error);
+                errorEvent.errorEvent(error);
             }
         },
 
@@ -151,7 +151,7 @@ export default {
                 const _data = await axios.get(APIConstants.api_logs_read_page + '1/5');
                 this.logRecords = _data.data.data
             } catch (error) {
-                Errors.errorEvent(error);
+                errorEvent.errorEvent(error);
             }
         },
 
