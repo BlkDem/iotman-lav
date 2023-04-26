@@ -820,7 +820,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 7:
               _context.prev = 7;
               _context.t0 = _context["catch"](0);
-              _api_errors__WEBPACK_IMPORTED_MODULE_12__.errorEvent.errorEvent(_context.t0);
+              (0,_api_errors__WEBPACK_IMPORTED_MODULE_12__.errorEvent)(_context.t0);
             case 10:
             case "end":
               return _context.stop();
@@ -999,7 +999,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 17:
               _context2.prev = 17;
               _context2.t0 = _context2["catch"](6);
-              _api_errors__WEBPACK_IMPORTED_MODULE_12__.errorEvent.errorEvent(_context2.t0);
+              (0,_api_errors__WEBPACK_IMPORTED_MODULE_12__.errorEvent)(_context2.t0);
             case 20:
               ;
             case 21:
@@ -1040,7 +1040,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 12:
               _context3.prev = 12;
               _context3.t0 = _context3["catch"](4);
-              _api_errors__WEBPACK_IMPORTED_MODULE_12__.errorEvent.errorEvent(_context3.t0);
+              (0,_api_errors__WEBPACK_IMPORTED_MODULE_12__.errorEvent)(_context3.t0);
               // console.log(error);
               _this4.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].DELETING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].getError(_context3.t0), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].ERROR_LEVEL_ERROR);
             case 16:
@@ -1095,7 +1095,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this5.filteredItems = _this5.Items;
                 _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].ADDED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
               } catch (error) {
-                _api_errors__WEBPACK_IMPORTED_MODULE_12__.errorEvent.errorEvent(error);
+                (0,_api_errors__WEBPACK_IMPORTED_MODULE_12__.errorEvent)(error);
                 //const Toaster = app.component('toaster')
                 _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].INSERTING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].getError(error), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].ERROR_LEVEL_ERROR);
               }
@@ -1154,7 +1154,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 19:
               _context5.prev = 19;
               _context5.t0 = _context5["catch"](6);
-              _api_errors__WEBPACK_IMPORTED_MODULE_12__.errorEvent.errorEvent(_context5.t0);
+              (0,_api_errors__WEBPACK_IMPORTED_MODULE_12__.errorEvent)(_context5.t0);
               _this6.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].getError(_context5.t0), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].ERROR_LEVEL_ERROR);
             case 23:
               _context5.next = 26;

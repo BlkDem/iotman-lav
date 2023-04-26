@@ -36,9 +36,9 @@ class Logger extends Model
     public static function getDaysOfTheMonth($date)
     {
 
-        $time=strtotime($date);
-        $month=date("m", $time);
-        $year=date("Y", $time);
+        $datetime=strtotime($date);
+        $month=date("m", $datetime);
+        $year=date("Y", $datetime);
 
         $res = Logger::select( [DB::raw('DAY(created_at) as day_of_month') ])
             ->whereMonth('created_at', $month)

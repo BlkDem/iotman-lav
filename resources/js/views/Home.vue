@@ -141,7 +141,7 @@ export default {
                 const _data = await axios.get(APIConstants.api_dev_blogs_read);
                 this.devBlogs = _data.data.data;
             } catch (error) {
-                errorEvent.errorEvent(error);
+                errorEvent(error);
             }
         },
 
@@ -151,7 +151,7 @@ export default {
                 const _data = await axios.get(APIConstants.api_logs_read_page + '1/5');
                 this.logRecords = _data.data.data
             } catch (error) {
-                errorEvent.errorEvent(error);
+                errorEvent(error);
             }
         },
 

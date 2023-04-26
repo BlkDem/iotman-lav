@@ -560,7 +560,7 @@ export default {
                             MessagesConstants.PROCESS_SUCCESSFULLY
                         );
                 } catch(error) {
-                    errorEvent.errorEvent(error)
+                    errorEvent(error)
                 }
             },
 
@@ -741,7 +741,7 @@ export default {
                     // })
                     }
                     catch(error) {
-                        errorEvent.errorEvent(error)
+                        errorEvent(error)
                     };
             },
 
@@ -764,7 +764,7 @@ export default {
                         )
                     }
                     catch(error) {
-                        errorEvent.errorEvent(error);
+                        errorEvent(error);
                         // console.log(error);
                         this.$root.$refs.toaster.showMessage(
                             MessagesConstants.DELETING_ERROR,
@@ -817,7 +817,7 @@ export default {
                         }
 
                         catch(error) {
-                            errorEvent.errorEvent(error)
+                            errorEvent(error)
                             //const Toaster = app.component('toaster')
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.INSERTING_ERROR,
@@ -874,7 +874,7 @@ export default {
                     }
                     catch(error) {
 
-                        errorEvent.errorEvent(error);
+                        errorEvent(error);
 
                         this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.EDITING_ERROR,
