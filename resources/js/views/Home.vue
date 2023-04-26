@@ -53,7 +53,7 @@
                                     'text-bg-warning': logRecord.log_level=='1',
                                     'text-bg-danger': logRecord.log_level=='2',
                                 }"
-                        v-for="(logRecord, index) in logRecords" :key="logRecord.id" :id="logRecord.id">
+                        v-for="(logRecord) in logRecords" :key="logRecord.id" :id="logRecord.id">
                         <div class="card-header"> {{ logRecord.created_at }} - {{ logRecord.log_instance }}</div>
                         <div class="card-body fix-height-200px">
                             <p class="card-title text-info">{{ logRecord.log_category }}</p>
