@@ -86,12 +86,14 @@ class DeviceTypeController extends BaseController
         try {
             $patchDeviceType = DeviceType::whereId($id);
 
-            if ($patchDeviceType === null)
+            if ($patchDeviceType->count() === 0)
             {
                 return response()->json('Patching Record Error - not found', 400);
             }
 
             $oldValue = $patchDeviceType->value($field);
+
+            // dd($patchDeviceType);
 
             $patchDeviceType->update([
                 "$field" => $value
@@ -101,7 +103,7 @@ class DeviceTypeController extends BaseController
             $res["old_field"] = $field;
             $res["old_value"] = $oldValue;
 
-            LOG::setLog('PatchEvent', $res);
+            LOG::setLog('Model patched', $res, 'Controller');
 
             return response()->json($res, 200);
         }
