@@ -76,6 +76,7 @@ import APIConstants from "../api/rest_api";
 import MessagesConstants from "../components/strings_constants/strings.js";
 import ThreeColumnLayout from "../layouts/ThreeColumnLayout.vue";
 import { errorEvent } from "../api/errors";
+import Repository from '../api/repository';
 
 export default {
 
@@ -124,8 +125,6 @@ export default {
 
         getLogPretty(data) {
 
-            // console.log(data);
-            // const jsonObj = JSON.parse(data);
             return data;
             if (typeof jsonObj === 'object') {
                 // const {idx, fieldExt, payload} = jsonObj;
@@ -136,23 +135,19 @@ export default {
         },
 
         async getBlogData() {
-            console.log('blog')
-            try {
-                const _data = await axios.get(APIConstants.api_dev_blogs_read);
-                this.devBlogs = _data.data.data;
-            } catch (error) {
-                errorEvent(error);
-            }
+
+            this.devBlogs = await Repository.getData(
+                APIConstants.api_dev_blogs_read
+            );
+
         },
 
         async getLogData() {
-            // console.log('log')
-            try {
-                const _data = await axios.get(APIConstants.api_logs_read_page + '1/5');
-                this.logRecords = _data.data.data
-            } catch (error) {
-                errorEvent(error);
-            }
+
+            this.logRecords = await Repository.getData(
+                APIConstants.api_logs_read_page + '1/5'
+            );
+
         },
 
         setLang(_lang) {
