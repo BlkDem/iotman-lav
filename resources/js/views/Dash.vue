@@ -198,18 +198,13 @@ export default {
         return {
 
             //Device, controllers and params
-            dataItems: "",
+            dataItems: undefined,
 
             dashEntities: {
                 device: Object, //dataItems.device
                 micro: Object, //dataItems.micro
                 params: [], //dataItems.params
             },
-
-
-            // device: Object, //dataItems.device
-            // micro: Object, //dataItems.micro
-            // params: [], //dataItems.params
 
             layoutCaption: 'Device Micro Parameters',
             deviceCaption: 'Device',
@@ -262,7 +257,10 @@ export default {
     created() {
         this.deviceMicroId = this.$route.params.device_micro_id;
         this.dashEntities.device.device_type_image = Pathes.storageImagePlugName;
-        this.layoutCaption = MessagesConstants.DASH
+        this.layoutCaption = MessagesConstants.DASH;
+    },
+
+    mounted() {
         this.getData(this.deviceMicroId);
     },
 
@@ -270,7 +268,6 @@ export default {
 
         /* MQTT Controls Events */
         onAdvancedControlClick(control) {
-            // console.log(control)
             this.cardWidth = control.controlClass ?? '';
             for (let item in this.advancedControls) this.advancedControls[item].controlActive = '';
             control.controlActive = 'btn-secondary';
@@ -278,21 +275,18 @@ export default {
 
         onButtonClick(value, param_fullname, cmd) {
             this.$refs.mqttRef.doPublish(param_fullname, cmd);
-            // console.log(value, param_fullname, cmd)
         },
 
         onRangeChange(value, param_fullname) {
-            // console.log(value, param_fullname)
             this.$refs.mqttRef.doPublish(param_fullname, value);
         },
 
         onSwitchChange(value, param_fullname) {
-            console.log(value, param_fullname)
+            // console.log(value, param_fullname)
             this.$refs.mqttRef.doPublish(param_fullname, value);
         },
 
         onColorChange(value, param_fullname) {
-            // console.log(value, param_fullname)
             if (value === null) return;
             let a = '';
             if (value[0] === '#') {
@@ -313,7 +307,7 @@ export default {
 
         onMessage(topic, message) {
             for (let item in this.dashEntities.params) {
-                if (this.dashEntities.params[item]['param_fullname'] === topic) {
+                if (this.dashEntities.params[item].param_fullname === topic) {
                     this.dashEntities.params[item].param_value = message;
                 }
             }
@@ -326,11 +320,12 @@ export default {
 
         async getData() {
 
-            this.dataItems = await Repository.getData(
-                    APIConstants.api_device_micro_dash + this.deviceMicroId
-            );
-
             try {
+
+                this.dataItems = await Repository.getData(
+                    APIConstants.api_device_micro_dash + this.deviceMicroId
+                );
+
                 if (this.dataItems.length !== 0) {
                     this.dashEntities = this.dataItems;
                 }
@@ -338,13 +333,13 @@ export default {
 
             catch (error) {
 
-                    errorEvent(error);
+                errorEvent(error);
 
-                    this.$root.$refs.toaster.showMessage(
-                            MessagesConstants.DELETING_ERROR,
-                            ParsingErrors.getError(error),
-                            ParsingErrors.ERROR_LEVEL_ERROR
-                    )
+                this.$root.$refs.toaster.showMessage(
+                    MessagesConstants.DELETING_ERROR,
+                    ParsingErrors.getError(error),
+                    ParsingErrors.ERROR_LEVEL_ERROR
+                )
 
             }
         },

@@ -3,6 +3,7 @@
 namespace App\Services;
 use Illuminate\Support\Facades\Response;
 use App\Models\Logger;
+use Error;
 use Illuminate\Support\Facades\Auth;
 
 class LoggerService
@@ -24,23 +25,28 @@ class LoggerService
      */
     public function setLog($category='cat', $value=null, $instance='GlobalObserver', $level=0) {
 
-        //get auth user
-        $user = Auth::id();
+        try
+        {
+            //get authentificated user id - we neen to know who are the bad guy ))
+            $user = Auth::id();
 
-        //prepare data for log
-        $res = $value;
-        $res["user"] = $user; //user
-        // dd($value);
-        $res["table"] = (is_array($value))? $value : $value->getTable(); //model table name
-        $res["original"] = (is_array($value))? $value : $value->getOriginal(); //original data for recover
+            //prepare data for log
+            $res = $value;
+            $res["user"] = $user; //user
+            $res["table"] = (is_array($value))? $value : $value->getTable(); //model table name
+            $res["original"] = (is_array($value))? $value : $value->getOriginal(); //original data for recover
 
-        $logRecord["log_level"] = $level;
-        $logRecord["log_category"] = $category;
-        $logRecord["log_instance"] = $instance;
-        $logRecord["log_data"] = $res;
+            //fill the record struct
+            $logRecord["log_level"] = $level;
+            $logRecord["log_category"] = $category;
+            $logRecord["log_instance"] = $instance;
+            $logRecord["log_data"] = $res;
 
-        $newLog = Logger::create($logRecord);
+            return Logger::create($logRecord);
 
-        return $newLog;
+        }
+        catch (\Exception $e) {
+            throw $e;
+        }
     }
 }

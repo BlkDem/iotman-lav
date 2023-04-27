@@ -228,8 +228,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-// import MakeID from '../../../helpers/MakeID';
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   emits: ['onClick'],
   props: {
@@ -633,7 +631,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       //Device, controllers and params
-      dataItems: "",
+      dataItems: undefined,
       dashEntities: {
         device: Object,
         //dataItems.device
@@ -641,10 +639,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         //dataItems.micro
         params: [] //dataItems.params
       },
-
-      // device: Object, //dataItems.device
-      // micro: Object, //dataItems.micro
-      // params: [], //dataItems.params
 
       layoutCaption: 'Device Micro Parameters',
       deviceCaption: 'Device',
@@ -691,30 +685,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.deviceMicroId = this.$route.params.device_micro_id;
     this.dashEntities.device.device_type_image = _config_pathes__WEBPACK_IMPORTED_MODULE_5__["default"].storageImagePlugName;
     this.layoutCaption = _components_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].DASH;
+  },
+  mounted: function mounted() {
     this.getData(this.deviceMicroId);
   },
   methods: {
     /* MQTT Controls Events */onAdvancedControlClick: function onAdvancedControlClick(control) {
       var _control$controlClass;
-      // console.log(control)
       this.cardWidth = (_control$controlClass = control.controlClass) !== null && _control$controlClass !== void 0 ? _control$controlClass : '';
       for (var item in this.advancedControls) this.advancedControls[item].controlActive = '';
       control.controlActive = 'btn-secondary';
     },
     onButtonClick: function onButtonClick(value, param_fullname, cmd) {
       this.$refs.mqttRef.doPublish(param_fullname, cmd);
-      // console.log(value, param_fullname, cmd)
     },
     onRangeChange: function onRangeChange(value, param_fullname) {
-      // console.log(value, param_fullname)
       this.$refs.mqttRef.doPublish(param_fullname, value);
     },
     onSwitchChange: function onSwitchChange(value, param_fullname) {
-      console.log(value, param_fullname);
+      // console.log(value, param_fullname)
       this.$refs.mqttRef.doPublish(param_fullname, value);
     },
     onColorChange: function onColorChange(value, param_fullname) {
-      // console.log(value, param_fullname)
       if (value === null) return;
       var a = '';
       if (value[0] === '#') {
@@ -731,7 +723,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     onMessage: function onMessage(topic, message) {
       for (var item in this.dashEntities.params) {
-        if (this.dashEntities.params[item]['param_fullname'] === topic) {
+        if (this.dashEntities.params[item].param_fullname === topic) {
           this.dashEntities.params[item].param_value = message;
         }
       }
@@ -745,23 +737,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              _context.prev = 0;
+              _context.next = 3;
               return _api_repository__WEBPACK_IMPORTED_MODULE_14__["default"].getData(_api_rest_api__WEBPACK_IMPORTED_MODULE_3__["default"].api_device_micro_dash + _this.deviceMicroId);
-            case 2:
+            case 3:
               _this.dataItems = _context.sent;
-              try {
-                if (_this.dataItems.length !== 0) {
-                  _this.dashEntities = _this.dataItems;
-                }
-              } catch (error) {
-                (0,_api_errors__WEBPACK_IMPORTED_MODULE_13__.errorEvent)(error);
-                _this.$root.$refs.toaster.showMessage(_components_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].DELETING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_4__["default"].getError(error), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_4__["default"].ERROR_LEVEL_ERROR);
+              if (_this.dataItems.length !== 0) {
+                _this.dashEntities = _this.dataItems;
               }
-            case 4:
+              _context.next = 11;
+              break;
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context["catch"](0);
+              (0,_api_errors__WEBPACK_IMPORTED_MODULE_13__.errorEvent)(_context.t0);
+              _this.$root.$refs.toaster.showMessage(_components_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].DELETING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_4__["default"].getError(_context.t0), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_4__["default"].ERROR_LEVEL_ERROR);
+            case 11:
             case "end":
               return _context.stop();
           }
-        }, _callee);
+        }, _callee, null, [[0, 7]]);
       }))();
     },
     getImage: function getImage(imageName) {
