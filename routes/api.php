@@ -8,6 +8,7 @@ use App\Http\Controllers\Devices\DevicesViewController;
 use App\Http\Controllers\Devices\DeviceUserController;
 use App\Http\Controllers\Devices\DeviceUsersViewController;
 use App\Http\Controllers\Auth\UserinfoController;
+use App\Http\Controllers\Common\PatchController;
 use App\Http\Controllers\Devices\UserDevicesCountController;
 use App\Http\Controllers\Images\AlbumController;
 use App\Http\Controllers\Images\ImageController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\LoggerController;
 use App\Http\Controllers\Devices\MicroParamController;
 use App\Http\Controllers\Devices\ParamTypeController;
 use App\Http\Controllers\Helpers\ServerStatusController;
+use App\Models\DeviceType;
 
 // use App\Http\Controllers\ImagesAlbumController;
 
@@ -238,5 +240,18 @@ Route::get('/user', [AuthController::class, 'UserInfo']);
 Route::get('/username', [AuthController::class, 'GetUserName']);
 
 Route::get('/sysinfo/{cmd}', [ServerStatusController::class, 'getServerLoad']);
+
+// Route::patch('/device_type/patch/{id}/{field}/{value}', [PatchController::class, 'patch']);
+
+Route::patch('/device_type/patch/{id}/{field}/{value}', function (Request $request) {
+    // dd(Request::route('id'));
+    $patchController = new PatchController();
+    return $patchController->patch(
+        Request::route('id'),
+        Request::route('field'),
+        Request::route('value'),
+        new DeviceType()
+    );
+});
 
 });

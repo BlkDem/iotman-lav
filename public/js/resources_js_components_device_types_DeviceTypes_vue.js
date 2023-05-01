@@ -1085,7 +1085,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 3:
               _add = _context4.sent;
               if (!_add) {
-                _context4.next = 14;
+                _context4.next = 25;
                 break;
               }
               newItemData = _this5.$refs.addItem.postData;
@@ -1093,30 +1093,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               for (field in newItemData) {
                 _values[newItemData[field].fieldName] = newItemData[field].value;
               }
-              _context4.next = 10;
+
+              // console.log(this.api.insert, _values)
+              _context4.prev = 8;
+              _context4.next = 11;
               return axios.post(_this5.api.insert, _values);
-            case 10:
+            case 11:
               response = _context4.sent;
-              try {
-                _res = response.data.data;
-                transformItem = _this5.processListItem(_res);
-                _this5.Items.push(transformItem);
-                _this5.filteredItems = _this5.Items;
-                _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].ADDED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
-              } catch (error) {
-                (0,_api_errors__WEBPACK_IMPORTED_MODULE_12__.errorEvent)(error);
-                //const Toaster = app.component('toaster')
-                _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].INSERTING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].getError(error), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].ERROR_LEVEL_ERROR);
-              }
-              _context4.next = 15;
+              _res = response.data.data;
+              transformItem = _this5.processListItem(_res);
+              _this5.Items.push(transformItem);
+              _this5.filteredItems = _this5.Items;
+              _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].ADDED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
+              _context4.next = 23;
               break;
-            case 14:
+            case 19:
+              _context4.prev = 19;
+              _context4.t0 = _context4["catch"](8);
+              (0,_api_errors__WEBPACK_IMPORTED_MODULE_12__.errorEvent)(_context4.t0);
+              //const Toaster = app.component('toaster')
+              _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].INSERTING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].getError(_context4.t0), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].ERROR_LEVEL_ERROR);
+            case 23:
+              _context4.next = 26;
+              break;
+            case 25:
               console.log(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].INSERTING_CANCELLED);
-            case 15:
+            case 26:
             case "end":
               return _context4.stop();
           }
-        }, _callee4);
+        }, _callee4, null, [[8, 19]]);
       }))();
     },
     doEdit: function doEdit(key, id) {
@@ -2709,6 +2715,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   ERROR_LEVEL_INFO: 0,
   ERROR_LEVEL_WARNING: 1,
@@ -2716,22 +2723,20 @@ __webpack_require__.r(__webpack_exports__);
   addslashes: function addslashes(str) {
     return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
   },
-  getError: function getError($errorObject) {
-    var ValidResponse = $errorObject.response.data != null ? $errorObject.response.data : '';
-    var ValidMessage = $errorObject.message != null ? $errorObject.message : '';
-    var ResponseDataMessage = $errorObject.response.data.message != null ? $errorObject.response.data.message : '';
-    var _msg = "";
-    console.log($errorObject.response.data);
-    // if (ValidResponse != null) {
-    for (var key in ValidResponse) {
-      if (key != 'trace' && key != 'exception' && key != 'file') _msg += key + ": " + this.addslashes(ValidResponse[key]) + "\n\r";
+  getError: function getError(errorObject) {
+    var errDump = [];
+    errDump.push('<h5>' + errorObject.message + '</h5></br>');
+    var ValidMessage = errorObject.response.data.message != null ? errorObject.response.data.message : 'No message';
+    if (_typeof(ValidMessage) === 'object') {
+      for (var message in ValidMessage) {
+        errDump.push('<strong>' + message + '</strong>: ' + ValidMessage[message].toString().replace(',', '!') + '</br>');
+      }
+    } else {
+      errDump.push(JSON.stringify(ValidMessage));
     }
-    // _msg += ValidMessage + "\n\r"
-    // _msg += ResponseDataMessage + "\n\r"
-    // _msg = _msg.slice(0, -1)
-    console.log(_msg);
-    return _msg;
-    // } else return 'Undefine error'
+    return errDump.reduce(function (acc, item) {
+      return acc + ' ' + item;
+    });
   }
 });
 
@@ -2835,7 +2840,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_sass_animation_scss__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.image-panel[data-v-75fb94a3] {\n    max-height: 200px;\n    margin-bottom: 20px;\n}\n.editable-image[data-v-75fb94a3] {\n    margin-bottom: 20px;\n    max-height: inherit;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.image-panel[data-v-75fb94a3] {\n    max-height: 100px;\n    margin-bottom: 20px;\n}\n.editable-image[data-v-75fb94a3] {\n    margin-bottom: 20px;\n    max-height: inherit;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

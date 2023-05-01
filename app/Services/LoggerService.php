@@ -32,6 +32,7 @@ class LoggerService
 
             //prepare data for log
             $res = $value;
+
             $res["user"] = $user; //user
             $res["table"] = (is_array($value))? $value : $value->getTable(); //model table name
             $res["original"] = (is_array($value))? $value : $value->getOriginal(); //original data for recover
@@ -42,6 +43,37 @@ class LoggerService
             $logRecord["log_instance"] = $instance;
             $logRecord["log_data"] = $res;
 
+            return Logger::create($logRecord);
+
+        }
+        catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+
+
+    public function setPatchLog($category='cat', $value, $table, $instance='GlobalObserver', $level=0) {
+
+        try
+        {
+            //get authentificated user id - we neen to know who are the bad guy ))
+            $user = Auth::id();
+
+            //prepare data for log
+            $res = $value;
+
+            $res["user"] = $user; //user
+            $res["table"] = $table; //model table name
+            // $res["original"] = (is_array($value))? $value : $value->getOriginal(); //original data for recover
+
+            //fill the record struct
+            $logRecord["log_level"] = $level;
+            $logRecord["log_category"] = $category;
+            $logRecord["log_instance"] = $instance;
+            $logRecord["log_data"] = $res;
+
+            // dd($logRecord);
             return Logger::create($logRecord);
 
         }

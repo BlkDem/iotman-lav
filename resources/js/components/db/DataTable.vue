@@ -800,9 +800,12 @@ export default {
                         _values[newItemData[field].fieldName] = newItemData[field].value
                     }
 
-                    const response = await axios.post(this.api.insert, _values)
+                    // console.log(this.api.insert, _values)
+
+
                         try {
 
+                            const response = await axios.post(this.api.insert, _values)
                             const _res = response.data.data
 
                             const transformItem = this.processListItem(_res)

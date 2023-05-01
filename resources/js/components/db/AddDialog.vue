@@ -255,7 +255,7 @@ export default {
 @import "../../../sass/animation.scss";
 
 .image-panel {
-    max-height: 200px;
+    max-height: 100px;
     margin-bottom: 20px;
 }
 

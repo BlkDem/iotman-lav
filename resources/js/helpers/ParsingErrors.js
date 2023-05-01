@@ -8,25 +8,23 @@ export default {
         return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
     },
 
-    getError($errorObject) {
+    getError(errorObject) {
 
-        let ValidResponse = ($errorObject.response.data != null) ? $errorObject.response.data : ''
-        let ValidMessage = ($errorObject.message != null) ? $errorObject.message : ''
-        let ResponseDataMessage = ($errorObject.response.data.message != null) ? $errorObject.response.data.message : ''
-        let _msg = ""
+        let errDump = [];
 
-        console.log($errorObject.response.data)
-        // if (ValidResponse != null) {
-            for (let key in ValidResponse) {
-                if ((key != 'trace')&&(key != 'exception')&&(key != 'file'))
-                _msg += key + ": " + this.addslashes(ValidResponse[key]) + "\n\r"
+        errDump.push('<h5>' + errorObject.message + '</h5></br>');
+
+        let ValidMessage = (errorObject.response.data.message != null) ? errorObject.response.data.message : 'No message'
+
+        if (typeof ValidMessage === 'object') {
+            for (let message in ValidMessage) {
+                errDump.push('<strong>' +message + '</strong>: ' + ValidMessage[message].toString().replace(',' , '!') + '</br>')
             }
-            // _msg += ValidMessage + "\n\r"
-            // _msg += ResponseDataMessage + "\n\r"
-            // _msg = _msg.slice(0, -1)
-            console.log(_msg)
-            return _msg
-        // } else return 'Undefine error'
+        } else {
+            errDump.push(JSON.stringify(ValidMessage))
+        }
+
+        return errDump.reduce((acc, item) => acc + ' ' + item)
     },
 
 }

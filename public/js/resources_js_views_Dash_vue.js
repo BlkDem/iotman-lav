@@ -1299,6 +1299,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   ERROR_LEVEL_INFO: 0,
   ERROR_LEVEL_WARNING: 1,
@@ -1306,22 +1307,20 @@ __webpack_require__.r(__webpack_exports__);
   addslashes: function addslashes(str) {
     return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
   },
-  getError: function getError($errorObject) {
-    var ValidResponse = $errorObject.response.data != null ? $errorObject.response.data : '';
-    var ValidMessage = $errorObject.message != null ? $errorObject.message : '';
-    var ResponseDataMessage = $errorObject.response.data.message != null ? $errorObject.response.data.message : '';
-    var _msg = "";
-    console.log($errorObject.response.data);
-    // if (ValidResponse != null) {
-    for (var key in ValidResponse) {
-      if (key != 'trace' && key != 'exception' && key != 'file') _msg += key + ": " + this.addslashes(ValidResponse[key]) + "\n\r";
+  getError: function getError(errorObject) {
+    var errDump = [];
+    errDump.push('<h5>' + errorObject.message + '</h5></br>');
+    var ValidMessage = errorObject.response.data.message != null ? errorObject.response.data.message : 'No message';
+    if (_typeof(ValidMessage) === 'object') {
+      for (var message in ValidMessage) {
+        errDump.push('<strong>' + message + '</strong>: ' + ValidMessage[message].toString().replace(',', '!') + '</br>');
+      }
+    } else {
+      errDump.push(JSON.stringify(ValidMessage));
     }
-    // _msg += ValidMessage + "\n\r"
-    // _msg += ResponseDataMessage + "\n\r"
-    // _msg = _msg.slice(0, -1)
-    console.log(_msg);
-    return _msg;
-    // } else return 'Undefine error'
+    return errDump.reduce(function (acc, item) {
+      return acc + ' ' + item;
+    });
   }
 });
 

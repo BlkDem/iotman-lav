@@ -25,7 +25,7 @@ class DeviceTypeController extends BaseController
 
     public function page($currentPage=0, $itemsPerPage=10){
 
-        $page = (int)$currentPage;
+        $page = $currentPage;
 
         $offset = $itemsPerPage*--$page;
         $res = DeviceType::limit($itemsPerPage)->offset($offset)->orderBy('device_type_name', 'asc')->get();
@@ -37,6 +37,7 @@ class DeviceTypeController extends BaseController
     }
 
     public function show($id) {
+
         $res = DeviceType::find($id);
         if (is_null($res)) {
             return $this->sendError("No Record for id=$id Found");
@@ -45,23 +46,27 @@ class DeviceTypeController extends BaseController
     }
 
     public function store(Request $request){
+
         $validator = ValidatorRules::MakeValidate($request, 'device_types');
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            return $this->sendError($validator->errors(), 400);
+            // return response()->json($validator->errors(), 400);
         }
         try {
             $newDeviceType = DeviceType::create($request->all());
             return $this->sendSuccess($newDeviceType, "Device Type Created", 201);
         }
         catch (Exception $e) {
-            return response()->json('Creating Record Error: ' . $e, 400);
+            // return response()->json('Creating Record Error: ' . $e, 400);
+            return $this->sendError('Creating Record Error: ' . $e, 400);
         }
     }
 
     public function update(Request $request, DeviceType $updateDeviceType){
         $validator = ValidatorRules::MakeValidate($request, 'device_types');
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            // return response()->json($validator->errors(), 400);
+            return $this->sendError($validator->errors(), 400);
         }
         try {
             $updateDeviceType->update($request->all());
@@ -69,46 +74,6 @@ class DeviceTypeController extends BaseController
         }
         catch (Exception $e) {
             return $this->sendError('Updating Record Error: ' . $e, 400);
-        }
-    }
-
-    /**
-     * patch record via key => value
-     *
-     * @param  Request $request
-     * @param  int $id
-     * @param  string $field
-     * @param  mixed $value
-     * @return Response
-     */
-    public function patch(Request $request, $id, $field, $value)
-    {
-        try {
-            $patchDeviceType = DeviceType::whereId($id);
-
-            if ($patchDeviceType->count() === 0)
-            {
-                return response()->json('Patching Record Error - not found', 400);
-            }
-
-            $oldValue = $patchDeviceType->value($field);
-
-            // dd($patchDeviceType);
-
-            $patchDeviceType->update([
-                "$field" => $value
-            ]);
-            $res = DeviceType::find($id);
-
-            $res["old_field"] = $field;
-            $res["old_value"] = $oldValue;
-
-            LOG::setLog('Model patched', $res, 'Controller');
-
-            return response()->json($res, 200);
-        }
-        catch (Exception $e) {
-            return response()->json('Patching Record Error: ' . $e, 400);
         }
     }
 
