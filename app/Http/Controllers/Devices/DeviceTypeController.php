@@ -14,6 +14,11 @@ class DeviceTypeController extends BaseController
 {
 
 
+    /**
+     * index Getting Device Types (Catalog)
+     *
+     * @return Response
+     */
     public function index(){
 
         $res = DeviceType::orderBy('device_type_name', 'asc')->get();
@@ -23,11 +28,21 @@ class DeviceTypeController extends BaseController
         return $this->sendResponse($res, "Device Types List", $paginator);
     }
 
-    public function page($currentPage=0, $itemsPerPage=10){
+    /**
+     * page - Getting Device Types (Catalog) on the page
+     *
+     * @param  int $currentPage
+     * @param  int $itemsPerPage
+     * @return Response
+     */
+    public function page($currentPage=0, $itemsPerPage=10)
+    {
 
-        $page = $currentPage;
+        $page = (($currentPage < 0) || ($currentPage === null))?0:$currentPage;
 
-        $offset = $itemsPerPage*--$page;
+        $itemsCountPerPage = (($currentPage < 0) || ($currentPage === null))?10:$itemsPerPage;
+
+        $offset = $itemsCountPerPage*--$page;
         $res = DeviceType::limit($itemsPerPage)->offset($offset)->orderBy('device_type_name', 'asc')->get();
         $total = DeviceType::get();
 
@@ -36,7 +51,14 @@ class DeviceTypeController extends BaseController
         return $this->sendResponse($res, "Device Types List", $paginator);
     }
 
-    public function show($id) {
+    /**
+     * show current Device Type by ID
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function show($id)
+    {
 
         $res = DeviceType::find($id);
         if (is_null($res)) {
@@ -45,7 +67,14 @@ class DeviceTypeController extends BaseController
         return $this->sendResponse($res, "Device type (id = $id) found");
     }
 
-    public function store(Request $request){
+    /**
+     * store Creating a new Device Type
+     *
+     * @param  Request $request
+     * @return Response
+     */
+    public function store(Request $request)
+    {
 
         $validator = ValidatorRules::MakeValidate($request, 'device_types');
         if ($validator->fails()) {
@@ -62,12 +91,21 @@ class DeviceTypeController extends BaseController
         }
     }
 
-    public function update(Request $request, DeviceType $updateDeviceType){
+    /**
+     * update - updating the DeviceType model
+     *
+     * @param  Request $request
+     * @param  DeviceType $updateDeviceType
+     * @return Response
+     */
+    public function update(Request $request, DeviceType $updateDeviceType)
+    {
         $validator = ValidatorRules::MakeValidate($request, 'device_types');
+
         if ($validator->fails()) {
-            // return response()->json($validator->errors(), 400);
             return $this->sendError($validator->errors(), 400);
         }
+
         try {
             $updateDeviceType->update($request->all());
             return $this->sendResponse($updateDeviceType, "Device type updated");
@@ -75,15 +113,26 @@ class DeviceTypeController extends BaseController
         catch (Exception $e) {
             return $this->sendError('Updating Record Error: ' . $e, 400);
         }
+
     }
 
-    public function destroy($id) {
+    /**
+     * destroy - Destroing the Device Type by ID
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+
         $deviceTypeItem = DeviceType::find($id);
+
         if ($deviceTypeItem === null) {
             return $this->sendError("No Record for deleting Found");
         }
 
         $deviceTypeItem->delete($id);
+
         return $this->sendResponse($deviceTypeItem, "Device Type $id deleted");
     }
 }
