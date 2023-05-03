@@ -81,12 +81,6 @@ Route::controller(ImageController::class)->group(function () {
     Route::patch('/image/patch/{id}/{field}/{value}', 'patch');
 });
 
-// Route::controller(ImagesAlbumController::class)->group(function () {
-    // Route::get('/images/read', 'index');
-    // Route::get('/images/read/page/{currentPage}/{itemsPerPage}', 'page');
-    // Route::get('/images/read/page/{currentPage}/{itemsPerPage}/{album_id}', 'pageWhereAlbum');
-// });
-
 //Upload and Save Image to storage.disk 'images'
 Route::post('/image/update_image/{imageId}', [ImageRepositoryController::class, 'store']);
 Route::post('/image/upload_image/', [ImageRepositoryController::class, 'getStoredFileName']);
