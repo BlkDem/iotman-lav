@@ -230,9 +230,11 @@ Route::delete('/user_device/delete/{id}', [DeviceUserController::class, 'destroy
 Route::patch('/user_device/patch/{id}/{field}/{value}', [DeviceUserController::class, 'patch']);
 
 
-//User Devices Count
-// Route::get('/user_device_count/read', [UserDevicesCountController::class, 'index']);
-// Route::get('/user_device_count/read/{id}', [UserDevicesCountController::class, 'show']);
+Route::group(['middleware' => 'role:project-manager'], function() {
+    Route::get('/dashboard', function() {
+       return 'Добро пожаловать, manager';
+    });
+ });
 
 //Auth Userinfo
 Route::get('/authuser', [UserinfoController::class, 'show']);
@@ -241,7 +243,6 @@ Route::get('/username', [AuthController::class, 'GetUserName']);
 
 Route::get('/sysinfo/{cmd}', [ServerStatusController::class, 'getServerLoad']);
 
-// Route::patch('/device_type/patch/{id}/{field}/{value}', [PatchController::class, 'patch']);
 
 Route::patch('/device_type/patch/{id}/{field}/{value}', function (Request $request) {
     // dd(Request::route('id'));

@@ -1,7 +1,9 @@
 <?php
 namespace App\Traits;
+
 use App\Models\Auth\Role;
 use App\Models\Auth\Permission;
+
 trait HasRolesAndPermissions
 {
     /**
@@ -26,7 +28,7 @@ trait HasRolesAndPermissions
     */
     public function hasRole(... $roles ) {
         foreach ($roles as $role) {
-            if ($this->roles->contains('slug', $role)) {
+           if ($this->roles->contains('slug', $role)) {
                 return true;
             }
         }
