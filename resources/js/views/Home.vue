@@ -53,7 +53,7 @@
                                     'text-bg-warning': logRecord.log_level=='1',
                                     'text-bg-danger': logRecord.log_level=='2',
                                 }"
-                        v-for="(logRecord, index) in logRecords" :key="logRecord.id" :id="logRecord.id">
+                        v-for="(logRecord) in logRecords" :key="logRecord.id" :id="logRecord.id">
                         <div class="card-header"> {{ logRecord.created_at }} - {{ logRecord.log_instance }}</div>
                         <div class="card-body fix-height-200px">
                             <p class="card-title text-info">{{ logRecord.log_category }}</p>
@@ -75,6 +75,8 @@
 import APIConstants from "../api/rest_api";
 import MessagesConstants from "../components/strings_constants/strings.js";
 import ThreeColumnLayout from "../layouts/ThreeColumnLayout.vue";
+import { errorEvent } from "../api/errors";
+import Repository from '../api/repository';
 
 export default {
 
@@ -123,8 +125,6 @@ export default {
 
         getLogPretty(data) {
 
-            // console.log(data);
-            // const jsonObj = JSON.parse(data);
             return data;
             if (typeof jsonObj === 'object') {
                 // const {idx, fieldExt, payload} = jsonObj;
@@ -135,27 +135,19 @@ export default {
         },
 
         async getBlogData() {
-            console.log('blog')
-            try {
-                const _data = await axios.get(APIConstants.api_dev_blogs_read);
-                this.devBlogs = _data.data.data;
-            } catch (error) {
-                if (error.response?.status === 401) {
-                    window.location.href = "/login"
-                }
-            }
+
+            this.devBlogs = await Repository.getData(
+                APIConstants.api_dev_blogs_read
+            );
+
         },
 
         async getLogData() {
-            console.log('log')
-            try {
-                const _data = await axios.get(APIConstants.api_logs_read_page + '1/5');
-                this.logRecords = _data.data.data
-            } catch (error) {
-                if (error.response?.status === 401) {
-                            window.location.href = "/login"
-                }
-            }
+
+            this.logRecords = await Repository.getData(
+                APIConstants.api_logs_read_page + '1/5'
+            );
+
         },
 
         setLang(_lang) {
@@ -180,7 +172,7 @@ export default {
 .list-enter-from,
 .list-leave-to {
   opacity: 0;
-  transform: translateX(30px);
+  transform: translateY(80px);
 }
 
 .list-leave-active {
@@ -188,7 +180,7 @@ export default {
 }
 
 .fix-height-200px {
-    max-height: 120px;
+    max-height: 128px;
     overflow-y: auto;
 }
 </style>

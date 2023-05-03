@@ -28,9 +28,7 @@ import Api from '../../api/ApiStruct';
                 deviceTypes: {
                     deviceTypesCaption: MessagesConstants.DEVICE_TYPES,
 
-                    api: {
-                        Api
-                    },
+                    api: { Api },
 
                     deviceTypesFields: [
                         ...DeviceTypeFieldStruct.FieldStruct

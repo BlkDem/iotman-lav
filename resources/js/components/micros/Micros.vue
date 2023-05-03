@@ -15,6 +15,7 @@ import DataTable from '../db/DataTable.vue';
 import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
 import Api from '../../api/ApiStruct';
+
 import FieldStruct from './FieldStruct';
 
 

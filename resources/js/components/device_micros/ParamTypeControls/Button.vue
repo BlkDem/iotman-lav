@@ -10,8 +10,6 @@
 
 <script>
 
-// import MakeID from '../../../helpers/MakeID';
-
 export default {
 
     emits: ['onClick'],
@@ -31,7 +29,6 @@ export default {
         param_value: '',
         param_desc: '',
         param_fullname: '',
-
 
     },
 

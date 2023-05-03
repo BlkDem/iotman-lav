@@ -1,6 +1,8 @@
 <template>
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div class="toast hide toastBasic" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+        <div class="toast toastBasic max-width-400px" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000"
+            :class="{'hide': !isShow, 'show': isShow}"
+        >
             <div class="toast-header text-light bg-info flex-center" :class="{'bg-danger': isError, 'br-warning': isWarning }">
                 <strong class="me-auto">{{ header }}</strong>
                 <!-- <small>Info</small> -->
@@ -8,8 +10,8 @@
                     <span aria-hidden="true"></span>
                 </button>
             </div>
-            <div class="toast-body">
-                {{ message }}
+            <div class="toast-body"> <span v-html="message"></span>
+                <!-- {{  }} -->
             </div>
         </div>
     </div>
@@ -26,7 +28,8 @@ export default {
              message: '',
              header: '',
              isError: false,
-             isWarning: false
+             isWarning: false,
+             isShow: false
         }
     },
 
@@ -47,12 +50,20 @@ export default {
             }
             this.header = _header;
             this.message = _message;
-            $('.toastBasic').toast('show');
+            this.isShow = true;
+            setTimeout(() => {this.isShow = false}, 5000);
         },
 
         hideToast(){
-            $('.toastBasic').toast('hide');
+            // $('.toastBasic').toast('hide');
+            this.isShow = false;
         }
     },
 }
 </script>
+
+<style scoped>
+.max-width-400px {
+    width: 400px;
+}
+</style>

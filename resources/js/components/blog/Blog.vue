@@ -61,6 +61,7 @@ import MessagesConstants from '../strings_constants/strings'
 import APIConstants from "../../api/rest_api";
 import MasterSlaveLayout from "../../layouts/MasterSlaveLayout.vue";
 import Paginator from '../db/Paginator.vue';
+import { errorEvent } from '../../api/errors';
 
 export default {
 
@@ -118,9 +119,7 @@ export default {
                 // console.log(_data.data)
                 this.calendarAttributes[0].dates = _data.data.data;
             } catch (error) {
-                if (error.response?.status === 401) {
-                    window.location.href = "/login"
-                }
+                errorEvent(error)
             }
         },
 
@@ -143,9 +142,7 @@ export default {
 
 
             } catch (error) {
-                if (error.response?.status === 401) {
-                    window.location.href = "/login"
-                }
+                errorEvent(error)
             }
         },
 

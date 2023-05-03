@@ -76,7 +76,7 @@
                             {{ item[column].value }}
                         </div>
 
-                        <img v-if="item[column].isImage" class="w-100 p-2" @click="imageClick"
+                        <img v-if="item[column].isImage" class="w-100 p-2" @click="imageClick($event)"
                             :src="(!item[column].isVirtualImage)?imagesPath + item[column].value:imagePlug"
                             @error="replaceByDefault"
                         />
@@ -195,7 +195,7 @@
                             <img v-if="item[column].isImage" class="device-image"
                                 :src="getImage(item[column])"
                                 @error="replaceByDefault"
-                                @click="imageClick"
+                                @click="imageClick($event)"
                             />
 
                             <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
@@ -225,7 +225,10 @@
                                 </button>
 
                                 <button class="btn btn-primary btn-sm"
-                                    @mousedown="this.isEsc=true; this.cancelEditCell()">
+                                    @mousedown="
+                                        this.isEsc=true;
+                                        this.cancelEditCell()"
+                                >
                                     <i class="far fa-times-circle"></i>
                                 </button>
 
@@ -272,6 +275,7 @@ import TableNav from '../../components/common/TableBar/TableNav.vue';
 import TableHead from './TableHead.vue';
 import Viewer from '../imagelib/Viewer.vue';
 import { Tooltip } from 'bootstrap'
+import { errorEvent } from '../../api/errors';
 
 export default {
 
@@ -389,23 +393,43 @@ export default {
 
         watch: {
             foreignValue() {
-                console.log('fk value', this.foreignValue)
+                // console.log('fk value', this.foreignValue)
                 this.getData()
             }
         },
 
         methods: {
 
+            // Edit button event
+            editBtnKeyUp(event_key, key, id) {
+                console.log('edit', event_key);
+                if (event_key === 'Escape') this.$refs.addItem.cancelDialog();
+                if (event_key === 'Enter') this.$refs.addItem.confirmDialog();
+            },
+
+            // Delete button event
+            deleteBtnKeyUp(event_key, key, id) {
+                console.log('delete', event_key);
+                if (event_key === 'Escape') this.$refs.confirmDialogue.cancelDialog();
+                if (event_key === 'Enter') this.$refs.confirmDialogue.confirmDialog();
+            },
+
+            //Make tooltip value
             getTooltip(item){
                 if (item.lookupValue != '') return item.lookupValue
                 if (item.value != null) return item.value
                 return ''
             },
 
+            //for opened/closed folder image etc.
             getVirtualImage(selected, item) {
                 return (selected)?item.selectedVirtualImage : item.VirtualImage
             },
 
+            /*
+            * Show direction arrows <- <-> ->
+            * IN/OUT params
+            */
             getDirectionImage(item) {
 
                 switch(item.value) {
@@ -417,11 +441,13 @@ export default {
 
             },
 
-            imageClick() {
+            //Show Image Viewer
+            imageClick(event) {
                 this.imageSrc = event.target.src
                 this.$refs.viewer.showImage()
             },
 
+            // Row click event
             rowClick(row){
 
                 //no selected rows - nothing to do
@@ -448,21 +474,21 @@ export default {
 
             //get image src with full path
             getImage(item) {
-                if (item.value==='') return this.imagePlug
+                if (item?.value==='') return this.imagePlug
                 return Pathes.storageImagesPath + item.value
             },
 
-            //set the plug
+            //set the default image plug
             replaceByDefault(e) {
                 e.target.src = Pathes.storageImagePlug
             },
 
             //set the cell uID
-            setId($key, $ckey) {
-                return "id" + $key + "_" + $ckey
+            setId(key, ckey) {
+                return "id" + key + "_" + ckey
             },
 
-            //columns highlights order rules
+            //columns align rules
             setLastColumnAlignClass(classList, keysCount, key) {
                 let alignClass = ''
                 switch (key) {
@@ -489,21 +515,20 @@ export default {
             },
 
             //after cell editing method
-            onInputChange($item, $key, $dataCol, $value, $isEsc){
+            onInputChange(item, key, dataCol, value, isEsc){
 
-                if ($isEsc) {
+                if (isEsc) {
                     this.isEsc = false
                     return
                 }
 
                 try {
-
                     //save new value to dataset (patch route)
-                    this.saveRecord($item, $dataCol, $value)
+                    this.saveRecord(item, dataCol, value)
 
                     //update arrays
-                    this.filteredItems[$key][$dataCol].value = $value
-                    this.Items[$key][$dataCol].value = $value
+                    this.filteredItems[key][dataCol].value = value
+                    this.Items[key][dataCol].value = value
                 }
                 catch(e) {
                     console.log(e)
@@ -522,32 +547,35 @@ export default {
             },
 
             //save cell data to dataset
-            saveRecord($id, $field, $value) {
+            async saveRecord(id, field, value) {
                 //finish editing
-                this.cancelEditCell()
+                try {
+                    this.cancelEditCell()
 
                 //patch dataset record $id such as 'field -> value'
-                axios.patch(
-                    this.api.patch + $id + '/' + $field + '/' + $value)
-                    .then(resp => {
+                    await axios.patch(
+                        this.api.patch + id + '/' + field + '/' + value)
                         this.$root.$refs.toaster.showMessage(
                             MessagesConstants.EDITED_MESSAGE,
                             MessagesConstants.PROCESS_SUCCESSFULLY
                         );
-                    })
+                } catch(error) {
+                    errorEvent(error)
+                }
             },
 
             //start editing cell
-            onCellClick($isEditable, $ckey=undefined, $key=undefined) {
-                if (!$isEditable) return //check editable cell
-                this.activeCol = $key //set active column
-                this.activeRow = $ckey //set active row
-                const a = setTimeout(() => { //delay for set focus to active input
-                    $("input#id" + $key + "_" + $ckey).focus()
+            onCellClick(isEditable, ckey=undefined, key=undefined) {
+                if (!isEditable) return //check editable cell
+                this.activeCol = key //set active column
+                this.activeRow = ckey //set active row
+                setTimeout(() => { //delay for set focus to active input
+                    $("input#id" + key + "_" + ckey).focus()
                 }, 200)
             },
 
 
+            //For future
             setLang(_lang) {
                 // this.pageCaption = _lang.DEVICE_TYPES ?? 'Device Types'
             },
@@ -558,17 +586,17 @@ export default {
             },
 
             //filtering
-            updateFilteredData($fieldName, $filter) {
+            updateFilteredData(fieldName, filter) {
 
                 this.filteredItems = this.Items;
-                this.filteredItems = Filtering.doFilter(this.filteredItems, $fieldName, $filter)
+                this.filteredItems = Filtering.doFilter(this.filteredItems, fieldName, filter)
             },
 
             //switch dataset view
-            setCompactView($value) {
+            setCompactView(value) {
                 // console.log(value)
                 if (!this.readOnly) {
-                    this.compactView = $value
+                    this.compactView = value
                 }
                 else this.compactView = true
             },
@@ -579,6 +607,12 @@ export default {
                 let newListItemData = {}
 
                 try {
+
+                    /**
+                     * Here code needs to refactoring (!)
+                     */
+
+
                     for (let field in this.dataFields) {
 
                         const dataField = this.dataFields[field]
@@ -651,6 +685,7 @@ export default {
                 }
             },
 
+            //Populate DataTable
             populateListItems(items) {
 
                     let newList = items
@@ -663,12 +698,13 @@ export default {
                     return newList
             },
 
-            async getData(_currentPage=1, _itemsPerPage=50) {
+            //Getting data from DataRepository (in progress now)
+            async getData(currentPage=1, itemsPerPage=50) {
 
                 //async loading master/slave datasets
                 //if dataset is slave waiting for master keys value
 
-                // (foreignValue===0) - clear items signal
+                // (foreignValue===0) - clear items event
                 if (this.foreignValue===0) {
                     this.filteredItems = []
                     this.Items = []
@@ -680,8 +716,9 @@ export default {
                 //prepare request with or w/o FK
                 let fkValue = (this.foreignValue>0)?'/'+this.foreignValue:''
 
-                await axios.get(this.api.get + _currentPage + "/" + _itemsPerPage + fkValue)
-                    .then(response => {
+                try {
+                    const response = await axios.get(this.api.get + currentPage + "/" + itemsPerPage + fkValue)
+                    // .then(response => {
 
                         this.Items = this.populateListItems(response.data.data);
                         this.filteredItems = this.Items;
@@ -701,13 +738,11 @@ export default {
                                 objectRef: this
                             }
                         )
-                    })
-                    .catch(err => {
-                        console.log('error: ', err.response.status)
-                        if (err.response?.status === 401) {
-                            window.location.href = "/login"
-                        }
-                    });
+                    // })
+                    }
+                    catch(error) {
+                        errorEvent(error)
+                    };
             },
 
             async doDelete(key, id) {
@@ -719,23 +754,24 @@ export default {
                 })
 
                 if (confirmDelete) {
-                    axios.delete(this.api.delete + id)
-                        .then(resp => {
+                    try {
+                        await axios.delete(this.api.delete + id)
                             this.Items.splice(key, 1);
                             this.Items = this.filteredItems
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.DELETED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
-                            )
-                        })
-                        .catch(error => {
-                            console.log(error);
-                            this.$root.$refs.toaster.showMessage(
-                                MessagesConstants.DELETING_ERROR,
-                                ParsingErrors.getError(error),
-                                ParsingErrors.ERROR_LEVEL_ERROR
-                            )
-                        })
+                        )
+                    }
+                    catch(error) {
+                        errorEvent(error);
+                        // console.log(error);
+                        this.$root.$refs.toaster.showMessage(
+                            MessagesConstants.DELETING_ERROR,
+                            ParsingErrors.getError(error),
+                            ParsingErrors.ERROR_LEVEL_ERROR
+                        )
+                    }
                 } else {
                     console.log(MessagesConstants.DELETING_CANCELLED)
                 }
@@ -759,20 +795,20 @@ export default {
                     const newItemData = this.$refs.addItem.postData
 
                     const _values = {}
+
                     for (let field in newItemData) {
                         _values[newItemData[field].fieldName] = newItemData[field].value
                     }
 
-                    console.log('values: ', _values, this.api.insert)
+                    // console.log(this.api.insert, _values)
 
-                    axios.post(this.api.insert, _values)
-                        .then(resp => {
 
-                            const _res = resp.data.data
+                        try {
 
-                            // console.log('res: ', _res)
+                            const response = await axios.post(this.api.insert, _values)
+                            const _res = response.data.data
+
                             const transformItem = this.processListItem(_res)
-                            // console.log('after transform: ', _res)
 
                             this.Items.push(transformItem);
                             this.filteredItems = this.Items
@@ -781,37 +817,27 @@ export default {
                                 MessagesConstants.ADDED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
                             )
-                        })
-                        .catch(error => {
+                        }
 
+                        catch(error) {
+                            errorEvent(error)
                             //const Toaster = app.component('toaster')
                             this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.INSERTING_ERROR,
                                 ParsingErrors.getError(error),
                                 ParsingErrors.ERROR_LEVEL_ERROR
                             )
-                        })
+                        }
                 } else {
                     console.log(MessagesConstants.INSERTING_CANCELLED);
                 }
 
             },
 
-            editBtnKeyUp(event_key, key, id) {
-                console.log('edit', event_key);
-                if (event_key === 'Escape') this.$refs.addItem.cancelDialog();
-                if (event_key === 'Enter') this.$refs.addItem.confirmDialog();
-            },
-
-            deleteBtnKeyUp(event_key, key, id) {
-                console.log('delete', event_key);
-                if (event_key === 'Escape') this.$refs.confirmDialogue.cancelDialog();
-                if (event_key === 'Enter') this.$refs.confirmDialogue.confirmDialog();
-            },
-
             async doEdit(key, id) {
 
                 let postFields = this.dataFields
+
                 for (let item in this.dataFields) {
                     postFields[item].value = this.filteredItems[key][this.dataFields[item].fieldName].value;
                 }
@@ -827,38 +853,39 @@ export default {
                 )
 
                 if (_edit) {
-                    const editItem = this.$refs.addItem.postData;
-                    // console.log('edit data: ', editItem);
 
-                    const _values = {}
-                    for (let field in editItem) {
-                        _values[editItem[field].fieldName] = editItem[field].value;
-                    }
+                    try {
+                        const editItem = this.$refs.addItem.postData;
 
-                    // console.log('on axios: ', _values)
-                    axios.put(this.api.update + id, _values)
-                        .then(resp => {
+                        const _values = {}
 
-                            const _res = resp.data.data
+                        for (let field in editItem) {
+                            _values[editItem[field].fieldName] = editItem[field].value;
+                        }
 
-                            this.filteredItems[key] = this.processListItem(_res)
+                        const response = await axios.put(this.api.update + id, _values)
 
-                            this.Items[key] = this.filteredItems[key]
-                            this.$root.$refs.toaster.showMessage(
+                        const listItem = response.data.data
+
+                        this.filteredItems[key] = this.processListItem(listItem)
+
+                        this.Items[key] = this.filteredItems[key]
+                        this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.EDITED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
-                            );
-                        })
-                        .then(resp => {
-                            // this.$root.$refs.DeviceRef.getData();
-                        })
-                        .catch(error => {
-                            this.$root.$refs.toaster.showMessage(
+                        );
+                    }
+                    catch(error) {
+
+                        errorEvent(error);
+
+                        this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.EDITING_ERROR,
                                 ParsingErrors.getError(error),
                                 ParsingErrors.ERROR_LEVEL_ERROR
-                            )
-                        })
+                        )
+
+                    }
                 } else {
                     console.log(MessagesConstants.EDITING_CANCELLED);
                 }

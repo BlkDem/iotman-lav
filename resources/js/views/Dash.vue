@@ -9,26 +9,26 @@
 
             <template v-slot:master>
 
-                <common-card :cardCaption="device.device_name">
+                <common-card :cardCaption="dashEntities.device.device_name">
 
                     <div class="mx-2">
-                        <h5 class="flex-center my-2">{{ device.device_type_name }}</h5>
-                        <img :src="getImage(device.device_type_image)" class="w-100 mb-4" />
+                        <h5 class="flex-center my-2">{{ dashEntities.device.device_type_name }}</h5>
+                        <img :src="getImage(dashEntities.device.device_type_image)" class="w-100 mb-4" />
                         <div class="w-100 mb-4">
                             <h6>Description:</h6>
-                            <div>{{ device.device_type_desc }}</div>
+                            <div>{{ dashEntities.device.device_type_desc }}</div>
                         </div>
                         <div class="w-100 mb-4">
                             <h6>Device Description:</h6>
-                            <div>{{ device.device_desc }}</div>
+                            <div>{{ dashEntities.device.device_desc }}</div>
                         </div>
-                        <div class="w-100 mb-4" v-if="micro.device_micro_desc!=null">
+                        <div class="w-100 mb-4" v-if="dashEntities.micro.device_micro_desc!=null">
                             <h6>Microcontroller:</h6>
-                            <div>{{ micro.device_micro_desc }}</div>
+                            <div>{{ dashEntities.micro.device_micro_desc }}</div>
                         </div>
                         <div class="w-100 mb-4">
                             <h6>Created:</h6>
-                            <div>{{ micro.created_at }}</div>
+                            <div>{{ dashEntities.micro.created_at }}</div>
                         </div>
                     </div>
 
@@ -46,7 +46,7 @@
                     @on-advanced-control-click="onAdvancedControlClick"
                 >
                 <div class="flex-controls">
-                    <div class="m-2" v-for="(param, key) in params" :key="key" :id="param.id">
+                    <div class="m-2" v-for="(param, key) in dashEntities.params" :key="key" :id="param.id">
 
                         <!-- <div class=""> -->
                             <div
@@ -158,7 +158,7 @@
         </MasterSlaveLayout>
 
         <MyMqtt ref="mqttRef"
-            :paramItems="params"
+            :paramItems="dashEntities.params"
             @on-connect="mqttConnected"
             @on-message="onMessage"
         />
@@ -179,6 +179,8 @@ import SwitchControl from '../components/device_micros/ParamTypeControls/Switch'
 import ButtonControl from '../components/device_micros/ParamTypeControls/Button.vue';
 import MyMqtt from '../components/MyMqtt.vue';
 import InfoCard from '../components/common/InfoCard.vue';
+import { errorEvent } from '../api/errors';
+import Repository from '../api/repository';
 
 export default {
     components: {MasterSlaveLayout,
@@ -196,11 +198,13 @@ export default {
         return {
 
             //Device, controllers and params
-            dataItems: "",
+            dataItems: undefined,
 
-            device: Object, //dataItems.device
-            micro: Object, //dataItems.micro
-            params: [], //dataItems.params
+            dashEntities: {
+                device: Object, //dataItems.device
+                micro: Object, //dataItems.micro
+                params: [], //dataItems.params
+            },
 
             layoutCaption: 'Device Micro Parameters',
             deviceCaption: 'Device',
@@ -252,9 +256,11 @@ export default {
 
     created() {
         this.deviceMicroId = this.$route.params.device_micro_id;
-        this.device.device_type_image = Pathes.storageImagePlugName;
-        // console.log("device_micro_id: ", this.deviceMicroId);
-        this.layoutCaption = MessagesConstants.DASH
+        this.dashEntities.device.device_type_image = Pathes.storageImagePlugName;
+        this.layoutCaption = MessagesConstants.DASH;
+    },
+
+    mounted() {
         this.getData(this.deviceMicroId);
     },
 
@@ -262,7 +268,6 @@ export default {
 
         /* MQTT Controls Events */
         onAdvancedControlClick(control) {
-            // console.log(control)
             this.cardWidth = control.controlClass ?? '';
             for (let item in this.advancedControls) this.advancedControls[item].controlActive = '';
             control.controlActive = 'btn-secondary';
@@ -270,21 +275,18 @@ export default {
 
         onButtonClick(value, param_fullname, cmd) {
             this.$refs.mqttRef.doPublish(param_fullname, cmd);
-            // console.log(value, param_fullname, cmd)
         },
 
         onRangeChange(value, param_fullname) {
-            // console.log(value, param_fullname)
             this.$refs.mqttRef.doPublish(param_fullname, value);
         },
 
         onSwitchChange(value, param_fullname) {
-            console.log(value, param_fullname)
+            // console.log(value, param_fullname)
             this.$refs.mqttRef.doPublish(param_fullname, value);
         },
 
         onColorChange(value, param_fullname) {
-            // console.log(value, param_fullname)
             if (value === null) return;
             let a = '';
             if (value[0] === '#') {
@@ -304,9 +306,9 @@ export default {
         },
 
         onMessage(topic, message) {
-            for (let item in this.params) {
-                if (this.params[item]['param_fullname'] === topic) {
-                    this.params[item].param_value = message;
+            for (let item in this.dashEntities.params) {
+                if (this.dashEntities.params[item].param_fullname === topic) {
+                    this.dashEntities.params[item].param_value = message;
                 }
             }
         },
@@ -317,31 +319,29 @@ export default {
         },
 
         async getData() {
-            await axios.get(APIConstants.api_device_micro_dash + this.deviceMicroId)
-                .then(response => {
-                this.dataItems = response.data.data;
 
-                this.device = this.dataItems.device;
-                this.micro = this.dataItems.micro;
-                this.params = this.dataItems.params;
+            try {
 
-            })
+                this.dataItems = await Repository.getData(
+                    APIConstants.api_device_micro_dash + this.deviceMicroId
+                );
 
-            .catch (error => {
+                if (this.dataItems.length !== 0) {
+                    this.dashEntities = this.dataItems;
+                }
+            }
 
-                    console.log(error);
+            catch (error) {
 
-                    if (error.response.status === 401) {
-                            window.location.href = "/login"
-                    }
+                errorEvent(error);
 
-                    this.$root.$refs.toaster.showMessage(
-                            MessagesConstants.DELETING_ERROR,
-                            ParsingErrors.getError(error),
-                            ParsingErrors.ERROR_LEVEL_ERROR
-                    )
+                this.$root.$refs.toaster.showMessage(
+                    MessagesConstants.DELETING_ERROR,
+                    ParsingErrors.getError(error),
+                    ParsingErrors.ERROR_LEVEL_ERROR
+                )
 
-            })
+            }
         },
 
         getImage(imageName) {

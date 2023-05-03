@@ -2,10 +2,10 @@ export default class Field {
 
     #property = ' with property';
 
-    constructor(name, props) {
-        this.name = name
-        this.props = props
-        // console.log(this.name, this.props)
+    constructor(fieldProps) {
+        this.fieldName = fieldProps?.fieldName
+        this.fieldCaption = fieldProps?.fieldCaption
+        this.fieldWidth = fieldProps?.fieldWidth
     }
 
     getName() {

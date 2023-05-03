@@ -13,24 +13,10 @@ use App\Facades\LOG;
 
 class LoggerController extends BaseController
 {
-    // public function getLog() {
-    //     // dd(Logger::logger());
-
-    //     return response()->json(LOG::setLog(), 200);
-    //     // return response()->json(LOG::logger(), 200);
-    // }
-
-    // public function WriteLog() {
-    //     // dd(Logger::logger());
-
-    //     return response()->json(LOG::setLog(), 200);
-    //     // return response()->json(LOG::logger(), 200);
-    // }
-
     /**
-     * index
+     * index Getting default recordset
      *
-     * @return void
+     * @return Response
      */
     public function index(){
 
@@ -99,15 +85,18 @@ class LoggerController extends BaseController
      * @param  Request $request
      * @return Response
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $validator = ValidatorRules::MakeValidate($request, 'loggers');
-        if ($validator->fails()) {
+
+        if ($validator->fails())
+        {
             return response()->json($validator->errors(), 400);
         }
-        try {
+        try
+        {
             $newDeviceType = Logger::create($request->all());
             return $this->sendSuccess($newDeviceType, "Device Type Created", 201);
-            // return response()->json($newDeviceType, 201);
         }
         catch (Exception $e) {
             return response()->json('Creating Record Error: ' . $e, 400);

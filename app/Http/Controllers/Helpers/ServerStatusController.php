@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Helpers;
 
-// use App\Http\Controllers\Controller;
-// use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-// use App\Exceptions\Sh
 
 class ServerStatusController extends BaseController
 {
+    /**
+     * shellCmd - do not use never !!!
+     *
+     * @param  string $cmd
+     * @return string
+     */
     public static function shellCmd($cmd)
     {
         {

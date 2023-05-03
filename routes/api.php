@@ -8,6 +8,7 @@ use App\Http\Controllers\Devices\DevicesViewController;
 use App\Http\Controllers\Devices\DeviceUserController;
 use App\Http\Controllers\Devices\DeviceUsersViewController;
 use App\Http\Controllers\Auth\UserinfoController;
+use App\Http\Controllers\Common\PatchController;
 use App\Http\Controllers\Devices\UserDevicesCountController;
 use App\Http\Controllers\Images\AlbumController;
 use App\Http\Controllers\Images\ImageController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\LoggerController;
 use App\Http\Controllers\Devices\MicroParamController;
 use App\Http\Controllers\Devices\ParamTypeController;
 use App\Http\Controllers\Helpers\ServerStatusController;
+use App\Models\DeviceType;
 
 // use App\Http\Controllers\ImagesAlbumController;
 
@@ -59,6 +61,12 @@ Route::controller(UserController::class)->group(function () {
     Route::patch('/user/patch/{id}/{field}/{value}', 'patch');
 });
 
+Route::get('cache-data', function () {
+    $user = \Cache::remember('user', 60, function() {
+        return \App\Models\User::first();
+    });
+});
+
 //CRUD routes for model 'images'
 
 Route::controller(ImageController::class)->group(function () {
@@ -72,12 +80,6 @@ Route::controller(ImageController::class)->group(function () {
     Route::delete('/image/delete/{id}', 'destroy');
     Route::patch('/image/patch/{id}/{field}/{value}', 'patch');
 });
-
-// Route::controller(ImagesAlbumController::class)->group(function () {
-    // Route::get('/images/read', 'index');
-    // Route::get('/images/read/page/{currentPage}/{itemsPerPage}', 'page');
-    // Route::get('/images/read/page/{currentPage}/{itemsPerPage}/{album_id}', 'pageWhereAlbum');
-// });
 
 //Upload and Save Image to storage.disk 'images'
 Route::post('/image/update_image/{imageId}', [ImageRepositoryController::class, 'store']);
@@ -222,9 +224,11 @@ Route::delete('/user_device/delete/{id}', [DeviceUserController::class, 'destroy
 Route::patch('/user_device/patch/{id}/{field}/{value}', [DeviceUserController::class, 'patch']);
 
 
-//User Devices Count
-// Route::get('/user_device_count/read', [UserDevicesCountController::class, 'index']);
-// Route::get('/user_device_count/read/{id}', [UserDevicesCountController::class, 'show']);
+Route::group(['middleware' => 'role:project-manager'], function() {
+    Route::get('/dashboard', function() {
+       return 'Добро пожаловать, manager';
+    });
+ });
 
 //Auth Userinfo
 Route::get('/authuser', [UserinfoController::class, 'show']);
@@ -232,5 +236,17 @@ Route::get('/user', [AuthController::class, 'UserInfo']);
 Route::get('/username', [AuthController::class, 'GetUserName']);
 
 Route::get('/sysinfo/{cmd}', [ServerStatusController::class, 'getServerLoad']);
+
+
+Route::patch('/device_type/patch/{id}/{field}/{value}', function (Request $request) {
+    // dd(Request::route('id'));
+    $patchController = new PatchController();
+    return $patchController->patch(
+        Request::route('id'),
+        Request::route('field'),
+        Request::route('value'),
+        new DeviceType()
+    );
+});
 
 });
