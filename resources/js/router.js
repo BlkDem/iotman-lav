@@ -190,6 +190,16 @@ const routes = [
     visible: false
   },
 
+//   {
+//     path: "/auth/login",
+//     name: "Login",
+//     icon: "fa-solid fa-right-to-bracket",
+//     component: () => import('./views/Login.vue'),
+
+//     ID: "LOGIN",
+//     visible: true
+//   },
+
 ];
 
 const router = createRouter({

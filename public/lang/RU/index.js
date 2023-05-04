@@ -29,6 +29,7 @@ export default {
     EDITING_ERROR: "Ошибка изменения",
     DELETING_CANCELLED: "Удаление отменено",
     DELETING_ERROR: "Ошибка удаления",
+    PATCHING_ERROR: "Ошибка изменения",
 
     NO_DESCRIPTION: " нет описания",
     NO_HWID: " нет адреса устройста",

@@ -274,6 +274,7 @@ import AddItem from './AddDialog.vue';
 import TableNav from '../../components/common/TableBar/TableNav.vue';
 import TableHead from './TableHead.vue';
 import Viewer from '../imagelib/Viewer.vue';
+import Repository from '../../api/repository';
 import { Tooltip } from 'bootstrap'
 import { errorEvent } from '../../api/errors';
 
@@ -514,27 +515,6 @@ export default {
                 this.activeRow = null
             },
 
-            //after cell editing method
-            onInputChange(item, key, dataCol, value, isEsc){
-
-                if (isEsc) {
-                    this.isEsc = false
-                    return
-                }
-
-                try {
-                    //save new value to dataset (patch route)
-                    this.saveRecord(item, dataCol, value)
-
-                    //update arrays
-                    this.filteredItems[key][dataCol].value = value
-                    this.Items[key][dataCol].value = value
-                }
-                catch(e) {
-                    console.log(e)
-                }
-            },
-
             //saving cell data if changed and cancel edit
             onInputEnter(){
                 this.cancelEditCell()
@@ -546,21 +526,54 @@ export default {
                 this.cancelEditCell()
             },
 
+            //after cell editing method
+            async onInputChange(item, key, dataCol, value, isEsc){
+
+                if (isEsc) {
+                    this.isEsc = false
+                    return
+                }
+
+                try {
+                    //save new value to dataset (patch route)
+                    if (await this.saveRecord(item, dataCol, value)) {
+
+                        //update arrays
+                        this.filteredItems[key][dataCol].value = value
+                        this.Items[key][dataCol].value = value
+                    }
+                }
+                catch(e) {
+                    console.log(e)
+                }
+            },
+
             //save cell data to dataset
             async saveRecord(id, field, value) {
-                //finish editing
+
                 try {
+
+                    //finish editing
                     this.cancelEditCell()
 
-                //patch dataset record $id such as 'field -> value'
+                    //patch dataset record $id such as 'field -> value'
                     await axios.patch(
                         this.api.patch + id + '/' + field + '/' + value)
                         this.$root.$refs.toaster.showMessage(
                             MessagesConstants.EDITED_MESSAGE,
                             MessagesConstants.PROCESS_SUCCESSFULLY
-                        );
+                    );
+
+                    return true;
+
                 } catch(error) {
-                    errorEvent(error)
+                    errorEvent(error);
+                        this.$root.$refs.toaster.showMessage(
+                            MessagesConstants.PATCHING_ERROR,
+                            ParsingErrors.getError(error),
+                            ParsingErrors.ERROR_LEVEL_ERROR
+                        )
+                    return false;
                 }
             },
 
@@ -717,10 +730,10 @@ export default {
                 let fkValue = (this.foreignValue>0)?'/'+this.foreignValue:''
 
                 try {
-                    const response = await axios.get(this.api.get + currentPage + "/" + itemsPerPage + fkValue)
+                    const response = await Repository.getData(this.api.get + currentPage + "/" + itemsPerPage + fkValue)
                     // .then(response => {
 
-                        this.Items = this.populateListItems(response.data.data);
+                        this.Items = this.populateListItems(response.data);
                         this.filteredItems = this.Items;
 
                         if (this.Items.length === 0) this.$emit('onDataClear') //clear child dataset event
@@ -731,10 +744,10 @@ export default {
                         // setup paginator
                         this.$refs.refPaginator.setPaginator(
                             {
-                                pagesCount: response.data.paginator.PagesCount,
-                                currentPage: response.data.paginator.CurrentPage,
-                                itemsPerPage: response.data.paginator.ItemsPerPage,
-                                recordsCount: response.data.paginator.RecordsCount,
+                                pagesCount: response.paginator.PagesCount,
+                                currentPage: response.paginator.CurrentPage,
+                                itemsPerPage: response.paginator.ItemsPerPage,
+                                recordsCount: response.paginator.RecordsCount,
                                 objectRef: this
                             }
                         )
@@ -865,11 +878,10 @@ export default {
 
                         const response = await axios.put(this.api.update + id, _values)
 
-                        const listItem = response.data.data
-
+                        const listItem = response.data
                         this.filteredItems[key] = this.processListItem(listItem)
-
                         this.Items[key] = this.filteredItems[key]
+
                         this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.EDITED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
@@ -889,11 +901,8 @@ export default {
                 } else {
                     console.log(MessagesConstants.EDITING_CANCELLED);
                 }
-
             },
-
         },
-
     };
 </script>
 
