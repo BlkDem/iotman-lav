@@ -9,7 +9,6 @@ use App\Http\Controllers\Devices\DeviceUserController;
 use App\Http\Controllers\Devices\DeviceUsersViewController;
 use App\Http\Controllers\Auth\UserinfoController;
 use App\Http\Controllers\Common\PatchController;
-use App\Http\Controllers\Devices\UserDevicesCountController;
 use App\Http\Controllers\Images\AlbumController;
 use App\Http\Controllers\Images\ImageController;
 use App\Http\Controllers\Images\ImageRepositoryController;
@@ -36,10 +35,6 @@ use App\Models\DeviceType;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-// Route::get('/user/{name}', function ($name) {
-//     //
-// })->where('name', '[A-Za-z]+');
 
 //Login
 Route::post('/login', [AuthController::class, 'signin']);
@@ -224,9 +219,9 @@ Route::delete('/user_device/delete/{id}', [DeviceUserController::class, 'destroy
 Route::patch('/user_device/patch/{id}/{field}/{value}', [DeviceUserController::class, 'patch']);
 
 
-Route::group(['middleware' => 'role:project-manager'], function() {
+Route::group(['middleware' => 'role:admin'], function() {
     Route::get('/dashboard', function() {
-       return 'Добро пожаловать, manager';
+       return 'Добро пожаловать, admin';
     });
  });
 
@@ -237,16 +232,19 @@ Route::get('/username', [AuthController::class, 'GetUserName']);
 
 Route::get('/sysinfo/{cmd}', [ServerStatusController::class, 'getServerLoad']);
 
+Route::group(['middleware' => 'role:admin'], function() {
 
-Route::patch('/device_type/patch/{id}/{field}/{value}', function (Request $request) {
+    Route::patch('/device_type/patch/{id}/{field}/{value}', function (Request $request) {
     // dd(Request::route('id'));
-    $patchController = new PatchController();
-    return $patchController->patch(
-        Request::route('id'),
-        Request::route('field'),
-        Request::route('value'),
-        new DeviceType()
-    );
+        $patchController = new PatchController();
+        return $patchController->patch(
+            Request::route('id'),
+            Request::route('field'),
+            Request::route('value'),
+            new DeviceType()
+        );
+    });
 });
+
 
 });

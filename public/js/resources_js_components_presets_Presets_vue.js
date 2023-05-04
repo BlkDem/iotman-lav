@@ -562,12 +562,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_common_TableBar_TableNav_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/common/TableBar/TableNav.vue */ "./resources/js/components/common/TableBar/TableNav.vue");
 /* harmony import */ var _TableHead_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./TableHead.vue */ "./resources/js/components/db/TableHead.vue");
 /* harmony import */ var _imagelib_Viewer_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../imagelib/Viewer.vue */ "./resources/js/components/imagelib/Viewer.vue");
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
-/* harmony import */ var _api_errors__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../api/errors */ "./resources/js/api/errors.js");
+/* harmony import */ var _api_repository__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../api/repository */ "./resources/js/api/repository/index.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
+/* harmony import */ var _api_errors__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../api/errors */ "./resources/js/api/errors.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -655,7 +657,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     var _this = this;
-    new bootstrap__WEBPACK_IMPORTED_MODULE_11__.Tooltip(document.body, {
+    new bootstrap__WEBPACK_IMPORTED_MODULE_12__.Tooltip(document.body, {
       selector: "[data-bs-toggle='tooltip']"
     });
     if (!this.readOnly) {
@@ -783,23 +785,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.activeCol = null;
       this.activeRow = null;
     },
-    //after cell editing method
-    onInputChange: function onInputChange(item, key, dataCol, value, isEsc) {
-      if (isEsc) {
-        this.isEsc = false;
-        return;
-      }
-      try {
-        //save new value to dataset (patch route)
-        this.saveRecord(item, dataCol, value);
-
-        //update arrays
-        this.filteredItems[key][dataCol].value = value;
-        this.Items[key][dataCol].value = value;
-      } catch (e) {
-        console.log(e);
-      }
-    },
     //saving cell data if changed and cancel edit
     onInputEnter: function onInputEnter() {
       this.cancelEditCell();
@@ -809,32 +794,73 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.isEsc = true;
       this.cancelEditCell();
     },
-    //save cell data to dataset
-    saveRecord: function saveRecord(id, field, value) {
+    //after cell editing method
+    onInputChange: function onInputChange(item, key, dataCol, value, isEsc) {
       var _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              _this2.cancelEditCell();
-
-              //patch dataset record $id such as 'field -> value'
-              _context.next = 4;
-              return axios.patch(_this2.api.patch + id + '/' + field + '/' + value);
-            case 4:
-              _this2.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
-              _context.next = 10;
+              if (!isEsc) {
+                _context.next = 3;
+                break;
+              }
+              _this2.isEsc = false;
+              return _context.abrupt("return");
+            case 3:
+              _context.prev = 3;
+              _context.next = 6;
+              return _this2.saveRecord(item, dataCol, value);
+            case 6:
+              if (!_context.sent) {
+                _context.next = 9;
+                break;
+              }
+              //update arrays
+              _this2.filteredItems[key][dataCol].value = value;
+              _this2.Items[key][dataCol].value = value;
+            case 9:
+              _context.next = 14;
               break;
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](0);
-              (0,_api_errors__WEBPACK_IMPORTED_MODULE_12__.errorEvent)(_context.t0);
-            case 10:
+            case 11:
+              _context.prev = 11;
+              _context.t0 = _context["catch"](3);
+              console.log(_context.t0);
+            case 14:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[3, 11]]);
+      }))();
+    },
+    //save cell data to dataset
+    saveRecord: function saveRecord(id, field, value) {
+      var _this3 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              //finish editing
+              _this3.cancelEditCell();
+
+              //patch dataset record $id such as 'field -> value'
+              _context2.next = 4;
+              return axios.patch(_this3.api.patch + id + '/' + field + '/' + value);
+            case 4:
+              _this3.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
+              return _context2.abrupt("return", true);
+            case 8:
+              _context2.prev = 8;
+              _context2.t0 = _context2["catch"](0);
+              (0,_api_errors__WEBPACK_IMPORTED_MODULE_13__.errorEvent)(_context2.t0);
+              _this3.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PATCHING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].getError(_context2.t0), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].ERROR_LEVEL_ERROR);
+              return _context2.abrupt("return", false);
+            case 13:
+            case "end":
+              return _context2.stop();
+          }
+        }, _callee2, null, [[0, 8]]);
       }))();
     },
     //start editing cell
@@ -955,11 +981,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     //Getting data from DataRepository (in progress now)
     getData: function getData() {
       var _arguments = arguments,
-        _this3 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        _this4 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         var currentPage, itemsPerPage, fkValue, response;
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) switch (_context2.prev = _context2.next) {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
             case 0:
               currentPage = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
               itemsPerPage = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : 50;
@@ -967,220 +993,220 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               //if dataset is slave waiting for master keys value
 
               // (foreignValue===0) - clear items event
-              if (_this3.foreignValue === 0) {
-                _this3.filteredItems = [];
-                _this3.Items = [];
+              if (_this4.foreignValue === 0) {
+                _this4.filteredItems = [];
+                _this4.Items = [];
               }
 
               //slave without FK - nothing to do
-              if (!(_this3.isSlave && !_this3.foreignValue > 0)) {
-                _context2.next = 5;
+              if (!(_this4.isSlave && !_this4.foreignValue > 0)) {
+                _context3.next = 5;
                 break;
               }
-              return _context2.abrupt("return");
+              return _context3.abrupt("return");
             case 5:
               //prepare request with or w/o FK
-              fkValue = _this3.foreignValue > 0 ? '/' + _this3.foreignValue : '';
-              _context2.prev = 6;
-              _context2.next = 9;
-              return axios.get(_this3.api.get + currentPage + "/" + itemsPerPage + fkValue);
+              fkValue = _this4.foreignValue > 0 ? '/' + _this4.foreignValue : '';
+              _context3.prev = 6;
+              _context3.next = 9;
+              return _api_repository__WEBPACK_IMPORTED_MODULE_11__["default"].getData(_this4.api.get + currentPage + "/" + itemsPerPage + fkValue);
             case 9:
-              response = _context2.sent;
+              response = _context3.sent;
               // .then(response => {
 
-              _this3.Items = _this3.populateListItems(response.data.data);
-              _this3.filteredItems = _this3.Items;
-              if (_this3.Items.length === 0) _this3.$emit('onDataClear'); //clear child dataset event
+              _this4.Items = _this4.populateListItems(response.data);
+              _this4.filteredItems = _this4.Items;
+              if (_this4.Items.length === 0) _this4.$emit('onDataClear'); //clear child dataset event
 
-              if (_this3.filteredItems.length > 0 && _this3.selectableRow) _this3.rowClick(0);
+              if (_this4.filteredItems.length > 0 && _this4.selectableRow) _this4.rowClick(0);
 
               // setup paginator
-              _this3.$refs.refPaginator.setPaginator({
-                pagesCount: response.data.paginator.PagesCount,
-                currentPage: response.data.paginator.CurrentPage,
-                itemsPerPage: response.data.paginator.ItemsPerPage,
-                recordsCount: response.data.paginator.RecordsCount,
-                objectRef: _this3
+              _this4.$refs.refPaginator.setPaginator({
+                pagesCount: response.paginator.PagesCount,
+                currentPage: response.paginator.CurrentPage,
+                itemsPerPage: response.paginator.ItemsPerPage,
+                recordsCount: response.paginator.RecordsCount,
+                objectRef: _this4
               });
               // })
-              _context2.next = 20;
+              _context3.next = 20;
               break;
             case 17:
-              _context2.prev = 17;
-              _context2.t0 = _context2["catch"](6);
-              (0,_api_errors__WEBPACK_IMPORTED_MODULE_12__.errorEvent)(_context2.t0);
+              _context3.prev = 17;
+              _context3.t0 = _context3["catch"](6);
+              (0,_api_errors__WEBPACK_IMPORTED_MODULE_13__.errorEvent)(_context3.t0);
             case 20:
               ;
             case 21:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
-        }, _callee2, null, [[6, 17]]);
+        }, _callee3, null, [[6, 17]]);
       }))();
     },
     doDelete: function doDelete(key, id) {
-      var _this4 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var _this5 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
         var confirmDelete;
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-          while (1) switch (_context3.prev = _context3.next) {
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
             case 0:
-              _context3.next = 2;
-              return _this4.$refs.confirmDialogue.showDialogue({
+              _context4.next = 2;
+              return _this5.$refs.confirmDialogue.showDialogue({
                 title: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].DELETE_CAPTION,
                 message: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].DELETE_CONFORMATION,
                 okButton: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].DELETE_BUTTON
               });
             case 2:
-              confirmDelete = _context3.sent;
+              confirmDelete = _context4.sent;
               if (!confirmDelete) {
-                _context3.next = 18;
+                _context4.next = 18;
                 break;
               }
-              _context3.prev = 4;
-              _context3.next = 7;
-              return axios["delete"](_this4.api["delete"] + id);
+              _context4.prev = 4;
+              _context4.next = 7;
+              return axios["delete"](_this5.api["delete"] + id);
             case 7:
-              _this4.Items.splice(key, 1);
-              _this4.Items = _this4.filteredItems;
-              _this4.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].DELETED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
-              _context3.next = 16;
+              _this5.Items.splice(key, 1);
+              _this5.Items = _this5.filteredItems;
+              _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].DELETED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
+              _context4.next = 16;
               break;
             case 12:
-              _context3.prev = 12;
-              _context3.t0 = _context3["catch"](4);
-              (0,_api_errors__WEBPACK_IMPORTED_MODULE_12__.errorEvent)(_context3.t0);
+              _context4.prev = 12;
+              _context4.t0 = _context4["catch"](4);
+              (0,_api_errors__WEBPACK_IMPORTED_MODULE_13__.errorEvent)(_context4.t0);
               // console.log(error);
-              _this4.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].DELETING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].getError(_context3.t0), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].ERROR_LEVEL_ERROR);
+              _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].DELETING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].getError(_context4.t0), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].ERROR_LEVEL_ERROR);
             case 16:
-              _context3.next = 19;
+              _context4.next = 19;
               break;
             case 18:
               console.log(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].DELETING_CANCELLED);
             case 19:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
-        }, _callee3, null, [[4, 12]]);
+        }, _callee4, null, [[4, 12]]);
       }))();
     },
     addItem: function addItem() {
-      var _this5 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+      var _this6 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
         var item, _add, newItemData, _values, field, response, _res, transformItem;
-        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-          while (1) switch (_context4.prev = _context4.next) {
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+          while (1) switch (_context5.prev = _context5.next) {
             case 0:
-              for (item in _this5.dataFields) {
-                _this5.dataFields[item].value = '';
+              for (item in _this6.dataFields) {
+                _this6.dataFields[item].value = '';
               }
-              _context4.next = 3;
-              return _this5.$refs.addItem.showDialogue({
+              _context5.next = 3;
+              return _this6.$refs.addItem.showDialogue({
                 edit_mode: false,
                 title: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].ITEM_ADDING_TITLE,
                 message: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].ITEM_ADDING_MESSAGE,
                 okButton: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].ITEM_ADDBUTTON_CAPTION,
-                dataFields: _this5.dataFields
+                dataFields: _this6.dataFields
               });
             case 3:
-              _add = _context4.sent;
+              _add = _context5.sent;
               if (!_add) {
-                _context4.next = 25;
+                _context5.next = 25;
                 break;
               }
-              newItemData = _this5.$refs.addItem.postData;
+              newItemData = _this6.$refs.addItem.postData;
               _values = {};
               for (field in newItemData) {
                 _values[newItemData[field].fieldName] = newItemData[field].value;
               }
 
               // console.log(this.api.insert, _values)
-              _context4.prev = 8;
-              _context4.next = 11;
-              return axios.post(_this5.api.insert, _values);
+              _context5.prev = 8;
+              _context5.next = 11;
+              return axios.post(_this6.api.insert, _values);
             case 11:
-              response = _context4.sent;
+              response = _context5.sent;
               _res = response.data.data;
-              transformItem = _this5.processListItem(_res);
-              _this5.Items.push(transformItem);
-              _this5.filteredItems = _this5.Items;
-              _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].ADDED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
-              _context4.next = 23;
+              transformItem = _this6.processListItem(_res);
+              _this6.Items.push(transformItem);
+              _this6.filteredItems = _this6.Items;
+              _this6.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].ADDED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
+              _context5.next = 23;
               break;
             case 19:
-              _context4.prev = 19;
-              _context4.t0 = _context4["catch"](8);
-              (0,_api_errors__WEBPACK_IMPORTED_MODULE_12__.errorEvent)(_context4.t0);
+              _context5.prev = 19;
+              _context5.t0 = _context5["catch"](8);
+              (0,_api_errors__WEBPACK_IMPORTED_MODULE_13__.errorEvent)(_context5.t0);
               //const Toaster = app.component('toaster')
-              _this5.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].INSERTING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].getError(_context4.t0), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].ERROR_LEVEL_ERROR);
+              _this6.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].INSERTING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].getError(_context5.t0), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].ERROR_LEVEL_ERROR);
             case 23:
-              _context4.next = 26;
+              _context5.next = 26;
               break;
             case 25:
               console.log(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].INSERTING_CANCELLED);
             case 26:
             case "end":
-              return _context4.stop();
+              return _context5.stop();
           }
-        }, _callee4, null, [[8, 19]]);
+        }, _callee5, null, [[8, 19]]);
       }))();
     },
     doEdit: function doEdit(key, id) {
-      var _this6 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+      var _this7 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
         var postFields, item, _edit, editItem, _values, field, response, listItem;
-        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-          while (1) switch (_context5.prev = _context5.next) {
+        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+          while (1) switch (_context6.prev = _context6.next) {
             case 0:
-              postFields = _this6.dataFields;
-              for (item in _this6.dataFields) {
-                postFields[item].value = _this6.filteredItems[key][_this6.dataFields[item].fieldName].value;
+              postFields = _this7.dataFields;
+              for (item in _this7.dataFields) {
+                postFields[item].value = _this7.filteredItems[key][_this7.dataFields[item].fieldName].value;
               }
-              _context5.next = 4;
-              return _this6.$refs.addItem.showDialogue({
+              _context6.next = 4;
+              return _this7.$refs.addItem.showDialogue({
                 edit_mode: true,
                 title: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].ITEM_EDITING_TITLE,
                 message: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].ITEM_EDITING_MESSAGE,
-                dataFields: _this6.dataFields,
+                dataFields: _this7.dataFields,
                 okButton: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].ITEM_EDITBUTTON_CAPTION
               });
             case 4:
-              _edit = _context5.sent;
+              _edit = _context6.sent;
               if (!_edit) {
-                _context5.next = 25;
+                _context6.next = 25;
                 break;
               }
-              _context5.prev = 6;
-              editItem = _this6.$refs.addItem.postData;
+              _context6.prev = 6;
+              editItem = _this7.$refs.addItem.postData;
               _values = {};
               for (field in editItem) {
                 _values[editItem[field].fieldName] = editItem[field].value;
               }
-              _context5.next = 12;
-              return axios.put(_this6.api.update + id, _values);
+              _context6.next = 12;
+              return axios.put(_this7.api.update + id, _values);
             case 12:
-              response = _context5.sent;
-              listItem = response.data.data;
-              _this6.filteredItems[key] = _this6.processListItem(listItem);
-              _this6.Items[key] = _this6.filteredItems[key];
-              _this6.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
-              _context5.next = 23;
+              response = _context6.sent;
+              listItem = response.data;
+              _this7.filteredItems[key] = _this7.processListItem(listItem);
+              _this7.Items[key] = _this7.filteredItems[key];
+              _this7.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
+              _context6.next = 23;
               break;
             case 19:
-              _context5.prev = 19;
-              _context5.t0 = _context5["catch"](6);
-              (0,_api_errors__WEBPACK_IMPORTED_MODULE_12__.errorEvent)(_context5.t0);
-              _this6.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].getError(_context5.t0), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].ERROR_LEVEL_ERROR);
+              _context6.prev = 19;
+              _context6.t0 = _context6["catch"](6);
+              (0,_api_errors__WEBPACK_IMPORTED_MODULE_13__.errorEvent)(_context6.t0);
+              _this7.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].getError(_context6.t0), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].ERROR_LEVEL_ERROR);
             case 23:
-              _context5.next = 26;
+              _context6.next = 26;
               break;
             case 25:
               console.log(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITING_CANCELLED);
             case 26:
             case "end":
-              return _context5.stop();
+              return _context6.stop();
           }
-        }, _callee5, null, [[6, 19]]);
+        }, _callee6, null, [[6, 19]]);
       }))();
     }
   }

@@ -15,7 +15,7 @@ class DeviceController extends BaseController
     {
         $validator = ValidatorRules::MakeValidate($request, 'devices');
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            return $this->sendError($validator->errors(), 400);
         }
         try {
             $newDevice = Device::create($request->all());

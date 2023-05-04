@@ -111,4 +111,13 @@ trait HasRolesAndPermissions
         return $this->givePermissionsTo($permissions);
     }
 
+    /**
+     * isAdmin
+     *
+     * @return void
+     */
+    public function isAdmin() {
+        return $this->roles()->where('slug', 'admin')->exists();
+     }
+
 }

@@ -29,6 +29,7 @@ export default {
     EDITING_ERROR: "Editing Error",
     DELETING_CANCELLED: "Deleting Cancelled",
     DELETING_ERROR: "Deleting Error",
+    PATCHING_ERROR: "Patching Error",
 
     IMAGE_UPLOADED: "Image uploaded",
 
