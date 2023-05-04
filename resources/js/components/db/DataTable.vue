@@ -8,6 +8,7 @@
 
 
     <common-card
+
         :cardCaption="pageCaption"
         :isCollapseButtonHidden="false"
         :cardCaptionAdd="cardCaptionAdd"
@@ -19,11 +20,12 @@
         <ConfirmDialogue ref="confirmDialogue" />
 
         <table-nav
+
             :compactView="compactView"
             :dataFields="dataFields"
-
             :foreignValue="foreignValue"
             :readOnly="readOnly"
+
             @getData="getData"
             @setCompactView="setCompactView"
             @addEvent="addItem"
@@ -90,10 +92,6 @@
                             >
                                 <i :class="item[column].VirtualImage" class="fa-10x my-4"></i>
                         </div>
-
-                        <!-- <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
-
-                        </div> -->
                     </div>
 
                     <div class="card-body w-100">
@@ -124,10 +122,12 @@
                 @updateSortedData="updateSortedData"
             >
             </TableHead>
+
             <TransitionGroup name="list" tag="div">
             <div class="card mb-1 w-100"
-                v-for="(item, key) in filteredItems" v-bind:key="key"
-                v-bind:id="item.id.value"
+                v-for="(item, key) in filteredItems"
+                :key="key"
+                :id="item.id.value"
                 :class="{
                             'cursor-pointer': readOnly,
                             'border-info bg-warning text-dark': selectedRow[key]===true,
@@ -179,16 +179,13 @@
                                     <i :class="getVirtualImage(selectedRow[key], item[column])"></i>
                                 </router-link>
 
-
                                 <i v-else :class="getVirtualImage(selectedRow[key], item[column])"></i>
-
 
                             </span>
 
                             <span v-if="item[column].isDirectionVirtualImage"
                                 :class="{'text-info': item[column].isHighLight}"
                             >
-
                                 <i :class="getDirectionImage(item[column])"></i>
                             </span>
 
@@ -268,8 +265,8 @@ import Paginator from './Paginator.vue';
 import MessagesConstants from '../strings_constants/strings'
 import Pathes from "../../config/pathes";
 import Sorting from "../../helpers/Sorting";
-import Filtering from "../../helpers/Filtering.js";
-import ParsingErrors from "../../helpers/ParsingErrors.js";
+import Filtering from "../../helpers/Filtering";
+import ParsingErrors from "../../helpers/ParsingErrors";
 import AddItem from './AddDialog.vue';
 import TableNav from '../../components/common/TableBar/TableNav.vue';
 import TableHead from './TableHead.vue';
@@ -393,8 +390,8 @@ export default {
         },
 
         watch: {
+            // master-slave datasets event
             foreignValue() {
-                // console.log('fk value', this.foreignValue)
                 this.getData()
             }
         },
@@ -526,7 +523,7 @@ export default {
                 this.cancelEditCell()
             },
 
-            //after cell editing method
+            //after cell editing method (patch)
             async onInputChange(item, key, dataCol, value, isEsc){
 
                 if (isEsc) {
@@ -608,7 +605,6 @@ export default {
 
             //switch dataset view
             setCompactView(value) {
-                // console.log(value)
                 if (!this.readOnly) {
                     this.compactView = value
                 }
@@ -623,73 +619,28 @@ export default {
                 try {
 
                     /**
-                     * Here code needs to refactoring (!)
+                     * Here code needs to refactoring (!) - fixed. Refactor+ / Stage 1
+                     * This code populate the datatable with the special prepared properies which define its view
+                     * like Image/Lookup/Hidden/Linked/Editable etc.
                      */
 
 
                     for (let field in this.dataFields) {
 
-                        const dataField = this.dataFields[field]
+                        const dataField = this.dataFields[field];
 
-                        const _link = dataField.Link //will link to path
-                        const _linkto = dataField.LinkTo //will link to path
+                        let newListItemMutated = {...dataField}
 
-                        const _editable = dataField.isEditable //possible edit cell by text click
-                        const _sortable = dataField.isSortable //field can sorted
-                        const _image = dataField.isImage //image field - binding 'img'
-                        const _datetime = dataField.isDateTime //image field - binding 'img'
-                        const _text = dataField.isText //Display Name Field
-                        const _highlight = dataField.isHighLight //highlight another color field 'bg-info' class
-                        const _hidden = dataField.isHidden //hidden field 'hide' class
-                        const _colscount = dataField.columnsCount //col-* col-ls-* ... value
-                        const _virtual = dataField.isVirtualImage //for abstract images like 'albums'
-                        const _directionvirtual = dataField.isDirectionVirtualImage //for abstract images like 'albums'
+                        newListItemData[dataField.fieldName] = newListItemMutated;
+
+                        newListItemMutated.value = (dataField.fieldName != null) ? listItem[dataField.fieldName] : ''
+                        newListItemMutated.lookupValue = (dataField.displayName != null) ? listItem[dataField.displayName] : '',
+                        newListItemMutated.selectedVirtualImage = dataField.selectedVirtualImage ?? dataField.VirtualImage,
+                        newListItemMutated.class =  "col-sm-" + dataField.columnsCount +
+                                                    " col-xs-" + dataField.columnsCount +
+                                                    " col-lg-" + dataField.columnsCount;
 
 
-                        const _subscribeimage = dataField.subscribeVirtualImage //for abstract 'subscribe' image/icon
-                        const _publishimage = dataField.publishVirtualImage //for abstract 'publish' image/icon
-                        const _biimage = dataField.biDirectionalVirtualImage //for abstract 'publish/subscribe' image/icon
-                        const _virtualimage = dataField.VirtualImage //for abstract images like 'albums'
-
-                        const _selectedvirtualimage = dataField.selectedVirtualImage ?? dataField.VirtualImage
-                        const _fieldignore = dataField.isFieldIgnore //ignore via populate the field
-                        const _isLookup = dataField.isLookup //field links to another object/dataset
-                        const _lookupApi = dataField.lookupApi //another object get api
-                        const _lookupId = dataField.lookupId //field link key (FK)
-                        const _displayName = dataField.displayName //Display Name Field
-
-                        newListItemData[dataField.fieldName] = {
-
-                            value: (dataField.fieldName != null) ? listItem[dataField.fieldName] : '',
-                            lookupValue: (dataField.displayName != null) ? listItem[dataField.displayName] : '',
-                            displayName: _displayName,
-                            VirtualImage: _virtualimage,
-                            subscribeVirtualImage: _subscribeimage,
-                            biDirectionalVirtualImage: _biimage,
-                            publishVirtualImage: _publishimage,
-                            selectedVirtualImage: _selectedvirtualimage,
-                            isDirectionVirtualImage: _directionvirtual,
-                            isFieldIgnore: _fieldignore,
-                            isEditable: _editable,
-                            Link: _link,
-                            LinkTo: _linkto,
-                            isText: _text,
-                            isDateTime: _datetime,
-                            isSortable: _sortable,
-                            isImage: _image,
-                            isHighLight: _highlight,
-                            isHidden: _hidden,
-                            columnsCount: _colscount,
-                            isLookup: _isLookup,
-                            lookupId: _lookupId,
-                            lookupApi: _lookupApi,
-                            isVirtualImage: _virtual,
-                            class: //field width (bootstrap)
-
-                                "col-sm-" + _colscount +
-                                " col-xs-" + _colscount +
-                                " col-lg-" + _colscount
-                        }
                     }
 
                     return newListItemData
@@ -883,6 +834,7 @@ export default {
                                 MessagesConstants.EDITED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
                         );
+
                     } catch(error) {
 
                         errorEvent(error);
