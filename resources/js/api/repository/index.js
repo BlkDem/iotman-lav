@@ -12,7 +12,7 @@ export default {
 
     async execute(method='get', _api, values='') {
 
-        console.log('method', method);
+        // console.log('method', method);
         if (typeof _api === 'string') return await SQLdata.execute(method, _api, values);
         if (typeof _api === 'object') return await noSQLdata.execute(method, _api, values);
 

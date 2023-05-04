@@ -554,10 +554,9 @@ export default {
                     this.cancelEditCell()
 
                     //patch dataset record $id such as 'field -> value'
-                    // await axios.patch(
-                    await Repository.execute('patch',
-                        this.api.patch + id + '/' + field + '/' + value)
-                        this.$root.$refs.toaster.showMessage(
+                    await Repository.execute('patch', this.api.patch + id + '/' + field + '/' + value)
+
+                    this.$root.$refs.toaster.showMessage(
                             MessagesConstants.EDITED_MESSAGE,
                             MessagesConstants.PROCESS_SUCCESSFULLY
                     );
@@ -566,11 +565,11 @@ export default {
 
                 } catch(error) {
                     errorEvent(error);
-                        this.$root.$refs.toaster.showMessage(
+                    this.$root.$refs.toaster.showMessage(
                             MessagesConstants.PATCHING_ERROR,
                             ParsingErrors.getError(error),
                             ParsingErrors.ERROR_LEVEL_ERROR
-                        )
+                    )
                     return false;
                 }
             },
@@ -624,12 +623,11 @@ export default {
                      * like Image/Lookup/Hidden/Linked/Editable etc.
                      */
 
-
                     for (let field in this.dataFields) {
 
                         const dataField = this.dataFields[field];
 
-                        let newListItemMutated = {...dataField}
+                        let newListItemMutated = { ...dataField };
 
                         newListItemData[dataField.fieldName] = newListItemMutated;
 
@@ -643,7 +641,7 @@ export default {
 
                     }
 
-                    return newListItemData
+                    return newListItemData;
 
                 } catch (error) {
                     console.log(error)
@@ -660,7 +658,7 @@ export default {
                         newList[itemRow] = this.processListItem(items[itemRow])
                     }
 
-                    return newList
+                    return newList;
             },
 
             //Getting data from DataRepository (in progress now)
@@ -685,7 +683,7 @@ export default {
                     const response = await Repository.getData(this.api.get + currentPage + "/" + itemsPerPage + fkValue)
                     // .then(response => {
 
-                        this.Items = this.populateListItems(response.data);
+                        this.Items = await this.populateListItems(response.data);
                         this.filteredItems = this.Items;
 
                         if (this.Items.length === 0) this.$emit('onDataClear') //clear child dataset event
@@ -826,6 +824,7 @@ export default {
 
                         const response = await Repository.execute('put', this.api.update + id, _values)
 
+                        // console.log('response: ', response.data)
                         const listItem = response.data
                         this.filteredItems[key] = this.processListItem(listItem)
                         this.Items[key] = this.filteredItems[key]

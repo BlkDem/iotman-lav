@@ -322,9 +322,10 @@ export default {
 
             try {
 
-                this.dataItems = await Repository.getData(
+                const dataItems = await Repository.getData(
                     APIConstants.api_device_micro_dash + this.deviceMicroId
                 );
+                this.dataItems = dataItems.data;
 
                 if (this.dataItems.length !== 0) {
                     this.dashEntities = this.dataItems;

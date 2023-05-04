@@ -850,7 +850,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _this3.cancelEditCell();
 
               //patch dataset record $id such as 'field -> value'
-              // await axios.patch(
               _context2.next = 4;
               return _api_repository__WEBPACK_IMPORTED_MODULE_11__["default"].execute('patch', _this3.api.patch + id + '/' + field + '/' + value);
             case 4:
@@ -967,9 +966,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _api_repository__WEBPACK_IMPORTED_MODULE_11__["default"].getData(_this4.api.get + currentPage + "/" + itemsPerPage + fkValue);
             case 9:
               response = _context3.sent;
-              // .then(response => {
-
-              _this4.Items = _this4.populateListItems(response.data);
+              _context3.next = 12;
+              return _this4.populateListItems(response.data);
+            case 12:
+              _this4.Items = _context3.sent;
               _this4.filteredItems = _this4.Items;
               if (_this4.Items.length === 0) _this4.$emit('onDataClear'); //clear child dataset event
 
@@ -984,19 +984,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 objectRef: _this4
               });
               // })
-              _context3.next = 20;
+              _context3.next = 22;
               break;
-            case 17:
-              _context3.prev = 17;
+            case 19:
+              _context3.prev = 19;
               _context3.t0 = _context3["catch"](6);
               (0,_api_errors__WEBPACK_IMPORTED_MODULE_13__.errorEvent)(_context3.t0);
-            case 20:
+            case 22:
               ;
-            case 21:
+            case 23:
             case "end":
               return _context3.stop();
           }
-        }, _callee3, null, [[6, 17]]);
+        }, _callee3, null, [[6, 19]]);
       }))();
     },
     doDelete: function doDelete(key, id) {
@@ -1138,6 +1138,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _api_repository__WEBPACK_IMPORTED_MODULE_11__["default"].execute('put', _this7.api.update + id, _values);
             case 12:
               response = _context6.sent;
+              // console.log('response: ', response.data)
               listItem = response.data;
               _this7.filteredItems[key] = _this7.processListItem(listItem);
               _this7.Items[key] = _this7.filteredItems[key];
@@ -2579,6 +2580,28 @@ __webpack_require__.r(__webpack_exports__);
     patch: ''
   }
 });
+
+/***/ }),
+
+/***/ "./resources/js/api/errors.js":
+/*!************************************!*\
+  !*** ./resources/js/api/errors.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "errorEvent": () => (/* binding */ errorEvent),
+/* harmony export */   "redirectTo": () => (/* binding */ redirectTo)
+/* harmony export */ });
+var redirectTo = '/login';
+function errorEvent(error) {
+  var _error$response;
+  console.error('event: ' + error);
+  if (((_error$response = error.response) === null || _error$response === void 0 ? void 0 : _error$response.status) === 401) {
+    window.location.href = redirectTo;
+  }
+}
 
 /***/ }),
 
