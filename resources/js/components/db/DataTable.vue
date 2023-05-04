@@ -557,7 +557,8 @@ export default {
                     this.cancelEditCell()
 
                     //patch dataset record $id such as 'field -> value'
-                    await axios.patch(
+                    // await axios.patch(
+                    await Repository.execute('patch',
                         this.api.patch + id + '/' + field + '/' + value)
                         this.$root.$refs.toaster.showMessage(
                             MessagesConstants.EDITED_MESSAGE,
@@ -768,10 +769,11 @@ export default {
 
                 if (confirmDelete) {
                     try {
-                        await axios.delete(this.api.delete + id)
-                            this.Items.splice(key, 1);
-                            this.Items = this.filteredItems
-                            this.$root.$refs.toaster.showMessage(
+                        // await axios.delete(this.api.delete + id)
+                        await Repository.execute('delete', this.api.delete + id);
+                        this.Items.splice(key, 1);
+                        this.Items = this.filteredItems
+                        this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.DELETED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
                         )
@@ -813,34 +815,29 @@ export default {
                         _values[newItemData[field].fieldName] = newItemData[field].value
                     }
 
-                    // console.log(this.api.insert, _values)
+                    try {
 
+                        // const response = await axios.post(this.api.insert, _values)
+                        const response = await Repository.execute('post', this.api.insert, _values)
+                        const _res = response.data
 
-                        try {
+                        const transformItem = this.processListItem(_res)
 
-                            const response = await axios.post(this.api.insert, _values)
-                            const _res = response.data.data
+                        this.Items.push(transformItem);
+                        this.filteredItems = this.Items
 
-                            const transformItem = this.processListItem(_res)
-
-                            this.Items.push(transformItem);
-                            this.filteredItems = this.Items
-
-                            this.$root.$refs.toaster.showMessage(
+                        this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.ADDED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
-                            )
-                        }
-
-                        catch(error) {
-                            errorEvent(error)
-                            //const Toaster = app.component('toaster')
-                            this.$root.$refs.toaster.showMessage(
+                        )
+                    } catch(error) {
+                        errorEvent(error)
+                        this.$root.$refs.toaster.showMessage(
                                 MessagesConstants.INSERTING_ERROR,
                                 ParsingErrors.getError(error),
                                 ParsingErrors.ERROR_LEVEL_ERROR
-                            )
-                        }
+                        )
+                    }
                 } else {
                     console.log(MessagesConstants.INSERTING_CANCELLED);
                 }
@@ -876,7 +873,7 @@ export default {
                             _values[editItem[field].fieldName] = editItem[field].value;
                         }
 
-                        const response = await axios.put(this.api.update + id, _values)
+                        const response = await Repository.execute('put', this.api.update + id, _values)
 
                         const listItem = response.data
                         this.filteredItems[key] = this.processListItem(listItem)
@@ -886,8 +883,7 @@ export default {
                                 MessagesConstants.EDITED_MESSAGE,
                                 MessagesConstants.PROCESS_SUCCESSFULLY
                         );
-                    }
-                    catch(error) {
+                    } catch(error) {
 
                         errorEvent(error);
 

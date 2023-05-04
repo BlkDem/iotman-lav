@@ -25430,6 +25430,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }, _callee);
     }))();
+  },
+  execute: function execute() {
+    var _arguments = arguments;
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var method, _api, values;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            method = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 'get';
+            _api = _arguments.length > 1 ? _arguments[1] : undefined;
+            values = _arguments.length > 2 && _arguments[2] !== undefined ? _arguments[2] : '';
+            console.log('method', method);
+            if (!(typeof _api === 'string')) {
+              _context2.next = 8;
+              break;
+            }
+            _context2.next = 7;
+            return _repository_sql__WEBPACK_IMPORTED_MODULE_0__["default"].execute(method, _api, values);
+          case 7:
+            return _context2.abrupt("return", _context2.sent);
+          case 8:
+            if (!(_typeof(_api) === 'object')) {
+              _context2.next = 12;
+              break;
+            }
+            _context2.next = 11;
+            return _repository_nosql__WEBPACK_IMPORTED_MODULE_1__["default"].execute(method, _api, values);
+          case 11:
+            return _context2.abrupt("return", _context2.sent);
+          case 12:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2);
+    }))();
   }
 });
 
@@ -25511,6 +25546,64 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             return _context.stop();
         }
       }, _callee, null, [[0, 7]]);
+    }))();
+  },
+  execute: function execute() {
+    var _arguments = arguments;
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var method, _api, values, data;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            method = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 'get';
+            _api = _arguments.length > 1 ? _arguments[1] : undefined;
+            values = _arguments.length > 2 ? _arguments[2] : undefined;
+            _context2.prev = 3;
+            data = {};
+            _context2.t0 = method;
+            _context2.next = _context2.t0 === 'get' ? 8 : _context2.t0 === 'post' ? 12 : _context2.t0 === 'put' ? 16 : _context2.t0 === 'patch' ? 20 : _context2.t0 === 'delete' ? 24 : 28;
+            break;
+          case 8:
+            _context2.next = 10;
+            return axios.get(_api);
+          case 10:
+            data = _context2.sent;
+            return _context2.abrupt("break", 28);
+          case 12:
+            _context2.next = 14;
+            return axios.post(_api, values);
+          case 14:
+            data = _context2.sent;
+            return _context2.abrupt("break", 28);
+          case 16:
+            _context2.next = 18;
+            return axios.put(_api, values);
+          case 18:
+            data = _context2.sent;
+            return _context2.abrupt("break", 28);
+          case 20:
+            _context2.next = 22;
+            return axios.patch(_api, values);
+          case 22:
+            data = _context2.sent;
+            return _context2.abrupt("break", 28);
+          case 24:
+            _context2.next = 26;
+            return axios["delete"](_api);
+          case 26:
+            data = _context2.sent;
+            return _context2.abrupt("break", 28);
+          case 28:
+            return _context2.abrupt("return", data.data);
+          case 31:
+            _context2.prev = 31;
+            _context2.t1 = _context2["catch"](3);
+            (0,_errors__WEBPACK_IMPORTED_MODULE_0__.errorEvent)(_context2.t1);
+          case 34:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[3, 31]]);
     }))();
   }
 });

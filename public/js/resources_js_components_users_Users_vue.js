@@ -845,8 +845,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _this3.cancelEditCell();
 
               //patch dataset record $id such as 'field -> value'
+              // await axios.patch(
               _context2.next = 4;
-              return axios.patch(_this3.api.patch + id + '/' + field + '/' + value);
+              return _api_repository__WEBPACK_IMPORTED_MODULE_11__["default"].execute('patch', _this3.api.patch + id + '/' + field + '/' + value);
             case 4:
               _this3.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
               return _context2.abrupt("return", true);
@@ -1065,7 +1066,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               }
               _context4.prev = 4;
               _context4.next = 7;
-              return axios["delete"](_this5.api["delete"] + id);
+              return _api_repository__WEBPACK_IMPORTED_MODULE_11__["default"].execute('delete', _this5.api["delete"] + id);
             case 7:
               _this5.Items.splice(key, 1);
               _this5.Items = _this5.filteredItems;
@@ -1119,14 +1120,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               for (field in newItemData) {
                 _values[newItemData[field].fieldName] = newItemData[field].value;
               }
-
-              // console.log(this.api.insert, _values)
               _context5.prev = 8;
               _context5.next = 11;
-              return axios.post(_this6.api.insert, _values);
+              return _api_repository__WEBPACK_IMPORTED_MODULE_11__["default"].execute('post', _this6.api.insert, _values);
             case 11:
               response = _context5.sent;
-              _res = response.data.data;
+              _res = response.data;
               transformItem = _this6.processListItem(_res);
               _this6.Items.push(transformItem);
               _this6.filteredItems = _this6.Items;
@@ -1137,7 +1136,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context5.prev = 19;
               _context5.t0 = _context5["catch"](8);
               (0,_api_errors__WEBPACK_IMPORTED_MODULE_13__.errorEvent)(_context5.t0);
-              //const Toaster = app.component('toaster')
               _this6.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].INSERTING_ERROR, _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].getError(_context5.t0), _helpers_ParsingErrors_js__WEBPACK_IMPORTED_MODULE_6__["default"].ERROR_LEVEL_ERROR);
             case 23:
               _context5.next = 26;
@@ -1183,7 +1181,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _values[editItem[field].fieldName] = editItem[field].value;
               }
               _context6.next = 12;
-              return axios.put(_this7.api.update + id, _values);
+              return _api_repository__WEBPACK_IMPORTED_MODULE_11__["default"].execute('put', _this7.api.update + id, _values);
             case 12:
               response = _context6.sent;
               listItem = response.data;
