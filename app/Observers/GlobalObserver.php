@@ -6,8 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 use App\Facades\LOG;
 use Illuminate\Support\Facades\Auth;
 
+
+/**
+ * 'retrieved', 'creating', 'created', 'updating', 'updated',
+ *  'saving', 'saved', 'restoring', 'restored', 'replicating',
+ *  'deleting', 'deleted', 'forceDeleting', 'forceDeleted',
+ */
+
 class GlobalObserver
 {
+    public function saved(Model $model)
+    {
+        // dd('patch');
+        LOG::setLog('Model patched/saved', $model);
+    }
+
     public function updated(Model $model)
     {
         LOG::setLog('Model updated', $model);
@@ -15,7 +28,7 @@ class GlobalObserver
 
     public function created(Model $model)
     {
-        // LOG::setLog('Model created', $model);
+        LOG::setLog('Model created', $model);
     }
 
     public function deleted(Model $model)

@@ -151,7 +151,7 @@ const routes = [
     name: "Users",
     icon: "fa-solid fa-user-tie",
     // component: () => import('./components/users/Users.vue'),
-    ID: "USERS",
+    ID: "ACCESS",
     visible: true,
     children: [
         {
@@ -176,6 +176,15 @@ const routes = [
             icon: "fa-solid fa-universal-access",
             component: () => import('./components/users/Permissions.vue'),
             ID: "PERMISSIONS",
+            visible: true
+          },
+
+        {
+            path: "/userroles",
+            name: "User Roles",
+            icon: "fa-solid fa-universal-access",
+            component: () => import('./components/users/UserAccess.vue'),
+            ID: "USERROLES",
             visible: true
           },
 

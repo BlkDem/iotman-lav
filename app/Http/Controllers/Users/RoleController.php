@@ -192,4 +192,5 @@ class RoleController extends BaseController
             $this->sendError('Deleting error: ' . $e);
         }
 
-    }}
+    }
+}

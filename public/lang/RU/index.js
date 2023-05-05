@@ -4,8 +4,10 @@ export default {
     BLOG: "Блог",
     LIBRARY: "Библиотека",
     IMAGES: "Изображения",
+    ACCESS: "Доступ",
     USERS: "Пользователи",
     ROLES: "Роли",
+    USERROLES: "Права пользователя",
     PERMISSIONS: "Разрешения",
 
     USERINFO: "Информация о пользователе",

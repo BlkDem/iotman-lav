@@ -115,6 +115,13 @@ class ValidatorRules extends Validator
                     ];
                     break;
 
+            case 'users_roles':
+                    $_rulesArray = [
+                        'user_id' => 'required',
+                        'role_id' => 'required',
+                    ];
+                    break;
+
             default:
                 $_rulesArray =  [];
                 break;

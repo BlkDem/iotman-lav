@@ -25238,8 +25238,10 @@ __webpack_require__.r(__webpack_exports__);
   BLOG: "Blog",
   LIBRARY: "Images Library",
   IMAGES: "Images",
+  ACCESS: "Access",
   USERS: "Users",
   ROLES: "Roles",
+  USERROLES: "User Roles",
   PERMISSIONS: "Permissions",
   USERINFO: "User Information",
   ALBUMS: "Albums",
@@ -25309,8 +25311,10 @@ __webpack_require__.r(__webpack_exports__);
   BLOG: "Блог",
   LIBRARY: "Библиотека",
   IMAGES: "Изображения",
+  ACCESS: "Доступ",
   USERS: "Пользователи",
   ROLES: "Роли",
+  USERROLES: "Права пользователя",
   PERMISSIONS: "Разрешения",
   USERINFO: "Информация о пользователе",
   ALBUMS: "Альбомы",
@@ -25817,8 +25821,10 @@ __webpack_require__.r(__webpack_exports__);
   BLOG: "Blog",
   LIBRARY: "Images Library",
   IMAGES: "Images",
+  ACCESS: "Access",
   USERS: "Users",
   ROLES: "Roles",
+  USERROLES: "User Roles",
   PERMISSIONS: "Permissions",
   USERINFO: "User Information",
   ALBUMS: "Albums",
@@ -26119,7 +26125,7 @@ var routes = [{
   name: "Users",
   icon: "fa-solid fa-user-tie",
   // component: () => import('./components/users/Users.vue'),
-  ID: "USERS",
+  ID: "ACCESS",
   visible: true,
   children: [{
     path: "/users",
@@ -26147,6 +26153,15 @@ var routes = [{
       return __webpack_require__.e(/*! import() */ "resources_js_components_users_Permissions_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/users/Permissions.vue */ "./resources/js/components/users/Permissions.vue"));
     },
     ID: "PERMISSIONS",
+    visible: true
+  }, {
+    path: "/userroles",
+    name: "User Roles",
+    icon: "fa-solid fa-universal-access",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_users_UserAccess_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/users/UserAccess.vue */ "./resources/js/components/users/UserAccess.vue"));
+    },
+    ID: "USERROLES",
     visible: true
   }]
 }, {
@@ -73377,7 +73392,7 @@ function useRoute() {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_device_types_DeviceTypes_vue":1,"resources_js_components_devices_Devices_vue":1,"resources_js_components_device_micros_DeviceMicros_vue":1,"resources_js_components_device_micros_ParamTypes_vue":1,"resources_js_components_micros_Micros_vue":1,"resources_js_components_user_devices_UserDevices_vue":1,"resources_js_components_imagelib_albums_Albums_vue":1,"resources_js_components_imagelib_images_Images_vue":1,"resources_js_components_users_Users_vue":1,"resources_js_components_users_Roles_vue":1,"resources_js_components_users_Permissions_vue":1,"resources_js_components_users_UserInfo_vue":1,"resources_js_components_presets_Presets_vue":1,"resources_js_components_blog_Blog_vue":1,"resources_js_views_Dash_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_device_types_DeviceTypes_vue":1,"resources_js_components_devices_Devices_vue":1,"resources_js_components_device_micros_DeviceMicros_vue":1,"resources_js_components_device_micros_ParamTypes_vue":1,"resources_js_components_micros_Micros_vue":1,"resources_js_components_user_devices_UserDevices_vue":1,"resources_js_components_imagelib_albums_Albums_vue":1,"resources_js_components_imagelib_images_Images_vue":1,"resources_js_components_users_Users_vue":1,"resources_js_components_users_Roles_vue":1,"resources_js_components_users_Permissions_vue":1,"resources_js_components_users_UserAccess_vue":1,"resources_js_components_users_UserInfo_vue":1,"resources_js_components_presets_Presets_vue":1,"resources_js_components_blog_Blog_vue":1,"resources_js_views_Dash_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
