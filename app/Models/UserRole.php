@@ -17,6 +17,7 @@ class UserRole extends Model
         return DB::table('users_roles')
             ->join('roles', 'roles.id', '=', 'users_roles.role_id')
             ->select(
+                'users_roles.id as id',
                 'users_roles.user_id as user_id',
                 'roles.id as role_id',
                 'roles.name as name',

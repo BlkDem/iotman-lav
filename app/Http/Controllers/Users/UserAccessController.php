@@ -33,6 +33,33 @@ class UserAccessController extends BaseController
         return UserRole::get()->count();
     }
 
+        /**
+     * pageWhereAlbum Get Images on a selected page where Album ID
+     *
+     * @param  int $currentPage - selected page
+     * @param  int $itemsPerPage - items per page
+     * @param  int $album_id - Album ID
+     * @return \Illuminate\Http\Response
+     */
+    public function pageWhereUser($currentPage = 0, $itemsPerPage = 10, $user_id)
+    {
+
+        $page = (int)$currentPage;
+
+        $offset = $itemsPerPage * --$page;
+
+        $res = UserRole::userRolesWhereUserID($user_id)
+            ->limit($itemsPerPage)->offset($offset)
+            // ->orderBy('slug', 'asc')
+            ->get();
+
+        $total = UserRole::where('user_id', $user_id)->get();
+
+        $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
+
+        return $this->sendResponse($res, "User Roles List", $paginator);
+    }
+
 
     /**
      * Display a listing of the resource.

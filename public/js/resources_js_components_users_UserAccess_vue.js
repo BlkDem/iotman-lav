@@ -947,6 +947,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               //if dataset is slave waiting for master keys value
 
               // (foreignValue===0) - clear items event
+
+              console.log('fkValue', _this4.foreignValue);
               if (_this4.foreignValue === 0) {
                 _this4.filteredItems = [];
                 _this4.Items = [];
@@ -954,21 +956,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               //slave without FK - nothing to do
               if (!(_this4.isSlave && !_this4.foreignValue > 0)) {
-                _context3.next = 5;
+                _context3.next = 6;
                 break;
               }
               return _context3.abrupt("return");
-            case 5:
+            case 6:
               //prepare request with or w/o FK
               fkValue = _this4.foreignValue > 0 ? '/' + _this4.foreignValue : '';
-              _context3.prev = 6;
-              _context3.next = 9;
+              _context3.prev = 7;
+              console.log(_this4.api.get);
+              _context3.next = 11;
               return _api_repository__WEBPACK_IMPORTED_MODULE_11__["default"].getData(_this4.api.get + currentPage + "/" + itemsPerPage + fkValue);
-            case 9:
+            case 11:
               response = _context3.sent;
-              _context3.next = 12;
+              _context3.next = 14;
               return _this4.populateListItems(response.data);
-            case 12:
+            case 14:
               _this4.Items = _context3.sent;
               _this4.filteredItems = _this4.Items;
               if (_this4.Items.length === 0) _this4.$emit('onDataClear'); //clear child dataset event
@@ -984,19 +987,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 objectRef: _this4
               });
               // })
-              _context3.next = 22;
+              _context3.next = 24;
               break;
-            case 19:
-              _context3.prev = 19;
-              _context3.t0 = _context3["catch"](6);
+            case 21:
+              _context3.prev = 21;
+              _context3.t0 = _context3["catch"](7);
               (0,_api_errors__WEBPACK_IMPORTED_MODULE_13__.errorEvent)(_context3.t0);
-            case 22:
+            case 24:
               ;
-            case 23:
+            case 25:
             case "end":
               return _context3.stop();
           }
-        }, _callee3, null, [[6, 19]]);
+        }, _callee3, null, [[7, 21]]);
       }))();
     },
     doDelete: function doDelete(key, id) {
@@ -1395,12 +1398,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _config_pathes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../config/pathes */ "./resources/js/config/pathes.js");
 /* harmony import */ var _api_ApiStruct__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../api/ApiStruct */ "./resources/js/api/ApiStruct.js");
 /* harmony import */ var _ShortUserStruct__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ShortUserStruct */ "./resources/js/components/users/ShortUserStruct.js");
+/* harmony import */ var _UserRoleStruct__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./UserRoleStruct */ "./resources/js/components/users/UserRoleStruct.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+
 
 
 
@@ -1415,20 +1420,20 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   data: function data() {
     return {
-      imageSrc: _config_pathes__WEBPACK_IMPORTED_MODULE_4__["default"].storageImagePlug,
       currentUser: '',
       layoutCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].USERROLES,
       usersReadOnly: true,
-      //Image model
-      images: {
-        imagesCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].IMAGES,
+      //User Roles model
+      roles: {
+        rolesCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].USERROLES,
         api: {
           Api: _api_ApiStruct__WEBPACK_IMPORTED_MODULE_5__["default"]
         },
-        imagesFields: _toConsumableArray(FieldStruct.ImageFieldStruct),
-        album_id: 'album_id',
-        album_id_value: 1
+        rolesFields: _toConsumableArray(_UserRoleStruct__WEBPACK_IMPORTED_MODULE_7__["default"].FieldStruct),
+        user_id: 'user_id'
+        // user_id_value: 1,
       },
+
       //User model
       users: {
         usersCaption: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].USERS,
@@ -1443,18 +1448,22 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     };
   },
   created: function created() {
-    var apiUserRoles = this.userRoles.api;
+    var apiUsers = this.users.api;
+    apiUsers.get = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_users_read_page;
+    var apiUserRoles = this.roles.api;
+
+    // apiUserRoles.get =    APIConstants.api_user_roles_read_page
     apiUserRoles.get = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_user_roles_read_page;
     apiUserRoles.insert = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_user_role_create;
     apiUserRoles.update = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_user_role_update;
     apiUserRoles["delete"] = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_user_role_delete;
-    apiUserRoles.patch = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_user_role_patch;
-    var apiUsers = this.users.api;
-    apiUsers.get = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_users_lookup;
+    // apiUserRoles.patch =  APIConstants.api_user_role_patch
   },
+
   methods: {
     onRowClick: function onRowClick(fkKey) {
-      this.images.selectedFkValue = fkKey;
+      console.log(fkKey);
+      this.users.selectedFkValue = fkKey;
     }
   }
 });
@@ -2698,13 +2707,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     slave: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_table, {
-        api: _ctx.roles.api,
-        dataFields: _ctx.roles.rolesFields,
-        pageCaption: _ctx.roles.rolesCaption,
-        foreignValue: _ctx.roles.selectedFkValue,
-        currentUser: $data.currentUser,
+        api: $data.roles.api,
+        dataFields: $data.roles.rolesFields,
+        pageCaption: $data.roles.rolesCaption,
+        foreignValue: $data.users.selectedFkValue,
         isSlave: true
-      }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignValue", "currentUser"])];
+      }, null, 8 /* PROPS */, ["api", "dataFields", "pageCaption", "foreignValue"])];
     }),
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["layoutCaption"])], 64 /* STABLE_FRAGMENT */);
@@ -2885,6 +2893,56 @@ __webpack_require__.r(__webpack_exports__);
     isSortable: true,
     isHighLight: false,
     columnsCount: 6
+  }]
+});
+
+/***/ }),
+
+/***/ "./resources/js/components/users/UserRoleStruct.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/users/UserRoleStruct.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  FieldStruct: [{
+    fieldName: 'Image',
+    fieldCaption: '',
+    type: String,
+    isImage: false,
+    isVirtualImage: true,
+    VirtualImage: 'fa-solid fa-user-tie fa-2x',
+    isSortable: false,
+    isHighLight: true,
+    columnsCount: 1
+  }, {
+    fieldName: 'id',
+    fieldCaption: 'ID',
+    type: Number,
+    isImage: false,
+    isSortable: true,
+    isHighLight: true,
+    columnsCount: 1
+  }, {
+    fieldName: 'name',
+    fieldCaption: 'Name',
+    type: String,
+    isImage: false,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 4
+  }, {
+    fieldName: 'slug',
+    fieldCaption: 'Slug',
+    type: String,
+    isImage: false,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 4
   }]
 });
 

@@ -668,6 +668,8 @@ export default {
                 //if dataset is slave waiting for master keys value
 
                 // (foreignValue===0) - clear items event
+
+                console.log('fkValue', this.foreignValue)
                 if (this.foreignValue===0) {
                     this.filteredItems = []
                     this.Items = []
@@ -680,6 +682,7 @@ export default {
                 let fkValue = (this.foreignValue>0)?'/'+this.foreignValue:''
 
                 try {
+                    console.log(this.api.get)
                     const response = await Repository.getData(this.api.get + currentPage + "/" + itemsPerPage + fkValue)
                     // .then(response => {
 

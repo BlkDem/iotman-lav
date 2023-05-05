@@ -7,7 +7,7 @@ export default {
     ACCESS: "Доступ",
     USERS: "Пользователи",
     ROLES: "Роли",
-    USERROLES: "Права пользователя",
+    USERROLES: "Роли пользователя",
     PERMISSIONS: "Разрешения",
 
     USERINFO: "Информация о пользователе",

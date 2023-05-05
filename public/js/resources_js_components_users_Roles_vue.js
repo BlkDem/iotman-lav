@@ -947,6 +947,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               //if dataset is slave waiting for master keys value
 
               // (foreignValue===0) - clear items event
+
+              console.log('fkValue', _this4.foreignValue);
               if (_this4.foreignValue === 0) {
                 _this4.filteredItems = [];
                 _this4.Items = [];
@@ -954,21 +956,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               //slave without FK - nothing to do
               if (!(_this4.isSlave && !_this4.foreignValue > 0)) {
-                _context3.next = 5;
+                _context3.next = 6;
                 break;
               }
               return _context3.abrupt("return");
-            case 5:
+            case 6:
               //prepare request with or w/o FK
               fkValue = _this4.foreignValue > 0 ? '/' + _this4.foreignValue : '';
-              _context3.prev = 6;
-              _context3.next = 9;
+              _context3.prev = 7;
+              console.log(_this4.api.get);
+              _context3.next = 11;
               return _api_repository__WEBPACK_IMPORTED_MODULE_11__["default"].getData(_this4.api.get + currentPage + "/" + itemsPerPage + fkValue);
-            case 9:
+            case 11:
               response = _context3.sent;
-              _context3.next = 12;
+              _context3.next = 14;
               return _this4.populateListItems(response.data);
-            case 12:
+            case 14:
               _this4.Items = _context3.sent;
               _this4.filteredItems = _this4.Items;
               if (_this4.Items.length === 0) _this4.$emit('onDataClear'); //clear child dataset event
@@ -984,19 +987,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 objectRef: _this4
               });
               // })
-              _context3.next = 22;
+              _context3.next = 24;
               break;
-            case 19:
-              _context3.prev = 19;
-              _context3.t0 = _context3["catch"](6);
+            case 21:
+              _context3.prev = 21;
+              _context3.t0 = _context3["catch"](7);
               (0,_api_errors__WEBPACK_IMPORTED_MODULE_13__.errorEvent)(_context3.t0);
-            case 22:
+            case 24:
               ;
-            case 23:
+            case 25:
             case "end":
               return _context3.stop();
           }
-        }, _callee3, null, [[6, 19]]);
+        }, _callee3, null, [[7, 21]]);
       }))();
     },
     doDelete: function doDelete(key, id) {

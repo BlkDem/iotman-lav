@@ -100,6 +100,7 @@ Route::controller(UserAccessController::class)->group(function () {
     Route::delete('/user_role/delete/{id}', 'destroy');
     Route::patch( '/user_role/patch/{id}/{field}/{value}', 'patch');
     Route::get(   '/user_roles/user/{user_id}', 'getUserRoles');
+    Route::get(   '/user_roles/read/page/{currentPage}/{itemsPerPage}/{user_id}', 'pageWhereUser');
 });
 
 //CRUD routes for model 'images'
