@@ -4,8 +4,10 @@ export default {
     BLOG: "Blog",
     LIBRARY: "Images Library",
     IMAGES: "Images",
+    ACCESS: "Access",
     USERS: "Users",
     ROLES: "Roles",
+    USERROLES: "User Roles",
     PERMISSIONS: "Permissions",
 
     USERINFO: "User Information",

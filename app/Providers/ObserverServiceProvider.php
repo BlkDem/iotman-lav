@@ -13,6 +13,8 @@ use App\Models\Micro;
 use App\Models\MicroParam;
 use App\Models\ParamType;
 use App\Models\User;
+use App\Models\Auth\Role;
+use App\Models\Auth\Permission;
 use App\Observers\GlobalObserver;
 use Illuminate\Support\ServiceProvider;
 
@@ -43,6 +45,8 @@ class ObserverServiceProvider extends ServiceProvider
             MicroParam::class,
             ParamType::class,
             User::class,
+            Role::class,
+            Permission::class,
         ];
 
         foreach ($MODELS as $MODEL) {

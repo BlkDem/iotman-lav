@@ -24,6 +24,7 @@ use App\Http\Controllers\Helpers\ServerStatusController;
 use App\Models\DeviceType;
 use App\Http\Controllers\Users\RoleController;
 use App\Http\Controllers\Users\PermissionController;
+use App\Http\Controllers\Users\UserAccessController;
 
 // use App\Http\Controllers\ImagesAlbumController;
 
@@ -86,6 +87,19 @@ Route::controller(RoleController::class)->group(function () {
     Route::put(   '/role/update/{updateRole}', 'update');
     Route::delete('/role/delete/{id}', 'destroy');
     Route::patch( '/role/patch/{id}/{field}/{value}', 'patch');
+});
+
+//CRUD routes for model 'users_roles'
+
+Route::controller(UserAccessController::class)->group(function () {
+    Route::post(  '/user_role/create', 'store');
+    Route::get(   '/user_roles/read', 'index');
+    Route::get(   '/user_roles/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get(   '/user_role/read/{id}', 'show');
+    Route::put(   '/user_role/update/{updateRole}', 'update');
+    Route::delete('/user_role/delete/{id}', 'destroy');
+    Route::patch( '/user_role/patch/{id}/{field}/{value}', 'patch');
+    Route::get(   '/user_roles/user/{user_id}', 'getUserRoles');
 });
 
 //CRUD routes for model 'images'

@@ -1,17 +1,18 @@
 export default {
-    RolePermissionFieldStruct: [
+    FieldStruct: [
         {
             fieldName: 'Image',
             fieldCaption: '',
             type: String,
             isImage: false,
             isVirtualImage: true,
-            VirtualImage: 'fa-solid fa-circle-user fa-2x',
+            VirtualImage: 'fa-solid fa-user-tie fa-2x',
             isEditable: false,
             isSortable: false,
             isHighLight: true,
-            columnsCount: 1
+            columnsCount: 2
         },
+
         {
             fieldName: 'id',
             fieldCaption: 'ID',
@@ -20,7 +21,7 @@ export default {
             isEditable: false,
             isSortable: true,
             isHighLight: true,
-            columnsCount: 1
+            columnsCount: 2
         },
 
         {
@@ -31,18 +32,8 @@ export default {
             isEditable: true,
             isSortable: true,
             isHighLight: false,
-            columnsCount: 2
-        },
-
-        {
-            fieldName: 'slug',
-            fieldCaption: 'Slug',
-            type: String,
-            isImage: false,
-            isEditable: true,
-            isSortable: true,
-            isHighLight: false,
             columnsCount: 6
         },
+
     ]
 }

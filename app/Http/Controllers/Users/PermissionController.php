@@ -91,7 +91,7 @@ class PermissionController extends BaseController
      */
     public function store(Request $request)
     {
-        $validator = ValidatorRules::MakeValidate($request, 'Permissions');
+        $validator = ValidatorRules::MakeValidate($request, 'permissions');
         if ($validator->fails()) {
             return $this->sendError($validator->errors(), 400);
             // return response()->json($validator->errors(), 400);
