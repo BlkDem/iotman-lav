@@ -766,6 +766,7 @@ export default {
 
                     try {
 
+
                         // const response = await axios.post(this.api.insert, _values)
                         const response = await Repository.execute('post', this.api.insert, _values)
                         const _res = response.data
@@ -822,6 +823,7 @@ export default {
                             _values[editItem[field].fieldName] = editItem[field].value;
                         }
 
+                        console.log(_values)
                         const response = await Repository.execute('put', this.api.update + id, _values)
 
                         // console.log('response: ', response.data)

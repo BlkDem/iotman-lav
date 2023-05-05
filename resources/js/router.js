@@ -150,9 +150,37 @@ const routes = [
     path: "/users",
     name: "Users",
     icon: "fa-solid fa-user-tie",
-    component: () => import('./components/users/Users.vue'),
+    // component: () => import('./components/users/Users.vue'),
     ID: "USERS",
     visible: true,
+    children: [
+        {
+            path: "/users",
+            name: "Users",
+            icon: "fa-solid fa-user-tie",
+            component: () => import('./components/users/Users.vue'),
+            ID: "USERS",
+            visible: true
+        },
+        {
+            path: "/roles",
+            name: "Roles",
+            icon: "fa-solid fa-circle-user",
+            component: () => import('./components/users/Roles.vue'),
+            ID: "ROLES",
+            visible: true
+        },
+        {
+            path: "/permissions",
+            name: "Permissions",
+            icon: "fa-solid fa-universal-access",
+            component: () => import('./components/users/Permissions.vue'),
+            ID: "PERMISSIONS",
+            visible: true
+          },
+
+    ]
+
   },
   {
     path: "/users/:user_id",

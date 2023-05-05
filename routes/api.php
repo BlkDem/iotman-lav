@@ -22,6 +22,8 @@ use App\Http\Controllers\Devices\MicroParamController;
 use App\Http\Controllers\Devices\ParamTypeController;
 use App\Http\Controllers\Helpers\ServerStatusController;
 use App\Models\DeviceType;
+use App\Http\Controllers\Users\RoleController;
+use App\Http\Controllers\Users\PermissionController;
 
 // use App\Http\Controllers\ImagesAlbumController;
 
@@ -60,6 +62,30 @@ Route::get('cache-data', function () {
     $user = \Cache::remember('user', 60, function() {
         return \App\Models\User::first();
     });
+});
+
+//CRUD routes for model 'permissions'
+
+Route::controller(PermissionController::class)->group(function () {
+    Route::post(  '/permission/create', 'store');
+    Route::get(   '/permissions/read', 'index');
+    Route::get(   '/permissions/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get(   '/permission/read/{id}', 'show');
+    Route::put(   '/permission/update/{updatePermission}', 'update');
+    Route::delete('/permission/delete/{id}', 'destroy');
+    Route::patch( '/permission/patch/{id}/{field}/{value}', 'patch');
+});
+
+//CRUD routes for model 'roles'
+
+Route::controller(RoleController::class)->group(function () {
+    Route::post(  '/role/create', 'store');
+    Route::get(   '/roles/read', 'index');
+    Route::get(   '/roles/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get(   '/role/read/{id}', 'show');
+    Route::put(   '/role/update/{updateRole}', 'update');
+    Route::delete('/role/delete/{id}', 'destroy');
+    Route::patch( '/role/patch/{id}/{field}/{value}', 'patch');
 });
 
 //CRUD routes for model 'images'

@@ -1125,7 +1125,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 4:
               _edit = _context6.sent;
               if (!_edit) {
-                _context6.next = 25;
+                _context6.next = 26;
                 break;
               }
               _context6.prev = 6;
@@ -1134,32 +1134,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               for (field in editItem) {
                 _values[editItem[field].fieldName] = editItem[field].value;
               }
-              _context6.next = 12;
+              console.log(_values);
+              _context6.next = 13;
               return _api_repository__WEBPACK_IMPORTED_MODULE_11__["default"].execute('put', _this7.api.update + id, _values);
-            case 12:
+            case 13:
               response = _context6.sent;
               // console.log('response: ', response.data)
               listItem = response.data;
               _this7.filteredItems[key] = _this7.processListItem(listItem);
               _this7.Items[key] = _this7.filteredItems[key];
               _this7.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
-              _context6.next = 23;
+              _context6.next = 24;
               break;
-            case 19:
-              _context6.prev = 19;
+            case 20:
+              _context6.prev = 20;
               _context6.t0 = _context6["catch"](6);
               (0,_api_errors__WEBPACK_IMPORTED_MODULE_13__.errorEvent)(_context6.t0);
               _this7.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITING_ERROR, _helpers_ParsingErrors__WEBPACK_IMPORTED_MODULE_6__["default"].getError(_context6.t0), _helpers_ParsingErrors__WEBPACK_IMPORTED_MODULE_6__["default"].ERROR_LEVEL_ERROR);
-            case 23:
-              _context6.next = 26;
+            case 24:
+              _context6.next = 27;
               break;
-            case 25:
-              console.log(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITING_CANCELLED);
             case 26:
+              console.log(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].EDITING_CANCELLED);
+            case 27:
             case "end":
               return _context6.stop();
           }
-        }, _callee6, null, [[6, 19]]);
+        }, _callee6, null, [[6, 20]]);
       }))();
     }
   }

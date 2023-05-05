@@ -5,6 +5,9 @@ export default {
     LIBRARY: "Images Library",
     IMAGES: "Images",
     USERS: "Users",
+    ROLES: "Roles",
+    PERMISSIONS: "Permissions",
+
     USERINFO: "User Information",
     ALBUMS: "Albums",
     DEVICE_TYPES: "Device Types",

@@ -25239,6 +25239,8 @@ __webpack_require__.r(__webpack_exports__);
   LIBRARY: "Images Library",
   IMAGES: "Images",
   USERS: "Users",
+  ROLES: "Roles",
+  PERMISSIONS: "Permissions",
   USERINFO: "User Information",
   ALBUMS: "Albums",
   DEVICE_TYPES: "Device Types",
@@ -25308,6 +25310,8 @@ __webpack_require__.r(__webpack_exports__);
   LIBRARY: "Библиотека",
   IMAGES: "Изображения",
   USERS: "Пользователи",
+  ROLES: "Роли",
+  PERMISSIONS: "Разрешения",
   USERINFO: "Информация о пользователе",
   ALBUMS: "Альбомы",
   DEVICE_TYPES: "Каталог",
@@ -25682,6 +25686,24 @@ var APIVersion = 1;
   api_user_device_update: apiPreffix + 'user_device/update/',
   api_user_device_delete: apiPreffix + 'user_device/delete/',
   api_user_device_patch: apiPreffix + 'user_device/patch/',
+  //Roles CRUD
+  api_role_create: apiPreffix + 'role/create/',
+  api_roles_read: apiPreffix + 'roles/read/',
+  api_role_getinfo: apiPreffix + 'role/read/',
+  api_roles_read_page: apiPreffix + 'roles/read/page/',
+  api_roles_lookup: apiPreffix + 'roles/lookup/',
+  api_role_update: apiPreffix + 'role/update/',
+  api_role_delete: apiPreffix + 'role/delete/',
+  api_role_patch: apiPreffix + 'role/patch/',
+  //Permissions CRUD
+  api_permission_create: apiPreffix + 'permission/create/',
+  api_permissions_read: apiPreffix + 'permissions/read/',
+  api_permission_getinfo: apiPreffix + 'permission/read/',
+  api_permissions_read_page: apiPreffix + 'permissions/read/page/',
+  api_permissions_lookup: apiPreffix + 'permissions/lookup/',
+  api_permission_update: apiPreffix + 'permission/update/',
+  api_permission_delete: apiPreffix + 'permission/delete/',
+  api_permission_patch: apiPreffix + 'permission/patch/',
   //Users CRUD
   api_user_create: apiPreffix + 'user/create/',
   api_users_read: apiPreffix + 'users/read/',
@@ -25796,6 +25818,8 @@ __webpack_require__.r(__webpack_exports__);
   LIBRARY: "Images Library",
   IMAGES: "Images",
   USERS: "Users",
+  ROLES: "Roles",
+  PERMISSIONS: "Permissions",
   USERINFO: "User Information",
   ALBUMS: "Albums",
   DEVICE_TYPES: "Device Types",
@@ -26094,11 +26118,37 @@ var routes = [{
   path: "/users",
   name: "Users",
   icon: "fa-solid fa-user-tie",
-  component: function component() {
-    return __webpack_require__.e(/*! import() */ "resources_js_components_users_Users_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/users/Users.vue */ "./resources/js/components/users/Users.vue"));
-  },
+  // component: () => import('./components/users/Users.vue'),
   ID: "USERS",
-  visible: true
+  visible: true,
+  children: [{
+    path: "/users",
+    name: "Users",
+    icon: "fa-solid fa-user-tie",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_users_Users_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/users/Users.vue */ "./resources/js/components/users/Users.vue"));
+    },
+    ID: "USERS",
+    visible: true
+  }, {
+    path: "/roles",
+    name: "Roles",
+    icon: "fa-solid fa-circle-user",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_users_Roles_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/users/Roles.vue */ "./resources/js/components/users/Roles.vue"));
+    },
+    ID: "ROLES",
+    visible: true
+  }, {
+    path: "/permissions",
+    name: "Permissions",
+    icon: "fa-solid fa-universal-access",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_users_Permissions_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/users/Permissions.vue */ "./resources/js/components/users/Permissions.vue"));
+    },
+    ID: "PERMISSIONS",
+    visible: true
+  }]
 }, {
   path: "/users/:user_id",
   name: "UserInfo",
@@ -73327,7 +73377,7 @@ function useRoute() {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_device_types_DeviceTypes_vue":1,"resources_js_components_devices_Devices_vue":1,"resources_js_components_device_micros_DeviceMicros_vue":1,"resources_js_components_device_micros_ParamTypes_vue":1,"resources_js_components_micros_Micros_vue":1,"resources_js_components_user_devices_UserDevices_vue":1,"resources_js_components_imagelib_albums_Albums_vue":1,"resources_js_components_imagelib_images_Images_vue":1,"resources_js_components_users_Users_vue":1,"resources_js_components_users_UserInfo_vue":1,"resources_js_components_presets_Presets_vue":1,"resources_js_components_blog_Blog_vue":1,"resources_js_views_Dash_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_device_types_DeviceTypes_vue":1,"resources_js_components_devices_Devices_vue":1,"resources_js_components_device_micros_DeviceMicros_vue":1,"resources_js_components_device_micros_ParamTypes_vue":1,"resources_js_components_micros_Micros_vue":1,"resources_js_components_user_devices_UserDevices_vue":1,"resources_js_components_imagelib_albums_Albums_vue":1,"resources_js_components_imagelib_images_Images_vue":1,"resources_js_components_users_Users_vue":1,"resources_js_components_users_Roles_vue":1,"resources_js_components_users_Permissions_vue":1,"resources_js_components_users_UserInfo_vue":1,"resources_js_components_presets_Presets_vue":1,"resources_js_components_blog_Blog_vue":1,"resources_js_views_Dash_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

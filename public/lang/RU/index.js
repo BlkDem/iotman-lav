@@ -5,6 +5,9 @@ export default {
     LIBRARY: "Библиотека",
     IMAGES: "Изображения",
     USERS: "Пользователи",
+    ROLES: "Роли",
+    PERMISSIONS: "Разрешения",
+
     USERINFO: "Информация о пользователе",
     ALBUMS: "Альбомы",
     DEVICE_TYPES: "Каталог",
