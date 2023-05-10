@@ -65,7 +65,6 @@ class LoggerService
 
             $res["user"] = $user; //user
             $res["table"] = $table; //model table name
-            // $res["original"] = (is_array($value))? $value : $value->getOriginal(); //original data for recover
 
             //fill the record struct
             $logRecord["log_level"] = $level;

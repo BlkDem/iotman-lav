@@ -111,6 +111,15 @@ export default {
     api_user_device_delete: apiPreffix + 'user_device/delete/',
     api_user_device_patch: apiPreffix +      'user_device/patch/',
 
+    //User Roles CRUD
+    api_user_role_create: apiPreffix +     'user_role/create/',
+    api_user_roles_read: apiPreffix +      'user_roles/read/',
+    api_user_roles_read_page: apiPreffix + 'user_roles/read/page/',
+    api_user_roles_user: apiPreffix +    'user_roles/user/',
+    api_user_role_update: apiPreffix +     'user_role/update/',
+    api_user_role_delete: apiPreffix +     'user_role/delete/',
+    // api_user_role_patch: apiPreffix +      'user_role/patch/',
+
     //Roles CRUD
     api_role_create: apiPreffix +     'role/create/',
     api_roles_read: apiPreffix +      'roles/read/',

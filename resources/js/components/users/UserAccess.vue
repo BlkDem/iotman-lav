@@ -27,8 +27,7 @@
                     :api="roles.api"
                     :dataFields=  "roles.rolesFields"
                     :pageCaption= "roles.rolesCaption"
-                    :foreignValue="roles.selectedFkValue"
-                    :currentUser="currentUser"
+                    :foreignValue="users.selectedFkValue"
                     :isSlave="true"
                 >
                 </data-table>
@@ -49,6 +48,7 @@ import MasterSlaveLayout from '../../layouts/MasterSlaveLayout.vue';
 import pathes from '../../config/pathes';
 import Api from '../../api/ApiStruct';
 import UserFieldStruct from './ShortUserStruct';
+import RolesFieldStruct from './UserRoleStruct';
 
 export default {
 
@@ -59,25 +59,24 @@ export default {
     data() {
         return {
 
-            imageSrc: pathes.storageImagePlug,
             currentUser: '',
 
             layoutCaption: MessagesConstants.USERROLES,
 
             usersReadOnly: true,
 
-            //Image model
-            images: {
-                imagesCaption: MessagesConstants.IMAGES,
+            //User Roles model
+            roles: {
+                rolesCaption: MessagesConstants.USERROLES,
 
                 api: { Api },
 
-                imagesFields: [
-                    ...FieldStruct.ImageFieldStruct
+                rolesFields: [
+                    ...RolesFieldStruct.FieldStruct
                 ],
 
-                album_id: 'album_id',
-                album_id_value: 1,
+                user_id: 'user_id',
+                // user_id_value: 1,
 
             },
 
@@ -104,23 +103,26 @@ export default {
 
     created() {
 
-        const apiUserRoles = this.userRoles.api
+        const apiUsers = this.users.api
 
+        apiUsers.get =    APIConstants.api_users_read_page;
+
+        const apiUserRoles = this.roles.api
+
+        // apiUserRoles.get =    APIConstants.api_user_roles_read_page
         apiUserRoles.get =    APIConstants.api_user_roles_read_page
         apiUserRoles.insert = APIConstants.api_user_role_create
         apiUserRoles.update = APIConstants.api_user_role_update
         apiUserRoles.delete = APIConstants.api_user_role_delete
-        apiUserRoles.patch =  APIConstants.api_user_role_patch
+        // apiUserRoles.patch =  APIConstants.api_user_role_patch
 
-        const apiUsers = this.users.api
-
-        apiUsers.get =    APIConstants.api_users_lookup
 
     },
 
     methods: {
         onRowClick(fkKey) {
-            this.images.selectedFkValue = fkKey
+            console.log(fkKey)
+            this.users.selectedFkValue = fkKey
         },
     },
 

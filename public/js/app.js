@@ -25314,7 +25314,7 @@ __webpack_require__.r(__webpack_exports__);
   ACCESS: "Доступ",
   USERS: "Пользователи",
   ROLES: "Роли",
-  USERROLES: "Права пользователя",
+  USERROLES: "Роли пользователя",
   PERMISSIONS: "Разрешения",
   USERINFO: "Информация о пользователе",
   ALBUMS: "Альбомы",
@@ -25690,6 +25690,15 @@ var APIVersion = 1;
   api_user_device_update: apiPreffix + 'user_device/update/',
   api_user_device_delete: apiPreffix + 'user_device/delete/',
   api_user_device_patch: apiPreffix + 'user_device/patch/',
+  //User Roles CRUD
+  api_user_role_create: apiPreffix + 'user_role/create/',
+  api_user_roles_read: apiPreffix + 'user_roles/read/',
+  api_user_roles_read_page: apiPreffix + 'user_roles/read/page/',
+  api_user_roles_user: apiPreffix + 'user_roles/user/',
+  api_user_role_update: apiPreffix + 'user_role/update/',
+  api_user_role_delete: apiPreffix + 'user_role/delete/',
+  // api_user_role_patch: apiPreffix +      'user_role/patch/',
+
   //Roles CRUD
   api_role_create: apiPreffix + 'role/create/',
   api_roles_read: apiPreffix + 'roles/read/',
