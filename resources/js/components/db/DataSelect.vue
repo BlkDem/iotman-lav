@@ -66,9 +66,10 @@ export default {
 
         async getData() {
 
-            this.dataItems = await Repository.getData(this.dataTableReadApi)
+            const response = await Repository.getData(this.dataTableReadApi)
+            console.log(response.data)
+            this.dataItems = response.data
 
-            // console.log(this.value)
         },
 
         doChange(value) {
