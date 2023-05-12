@@ -50,14 +50,6 @@ export default {
         }
     },
 
-    created() {
-        // (async () => {
-        //     const _data = await APIConstants.getData(this.dataTableReadApi)
-        //     this.dataItems = _data.data.data
-        //     console.log(this.value)
-        // })()
-    },
-
     mounted() {
         this.getData();
     },
@@ -67,7 +59,7 @@ export default {
         async getData() {
 
             const response = await Repository.getData(this.dataTableReadApi)
-            console.log(response.data)
+            // console.log(response.data)
             this.dataItems = response.data
 
         },

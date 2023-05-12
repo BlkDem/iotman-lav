@@ -499,13 +499,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       type: String
     }
   },
-  created: function created() {
-    // (async () => {
-    //     const _data = await APIConstants.getData(this.dataTableReadApi)
-    //     this.dataItems = _data.data.data
-    //     console.log(this.value)
-    // })()
-  },
   mounted: function mounted() {
     this.getData();
   },
@@ -521,9 +514,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _api_repository__WEBPACK_IMPORTED_MODULE_1__["default"].getData(_this.dataTableReadApi);
             case 2:
               response = _context.sent;
-              console.log(response.data);
+              // console.log(response.data)
               _this.dataItems = response.data;
-            case 5:
+            case 4:
             case "end":
               return _context.stop();
           }
