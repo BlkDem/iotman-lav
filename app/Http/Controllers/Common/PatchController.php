@@ -33,8 +33,12 @@ class PatchController extends BaseController
      * @param  mixed $value
      * @return Response
      */
-    public function patch($id, $field, $value, Model $model)
+    public function patch(Request $request, Model $model)
     {
+        // [$id, $field, $value]
+        $id     = $request::route('id');
+        $field  = $request::route('field');
+        $value  = $request::route('value');
 
         try {
             $patchModel = $model::whereId($id);
@@ -50,14 +54,13 @@ class PatchController extends BaseController
                 "$field" => $value
             ]);
 
-
             $res = $model::whereId($id)->first();
 
-            $res["patched_field"] = $field;
-            $res["patched_old_value"] = $oldValue;
-            $res["table"] = $model->getTable();
+            $res['patched_field'] = $field;
+            $res['patched_old_value'] = $oldValue;
+            $res['table'] = $model->getTable();
 
-            LOG::setPatchLog('Model patched', $res, $res["table"], 'Controller');
+            LOG::setPatchLog('Model patched', $res, $res['table'], 'Controller');
 
             return $this->sendResponse($res, 'Model Patched');
         }

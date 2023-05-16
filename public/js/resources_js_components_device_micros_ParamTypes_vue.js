@@ -1303,12 +1303,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     console.log(event);
   },
   created: function created() {
-    var paramTypeApi = this.paramTypes.api;
-    paramTypeApi.get = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_param_types_read_page;
-    paramTypeApi.insert = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_param_type_create;
-    paramTypeApi.update = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_param_type_update;
-    paramTypeApi.patch = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_param_type_patch;
-    paramTypeApi["delete"] = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].api_param_type_delete;
+    this.paramTypes.api = _api_rest_api__WEBPACK_IMPORTED_MODULE_1__["default"].param_types;
   },
   mounted: function mounted() {
     var _this = this;

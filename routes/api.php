@@ -256,7 +256,6 @@ Route::get('/user_devices/read/page/{currentPage}/{itemsPerPage}/{user_id}', [De
 Route::get('/user_devices/read/{id}', [DeviceUsersViewController::class, 'show']);
 Route::put('/user_device/update/{updateDeviceUser}', [DeviceUserController::class, 'update']);
 Route::delete('/user_device/delete/{id}', [DeviceUserController::class, 'destroy']);
-// Route::get('/user_device/show', [DeviceUsersViewController::class, 'show']);
 Route::patch('/user_device/patch/{id}/{field}/{value}', [DeviceUserController::class, 'patch']);
 
 
@@ -276,14 +275,8 @@ Route::get('/sysinfo/{cmd}', [ServerStatusController::class, 'getServerLoad']);
 Route::group(['middleware' => 'role:admin'], function() {
 
     Route::patch('/device_type/patch/{id}/{field}/{value}', function (Request $request) {
-    // dd(Request::route('id'));
         $patchController = new PatchController();
-        return $patchController->patch(
-            Request::route('id'),
-            Request::route('field'),
-            Request::route('value'),
-            new DeviceType()
-        );
+        return $patchController->patch($request, new DeviceType());
     });
 });
 

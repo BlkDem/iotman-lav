@@ -33,7 +33,9 @@ import FieldStruct from './FieldStruct';
 
                     api: { Api },
 
-                    paramTypesFields: [ ...FieldStruct.ParamTypeFieldStruct ],
+                    paramTypesFields: [
+                        ...FieldStruct.ParamTypeFieldStruct
+                    ],
 
                 },
 
@@ -46,13 +48,8 @@ import FieldStruct from './FieldStruct';
 
         created() {
 
-            const paramTypeApi = this.paramTypes.api
+            this.paramTypes.api = APIConstants.param_types
 
-            paramTypeApi.get =    APIConstants.api_param_types_read_page
-            paramTypeApi.insert = APIConstants.api_param_type_create
-            paramTypeApi.update = APIConstants.api_param_type_update
-            paramTypeApi.patch =  APIConstants.api_param_type_patch
-            paramTypeApi.delete = APIConstants.api_param_type_delete
         },
 
         mounted() {

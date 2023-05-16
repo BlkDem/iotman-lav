@@ -4,38 +4,46 @@ const APIVersion = 1;
 export default {
     apiVersion: APIVersion,
 
-    //Presets CRUD
-    api_preset_create: apiPreffix +     'preset/create/',
-    api_presets_read: apiPreffix +      'presets/read/',
-    api_presets_group: apiPreffix +      'presets/group/',
-    api_presets_read_page: apiPreffix + 'presets/read/page/',
-    api_preset_update: apiPreffix +     'preset/update/',
-    api_preset_delete: apiPreffix +     'preset/delete/',
-    api_preset_patch: apiPreffix +      'preset/patch/',
+    //Presets CRUD group
+    presets: {
+        read: apiPreffix +       'presets/read/',
+        group: apiPreffix +      'presets/group/',
+        get: apiPreffix +        'presets/read/page/',
+        insert: apiPreffix +     'preset/create/',
+        update: apiPreffix +     'preset/update/',
+        delete: apiPreffix +     'preset/delete/',
+        patch: apiPreffix +      'preset/patch/',
+    },
 
-    //Micros CRUD
-    api_micro_create: apiPreffix +     'micro/create/',
-    api_micros_read: apiPreffix +      'micros/read/',
-    api_micros_read_page: apiPreffix + 'micros/read/page/',
-    api_micro_update: apiPreffix +     'micro/update/',
-    api_micro_delete: apiPreffix +     'micro/delete/',
-    api_micro_patch: apiPreffix +      'micro/patch/',
+    //Micros CRUD group
+    micros: {
+        create: apiPreffix +     'micro/create/',
+        read: apiPreffix +       'micros/read/',
+        get: apiPreffix +        'micros/read/page/',
+        update: apiPreffix +     'micro/update/',
+        delete: apiPreffix +     'micro/delete/',
+        patch: apiPreffix +      'micro/patch/',
+    },
 
-    //Micro Params CRUD
-    api_micro_param_create: apiPreffix +     'micro_param/create/',
-    api_micro_params_read: apiPreffix +      'micro_params/read/',
-    api_micro_params_read_page: apiPreffix + 'micro_params/read/page/',
-    api_micro_param_update: apiPreffix +     'micro_param/update/',
-    api_micro_param_delete: apiPreffix +     'micro_param/delete/',
-    api_micro_param_patch: apiPreffix +      'micro_param/patch/',
+    //Micro Params CRUD group
+    // micro_params: {
+    //     create: apiPreffix + 'micro_param/create/',
+    //     read: apiPreffix +   'micro_params/read/',
+    //     get: apiPreffix +    'micro_params/read/page/',
+    //     update: apiPreffix + 'micro_param/update/',
+    //     delete: apiPreffix + 'micro_param/delete/',
+    //     patch: apiPreffix +  'micro_param/patch/',
+    // },
 
-    //Param Types CRUD
-    api_param_type_create: apiPreffix +     'param_type/create/',
-    api_param_types_read: apiPreffix +      'param_types/read/',
-    api_param_types_read_page: apiPreffix + 'param_types/read/page/',
-    api_param_type_update: apiPreffix +     'param_type/update/',
-    api_param_type_delete: apiPreffix +     'param_type/delete/',
-    api_param_type_patch: apiPreffix +      'param_type/patch/',
+    //Param Types CRUD group
+    param_types: {
+        create: apiPreffix +     'param_type/create/',
+        read: apiPreffix +       'param_types/read/',
+        get: apiPreffix +        'param_types/read/page/',
+        update: apiPreffix +     'param_type/update/',
+        delete: apiPreffix +     'param_type/delete/',
+        patch: apiPreffix +      'param_type/patch/',
+    },
 
     //Device Micros CRUD
     api_device_micro_create: apiPreffix +     'device_micro/create/',

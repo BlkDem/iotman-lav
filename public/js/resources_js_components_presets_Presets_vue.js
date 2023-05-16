@@ -1419,12 +1419,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     };
   },
   created: function created() {
-    var presetApi = this.presets.api;
-    presetApi.get = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_presets_read_page;
-    presetApi.insert = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_preset_create;
-    presetApi.update = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_preset_update;
-    presetApi.patch = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_preset_patch;
-    presetApi["delete"] = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_preset_delete;
+    this.presets.api = _api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].presets;
   }
 });
 
