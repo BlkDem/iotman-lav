@@ -11,19 +11,6 @@ use App\Facades\LOG;
 class PatchController extends BaseController
 {
 
-    public static function MakeResponse($isSucces, $obj, $msg, $code=200)
-    {
-        $newResponse = [
-            'success' => $isSucces,
-            'data'    => $obj,
-            'message' => $msg,
-            'code' => $code
-        ];
-
-        return $newResponse;
-
-    }
-
     /**
      * patch record via key => value
      *
@@ -33,7 +20,7 @@ class PatchController extends BaseController
      * @param  mixed $value
      * @return Response
      */
-    public function patch(Request $request, Model $model)
+    public function __invoke(Request $request, Model $model)
     {
         // [$id, $field, $value]
         $id     = $request::route('id');

@@ -261,7 +261,7 @@ Route::patch('/user_device/patch/{id}/{field}/{value}', [DeviceUserController::c
 
 Route::group(['middleware' => 'role:admin'], function() {
     Route::get('/dashboard', function() {
-       return 'Добро пожаловать, admin';
+       return 'Test admin';
     });
  });
 
@@ -276,8 +276,9 @@ Route::group(['middleware' => 'role:admin'], function() {
 
     Route::patch('/device_type/patch/{id}/{field}/{value}', function (Request $request) {
         $patchController = new PatchController();
-        return $patchController->patch($request, new DeviceType());
+        return $patchController($request, new DeviceType());
     });
+
 });
 
 
