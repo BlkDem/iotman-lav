@@ -1,10 +1,6 @@
 <template>
-    <!-- <div style="margin-top: 0.5rem">
-    </div> -->
 
-    <Viewer ref="viewer" :imageSrc="imageSrc">
-
-    </Viewer>
+    <Viewer ref="viewer" :imageSrc="imageSrc" />
 
 
     <common-card
@@ -147,14 +143,10 @@
                             :title="getTooltip(item[column])"
                         >
 
-                            <span v-if="
-                                    (activeCol!==key||activeRow!==ckey)&&
-                                    (!item[column].isImage)&&
-                                    (!item[column].isDirectionVirtualImage)&&
-                                    (!item[column].isHidden)&&
-                                    (!item[column].isLookup)"
+                            <span v-if="isDefaultField(item[column], ckey, key)"
                                 :class="{
                                             'text-info': item[column].isHighLight,
+                                            'text-light': item[column].isLightColor,
                                         }"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
@@ -397,6 +389,14 @@ export default {
         },
 
         methods: {
+
+            isDefaultField(item, ckey, key) {
+                return (this.activeCol!==key||this.activeRow!==ckey)&&
+                        (!item.isImage)&&
+                        (!item.isDirectionVirtualImage)&&
+                        (!item.isHidden)&&
+                        (!item.isLookup)
+            },
 
             // Edit button event
             editBtnKeyUp(event_key, key, id) {
@@ -771,7 +771,9 @@ export default {
 
 
                         // const response = await axios.post(this.api.insert, _values)
+                        console.log(_values)
                         const response = await Repository.execute('post', this.api.insert, _values)
+                        console.log(console.response)
                         const _res = response.data
 
                         const transformItem = this.processListItem(_res)

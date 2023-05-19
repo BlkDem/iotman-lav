@@ -17,7 +17,7 @@ export default {
 
     //Micros CRUD group
     micros: {
-        create: apiPreffix +     'micro/create/',
+        insert: apiPreffix +     'micro/create/',
         read: apiPreffix +       'micros/read/',
         get: apiPreffix +        'micros/read/page/',
         update: apiPreffix +     'micro/update/',
@@ -26,18 +26,18 @@ export default {
     },
 
     //Micro Params CRUD group
-    // micro_params: {
-    //     create: apiPreffix + 'micro_param/create/',
-    //     read: apiPreffix +   'micro_params/read/',
-    //     get: apiPreffix +    'micro_params/read/page/',
-    //     update: apiPreffix + 'micro_param/update/',
-    //     delete: apiPreffix + 'micro_param/delete/',
-    //     patch: apiPreffix +  'micro_param/patch/',
-    // },
+    micro_params: {
+        insert: apiPreffix + 'micro_param/create/',
+        read: apiPreffix +   'micro_params/read/',
+        get: apiPreffix +    'micro_params/read/page/',
+        update: apiPreffix + 'micro_param/update/',
+        delete: apiPreffix + 'micro_param/delete/',
+        patch: apiPreffix +  'micro_param/patch/',
+    },
 
     //Param Types CRUD group
     param_types: {
-        create: apiPreffix +     'param_type/create/',
+        insert: apiPreffix +     'param_type/create/',
         read: apiPreffix +       'param_types/read/',
         get: apiPreffix +        'param_types/read/page/',
         update: apiPreffix +     'param_type/update/',

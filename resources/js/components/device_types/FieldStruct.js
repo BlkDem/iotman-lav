@@ -27,6 +27,7 @@ export default {
             fieldCaption: 'Name',
             type: String,
             isImage: false,
+            isLightColor: true,
             isEditable: true,
             isSortable: true,
             isHighLight: false,

@@ -677,6 +677,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    isDefaultField: function isDefaultField(item, ckey, key) {
+      return (this.activeCol !== key || this.activeRow !== ckey) && !item.isImage && !item.isDirectionVirtualImage && !item.isHidden && !item.isLookup;
+    },
     // Edit button event
     editBtnKeyUp: function editBtnKeyUp(event_key, key, id) {
       console.log('edit', event_key);
@@ -1065,7 +1068,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 3:
               _add = _context5.sent;
               if (!_add) {
-                _context5.next = 25;
+                _context5.next = 27;
                 break;
               }
               newItemData = _this6.$refs.addItem.postData;
@@ -1074,32 +1077,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _values[newItemData[field].fieldName] = newItemData[field].value;
               }
               _context5.prev = 8;
-              _context5.next = 11;
+              // const response = await axios.post(this.api.insert, _values)
+              console.log(_values);
+              _context5.next = 12;
               return _api_repository__WEBPACK_IMPORTED_MODULE_11__["default"].execute('post', _this6.api.insert, _values);
-            case 11:
+            case 12:
               response = _context5.sent;
+              console.log(console.response);
               _res = response.data;
               transformItem = _this6.processListItem(_res);
               _this6.Items.push(transformItem);
               _this6.filteredItems = _this6.Items;
               _this6.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].ADDED_MESSAGE, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].PROCESS_SUCCESSFULLY);
-              _context5.next = 23;
+              _context5.next = 25;
               break;
-            case 19:
-              _context5.prev = 19;
+            case 21:
+              _context5.prev = 21;
               _context5.t0 = _context5["catch"](8);
               (0,_api_errors__WEBPACK_IMPORTED_MODULE_13__.errorEvent)(_context5.t0);
               _this6.$root.$refs.toaster.showMessage(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].INSERTING_ERROR, _helpers_ParsingErrors__WEBPACK_IMPORTED_MODULE_6__["default"].getError(_context5.t0), _helpers_ParsingErrors__WEBPACK_IMPORTED_MODULE_6__["default"].ERROR_LEVEL_ERROR);
-            case 23:
-              _context5.next = 26;
-              break;
             case 25:
+              _context5.next = 28;
+              break;
+            case 27:
               console.log(_strings_constants_strings__WEBPACK_IMPORTED_MODULE_2__["default"].INSERTING_CANCELLED);
-            case 26:
+            case 28:
             case "end":
               return _context5.stop();
           }
-        }, _callee5, null, [[8, 19]]);
+        }, _callee5, null, [[8, 21]]);
       }))();
     },
     doEdit: function doEdit(key, id) {
@@ -2151,7 +2157,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
   var _component_Paginator = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Paginator");
   var _component_common_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("common-card");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div style=\"margin-top: 0.5rem\">\n    </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Viewer, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Viewer, {
     ref: "viewer",
     imageSrc: $data.imageSrc
   }, null, 8 /* PROPS */, ["imageSrc"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_common_card, {
@@ -2273,10 +2279,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 "data-bs-toggle": "tooltip",
                 "data-bs-placement": "top",
                 title: $options.getTooltip(item[column])
-              }, [($data.activeCol !== key || $data.activeRow !== ckey) && !item[column].isImage && !item[column].isDirectionVirtualImage && !item[column].isHidden && !item[column].isLookup ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+              }, [$options.isDefaultField(item[column], ckey, key) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
                 key: 0,
                 "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-                  'text-info': item[column].isHighLight
+                  'text-info': item[column].isHighLight,
+                  'text-light': item[column].isLightColor
                 }),
                 onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
                   return $options.onCellClick(item[column].isEditable, ckey, key);
@@ -2882,7 +2889,7 @@ __webpack_require__.r(__webpack_exports__);
     isText: true,
     isEditable: true,
     isSortable: true,
-    isHighLight: false,
+    isLightColor: true,
     columnsCount: 5
   }, {
     fieldName: 'album_id',

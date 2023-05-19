@@ -82,7 +82,7 @@ export default {
         async getMQTTParams() {
             try {
 
-                await axios.get(APIConstants.api_presets_group + 'MQTT')
+                await axios.get(APIConstants.presets.group + 'MQTT')
                     .then(response => {
                         const configMQTT = response.data.data
 

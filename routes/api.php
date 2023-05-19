@@ -25,6 +25,7 @@ use App\Models\DeviceType;
 use App\Http\Controllers\Users\RoleController;
 use App\Http\Controllers\Users\PermissionController;
 use App\Http\Controllers\Users\UserAccessController;
+use App\Http\Controllers\Helpers\AllModelController;
 
 // use App\Http\Controllers\ImagesAlbumController;
 
@@ -218,9 +219,9 @@ Route::controller(ParamTypeController::class)->group(function () {
     Route::post(  '/param_type/create', 'store');
     Route::get(   '/param_types/read/', 'index');
     Route::get(   '/param_types/read/page/{currentPage}/{itemsPerPage}', 'page');
-    Route::get(   '/param_types/read/{id}', 'show');
+    Route::get(   '/param_type/read/{id}', 'show');
     Route::patch( '/param_type/patch/{id}/{field}/{value}', 'patch');
-    Route::put(   '/param_type/update/{updateDeviceType}', 'update');
+    Route::put(   '/param_type/update/{updateParamType}', 'update');
     Route::delete('/param_type/delete/{id}', 'destroy');
 
 });
@@ -269,14 +270,23 @@ Route::group(['middleware' => 'role:admin'], function() {
 Route::get('/authuser', [UserinfoController::class, 'show']);
 Route::get('/user', [AuthController::class, 'UserInfo']);
 Route::get('/username', [AuthController::class, 'GetUserName']);
+Route::get('/getmodel', function () {
+
+    $allModels = new AllModelController();
+    dd($allModels->getAllModels());
+
+
+    // dd($model::all());
+    // do some filtering, then return the model
+    // return $models;
+});
 
 Route::get('/sysinfo/{cmd}', [ServerStatusController::class, 'getServerLoad']);
 
 Route::group(['middleware' => 'role:admin'], function() {
 
     Route::patch('/device_type/patch/{id}/{field}/{value}', function (Request $request) {
-        $patchController = new PatchController();
-        return $patchController($request, new DeviceType());
+        return (new PatchController())($request, new DeviceType());
     });
 
 });

@@ -67,7 +67,7 @@ export default {
             if (isNaN(a)) return
 
                 // return HEX color like #AABBCC
-                return '#' + a.toString(16).toUpperCase();
+                return '#' + a.toString(16).padStart(6, "0").toUpperCase();
         }
     }
 

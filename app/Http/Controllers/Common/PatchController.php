@@ -27,6 +27,9 @@ class PatchController extends BaseController
         $field  = $request::route('field');
         $value  = $request::route('value');
 
+        if ((!$id) || (!$field))
+            return $this->sendError('Model Patching error: bad request');
+
         try {
             $patchModel = $model::whereId($id);
 
