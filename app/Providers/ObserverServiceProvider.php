@@ -17,6 +17,7 @@ use App\Models\Auth\Role;
 use App\Models\Auth\Permission;
 use App\Observers\GlobalObserver;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Helpers\Preset;
 
 class ObserverServiceProvider extends ServiceProvider
 {
@@ -44,6 +45,7 @@ class ObserverServiceProvider extends ServiceProvider
             Micro::class,
             MicroParam::class,
             ParamType::class,
+            Preset::class,
             User::class,
             Role::class,
             Permission::class,

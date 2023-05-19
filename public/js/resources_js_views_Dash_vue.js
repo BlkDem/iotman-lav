@@ -88,7 +88,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return axios.get(_api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].api_presets_group + 'MQTT').then(function (response) {
+              return axios.get(_api_rest_api__WEBPACK_IMPORTED_MODULE_2__["default"].presets.group + 'MQTT').then(function (response) {
                 var configMQTT = response.data.data;
                 for (var item in configMQTT) {
                   if (configMQTT[item].preset_key === 'MQTT_SERVER') _this.connection.host = configMQTT[item].preset_value;
@@ -318,7 +318,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
     if (isNaN(a)) return;
 
     // return HEX color like #AABBCC
-    return '#' + a.toString(16).toUpperCase();
+    return '#' + a.toString(16).padStart(6, "0").toUpperCase();
   }
 }), _emits$props$emits$da);
 

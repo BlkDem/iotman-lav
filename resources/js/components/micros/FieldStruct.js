@@ -30,7 +30,7 @@ export default {
             isImage: false,
             isEditable: true,
             isSortable: true,
-            isHighLight: false,
+            isLightColor: true,
             columnsCount: 2
         },
 

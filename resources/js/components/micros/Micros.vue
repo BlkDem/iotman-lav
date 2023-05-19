@@ -20,7 +20,11 @@ import FieldStruct from './FieldStruct';
 
 
 export default {
-    components: {DataTable},
+
+    components: {
+        DataTable
+    },
+
     data() {
         return {
             micros: {
@@ -39,13 +43,8 @@ export default {
     },
 
     created() {
-        const microApi = this.micros.api
 
-        microApi.get =    APIConstants.api_micros_read_page
-        microApi.insert = APIConstants.api_micro_create
-        microApi.update = APIConstants.api_micro_update
-        microApi.patch =  APIConstants.api_micro_patch
-        microApi.delete = APIConstants.api_micro_delete
+        this.micros.api = APIConstants.micros
 
     }
 }

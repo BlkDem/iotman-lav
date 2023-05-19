@@ -78,7 +78,8 @@ export default {
             isHighLight: false,
             columnsCount: 2,
             lookupId: 'micro_id',
-            lookupApi: APIConstants.api_micros_read,
+            // lookupApi: APIConstants.api_micros_read,
+            lookupApi: APIConstants.micros.read,
             isLookup: true,
         },
 
@@ -145,7 +146,7 @@ export default {
             isImage: false,
             isEditable: false,
             isSortable: true,
-            isHighLight: false,
+            isLightColor: true,
             columnsCount: 2,
             lookupId: 'device_micro_id',
             lookupApi: APIConstants.api_device_micros_read,
@@ -174,7 +175,8 @@ export default {
             isHighLight: false,
             columnsCount: 1,
             lookupId: 'param_type_id',
-            lookupApi: APIConstants.api_param_types_read,
+            // lookupApi: APIConstants.api_param_types_read,
+            lookupApi: APIConstants.param_types.read,
             isLookup: true,
         },
 
@@ -261,7 +263,7 @@ export default {
             isImage: false,
             isEditable: true,
             isSortable: true,
-            isHighLight: false,
+            isLightColor: true,
             columnsCount: 3
         },
 

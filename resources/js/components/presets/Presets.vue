@@ -35,13 +35,8 @@ export default {
     },
 
     created() {
-        const presetApi = this.presets.api
 
-        presetApi.get =    APIConstants.api_presets_read_page
-        presetApi.insert = APIConstants.api_preset_create
-        presetApi.update = APIConstants.api_preset_update
-        presetApi.patch =  APIConstants.api_preset_patch
-        presetApi.delete = APIConstants.api_preset_delete
+        this.presets.api = APIConstants.presets
 
     }
 }

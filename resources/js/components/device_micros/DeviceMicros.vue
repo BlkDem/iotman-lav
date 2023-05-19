@@ -133,13 +133,14 @@ export default {
         deviceMicroApi.patch =  APIConstants.api_device_micro_patch
         deviceMicroApi.delete = APIConstants.api_device_micro_delete
 
-        const microParamsApi = this.microParams.api
+        this.microParams.api = APIConstants.micro_params
+        // const microParamsApi = this.microParams.api
 
-        microParamsApi.get =    APIConstants.api_micro_params_read_page
-        microParamsApi.insert = APIConstants.api_micro_param_create
-        microParamsApi.update = APIConstants.api_micro_param_update
-        microParamsApi.patch =  APIConstants.api_micro_param_patch
-        microParamsApi.delete = APIConstants.api_micro_param_delete
+        // microParamsApi.get =    APIConstants.api_micro_params_read_page
+        // microParamsApi.insert = APIConstants.api_micro_param_create
+        // microParamsApi.update = APIConstants.api_micro_param_update
+        // microParamsApi.patch =  APIConstants.api_micro_param_patch
+        // microParamsApi.delete = APIConstants.api_micro_param_delete
 
         const apiDevices = this.devices.api
 
