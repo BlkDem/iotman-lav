@@ -199,7 +199,7 @@ return [
 
         App\Providers\ObserverServiceProvider::class,
 
-        App\Providers\PermissionServiceProvider::class,
+        // App\Providers\PermissionServiceProvider::class,
 
     ],
 

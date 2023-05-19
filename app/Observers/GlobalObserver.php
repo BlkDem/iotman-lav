@@ -28,7 +28,7 @@ class GlobalObserver
 
     public function created(Model $model)
     {
-        // LOG::setLog('Model created', $model);
+        LOG::setLog('Model created', $model);
     }
 
     public function deleted(Model $model)
