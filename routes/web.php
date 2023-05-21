@@ -20,12 +20,15 @@ Route::get('/login', [RootController::class, 'index']);
 /**
  * Other vue routes
  */
-//Route::get('/{vue?}', [RootController::class, 'index'])->where('vue', '[\/\w\.-]*');
 
-Route::get('/', [RootController::class, 'index']);
+//  Route::get('/auth', [RootController::class, 'index']);
+
+
+
 
 /**
  * Authentication routes
  */
 Auth::routes();
 
+Route::get('/{vue?}', [RootController::class, 'index'])->where('vue', '[\/\w\.-]*');
