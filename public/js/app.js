@@ -25786,6 +25786,9 @@ var emitter = (0,mitt__WEBPACK_IMPORTED_MODULE_14__["default"])();
 window.axios = (axios__WEBPACK_IMPORTED_MODULE_15___default());
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.withCredentials = true;
+//
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)(_components_App_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
 app.config.globalProperties.emitter = emitter;
 app.component('Calendar', v_calendar__WEBPACK_IMPORTED_MODULE_3__.Calendar);
