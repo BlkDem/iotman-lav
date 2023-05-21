@@ -60,11 +60,11 @@ Route::controller(UserController::class)->group(function () {
     Route::patch('/user/patch/{id}/{field}/{value}', 'patch');
 });
 
-Route::get('cache-data', function () {
-    $user = \Cache::remember('user', 60, function() {
-        return \App\Models\User::first();
-    });
-});
+// Route::get('cache-data', function () {
+//     $user = \Cache::remember('user', 60, function() {
+//         return \App\Models\User::first();
+//     });
+// });
 
 //CRUD routes for model 'permissions'
 
