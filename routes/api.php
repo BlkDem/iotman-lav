@@ -60,11 +60,11 @@ Route::controller(UserController::class)->group(function () {
     Route::patch('/user/patch/{id}/{field}/{value}', 'patch');
 });
 
-Route::get('cache-data', function () {
-    $user = \Cache::remember('user', 60, function() {
-        return \App\Models\User::first();
-    });
-});
+// Route::get('cache-data', function () {
+//     $user = \Cache::remember('user', 60, function() {
+//         return \App\Models\User::first();
+//     });
+// });
 
 //CRUD routes for model 'permissions'
 
@@ -260,36 +260,38 @@ Route::delete('/user_device/delete/{id}', [DeviceUserController::class, 'destroy
 Route::patch('/user_device/patch/{id}/{field}/{value}', [DeviceUserController::class, 'patch']);
 
 
-Route::group(['middleware' => 'role:admin'], function() {
-    Route::get('/dashboard', function() {
-       return 'Test admin';
-    });
- });
+// Route::group(['middleware' => 'role:admin'], function() {
+//     Route::get('/dashboard', function() {
+//        return 'Test admin';
+//     });
+//  });
 
 //Auth Userinfo
 Route::get('/authuser', [UserinfoController::class, 'show']);
 Route::get('/user', [AuthController::class, 'UserInfo']);
 Route::get('/username', [AuthController::class, 'GetUserName']);
-Route::get('/getmodel', function () {
+// Route::get('/getmodel', function () {
 
-    $allModels = new AllModelController();
-    dd($allModels->getAllModels());
+//     $allModels = new AllModelController();
+//     dd($allModels->getAllModels());
 
 
-    // dd($model::all());
-    // do some filtering, then return the model
-    // return $models;
+//     // dd($model::all());
+//     // do some filtering, then return the model
+//     // return $models;
+// });
+
+//Route::get('/sysinfo/{cmd}', [ServerStatusController::class, 'getServerLoad']);
+
+Route::patch('/device_type/patch/{id}/{field}/{value}', function (Request $request) {
+    return (new PatchController())($request, new DeviceType());
 });
 
-Route::get('/sysinfo/{cmd}', [ServerStatusController::class, 'getServerLoad']);
+// Route::group(['middleware' => 'role:admin'], function() {
 
-Route::group(['middleware' => 'role:admin'], function() {
 
-    Route::patch('/device_type/patch/{id}/{field}/{value}', function (Request $request) {
-        return (new PatchController())($request, new DeviceType());
-    });
 
-});
+// });
 
 
 });
