@@ -43,21 +43,17 @@ class Device extends Model
         'id',
         'device_name',
         'device_desc',
-        'device_pass',
-        'device_hwid',
+        // 'device_pass',
+        // 'device_hwid',
         'device_type_id',
         'device_type_name',
         'device_type_desc',
         'device_type_image'
     ];
 
-    public function DeviceTypes()
-    {
-        return $this->hasMany(DeviceType::class);
-    }
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+    ];
 
-    public function DeviceType()
-    {
-      return $this->belongsTo(DeviceType::class);
-    }
 }

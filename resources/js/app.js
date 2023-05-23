@@ -1,39 +1,58 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
 
 import './bootstrap';
 import { createApp } from 'vue';
-import { defineAsyncComponent } from 'vue';
+import { vue3Debounce } from 'vue-debounce'
+import { SetupCalendar, Calendar, DatePicker } from 'v-calendar';
+import router from './router'
 
-
-/**
- * Next, we will create a fresh Vue application instance. You may then begin
- * registering components with the application instance so they are ready
- * to use in your application's views. An example is included for you.
- */
-
-const app = createApp({});
-
+import LangCombo from './components/header/LangCombo.vue';
+import App from './components/App.vue';
 import Navbar from './components/header/Navbar.vue';
+import AppMenu from './components/common/AppMenu.vue';
+import ThemeCombo from './components/header/ThemeCombo.vue';
+import UserMenu from './components/common/UserMenu.vue';
+import Toaster from './components/common/Toaster.vue'; //resources\js\components\common\Toaster.vue
+import CommonCard from './components/common/CommonCard.vue';
+import InfoCard from './components/common/InfoCard.vue';
+
+import mitt from 'mitt';
+const emitter = mitt();
+
+import axios from 'axios';
+window.axios = axios;
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.withCredentials = true;
+//
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
+
+const app = createApp(App);
+
+app.config.globalProperties.emitter = emitter;
+
+app.component('Calendar', Calendar)
+
+app.component('DatePicker', DatePicker)
+
+app.component('LangCombo', LangCombo);
 
 app.component('Navbar', Navbar);
 
-import Toaster from './components/common/Toaster.vue';
-app.component('toaster', Toaster);
+app.component('UserMenu', UserMenu);
 
-app.component('device-type-list', defineAsyncComponent(() =>
-  import('./components/device_types/DeviceTypes.vue')
-))
+app.component('ThemeCombo', ThemeCombo);
 
-app.component('device-list', defineAsyncComponent(() =>
-  import('./components/devices/Devices.vue')
-))
+app.component('Toaster', Toaster);
 
-app.component('device-user-list', defineAsyncComponent(() =>
-  import('./components/user_devices/UserDevices.vue')
-))
+app.component('CommonCard', CommonCard);
 
-app.mount('#app');
+app.component('InfoCard', InfoCard);
+
+app.component('AppMenu', AppMenu);
+
+app.use(router)
+    .use(SetupCalendar, {})
+    .directive('debounce', vue3Debounce({ lock: true }))
+    .mount('#app');
+

@@ -195,6 +195,12 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        App\Providers\FacadeServiceProvider::class,
+
+        App\Providers\ObserverServiceProvider::class,
+
+        // App\Providers\PermissionServiceProvider::class,
+
     ],
 
     /*

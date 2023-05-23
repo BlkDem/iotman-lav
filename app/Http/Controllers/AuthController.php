@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\BaseController as BaseController;
+use App\Http\Controllers\BaseController;
 use Illuminate\Support\Facades\Auth;
-use Validator;
+use App\Http\Middleware\ValidatorRules;
 use App\Models\User;
 
 class AuthController extends BaseController
@@ -44,15 +44,10 @@ class AuthController extends BaseController
 
     public function signup(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'confirm_password' => 'required|same:password',
-        ]);
 
-        if($validator->fails()){
-            return $this->sendError('Error validation', $validator->errors());
+        $validator = ValidatorRules::MakeValidate($request, 'users');
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
         }
 
         $input = $request->all();

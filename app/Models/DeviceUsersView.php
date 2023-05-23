@@ -17,5 +17,11 @@ class DeviceUsersView extends Model
 {
     use HasFactory;
 
-    protected $table = 'Device_DeviceTypes_UserDevices';
+    protected $table = 'device_devicetypes_userdevices';
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+    ];
+
 }

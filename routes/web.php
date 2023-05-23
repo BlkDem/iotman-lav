@@ -5,13 +5,35 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RootController;
 use Illuminate\Support\Facades\Auth;
 
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    // return what you want
+});
+
 Route::group(['middleware' => ['auth']], function() {
     /**
     * Logout Route
     */
-    // Route::get('/logout', [LogoutController::class, 'perform']);
     Route::get('/logout', [LoginController::class, 'logout']);
  });
-Route::get('/', [RootController::class, 'index']);
-Route::get('/home', [RootController::class, 'index']);
+
+/**
+ * login route to backend
+ */
+Route::get('/login', [RootController::class, 'index']);
+
+/**
+ * Other vue routes
+ */
+
+//  Route::get('/auth', [RootController::class, 'index']);
+
+
+
+
+/**
+ * Authentication routes
+ */
 Auth::routes();
+
+Route::get('/{vue?}', [RootController::class, 'index'])->where('vue', '[\/\w\.-]*');

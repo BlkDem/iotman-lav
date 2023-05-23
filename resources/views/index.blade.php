@@ -11,27 +11,32 @@
         }
     </script>
     <title>Umolab Devices</title>
-    <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
-
+    <!-- <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
     <!-- * checking and applying Application Theme via asset the specified CSS file
     * All app.css in their folders /css/ThemeFolder/app.css and default theme in /css/app.css
    -->
 
     <?php
-    echo "<script>var _currentTheme=''</script>";
-    $_themeCss = '/css/app.css';
-    $_themed = isset($_GET["theme"]);
-    if ($_themed) {
-        $_themeName = $_GET["theme"];
-        if (file_exists(public_path('/css/' . $_themeName . '/app.css'))) {
-            $_themeCss = '/css/' . $_themeName . '/app.css';
-            echo "<script>_currentTheme='$_themeName'</script>";
-        }
-    }
+    // echo "<script>var _newTheme='Default'</script>";
+    // $_themeCss = '/css/slate/app.css';
+
+    // if (isset($_GET["theme"])) {
+    //     $_themeName = $_GET["theme"];
+    //     if (file_exists(public_path('/css/' . $_themeName . '/app.css'))) {
+    //         $_themeCss = '/css/' . $_themeName . '/app.css';
+    //         // echo("<h1 style='position: absolute; z-index: 1034;'>$_themeCss</h1>");
+    //         echo "<script>_newTheme='$_themeName'</script>";
+    //     }
+    // }
     ?>
 
-    <link rel="stylesheet" href="{{ asset($_themeCss) }}">
+    <?php
+        $_themeCss = '/css/slate/app.css';
+    ?>
+
+    <link rel="stylesheet" id="themeCss" href="{{ asset($_themeCss) }}">
     <style>
         ::-webkit-scrollbar {
             width: 10px;
@@ -51,118 +56,91 @@
             /* background: linear-gradient(to right, rgba(var(--bs-light),.25), rgba(var(--bs-light),.25) 1px,
           rgba(var(--bs-light),.25) 1px, rgba(var(--bs-light),.25)); */
         }
+
+        .font-0_9 {
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 
-<body class="container-fluid">
-    <div id="app" class="container text-center m-20">
-        <Navbar ref="navbar"></Navbar>
-        <Toaster ref="toaster"></Toaster>
-        <device-list ref="DeviceRef"></device-list>
-        <device-type-list ref="DeviceTypeRef"></device-type-list>
-        <device-user-list ref="DeviceUserRef"></device-user-list>
+<body class="container-fluid" style="box-sizing: border-box;">
+
+        <!-- vue mount point -->
+    <div id="app" class="container font-0_9" >
+
     </div>
 
     <!-- Footer -->
-    <footer class="text-center text-lg-start text-muted">
+    <footer class="text-center">
+    <div class="flex-center p-2 border-top border-2 border-secondary">BlkDem for Umolab Group &copy; 2022</div>
         <!-- Section: Social media -->
-        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+        <section class="p-2">
             <!-- Left -->
+      <div class="flex-center icon-social mb-4">
+        <div class="mx-1">
+          <a class="gold" href="https://github.com/BlkDem" target="_blank" v-b-tooltip.hover
+            title="https://github.com/BlkDem">
+            <i class="fa-brands fa-square-github fa-2x" size="2xl"></i>
+          </a>
+        </div>
+        <div class="mx-1">
+          <a class="gold" href="https://linkedin.com/in/blkdem" target="_blank" v-b-tooltip.hover
+            title="https://linkedin.com/in/blkdem">
+                <i class="fa-brands fa-linkedin fa-2x" size="2xl"></i>
+          </a>
+        </div>
+        <div class="mx-1">
+          <a class="gold" href="mailto:blkdem@blkdem.ru" target="_blank" v-b-tooltip.hover title="blkdem@blkdem.ru">
+                <i class="fa-solid fa-square-envelope fa-2x" size="2xl"></i>
+          </a>
+        </div>
+        <div class="mx-1">
+          <a class="gold" href="https://wa.me/79039073355" target="_blank" v-b-tooltip.hover
+            title="+7 903 907-3355 / +90 501 082-0257">
+                <i class="fa-brands fa-square-whatsapp fa-2x" size="2xl"></i>
+          </a>
+        </div>
+        <div class="mx-1">
+          <a class="gold" href="https://t.me/Umolab1" target="_blank" v-b-tooltip.hover title="https://t.me/Umolab1">
+                <i class="fa-brands fa-telegram fa-2x" size="2xl"></i>
+          </a>
+        </div>
+        <div class="mx-1">
+          <a class="gold"
+            href="https://www.google.com/maps/place/36%C2%B053'43.7%22N+30%C2%B042'14.0%22E/@36.895482,30.7013021,17z/data=!3m1!4b1!4m4!3m3!8m2!3d36.895482!4d30.703877"
+            target="_blank" v-b-tooltip.hover title="Antalya, Turkey">
+                <i icon="fa-solid fa-location-crosshairs" size="2xl"></i>
+          </a>
+      </div>
+    </div>
 
             <!-- Right -->
         </section>
         <!-- Section: Social media -->
 
+
+
         <!-- Section: Links  -->
-        <section class="">
-            <div class="container text-center text-md-start mt-5">
-                <!-- Grid row -->
-                <div class="row mt-3">
-                    <!-- Grid column -->
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <!-- Content -->
-
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            <i class="fas fa-gem me-3"></i>Company name
-                        </h6>
-
-                        <p>
-                            Here you can use rows and columns to organize your footer content. Lorem ipsum
-                            dolor sit amet, consectetur adipisicing elit.
-                        </p>
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Products
-                        </h6>
-                        <p>
-                            <a href="#!" class="text-reset">Angular</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">React</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Vue</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Laravel</a>
-                        </p>
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Useful links
-                        </h6>
-                        <p>
-                            <a href="#!" class="text-reset">Pricing</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Settings</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Orders</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Help</a>
-                        </p>
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                        <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
-                        <p>
-                            <i class="fas fa-envelope me-3"></i>
-                            info@example.com
-                        </p>
-                        <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-                        <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
-                    </div>
-                    <!-- Grid column -->
-                </div>
-                <!-- Grid row -->
-            </div>
-        </section>
+        <!-- <section class="mx-4 my-4" style="display: flex; justify-content: center;">
+            <object type="image/svg+xml" data="images/logo/u-logo2.svg" id="object_1" class="icon logo"
+                            style="width: 120px;">
+            </object>
+        </section> -->
         <!-- Section: Links  -->
 
         <!-- Copyright -->
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        <!-- <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
             © 2023 Copyright:
             <a class="text-reset fw-bold" href="https://umolab.ru" target="_blank">Umolab</a>
-        </div>
+        </div> -->
         <!-- Copyright -->
     </footer>
     <!-- Footer -->
-
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>

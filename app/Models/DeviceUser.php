@@ -40,4 +40,10 @@ class DeviceUser extends Model
         'device_id',
         'user_id'
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+    ];
+
 }

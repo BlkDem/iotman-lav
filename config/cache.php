@@ -92,6 +92,13 @@ return [
             'driver' => 'octane',
         ],
 
+        'stores' => [
+            //...
+            'none' => [
+                'driver' => 'null',
+            ],
+        ],
+
     ],
 
     /*

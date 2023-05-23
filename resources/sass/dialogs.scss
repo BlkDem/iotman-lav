@@ -19,16 +19,19 @@
     padding: 0.5rem;
     display: flex;
     align-items: center;
+    backdrop-filter: blur(5px);
     z-index: 1031;
 }
 
 .window {
     //background-color: $dark;
-    background-color: $primary;
+    // background-color: $primary;
     border: 1px solid $secondary;
     border-radius: 10px;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
     max-width: 460px;
+    max-height: 90vh;
+    overflow-y: auto;
     margin-left: auto;
     margin-right: auto;
     padding: 1.6rem;

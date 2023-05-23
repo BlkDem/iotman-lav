@@ -1,357 +1,132 @@
 <template>
-    <div v-show="userDeviceVisible">
-        <!-- <AddDevice ref="addDevice"></AddDevice>
-    <ConfirmDialogue ref="confirmDialogue" /> -->
-        <h1 class="align-left px-4 pb-3" style="margin-top: 5.5rem">
-            User Devices
-        </h1>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
-            <div class="container-fluid">
-                <div class="navbar-collapse" id="navbarColor02">
-                    <ul class="navbar-nav me-auto  d-flex">
-                        <li class="nav-item  d-flex py-1">
-                            <input class="form-control me-sm-2" type="text" placeholder="Search"
-                                v-model="userDevice_filter" />
-                        </li>
-                        <li class="nav-item dropdown me-auto vertical-center">
-                            <a class="nav-link dropdown-toggle mx-2" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">{{ SortName }}</a>
-                            <div class="dropdown-menu w-100">
-                                <a class="dropdown-item" href="#" v-for="rule in sortRules" :key="rule.key"
-                                    :value="rule.key" @click="doSort(rule.key)">{{ rule.title }}</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" @click="
-                    sortDirection = !sortDirection;
-                    doSort(sortColumn);
-                  ">
-                                    {{
-                    sortDirection ? sortOrderStrings[0] : sortOrderStrings[1]
-                  }}
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="d-flex">
-                        <button class="btn btn-primary" @click="compactView = true">
-                            <i class="fas fa-list"></i>
-                        </button>
-                        <button class="btn btn-primary mx-2" @click="compactView = false">
-                            <i class="fas fa-th-large"></i>
-                        </button>
-                        <button class="btn btn-primary" @click="setDevice">
-                            Add Device
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </nav>
+    <div style="margin-top: 5.5rem"></div>
 
-        <div>
-            <h5 class="text-primary my-2">{{ dataDescription }}</h5>
-        </div>
+        <MasterSlaveLayout
+            :layoutCaption="layoutCaption"
+        >
 
-        <div>
-            <!-- <h1>User Devices</h1> -->
-            <div class="row my-2" v-if="!getCompactView">
-                <div class="p-2 col-sm-4 col-xs-4 col-lg-4" v-for="(user_device, key) in filteredUserDevices" v-bind:key="key"
-                    v-bind:id="user_device.id">
-                    <div class="card border-light">
-                        <h3 class="card-header">{{ user_device.device_name }}</h3>
-                        <div class="card-body">
-                            <h5 class="card-title text-info">{{ user_device.device_type_name }}</h5>
-                            <h6 class="card-subtitle text-muted">{{ user_device.device_desc }}</h6>
-                        </div>
-                        <img v-bind:src="user_device.device_type_image">
-                        <div class="card-body">
-                            <p class="card-text">{{ user_device.device_type_desc }}</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Hardware Address HWID: {{ user_device.device_hwid }}</li>
-                            <li class="list-group-item">User Device ID: {{ user_device.id }}</li>
-                        </ul>
-                        <div class="card-body">
-                            <li class="list-group-item">User: {{user_device.user_name}} ({{ user_device.user_id }})</li>
-                        </div>
-                        <div class="card-footer text-muted">
-                            <button class="btn btn-info btn-width-40 mx-1" @click="doEdit(key, device.id)">
-                                <i class="fas fa-edit" aria-hidden="true"></i>
-                                Edit
-                            </button>
+            <template v-slot:master>
 
-                            <button class="btn btn-warning btn-width-40 mx-1" @click="doDelete(key, device.id)">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-            <!-- compact view -->
-    <div v-show="getCompactView" class="my-2">
-      <div
-        class="card border-primary mb-4 w-100"
-        v-for="(user_device, key) in filteredUserDevices"
-        v-bind:key="key"
-        v-bind:id="user_device.id"
-      >
-        <div class="card-header">
-          <div class="row vertical-center">
-            <div class="col-sm-1 col-xs-1 col-lg-1">
-              <img v-bind:src="user_device.device_type_image" class="device-image" />
-            </div>
-            <div class="col-sm-3 col-xs-3 col-lg-3 align-left">
-              <h5>
-                {{ user_device.device_name
-                }}<span class="text-info"> ({{ user_device.id }}) </span>
-              </h5>
-            </div>
-            <div class="col-sm-6 col-xs-6 col-lg-6 align-left">
-              <h6>
-                {{ user_device.device_type_name }}: HWID ({{ user_device.device_hwid }})
-              </h6>
-            </div>
-            <div class="col-sm-2 col-xs-2 col-lg-2 align-right">
-              <button class="btn btn-info mx-2" @click="doEdit(key, user_device.id)">
-                <i class="fas fa-edit" aria-hidden="true"></i>
-              </button>
+                <data-table
+                    :api="users.api"
+                    :dataFields="users.usersFields"
+                    :pageCaption="users.usersCaption"
+                    :selectableRow="true"
+                    :selectedName="users.selectedName"
+                    :readOnly="usersReadOnly"
+                    :isAdditionalCaption="additionalCaption"
+                    @onRowClick="onRowClick">
+                </data-table>
 
-              <button
-                class="btn btn-secondary"
-                @click="doDelete(key, user_device.id)"
-              >
-                <i class="fa fa-trash" aria-hidden="true"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <Paginator ref="paginatorDevices"></Paginator>
+            </template>
+
+            <template v-slot:slave>
+
+                <data-table
+                    :api="userDevices.api"
+                    :dataFields="userDevices.userDevicesFields"
+                    :pageCaption="userDevices.userDevicesCaption"
+                    :isSlave="true"
+                    :foreignValue="userDevices.selectedFkValue"
+                >
+                </data-table>
+
+            </template>
 
 
+        </MasterSlaveLayout>
 
-    </div>
 </template>
 
 <script>
 
-import ConfirmDialogue from "../../components/common/ConfirmDialogue.vue";
-// import AddDevice from "./AddDevice.vue";
-// import DeviceTypesCombo from "../../components/device_types/DeviceTypesCombo.vue";
-import Paginator from "../../components/common/Paginator.vue";
-import UserDeviceStringConstants from "../../components/strings_constants/user_devices/index";
-import MessagesConstants from "../strings_constants/strings.js";
-import APIConstants from "../../rest_api.js";
+import MessagesConstants from '../strings_constants/strings'
+import APIConstants from "../../api/rest_api";
+import DataTable from '../../components/db/DataTable.vue';
+import MasterSlaveLayout from '../../layouts/MasterSlaveLayout.vue';
+import FieldStruct from './FieldStruct';
+import Api from '../../api/ApiStruct';
 
-    export default {
-        components: {
-            ConfirmDialogue,
-    // AddUseDevice,
-    // DeviceTypesCombo,
-            Paginator /*MyMqtt*/,
-        },
+export default {
 
-        data() {
-            return {
-                userDeviceVisible: true,
-                userDevice_filter: "",
-                user_devices: [],
-                filteredUserDevices: [], //filtered array of devices
-                dataDescription: "", //table data description label
-                compactView: true, //copact view mode
-                userDevice_filter: "", //filtering string
-                sortOrderStrings: [
-                    MessagesConstants.SORT_ASC,
-                    MessagesConstants.SORT_DESC,
+    components: {
+        DataTable, MasterSlaveLayout,
+    },
+
+    data() {
+        return {
+
+            //DataSet is readonly
+            usersReadOnly: true,
+
+            //Additional Card Caption
+            additionalCaption: true,
+
+            //Page Caption
+            layoutCaption: MessagesConstants.USER_DEVICES,
+
+            //User`s Devices model
+            userDevices: {
+                userDevicesCaption: MessagesConstants.USER_DEVICES,
+
+                api: { Api },
+
+                userDevicesFields: [
+                    ...FieldStruct.UserDeviceFieldStruct
                 ],
-                sortOrder: MessagesConstants.SORT_ASC,
-                sortDirection: false,
-                userDeviceVisible: false,
-                sortColumn: "user_name",
-                sortRules: [{
-                        key: "user_name",
-                        title: MessagesConstants.SORT_BY_NAME
-                    },
-                    {
-                        key: "user_id",
-                        title: MessagesConstants.SORT_BY_ID
-                    },
+
+                // user_id: 'user_id',
+                // user_id_value: 1,
+
+            },
+
+            //User`s model
+            users: {
+                usersCaption: MessagesConstants.USERS,
+
+                api: { Api },
+
+                usersFields: [
+                    ...FieldStruct.UserFieldStruct
+
                 ],
-            };
-        },
 
-        created() {
-            if (localStorage.UserDeviceCompactView==null) {
-                localStorage.UserDeviceCompactView=this.compactView;
-            }
+                selectedName: 'user_name',
 
-            this.dataDescription=UserDeviceStringConstants.USER_DEVICE_DATA_DESCRIPTION; //device dataset description
-            this.getUserDevices();
-        },
+                //selected album id for child table images
+                selectedFkValue: 0,
 
-        mounted() {
-            if (localStorage.getItem('CompactView')) {
-                this.compactView=(localStorage.getItem('CompactView')==='true');
-            }
-        },
-
-        watch: {
-            userDevice_filter: function () {
-                handler: this.doFilter();
             },
 
-            selectSort: function () {
-                handler: this.doSort();
-            },
 
-            compactView: function () {
-                localStorage.CompactView=this.compactView;
-            },
-        },
+        }
+    },
 
-        computed: {
-            SortName() {
-                let res =
-                this.sortColumn === "id"
-                    ? MessagesConstants.SORT_BY_ID
-                    : MessagesConstants.SORT_BY_NAME;
-                res += " (";
-                res += !this.sortDirection
-                    ? MessagesConstants.SORT_ASC
-                    : MessagesConstants.SORT_DESC;
-                res += ")";
-            return res;
-            },
+    created() {
 
-            getCompactView() {
-                return this.compactView;
-            },
-        },
+        const apiUserDevices = this.userDevices.api
 
-        methods: {
-            doSort($c) {
-                const column=$c;
-                this.sortColumn=column;
-                const order=this.sortDirection;
+        apiUserDevices.get = APIConstants.api_user_devices_read_page
+        apiUserDevices.insert = APIConstants.api_user_device_create
+        apiUserDevices.update = APIConstants.api_user_device_update
+        apiUserDevices.delete = APIConstants.api_user_device_delete
+        apiUserDevices.patch =  APIConstants.api_user_device_patch
 
-                this.filteredUserDevices.sort(function (a, b) {
-                        if (column==="id") {
-                            var nameA=a[column];
-                            var nameB=b[column];
-                        }
+        const apiUsers = this.users.api
 
-                        else {
-                            var nameA=a[column] + "".toUpperCase();
-                            var nameB=b[column] + "".toUpperCase();
-                        }
+        apiUsers.get = APIConstants.api_users_lookup
 
-                        if (order && nameA > nameB) {
-                            return -1;
-                        }
+    },
 
-                        if (order && nameA < nameB) {
-                            return 1;
-                        }
+    methods: {
+        onRowClick(dataEvent) {
+            this.userDevices.selectedFkValue = dataEvent
+        }
+    },
 
-                        if ( !order && nameA < nameB) {
-                            return -1;
-                        }
-
-                        if ( !order && nameA> nameB) {
-                            return 1;
-                        }
-
-                        return 0;
-                    }
-
-                );
-            },
-
-            doFilter() {
-                this.filteredUserDevices=this.user_devices;
-
-                const res=this.filteredUserDevices.filter((user_device)=> {
-                        if (this.userDevice_filter==="") return true;
-                        else return (user_device.device_name .toLowerCase() .indexOf(this.userDevice_filter.toLowerCase()) > -1);
-                    }
-
-                );
-
-                if (this.user_devices.length > res.length) {
-                    this.filteredUserDevices=res;
-                    this.doSort();
-                }
-
-                // return res;
-            },
-
-            //convert 'null' 'undefined' to predefined consts
-            processStrings() {
-                this.filteredUserDevices.forEach((dev, key)=> {
-                        this.filteredUserDevices[key].device_desc=dev.device_desc==null ? MessagesConstants.NO_DESCRIPTION : dev.device_desc;
-                        this.filteredUserDevices[key].device_hwid=dev.device_hwid==null ? DeviceStringConstants.NO_HWID : dev.device_hwid;
-                        // this.filteredUserDevices[key].device_pass=dev.device_hwid==null ? DeviceStringConstants.NO_PASS : dev.device_pass;
-                    }
-
-                );
-            },
-
-            getUserDevices(api_url) {
-                fetch(APIConstants.api_user_devices_read)
-                .then((response) => response.json())
-                .then((response) => {
-                        this.filteredUserDevices = response.data;
-                        this.processStrings();
-                        this.user_devices = this.filteredUserDevices;
-                        this.doSort(this.sortColumn);
-                    }
-                )
-        .catch((err) => console.log(err));
-                },
-            ShowHide(isVisible) {
-                this.userDeviceVisible = isVisible;
-            },
-
-            // getVisible() {
-            //     return this.visible;
-            // }
-        },
-
-    };
-
+};
 </script>
 
-<style lang="scss">
-@import "../../../sass/aligns.scss";
-//@import "../../../sass/lists.scss";
+<style>
 
-.vertical-center {
-    display: flex;
-    align-items: center;
-}
-
-.navbar-nav .dropdown-menu {
-    position: absolute;
-}
-
-.device-image {
-  width: 70px;
-  margin-top: -50%;
-  margin-bottom: -50%;
-  margin-left: -10px;
-  border-radius: 10px;
-  box-shadow: #eee 0px 0px 8px;
-}
-
-@media only screen and (min-width: 320px) and (max-width: 480px) {
-  .device-image {
-    width: 64px;
-    margin-top: -23px;
-    margin-bottom: -29px;
-    margin-left: 210px;
-    border-radius: 10px;
-    box-shadow: #eee 0px 0px 8px;
-  }
-}
 </style>

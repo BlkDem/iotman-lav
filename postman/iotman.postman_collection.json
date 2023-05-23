@@ -1,0 +1,1167 @@
+{
+	"info": {
+		"_postman_id": "d0811ed4-590f-4924-8405-07ba9684c0a5",
+		"name": "iotman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22748462"
+	},
+	"item": [
+		{
+			"name": "devices",
+			"item": [
+				{
+					"name": "Get a devices collection",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/read/",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"read",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a device by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/read/1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"read",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a device",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/create/?device_name=test_ok&device_type_id=2",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"create",
+								""
+							],
+							"query": [
+								{
+									"key": "device_name",
+									"value": "test_ok"
+								},
+								{
+									"key": "device_type_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a device",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/delete/18",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"delete",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a device by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/update/70/?device_name=asdfghjk567&device_type_id=2&device_desc=&device_hwid=&device_pass=",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"update",
+								"70",
+								""
+							],
+							"query": [
+								{
+									"key": "device_name",
+									"value": "asdfghjk567"
+								},
+								{
+									"key": "device_type_id",
+									"value": "2"
+								},
+								{
+									"key": "device_desc",
+									"value": ""
+								},
+								{
+									"key": "device_hwid",
+									"value": ""
+								},
+								{
+									"key": "device_pass",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "micros",
+			"item": [
+				{
+					"name": "Get a micros collection",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/micros/read/",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"micros",
+								"read",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a device by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/read/1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"read",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a device",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/create/?device_name=test_ok&device_type_id=2",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"create",
+								""
+							],
+							"query": [
+								{
+									"key": "device_name",
+									"value": "test_ok"
+								},
+								{
+									"key": "device_type_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a device",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/delete/18",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"delete",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a device by ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/update/1?created_at=2022-08-10T07:27:15.000000Z",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"update",
+								"1"
+							],
+							"query": [
+								{
+									"key": "created_at",
+									"value": "2022-08-10T07:27:15.000000Z"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "device_types",
+			"item": [
+				{
+					"name": "Get a device types collection",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/read/",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"read",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a device types Pager",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/read/page/1/10",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"read",
+								"page",
+								"1",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a device type by ID",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new device type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_type/create/?device_type_name=new device 1&device_type_desc=new device desc 1&device_type_image=image1.jpg",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_type",
+								"create",
+								""
+							],
+							"query": [
+								{
+									"key": "device_type_name",
+									"value": "new device 1"
+								},
+								{
+									"key": "device_type_desc",
+									"value": "new device desc 1"
+								},
+								{
+									"key": "device_type_image",
+									"value": "image1.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a device type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/delete/14",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"delete",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a device type by ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/update/7?device_type_name=new device 1&device_type_desc=new device desc 1&device_type_image=image1.jpg",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"update",
+								"7"
+							],
+							"query": [
+								{
+									"key": "device_type_name",
+									"value": "new device 1"
+								},
+								{
+									"key": "device_type_desc",
+									"value": "new device desc 1"
+								},
+								{
+									"key": "device_type_image",
+									"value": "image1.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch a device type by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_type/patch/17/device_type_name/new device 1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_type",
+								"patch",
+								"17",
+								"device_type_name",
+								"new device 1"
+							],
+							"query": [
+								{
+									"key": "device_type_desc",
+									"value": "new device desc 1",
+									"disabled": true
+								},
+								{
+									"key": "device_type_image",
+									"value": "image1.jpg",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "dev_blogs",
+			"item": [
+				{
+					"name": "Get a dev blogs collection",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/read/",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"read",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a dev blogs Pager",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/read/page/1/10",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"read",
+								"page",
+								"1",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a dev blog by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/dev_blogs/read/1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"dev_blogs",
+								"read",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new dev blog",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/create/?device_type_name=new device 1&device_type_desc=new device desc 1&device_type_image=image1.jpg",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"create",
+								""
+							],
+							"query": [
+								{
+									"key": "device_type_name",
+									"value": "new device 1"
+								},
+								{
+									"key": "device_type_desc",
+									"value": "new device desc 1"
+								},
+								{
+									"key": "device_type_image",
+									"value": "image1.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a dev blog",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/dev_blog/delete/14",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"dev_blog",
+								"delete",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a dev blog by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/dev_blog/update/7?dev_blog_name=new device blog 1&dev_blog_desc=new device blog desc 1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"dev_blog",
+								"update",
+								"7"
+							],
+							"query": [
+								{
+									"key": "dev_blog_name",
+									"value": "new device blog 1"
+								},
+								{
+									"key": "dev_blog_desc",
+									"value": "new device blog desc 1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user_devices",
+			"item": [
+				{
+					"name": "Get a user devices collection",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/user_devices/read",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"user_devices",
+								"read"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a user devices count collection",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get a User Device by ID",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Create a User Device",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "r8kwZW4UScLd2vsB5oBVxWG888dcrkuVYCHa2r8p",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/user_devices/create/?user_device_name=test_name&user_device_pass=test_pass&user_id=2&device_id=1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"user_devices",
+								"create",
+								""
+							],
+							"query": [
+								{
+									"key": "user_device_name",
+									"value": "test_name"
+								},
+								{
+									"key": "user_device_pass",
+									"value": "test_pass"
+								},
+								{
+									"key": "user_id",
+									"value": "2"
+								},
+								{
+									"key": "device_id",
+									"value": "1"
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a User Device",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/delete/8",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"delete",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a User Device",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/update/7?device_type_name=new device 1&device_type_desc=new device desc 1&device_type_image=image1.jpg",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"update",
+								"7"
+							],
+							"query": [
+								{
+									"key": "device_type_name",
+									"value": "new device 1"
+								},
+								{
+									"key": "device_type_desc",
+									"value": "new device desc 1"
+								},
+								{
+									"key": "device_type_image",
+									"value": "image1.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get a users collection",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/read",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"read"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a user by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/devices/read",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"devices",
+								"read"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth userinfo",
+			"item": [
+				{
+					"name": "Userinfo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "HydGStMqt1vsnTFaJ4PTT7n9zO7gmI4QgMFivaYn\n",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/authuser",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"authuser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User sing in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/create/?device_type_name=new device 1&device_type_desc=new device desc 1&device_type_image=image1.jpg",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"create",
+								""
+							],
+							"query": [
+								{
+									"key": "device_type_name",
+									"value": "new device 1"
+								},
+								{
+									"key": "device_type_desc",
+									"value": "new device desc 1"
+								},
+								{
+									"key": "device_type_image",
+									"value": "image1.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "images",
+			"item": [
+				{
+					"name": "Get images collection",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/read/",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"read",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Image Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/maxim/Pictures/blog.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{local}}/image/update_image/6",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"image",
+								"update_image",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patcher",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/maxim/Pictures/blog.jpg",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{local}}/image/patch/6/image_name/123",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"image",
+								"patch",
+								"6",
+								"image_name",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create an image record",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "albums",
+			"item": [
+				{
+					"name": "Get albums collection",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/read/",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"read",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an album by ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_types/update/7?device_type_name=new device 1&device_type_desc=new device desc 1&device_type_image=image1.jpg",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_types",
+								"update",
+								"7"
+							],
+							"query": [
+								{
+									"key": "device_type_name",
+									"value": "new device 1"
+								},
+								{
+									"key": "device_type_desc",
+									"value": "new device desc 1"
+								},
+								{
+									"key": "device_type_image",
+									"value": "image1.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new album",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "npFLOv5yRgtGA4wBhhAtPUnrS7RDXnkAeLtlr6el",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/device_type/create/?device_type_name=new device 1&device_type_desc=new device desc 1&device_type_image=image1.jpg",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"device_type",
+								"create",
+								""
+							],
+							"query": [
+								{
+									"key": "device_type_name",
+									"value": "new device 1"
+								},
+								{
+									"key": "device_type_desc",
+									"value": "new device desc 1"
+								},
+								{
+									"key": "device_type_image",
+									"value": "image1.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

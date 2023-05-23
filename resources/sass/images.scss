@@ -1,0 +1,151 @@
+.mt-55 {
+    margin-top: 5.5rem;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.flex-space {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.flex-center-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.flex-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.flex-left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/*.image-badge {
+    width: 24px;
+    height: 24px;
+    margin-left: -10px;
+}
+
+.logo {
+    display: flex;
+    margin-right: 16px;
+    margin-left: 4px;
+    width: 36px;
+}*/
+
+.device-image {
+    position: relative;
+    height: 1.9rem;
+    border-radius: 5px;
+    border: 0px solid var(--bs-primary);
+    -webkit-transition: width .5s, height .5s, -webkit-transform .5s;
+    transition: width .5s, height .5s, border-color .5s, transform .5s;
+}
+
+.device-image:hover {
+    border: 2px solid var(--bs-secondary);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+}
+
+.card-space {
+    margin-bottom: 00px;
+}
+
+a.a_cap:first-letter {
+    text-transform: uppercase;
+}
+
+.edit-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-width-40 {
+    width: 40%;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.switch-big
+{
+    width: 75px;
+    height: 40px;
+}
+
+.switch-label {
+    height: 40px;
+    font-size: 1.5rem;
+    margin-left: 8px;
+    margin-top: 5px;
+}
+
+.shadow-1 {
+    text-shadow: 1px 1px 1px #333;
+}
+
+
+.vc-title {
+    color: var(--bs-body-color);
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+    .device-image {
+        /*width: 100px;
+        height: 100px;
+         margin-top: -23px;
+        margin-bottom: -32px;*/
+        margin-left: 219px;
+        border-radius: 10px;
+        /*box-shadow: #eee 0px 0px 8px;*/
+    }
+    .card-space {
+        margin-bottom: 20px;
+    }
+    .container {
+        padding: 0;
+        width: 100%;
+    }
+
+    .navbar > .container-fluid {
+        display: flex;
+        flex-wrap: inherit;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .edit-buttons {
+        /* display: flex;*/
+        margin-top: 16px;
+        margin-bottom: 8px;
+        justify-content: flex-start;
+    }
+
+    .flex-right {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+}
