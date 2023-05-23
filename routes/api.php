@@ -41,9 +41,13 @@ use App\Http\Controllers\Helpers\AllModelController;
 */
 
 //Login
-Route::post('/login', [AuthController::class, 'signin']);
+// Route::post('/login', [AuthController::class, 'signin']);
 
-Route::get('/test', [LoggerController::class, 'getLog']);
+// Route::get('/test', [LoggerController::class, 'getLog']);
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 Route::middleware('auth:sanctum')->group( function () {
 

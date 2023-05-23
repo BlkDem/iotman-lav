@@ -1,4 +1,5 @@
 <template>
+
     <h1 class="align-left px-4 pb-1" style="margin-top: 5.5rem">
         <!-- {{ pageCaption }} -->
     </h1>
@@ -76,10 +77,11 @@ import APIConstants from "../api/rest_api";
 import MessagesConstants from "../components/strings_constants/strings.js";
 import ThreeColumnLayout from "../layouts/ThreeColumnLayout.vue";
 import Repository from '../api/repository';
+import Navbar from "../components/header/Navbar.vue";
 
 export default {
 
-    components: {ThreeColumnLayout},
+    components: {ThreeColumnLayout, Navbar},
 
     data() {
 

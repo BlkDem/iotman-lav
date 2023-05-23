@@ -4,6 +4,7 @@ import { createApp } from 'vue';
 import { vue3Debounce } from 'vue-debounce'
 import { SetupCalendar, Calendar, DatePicker } from 'v-calendar';
 import router from './router'
+import store from './store'
 
 import LangCombo from './components/header/LangCombo.vue';
 import App from './components/App.vue';
@@ -24,8 +25,9 @@ window.axios = axios;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.withCredentials = true;
 //
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
+// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
+axios.defaults.baseURL = 'http://localhost:8000'
 
 const app = createApp(App);
 
@@ -52,6 +54,7 @@ app.component('InfoCard', InfoCard);
 app.component('AppMenu', AppMenu);
 
 app.use(router)
+    .use(store)
     .use(SetupCalendar, {})
     .directive('debounce', vue3Debounce({ lock: true }))
     .mount('#app');
