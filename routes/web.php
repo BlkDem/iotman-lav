@@ -6,9 +6,9 @@ use App\Http\Controllers\RootController;
 use Illuminate\Support\Facades\Auth;
 
 
-Route::get('{any}', function () {
-    return view('welcome');
-})->where('any', '.*');
+// Route::get('{any}', function () {
+//     return view('home');
+// })->where('any', '.*');
 
 
 /**
@@ -16,4 +16,4 @@ Route::get('{any}', function () {
  */
 Auth::routes();
 
-// Route::get('/{vue?}', [RootController::class, 'index'])->where('vue', '[\/\w\.-]*');
+Route::get('/{vue?}', [RootController::class, 'index'])->where('vue', '[\/\w\.-]*');
