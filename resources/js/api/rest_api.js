@@ -95,7 +95,7 @@ export default {
     api_images_from_storage: apiPreffix + 'images/get_images/',
 
     //Device Types CRUD
-    api_device_type_create: apiPreffix + 'device_type/create/',
+    api_device_type_create: apiPreffix + 'device_type/create',
     api_device_types_read: apiPreffix + 'device_types/read/',
     api_devices_types_read_page: apiPreffix + 'device_types/read/page/',
     api_device_type_update: apiPreffix + 'device_type/update/',
