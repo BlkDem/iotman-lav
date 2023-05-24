@@ -227,15 +227,41 @@ const routes = [
     visible: false
   },
 
-//   {
-//     path: "/auth/login",
-//     name: "Login",
-//     icon: "fa-solid fa-right-to-bracket",
-//     component: () => import('./views/Login.vue'),
-
-//     ID: "LOGIN",
-//     visible: true
-//   },
+  {
+    name: "login",
+    path: "/login",
+    component: () => import('./components/auth/Login.vue'),
+    meta: {
+        middleware: "guest",
+        title: `Login`
+    }
+  },
+  {
+    name: "register",
+    path: "/auth/register",
+    component: () => import('./components/Auth/Register.vue'),
+    meta: {
+        middleware: "guest",
+        title: `Register`
+    }
+  },
+  {
+    path: "/",
+    component: () => import('./views/Home.vue'),
+    meta: {
+        middleware: "auth"
+    },
+    children: [
+        {
+            name: "dashboard",
+            path: '/',
+            component: () => import('./views/Home.vue'),
+            meta: {
+                title: `Dashboard`
+            }
+        }
+    ]
+}
 
 ];
 

@@ -36,7 +36,8 @@ export default {
         }
     },
 
-    created() {
+    mounted() {
+
         this.readThemes() //loading themes list from file themes.js
         this.currentTheme=(localStorage.Theme != null)?localStorage.Theme:'slate'
     },
@@ -48,6 +49,7 @@ export default {
         },
 
         changeTheme(new_theme) { // changing theme
+            // return
             Themes.setTheme(new_theme)
             if (localStorage.Theme !== new_theme) { //no action if the same theme
                 localStorage.Theme = new_theme; //save a new theme

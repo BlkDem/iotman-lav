@@ -25,10 +25,10 @@ export default {
     ],
 
     setTheme(theme) {
-        const cssId = 'themeCss'; // you could encode the css path itself to generate id..
-        const cssElem = document.getElementById(cssId)
-        const newTheme = ((theme.toLowerCase() !== 'default')&&(theme!=null))?theme:'slate'
-        // console.log()
+        const cssId = 'themeCss';
+        const cssElem = document.getElementById(cssId);
+        if (cssElem === null) return;
+        const newTheme = ((theme.toLowerCase() !== 'default')&&(theme!=null))?theme:'slate';
         const head = document.getElementsByTagName('head')[0];
         const link = document.createElement('link');
         link.id = cssId;
