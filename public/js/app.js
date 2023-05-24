@@ -24137,9 +24137,21 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       styleCSS: '/css/vapor/app.css'
+      // userAuth: this.$store.state.auth.authenticated,
+      // user: {
+      //     authentificated: false,
+      // }
     };
   },
+
   emits: ['newLangUp'],
+  computed: {
+    userAuth: function userAuth() {
+      return this.$store.state.auth.authenticated;
+    } // user () {
+    //     return this.$store.state.count
+    // }
+  },
   methods: {
     newLang: function newLang(event) {
       if (this.$refs.appMenu != null) this.$refs.appMenu.setLang(event);
@@ -24179,7 +24191,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       // themeCaption: 'Theme' //binded theme caption preffix
     };
   },
-  created: function created() {
+  mounted: function mounted() {
     this.readThemes(); //loading themes list from file themes.js
     this.currentTheme = localStorage.Theme != null ? localStorage.Theme : 'slate';
   },
@@ -24190,6 +24202,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     changeTheme: function changeTheme(new_theme) {
       // changing theme
+      return;
       _themes_js__WEBPACK_IMPORTED_MODULE_0__["default"].setTheme(new_theme);
       if (localStorage.Theme !== new_theme) {
         //no action if the same theme
@@ -24354,7 +24367,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       logBlockCaption: undefined,
       margins: 2,
       devBlogs: [],
-      logRecords: []
+      logRecords: [],
+      logTimer: 0
     };
   },
   created: function created() {
@@ -24368,7 +24382,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     this.informationBlockCaption = (_MessagesConstants$in = _components_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_1__["default"].informationBlockCaption) !== null && _MessagesConstants$in !== void 0 ? _MessagesConstants$in : 'Information';
     this.logBlockCaption = (_MessagesConstants$lo = _components_strings_constants_strings_js__WEBPACK_IMPORTED_MODULE_1__["default"].logBlockCaption) !== null && _MessagesConstants$lo !== void 0 ? _MessagesConstants$lo : 'Log';
     this.getBlogData();
-    setInterval(function () {
+    this.logTimer = setInterval(function () {
       _this.getLogData();
     }, 5000);
     this.getLogData();
@@ -24378,6 +24392,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     this.emitter.on("new-lang", function (_lang) {
       _this2.setLang(_lang);
     });
+  },
+  beforeUnmount: function beforeUnmount() {
+    clearInterval(this.logTimer);
   },
   methods: {
     getLogPretty: function getLogPretty(data) {
@@ -24895,6 +24912,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
+  key: 0,
   "class": "navbar navbar-expand-lg fixed-top navbar-dark bg-primary"
 };
 var _hoisted_2 = {
@@ -24936,7 +24954,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ThemeCombo = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ThemeCombo");
   var _component_LangCombo = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LangCombo");
   var _component_UserMenu = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("UserMenu");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <a class=\"logo\" href=\"/\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <object type=\"image/svg+xml\" data=\"images/logo/u4.svg\" id=\"object_1\" class=\"icon logo\"\r\n                    >\r\n                </object> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" </a> "), _cache[0] || ((0,vue__WEBPACK_IMPORTED_MODULE_0__.setBlockTracking)(-1), _cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Logo, {
+  return $options.userAuth ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, _cache[0] || ((0,vue__WEBPACK_IMPORTED_MODULE_0__.setBlockTracking)(-1), _cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Logo, {
     "class": "logo"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.setBlockTracking)(1), _cache[0]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AppMenu, {
     ref: "appMenu"
@@ -24946,7 +24964,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     ref: "langCombo"
   }, null, 512 /* NEED_PATCH */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_UserMenu, {
     ref: "userMenu"
-  }, null, 512 /* NEED_PATCH */)])])])]);
+  }, null, 512 /* NEED_PATCH */)])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),
@@ -24993,7 +25011,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         $options.changeTheme(theme);
       }
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(theme), 9 /* TEXT, PROPS */, _hoisted_4);
-  }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dropdown-divider\"></div>\r\n            <a class=\"dropdown-item\" href=\"#\" @click=\"changeTheme('slate')\">slate</a> ")])]);
+  }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dropdown-divider\"></div>\n            <a class=\"dropdown-item\" href=\"#\" @click=\"changeTheme('slate')\">slate</a> ")])]);
 }
 
 /***/ }),
@@ -26237,7 +26255,7 @@ var routes = [{
   }
 }, {
   name: "register",
-  path: "/register",
+  path: "/auth/register",
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_components_Auth_Register_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Auth/Register.vue */ "./resources/js/components/Auth/Register.vue"));
   },
@@ -33754,7 +33772,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\r\n    /* @import \"../../../sass/images.scss\"; */\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n    /* @import \"../../../sass/images.scss\"; */\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -33802,7 +33820,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.list-move[data-v-63cd6604],\r\n.list-enter-active[data-v-63cd6604],\r\n.list-leave-active[data-v-63cd6604] {\r\n  transition: all 0.5s ease;\n}\n.list-enter-from[data-v-63cd6604],\r\n.list-leave-to[data-v-63cd6604] {\r\n  opacity: 0;\r\n  transform: translateY(80px);\n}\n.list-leave-active[data-v-63cd6604] {\r\n  position: absolute;\n}\n.fix-height-200px[data-v-63cd6604] {\r\n    max-height: 128px;\r\n    overflow-y: auto;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.list-move[data-v-63cd6604],\n.list-enter-active[data-v-63cd6604],\n.list-leave-active[data-v-63cd6604] {\n  transition: all 0.5s ease;\n}\n.list-enter-from[data-v-63cd6604],\n.list-leave-to[data-v-63cd6604] {\n  opacity: 0;\n  transform: translateY(80px);\n}\n.list-leave-active[data-v-63cd6604] {\n  position: absolute;\n}\n.fix-height-200px[data-v-63cd6604] {\n    max-height: 128px;\n    overflow-y: auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

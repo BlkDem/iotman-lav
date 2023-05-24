@@ -1,17 +1,12 @@
 <template>
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <nav v-if="userAuth" class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <!-- <a class="logo" href="/"> -->
-                <!-- <object type="image/svg+xml" data="images/logo/u4.svg" id="object_1" class="icon logo"
-                    >
-                </object> -->
-            <!-- </a> -->
-            <Logo class="logo" v-once/>
 
+            <Logo class="logo" v-once/>
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
@@ -46,11 +41,24 @@ export default {
     data() {
         return {
             styleCSS: '/css/vapor/app.css',
+            // userAuth: this.$store.state.auth.authenticated,
+            // user: {
+            //     authentificated: false,
+            // }
         }
 
     },
 
     emits: ['newLangUp'],
+
+    computed: {
+        userAuth() {
+            return this.$store.state.auth.authenticated
+        },
+        // user () {
+        //     return this.$store.state.count
+        // }
+    },
 
     methods: {
         newLang(event)

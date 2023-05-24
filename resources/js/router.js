@@ -238,7 +238,7 @@ const routes = [
   },
   {
     name: "register",
-    path: "/register",
+    path: "/auth/register",
     component: () => import('./components/Auth/Register.vue'),
     meta: {
         middleware: "guest",

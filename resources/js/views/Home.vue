@@ -95,6 +95,7 @@ export default {
             devBlogs: [],
 
             logRecords: [],
+            logTimer: 0
         }
     },
 
@@ -107,7 +108,7 @@ export default {
 
         this.getBlogData();
 
-        setInterval(() => {
+        this.logTimer = setInterval(() => {
             this.getLogData();
         }, 5000)
 
@@ -120,6 +121,10 @@ export default {
         this.emitter.on("new-lang", _lang => {
             this.setLang(_lang);
         });
+    },
+
+    beforeUnmount() {
+        clearInterval(this.logTimer)
     },
 
     methods: {

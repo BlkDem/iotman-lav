@@ -24,6 +24,8 @@ return [
 
     'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS',
     'localhost,
+    dev.umolab.ru,
+    iotman.blkdem.ru,
     http://localhost,
     http://localhost:8000,
     localhost:3000,
