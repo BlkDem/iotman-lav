@@ -24202,7 +24202,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     changeTheme: function changeTheme(new_theme) {
       // changing theme
-      return;
+      // return
       _themes_js__WEBPACK_IMPORTED_MODULE_0__["default"].setTheme(new_theme);
       if (localStorage.Theme !== new_theme) {
         //no action if the same theme
@@ -26395,10 +26395,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   Themes: ['cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'lux', 'materia', 'minty', 'morph', 'quartz', 'pulse', 'sandstone', 'simplex', 'sketchy', 'slate', 'solar', 'superhero', 'united', 'vapor', 'yeti', 'zephyr'],
   setTheme: function setTheme(theme) {
-    var cssId = 'themeCss'; // you could encode the css path itself to generate id..
+    var cssId = 'themeCss';
     var cssElem = document.getElementById(cssId);
+    if (cssElem === null) return;
     var newTheme = theme.toLowerCase() !== 'default' && theme != null ? theme : 'slate';
-    // console.log()
     var head = document.getElementsByTagName('head')[0];
     var link = document.createElement('link');
     link.id = cssId;

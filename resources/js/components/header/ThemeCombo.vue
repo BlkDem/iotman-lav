@@ -49,7 +49,7 @@ export default {
         },
 
         changeTheme(new_theme) { // changing theme
-            return
+            // return
             Themes.setTheme(new_theme)
             if (localStorage.Theme !== new_theme) { //no action if the same theme
                 localStorage.Theme = new_theme; //save a new theme
