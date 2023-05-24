@@ -9,7 +9,7 @@ export default {
         read: apiPreffix +       'presets/read/',
         group: apiPreffix +      'presets/group/',
         get: apiPreffix +        'presets/read/page/',
-        insert: apiPreffix +     'preset/create/',
+        insert: apiPreffix +     'preset/create',
         update: apiPreffix +     'preset/update/',
         delete: apiPreffix +     'preset/delete/',
         patch: apiPreffix +      'preset/patch/',
@@ -17,7 +17,7 @@ export default {
 
     //Micros CRUD group
     micros: {
-        insert: apiPreffix +     'micro/create/',
+        insert: apiPreffix +     'micro/create',
         read: apiPreffix +       'micros/read/',
         get: apiPreffix +        'micros/read/page/',
         update: apiPreffix +     'micro/update/',
@@ -27,7 +27,7 @@ export default {
 
     //Micro Params CRUD group
     micro_params: {
-        insert: apiPreffix + 'micro_param/create/',
+        insert: apiPreffix + 'micro_param/create',
         read: apiPreffix +   'micro_params/read/',
         get: apiPreffix +    'micro_params/read/page/',
         update: apiPreffix + 'micro_param/update/',
@@ -37,7 +37,7 @@ export default {
 
     //Param Types CRUD group
     param_types: {
-        insert: apiPreffix +     'param_type/create/',
+        insert: apiPreffix +     'param_type/create',
         read: apiPreffix +       'param_types/read/',
         get: apiPreffix +        'param_types/read/page/',
         update: apiPreffix +     'param_type/update/',
@@ -46,7 +46,7 @@ export default {
     },
 
     //Device Micros CRUD
-    api_device_micro_create: apiPreffix +     'device_micro/create/',
+    api_device_micro_create: apiPreffix +     'device_micro/create',
     api_device_micros_read: apiPreffix +      'device_micros/read/',
     api_device_micros_read_page: apiPreffix + 'device_micros/read/page/',
     api_device_micro_update: apiPreffix +     'device_micro/update/',
@@ -55,7 +55,7 @@ export default {
     api_device_micro_dash: apiPreffix +       'device_micro/dash/',
 
     //DevBlogs CRUD
-    api_dev_blog_create: apiPreffix +    'dev_blog/create/',
+    api_dev_blog_create: apiPreffix +    'dev_blog/create',
     api_dev_blogs_read: apiPreffix +      'dev_blogs/read/',
     api_dev_blogs_read_page: apiPreffix + 'dev_blogs/read/page/',
     api_dev_blog_update: apiPreffix +     'dev_blog/update/',
@@ -64,7 +64,7 @@ export default {
     api_dev_blog_days: apiPreffix +      'dev_blog/daysofthemonth/',
 
     //Logs CRUD
-    api_log_create: apiPreffix +     'log/create/',
+    api_log_create: apiPreffix +     'log/create',
     api_logs_read: apiPreffix +      'logs/read/',
     api_logs_read_page: apiPreffix + 'logs/read/page/',
     api_log_update: apiPreffix +     'log/update/',
@@ -72,7 +72,7 @@ export default {
     api_log_patch: apiPreffix +      'log/patch/',
 
     //Albums CRUD
-    api_album_create: apiPreffix + 'album/create/',
+    api_album_create: apiPreffix + 'album/create',
     api_albums_read: apiPreffix + 'albums/read/',
     api_albums_lookup: apiPreffix + 'albums/lookup/',
     api_albums_read_page: apiPreffix + 'albums/read/page/',
@@ -81,7 +81,7 @@ export default {
     api_album_patch: apiPreffix +      'album/patch/',
 
     //Images CRUD + management
-    api_image_create: apiPreffix + 'image/create/',
+    api_image_create: apiPreffix + 'image/create',
     api_images_read: apiPreffix + 'images/read/',
     api_images_read_page: apiPreffix + 'images/read/page/',
     api_image_update: apiPreffix + 'image/update/',
@@ -103,7 +103,7 @@ export default {
     api_device_type_delete: apiPreffix + 'device_type/delete/',
 
     //Devices CRUD
-    api_device_create: apiPreffix + 'devices/create/',
+    api_device_create: apiPreffix + 'devices/create',
     api_devices_read: apiPreffix + 'devices/read/',
     api_devices_read_page: apiPreffix + 'devices/read/page/',
     api_devices_lookup: apiPreffix + 'devices/lookup/',
@@ -112,7 +112,7 @@ export default {
     api_device_patch: apiPreffix +      'device/patch/',
 
     //User Devices CRUD
-    api_user_device_create: apiPreffix + 'user_device/create/',
+    api_user_device_create: apiPreffix + 'user_device/create',
     api_user_devices_read: apiPreffix + 'user_devices/read/',
     api_user_devices_read_page: apiPreffix + 'user_devices/read/page/',
     api_user_device_update: apiPreffix + 'user_device/update/',
@@ -120,7 +120,7 @@ export default {
     api_user_device_patch: apiPreffix +      'user_device/patch/',
 
     //User Roles CRUD
-    api_user_role_create: apiPreffix +     'user_role/create/',
+    api_user_role_create: apiPreffix +     'user_role/create',
     api_user_roles_read: apiPreffix +      'user_roles/read/',
     api_user_roles_read_page: apiPreffix + 'user_roles/read/page/',
     api_user_roles_user: apiPreffix +    'user_roles/user/',
@@ -129,7 +129,7 @@ export default {
     // api_user_role_patch: apiPreffix +      'user_role/patch/',
 
     //Roles CRUD
-    api_role_create: apiPreffix +     'role/create/',
+    api_role_create: apiPreffix +     'role/create',
     api_roles_read: apiPreffix +      'roles/read/',
     api_role_getinfo: apiPreffix +    'role/read/',
     api_roles_read_page: apiPreffix + 'roles/read/page/',
@@ -139,7 +139,7 @@ export default {
     api_role_patch: apiPreffix +      'role/patch/',
 
     //Permissions CRUD
-    api_permission_create: apiPreffix +     'permission/create/',
+    api_permission_create: apiPreffix +     'permission/create',
     api_permissions_read: apiPreffix +      'permissions/read/',
     api_permission_getinfo: apiPreffix +    'permission/read/',
     api_permissions_read_page: apiPreffix + 'permissions/read/page/',
@@ -149,7 +149,7 @@ export default {
     api_permission_patch: apiPreffix +      'permission/patch/',
 
     //Users CRUD
-    api_user_create: apiPreffix + 'user/create/',
+    api_user_create: apiPreffix + 'user/create',
     api_users_read: apiPreffix + 'users/read/',
     api_user_getinfo: apiPreffix + 'user/read/',
     api_users_read_page: apiPreffix + 'users/read/page/',
