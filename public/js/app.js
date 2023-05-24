@@ -25011,7 +25011,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         $options.changeTheme(theme);
       }
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(theme), 9 /* TEXT, PROPS */, _hoisted_4);
-  }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dropdown-divider\"></div>\n            <a class=\"dropdown-item\" href=\"#\" @click=\"changeTheme('slate')\">slate</a> ")])]);
+  }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dropdown-divider\"></div>\r\n            <a class=\"dropdown-item\" href=\"#\" @click=\"changeTheme('slate')\">slate</a> ")])]);
 }
 
 /***/ }),
@@ -25811,7 +25811,8 @@ window.axios.defaults.withCredentials = true;
 //
 // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
-(axios__WEBPACK_IMPORTED_MODULE_16___default().defaults.baseURL) = 'http://localhost:8000';
+// axios.defaults.baseURL = 'http://localhost:8000'
+
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)(_components_App_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
 app.config.globalProperties.emitter = emitter;
 app.component('Calendar', v_calendar__WEBPACK_IMPORTED_MODULE_3__.Calendar);
@@ -33772,7 +33773,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n    /* @import \"../../../sass/images.scss\"; */\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\r\n    /* @import \"../../../sass/images.scss\"; */\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -33820,7 +33821,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.list-move[data-v-63cd6604],\n.list-enter-active[data-v-63cd6604],\n.list-leave-active[data-v-63cd6604] {\n  transition: all 0.5s ease;\n}\n.list-enter-from[data-v-63cd6604],\n.list-leave-to[data-v-63cd6604] {\n  opacity: 0;\n  transform: translateY(80px);\n}\n.list-leave-active[data-v-63cd6604] {\n  position: absolute;\n}\n.fix-height-200px[data-v-63cd6604] {\n    max-height: 128px;\n    overflow-y: auto;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.list-move[data-v-63cd6604],\r\n.list-enter-active[data-v-63cd6604],\r\n.list-leave-active[data-v-63cd6604] {\r\n  transition: all 0.5s ease;\n}\n.list-enter-from[data-v-63cd6604],\r\n.list-leave-to[data-v-63cd6604] {\r\n  opacity: 0;\r\n  transform: translateY(80px);\n}\n.list-leave-active[data-v-63cd6604] {\r\n  position: absolute;\n}\n.fix-height-200px[data-v-63cd6604] {\r\n    max-height: 128px;\r\n    overflow-y: auto;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
