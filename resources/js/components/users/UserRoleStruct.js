@@ -1,3 +1,5 @@
+import APIConstants from '../../api/rest_api'
+
 export default {
     FieldStruct: [
         {
@@ -22,25 +24,41 @@ export default {
             columnsCount: 1
         },
 
-        {
-            fieldName: 'name',
-            fieldCaption: 'Name',
-            type: String,
-            isImage: false,
-            isSortable: true,
-            isHighLight: false,
-            columnsCount: 4
-        },
+        // {
+        //     fieldName: 'name',
+        //     fieldCaption: 'Name',
+        //     type: String,
+        //     isImage: false,
+        //     isSortable: true,
+        //     isHighLight: false,
+        //     columnsCount: 4
+        // },
 
         {
-            fieldName: 'slug',
-            fieldCaption: 'Slug',
+            fieldName: 'role_id',
+            displayName: 'name',
+            fieldCaption: 'Role',
             type: String,
             isImage: false,
+            isEditable: false,
             isSortable: true,
             isHighLight: false,
-            columnsCount: 4
+            columnsCount: 8,
+            lookupId: 'role_id',
+            lookupApi: APIConstants.api_user_roles_lookup,
+            isLookup: true,
         },
+
+
+        // {
+        //     fieldName: 'slug',
+        //     fieldCaption: 'Slug',
+        //     type: String,
+        //     isImage: false,
+        //     isSortable: true,
+        //     isHighLight: false,
+        //     columnsCount: 4
+        // },
 
     ]
 }

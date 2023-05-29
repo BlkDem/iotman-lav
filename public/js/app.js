@@ -25722,6 +25722,7 @@ var APIVersion = 1;
   api_user_role_create: apiPreffix + 'user_role/create',
   api_user_roles_read: apiPreffix + 'user_roles/read/',
   api_user_roles_read_page: apiPreffix + 'user_roles/read/page/',
+  api_user_roles_lookup: apiPreffix + 'user_roles/lookup/',
   api_user_roles_user: apiPreffix + 'user_roles/user/',
   api_user_role_update: apiPreffix + 'user_role/update/',
   api_user_role_delete: apiPreffix + 'user_role/delete/',
@@ -26203,7 +26204,7 @@ var routes = [{
     name: "User Roles",
     icon: "fa-solid fa-universal-access",
     component: function component() {
-      return __webpack_require__.e(/*! import() */ "resources_js_components_users_UserAccess_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/users/UserAccess.vue */ "./resources/js/components/users/UserAccess.vue"));
+      return __webpack_require__.e(/*! import() */ "resources_js_components_users_UserRoles_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/users/UserRoles.vue */ "./resources/js/components/users/UserRoles.vue"));
     },
     ID: "USERROLES",
     visible: true
@@ -26405,7 +26406,8 @@ __webpack_require__.r(__webpack_exports__);
     link.id = cssId;
     link.rel = 'stylesheet';
     link.type = 'text/css';
-    link.href = '/css/' + newTheme + '/app.css';
+    // link.href = '/css/' + newTheme + '/app.css';
+    link.href = "/css/".concat(newTheme, "/app.css");
     link.media = 'all';
     head.appendChild(link);
     cssElem.remove();
@@ -75082,7 +75084,7 @@ function useRoute() {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_device_types_DeviceTypes_vue":1,"resources_js_components_devices_Devices_vue":1,"resources_js_components_device_micros_DeviceMicros_vue":1,"resources_js_components_device_micros_ParamTypes_vue":1,"resources_js_components_micros_Micros_vue":1,"resources_js_components_user_devices_UserDevices_vue":1,"resources_js_components_imagelib_albums_Albums_vue":1,"resources_js_components_imagelib_images_Images_vue":1,"resources_js_components_users_Users_vue":1,"resources_js_components_users_Roles_vue":1,"resources_js_components_users_Permissions_vue":1,"resources_js_components_users_UserAccess_vue":1,"resources_js_components_users_UserInfo_vue":1,"resources_js_components_presets_Presets_vue":1,"resources_js_components_blog_Blog_vue":1,"resources_js_views_Dash_vue":1,"resources_js_components_auth_Login_vue":1,"resources_js_components_Auth_Register_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_device_types_DeviceTypes_vue":1,"resources_js_components_devices_Devices_vue":1,"resources_js_components_device_micros_DeviceMicros_vue":1,"resources_js_components_device_micros_ParamTypes_vue":1,"resources_js_components_micros_Micros_vue":1,"resources_js_components_user_devices_UserDevices_vue":1,"resources_js_components_imagelib_albums_Albums_vue":1,"resources_js_components_imagelib_images_Images_vue":1,"resources_js_components_users_Users_vue":1,"resources_js_components_users_Roles_vue":1,"resources_js_components_users_Permissions_vue":1,"resources_js_components_users_UserRoles_vue":1,"resources_js_components_users_UserInfo_vue":1,"resources_js_components_presets_Presets_vue":1,"resources_js_components_blog_Blog_vue":1,"resources_js_views_Dash_vue":1,"resources_js_components_auth_Login_vue":1,"resources_js_components_Auth_Register_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

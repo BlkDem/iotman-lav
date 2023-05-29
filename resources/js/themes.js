@@ -34,7 +34,8 @@ export default {
         link.id = cssId;
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = '/css/' + newTheme + '/app.css';
+        // link.href = '/css/' + newTheme + '/app.css';
+        link.href = `/css/${newTheme}/app.css`;
         link.media = 'all';
         head.appendChild(link);
         cssElem.remove();

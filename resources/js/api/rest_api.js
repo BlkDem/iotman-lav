@@ -123,6 +123,7 @@ export default {
     api_user_role_create: apiPreffix +     'user_role/create',
     api_user_roles_read: apiPreffix +      'user_roles/read/',
     api_user_roles_read_page: apiPreffix + 'user_roles/read/page/',
+    api_user_roles_lookup: apiPreffix +    'user_roles/lookup/',
     api_user_roles_user: apiPreffix +    'user_roles/user/',
     api_user_role_update: apiPreffix +     'user_role/update/',
     api_user_role_delete: apiPreffix +     'user_role/delete/',

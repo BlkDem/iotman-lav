@@ -77,6 +77,21 @@ class UserAccessController extends BaseController
     }
 
     /**
+     * Display a listing of the resource with names.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexLookup()
+    {
+        $res = UserRole::userRolesLookup()->get();
+
+        $paginator = PaginatorController::Paginate($res->count(), 1, 1);
+
+        return $this->sendResponse($res, "User Roles Lookup List", $paginator);
+
+    }
+
+    /**
      * page - Getting scoped recordset
      *
      * @param  int $currentPage
