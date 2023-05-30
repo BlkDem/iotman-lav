@@ -2932,18 +2932,7 @@ __webpack_require__.r(__webpack_exports__);
     isSortable: true,
     isHighLight: true,
     columnsCount: 1
-  },
-  // {
-  //     fieldName: 'name',
-  //     fieldCaption: 'Name',
-  //     type: String,
-  //     isImage: false,
-  //     isSortable: true,
-  //     isHighLight: false,
-  //     columnsCount: 4
-  // },
-
-  {
+  }, {
     fieldName: 'role_id',
     displayName: 'name',
     fieldCaption: 'Role',

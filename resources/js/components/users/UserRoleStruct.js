@@ -24,16 +24,6 @@ export default {
             columnsCount: 1
         },
 
-        // {
-        //     fieldName: 'name',
-        //     fieldCaption: 'Name',
-        //     type: String,
-        //     isImage: false,
-        //     isSortable: true,
-        //     isHighLight: false,
-        //     columnsCount: 4
-        // },
-
         {
             fieldName: 'role_id',
             displayName: 'name',
