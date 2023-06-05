@@ -25807,8 +25807,8 @@ __webpack_require__.r(__webpack_exports__);
 var emitter = (0,mitt__WEBPACK_IMPORTED_MODULE_15__["default"])();
 
 window.axios = (axios__WEBPACK_IMPORTED_MODULE_16___default());
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.withCredentials = true;
+(axios__WEBPACK_IMPORTED_MODULE_16___default().defaults.headers.common["X-Requested-With"]) = 'XMLHttpRequest';
+(axios__WEBPACK_IMPORTED_MODULE_16___default().defaults.withCredentials) = true;
 //
 // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
@@ -26204,7 +26204,7 @@ var routes = [{
     name: "User Roles",
     icon: "fa-solid fa-universal-access",
     component: function component() {
-      return __webpack_require__.e(/*! import() */ "resources_js_components_users_UserRoles_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/users/UserRoles.vue */ "./resources/js/components/users/UserRoles.vue"));
+      return __webpack_require__.e(/*! import() */ "resources_js_components_users_UserAccess_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/users/UserAccess.vue */ "./resources/js/components/users/UserAccess.vue"));
     },
     ID: "USERROLES",
     visible: true
@@ -33751,7 +33751,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.str0[data-v-60e9ac92] {\r\n    stroke: var(--bs-white);\r\n    stroke-opacity: 0.5;\r\n    stroke-width: 30.55;\r\n    stroke-miterlimit: 22.9256\n}\n.str1[data-v-60e9ac92] {\r\n    stroke: var(--bs-white);\r\n    stroke-opacity: 0.5;\r\n    stroke-width: 15.28;\r\n    stroke-linejoin: bevel;\r\n    stroke-miterlimit: 22.9256\n}\r\n\r\n/* .fil0 {fill:none} */\r\n/* .fil0 {fill:var(--bs-dark);fill-rule:nonzero} */\n.fil1[data-v-60e9ac92] {\r\n    /* fill: var(--bs-dark); */\r\n    fill:url(#linear-gradient);\r\n    /* fill-opacity: 0.1; */\r\n    fill-rule: nonzero\n}\n.fil0[data-v-60e9ac92] {\r\n    /* fill: var(--bs-dark); */\r\n    fill:url(#radial-gradient);\r\n    /* fill-opacity: 0.1; */\r\n    fill-rule: nonzero\n}\n.logo[data-v-60e9ac92] {\r\n    display: flex;\r\n    margin-right: 16px;\r\n    margin-left: 4px;\r\n    width: 36px;\n}\r\n\r\n/* .fil1 {fill:var(--bs-dark);fill-rule:nonzero} */\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.str0[data-v-60e9ac92] {\n    stroke: var(--bs-white);\n    stroke-opacity: 0.5;\n    stroke-width: 30.55;\n    stroke-miterlimit: 22.9256\n}\n.str1[data-v-60e9ac92] {\n    stroke: var(--bs-white);\n    stroke-opacity: 0.5;\n    stroke-width: 15.28;\n    stroke-linejoin: bevel;\n    stroke-miterlimit: 22.9256\n}\n\n/* .fil0 {fill:none} */\n/* .fil0 {fill:var(--bs-dark);fill-rule:nonzero} */\n.fil1[data-v-60e9ac92] {\n    /* fill: var(--bs-dark); */\n    fill:url(#linear-gradient);\n    /* fill-opacity: 0.1; */\n    fill-rule: nonzero\n}\n.fil0[data-v-60e9ac92] {\n    /* fill: var(--bs-dark); */\n    fill:url(#radial-gradient);\n    /* fill-opacity: 0.1; */\n    fill-rule: nonzero\n}\n.logo[data-v-60e9ac92] {\n    display: flex;\n    margin-right: 16px;\n    margin-left: 4px;\n    width: 36px;\n}\n\n/* .fil1 {fill:var(--bs-dark);fill-rule:nonzero} */\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -75084,7 +75084,7 @@ function useRoute() {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_device_types_DeviceTypes_vue":1,"resources_js_components_devices_Devices_vue":1,"resources_js_components_device_micros_DeviceMicros_vue":1,"resources_js_components_device_micros_ParamTypes_vue":1,"resources_js_components_micros_Micros_vue":1,"resources_js_components_user_devices_UserDevices_vue":1,"resources_js_components_imagelib_albums_Albums_vue":1,"resources_js_components_imagelib_images_Images_vue":1,"resources_js_components_users_Users_vue":1,"resources_js_components_users_Roles_vue":1,"resources_js_components_users_Permissions_vue":1,"resources_js_components_users_UserRoles_vue":1,"resources_js_components_users_UserInfo_vue":1,"resources_js_components_presets_Presets_vue":1,"resources_js_components_blog_Blog_vue":1,"resources_js_views_Dash_vue":1,"resources_js_components_auth_Login_vue":1,"resources_js_components_Auth_Register_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_device_types_DeviceTypes_vue":1,"resources_js_components_devices_Devices_vue":1,"resources_js_components_device_micros_DeviceMicros_vue":1,"resources_js_components_device_micros_ParamTypes_vue":1,"resources_js_components_micros_Micros_vue":1,"resources_js_components_user_devices_UserDevices_vue":1,"resources_js_components_imagelib_albums_Albums_vue":1,"resources_js_components_imagelib_images_Images_vue":1,"resources_js_components_users_Users_vue":1,"resources_js_components_users_Roles_vue":1,"resources_js_components_users_Permissions_vue":1,"resources_js_components_users_UserAccess_vue":1,"resources_js_components_users_UserInfo_vue":1,"resources_js_components_presets_Presets_vue":1,"resources_js_components_blog_Blog_vue":1,"resources_js_views_Dash_vue":1,"resources_js_components_auth_Login_vue":1,"resources_js_components_Auth_Register_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

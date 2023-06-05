@@ -153,79 +153,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/SortComp.vue?vue&type=script&lang=js":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/SortComp.vue?vue&type=script&lang=js ***!
-  \******************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../strings_constants/strings */ "./resources/js/components/strings_constants/strings.js");
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {
-    sortDataFields: {
-      type: Array
-    }
-  },
-  emits: ["updateSortedData"],
-  data: function data() {
-    return {
-      sortOrderStrings: [_strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SORT_ASC, _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SORT_DESC],
-      sortOrder: _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SORT_ASC,
-      sortDirection: false,
-      sortColumn: undefined
-    };
-  },
-  computed: {
-    sortName: function sortName() {
-      //combine elements to the caption string
-      return this.sortingCaption(this.sortColumn.fieldCaption);
-    }
-  },
-  created: function created() {
-    //set the default sort field
-    this.sortColumn = this.sortDataFields[0].isSortable ? this.sortDataFields[0] : this.sortDataFields[1];
-  },
-  methods: {
-    //strings processing
-    sortingCaption: function sortingCaption(column) {
-      var res = "";
-      switch (column) {
-        case 'ID':
-          res = _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SORT_BY_ID;
-          break;
-        case 'Name':
-          res = _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SORT_BY_NAME;
-          break;
-        case 'Description':
-          res = _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SORT_BY_DESCRIPTION;
-          break;
-        default:
-          res = _strings_constants_strings__WEBPACK_IMPORTED_MODULE_0__["default"].SORT_BY + column;
-          break;
-      }
-      return res;
-    },
-    //chage sort direction ASC / DESC
-    changeDirection: function changeDirection() {
-      this.sortDirection = !this.sortDirection;
-      this.doSort(this.sortColumn, this.sortDirection);
-    },
-    //send a sort message
-    doSort: function doSort(column, direction) {
-      this.sortColumn = column;
-      this.sortDirection = direction;
-      this.$emit('updateSortedData', column.fieldName, direction);
-    }
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/TableNav.vue?vue&type=script&lang=js":
 /*!******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/TableNav.vue?vue&type=script&lang=js ***!
@@ -236,16 +163,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _SortComp_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SortComp.vue */ "./resources/js/components/common/TableBar/SortComp.vue");
-/* harmony import */ var _FilterComp_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FilterComp.vue */ "./resources/js/components/common/TableBar/FilterComp.vue");
-
+/* harmony import */ var _FilterComp_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FilterComp.vue */ "./resources/js/components/common/TableBar/FilterComp.vue");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    SortComp: _SortComp_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    FilterComp: _FilterComp_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    FilterComp: _FilterComp_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  emits: ["setCompactView", "addEvent", "doSort", "doFilter", "updateSortedData", "updateFilteredData", 'getData'],
+  emits: ["setCompactView", "addEvent", "updateSortedData", "updateFilteredData", 'getData'],
   props: {
     dataFields: {
       type: Array
@@ -259,7 +183,6 @@ __webpack_require__.r(__webpack_exports__);
     return {
       compactView: true,
       dataFilter: "",
-      sortDataFields: undefined,
       filterDataFields: undefined
     };
   },
@@ -269,25 +192,14 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.prepareSortFieldsArray();
     this.prepareFilterFieldsArray();
   },
   methods: {
-    prepareSortFieldsArray: function prepareSortFieldsArray() {
-      // exclude 'image' fields from fieldset
-      this.sortDataFields = this.dataFields.filter(function (field) {
-        return !field.isImage;
-      });
-    },
     prepareFilterFieldsArray: function prepareFilterFieldsArray() {
       // exclude 'image' fields from fieldset
       this.filterDataFields = this.dataFields.filter(function (field) {
         return !field.isImage;
       });
-    },
-    doSort: function doSort($column, $direction) {
-      // console.log('sort from tablenav', $column, $direction)
-      this.$emit('updateSortedData', $column, $direction);
     },
     updateFilteredData: function updateFilteredData(fieldName, filter) {
       console.log(filter);
@@ -301,11 +213,6 @@ __webpack_require__.r(__webpack_exports__);
     getData: function getData() {
       this.$emit('getData');
     }
-  },
-  watch: {
-    // dataFilter: function () {
-    //     handler: this.updateFilteredData();
-    // },
   }
 });
 
@@ -874,12 +781,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (!isEditable) return; //check editable cell
       this.activeCol = key; //set active column
       this.activeRow = ckey; //set active row
+
       setTimeout(function () {
         //delay for set focus to active input
-        $("input#id" + key + "_" + ckey).focus();
+        document.getElementById("input#id" + key + "_" + ckey).focus();
       }, 200);
     },
-    //For future
+    //For future (will use vuex-i18n)
     setLang: function setLang(_lang) {
       // this.pageCaption = _lang.DEVICE_TYPES ?? 'Device Types'
     },
@@ -903,8 +811,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var newListItemData = {};
       try {
         /**
-         * Here code needs to refactoring (!) - fixed. Refactor+ / Stage 1
-         * This code populate the datatable with the special prepared properies which define its view
+         * This code needs to refactoring (!) - fixed (1). Refactor+ / Stage 1
+         * This code populate the datatable with the special prepared properties which define its view
          * like Image/Lookup/Hidden/Linked/Editable etc.
          */
 
@@ -1580,60 +1488,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "font-family": "Arial, FontAwesome"
     }
   }, null, 8 /* PROPS */, _hoisted_7), [[_directive_debounce, $options.onInput, "300"]])])], 64 /* STABLE_FRAGMENT */);
-}
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/SortComp.vue?vue&type=template&id=11509444":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/SortComp.vue?vue&type=template&id=11509444 ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render)
-/* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-
-var _hoisted_1 = {
-  "class": "nav-item dropdown me-auto vertical-center"
-};
-var _hoisted_2 = {
-  "class": "flex-center"
-};
-var _hoisted_3 = {
-  "class": "nav-link mx-2",
-  "data-bs-toggle": "dropdown",
-  role: "button",
-  "aria-haspopup": "true",
-  "aria-expanded": "false"
-};
-var _hoisted_4 = {
-  "class": "dropdown-menu"
-};
-var _hoisted_5 = ["value", "onClick"];
-function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.sortName), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": "nav-link",
-    onClick: _cache[0] || (_cache[0] = function ($event) {
-      return $options.changeDirection();
-    })
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["fa-solid", {
-      'fa-caret-up': $data.sortDirection,
-      'fa-caret-down': !$data.sortDirection
-    }])
-  }, null, 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.sortDataFields, function (sortField) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [sortField.isSortable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
-      "class": "dropdown-item",
-      key: sortField.fieldName,
-      value: sortField.fieldName,
-      onClick: function onClick($event) {
-        return $options.doSort(sortField, $data.sortDirection);
-      }
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(sortField.fieldCaption), 9 /* TEXT, PROPS */, _hoisted_5)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
-  }), 256 /* UNKEYED_FRAGMENT */))])])]);
 }
 
 /***/ }),
@@ -2881,7 +2735,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".list-move[data-v-3592dfc4],\r\n\r\n.list-enter-active[data-v-3592dfc4],\r\n.list-leave-active[data-v-3592dfc4] {\r\n    transition: all 0.5s ease;\n}\n.list-enter-from[data-v-3592dfc4],\r\n.list-leave-to[data-v-3592dfc4] {\r\n    opacity: 0;\r\n    transform: translateY(30px);\n}\r\n\r\n/* ensure leaving items are taken out of layout flow so that moving\r\n   animations can be calculated correctly. */\n.list-leave-active[data-v-3592dfc4] {\r\n    position: absolute;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".list-move[data-v-3592dfc4],\n\n.list-enter-active[data-v-3592dfc4],\n.list-leave-active[data-v-3592dfc4] {\n    transition: all 0.5s ease;\n}\n.list-enter-from[data-v-3592dfc4],\n.list-leave-to[data-v-3592dfc4] {\n    opacity: 0;\n    transform: translateY(30px);\n}\n\n/* ensure leaving items are taken out of layout flow so that moving\n   animations can be calculated correctly. */\n.list-leave-active[data-v-3592dfc4] {\n    position: absolute;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3155,33 +3009,6 @@ __webpack_require__.r(__webpack_exports__);
 
 ;
 const __exports__ = /*#__PURE__*/(0,C_projects_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_FilterComp_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_FilterComp_vue_vue_type_template_id_c6f41110__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/common/TableBar/FilterComp.vue"]])
-/* hot reload */
-if (false) {}
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
-
-/***/ }),
-
-/***/ "./resources/js/components/common/TableBar/SortComp.vue":
-/*!**************************************************************!*\
-  !*** ./resources/js/components/common/TableBar/SortComp.vue ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _SortComp_vue_vue_type_template_id_11509444__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SortComp.vue?vue&type=template&id=11509444 */ "./resources/js/components/common/TableBar/SortComp.vue?vue&type=template&id=11509444");
-/* harmony import */ var _SortComp_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SortComp.vue?vue&type=script&lang=js */ "./resources/js/components/common/TableBar/SortComp.vue?vue&type=script&lang=js");
-/* harmony import */ var C_projects_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
-
-
-
-
-;
-const __exports__ = /*#__PURE__*/(0,C_projects_iotman_lav_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_SortComp_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_SortComp_vue_vue_type_template_id_11509444__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/common/TableBar/SortComp.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -3490,21 +3317,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/common/TableBar/SortComp.vue?vue&type=script&lang=js":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/components/common/TableBar/SortComp.vue?vue&type=script&lang=js ***!
-  \**************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SortComp_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SortComp_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./SortComp.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/SortComp.vue?vue&type=script&lang=js");
- 
-
-/***/ }),
-
 /***/ "./resources/js/components/common/TableBar/TableNav.vue?vue&type=script&lang=js":
 /*!**************************************************************************************!*\
   !*** ./resources/js/components/common/TableBar/TableNav.vue?vue&type=script&lang=js ***!
@@ -3681,21 +3493,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_FilterComp_vue_vue_type_template_id_c6f41110__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_FilterComp_vue_vue_type_template_id_c6f41110__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./FilterComp.vue?vue&type=template&id=c6f41110 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/FilterComp.vue?vue&type=template&id=c6f41110");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/common/TableBar/SortComp.vue?vue&type=template&id=11509444":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/components/common/TableBar/SortComp.vue?vue&type=template&id=11509444 ***!
-  \********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SortComp_vue_vue_type_template_id_11509444__WEBPACK_IMPORTED_MODULE_0__.render)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SortComp_vue_vue_type_template_id_11509444__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./SortComp.vue?vue&type=template&id=11509444 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/common/TableBar/SortComp.vue?vue&type=template&id=11509444");
 
 
 /***/ }),

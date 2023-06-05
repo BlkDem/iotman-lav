@@ -2911,8 +2911,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _api_rest_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api/rest_api */ "./resources/js/api/rest_api.js");
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   FieldStruct: [{
     fieldName: 'Image',
@@ -2933,30 +2931,22 @@ __webpack_require__.r(__webpack_exports__);
     isHighLight: true,
     columnsCount: 1
   }, {
-    fieldName: 'role_id',
-    displayName: 'name',
-    fieldCaption: 'Role',
+    fieldName: 'name',
+    fieldCaption: 'Name',
     type: String,
     isImage: false,
-    isEditable: false,
     isSortable: true,
     isHighLight: false,
-    columnsCount: 8,
-    lookupId: 'role_id',
-    lookupApi: _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].api_user_roles_lookup,
-    isLookup: true
-  }
-
-  // {
-  //     fieldName: 'slug',
-  //     fieldCaption: 'Slug',
-  //     type: String,
-  //     isImage: false,
-  //     isSortable: true,
-  //     isHighLight: false,
-  //     columnsCount: 4
-  // },
-  ]
+    columnsCount: 4
+  }, {
+    fieldName: 'slug',
+    fieldCaption: 'Slug',
+    type: String,
+    isImage: false,
+    isSortable: true,
+    isHighLight: false,
+    columnsCount: 4
+  }]
 });
 
 /***/ }),

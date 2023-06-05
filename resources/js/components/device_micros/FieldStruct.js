@@ -140,8 +140,8 @@ export default {
 
         {
             fieldName: 'device_micro_id',
-            displayName: 'device_micro_idx',
-            fieldCaption: 'Idx',
+            displayName: 'device_micro_desc',
+            fieldCaption: 'Micro',
             type: String,
             isImage: false,
             isEditable: false,

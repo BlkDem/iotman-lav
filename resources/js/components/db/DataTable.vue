@@ -579,13 +579,14 @@ export default {
                 if (!isEditable) return //check editable cell
                 this.activeCol = key //set active column
                 this.activeRow = ckey //set active row
+
                 setTimeout(() => { //delay for set focus to active input
-                    $("input#id" + key + "_" + ckey).focus()
+                    document.getElementById("input#id" + key + "_" + ckey).focus();
                 }, 200)
+
             },
 
-
-            //For future
+            //For future (will use vuex-i18n)
             setLang(_lang) {
                 // this.pageCaption = _lang.DEVICE_TYPES ?? 'Device Types'
             },
@@ -618,8 +619,8 @@ export default {
                 try {
 
                     /**
-                     * Here code needs to refactoring (!) - fixed. Refactor+ / Stage 1
-                     * This code populate the datatable with the special prepared properies which define its view
+                     * This code needs to refactoring (!) - fixed (1). Refactor+ / Stage 1
+                     * This code populate the datatable with the special prepared properties which define its view
                      * like Image/Lookup/Hidden/Linked/Editable etc.
                      */
 

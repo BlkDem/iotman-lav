@@ -24,6 +24,29 @@ class MicroParamController extends BaseController
 
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Image  $image
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $res = MicroParam::find($id);
+        if (is_null($res)) {
+            return $this->sendError("No Record for id=$id Found");
+        }
+        return $this->sendResponse($res, "Image (id = $id) found");
+
+    }
+
+    /**
+     * Get dataset on selected page
+     *
+     * @param  int $currentPage
+     * @param  int $itemsPerPage
+     * @return void
+     */
     public function page($currentPage=0, $itemsPerPage=10){
 
         $page = (int)$currentPage;
@@ -37,6 +60,14 @@ class MicroParamController extends BaseController
         return $this->sendResponse($res, "Micro params List", $paginator);
     }
 
+    /**
+     * pageWhereMicroDevice - get dataset on a selected page where $device_micro_id
+     *
+     * @param  mixed $currentPage
+     * @param  mixed $itemsPerPage
+     * @param  mixed $device_micro_id
+     * @return void
+     */
     public function pageWhereMicroDevice($currentPage=0, $itemsPerPage=10, $device_micro_id){
 
         $page = (int)$currentPage;
@@ -57,6 +88,33 @@ class MicroParamController extends BaseController
     }
 
     /**
+     * copmliteResponseForMicroParam - fill the record with foreign props
+     *
+     * @param  mixed $microParam
+     * @return void
+     */
+    public function copmliteResponseForMicroParam(MicroParam $microParam): MicroParam
+    {
+        /**
+         * Prepare complited response for front
+        */
+
+        $newMicroParam = $microParam;
+
+        $deviceMicroId = $microParam["device_micro_id"];
+        $deviceMicroIdx = DeviceMicro::find($deviceMicroId);
+
+        $paramTypeId = $microParam["param_type_id"];
+        $paramTypeName = ParamType::find($paramTypeId);
+
+        $newMicroParam["device_micro_idx"] = $deviceMicroIdx["device_micro_idx"];
+        $newMicroParam["type_name"] = $paramTypeName["type_name"];
+
+        return $newMicroParam;
+    }
+
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -71,36 +129,20 @@ class MicroParamController extends BaseController
         try {
             $newMicroParam = MicroParam::create($request->all());
 
-            $deviceMicroId = $newMicroParam["device_micro_id"];
-            $deviceMicroIdx = DeviceMicro::find($deviceMicroId);
+            // $deviceMicroId = $newMicroParam["device_micro_id"];
+            // $deviceMicroIdx = DeviceMicro::find($deviceMicroId);
 
-            $paramTypeId = $newMicroParam["param_type_id"];
-            $paramTypeName = ParamType::find($paramTypeId);
+            // $paramTypeId = $newMicroParam["param_type_id"];
+            // $paramTypeName = ParamType::find($paramTypeId);
 
-            $newMicroParam["device_micro_idx"] = $deviceMicroIdx["device_micro_idx"];
-            $newMicroParam["type_name"] = $paramTypeName["type_name"];
+            // $newMicroParam["device_micro_idx"] = $deviceMicroIdx["device_micro_idx"];
+            // $newMicroParam["type_name"] = $paramTypeName["type_name"];
 
-            return $this->sendResponse($newMicroParam, 'Param created');
+            return $this->sendResponse($this->copmliteResponseForMicroParam($newMicroParam), 'Param created');
         }
         catch (Exception $e) {
             return $this->sendError('Error creating record: '. $e);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $res = MicroParam::find($id);
-        if (is_null($res)) {
-            return $this->sendError("No Record for id=$id Found");
-        }
-        return $this->sendResponse($res, "Image (id = $id) found");
-
     }
 
     /**
@@ -118,16 +160,16 @@ class MicroParamController extends BaseController
         try {
             $updateParam->update($request->all());
 
-            $deviceMicroId = $updateParam["device_micro_id"];
-            $deviceMicroIdx = DeviceMicro::find($deviceMicroId);
+            // $deviceMicroId = $updateParam["device_micro_id"];
+            // $deviceMicroIdx = DeviceMicro::find($deviceMicroId);
 
-            $paramTypeId = $updateParam["param_type_id"];
-            $paramTypeName = ParamType::find($paramTypeId);
+            // $paramTypeId = $updateParam["param_type_id"];
+            // $paramTypeName = ParamType::find($paramTypeId);
 
-            $updateParam["device_micro_idx"] = $deviceMicroIdx["device_micro_idx"];
-            $updateParam["type_name"] = $paramTypeName["type_name"];
+            // $updateParam["device_micro_idx"] = $deviceMicroIdx["device_micro_idx"];
+            // $updateParam["type_name"] = $paramTypeName["type_name"];
 
-            return $this->sendResponse($updateParam, "Micro param updated");
+            return $this->sendResponse($this->copmliteResponseForMicroParam($updateParam), "Micro param updated");
         }
         catch (Exception $e) {
             return $this->sendError('Deleting Record Error: ' . $e);

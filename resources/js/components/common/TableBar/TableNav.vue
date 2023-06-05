@@ -36,20 +36,17 @@
 </template>
 
 <script>
-import SortComp from './SortComp.vue';
+
 import FilterComp from './FilterComp.vue';
 
 export default {
     components: {
-        SortComp,
         FilterComp
     },
 
     emits: [
         "setCompactView",
         "addEvent",
-        "doSort",
-        "doFilter",
         "updateSortedData",
         "updateFilteredData",
         'getData'
@@ -70,7 +67,6 @@ export default {
         return {
             compactView: true,
             dataFilter: "",
-            sortDataFields: undefined,
             filterDataFields: undefined
         }
     },
@@ -82,26 +78,15 @@ export default {
     },
 
     created() {
-        this.prepareSortFieldsArray()
         this.prepareFilterFieldsArray()
     },
 
 
     methods: {
 
-        prepareSortFieldsArray() {
-            // exclude 'image' fields from fieldset
-            this.sortDataFields = this.dataFields.filter(field => !field.isImage);
-        },
-
         prepareFilterFieldsArray() {
             // exclude 'image' fields from fieldset
             this.filterDataFields = this.dataFields.filter(field => !field.isImage);
-        },
-
-        doSort($column, $direction) {
-            // console.log('sort from tablenav', $column, $direction)
-            this.$emit('updateSortedData', $column, $direction)
         },
 
         updateFilteredData(fieldName, filter) {
@@ -120,10 +105,5 @@ export default {
         }
     },
 
-    watch: {
-        // dataFilter: function () {
-        //     handler: this.updateFilteredData();
-        // },
-    },
 }
 </script>

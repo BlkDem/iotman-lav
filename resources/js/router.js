@@ -183,7 +183,7 @@ const routes = [
             path: "/userroles",
             name: "User Roles",
             icon: "fa-solid fa-universal-access",
-            component: () => import('./components/users/UserRoles.vue'),
+            component: () => import('./components/users/UserAccess.vue'),
             ID: "USERROLES",
             visible: true
           },
