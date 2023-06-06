@@ -58,8 +58,10 @@ export default {
 </script>
 
 <style scoped>
+
 input {
     font-family: var(--bs-body-font-family), FontAwesome;
     max-height: 2rem;
 }
+
 </style>
