@@ -3000,7 +3000,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ninput[data-v-c6f41110] {\n    font-family: var(--bs-body-font-family), FontAwesome;\n    max-height: 2rem;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ninput[data-v-c6f41110] {\r\n    font-family: var(--bs-body-font-family), FontAwesome;\r\n    max-height: 2rem;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3049,7 +3049,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".list-move[data-v-3592dfc4],\n\n.list-enter-active[data-v-3592dfc4],\n.list-leave-active[data-v-3592dfc4] {\n    transition: all 0.5s ease;\n}\n.list-enter-from[data-v-3592dfc4],\n.list-leave-to[data-v-3592dfc4] {\n    opacity: 0;\n    transform: translateY(30px);\n}\n\n/* ensure leaving items are taken out of layout flow so that moving\n   animations can be calculated correctly. */\n.list-leave-active[data-v-3592dfc4] {\n    position: absolute;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".list-move[data-v-3592dfc4],\r\n\r\n.list-enter-active[data-v-3592dfc4],\r\n.list-leave-active[data-v-3592dfc4] {\r\n    transition: all 0.5s ease;\n}\n.list-enter-from[data-v-3592dfc4],\r\n.list-leave-to[data-v-3592dfc4] {\r\n    opacity: 0;\r\n    transform: translateY(30px);\n}\r\n\r\n/* ensure leaving items are taken out of layout flow so that moving\r\n   animations can be calculated correctly. */\n.list-leave-active[data-v-3592dfc4] {\r\n    position: absolute;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3118,7 +3118,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".fade-in-1s {\n    animation: fadeIn 1s;\n    -webkit-animation: fadeIn 1s;\n    -moz-animation: fadeIn 1s;\n    -o-animation: fadeIn 1s;\n    -ms-animation: fadeIn 1s;\n}\n\n.fade-in {\n    animation: fadeIn 0.5s;\n    -webkit-animation: fadeIn .5s;\n    -moz-animation: fadeIn .5s;\n    -o-animation: fadeIn .5s;\n    -ms-animation: fadeIn .5s;\n  }\n\n  @keyframes fadeIn {\n    0% { opacity: 0; }\n    100% { opacity: 1; }\n  }\n\n  @-moz-keyframes fadeIn {\n    0% { opacity: 0; }\n    100% { opacity: 1; }\n  }\n\n  @-webkit-keyframes fadeIn {\n    0% { opacity: 0; }\n    100% { opacity: 1; }\n  }\n\n  @-o-keyframes fadeIn {\n    0% { opacity: 0; }\n    100% { opacity: 1; }\n  }\n\n  @-ms-keyframes fadeIn {\n    0% { opacity: 0; }\n    100% { opacity: 1; }\n  }\n\n  .fade-enter-active,\n  .fade-leave-active {\n    transition: opacity 0.3s;\n  }\n\n  .fade-enter,\n  .fade-leave-to {\n    opacity: 0;\n  }\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".fade-in-1s {\r\n    animation: fadeIn 1s;\r\n    -webkit-animation: fadeIn 1s;\r\n    -moz-animation: fadeIn 1s;\r\n    -o-animation: fadeIn 1s;\r\n    -ms-animation: fadeIn 1s;\r\n}\r\n\r\n.fade-in {\r\n    animation: fadeIn 0.5s;\r\n    -webkit-animation: fadeIn .5s;\r\n    -moz-animation: fadeIn .5s;\r\n    -o-animation: fadeIn .5s;\r\n    -ms-animation: fadeIn .5s;\r\n  }\r\n\r\n  @keyframes fadeIn {\r\n    0% { opacity: 0; }\r\n    100% { opacity: 1; }\r\n  }\r\n\r\n  @-moz-keyframes fadeIn {\r\n    0% { opacity: 0; }\r\n    100% { opacity: 1; }\r\n  }\r\n\r\n  @-webkit-keyframes fadeIn {\r\n    0% { opacity: 0; }\r\n    100% { opacity: 1; }\r\n  }\r\n\r\n  @-o-keyframes fadeIn {\r\n    0% { opacity: 0; }\r\n    100% { opacity: 1; }\r\n  }\r\n\r\n  @-ms-keyframes fadeIn {\r\n    0% { opacity: 0; }\r\n    100% { opacity: 1; }\r\n  }\r\n\r\n  .fade-enter-active,\r\n  .fade-leave-active {\r\n    transition: opacity 0.3s;\r\n  }\r\n\r\n  .fade-enter,\r\n  .fade-leave-to {\r\n    opacity: 0;\r\n  }\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
