@@ -68,49 +68,6 @@
     transform: scale(2);
 }
 
-.card-space {
-    margin-bottom: 00px;
-}
-
-a.a_cap:first-letter {
-    text-transform: uppercase;
-}
-
-.edit-buttons {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.btn-width-40 {
-    width: 40%;
-}
-
-.cursor-pointer {
-    cursor: pointer;
-}
-
-.switch-big
-{
-    width: 75px;
-    height: 40px;
-}
-
-.switch-label {
-    height: 40px;
-    font-size: 1.5rem;
-    margin-left: 8px;
-    margin-top: 5px;
-}
-
-.shadow-1 {
-    text-shadow: 1px 1px 1px #333;
-}
-
-
-.vc-title {
-    color: var(--bs-body-color);
-}
-
 @media only screen and (min-width: 320px) and (max-width: 480px) {
     .device-image {
         /*width: 100px;

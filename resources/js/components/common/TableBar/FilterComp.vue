@@ -14,8 +14,8 @@
             </div>
         </div>
         <div class="flex-center w-100">
-        <input class="form-control-sm w-100" type="text"
-            :placeholder="'&#xF002; ' + currentFieldCaption" style="font-family:Arial, FontAwesome"
+        <input class="form-control w-100" type="text"
+            :placeholder="'&#xF002; ' + currentFieldCaption"
 
             v-debounce:300="onInput"
             />
@@ -56,3 +56,10 @@ export default {
 }
 
 </script>
+
+<style scoped>
+input {
+    font-family: var(--bs-body-font-family), FontAwesome;
+    max-height: 2rem;
+}
+</style>

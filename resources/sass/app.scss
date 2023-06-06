@@ -3,5 +3,66 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~bootswatch/dist/slate/bootswatch";
 
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css";
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: -webkit-gradient(linear, left top, left bottom, from(var(--bs-primary)), to(var(--bs-secondary)));
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--bs-light);
+    border-radius: 10px;
+}
+
+.font-0_9 {
+    font-size: 0.9rem;
+}
+
+.card-space {
+    margin-bottom: 00px;
+}
+
+a.a_cap:first-letter {
+    text-transform: uppercase;
+}
+
+.edit-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-width-40 {
+    width: 40%;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.switch-big
+{
+    width: 75px;
+    height: 40px;
+}
+
+.switch-label {
+    height: 40px;
+    font-size: 1.5rem;
+    margin-left: 8px;
+    margin-top: 5px;
+}
+
+.shadow-1 {
+    text-shadow: 1px 1px 1px #333;
+}
+
+.vc-title {
+    color: var(--bs-body-color);
+}
+
 
 
