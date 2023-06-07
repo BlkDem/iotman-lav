@@ -188,7 +188,7 @@
                             />
 
                             <div class="flex w-100" v-if="activeCol===key&&activeRow===ckey">
-                                <input class="form-control-sm w-100" :value="item[column].value"
+                                <input class="form-control w-100" :value="item[column].value"
                                     :id="setId(key, ckey)"
                                     :name="setId(key, ckey)"
                                     @keyup.enter="onInputEnter()"
@@ -581,7 +581,9 @@ export default {
                 this.activeRow = ckey //set active row
 
                 setTimeout(() => { //delay for set focus to active input
-                    document.getElementById("input#id" + key + "_" + ckey).focus();
+                    const el = document.getElementsByName("id" + key + "_" + ckey)[0];
+                    // console.log(el);
+                    if (el) el.focus();
                 }, 200)
 
             },
@@ -861,7 +863,13 @@ export default {
     };
 </script>
 
-<style scoped>.list-move,
+<style scoped>
+
+input {
+    max-height: 2rem;
+}
+
+.list-move,
 /* apply transition to moving elements */
 .list-enter-active,
 .list-leave-active {

@@ -784,7 +784,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       setTimeout(function () {
         //delay for set focus to active input
-        document.getElementById("input#id" + key + "_" + ckey).focus();
+        var el = document.getElementsByName("id" + key + "_" + ckey)[0];
+        // console.log(el);
+        if (el) el.focus();
       }, 200);
     },
     //For future (will use vuex-i18n)
@@ -2189,7 +2191,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   return $options.imageClick($event);
                 })
               }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_19)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.activeCol === key && $data.activeRow === ckey ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-                "class": "form-control-sm w-100",
+                "class": "form-control w-100",
                 value: item[column].value,
                 id: $options.setId(key, ckey),
                 name: $options.setId(key, ckey),
@@ -3023,7 +3025,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".list-move[data-v-3592dfc4],\r\n\r\n.list-enter-active[data-v-3592dfc4],\r\n.list-leave-active[data-v-3592dfc4] {\r\n    transition: all 0.5s ease;\n}\n.list-enter-from[data-v-3592dfc4],\r\n.list-leave-to[data-v-3592dfc4] {\r\n    opacity: 0;\r\n    transform: translateY(30px);\n}\r\n\r\n/* ensure leaving items are taken out of layout flow so that moving\r\n   animations can be calculated correctly. */\n.list-leave-active[data-v-3592dfc4] {\r\n    position: absolute;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ninput[data-v-3592dfc4] {\n    max-height: 2rem;\n}\n.list-move[data-v-3592dfc4],\n\n.list-enter-active[data-v-3592dfc4],\n.list-leave-active[data-v-3592dfc4] {\n    transition: all 0.5s ease;\n}\n.list-enter-from[data-v-3592dfc4],\n.list-leave-to[data-v-3592dfc4] {\n    opacity: 0;\n    transform: translateY(30px);\n}\n\n/* ensure leaving items are taken out of layout flow so that moving\n   animations can be calculated correctly. */\n.list-leave-active[data-v-3592dfc4] {\n    position: absolute;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
