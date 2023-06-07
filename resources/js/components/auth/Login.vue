@@ -5,7 +5,7 @@
 <main class="container-xs">
             <div class="container data-in-center">
                 <div class="row justify-content-center">
-                    <div class="col-md-8">
+                    <div class="col-xs-8 col-md-10 col-lg-8">
 
     <div class="card m-4 py-4 border-4 border-top border-bottom rounded-bottom rounded-top border-secondary">
     <div class="mb-4 card-header text-center text-uppercase">
@@ -41,11 +41,11 @@
         </svg>
     </div>
 
-        <h1>Login - Vue</h1>
+        <h1>Login</h1>
     </div>
 
     <div class="card-body">
-        <form action="javascript:void(0)" class="row" method="post">
+        <form action="javascript:void(0)" method="post">
                             <div class="col-12" v-if="Object.keys(validationErrors).length > 0">
                                 <div class="alert alert-danger">
                                     <ul class="mb-0">
@@ -69,7 +69,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary w-100" :disabled="processing" @click.prevent="login" >
+                                    <button type="submit" class="btn btn-primary w-100 my-4" :disabled="processing" @click.prevent="login" >
                                         {{ processing ? "Please wait" : "Login" }}
                                     </button>
                                 </div>
@@ -93,9 +93,13 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+
+import {mapActions} from 'vuex';
+
 export default {
+
     name:"login",
+
     data(){
         return {
             auth:{
@@ -106,10 +110,12 @@ export default {
             processing:false
         }
     },
+
     methods:{
         ...mapActions({
             signIn:'auth/login'
         }),
+
         async login(){
             this.processing = true
             await axios.get('/sanctum/csrf-cookie').then((response) => {
@@ -135,7 +141,8 @@ export default {
 </script>
 
 <style>
-   .str0 {
+
+.str0 {
     stroke: var(--bs-white);
     stroke-opacity: 0.5;
     stroke-width: 30.55;

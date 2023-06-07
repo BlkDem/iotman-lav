@@ -104,7 +104,7 @@ var _hoisted_4 = {
   "class": "row justify-content-center"
 };
 var _hoisted_5 = {
-  "class": "col-md-8"
+  "class": "col-xs-8 col-md-10 col-lg-8"
 };
 var _hoisted_6 = {
   "class": "card m-4 py-4 border-4 border-top border-bottom rounded-bottom rounded-top border-secondary"
@@ -129,13 +129,12 @@ var _hoisted_8 = {
 };
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<linearGradient id=\"linear-gradient\" x1=\"0\" x2=\"0\" y1=\"0\" y2=\"1\"><stop offset=\"0%\" stop-color=\"var(--bs-secondary)\"></stop><stop offset=\"50%\" stop-color=\"var(--bs-primary)\"></stop><stop offset=\"100%\" stop-color=\"var(--bs-secondary)\"></stop></linearGradient><radialGradient id=\"radial-gradient\"><stop offset=\"60%\" stop-color=\"var(--bs-primary)\"></stop><stop offset=\"100%\" stop-color=\"var(--bs-secondary)\"></stop></radialGradient><g id=\"layer1\"><metadata id=\"umolab_icon\"></metadata><circle class=\"fil0 str0\" cx=\"300.45\" cy=\"300.45\" r=\"285.17\"></circle><path class=\"fil1 str1\" d=\"M168.64 155.24l65.46 0 0 290.42 -32.95 0 -32.51 -32.51 0 -257.91zm263.62 0l0 257.91 -32.51 32.51 -118.63 0 0 -65.47 85.67 0 0 -224.95 65.47 0z\"></path></g>", 3);
 var _hoisted_12 = [_hoisted_9];
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Login - Vue", -1 /* HOISTED */);
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Login", -1 /* HOISTED */);
 var _hoisted_14 = {
   "class": "card-body"
 };
 var _hoisted_15 = {
   action: "javascript:void(0)",
-  "class": "row",
   method: "post"
 };
 var _hoisted_16 = {
@@ -215,7 +214,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "form-control"
   }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.auth.password]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
-    "class": "btn btn-primary w-100",
+    "class": "btn btn-primary w-100 my-4",
     disabled: $data.processing,
     onClick: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.login && $options.login.apply($options, arguments);
@@ -250,7 +249,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.str0 {\r\n    stroke: var(--bs-white);\r\n    stroke-opacity: 0.5;\r\n    stroke-width: 30.55;\r\n    stroke-miterlimit: 22.9256\n}\n.str1 {\r\n    stroke: var(--bs-white);\r\n    stroke-opacity: 0.5;\r\n    stroke-width: 15.28;\r\n    stroke-linejoin: bevel;\r\n    stroke-miterlimit: 22.9256\n}\r\n\r\n/* .fil0 {fill:none} */\r\n/* .fil0 {fill:var(--bs-dark);fill-rule:nonzero} */\n.fil1 {\r\n    /* fill: var(--bs-dark); */\r\n    fill:url(#linear-gradient);\r\n    /* fill-opacity: 0.1; */\r\n    fill-rule: nonzero\n}\n.fil0 {\r\n    /* fill: var(--bs-dark); */\r\n    fill:url(#radial-gradient);\r\n    /* fill-opacity: 0.1; */\r\n    fill-rule: nonzero\n}\n.logo {\r\n    display: flex;\r\n    margin-right: 16px;\r\n    margin-left: 4px;\r\n    width: 36px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.str0 {\n    stroke: var(--bs-white);\n    stroke-opacity: 0.5;\n    stroke-width: 30.55;\n    stroke-miterlimit: 22.9256\n}\n.str1 {\n    stroke: var(--bs-white);\n    stroke-opacity: 0.5;\n    stroke-width: 15.28;\n    stroke-linejoin: bevel;\n    stroke-miterlimit: 22.9256\n}\n\n/* .fil0 {fill:none} */\n/* .fil0 {fill:var(--bs-dark);fill-rule:nonzero} */\n.fil1 {\n    /* fill: var(--bs-dark); */\n    fill:url(#linear-gradient);\n    /* fill-opacity: 0.1; */\n    fill-rule: nonzero\n}\n.fil0 {\n    /* fill: var(--bs-dark); */\n    fill:url(#radial-gradient);\n    /* fill-opacity: 0.1; */\n    fill-rule: nonzero\n}\n.logo {\n    display: flex;\n    margin-right: 16px;\n    margin-left: 4px;\n    width: 36px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

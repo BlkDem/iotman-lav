@@ -14,10 +14,10 @@
 
 </head>
 
-<body class="container-fluid" style="box-sizing: border-box;">
+<body class="container-fluid font-0_9" style="box-sizing: border-box;">
 
         <!-- vue mount point -->
-    <div id="app" class="container font-0_9" >
+    <div id="app" class="container" >
 
     </div>
 

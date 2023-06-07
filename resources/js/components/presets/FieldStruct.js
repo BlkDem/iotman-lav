@@ -33,6 +33,7 @@ export default {
             isEditable: true,
             isSortable: true,
             isHighLight: false,
+            isLightColor: true,
             columnsCount: 3
         },
 

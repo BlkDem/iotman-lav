@@ -1,12 +1,21 @@
 <template>
-    <nav v-if="userAuth" class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+
+        <!-- <a class="navbar-brand" href="#">
+            <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
+        </a> -->
+
+
+
         <div class="container-fluid">
+
+            <Logo class="logo mx-2" v-once/>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <Logo class="logo" v-once/>
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
@@ -51,15 +60,6 @@ export default {
 
     emits: ['newLangUp'],
 
-    computed: {
-        userAuth() {
-            return this.$store.state.auth.authenticated
-        },
-        // user () {
-        //     return this.$store.state.count
-        // }
-    },
-
     methods: {
         newLang(event)
         {
@@ -71,6 +71,6 @@ export default {
 };
 </script>
 
-<style>
-    /* @import "../../../sass/images.scss"; */
+<style lang="scss">
+    @import "../../../sass/app.scss";
 </style>
