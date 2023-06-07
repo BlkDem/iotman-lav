@@ -2449,15 +2449,15 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "errorEvent": () => (/* binding */ errorEvent),
-/* harmony export */   "redirectTo": () => (/* binding */ redirectTo)
+/* harmony export */   "errorEvent": () => (/* binding */ errorEvent)
 /* harmony export */ });
-var redirectTo = '/login';
+/* harmony import */ var _api_services_logout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/services/logout */ "./resources/js/api/services/logout.js");
+
 function errorEvent(error) {
   var _error$response;
   console.error('event: ' + error);
   if (((_error$response = error.response) === null || _error$response === void 0 ? void 0 : _error$response.status) === 401) {
-    window.location.href = redirectTo;
+    _api_services_logout__WEBPACK_IMPORTED_MODULE_0__["default"].methods.logout();
   }
 }
 

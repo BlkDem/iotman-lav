@@ -1,4 +1,4 @@
-import {mapActions} from 'vuex';
+import { mapActions } from 'vuex';
 import store from '../../store'
 import router from '../../router'
 
