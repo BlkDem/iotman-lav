@@ -1,10 +1,12 @@
 <template>
     <link rel="stylesheet" id="themeCss" />
     <div>
-        <Navbar ref="navbar"></Navbar>
-        <Toaster ref="toaster"></Toaster>
+        <Navbar v-if="userAuth" ref="navbar"></Navbar>
+        <Toaster v-if="userAuth" ref="toaster"></Toaster>
+
         <router-view />
-        <SocialLinks />
+
+        <SocialLinks v-if="userAuth" />
     </div>
 
 </template>
@@ -18,13 +20,21 @@ export default {
 
     components: {
         SocialLinks
-    }
+    },
+
+    computed: {
+        userAuth() {
+            return this.$store.state.auth?.authenticated
+        },
+    },
+
 }
 </script>
 
 <style lang="scss">
 
 @import "../../sass/images.scss";
+@import "../../sass/aligns.scss";
 @import "../../sass/app.scss";
 
 </style>

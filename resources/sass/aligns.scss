@@ -9,6 +9,40 @@
     text-align: center !important;
 }
 
-.btn-width-40 {
-    width: 40% !important;
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.flex-space {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.flex-center-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.flex-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.flex-left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }

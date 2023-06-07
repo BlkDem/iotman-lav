@@ -32,7 +32,7 @@
                                 <input type="password_confirmation" name="password_confirmation" v-model="user.password_confirmation" id="password_confirmation" placeholder="Enter Password" class="form-control">
                             </div>
                             <div class="col-12 mb-2">
-                                <button type="submit" :disabled="processing" class="btn btn-primary btn-block">
+                                <button type="submit" :disabled="processing" class="btn btn-primary w-100 my-4">
                                     {{ processing ? "Please wait" : "Register" }}
                                 </button>
                             </div>

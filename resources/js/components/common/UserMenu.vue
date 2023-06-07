@@ -14,9 +14,16 @@
 
 // import APIConstants from "../../api/rest_api";
 import MessagesConstants from "../strings_constants/strings.js";
-import {mapActions} from 'vuex'
+// import ServiceLogout from "../../api/services/AuthService";
+import ServiceLogout from "../../api/services/logout";
+
+// import { mapActions } from 'vuex';
 
 export default {
+
+    mixins: [
+        ServiceLogout
+    ],
 
     data() {
         return {
@@ -34,9 +41,9 @@ export default {
 
     methods: {
 
-        ...mapActions({
-            signOut:"auth/logout"
-        }),
+        // ...mapActions({
+        //     signOut:"auth/logout"
+        // }),
 
         // async loadUserInfo() {
         //     try {
@@ -52,10 +59,15 @@ export default {
         // },
 
         async logout(){
-            await axios.post('/logout').then(({data})=>{
-                this.signOut()
-                this.$router.push({name:"login"})
-            })
+            try {
+                await ServiceLogout.methods.logout();
+            } catch (e) {
+                console.error(e);
+            }
+            // await axios.post('/logout').then(({data})=>{
+            //     this.signOut()
+            //     this.$router.push({name:"login"})
+            // })
         },
 
         setLang(event) {

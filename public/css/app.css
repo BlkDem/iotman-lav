@@ -11179,3 +11179,11 @@ a.a_cap:first-letter {
 .vc-title {
   color: var(--bs-body-color);
 }
+
+.btn-width-40 {
+  width: 40% !important;
+}
+
+.mt-55 {
+  margin-top: 5.5rem;
+}
