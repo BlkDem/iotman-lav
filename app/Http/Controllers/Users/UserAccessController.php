@@ -119,7 +119,7 @@ class UserAccessController extends BaseController
      */
     public function store(Request $request)
     {
-        $validator = ValidatorRules::MakeValidate($request, 'roles');
+        $validator = ValidatorRules::MakeValidate($request, 'users_roles');
         if ($validator->fails()) {
             return $this->sendError($validator->errors(), 400);
             // return response()->json($validator->errors(), 400);
