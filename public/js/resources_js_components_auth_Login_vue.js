@@ -57,10 +57,12 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
               })["catch"](function (_ref2) {
                 var response = _ref2.response;
                 if (response.status === 422) {
-                  _this.validationErrors = response.data.errors;
+                  var _response$data;
+                  _this.validationErrors = (_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.errors;
                 } else {
+                  var _response$data2;
                   _this.validationErrors = {};
-                  alert(response.data.message);
+                  alert((_response$data2 = response.data) === null || _response$data2 === void 0 ? void 0 : _response$data2.message);
                 }
               })["finally"](function () {
                 _this.processing = false;
