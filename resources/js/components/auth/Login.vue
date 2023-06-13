@@ -126,10 +126,10 @@ export default {
                 this.signIn()
             }).catch(({response})=>{
                 if(response.status===422){
-                    this.validationErrors = response.data.errors
+                    this.validationErrors = response.data?.errors
                 }else{
                     this.validationErrors = {}
-                    alert(response.data.message)
+                    alert(response.data?.message)
                 }
             }).finally(()=>{
                 this.processing = false

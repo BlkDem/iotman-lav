@@ -117,6 +117,15 @@ class UserController extends BaseController
             response()->json(User::find($id), 200);
     }
 
+    public function roles($id) {
+
+        $res = User::find($id)->user_roles()->get();
+        if (is_null($res)) {
+            return $this->sendError("No Record for id=$id Found");
+        }
+        return $this->sendResponse($res, "Roles for user (id = $id) found");
+    }
+
     /**
      * store - Creating a new user
      *
