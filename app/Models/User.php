@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Traits\HasRolesAndPermissions;
+use App\Models\UserRole;
 
 /**
  * App\Models\User
@@ -76,5 +77,10 @@ class User extends Authenticatable
         'updated_at' => 'datetime:Y-m-d H:i:s',
         'email_verified_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    public function user_roles()
+    {
+        return $this->hasMany(UserRole::class);
+    }
 
 }

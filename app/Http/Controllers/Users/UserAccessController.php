@@ -9,6 +9,7 @@ use App\Models\UserRole;
 use Exception;
 use App\Http\Controllers\PaginatorController;
 use App\Http\Middleware\ValidatorRules;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserAccessController extends BaseController
 {
@@ -83,7 +84,11 @@ class UserAccessController extends BaseController
      */
     public function indexLookup()
     {
+        // $res = UserRole::userRolesLookup();
+        // $res->with('user')->toSql();
+
         $res = UserRole::userRolesLookup()->get();
+        // $res = UserRole::with('users')->get();
 
         $paginator = PaginatorController::Paginate($res->count(), 1, 1);
 
@@ -119,7 +124,7 @@ class UserAccessController extends BaseController
      */
     public function store(Request $request)
     {
-        $validator = ValidatorRules::MakeValidate($request, 'roles');
+        $validator = ValidatorRules::MakeValidate($request, 'users_roles');
         if ($validator->fails()) {
             return $this->sendError($validator->errors(), 400);
             // return response()->json($validator->errors(), 400);

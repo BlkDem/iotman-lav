@@ -59,6 +59,7 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/users/read/page/{currentPage}/{itemsPerPage}', 'page');
     Route::get('/users/lookup/{currentPage}/{itemsPerPage}', 'indexLookup');
     Route::get('/user/read/{id}', 'show');
+    Route::get('/user/roles/{id}', 'roles');
     Route::put('/user/update/{updateUser}', 'update');
     Route::delete('/user/delete/{id}', 'destroy');
     Route::patch('/user/patch/{id}/{field}/{value}', 'patch');

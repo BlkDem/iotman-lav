@@ -432,6 +432,8 @@ namespace App\Models{
  * @property-read int|null $permissions_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Auth\Role> $roles
  * @property-read int|null $roles_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $user_roles
+ * @property-read int|null $user_roles_count
  */
 	class User extends \Eloquent {}
 }
@@ -456,6 +458,9 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $id
+ * @property-read \App\Models\Auth\Role|null $role
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
+ * @property-read int|null $users_count
  * @method static \Illuminate\Database\Eloquent\Builder|UserRole newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserRole newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserRole query()
