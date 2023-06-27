@@ -38,17 +38,25 @@ class DeviceTypeController extends BaseController
     public function page($currentPage=0, $itemsPerPage=10)
     {
 
-        $page = (($currentPage < 0) || ($currentPage === null))?0:$currentPage;
+        $cache_key = app(DeviceType::class)->getTable() . "_" . $currentPage . "_" . $itemsPerPage;
+        $cache_value = Cache::store('database')->get($cache_key);
 
-        $itemsCountPerPage = (($currentPage < 0) || ($currentPage === null))?10:$itemsPerPage;
+        if (!is_null($cache_value)) {
+            $res = $cache_value;
+        }
+        else {
+            $page = (($currentPage < 0) || ($currentPage === null))?0:$currentPage;
 
-        $offset = $itemsCountPerPage*--$page;
-        $res = DeviceType::limit($itemsPerPage)->offset($offset)->orderBy('device_type_name', 'asc')->get();
-        $total = DeviceType::get();
+            $itemsCountPerPage = (($currentPage < 0) || ($currentPage === null))?10:$itemsPerPage;
 
-        Cache::put('device_types', $res, now()->addMinutes(10));
+            $offset = $itemsCountPerPage*--$page;
+            $res = DeviceType::limit($itemsPerPage)->offset($offset)->orderBy('device_type_name', 'asc')->get();
 
-        $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
+            Cache::store('database')->put($cache_key, $res, 600);
+
+        }
+
+        $paginator = PaginatorController::Paginate($res->count(), (int)($itemsPerPage), $currentPage);
 
         return $this->sendResponse($res, "Device Types List", $paginator);
     }
