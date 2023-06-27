@@ -135,5 +135,16 @@ class DeviceTypeController extends BaseController
 
         return $this->sendResponse($deviceTypeItem, "Device Type $id deleted");
     }
+
+
+    /**
+     * supertod - Supertod Devices list Scope
+     *
+     * @return array
+     */
+    public function supertod() {
+
+        return $this->sendResponse(DeviceType::supertod()->get(), "Supertod Devices");
+    }
 }
 

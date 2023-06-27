@@ -8,6 +8,7 @@ use App\Models\DevicesView;
 use App\Http\Middleware\ValidatorRules;
 use App\Http\Controllers\BaseController;
 use Exception;
+use Response;
 
 class DeviceController extends BaseController
 {
