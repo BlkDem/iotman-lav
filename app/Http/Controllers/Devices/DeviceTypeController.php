@@ -8,7 +8,7 @@ use App\Http\Middleware\ValidatorRules;
 use Exception;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\PaginatorController;
-use App\Facades\LOG;
+use Illuminate\Support\Facades\Cache;
 
 class DeviceTypeController extends BaseController
 {
@@ -45,6 +45,8 @@ class DeviceTypeController extends BaseController
         $offset = $itemsCountPerPage*--$page;
         $res = DeviceType::limit($itemsPerPage)->offset($offset)->orderBy('device_type_name', 'asc')->get();
         $total = DeviceType::get();
+
+        Cache::put('device_types', $res, now()->addMinutes(10));
 
         $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
 
