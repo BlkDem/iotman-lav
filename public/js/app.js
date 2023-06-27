@@ -24419,16 +24419,23 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              _context.prev = 0;
+              _context.next = 3;
               return _api_repository__WEBPACK_IMPORTED_MODULE_3__["default"].getData(_api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].api_dev_blogs_read);
-            case 2:
+            case 3:
               response = _context.sent;
               _this3.devBlogs = response.data;
-            case 4:
+              _context.next = 10;
+              break;
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context["catch"](0);
+              console.error(_context.t0);
+            case 10:
             case "end":
               return _context.stop();
           }
-        }, _callee);
+        }, _callee, null, [[0, 7]]);
       }))();
     },
     getLogData: function getLogData() {
@@ -24438,16 +24445,23 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
-              _context2.next = 2;
+              _context2.prev = 0;
+              _context2.next = 3;
               return _api_repository__WEBPACK_IMPORTED_MODULE_3__["default"].getData(_api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].api_logs_read_page + '1/5');
-            case 2:
+            case 3:
               response = _context2.sent;
-              _this4.logRecords = response.data;
-            case 4:
+              _this4.logRecords = response === null || response === void 0 ? void 0 : response.data;
+              _context2.next = 10;
+              break;
+            case 7:
+              _context2.prev = 7;
+              _context2.t0 = _context2["catch"](0);
+              console.error(_context2.t0);
+            case 10:
             case "end":
               return _context2.stop();
           }
-        }, _callee2);
+        }, _callee2, null, [[0, 7]]);
       }))();
     },
     setLang: function setLang(_lang) {
@@ -33916,7 +33930,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.list-move[data-v-63cd6604],\r\n.list-enter-active[data-v-63cd6604],\r\n.list-leave-active[data-v-63cd6604] {\r\n  transition: all 0.5s ease;\n}\n.list-enter-from[data-v-63cd6604],\r\n.list-leave-to[data-v-63cd6604] {\r\n  opacity: 0;\r\n  transform: translateY(80px);\n}\n.list-leave-active[data-v-63cd6604] {\r\n  position: absolute;\n}\n.fix-height-200px[data-v-63cd6604] {\r\n    max-height: 128px;\r\n    overflow-y: auto;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.list-move[data-v-63cd6604],\n.list-enter-active[data-v-63cd6604],\n.list-leave-active[data-v-63cd6604] {\n  transition: all 0.5s ease;\n}\n.list-enter-from[data-v-63cd6604],\n.list-leave-to[data-v-63cd6604] {\n  opacity: 0;\n  transform: translateY(80px);\n}\n.list-leave-active[data-v-63cd6604] {\n  position: absolute;\n}\n.fix-height-200px[data-v-63cd6604] {\n    max-height: 128px;\n    overflow-y: auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -181,6 +181,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|DeviceType whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DeviceType whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|DeviceType supertod()
  */
 	class DeviceType extends \Eloquent {}
 }

@@ -236,6 +236,7 @@ Route::controller(ParamTypeController::class)->group(function () {
 
 Route::post('/device_type/create', [DeviceTypeController::class, 'store']);
 Route::get('/device_types/read/', [DeviceTypeController::class, 'index']);
+Route::get('/device_types/supertod/', [DeviceTypeController::class, 'supertod']);
 Route::get('/device_types/read/page/{currentPage}/{itemsPerPage}', [DeviceTypeController::class, 'page']);
 Route::get('/device_types/read/{id}', [DeviceTypeController::class, 'show']);
 Route::patch('/device_type/patch/{id}/{field}/{value}', [DeviceTypeController::class, 'patch']);

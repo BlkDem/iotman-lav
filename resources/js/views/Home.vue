@@ -142,15 +142,23 @@ export default {
 
         async getBlogData() {
 
-            const response = await Repository.getData(APIConstants.api_dev_blogs_read)
-            this.devBlogs = response.data;
+            try {
+                const response = await Repository.getData(APIConstants.api_dev_blogs_read)
+                this.devBlogs = response.data;
+            } catch(e) {
+                console.error(e)
+            }
 
         },
 
         async getLogData() {
 
-            const response = await Repository.getData(APIConstants.api_logs_read_page + '1/5')
-            this.logRecords = response.data;
+            try {
+                const response = await Repository.getData(APIConstants.api_logs_read_page + '1/5')
+                this.logRecords = response?.data;
+            } catch(e) {
+                console.error(e);
+            }
 
         },
 

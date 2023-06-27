@@ -45,4 +45,10 @@ class DeviceType extends Model
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    public function scopeSupertod($query)
+    {
+	    return $query->where('device_type_name', 'LIKE', 'ST-%');
+    }
+
 }

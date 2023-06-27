@@ -131,9 +131,27 @@ class DeviceTypeController extends BaseController
             return $this->sendError("No Record for deleting Found");
         }
 
-        $deviceTypeItem->delete($id);
+        try
+        {
+            $deviceTypeItem->delete($id);
+        }
+        catch (\Exception $e)
+        {
+            return $this->sendError("Deleting error: " . $e);
+        }
 
         return $this->sendResponse($deviceTypeItem, "Device Type $id deleted");
+    }
+
+
+    /**
+     * supertod - Supertod Devices list Scope
+     *
+     * @return array
+     */
+    public function supertod() {
+
+        return $this->sendResponse(DeviceType::supertod()->get(), "Supertod Devices");
     }
 }
 
