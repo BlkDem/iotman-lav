@@ -29,7 +29,7 @@
     "vue-axios": "^3.4.1",
     "vue-cropperjs": "^5.0.0",
     "vue-debounce": "^4.0.0",
-    "vue-loader": "^17.0.0",
+    "vue-loader": "^17.2.2",
     "vue-luxon": "^0.10.0",
     "vue-router": "^4.0.13",
     "vue-toasted": "^1.1.28",
