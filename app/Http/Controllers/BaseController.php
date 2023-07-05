@@ -11,7 +11,7 @@ class BaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function sendResponse($result, $message, $paginator=[], $cached=false)
+    public function sendResponse($result, $message, $paginator=[], $cached=false, $statusCode=200)
     {
 
         $_result = (isset($result["data"]))?$result["data"]:$result;
@@ -23,19 +23,20 @@ class BaseController extends Controller
             'paginator' => $paginator,
         ];
         // dd(response()->json($response));
-        return response()->json($response, 200);
+        return response()->json($response, $statusCode);
     }
     /**
      * send success method.
      *
      * @return \Illuminate\Http\Response
      */
-    public function sendSuccess($result=[], $message, $statusCode=200)
+    public function sendSuccess($result=[], $message, $cached=false, $statusCode=200)
     {
 
         // $_result = (isset($result["data"]))?$result["data"]:'';
     	$response = [
             'success' => true,
+            'cached' => $cached,
             'data'    => $result,
             'message' => $message,
         ];
