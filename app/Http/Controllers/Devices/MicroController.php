@@ -26,6 +26,14 @@ class MicroController extends BaseController
 
     }
 
+    /**
+     * page
+     *
+     * @param  mixed $currentPage
+     * @param  mixed $itemsPerPage
+     * @return void
+     */
+
     public function page($currentPage=0, $itemsPerPage=10){
 
         $page = (int)$currentPage;
@@ -36,7 +44,7 @@ class MicroController extends BaseController
 
         $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
 
-        return $this->sendResponse($res, "Micros List", $paginator);
+        return $this->sendResponse($res, "Micros List with pages", $paginator);
     }
 
     /**
