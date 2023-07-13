@@ -329,11 +329,12 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
       this.$refs.popup.open();
-      setTimeout(function () {
-        //delay for set focus to active input
-        // console.log('focus')
-        $("input#btnOk").focus();
-      }, 200);
+
+      // setTimeout(() => { //delay for set focus to active input
+      //     // console.log('focus')
+      //     $("input#btnOk").focus()
+      // }, 200)
+
       return new Promise(function (resolve, reject) {
         _this2.resolvePromise = resolve;
         _this2.rejectPromise = reject;
@@ -1671,7 +1672,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           placeholder: 'Input ' + field.fieldCaption,
           cols: "40",
           rows: "2"
-        }, "\r\n                    ", 8 /* PROPS */, _hoisted_6)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, field.value]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), field.isDateTime ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
+        }, "\n                    ", 8 /* PROPS */, _hoisted_6)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, field.value]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), field.isDateTime ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
           key: 1,
           type: "datetime-local",
           "class": "form-control p-2 mb-1",
@@ -2725,7 +2726,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_sass_animation_scss__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.image-panel[data-v-75fb94a3] {\r\n    max-height: 100px;\r\n    margin-bottom: 20px;\n}\n.editable-image[data-v-75fb94a3] {\r\n    margin-bottom: 20px;\r\n    max-height: inherit;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.image-panel[data-v-75fb94a3] {\n    max-height: 100px;\n    margin-bottom: 20px;\n}\n.editable-image[data-v-75fb94a3] {\n    margin-bottom: 20px;\n    max-height: inherit;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

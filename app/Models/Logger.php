@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\LoggerDataContext;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,7 @@ class Logger extends Model
     protected $casts = [
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',
+        'log_data' => LoggerDataContext::class,
     ];
 
     /**

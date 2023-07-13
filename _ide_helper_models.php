@@ -302,7 +302,7 @@ namespace App\Models{
  * @property int $log_level
  * @property string|null $log_category
  * @property string|null $log_instance
- * @property string $log_data
+ * @property mixed $log_data
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $log_object
@@ -404,9 +404,21 @@ namespace App\Models{
 /**
  * App\Models\Price
  *
+ * @property int $id
+ * @property string|null $price_desc
+ * @property float $price_value
+ * @property int $price_group_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Price newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Price newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Price query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Price whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Price whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Price wherePriceDesc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Price wherePriceGroupId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Price wherePriceValue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Price whereUpdatedAt($value)
  */
 	class Price extends \Eloquent {}
 }

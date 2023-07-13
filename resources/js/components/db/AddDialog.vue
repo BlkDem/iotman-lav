@@ -204,10 +204,10 @@ export default {
 
             this.$refs.popup.open()
 
-            setTimeout(() => { //delay for set focus to active input
-                // console.log('focus')
-                $("input#btnOk").focus()
-            }, 200)
+            // setTimeout(() => { //delay for set focus to active input
+            //     // console.log('focus')
+            //     $("input#btnOk").focus()
+            // }, 200)
 
 
             return new Promise((resolve, reject) => {
