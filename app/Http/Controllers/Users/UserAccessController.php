@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Users;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use App\Models\UserRole;
+use App\Models\User;
+use App\Models\Auth\Role;
 use Exception;
 use App\Http\Controllers\PaginatorController;
 use App\Http\Middleware\ValidatorRules;
@@ -116,6 +118,31 @@ class UserAccessController extends BaseController
         return $this->sendResponse($res, "User Roles List", $paginator);
     }
 
+
+    /**
+     * compliteResponseForUserAccess - fill the record with foreign props
+     *
+     * @param  mixed $microParam
+     * @return void
+     */
+    public function compliteResponseForUserAccess(UserRole $userRole): UserRole
+    {
+        /**
+         * Prepare complited response for front
+        */
+
+        $userId = $userRole["user_id"];
+        $userName = User::find($userId);
+
+        $roleId = $userRole["role_id"];
+        $roleName = Role::find($roleId);
+
+        $userRole["user_name"] = $userName["name"];
+        $userRole["role_name"] = $roleName["name"];
+
+        return $userRole;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -130,8 +157,9 @@ class UserAccessController extends BaseController
             // return response()->json($validator->errors(), 400);
         }
         try {
+            // dd($request);
             $newRole = UserRole::create($request->all());
-            return $this->sendSuccess($newRole, 'Role created', 201);
+            return $this->sendSuccess($this->compliteResponseForUserAccess($newRole), 'Role created', false, 201);
         }
         catch (Exception $e) {
             return $this->sendError('Error creatig record: ' . $e);

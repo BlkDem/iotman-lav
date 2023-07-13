@@ -14,13 +14,17 @@ class UserRole extends Model
 
     protected $table = "users_roles";
 
+    protected $fillable = ['user_id', 'role_id'];
+
     public static function userRolesWhereUserID($user_id)
     {
         return DB::table('users_roles')
             ->join('roles', 'roles.id', '=', 'users_roles.role_id')
+            ->join('users', 'users.id', '=', 'users_roles.user_id')
             ->select(
                 'users_roles.id as id',
                 'users_roles.user_id as user_id',
+                'users.name as user_name',
                 'roles.id as role_id',
                 'roles.name as name',
                 'roles.slug as slug',

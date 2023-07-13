@@ -88,12 +88,12 @@ class MicroParamController extends BaseController
     }
 
     /**
-     * copmliteResponseForMicroParam - fill the record with foreign props
+     * compliteResponseForMicroParam - fill the record with foreign props
      *
      * @param  mixed $microParam
      * @return void
      */
-    public function copmliteResponseForMicroParam(MicroParam $microParam): MicroParam
+    public function compliteResponseForMicroParam(MicroParam $microParam): MicroParam
     {
         /**
          * Prepare complited response for front
@@ -138,7 +138,7 @@ class MicroParamController extends BaseController
             // $newMicroParam["device_micro_idx"] = $deviceMicroIdx["device_micro_idx"];
             // $newMicroParam["type_name"] = $paramTypeName["type_name"];
 
-            return $this->sendResponse($this->copmliteResponseForMicroParam($newMicroParam), 'Param created');
+            return $this->sendResponse($this->compliteResponseForMicroParam($newMicroParam), 'Param created');
         }
         catch (Exception $e) {
             return $this->sendError('Error creating record: '. $e);
@@ -169,7 +169,7 @@ class MicroParamController extends BaseController
             // $updateParam["device_micro_idx"] = $deviceMicroIdx["device_micro_idx"];
             // $updateParam["type_name"] = $paramTypeName["type_name"];
 
-            return $this->sendResponse($this->copmliteResponseForMicroParam($updateParam), "Micro param updated");
+            return $this->sendResponse($this->compliteResponseForMicroParam($updateParam), "Micro param updated");
         }
         catch (Exception $e) {
             return $this->sendError('Deleting Record Error: ' . $e);

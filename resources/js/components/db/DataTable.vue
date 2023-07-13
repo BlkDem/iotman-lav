@@ -138,7 +138,7 @@
                         >
 
                         <div class="w-100 elipsis"
-                            v-if="!item[column].isHidden"
+
                             data-bs-toggle="tooltip" data-bs-placement="top"
                             :title="getTooltip(item[column])"
                         >
@@ -154,9 +154,9 @@
                                 {{ item[column].value }}
                             </span>
 
-                            <span v-if="item[column].isLookup&&!item[column].isHidden"
+                            <span v-if="item[column].isLookup"
                                 :class="{
-                                            'text-info': item[column].isHighLight,
+                                            'text-info': item[column].isHighLight || item[column].isHidden,
                                         }"
                                 @click.stop="onCellClick(item[column].isEditable, ckey, key)"
                             >
@@ -394,7 +394,7 @@ export default {
                 return (this.activeCol!==key||this.activeRow!==ckey)&&
                         (!item.isImage)&&
                         (!item.isDirectionVirtualImage)&&
-                        (!item.isHidden)&&
+                        // (!item.isHidden)&&
                         (!item.isLookup)
             },
 

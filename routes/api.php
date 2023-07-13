@@ -27,6 +27,7 @@ use App\Http\Controllers\Users\PermissionController;
 use App\Http\Controllers\Users\UserAccessController;
 use App\Http\Controllers\Helpers\AllModelController;
 use App\Http\Controllers\PriceGroupController;
+use App\Http\Controllers\Users\RolePermissionController;
 
 // use App\Http\Controllers\ImagesAlbumController;
 
@@ -73,7 +74,8 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/user/create', 'store');
     Route::get('/users/read', 'index');
     Route::get('/users/read/page/{currentPage}/{itemsPerPage}', 'page');
-    Route::get('/users/lookup/{currentPage}/{itemsPerPage}', 'indexLookup');
+    Route::get('/users/lookup/', 'indexLookupWithPages');
+    Route::get('/users/lookup/{currentPage}/{itemsPerPage}', 'indexLookupWithPages');
     Route::get('/user/read/{id}', 'show');
     Route::get('/user/roles/{id}', 'roles');
     Route::put('/user/update/{updateUser}', 'update');
@@ -124,6 +126,21 @@ Route::controller(UserAccessController::class)->group(function () {
     Route::get(   '/user_roles/user/{user_id}', 'getUserRoles');
     Route::get(   '/user_roles/lookup', 'indexLookup');
     Route::get(   '/user_roles/read/page/{currentPage}/{itemsPerPage}/{user_id}', 'pageWhereUser');
+});
+
+//CRUD routes for model 'roles_permissions'
+
+Route::controller(RolePermissionController::class)->group(function () {
+    Route::post(  '/role_permission/create', 'store');
+    Route::get(   '/role_permissions/read', 'index');
+    Route::get(   '/role_permissions/read/page/{currentPage}/{itemsPerPage}', 'page');
+    Route::get(   '/role_permission/read/{id}', 'show');
+    Route::put(   '/role_permission/update/{updateRole}', 'update');
+    Route::delete('/role_permission/delete/{id}', 'destroy');
+    Route::patch( '/role_permission/patch/{id}/{field}/{value}', 'patch');
+    Route::get(   '/role_permissions/user/{user_id}', 'getUserRoles');
+    Route::get(   '/role_permissions/lookup', 'indexLookup');
+    Route::get(   '/role_permissions/read/page/{currentPage}/{itemsPerPage}/{user_id}', 'pageWhereUser');
 });
 
 //CRUD routes for model 'images'

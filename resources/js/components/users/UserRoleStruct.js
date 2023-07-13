@@ -33,10 +33,26 @@ export default {
             isEditable: false,
             isSortable: true,
             isHighLight: false,
-            columnsCount: 8,
+            columnsCount: 4,
             lookupId: 'role_id',
-            lookupApi: APIConstants.api_user_roles_lookup,
+            lookupApi: APIConstants.api_roles_read,
             isLookup: true,
+        },
+
+        {
+            fieldName: 'user_id',
+            displayName: 'user_name',
+            fieldCaption: 'User',
+            type: String,
+            isImage: false,
+            isEditable: false,
+            isSortable: true,
+            isHighLight: false,
+            columnsCount: 4,
+            lookupId: 'user_id',
+            lookupApi: APIConstants.api_users_lookup,
+            isLookup: true,
+            isHidden: true,
         },
 
 

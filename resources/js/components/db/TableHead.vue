@@ -56,10 +56,10 @@ export default {
     methods: {
         setClass(width, hidden, key) {
             let colClass = 'col-sm-' + width + ' col-xs-' + width + ' col-lg-' + width
-            let rightAlign = (key === this.fieldsCaptions.length - 1)?'flex-right':''
-            let hiddenClass = (hidden)?'hide':colClass
-            return rightAlign + ' ' + hiddenClass
-            // return colClass
+            // let rightAlign = (key === this.fieldsCaptions.length - 1)?'flex-right':''
+            // let hiddenClass = (hidden)?'hide':colClass
+            // return rightAlign + ' ' + hiddenClass
+            return colClass
         },
 
         changeDirection(ckey) {

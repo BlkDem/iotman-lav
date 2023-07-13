@@ -33,7 +33,7 @@
 
                 </div>
 
-                <div v-if="field.isLookup" :class="{'hide': field.isHidden}" class="mb-1">
+                <div v-if="field.isLookup" class="mb-1">
                     <label class="px-2">{{ field.fieldCaption }} </label>
                     <DataSelect
                         :dataTableReadApi="field.lookupApi"
@@ -45,6 +45,8 @@
                     </DataSelect>
                     <!-- <input class="form-control p-2 mb-4" :placeholder="'Input ' + field.fieldCaption"  v-model="field.value" /> -->
                 </div>
+
+                <!-- <input type="text" v-if="field.isHidden" :value="field.value" class="mb-1" /> -->
 
 
                 <div v-if="field.isImage&&field.isEditable" class="flex-center-column py-1">
@@ -218,6 +220,8 @@ export default {
 
         confirmDialog() {
             this.$refs.popup.close()
+
+            console.log(this.dataFields)
 
             for (let item in this.dataFields) {
                 if (!this.dataFields[item].isFieldIgnore)

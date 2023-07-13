@@ -75,13 +75,13 @@ class UserController extends BaseController
     }
 
     /**
-     * indexLookup - Getting users with their devices
+     * indexLookupWithPages - Getting users with their devices with pager
      *
      * @param  int $currentPage
      * @param  int $itemsPerPage
      * @return Response
      */
-    public function indexLookup($currentPage=0, $itemsPerPage=10)
+    public function indexLookupWithPages($currentPage=0, $itemsPerPage=10)
     {
         $page = (int)$currentPage;
 

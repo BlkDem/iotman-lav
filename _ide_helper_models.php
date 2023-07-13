@@ -448,6 +448,17 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\RolePermission
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|RolePermission newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RolePermission newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RolePermission query()
+ */
+	class RolePermission extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id
