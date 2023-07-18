@@ -12,6 +12,7 @@ use Exception;
 use App\Http\Controllers\PaginatorController;
 use App\Http\Middleware\ValidatorRules;
 use Illuminate\Database\Eloquent\Builder;
+use App\Http\Controllers\Helpers\CompleteResponseController;
 
 class UserAccessController extends BaseController
 {
@@ -27,16 +28,7 @@ class UserAccessController extends BaseController
 
     }
 
-        /**
-     * getTotalRecords - Getting records count
-     *
-     * @return Integer
-     */
-    private function getTotalRecords() {
-        return UserRole::get()->count();
-    }
-
-        /**
+    /**
      * pageWhereAlbum Get Images on a selected page where Album ID
      *
      * @param  int $currentPage - selected page
@@ -113,34 +105,9 @@ class UserAccessController extends BaseController
 
         $res = UserRole::limit($itemsPerPage)->offset($offset)->get();
 
-        $paginator = PaginatorController::Paginate($this->getTotalRecords(), $itemsPerPage, $currentPage);
+        $paginator = PaginatorController::Paginate($res->count(), $itemsPerPage, $currentPage);
 
         return $this->sendResponse($res, "User Roles List", $paginator);
-    }
-
-
-    /**
-     * compliteResponseForUserAccess - fill the record with foreign props
-     *
-     * @param  mixed $microParam
-     * @return void
-     */
-    public function compliteResponseForUserAccess(UserRole $userRole): UserRole
-    {
-        /**
-         * Prepare complited response for front
-        */
-
-        $userId = $userRole["user_id"];
-        $userName = User::find($userId);
-
-        $roleId = $userRole["role_id"];
-        $roleName = Role::find($roleId);
-
-        $userRole["user_name"] = $userName["name"];
-        $userRole["role_name"] = $roleName["name"];
-
-        return $userRole;
     }
 
     /**
@@ -157,9 +124,14 @@ class UserAccessController extends BaseController
             // return response()->json($validator->errors(), 400);
         }
         try {
-            // dd($request);
+
             $newRole = UserRole::create($request->all());
-            return $this->sendSuccess($this->compliteResponseForUserAccess($newRole), 'Role created', false, 201);
+
+            return $this->sendSuccess((new CompleteResponseController())($newRole,
+                [new Role(), new User()],
+                ["role_id", "user_id"],
+                ["role_name", "user_name"]),
+                'Role created', false, 201);
         }
         catch (Exception $e) {
             return $this->sendError('Error creatig record: ' . $e);

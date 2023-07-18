@@ -26,7 +26,7 @@ export default {
 
         {
             fieldName: 'role_id',
-            displayName: 'name',
+            displayName: 'role_name',
             fieldCaption: 'Role',
             type: String,
             isImage: false,
@@ -35,7 +35,7 @@ export default {
             isHighLight: false,
             columnsCount: 4,
             lookupId: 'role_id',
-            lookupApi: APIConstants.api_roles_read,
+            lookupApi: APIConstants.api_roles_lookup,
             isLookup: true,
         },
 

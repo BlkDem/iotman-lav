@@ -252,20 +252,20 @@
 </template>
 
 <script>
-import ConfirmDialogue from '../../components/common/ConfirmDialogue.vue';
-import Paginator from './Paginator.vue';
-import MessagesConstants from '../strings_constants/strings'
-import Pathes from "../../config/pathes";
-import Sorting from "../../helpers/Sorting";
-import Filtering from "../../helpers/Filtering";
-import ParsingErrors from "../../helpers/ParsingErrors";
-import AddItem from './AddDialog.vue';
-import TableNav from '../../components/common/TableBar/TableNav.vue';
-import TableHead from './TableHead.vue';
-import Viewer from '../imagelib/Viewer.vue';
-import Repository from '../../api/repository';
+import ConfirmDialogue from '@/components/common/ConfirmDialogue.vue';
+import Paginator from '@/components/db/Paginator';
+import MessagesConstants from '@/components/strings_constants/strings'
+import Pathes from "@/config/pathes";
+import Sorting from "@/helpers/Sorting";
+import Filtering from "@/helpers/Filtering";
+import ParsingErrors from "@/helpers/ParsingErrors";
+import AddItem from '@/components/db/AddDialog.vue';
+import TableNav from '@/components/common/TableBar/TableNav.vue';
+import TableHead from '@/components/db/TableHead.vue';
+import Viewer from '@/components/imagelib/Viewer.vue';
+import Repository from '@/api/repository';
 import { Tooltip } from 'bootstrap'
-import { errorEvent } from '../../api/errors';
+import { errorEvent } from '@/api/errors';
 
 export default {
 
@@ -685,9 +685,8 @@ export default {
                 let fkValue = (this.foreignValue>0)?'/'+this.foreignValue:''
 
                 try {
-                    console.log(this.api.get)
+                    // console.log(this.api.get)
                     const response = await Repository.getData(this.api.get + currentPage + "/" + itemsPerPage + fkValue)
-                    // .then(response => {
 
                         this.Items = await this.populateListItems(response.data);
                         this.filteredItems = this.Items;
@@ -707,7 +706,6 @@ export default {
                                 objectRef: this
                             }
                         )
-                    // })
                     }
                     catch(error) {
                         errorEvent(error)
@@ -724,7 +722,6 @@ export default {
 
                 if (confirmDelete) {
                     try {
-                        // await axios.delete(this.api.delete + id)
                         await Repository.execute('delete', this.api.delete + id);
                         this.Items.splice(key, 1);
                         this.Items = this.filteredItems
@@ -773,10 +770,8 @@ export default {
                     try {
 
 
-                        // const response = await axios.post(this.api.insert, _values)
-                        console.log(_values)
                         const response = await Repository.execute('post', this.api.insert, _values)
-                        console.log(console.response)
+
                         const _res = response.data
 
                         const transformItem = this.processListItem(_res)
@@ -834,7 +829,6 @@ export default {
                         console.log(_values)
                         const response = await Repository.execute('put', this.api.update + id, _values)
 
-                        // console.log('response: ', response.data)
                         const listItem = response.data
                         this.filteredItems[key] = this.processListItem(listItem)
                         this.Items[key] = this.filteredItems[key]
@@ -863,29 +857,3 @@ export default {
     };
 </script>
 
-<style scoped>
-
-input {
-    max-height: 2rem;
-}
-
-.list-move,
-/* apply transition to moving elements */
-.list-enter-active,
-.list-leave-active {
-    transition: all 0.5s ease;
-}
-
-.list-enter-from,
-.list-leave-to {
-    opacity: 0;
-    transform: translateY(30px);
-}
-
-/* ensure leaving items are taken out of layout flow so that moving
-   animations can be calculated correctly. */
-.list-leave-active {
-    position: absolute;
-}
-
-</style>

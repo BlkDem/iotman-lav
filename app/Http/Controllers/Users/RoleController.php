@@ -52,12 +52,9 @@ class RoleController extends BaseController
 
         $offset = $itemsPerPage*--$page;
 
-        $res = Role::albumImagesCount()
-                ->limit($itemsPerPage)
-                ->offset($offset)
-                ->get();
+        $res = Role::select('id', 'name', 'name as role_name')->limit($itemsPerPage)->offset($offset)->orderBy('role_name', 'asc')->get();
 
-        $paginator = PaginatorController::Paginate($this->getTotalRecords(), (int)$itemsPerPage, $currentPage);
+        $paginator = PaginatorController::Paginate($res->count(), (int)$itemsPerPage, $currentPage);
 
         return $this->sendResponse($res, "Roles lookup List", $paginator);
 

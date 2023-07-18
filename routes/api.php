@@ -106,6 +106,7 @@ Route::controller(PermissionController::class)->group(function () {
 Route::controller(RoleController::class)->group(function () {
     Route::post(  '/role/create', 'store');
     Route::get(   '/roles/read', 'index');
+    Route::get(   '/roles/lookup', 'indexLookup');
     Route::get(   '/roles/read/page/{currentPage}/{itemsPerPage}', 'page');
     Route::get(   '/role/read/{id}', 'show');
     Route::put(   '/role/update/{updateRole}', 'update');

@@ -91,14 +91,12 @@ class DeviceTypeController extends BaseController
         $validator = ValidatorRules::MakeValidate($request, 'device_types');
         if ($validator->fails()) {
             return $this->sendError($validator->errors(), 400);
-            // return response()->json($validator->errors(), 400);
         }
         try {
             $newDeviceType = DeviceType::create($request->all());
             return $this->sendSuccess($newDeviceType, "Device Type Created", 201);
         }
         catch (Exception $e) {
-            // return response()->json('Creating Record Error: ' . $e, 400);
             return $this->sendError('Creating Record Error: ' . $e, 400);
         }
     }
