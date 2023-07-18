@@ -363,7 +363,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               infoCardMoreButtonCaption: itemCard.infoCardMoreButtonCaption,
               marginBottom: 2,
               buttonVisible: itemCard.buttonVisible
-            }, null, 8 /* PROPS */, ["class", "infoCardCaption", "infoCardTitle", "infoCardText", "infoCardMoreButtonCaption", "buttonVisible"]);
+            }, null, 8 /* PROPS */, ["infoCardCaption", "infoCardTitle", "infoCardText", "infoCardMoreButtonCaption", "buttonVisible"]);
           }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Paginator, {
             ref: "refBlogPaginator"
           }, null, 512 /* NEED_PATCH */)];

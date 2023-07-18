@@ -35,7 +35,7 @@
             <!-- <h5 class="text-primary my-2 align-center">{{ dataDescription }}</h5> -->
         </div>
 
-        <div class="row my-2" v-if="!compactView">
+        <b-row class="my-2" v-if="!compactView">
             <div class="col-sm-4 col-xs-4 col-lg-4 p-2" v-for="(item, key) in filteredItems"
                 v-bind:key="key" v-bind:id="item.id.value"
                 :class="{
@@ -109,7 +109,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </b-row>
 
         <!-- compact view -->
         <div v-show="compactView" class="my-3" >

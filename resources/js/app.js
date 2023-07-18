@@ -16,6 +16,11 @@ import Toaster from './components/common/Toaster.vue'; //resources\js\components
 import CommonCard from './components/common/CommonCard.vue';
 import InfoCard from './components/common/InfoCard.vue';
 
+import BootstrapVue3 from "bootstrap-vue-3";
+
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue-3/dist/bootstrap-vue-3.css";
+
 import mitt from 'mitt';
 const emitter = mitt();
 
@@ -56,6 +61,7 @@ app.component('AppMenu', AppMenu);
 app.use(router)
     .use(store)
     .use(SetupCalendar, {})
+    .use(BootstrapVue3)
     .directive('debounce', vue3Debounce({ lock: true }))
     .mount('#app');
 
