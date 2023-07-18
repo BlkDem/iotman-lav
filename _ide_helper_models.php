@@ -402,6 +402,40 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Price
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Price newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Price newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Price query()
+ */
+	class Price extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\PriceGroup
+ *
+ * @property int $id
+ * @property string $price_group_name
+ * @property string|null $price_group_desc
+ * @property float $price_group_discount
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|PriceGroup newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PriceGroup newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PriceGroup query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PriceGroup whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PriceGroup whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PriceGroup wherePriceGroupDesc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PriceGroup wherePriceGroupDiscount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PriceGroup wherePriceGroupName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PriceGroup whereUpdatedAt($value)
+ */
+	class PriceGroup extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id

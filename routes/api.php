@@ -26,6 +26,7 @@ use App\Http\Controllers\Users\RoleController;
 use App\Http\Controllers\Users\PermissionController;
 use App\Http\Controllers\Users\UserAccessController;
 use App\Http\Controllers\Helpers\AllModelController;
+use App\Http\Controllers\PriceGroupController;
 
 // use App\Http\Controllers\ImagesAlbumController;
 
@@ -45,11 +46,26 @@ use App\Http\Controllers\Helpers\AllModelController;
 
 // Route::get('/test', [LoggerController::class, 'getLog']);
 
+// public routes
+Route::get('/device_types/supertod/', [DeviceTypeController::class, 'supertod']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::middleware('auth:sanctum')->group( function () {
+
+
+
+//CRUD routes for model 'price_groups'
+
+Route::controller(PriceGroupController::class)->group(function() {
+    Route::get('/price_groups/read', 'index');
+    Route::post('/price_group/create', 'store');
+    Route::delete('/price_group/delete/{id}', 'destroy');
+    Route::patch('/price_group/patch/{id}/{field}/{value}', 'patch');
+    Route::get('/price_groups/lookup/{currentPage}/{itemsPerPage}', 'indexLookup');
+});
 
 //CRUD routes for model 'users'
 
@@ -236,7 +252,7 @@ Route::controller(ParamTypeController::class)->group(function () {
 
 Route::post('/device_type/create', [DeviceTypeController::class, 'store']);
 Route::get('/device_types/read/', [DeviceTypeController::class, 'index']);
-Route::get('/device_types/supertod/', [DeviceTypeController::class, 'supertod']);
+// Route::get('/device_types/supertod/', [DeviceTypeController::class, 'supertod']);
 Route::get('/device_types/read/page/{currentPage}/{itemsPerPage}', [DeviceTypeController::class, 'page']);
 Route::get('/device_types/read/{id}', [DeviceTypeController::class, 'show']);
 Route::patch('/device_type/patch/{id}/{field}/{value}', [DeviceTypeController::class, 'patch']);

@@ -38,11 +38,13 @@ class DeviceTypeController extends BaseController
     public function page($currentPage=0, $itemsPerPage=10)
     {
 
+        $is_cached = false;
         $cache_key = app(DeviceType::class)->getTable() . "_" . $currentPage . "_" . $itemsPerPage;
         $cache_value = Cache::store('database')->get($cache_key);
 
         if (!is_null($cache_value)) {
             $res = $cache_value;
+            $is_cached = true;
         }
         else {
             $page = (($currentPage < 0) || ($currentPage === null))?0:$currentPage;
@@ -58,7 +60,7 @@ class DeviceTypeController extends BaseController
 
         $paginator = PaginatorController::Paginate($res->count(), (int)($itemsPerPage), $currentPage);
 
-        return $this->sendResponse($res, "Device Types List", $paginator);
+        return $this->sendResponse($res, "Device Types List", $paginator, $is_cached);
     }
 
     /**

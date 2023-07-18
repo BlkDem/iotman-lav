@@ -73,6 +73,18 @@ class ValidatorRules extends Validator
                     ];
                     break;
 
+            case 'price_groups':
+                    $_rulesArray = [
+                        'price_group_name' => 'required|min:3',
+                    ];
+                    break;
+
+            case 'prices':
+                    $_rulesArray = [
+                        'price_group_id' => 'required',
+                    ];
+                    break;
+
             case 'device_micros':
                     $_rulesArray = [
                         'device_id' => 'required',
