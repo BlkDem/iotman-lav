@@ -12,7 +12,6 @@ class DevicesViewController extends BaseController
     {
 
         $res = DevicesView::orderBy('device_name', 'asc')->get();
-        dd($res);
 
         $paginator = PaginatorController::Paginate($res->count(), 1, 1);
 
