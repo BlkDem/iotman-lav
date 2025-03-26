@@ -17,7 +17,6 @@ class Micro extends Model
         'micro_desc',
         'micro_config',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
-
 }

@@ -10,37 +10,38 @@ class ServerStatusController extends BaseController
     /**
      * shellCmd - do not use never !!!
      *
-     * @param  string $cmd
+     * @param  string  $cmd
      * @return string
      */
     public static function shellCmd($cmd)
     {
-        {
-            $process = Process::fromShellCommandline($cmd);
 
-            $processOutput = '';
+        $process = Process::fromShellCommandline($cmd);
 
-            $captureOutput = function ($type, $line) use (&$processOutput) {
-                $processOutput .= $line;
-            };
+        $processOutput = '';
 
-            $process->setTimeout(null)
-                ->run($captureOutput);
+        $captureOutput = function ($type, $line) use (&$processOutput) {
+            $processOutput .= $line;
+        };
 
-            // dd($captureOutput);
+        $process->setTimeout(null)
+            ->run($captureOutput);
 
-            if ($process->getExitCode()) {
-                // $exception = new ShellCommandFailedException($cmd . " - " . $processOutput);
-                // report($exception);
-                return "error";
-                // throw $exception;
-            }
+        // dd($captureOutput);
 
-            return $processOutput;
+        if ($process->getExitCode()) {
+            // $exception = new ShellCommandFailedException($cmd . " - " . $processOutput);
+            // report($exception);
+            return 'error';
+            // throw $exception;
         }
+
+        return $processOutput;
+
     }
 
-    public function getServerLoad($cmd){
+    public function getServerLoad($cmd)
+    {
         return self::shellCmd($cmd);
     }
 }

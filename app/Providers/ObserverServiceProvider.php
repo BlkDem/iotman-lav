@@ -3,21 +3,21 @@
 namespace App\Providers;
 
 use App\Models\Album;
+use App\Models\Auth\Permission;
+use App\Models\Auth\Role;
 use App\Models\DevBlog;
 use App\Models\Device;
 use App\Models\DeviceMicro;
 use App\Models\DeviceType;
 use App\Models\DeviceUser;
+use App\Models\Helpers\Preset;
 use App\Models\Image;
 use App\Models\Micro;
 use App\Models\MicroParam;
 use App\Models\ParamType;
 use App\Models\User;
-use App\Models\Auth\Role;
-use App\Models\Auth\Permission;
 use App\Observers\GlobalObserver;
 use Illuminate\Support\ServiceProvider;
-use App\Models\Helpers\Preset;
 
 class ObserverServiceProvider extends ServiceProvider
 {

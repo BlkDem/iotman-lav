@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use App\Services\LoggerService;
+use Illuminate\Support\ServiceProvider;
 
 class FacadeServiceProvider extends ServiceProvider
 {
@@ -14,8 +14,8 @@ class FacadeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('LOG',function($app){
-            return new LoggerService();
+        $this->app->bind('LOG', function ($app) {
+            return new LoggerService;
         });
     }
 

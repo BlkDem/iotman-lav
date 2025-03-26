@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Helpers;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\PaginatorController;
-use App\Models\Helpers\Preset;
-use Illuminate\Http\Request;
-use Exception;
 use App\Http\Middleware\ValidatorRules;
+use App\Models\Helpers\Preset;
+use Exception;
+use Illuminate\Http\Request;
 
 class PresetController extends BaseController
 {
-
-    private function getTotalRecords() {
+    private function getTotalRecords()
+    {
         return Preset::get()->count();
     }
 
@@ -22,28 +22,29 @@ class PresetController extends BaseController
 
         $paginator = PaginatorController::Paginate($res->count(), 1, 1);
 
-        return $this->sendResponse($res, "Presets", $paginator);
+        return $this->sendResponse($res, 'Presets', $paginator);
 
     }
 
     public function indexGroup($group)
     {
-        $groupData = Preset::where('preset_key', 'LIKE', $group . '%')->get();
+        $groupData = Preset::where('preset_key', 'LIKE', $group.'%')->get();
 
-        return $this->sendResponse($groupData, "Presets");
+        return $this->sendResponse($groupData, 'Presets');
     }
 
-    public function page($currentPage=0, $itemsPerPage=10){
+    public function page($currentPage = 0, $itemsPerPage = 10)
+    {
 
-        $page = (int)$currentPage;
+        $page = (int) $currentPage;
 
-        $offset = $itemsPerPage*--$page;
+        $offset = $itemsPerPage * --$page;
 
         $res = Preset::limit($itemsPerPage)->offset($offset)->orderBy('preset_key', 'asc')->get();
 
-        $paginator = PaginatorController::Paginate($this->getTotalRecords(), (int)($itemsPerPage), $currentPage);
+        $paginator = PaginatorController::Paginate($this->getTotalRecords(), (int) ($itemsPerPage), $currentPage);
 
-        return $this->sendResponse($res, "Preset pages", $paginator);
+        return $this->sendResponse($res, 'Preset pages', $paginator);
     }
 
     public function store(Request $request)
@@ -55,10 +56,10 @@ class PresetController extends BaseController
         }
         try {
             $newPreset = Preset::create($request->all());
+
             return $this->sendSuccess($newPreset, 'Preset created', 201);
-        }
-        catch (Exception $e) {
-            return $this->sendError('Error creatig preset: ' . $e);
+        } catch (Exception $e) {
+            return $this->sendError('Error creatig preset: '.$e);
         }
     }
 
@@ -68,51 +69,55 @@ class PresetController extends BaseController
         if (is_null($res)) {
             return $this->sendError("No Record for id=$id Found");
         }
+
         return $this->sendResponse($res, "Preset (id = $id) found");
     }
 
-    public function update(Request $request, Preset $updatePreset) {
+    public function update(Request $request, Preset $updatePreset)
+    {
         $validator = ValidatorRules::MakeValidate($request, 'presets');
         if ($validator->fails()) {
             return $this->sendError($validator->errors());
         }
         try {
             $updatePreset->update($request->all());
+
             return $this->sendResponse($updatePreset, 'Preset updated');
-        }
-        catch (Exception $e) {
-            return $this->sendError('Update record error: ' . $e);
+        } catch (Exception $e) {
+            return $this->sendError('Update record error: '.$e);
         }
     }
 
-    public function patch(Request $request, $id, $field, $value){
+    public function patch(Request $request, $id, $field, $value)
+    {
         try {
             $patchAlbum = Preset::whereId($id);
             $patchAlbum->update([
-                "$field" => $value
+                "$field" => $value,
             ]);
             $res = Preset::find($id);
+
             return response()->json($res, 200);
-        }
-        catch (Exception $e) {
-            return response()->json('Patching Record Error: ' . $e, 400);
+        } catch (Exception $e) {
+            return response()->json('Patching Record Error: '.$e, 400);
         }
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $presetItem = Preset::find($id);
         if ($presetItem === null) {
-            return $this->sendError("No Record for deleting Found");
+            return $this->sendError('No Record for deleting Found');
         }
 
         try {
             $presetItem->delete($id);
+
             return $this->sendResponse($presetItem, "Preset $id deleted");
 
         } catch (Exception $e) {
-            return $this->sendError('Deleting error: ' . $e);
+            return $this->sendError('Deleting error: '.$e);
         }
 
     }
-
 }

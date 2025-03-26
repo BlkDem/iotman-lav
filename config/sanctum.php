@@ -21,9 +21,8 @@ return [
     //     Sanctum::currentApplicationUrlWithPort()
     // ))),
 
-
     'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS',
-    'localhost,
+        'localhost,
     dev.umolab.ru,
     iotman.blkdem.ru,
     http://localhost,

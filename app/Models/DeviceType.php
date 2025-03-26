@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $device_type_image
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Database\Factories\DeviceTypeFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|DeviceType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|DeviceType newQuery()
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|DeviceType whereDeviceTypeName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DeviceType whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DeviceType whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class DeviceType extends Model
@@ -38,7 +40,7 @@ class DeviceType extends Model
         'device_type_desc',
         'device_type_image',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     protected $casts = [
@@ -48,7 +50,6 @@ class DeviceType extends Model
 
     public function scopeSupertod($query)
     {
-	    return $query->where('device_type_name', 'LIKE', 'ST-%');
+        return $query->where('device_type_name', 'LIKE', 'ST-%');
     }
-
 }

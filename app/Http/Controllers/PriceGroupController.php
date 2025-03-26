@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\ValidatorRules;
 use App\Models\PriceGroup;
 use Illuminate\Http\Request;
-use App\Http\Controllers\BaseController;
-use App\Http\Controllers\PaginatorController;
-use App\Http\Middleware\ValidatorRules;
 
 class PriceGroupController extends BaseController
 {
@@ -21,36 +19,34 @@ class PriceGroupController extends BaseController
 
         $paginator = PaginatorController::Paginate($res->count(), 1, 1);
 
-        return $this->sendResponse($res, "Price Groups List", $paginator);
+        return $this->sendResponse($res, 'Price Groups List', $paginator);
 
     }
 
-        /**
+    /**
      * page
      *
-     * @param  mixed $currentPage
-     * @param  mixed $itemsPerPage
+     * @param  mixed  $currentPage
+     * @param  mixed  $itemsPerPage
      * @return void
      */
+    public function page($currentPage = 0, $itemsPerPage = 10)
+    {
 
-     public function page($currentPage=0, $itemsPerPage=10){
+        $page = (int) $currentPage;
 
-        $page = (int)$currentPage;
-
-        $offset = $itemsPerPage*--$page;
+        $offset = $itemsPerPage * --$page;
         $res = PriceGroup::limit($itemsPerPage)->offset($offset)->orderBy('price_group_name', 'asc')->get();
         $total = PriceGroup::get();
 
-        $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
+        $paginator = PaginatorController::Paginate($total->count(), (int) ($itemsPerPage), $currentPage);
 
-        return $this->sendResponse($res, "Price Groups List with pages", $paginator);
+        return $this->sendResponse($res, 'Price Groups List with pages', $paginator);
     }
-
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -61,17 +57,16 @@ class PriceGroupController extends BaseController
         }
         try {
             $newPriceGroup = PriceGroup::create($request->all());
-            return $this->sendSuccess($newPriceGroup, "Price Group Created", 201);
-        }
-        catch (\Exception $e) {
-            return $this->sendError('Creating Record Error: ' . $e, 400);
+
+            return $this->sendSuccess($newPriceGroup, 'Price Group Created', 201);
+        } catch (\Exception $e) {
+            return $this->sendError('Creating Record Error: '.$e, 400);
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PriceGroup  $priceGroup
      * @return \Illuminate\Http\Response
      */
     public function show(PriceGroup $priceGroup)
@@ -82,7 +77,6 @@ class PriceGroupController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\PriceGroup  $priceGroup
      * @return \Illuminate\Http\Response
      */
@@ -96,10 +90,10 @@ class PriceGroupController extends BaseController
 
         try {
             $updatePriceGroup->update($request->all());
-            return $this->sendResponse($updatePriceGroup, "Price Group updated");
-        }
-        catch (\Exception $e) {
-            return $this->sendError('Updating Record Error: ' . $e, 400);
+
+            return $this->sendResponse($updatePriceGroup, 'Price Group updated');
+        } catch (\Exception $e) {
+            return $this->sendError('Updating Record Error: '.$e, 400);
         }
     }
 
@@ -114,16 +108,13 @@ class PriceGroupController extends BaseController
         $priceGroup = PriceGroup::find($id);
 
         if ($priceGroup === null) {
-            return $this->sendError("No Record for deleting Found");
+            return $this->sendError('No Record for deleting Found');
         }
 
-        try
-        {
+        try {
             $priceGroup->delete($id);
-        }
-        catch (\Exception $e)
-        {
-            return $this->sendError("Deleting error: " . $e);
+        } catch (\Exception $e) {
+            return $this->sendError('Deleting error: '.$e);
         }
 
         return $this->sendResponse($priceGroup, "Device Type $id deleted");

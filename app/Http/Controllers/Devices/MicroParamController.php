@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Devices;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\PaginatorController;
-use App\Models\MicroParam;
-use App\Models\DeviceMicro;
-use App\Models\ParamType;
 use App\Http\Middleware\ValidatorRules;
-use Illuminate\Support\Facades\DB;
+use App\Models\DeviceMicro;
+use App\Models\MicroParam;
+use App\Models\ParamType;
 use Exception;
+use Illuminate\Http\Request;
 
 class MicroParamController extends BaseController
 {
@@ -20,7 +19,7 @@ class MicroParamController extends BaseController
 
         $paginator = PaginatorController::Paginate($res->count(), 1, 1);
 
-        return $this->sendResponse($res, "Micro params List", $paginator);
+        return $this->sendResponse($res, 'Micro params List', $paginator);
 
     }
 
@@ -36,6 +35,7 @@ class MicroParamController extends BaseController
         if (is_null($res)) {
             return $this->sendError("No Record for id=$id Found");
         }
+
         return $this->sendResponse($res, "Image (id = $id) found");
 
     }
@@ -43,36 +43,38 @@ class MicroParamController extends BaseController
     /**
      * Get dataset on selected page
      *
-     * @param  int $currentPage
-     * @param  int $itemsPerPage
+     * @param  int  $currentPage
+     * @param  int  $itemsPerPage
      * @return void
      */
-    public function page($currentPage=0, $itemsPerPage=10){
+    public function page($currentPage = 0, $itemsPerPage = 10)
+    {
 
-        $page = (int)$currentPage;
+        $page = (int) $currentPage;
 
-        $offset = $itemsPerPage*--$page;
+        $offset = $itemsPerPage * --$page;
         $res = MicroParam::limit($itemsPerPage)->offset($offset)->orderBy('param_in, param_name', 'asc')->get();
         $total = MicroParam::get();
 
-        $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
+        $paginator = PaginatorController::Paginate($total->count(), (int) ($itemsPerPage), $currentPage);
 
-        return $this->sendResponse($res, "Micro params List", $paginator);
+        return $this->sendResponse($res, 'Micro params List', $paginator);
     }
 
     /**
      * pageWhereMicroDevice - get dataset on a selected page where $device_micro_id
      *
-     * @param  mixed $currentPage
-     * @param  mixed $itemsPerPage
-     * @param  mixed $device_micro_id
+     * @param  mixed  $currentPage
+     * @param  mixed  $itemsPerPage
+     * @param  mixed  $device_micro_id
      * @return void
      */
-    public function pageWhereMicroDevice($currentPage=0, $itemsPerPage=10, $device_micro_id){
+    public function pageWhereMicroDevice($currentPage, $itemsPerPage, $device_micro_id)
+    {
 
-        $page = (int)$currentPage;
+        $page = (int) $currentPage;
 
-        $offset = $itemsPerPage*--$page;
+        $offset = $itemsPerPage * --$page;
 
         $res = MicroParam::deviceMicroParamsWhereID($device_micro_id)
             ->limit($itemsPerPage)->offset($offset)
@@ -82,42 +84,39 @@ class MicroParamController extends BaseController
 
         $total = MicroParam::where('device_micro_id', $device_micro_id)->get();
 
-        $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
+        $paginator = PaginatorController::Paginate($total->count(), (int) ($itemsPerPage), $currentPage);
 
-        return $this->sendResponse($res, "Micro params List", $paginator);
+        return $this->sendResponse($res, 'Micro params List', $paginator);
     }
 
     /**
      * copmliteResponseForMicroParam - fill the record with foreign props
      *
-     * @param  mixed $microParam
+     * @param  mixed  $microParam
      * @return void
      */
     public function copmliteResponseForMicroParam(MicroParam $microParam): MicroParam
     {
         /**
          * Prepare complited response for front
-        */
-
+         */
         $newMicroParam = $microParam;
 
-        $deviceMicroId = $microParam["device_micro_id"];
+        $deviceMicroId = $microParam['device_micro_id'];
         $deviceMicroIdx = DeviceMicro::find($deviceMicroId);
 
-        $paramTypeId = $microParam["param_type_id"];
+        $paramTypeId = $microParam['param_type_id'];
         $paramTypeName = ParamType::find($paramTypeId);
 
-        $newMicroParam["device_micro_idx"] = $deviceMicroIdx["device_micro_idx"];
-        $newMicroParam["type_name"] = $paramTypeName["type_name"];
+        $newMicroParam['device_micro_idx'] = $deviceMicroIdx['device_micro_idx'];
+        $newMicroParam['type_name'] = $paramTypeName['type_name'];
 
         return $newMicroParam;
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -139,20 +138,19 @@ class MicroParamController extends BaseController
             // $newMicroParam["type_name"] = $paramTypeName["type_name"];
 
             return $this->sendResponse($this->copmliteResponseForMicroParam($newMicroParam), 'Param created');
-        }
-        catch (Exception $e) {
-            return $this->sendError('Error creating record: '. $e);
+        } catch (Exception $e) {
+            return $this->sendError('Error creating record: '.$e);
         }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Micro  $micro
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MicroParam $updateParam) {
+    public function update(Request $request, MicroParam $updateParam)
+    {
         $validator = ValidatorRules::MakeValidate($request, 'micro_params');
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
@@ -169,24 +167,24 @@ class MicroParamController extends BaseController
             // $updateParam["device_micro_idx"] = $deviceMicroIdx["device_micro_idx"];
             // $updateParam["type_name"] = $paramTypeName["type_name"];
 
-            return $this->sendResponse($this->copmliteResponseForMicroParam($updateParam), "Micro param updated");
-        }
-        catch (Exception $e) {
-            return $this->sendError('Deleting Record Error: ' . $e);
+            return $this->sendResponse($this->copmliteResponseForMicroParam($updateParam), 'Micro param updated');
+        } catch (Exception $e) {
+            return $this->sendError('Deleting Record Error: '.$e);
         }
     }
 
-    public function patch(Request $request, $id, $field, $value){
+    public function patch(Request $request, $id, $field, $value)
+    {
         try {
             $patchMicro = MicroParam::whereId($id);
             $patchMicro->update([
-                "$field" => $value
+                "$field" => $value,
             ]);
             $res = MicroParam::find($id);
+
             return response()->json($res, 200);
-        }
-        catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
+        } catch (Exception $e) {
+            return response()->json('Deleting Record Error: '.$e, 400);
         }
     }
 
@@ -196,19 +194,19 @@ class MicroParamController extends BaseController
      * @param  \App\Models\Micro  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $microItem = MicroParam::find($id);
         if ($microItem === null) {
-            return $this->sendError("No Record for deleting Found");
+            return $this->sendError('No Record for deleting Found');
         }
 
         try {
-        $microItem->delete($id);
+            $microItem->delete($id);
+
             return $this->sendResponse($microItem, "Micro param $id deleted");
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return $this->sendError("Error deleting record $id. Message: $e");
         }
     }
-
 }

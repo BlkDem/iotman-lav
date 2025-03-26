@@ -10,7 +10,7 @@ class Logger extends Model
 {
     use HasFactory;
 
-    protected $table = "loggers";
+    protected $table = 'loggers';
 
     protected $fillable = [
         'id',
@@ -19,7 +19,7 @@ class Logger extends Model
         'log_instance',
         'log_data',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     protected $casts = [
@@ -30,28 +30,27 @@ class Logger extends Model
     /**
      * getDaysOfTheMonth - select days with log records in requested month and year
      *
-     * @param  mixed $date
-     * @return Object with days collection
+     * @param  mixed  $date
+     * @return object with days collection
      */
     public static function getDaysOfTheMonth($date)
     {
 
-        $datetime=strtotime($date);
-        $month=date("m", $datetime);
-        $year=date("Y", $datetime);
+        $datetime = strtotime($date);
+        $month = date('m', $datetime);
+        $year = date('Y', $datetime);
 
-        $res = Logger::select( [DB::raw('DAY(created_at) as day_of_month') ])
+        $res = Logger::select([DB::raw('DAY(created_at) as day_of_month')])
             ->whereMonth('created_at', $month)
             ->whereYear('created_at', $year)
             ->groupBy('day_of_month')
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $days["days"] = collect($res)->pluck('day_of_month');
-        $days["month"] = $month;
-        $days["year"] = $year;
+        $days['days'] = collect($res)->pluck('day_of_month');
+        $days['month'] = $month;
+        $days['year'] = $year;
 
         return $days;
     }
-
 }

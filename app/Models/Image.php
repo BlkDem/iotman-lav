@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Album;
 use Illuminate\Support\Facades\DB;
 
 class Image extends Model
@@ -19,7 +18,7 @@ class Image extends Model
         'image_desc',
         'album_id',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     protected $casts = [
@@ -45,7 +44,7 @@ class Image extends Model
             ->join('albums', 'images.album_id', '=', 'albums.id')
             ->where('images.id', '=', $id)
             ->select('images.*', 'albums.id', 'albums.album_name');
-            // ->get();
+        // ->get();
     }
 
     public static function imagesWhereAlbumID($album_id)
@@ -63,5 +62,4 @@ class Image extends Model
             )
             ->where('album_id', $album_id);
     }
-
 }

@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Users;
 
 // use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
-use App\Models\UserRole;
-use Exception;
 use App\Http\Controllers\PaginatorController;
 use App\Http\Middleware\ValidatorRules;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\UserRole;
+use Exception;
+use Illuminate\Http\Request;
 
 class UserAccessController extends BaseController
 {
-    public function getUserRoles($id) {
+    public function getUserRoles($id)
+    {
         $res = UserRole::where('user_id', $id)->first();
         if (is_null($res)) {
             return $this->sendError("No Record for id=$id Found");
@@ -25,27 +25,28 @@ class UserAccessController extends BaseController
 
     }
 
-        /**
+    /**
      * getTotalRecords - Getting records count
      *
-     * @return Integer
+     * @return int
      */
-    private function getTotalRecords() {
+    private function getTotalRecords()
+    {
         return UserRole::get()->count();
     }
 
-        /**
+    /**
      * pageWhereAlbum Get Images on a selected page where Album ID
      *
-     * @param  int $currentPage - selected page
-     * @param  int $itemsPerPage - items per page
-     * @param  int $album_id - Album ID
+     * @param  int  $currentPage  - selected page
+     * @param  int  $itemsPerPage  - items per page
+     * @param  int  $album_id  - Album ID
      * @return \Illuminate\Http\Response
      */
-    public function pageWhereUser($currentPage = 0, $itemsPerPage = 10, $user_id)
+    public function pageWhereUser($currentPage, $itemsPerPage, $user_id)
     {
 
-        $page = (int)$currentPage;
+        $page = (int) $currentPage;
 
         $offset = $itemsPerPage * --$page;
 
@@ -56,11 +57,10 @@ class UserAccessController extends BaseController
 
         $total = UserRole::where('user_id', $user_id)->get();
 
-        $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
+        $paginator = PaginatorController::Paginate($total->count(), (int) ($itemsPerPage), $currentPage);
 
-        return $this->sendResponse($res, "User Roles List", $paginator);
+        return $this->sendResponse($res, 'User Roles List', $paginator);
     }
-
 
     /**
      * Display a listing of the resource.
@@ -73,7 +73,7 @@ class UserAccessController extends BaseController
 
         $paginator = PaginatorController::Paginate($res->count(), 1, 1);
 
-        return $this->sendResponse($res, "User Roles List", $paginator);
+        return $this->sendResponse($res, 'User Roles List', $paginator);
 
     }
 
@@ -92,34 +92,34 @@ class UserAccessController extends BaseController
 
         $paginator = PaginatorController::Paginate($res->count(), 1, 1);
 
-        return $this->sendResponse($res, "User Roles Lookup List", $paginator);
+        return $this->sendResponse($res, 'User Roles Lookup List', $paginator);
 
     }
 
     /**
      * page - Getting scoped recordset
      *
-     * @param  int $currentPage
-     * @param  int $itemsPerPage
+     * @param  int  $currentPage
+     * @param  int  $itemsPerPage
      * @return Response
      */
-    public function page($currentPage=0, $itemsPerPage=10){
+    public function page($currentPage = 0, $itemsPerPage = 10)
+    {
 
         $page = $currentPage;
 
-        $offset = $itemsPerPage*--$page;
+        $offset = $itemsPerPage * --$page;
 
         $res = UserRole::limit($itemsPerPage)->offset($offset)->get();
 
         $paginator = PaginatorController::Paginate($this->getTotalRecords(), $itemsPerPage, $currentPage);
 
-        return $this->sendResponse($res, "User Roles List", $paginator);
+        return $this->sendResponse($res, 'User Roles List', $paginator);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -131,34 +131,33 @@ class UserAccessController extends BaseController
         }
         try {
             $newRole = UserRole::create($request->all());
+
             return $this->sendSuccess($newRole, 'Role created', 201);
-        }
-        catch (Exception $e) {
-            return $this->sendError('Error creatig record: ' . $e);
+        } catch (Exception $e) {
+            return $this->sendError('Error creatig record: '.$e);
         }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Album  $album
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserRole $updateRole) {
+    public function update(Request $request, UserRole $updateRole)
+    {
         $validator = ValidatorRules::MakeValidate($request, 'users_roles');
         if ($validator->fails()) {
             return $this->sendError($validator->errors());
         }
         try {
             $updateRole->update($request->all());
+
             return $this->sendResponse($updateRole, 'Record updated');
-        }
-        catch (Exception $e) {
-            return $this->sendError('Updating Record Error: ' . $e);
+        } catch (Exception $e) {
+            return $this->sendError('Updating Record Error: '.$e);
         }
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -166,23 +165,25 @@ class UserAccessController extends BaseController
      * @param  \App\Models\Album  $album
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
 
-        //check exists
+        // check exists
         $roleItem = UserRole::find($id);
 
         if ($roleItem === null) {
-            return $this->sendError("No Record for deleting Found");
+            return $this->sendError('No Record for deleting Found');
         }
 
-        //deleting
+        // deleting
         try {
 
             $roleItem->delete($id);
+
             return $this->sendResponse($roleItem, "Role $id deleted");
 
         } catch (Exception $e) {
-            $this->sendError('Deleting error: ' . $e);
+            $this->sendError('Deleting error: '.$e);
         }
 
     }
