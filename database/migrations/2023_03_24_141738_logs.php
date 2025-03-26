@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('loggers', function (Blueprint $table) {
-            $table->index(['created_at']);
+        Schema::table('logs', function (Blueprint $table) {
+            //
         });
     }
 
@@ -25,8 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('loggers', function (Blueprint $table) {
-            $table->dropIndex(['created_at']);
+        Schema::table('logs', function (Blueprint $table) {
+            //
         });
     }
 };
