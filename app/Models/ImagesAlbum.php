@@ -10,5 +10,4 @@ class ImagesAlbum extends Model
     use HasFactory;
 
     protected $table = 'images_albums';
-
 }

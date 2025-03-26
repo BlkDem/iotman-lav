@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 
 class UserinfoController extends Controller
 {
@@ -22,6 +20,7 @@ class UserinfoController extends Controller
                     // 'token' => $user->getRememberToken()
                 ]);
         }
+
         return response()->json(['User' => 'No user info'], 200);
     }
 }

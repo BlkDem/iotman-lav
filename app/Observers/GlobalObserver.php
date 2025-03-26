@@ -2,17 +2,14 @@
 
 namespace App\Observers;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Facades\LOG;
-use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * 'retrieved', 'creating', 'created', 'updating', 'updated',
  *  'saving', 'saved', 'restoring', 'restored', 'replicating',
  *  'deleting', 'deleted', 'forceDeleting', 'forceDeleted',
  */
-
 class GlobalObserver
 {
     public function saved(Model $model)

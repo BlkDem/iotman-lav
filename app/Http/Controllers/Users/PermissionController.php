@@ -2,25 +2,24 @@
 
 namespace App\Http\Controllers\Users;
 
-use Illuminate\Http\Request;
-use Exception;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\PaginatorController;
 use App\Http\Middleware\ValidatorRules;
 use App\Models\Auth\Permission;
+use Exception;
+use Illuminate\Http\Request;
 
 class PermissionController extends BaseController
 {
-
     /**
      * getTotalRecords - Getting records count
      *
-     * @return Integer
+     * @return int
      */
-    private function getTotalRecords() {
+    private function getTotalRecords()
+    {
         return Permission::get()->count();
     }
-
 
     /**
      * Display a listing of the resource.
@@ -33,60 +32,60 @@ class PermissionController extends BaseController
 
         $paginator = PaginatorController::Paginate($res->count(), 1, 1);
 
-        return $this->sendResponse($res, "Permissions List", $paginator);
+        return $this->sendResponse($res, 'Permissions List', $paginator);
 
     }
 
     /**
      * indexLookup - Getting only id and name fields for lookup components
      *
-     * @param  int $currentPage
-     * @param  int $itemsPerPage
+     * @param  int  $currentPage
+     * @param  int  $itemsPerPage
      * @return Response
      */
-    public function indexLookup($currentPage=0, $itemsPerPage=10)
+    public function indexLookup($currentPage = 0, $itemsPerPage = 10)
     {
         // $res = Album::select('id','album_name')->orderBy('id', 'asc')->get();
 
         $page = $currentPage;
 
-        $offset = $itemsPerPage*--$page;
+        $offset = $itemsPerPage * --$page;
 
         $res = Permission::albumImagesCount()
-                ->limit($itemsPerPage)
-                ->offset($offset)
-                ->get();
+            ->limit($itemsPerPage)
+            ->offset($offset)
+            ->get();
 
-        $paginator = PaginatorController::Paginate($this->getTotalRecords(), (int)$itemsPerPage, $currentPage);
+        $paginator = PaginatorController::Paginate($this->getTotalRecords(), (int) $itemsPerPage, $currentPage);
 
-        return $this->sendResponse($res, "Permissions lookup List", $paginator);
+        return $this->sendResponse($res, 'Permissions lookup List', $paginator);
 
     }
 
     /**
      * page - Getting scoped recordset
      *
-     * @param  int $currentPage
-     * @param  int $itemsPerPage
+     * @param  int  $currentPage
+     * @param  int  $itemsPerPage
      * @return Response
      */
-    public function page($currentPage=0, $itemsPerPage=10){
+    public function page($currentPage = 0, $itemsPerPage = 10)
+    {
 
         $page = $currentPage;
 
-        $offset = $itemsPerPage*--$page;
+        $offset = $itemsPerPage * --$page;
 
         $res = Permission::limit($itemsPerPage)->offset($offset)->orderBy('name', 'asc')->get();
 
         $paginator = PaginatorController::Paginate($this->getTotalRecords(), $itemsPerPage, $currentPage);
 
-        return $this->sendResponse($res, "Permissions List", $paginator);
+        return $this->sendResponse($res, 'Permissions List', $paginator);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -98,10 +97,10 @@ class PermissionController extends BaseController
         }
         try {
             $newPermission = Permission::create($request->all());
+
             return $this->sendSuccess($newPermission, 'Role created', 201);
-        }
-        catch (Exception $e) {
-            return $this->sendError('Error creatig record: ' . $e);
+        } catch (Exception $e) {
+            return $this->sendError('Error creatig record: '.$e);
         }
     }
 
@@ -117,6 +116,7 @@ class PermissionController extends BaseController
         if (is_null($res)) {
             return $this->sendError("No Record for id=$id Found");
         }
+
         return $this->sendResponse($res, "Album (id = $id) found");
 
     }
@@ -124,45 +124,45 @@ class PermissionController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Album  $album
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Permission $updatePermission) {
+    public function update(Request $request, Permission $updatePermission)
+    {
         $validator = ValidatorRules::MakeValidate($request, 'roles');
         if ($validator->fails()) {
             return $this->sendError($validator->errors());
         }
         try {
             $updatePermission->update($request->all());
+
             return $this->sendResponse($updatePermission, 'Permission created');
-        }
-        catch (Exception $e) {
-            return $this->sendError('Updating Record Error: ' . $e);
+        } catch (Exception $e) {
+            return $this->sendError('Updating Record Error: '.$e);
         }
     }
 
     /**
      * patch - Ptching requested record via key => value
      *
-     * @param  Request $request
-     * @param  int $id
-     * @param  string $field
-     * @param  mixed $value
+     * @param  int  $id
+     * @param  string  $field
+     * @param  mixed  $value
      * @return Response
      */
-    public function patch(Request $request, $id, $field, $value){
+    public function patch(Request $request, $id, $field, $value)
+    {
         try {
             $patchPermission = Permission::whereId($id);
             $patchPermission->update([
-                "$field" => $value
+                "$field" => $value,
             ]);
             $res = Permission::find($id);
+
             return $this->sendResponse($res, 'Permission patched');
             // return response()->json($res, 200);
-        }
-        catch (Exception $e) {
-            return $this->sendError('Patching Record Error: ' . $e);
+        } catch (Exception $e) {
+            return $this->sendError('Patching Record Error: '.$e);
             // return response()->json('Patching Record Error: ' . $e, 400);
         }
     }
@@ -173,23 +173,26 @@ class PermissionController extends BaseController
      * @param  \App\Models\Auth\Permission  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
 
-        //check exists
+        // check exists
         $permissionItem = Permission::find($id);
 
         if ($permissionItem === null) {
-            return $this->sendError("No Record for deleting Found");
+            return $this->sendError('No Record for deleting Found');
         }
 
-        //deleting
+        // deleting
         try {
 
             $permissionItem->delete($id);
+
             return $this->sendResponse($permissionItem, "Permission $id deleted");
 
         } catch (Exception $e) {
-            $this->sendError('Deleting error: ' . $e);
+            $this->sendError('Deleting error: '.$e);
         }
 
-    }}
+    }
+}

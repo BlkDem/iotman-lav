@@ -7,23 +7,21 @@ use Illuminate\Support\Facades\Auth;
 
 class RoleMiddleware
 {
-
     /**
      * Handle an incoming request.
-     * @param $request
-     * @param Closure $next
-     * @param $role
-     * @param null $permission
+     *
+     * @param  null  $permission
      * @return mixed
      */
     public function handle($request, Closure $next, $role, $permission = null)
     {
-        if(!Auth::user()->hasRole($role)) {
+        if (! Auth::user()->hasRole($role)) {
             abort(403);
         }
-        if($permission !== null && !Auth::user()->can($permission)) {
+        if ($permission !== null && ! Auth::user()->can($permission)) {
             abort(403);
         }
+
         return $next($request);
     }
 }

@@ -1,9 +1,10 @@
 <?php
+
 namespace Database\Seeders;
 
+use App\Models\Auth\Permission;
 use App\Models\Auth\Role;
 use App\Models\User;
-use App\Models\Auth\Permission;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -15,12 +16,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $developer = Role::where('slug','web-developer')->first();
+        $developer = Role::where('slug', 'web-developer')->first();
         $manager = Role::where('slug', 'project-manager')->first();
-        $createTasks = Permission::where('slug','create-tasks')->first();
-        $manageUsers = Permission::where('slug','manage-users')->first();
+        $createTasks = Permission::where('slug', 'create-tasks')->first();
+        $manageUsers = Permission::where('slug', 'manage-users')->first();
 
-        $user1 = new User();
+        $user1 = new User;
         $user1->name = 'Jhon Deo';
         $user1->email = 'jhon@deo.com';
         $user1->password = bcrypt('secret');
@@ -28,8 +29,7 @@ class UserSeeder extends Seeder
         $user1->roles()->attach($developer);
         $user1->permissions()->attach($createTasks);
 
-
-        $user2 = new User();
+        $user2 = new User;
         $user2->name = 'Mike Thomas';
         $user2->email = 'mike@thomas.com';
         $user2->password = bcrypt('secret');

@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Http\Middleware\ValidatorRules;
-use App\Http\Controllers\BaseController;
-use App\Http\Controllers\PaginatorController;
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
 use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends BaseController
 {
@@ -17,7 +15,8 @@ class UserController extends BaseController
      *
      * @return int
      */
-    private function getTotalRecords() {
+    private function getTotalRecords()
+    {
         return User::get()->count();
     }
 
@@ -26,50 +25,49 @@ class UserController extends BaseController
      *
      * @return Response
      */
-    public function index(){
+    public function index()
+    {
 
         $res = DB::table('users')
-        ->select('users.id as id', 'users.name as user_name')
-        ->orderBy('user_name', 'asc')
-        ->get()
-        ;
+            ->select('users.id as id', 'users.name as user_name')
+            ->orderBy('user_name', 'asc')
+            ->get();
 
-        //User::orderBy('name', 'asc')->get();
+        // User::orderBy('name', 'asc')->get();
 
         $paginator = PaginatorController::Paginate($res->count(), 1, 1);
 
-        return $this->sendResponse($res, "Users List", $paginator);
+        return $this->sendResponse($res, 'Users List', $paginator);
     }
 
     /**
      * page - Getting scoped recordset
      *
-     * @param  int $currentPage
-     * @param  int $itemsPerPage
+     * @param  int  $currentPage
+     * @param  int  $itemsPerPage
      * @return Response
      */
-    public function page($currentPage=0, $itemsPerPage=10)
+    public function page($currentPage = 0, $itemsPerPage = 10)
     {
 
-        $page = (int)$currentPage;
+        $page = (int) $currentPage;
 
-        $offset = $itemsPerPage*--$page;
+        $offset = $itemsPerPage * --$page;
         $res = User::limit($itemsPerPage)->offset($offset)->orderBy('name', 'asc')->get();
         $total = User::get();
 
-        $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
+        $paginator = PaginatorController::Paginate($total->count(), (int) ($itemsPerPage), $currentPage);
 
-        return $this->sendResponse($res, "Users List", $paginator);
+        return $this->sendResponse($res, 'Users List', $paginator);
 
         $usersDataSet = User::get();
 
-        if ($usersDataSet->count() ==0)
-        {
+        if ($usersDataSet->count() == 0) {
             return response()->json(['Error' => 'true', 'Message' => 'No Records Found'], 404);
         }
 
         $_returnData = ['data' => $usersDataSet];
-        $_returnData['meta'] = Array('count' => $usersDataSet->count());
+        $_returnData['meta'] = ['count' => $usersDataSet->count()];
 
         return response()->json($_returnData, 200);
     }
@@ -77,59 +75,59 @@ class UserController extends BaseController
     /**
      * indexLookup - Getting users with their devices
      *
-     * @param  int $currentPage
-     * @param  int $itemsPerPage
+     * @param  int  $currentPage
+     * @param  int  $itemsPerPage
      * @return Response
      */
-    public function indexLookup($currentPage=0, $itemsPerPage=10)
+    public function indexLookup($currentPage = 0, $itemsPerPage = 10)
     {
-        $page = (int)$currentPage;
+        $page = (int) $currentPage;
 
-        $offset = $itemsPerPage*--$page;
+        $offset = $itemsPerPage * --$page;
 
         $res = DB::table('users')
-                ->select('users.id as id' , 'users.name as user_name')
-                ->leftJoin('user_devices', 'users.id', '=', 'user_devices.user_id')
-                ->selectRaw('count(user_devices.id) as devices_count')
-                ->groupBy('id', 'user_name')
-                ->limit($itemsPerPage)
-                ->offset($offset)
-                ->get();
+            ->select('users.id as id', 'users.name as user_name')
+            ->leftJoin('user_devices', 'users.id', '=', 'user_devices.user_id')
+            ->selectRaw('count(user_devices.id) as devices_count')
+            ->groupBy('id', 'user_name')
+            ->limit($itemsPerPage)
+            ->offset($offset)
+            ->get();
 
+        $paginator = PaginatorController::Paginate($this->getTotalRecords(), (int) $itemsPerPage, $currentPage);
 
-        $paginator = PaginatorController::Paginate($this->getTotalRecords(), (int)$itemsPerPage, $currentPage);
-
-        return $this->sendResponse($res, "Users (with devices) lookup List", $paginator);
+        return $this->sendResponse($res, 'Users (with devices) lookup List', $paginator);
 
     }
 
     /**
      * show - Getting requested record
      *
-     * @param  int $id
+     * @param  int  $id
      * @return Response
      */
     public function show($id)
     {
-        return (is_null(User::findOrFail($id)))?
-            response()->json(['Error' => 'true', 'Message' => 'Record ' . $id . ' Not Found'], 404)
+        return (is_null(User::findOrFail($id))) ?
+            response()->json(['Error' => 'true', 'Message' => 'Record '.$id.' Not Found'], 404)
             :
             response()->json(User::find($id), 200);
     }
 
-    public function roles($id) {
+    public function roles($id)
+    {
 
         $res = User::find($id)->user_roles()->get();
         if (is_null($res)) {
             return $this->sendError("No Record for id=$id Found");
         }
+
         return $this->sendResponse($res, "Roles for user (id = $id) found");
     }
 
     /**
      * store - Creating a new user
      *
-     * @param  Request $request
      * @return Response
      */
     public function store(Request $request)
@@ -140,18 +138,16 @@ class UserController extends BaseController
         }
         try {
             $newUser = User::create($request->all());
-            return $this->sendResponse($newUser, "New User Created", 201);
-        }
-        catch (Exception $e) {
-            return $this->sendError("Error creating user: " . $e);
+
+            return $this->sendResponse($newUser, 'New User Created', 201);
+        } catch (Exception $e) {
+            return $this->sendError('Error creating user: '.$e);
         }
     }
 
     /**
      * update Updating requested record
      *
-     * @param  Request $request
-     * @param  User $updateUser
      * @return Response
      */
     public function update(Request $request, User $updateUser)
@@ -162,53 +158,50 @@ class UserController extends BaseController
         }
         try {
             $updateUser->update($request->all());
-            return $this->sendResponse($updateUser, "User updated", 200);
-        }
-        catch (Exception $e) {
-            return response()->json('Updating Record Error: ' . $e, 400);
+
+            return $this->sendResponse($updateUser, 'User updated', 200);
+        } catch (Exception $e) {
+            return response()->json('Updating Record Error: '.$e, 400);
         }
     }
 
     /**
      * patch - Patching requested record via key => value
      *
-     * @param  Request $request
-     * @param  int $id
-     * @param  string $field
-     * @param  mixed $value
+     * @param  int  $id
+     * @param  string  $field
+     * @param  mixed  $value
      * @return Response
      */
-    public function patch(Request $request, $id, $field, $value){
+    public function patch(Request $request, $id, $field, $value)
+    {
         try {
             $patchUser = User::whereId($id);
             $patchUser->update([
-                "$field" => $value
+                "$field" => $value,
             ]);
             $res = User::find($id);
+
             return response()->json($res, 200);
-        }
-        catch (Exception $e) {
-            return response()->json('Patching Record Error: ' . $e, 400);
+        } catch (Exception $e) {
+            return response()->json('Patching Record Error: '.$e, 400);
         }
     }
 
     /**
      * destroy - Deleting requested record
      *
-     * @param  Request $request
-     * @param  User $deleteUser
      * @return Response
      */
     public function destroy(Request $request, User $deleteUser)
     {
         try {
-            return ($deleteUser->delete($request->all()) !== null)?
+            return ($deleteUser->delete($request->all()) !== null) ?
                 response()->json(null, 204)
                 :
                 response()->json('Error deleting', 200);
-        }
-        catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
+        } catch (Exception $e) {
+            return response()->json('Deleting Record Error: '.$e, 400);
         }
     }
 }

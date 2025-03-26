@@ -95,7 +95,7 @@ return [
         ],
 
         'stores' => [
-            //...
+            // ...
             'none' => [
                 'driver' => 'null',
             ],

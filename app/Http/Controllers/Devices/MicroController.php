@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Devices;
 
-use App\Models\Micro;
-use Illuminate\Http\Request;
-use Exception;
 use App\Http\Controllers\BaseController;
-use App\Http\Middleware\ValidatorRules;
 use App\Http\Controllers\PaginatorController;
+use App\Http\Middleware\ValidatorRules;
+use App\Models\Micro;
+use Exception;
+use Illuminate\Http\Request;
 
 class MicroController extends BaseController
 {
- /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -22,35 +22,34 @@ class MicroController extends BaseController
 
         $paginator = PaginatorController::Paginate($res->count(), 1, 1);
 
-        return $this->sendResponse($res, "Micros List", $paginator);
+        return $this->sendResponse($res, 'Micros List', $paginator);
 
     }
 
     /**
      * page
      *
-     * @param  mixed $currentPage
-     * @param  mixed $itemsPerPage
+     * @param  mixed  $currentPage
+     * @param  mixed  $itemsPerPage
      * @return void
      */
+    public function page($currentPage = 0, $itemsPerPage = 10)
+    {
 
-    public function page($currentPage=0, $itemsPerPage=10){
+        $page = (int) $currentPage;
 
-        $page = (int)$currentPage;
-
-        $offset = $itemsPerPage*--$page;
+        $offset = $itemsPerPage * --$page;
         $res = Micro::limit($itemsPerPage)->offset($offset)->orderBy('micro_name', 'asc')->get();
         $total = Micro::get();
 
-        $paginator = PaginatorController::Paginate($total->count(), (int)($itemsPerPage), $currentPage);
+        $paginator = PaginatorController::Paginate($total->count(), (int) ($itemsPerPage), $currentPage);
 
-        return $this->sendResponse($res, "Micros List with pages", $paginator);
+        return $this->sendResponse($res, 'Micros List with pages', $paginator);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -61,10 +60,10 @@ class MicroController extends BaseController
         }
         try {
             $newDeviceType = Micro::create($request->all());
+
             return $this->sendResponse($newDeviceType, 'Device created');
-        }
-        catch (Exception $e) {
-            return response()->json('Store Record Error: ' . $e, 400);
+        } catch (Exception $e) {
+            return response()->json('Store Record Error: '.$e, 400);
         }
     }
 
@@ -80,6 +79,7 @@ class MicroController extends BaseController
         if (is_null($res)) {
             return $this->sendError("No Record for id=$id Found");
         }
+
         return $this->sendResponse($res, "Image (id = $id) found");
 
     }
@@ -87,35 +87,36 @@ class MicroController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Micro  $micro
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Micro $updateMicro) {
+    public function update(Request $request, Micro $updateMicro)
+    {
         $validator = ValidatorRules::MakeValidate($request, 'micros');
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
         try {
             $updateMicro->update($request->all());
-            return $this->sendResponse($updateMicro, "Micro updated");
-        }
-        catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
+
+            return $this->sendResponse($updateMicro, 'Micro updated');
+        } catch (Exception $e) {
+            return response()->json('Deleting Record Error: '.$e, 400);
         }
     }
 
-    public function patch(Request $request, $id, $field, $value){
+    public function patch(Request $request, $id, $field, $value)
+    {
         try {
             $patchMicro = Micro::whereId($id);
             $patchMicro->update([
-                "$field" => $value
+                "$field" => $value,
             ]);
             $res = Micro::find($id);
+
             return response()->json($res, 200);
-        }
-        catch (Exception $e) {
-            return response()->json('Deleting Record Error: ' . $e, 400);
+        } catch (Exception $e) {
+            return response()->json('Deleting Record Error: '.$e, 400);
         }
     }
 
@@ -125,17 +126,18 @@ class MicroController extends BaseController
      * @param  \App\Models\Micro  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $microItem = Micro::find($id);
         if ($microItem === null) {
-            return $this->sendError("No Record for deleting Found");
+            return $this->sendError('No Record for deleting Found');
         }
 
         try {
-        $microItem->delete($id);
+            $microItem->delete($id);
+
             return $this->sendResponse($microItem, "Micro $id deleted");
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return $this->sendError("Error deleting record $id. Message: $e");
         }
     }

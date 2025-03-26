@@ -2,17 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Auth\Role;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use App\Models\User;
-use App\Models\Auth\Role;
 
 class UserRole extends Model
 {
     use HasFactory;
 
-    protected $table = "users_roles";
+    protected $table = 'users_roles';
 
     public static function userRolesWhereUserID($user_id)
     {
@@ -42,22 +41,17 @@ class UserRole extends Model
                 'roles.slug as slug',
                 'users_roles.created_at as created_at',
                 'users_roles.updated_at as updated_at',
-            )
-            // ->where('user_id', $user_id)
-            ;
+            );
+        // ->where('user_id', $user_id)
     }
 
     public function users()
     {
-        return $this->hasMany(User::class,'users', 'id', 'user_id');
+        return $this->hasMany(User::class, 'users', 'id', 'user_id');
     }
 
     public function role()
     {
         return $this->belongsTo(Role::class, 'role_id', 'role_id');
     }
-
-
-
-
 }

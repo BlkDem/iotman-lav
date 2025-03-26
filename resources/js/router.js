@@ -239,7 +239,7 @@ const routes = [
   {
     name: "register",
     path: "/auth/register",
-    component: () => import('./components/Auth/Register.vue'),
+    component: () => import('./components/auth/Register.vue'),
     meta: {
         middleware: "guest",
         title: `Register`

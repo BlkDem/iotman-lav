@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\DeviceType $DeviceType
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\DeviceType[] $DeviceTypes
  * @property-read int|null $device_types_count
+ *
  * @method static \Database\Factories\DeviceFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Device newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Device newQuery()
@@ -31,6 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Device whereDeviceTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Device whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Device whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Device extends Model
@@ -48,12 +50,11 @@ class Device extends Model
         'device_type_id',
         'device_type_name',
         'device_type_desc',
-        'device_type_image'
+        'device_type_image',
     ];
 
     protected $casts = [
         'created_at' => 'datetime:Y-m-d',
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
-
 }

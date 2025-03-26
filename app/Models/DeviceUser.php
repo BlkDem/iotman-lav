@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|DeviceUser newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|DeviceUser newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|DeviceUser query()
@@ -25,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|DeviceUser whereUserDeviceName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DeviceUser whereUserDevicePass($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DeviceUser whereUserId($value)
+ *
  * @mixin \Eloquent
  */
 class DeviceUser extends Model
@@ -38,12 +40,11 @@ class DeviceUser extends Model
         'user_device_name',
         'user_device_pass',
         'device_id',
-        'user_id'
+        'user_id',
     ];
 
     protected $casts = [
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
-
 }
