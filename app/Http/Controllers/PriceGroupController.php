@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Middleware\ValidatorRules;
 use App\Models\PriceGroup;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class PriceGroupController extends BaseController
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -47,7 +48,7 @@ class PriceGroupController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -67,7 +68,7 @@ class PriceGroupController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(PriceGroup $priceGroup)
     {
@@ -77,8 +78,8 @@ class PriceGroupController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Models\PriceGroup  $priceGroup
-     * @return \Illuminate\Http\Response
+     * @param  PriceGroup  $priceGroup
+     * @return Response
      */
     public function update(Request $request, PriceGroup $updatePriceGroup)
     {
@@ -100,8 +101,8 @@ class PriceGroupController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PriceGroup  $priceGroup
-     * @return \Illuminate\Http\Response
+     * @param  PriceGroup  $priceGroup
+     * @return Response
      */
     public function destroy($id)
     {

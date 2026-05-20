@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\PaginatorController;
 use App\Http\Middleware\ValidatorRules;
+use App\Models\Album;
 use App\Models\UserRole;
 use Exception;
 use Illuminate\Http\Request;
@@ -141,7 +142,7 @@ class UserAccessController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Models\Album  $album
+     * @param  Album  $album
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, UserRole $updateRole)
@@ -162,7 +163,7 @@ class UserAccessController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Album  $album
+     * @param  Album  $album
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

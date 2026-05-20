@@ -141,7 +141,7 @@ class DeviceTypeController extends BaseController
 
         try {
             $deviceTypeItem->delete($id);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->sendError('Deleting error: '.$e);
         }
 

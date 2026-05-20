@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\DeviceType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\DeviceType>
+ * @extends Factory<DeviceType>
  */
 class DeviceTypeFactory extends Factory
 {

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Device
@@ -14,10 +16,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $device_hwid
  * @property string|null $device_pass
  * @property int $device_type_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\DeviceType $DeviceType
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\DeviceType[] $DeviceTypes
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read DeviceType $DeviceType
+ * @property-read Collection|DeviceType[] $DeviceTypes
  * @property-read int|null $device_types_count
  *
  * @method static \Database\Factories\DeviceFactory factory(...$parameters)

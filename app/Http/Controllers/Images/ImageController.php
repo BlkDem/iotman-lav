@@ -9,13 +9,14 @@ use App\Models\Album;
 use App\Models\Image;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ImageController extends BaseController
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -76,7 +77,7 @@ class ImageController extends BaseController
      *
      * @param  int  $currentPage  - selected page
      * @param  int  $itemsPerPage  - items per page
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function page($currentPage = 0, $itemsPerPage = 10)
     {
@@ -102,7 +103,7 @@ class ImageController extends BaseController
      * @param  int  $currentPage  - selected page
      * @param  int  $itemsPerPage  - items per page
      * @param  int  $album_id  - Album ID
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function pageWhereAlbum($currentPage, $itemsPerPage, $album_id)
     {
@@ -125,7 +126,7 @@ class ImageController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -154,8 +155,8 @@ class ImageController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Models\Image  $image  - updating Image
-     * @return \Illuminate\Http\Response
+     * @param  Image  $image  - updating Image
+     * @return Response
      */
     public function update(Request $request, Image $updateImage)
     {
@@ -195,7 +196,7 @@ class ImageController extends BaseController
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -211,7 +212,7 @@ class ImageController extends BaseController
     /**
      * getImages - getting images from repository (storage files)
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function getImages()
     {
@@ -232,7 +233,7 @@ class ImageController extends BaseController
      * @param  int  $id  - selected Image ID
      * @param  int  $field  - editing field
      * @param  int  $value  - setting value
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function patch(Request $request, $id, $field, $value)
     {
@@ -254,8 +255,8 @@ class ImageController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Image  $id
-     * @return \Illuminate\Http\Response
+     * @param  Image  $id
+     * @return Response
      */
     public function destroy($id)
     {
