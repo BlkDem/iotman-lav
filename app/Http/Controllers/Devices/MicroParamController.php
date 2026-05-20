@@ -6,10 +6,13 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\PaginatorController;
 use App\Http\Middleware\ValidatorRules;
 use App\Models\DeviceMicro;
+use App\Models\Image;
+use App\Models\Micro;
 use App\Models\MicroParam;
 use App\Models\ParamType;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class MicroParamController extends BaseController
 {
@@ -26,8 +29,8 @@ class MicroParamController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
+     * @param  Image  $image
+     * @return Response
      */
     public function show($id)
     {
@@ -117,7 +120,7 @@ class MicroParamController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -146,8 +149,8 @@ class MicroParamController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Models\Micro  $micro
-     * @return \Illuminate\Http\Response
+     * @param  Micro  $micro
+     * @return Response
      */
     public function update(Request $request, MicroParam $updateParam)
     {
@@ -191,8 +194,8 @@ class MicroParamController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Micro  $id
-     * @return \Illuminate\Http\Response
+     * @param  Micro  $id
+     * @return Response
      */
     public function destroy($id)
     {

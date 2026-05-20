@@ -8,6 +8,7 @@ use App\Models\DeviceUser;
 use App\Models\DeviceUsersView;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 // use Illuminate\Database\Eloquent\Model;
 
@@ -26,8 +27,8 @@ class DeviceUserController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\DeviceUser  $deviceUser
-     * @return \Illuminate\Http\Response
+     * @param  DeviceUser  $deviceUser
+     * @return Response
      */
     public function show($device_user_id)
     {
@@ -57,8 +58,8 @@ class DeviceUserController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Models\DeviceUser  $deviceUser
-     * @return \Illuminate\Http\Response
+     * @param  DeviceUser  $deviceUser
+     * @return Response
      */
     public function update(Request $request, DeviceUser $updateDeviceUser)
     {
@@ -95,8 +96,8 @@ class DeviceUserController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\DeviceUser  $deviceUser
-     * @return \Illuminate\Http\Response
+     * @param  DeviceUser  $deviceUser
+     * @return Response
      */
     public function destroy($id)
     {

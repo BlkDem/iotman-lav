@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\PaginatorController;
 use App\Models\DeviceUser;
 use App\Models\DeviceUsersView;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
 class DeviceUsersViewController extends BaseController
@@ -13,7 +14,7 @@ class DeviceUsersViewController extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {

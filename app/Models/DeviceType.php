@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\DeviceType
@@ -12,8 +13,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $device_type_name
  * @property string $device_type_desc
  * @property string $device_type_image
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  *
  * @method static \Database\Factories\DeviceTypeFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|DeviceType newModelQuery()

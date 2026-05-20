@@ -5,16 +5,18 @@ namespace App\Http\Controllers\Devices;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\PaginatorController;
 use App\Http\Middleware\ValidatorRules;
+use App\Models\Image;
 use App\Models\Micro;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class MicroController extends BaseController
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -50,7 +52,7 @@ class MicroController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -70,8 +72,8 @@ class MicroController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
+     * @param  Image  $image
+     * @return Response
      */
     public function show($id)
     {
@@ -87,8 +89,8 @@ class MicroController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Models\Micro  $micro
-     * @return \Illuminate\Http\Response
+     * @param  Micro  $micro
+     * @return Response
      */
     public function update(Request $request, Micro $updateMicro)
     {
@@ -123,8 +125,8 @@ class MicroController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Micro  $id
-     * @return \Illuminate\Http\Response
+     * @param  Micro  $id
+     * @return Response
      */
     public function destroy($id)
     {

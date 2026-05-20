@@ -17,6 +17,7 @@ use App\Models\MicroParam;
 use App\Models\ParamType;
 use App\Models\User;
 use App\Observers\GlobalObserver;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class ObserverServiceProvider extends ServiceProvider
@@ -33,7 +34,7 @@ class ObserverServiceProvider extends ServiceProvider
 
     private static function registerGlobalObserver()
     {
-        /** @var \Illuminate\Database\Eloquent\Model[] $MODELS */
+        /** @var Model[] $MODELS */
         $MODELS = [
             DeviceType::class,
             Device::class,

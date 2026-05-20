@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Middleware\ValidatorRules;
 use App\Models\DevBlog;
+use App\Models\Micro;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -89,7 +90,7 @@ class DevBlogController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\DevBlog  $id
+     * @param  DevBlog  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -106,7 +107,7 @@ class DevBlogController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Models\DevBlog  $micro
+     * @param  DevBlog  $micro
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, DevBlog $updateDevBlog)
@@ -128,7 +129,7 @@ class DevBlogController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Micro  $id
+     * @param  Micro  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

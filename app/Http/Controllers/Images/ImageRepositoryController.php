@@ -14,12 +14,12 @@ class ImageRepositoryController extends BaseController
     /**
      * default preset min and max filesize
      *
-     * @var int $max_file_size
+     * @var int
      */
     private static $max_file_size = 1000000;
 
     /**
-     * @var int $min_file_size
+     * @var int
      */
     private static $min_file_size = 1000;
 

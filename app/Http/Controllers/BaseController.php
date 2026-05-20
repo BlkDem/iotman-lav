@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Response;
+
 class BaseController extends Controller
 {
     /**
      * success response method.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function sendResponse($result, $message, $paginator = [], $cached = false, $statusCode = 200)
     {
@@ -28,7 +30,7 @@ class BaseController extends Controller
     /**
      * send success method.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function sendSuccess($result, $message, $cached = false, $statusCode = 200)
     {
@@ -47,7 +49,7 @@ class BaseController extends Controller
     /**
      * return error response.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function sendError($error, $errorMessages = [], $code = 404)
     {
